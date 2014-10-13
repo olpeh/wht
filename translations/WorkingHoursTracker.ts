@@ -11,20 +11,20 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Show Page 2</source>
+        <source>Show previous hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>UI Template</source>
+        <source>Working Hours Tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hello Sailors</source>
+        <source>Add new item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>Hours</name>
     <message>
         <source>Nested Page</source>
         <translation type="unfinished"></translation>
@@ -35,4 +35,3 @@
     </message>
 </context>
 </TS>
-
