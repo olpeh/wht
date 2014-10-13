@@ -30,8 +30,6 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
-
 Page {
     id: page
 
@@ -42,8 +40,8 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
-                text: qsTr("Show Page 2")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
+                text: qsTr("Show previous hours")
+                onClicked: pageStack.push(Qt.resolvedUrl("Hours.qml"))
             }
         }
 
@@ -58,13 +56,63 @@ Page {
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("UI Template")
+                title: qsTr("Working Hours Tracker")
             }
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Hello Sailors")
+                text: qsTr("Add new item")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
+            }
+            Button {
+                id: startTime
+                property var hour: null
+                property var minute: null
+                text: "Choose a starting time"
+
+                onClicked: {
+                    var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                        hour: 07,
+                        minute: 00,
+                        hourMode: DateTime.TwentyFourHours
+                    })
+                    dialog.accepted.connect(function() {
+                        startTime.text = "Start time: " + dialog.timeText
+                        hour = dialog.hour
+                        minute = dialog.minute
+                        if(endTime.hour != null)
+                            durationLabel.text = "Duration: " + (endTime.hour - dialog.hour) + ":" + (endTime.minute - dialog.minute)
+
+                    })
+                }
+            }
+            Button {
+                id: endTime
+                property var hour: null
+                property var minute: null
+                text: "Choose an ending time"
+
+                onClicked: {
+                    var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                        hour: 15,
+                        minute: 30,
+                        hourMode: DateTime.TwentyFourHours
+                    })
+                    dialog.accepted.connect(function() {
+                        endTime.text = "End time: " + dialog.timeText
+                        hour = dialog.hour
+                        minute = dialog.minute
+                        durationLabel.text = "Duration: " + (dialog.hour - startTime.hour) + ":" + (dialog.minute - startTime.minute)
+                        console.log(startTime.hour)
+                        console.log(startTime.minute)
+                        console.log(endTime.hour)
+                        console.log(endTime.minute)
+                    })
+                }
+            }
+            Label {
+                id: durationLabel
+                text: "Duration:"
             }
         }
     }

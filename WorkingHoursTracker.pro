@@ -19,12 +19,12 @@ SOURCES += src/WorkingHoursTracker.cpp
 OTHER_FILES += qml/WorkingHoursTracker.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/WorkingHoursTracker.changes.in \
     rpm/WorkingHoursTracker.spec \
     rpm/WorkingHoursTracker.yaml \
     translations/*.ts \
-    WorkingHoursTracker.desktop
+    WorkingHoursTracker.desktop \
+    qml/pages/Hours.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
