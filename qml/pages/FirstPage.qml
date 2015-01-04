@@ -136,15 +136,9 @@ Page {
         anchors.fill: parent
         PullDownMenu {
             MenuItem {
-                text: "Reset database"
-                onClicked: {
-                    resetDatabase();
-                }
-            }
-            MenuItem {
                 text: "About"
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About.qml"))
+                    pageStack.push(Qt.resolvedUrl("About.qml", {dataContainer: root}))
                 }
             }
             MenuItem {

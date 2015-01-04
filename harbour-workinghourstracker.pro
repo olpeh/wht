@@ -28,7 +28,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/config.js \
     qml/pages/All.qml \
     qml/pages/Timer.qml \
-    rpm/harbour-workinghourstracker.changes
+    rpm/harbour-workinghourstracker.changes \
+    qml/pages/Settings.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

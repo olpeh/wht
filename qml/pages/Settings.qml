@@ -27,27 +27,28 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    id: aboutPage
+    id: settingsPage
     property QtObject dataContainer: null
-    SilicaFlickable{
-        anchors.fill: parent
-        contentHeight: childrenRect.height
-        PullDownMenu {
-            MenuItem {
-                text: "Settings"
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: dataContainer})
-            }
-        }
+
+    SilicaFlickable {
+        contentHeight: column.y + column.height
+        width: parent.width
+        height: parent.height
+        //contentHeight: column.y + column.height
         Column {
             id: column
-            PageHeader {
-                title: "About"
-            }
+
+            spacing: 20
             width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            PageHeader {
+                title: "Settings"
+            }
+            RemorseItem { id: remorse }
             SectionHeader { text: "General" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
+                font.pointSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -55,13 +56,30 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "About Working Hours Tracker"
+                text: "More settings to come"
             }
-            SectionHeader { text: "License" }
 
+
+            SectionHeader { text: "DANGER ZONE!" }
+
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 250
+                height: 75
+                ValueButton {
+                    id: resetButton
+                    anchors.centerIn: parent
+                    label: "Reset database"
+                    width: parent.width
+                    onClicked: remorse.execute(settingsPage,"Deleting database", function() {console.log("Resetting database"); settingsPage.dataContainer.resetDatabase();})
+                }
+            }
             Text {
-                //font.pointSize: Theme.fontSizeMedium
-                color: Theme.primaryColor
+                id: warningText
+                font.pointSize: Theme.fontSizeMedium
+                color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -69,21 +87,9 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "BSD"
+                text: "Warning: You will loose all your hours data if you reset the database!"
             }
-            SectionHeader { text: "Contact" }
-            Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
-                wrapMode: Text.WordWrap
-                width: root.width
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-                }
-                text: "Contact info"
-            }
+
         }
     }
 }

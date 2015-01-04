@@ -13,10 +13,10 @@ Name:       harbour-workinghourstracker
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Working Hours Tracker
-Version:    0.6.1
+Version:    0.6.2
 Release:    1
 Group:      Qt/Qt
-License:    LICENSE
+License:    BSD
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-workinghourstracker.yaml
@@ -28,7 +28,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my SailfishOS Application
+Working Hours Tracker for SailfishOS
 
 
 %prep
