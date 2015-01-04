@@ -1,10 +1,9 @@
 /*
-  Copyright (C) 2013 Jolla Ltd.
-  Contact: Thomas Perl <thomas.perl@jollamobile.com>
+  Copyright (C) 2015 Olavi Haapala.
+  Contact: Olavi Haapala <ojhaapala@gmail.com>
+  Twitter: @olpetik
   All rights reserved.
-
   You may use this file under the terms of BSD license as follows:
-
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
     * Redistributions of source code must retain the above copyright
@@ -12,10 +11,6 @@
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
-    * Neither the name of the Jolla Ltd nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
-
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -30,91 +25,167 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../config.js" as DB
+
 Page {
-    id: page
+    id: root
+    function resetDatabase(){
+        //console.log(hours);
+        DB.resetDatabase();
+    }
+    function updateHoursToday(hours){
+        //console.log(hours);
+        summaryModel.set(0,{"hours": hours})
+    }
+    function updateHoursThisWeek(hours){
+        //console.log(hours);
+        summaryModel.set(1,{"hours": hours})
+    }
+    function updateHoursThisMonth(hours){
+        //console.log(hours);
+        summaryModel.set(2,{"hours": hours})
+    }
+    function updateHoursThisYear(hours){
+        //console.log(hours);
+        summaryModel.set(3,{"hours": hours})
+    }
+    function updateHoursAll(hours){
+        //console.log(hours);
+        summaryModel.set(4,{"hours": hours})
+    }
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
+    function getHours() {
+        //Update hours view after adding or deleting hours
+        DB.getHoursToday();
+        DB.getHoursThisWeek();
+        DB.getHoursThisMonth();
+        DB.getHoursThisYear();
+        DB.getHoursAll();
+
+    }
+    function setHours(uid,date,duration,description) {
+        DB.setHours(uid,date,duration,description)
+    }
+    function getAllToday(){
+        return DB.getAllToday();
+    }
+    function getAllThisWeek(){
+        return DB.getAllThisWeek();
+    }
+    function getAllThisMonth(){
+        return DB.getAllThisMonth();
+    }
+    function getAllThisYear(){
+        return DB.getAllThisYear();
+    }
+    function getAll(){
+        return DB.getAll();
+    }
+
+    function getStartTime(){
+        return DB.getStartTime();
+    }
+    function startTimer(){
+        return DB.startTimer();
+    }
+    function stopTimer(){
+        DB.stopTimer();
+    }
+    function remove(uid){
+        console.log("Trying to remove from database!")
+        console.log(uid);
+        DB.remove(uid);
+    }
+
+    Component.onCompleted: {
+        // Initialize the database
+        DB.initialize();
+        console.log("Get hours from database...");
+        DB.getHoursToday();
+        DB.getHoursThisWeek();
+        DB.getHoursThisMonth();
+        DB.getHoursThisYear();
+        DB.getHoursAll();
+    }
+
+    ListModel {
+        id: summaryModel
+        ListElement {
+            hours: 0
+            section: "Today"
+        }
+        ListElement {
+            hours: 0
+            section: "This week"
+        }
+        ListElement {
+            hours: 0
+            section: "This month"
+        }
+        ListElement {
+            hours: 0
+            section: "This year"
+        }
+        ListElement {
+            hours: 0
+            section: "All"
+        }
+    }
+    SilicaListView {
+        id: listView
         anchors.fill: parent
-
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
-                text: qsTr("Show previous hours")
-                onClicked: pageStack.push(Qt.resolvedUrl("Hours.qml"))
+                text: "Reset database"
+                onClicked: {
+                    resetDatabase();
+                }
+            }
+            MenuItem {
+                text: "About"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("About.qml"))
+                }
+            }
+            MenuItem {
+                text: "Add Hours"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
+                }
+            }
+            MenuItem {
+                text: "Timer"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Timer.qml"), {dataContainer: root})
+                }
             }
         }
-
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
-
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-
-            width: page.width
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: qsTr("Working Hours Tracker")
+        model: summaryModel
+        header: PageHeader { title: "Working Hours Tracker" }
+        section {
+            property: 'section'
+            delegate: SectionHeader {
+                text: section
             }
-            Label {
-                x: Theme.paddingLarge
-                text: qsTr("Add new item")
+        }
+        delegate: BackgroundItem {
+            width: listView.width
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-            }
-            Button {
-                id: startTime
-                property var hour: null
-                property var minute: null
-                text: "Choose a starting time"
-
-                onClicked: {
-                    var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                        hour: 07,
-                        minute: 00,
-                        hourMode: DateTime.TwentyFourHours
-                    })
-                    dialog.accepted.connect(function() {
-                        startTime.text = "Start time: " + dialog.timeText
-                        hour = dialog.hour
-                        minute = dialog.minute
-                        if(endTime.hour != null)
-                            durationLabel.text = "Duration: " + (endTime.hour - dialog.hour) + ":" + (endTime.minute - dialog.minute)
-
-                    })
+                radius: 10.0
+                width: 175
+                height: 80
+                Label {
+                    anchors.centerIn: parent
+                    id: duration
+                    text: model.hours
+                    x: Theme.paddingLarge
                 }
             }
-            Button {
-                id: endTime
-                property var hour: null
-                property var minute: null
-                text: "Choose an ending time"
-
-                onClicked: {
-                    var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                        hour: 15,
-                        minute: 30,
-                        hourMode: DateTime.TwentyFourHours
-                    })
-                    dialog.accepted.connect(function() {
-                        endTime.text = "End time: " + dialog.timeText
-                        hour = dialog.hour
-                        minute = dialog.minute
-                        durationLabel.text = "Duration: " + (dialog.hour - startTime.hour) + ":" + (dialog.minute - startTime.minute)
-                        console.log(startTime.hour)
-                        console.log(startTime.minute)
-                        console.log(endTime.hour)
-                        console.log(endTime.minute)
-                    })
-                }
-            }
-            Label {
-                id: durationLabel
-                text: "Duration:"
-            }
+            onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: section})
         }
+        VerticalScrollDecorator {}
     }
 }
 

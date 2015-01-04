@@ -1,0 +1,21 @@
+# Rename this file as harbour-workinghourstracker.changes to include changelog
+# entries in your RPM file.
+#
+# Add new changelog entries following the format below.
+# Add newest entries to the top of the list.
+# Separate entries from eachother with a blank line.
+
+# * date Author's Name <author's email> version-release
+# - Summary of changes
+
+* Sun Jan 04 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.2-1
+- Fixed sorting order
+- Updating detailed view after edit
+- added license
+
+* Sun Jan 04 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.1-1
+- Added edition possibility
+- Deletion possible
+- Some bugfixes
+
+

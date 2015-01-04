@@ -26,32 +26,18 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-CoverBackground {
+
+Page {
+    id: aboutPage
     Label {
-        id: label
-        anchors.centerIn: parent
-        text: "Working Hours"
-    }
-
-    CoverActionList {
-        id: coverAction
-
-        CoverAction {
-            iconSource: "image://theme/icon-l-add"
-            onTriggered: {
-                pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0})
-                appWindow.activate()
-            }
-        }
-
-        /*CoverAction {
-            iconSource: "image://theme/icon-m-levels"
-            onTriggered: {
-                pageStack.push(Qt.resolvedUrl("../pages/Timer.qml"), {dataContainer: appWindow.firstPage})
-                appWindow.activate()
-            }
-        }*/
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 120
+        font.bold: true
+        text: "Working Hours Tracker"
     }
 }
+
+
+
 
 

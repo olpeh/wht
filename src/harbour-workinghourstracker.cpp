@@ -1,9 +1,10 @@
 /*
-  Copyright (C) 2015 Olavi Haapala.
-  Contact: Olavi Haapala <ojhaapala@gmail.com>
-  Twitter: @olpetik
+  Copyright (C) 2013 Jolla Ltd.
+  Contact: Thomas Perl <thomas.perl@jollamobile.com>
   All rights reserved.
+
   You may use this file under the terms of BSD license as follows:
+
   Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are met:
     * Redistributions of source code must retain the above copyright
@@ -11,6 +12,10 @@
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
+    * Neither the name of the Jolla Ltd nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
   ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
   WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -23,35 +28,24 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
+#ifdef QT_QML_DEBUG
+#include <QtQuick>
+#endif
 
-CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: "Working Hours"
-    }
+#include <sailfishapp.h>
 
-    CoverActionList {
-        id: coverAction
 
-        CoverAction {
-            iconSource: "image://theme/icon-l-add"
-            onTriggered: {
-                pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0})
-                appWindow.activate()
-            }
-        }
+int main(int argc, char *argv[])
+{
+    // SailfishApp::main() will display "qml/template.qml", if you need more
+    // control over initialization, you can use:
+    //
+    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
+    //   - SailfishApp::createView() to get a new QQuickView * instance
+    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
+    //
+    // To display the view, call "show()" (will show fullscreen on device).
 
-        /*CoverAction {
-            iconSource: "image://theme/icon-m-levels"
-            onTriggered: {
-                pageStack.push(Qt.resolvedUrl("../pages/Timer.qml"), {dataContainer: appWindow.firstPage})
-                appWindow.activate()
-            }
-        }*/
-    }
+    return SailfishApp::main(argc, argv);
 }
-
 
