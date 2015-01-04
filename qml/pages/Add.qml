@@ -241,5 +241,5 @@ Dialog {
             if (result == DialogResult.Accepted) {
                 saveHours();
             }
-        }
+    }
 }

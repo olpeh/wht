@@ -31,7 +31,8 @@ Page {
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent
-        contentHeight: childrenRect.height
+        contentHeight: column.y + column.height
+        //contentHeight: childrenRect.height
         PullDownMenu {
             MenuItem {
                 text: "Settings"
@@ -47,7 +48,7 @@ Page {
             SectionHeader { text: "General" }
             Text {
                 //font.pointSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
+                color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -55,13 +56,12 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "About Working Hours Tracker"
+                text: "Working Hours Tracker v. 0.6.2 \nA simple working hours tracker to keep track on working hours."
             }
             SectionHeader { text: "License" }
-
             Text {
                 //font.pointSize: Theme.fontSizeMedium
-                color: Theme.primaryColor
+                color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -69,12 +69,36 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "BSD"
+                text: "Copyright (C) 2015 Olavi Haapala \nLicensed under BSD."
             }
+            SectionHeader { text: "Source" }
+            Text {
+                //font.pointSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "Contributions and bug reporst are welcome. Please report issues in github. Link below."
+            }
+            ValueButton {
+                id: github
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: copyright.bottom
+                anchors.topMargin: 20
+                label: "<a href=\"https://github.com/ojhaapala/wht\">https://github.com/ojhaapala/wht</a>"
+                onClicked: {
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht")
+                }
+            }
+
             SectionHeader { text: "Contact" }
             Text {
                 //font.pointSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
+                color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -82,7 +106,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Contact info"
+                text: "Contact info \nemail: ojhaapala@gmail.com \ntwitter: @olpetik"
             }
         }
     }

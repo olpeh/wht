@@ -73,7 +73,7 @@ Page {
                     anchors.centerIn: parent
                     label: "Reset database"
                     width: parent.width
-                    onClicked: remorse.execute(settingsPage,"Deleting database", function() {console.log("Resetting database"); settingsPage.dataContainer.resetDatabase();})
+                    onClicked: remorse.execute(settingsPage,"Resetting database", function() {console.log("Resetting database"); settingsPage.dataContainer.resetDatabase();})
                 }
             }
             Text {
@@ -87,7 +87,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Warning: You will loose all your hours data if you reset the database!"
+                text: "Warning: You will loose all your Working Hours data if you reset the database!"
             }
 
         }
