@@ -36,6 +36,7 @@ Dialog {
     property double duration: 8
     property string uid: "0"
     property string dateText: "Today"
+    property string durationText: "08:00"
     property date selectedDate : new Date()
     property date timeNow : new Date()
     property int startSelectedHour : timeNow.getHours() - 8
@@ -83,6 +84,30 @@ Dialog {
             page.editMode.updateView()
     }
 
+    // helper functions for giving duration in hh:mm format
+    function countMinutes(duration) {
+        var minutes = duration * 60
+        console.log(Math.round(minutes % 60))
+        return pad(Math.round(minutes % 60))
+    }
+    function countHours(duration) {
+        var minutes = duration * 60
+        return pad(Math.floor(minutes / 60))
+    }
+
+    // changed duration - move start time
+    function updateStartTime() {
+        startSelectedHour = endSelectedHour - countHours(duration)
+        startSelectedMinute = endSelectedMinute - countMinutes(duration)
+        if (startSelectedMinute < 0) {
+            startSelectedMinute+=60
+            startSelectedHour-=1
+        }
+        if (startSelectedHour < 0) {
+            startSelectedHour+=24
+        }
+        startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+    }
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -162,7 +187,7 @@ Dialog {
                             if (endSelectedHour < startSelectedHour)
                                 endHour +=24
                             duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-                            durationLabel.text = "Duration: " + duration +"h"
+                            durationButton.value = countHours(duration) + ":" + countMinutes(duration)
                          })
                     }
 
@@ -192,10 +217,11 @@ Dialog {
                             value = dialog.timeText
                             endSelectedHour = dialog.hour
                             endSelectedMinute = dialog.minute
+                            var endHour = endSelectedHour
                             if (endSelectedHour < startSelectedHour)
-                                endSelectedHour +=24
-                            duration = ((((endSelectedHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-                            durationLabel.text = "Duration: " + duration +"h"
+                                endHour +=24
+                            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+                            durationButton.value = countHours(duration) + ":" + countMinutes(duration)
                         })
                     }
 
@@ -208,16 +234,39 @@ Dialog {
             SectionHeader { text: "Duration" }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.highlightColor
+                color: Theme.secondaryHighlightColor
                 radius: 10.0
                 width: 300
                 height: 80
-
-                Label {
-                    id: durationLabel
+                ValueButton {
+                    id: durationButton
                     anchors.centerIn: parent
-                    color: "green"
-                    text: "Duration: " + duration +"h"
+                    function openTimeDialog() {
+                        var durationHour = countHours(duration)
+                        var durationMinute = countMinutes(duration)
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: durationHour,
+                                        minute: durationMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            value = dialog.timeText
+                            durationHour = dialog.hour
+                            durationMinute = dialog.minute
+                            console.log(durationMinute)
+                            duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                            console.log(duration)
+                            value = pad(durationHour) + ":" + pad(durationMinute)
+                            console.log(countMinutes(duration))
+                            updateStartTime()
+                        })
+                    }
+
+                    label: "Duration: "
+                    value: durationText
+                    width: parent.width
+                    onClicked: openTimeDialog()
                 }
             }
             Component.onCompleted: {
@@ -235,6 +284,8 @@ Dialog {
                     descriptionTextArea.text = description;
                 if(dateText != "Today")
                     updateDateText()
+                //update durationText
+                durationText = countHours(duration) + ":" + countMinutes(duration)
             }
         }
     }
