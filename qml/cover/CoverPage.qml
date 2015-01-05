@@ -27,12 +27,14 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: "Working Hours"
+    CoverPlaceholder {
+        icon.source: "wht.png"
+        anchors.fill: parent
     }
-
+    CoverPlaceholder {
+    text: "Working Hours"
+    anchors.topMargin: 125
+    }
     CoverActionList {
         id: coverAction
 
