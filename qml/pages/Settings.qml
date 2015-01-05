@@ -73,7 +73,11 @@ Page {
                     anchors.centerIn: parent
                     label: "Reset database"
                     width: parent.width
-                    onClicked: remorse.execute(settingsPage,"Resetting database", function() {console.log("Resetting database"); settingsPage.dataContainer.resetDatabase();})
+                    onClicked: remorse.execute(settingsPage,"Resetting database", function() {
+                        console.log("Resetting database");
+                        if (dataContainer != null)
+                           settingsPage.dataContainer.resetDatabase();
+                    })
                 }
             }
             Text {

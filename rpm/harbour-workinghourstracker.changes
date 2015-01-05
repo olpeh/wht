@@ -8,6 +8,20 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Jan 05 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.5-1
+- Added placeholder text
+- Added category to pageheader
+- Small bugfixes
+
+* Mon Jan 05 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.4-1
+- Bugfix for adding
+
+* Sun Jan 04 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.3-1
+- Added about info
+- Created icons
+- added settings page
+- Fixed database resetting bug
+
 * Sun Jan 04 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.2-1
 - Fixed sorting order
 - Updating detailed view after edit

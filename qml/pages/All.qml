@@ -64,7 +64,7 @@ Page {
                                'endTime': allHours[i].endTime,
                                'duration': allHours[i].duration,
                                'project' : allHours[i].project,
-                               'description': allHours[i].description })
+                               'description': allHours[i].description})
             }
         }
     }
@@ -79,7 +79,7 @@ Page {
     SilicaListView {
         id: listView
         header: PageHeader {
-            title: "Working Hours Tracker"
+            title: section
         }
         spacing: Theme.paddingLarge +10
         anchors.fill: parent
@@ -87,15 +87,21 @@ Page {
         model: hoursModel
         VerticalScrollDecorator {}
 
+        ViewPlaceholder {
+                    enabled: listView.count == 0
+                    text: "No items in this category yet"
+        }
         delegate: Item {
             id: myListItem
             property Item contextMenu
             property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
             width: ListView.view.width
             height: menuOpen ? contextMenu.height + contentItem.childrenRect.height: contentItem.childrenRect.height
+
             BackgroundItem {
                 id: contentItem
                 width: parent.width
+
                 Label {
                     id: date
                     text: model.date
@@ -146,7 +152,7 @@ Page {
                 }
                 Label {
                     id: description
-                    text: model.description
+                    text: "Description: " + model.description
                     font.pixelSize: Theme.fontSizeExtraSmall
                     wrapMode: Text.WordWrap
                     maximumLineCount: 2

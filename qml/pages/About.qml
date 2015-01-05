@@ -36,7 +36,10 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: "Settings"
-                onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: dataContainer})
+                onClicked: {
+                    console.log (dataContainer)
+                    pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: dataContainer})
+                }
             }
         }
         Column {
@@ -56,7 +59,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Working Hours Tracker v. 0.6.2 \nA simple working hours tracker to keep track on working hours."
+                text: "Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours."
             }
             SectionHeader { text: "License" }
             Text {
@@ -87,7 +90,6 @@ Page {
             ValueButton {
                 id: github
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: copyright.bottom
                 anchors.topMargin: 20
                 label: "<a href=\"https://github.com/ojhaapala/wht\">https://github.com/ojhaapala/wht</a>"
                 onClicked: {
@@ -106,9 +108,21 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Contact info \nemail: ojhaapala@gmail.com \ntwitter: @olpetik"
+                text: "Email: ojhaapala@gmail.com"
+            }
+            ValueButton {
+                id: twitter
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 20
+                label: "<a href=\"https://twitter.com/olpetik\">Twitter: @olpetik</a>"
+                onClicked: {
+                    Qt.openUrlExternally("https://twitter.com/olpetik")
+                }
             }
         }
+    }
+    Component.onCompleted: {
+       console.log(dataContainer);
     }
 }
 

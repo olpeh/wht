@@ -138,7 +138,7 @@ Page {
             MenuItem {
                 text: "About"
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About.qml", {dataContainer: root}))
+                    pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
             }
             MenuItem {

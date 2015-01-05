@@ -158,9 +158,10 @@ Dialog {
                             value = dialog.timeText
                             startSelectedHour = dialog.hour
                             startSelectedMinute = dialog.minute
+                            var endHour = endSelectedHour
                             if (endSelectedHour < startSelectedHour)
-                                endSelectedHour +=24
-                         duration = ((((endSelectedHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+                                endHour +=24
+                            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
                             durationLabel.text = "Duration: " + duration +"h"
                          })
                     }
