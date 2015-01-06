@@ -29,7 +29,13 @@ import "pages"
 
 ApplicationWindow
 {
+    property Item firstPage
     id: appWindow
-    initialPage: Component { FirstPage { } }
+    initialPage: Component {
+        FirstPage {
+            id: firstPage
+            Component.onCompleted: appWindow.firstPage = firstPage
+        }
+    }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }

@@ -39,11 +39,6 @@ function resetDatabase() {
             tx.executeSql('DROP TABLE timer')
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER)');
-            root.updateHoursToday(0);
-            root.updateHoursThisWeek(0);
-            root.updateHoursThisMonth(0);
-            root.updateHoursThisYear(0);
-            root.updateHoursAll(0);
             console.log("Database reset");
         });
 }
@@ -93,71 +88,71 @@ function setHours(uid,date,startTime, endTime, duration,project,description) {
 // This function is used to retrieve hours today from the database
 function getHoursToday() {
     var db = getDatabase();
+    var dur =0;
     db.transaction(function(tx) {
-        var dur =0;
         var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime");');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
         }
-        //console.log(dur);
-        root.updateHoursToday(dur);
     })
+    //console.log(dur);
+    return dur;
 }
 
 // This function is used to retrieve hours this week from the database
 function getHoursThisWeek() {
     var db = getDatabase();
+    var dur=0;
     db.transaction(function(tx) {
-        var dur=0;
         var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0")');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
         }
-        //console.log(dur);
-        root.updateHoursThisWeek(dur);
     })
+    //console.log(dur);
+    return dur;
 }
 
 // This function is used to retrieve hours this month from the database
 function getHoursThisMonth() {
     var db = getDatabase();
+    var dur=0;
     db.transaction(function(tx) {
-        var dur=0;
         var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of month") AND strftime("%Y-%m-%d", "now", "localtime")');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
         }
-        console.log(dur);
-        root.updateHoursThisMonth(dur);
     })
+    //console.log(dur);
+    return dur;
 }
 
 // This function is used to retrieve hours this year from the database
 function getHoursThisYear() {
     var db = getDatabase();
+    var dur=0;
     db.transaction(function(tx) {
-        var dur=0;
         var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime")');
          for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
         }
-        console.log(dur);
-        root.updateHoursThisYear(dur);
     })
+    //console.log(dur);
+    return dur;
 }
 
 // This function is used to retrieve all hours from the database
 function getHoursAll() {
+    var dur=0;
     var db = getDatabase();
     db.transaction(function(tx) {
-        var dur=0;
         var rs = tx.executeSql('SELECT * FROM hours');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
         }
-        console.log(dur);
-        root.updateHoursAll(dur);
     })
+    //console.log(dur);
+    return dur;
 }
 
 

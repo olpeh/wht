@@ -32,36 +32,19 @@ Page {
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
+        summaryModel.set(0,{"hours": 0});
+        summaryModel.set(1,{"hours": 0});
+        summaryModel.set(2,{"hours": 0});
+        summaryModel.set(3,{"hours": 0});
+        summaryModel.set(4,{"hours": 0});
     }
-    function updateHoursToday(hours){
-        //console.log(hours);
-        summaryModel.set(0,{"hours": hours})
-    }
-    function updateHoursThisWeek(hours){
-        //console.log(hours);
-        summaryModel.set(1,{"hours": hours})
-    }
-    function updateHoursThisMonth(hours){
-        //console.log(hours);
-        summaryModel.set(2,{"hours": hours})
-    }
-    function updateHoursThisYear(hours){
-        //console.log(hours);
-        summaryModel.set(3,{"hours": hours})
-    }
-    function updateHoursAll(hours){
-        //console.log(hours);
-        summaryModel.set(4,{"hours": hours})
-    }
-
     function getHours() {
         //Update hours view after adding or deleting hours
-        DB.getHoursToday();
-        DB.getHoursThisWeek();
-        DB.getHoursThisMonth();
-        DB.getHoursThisYear();
-        DB.getHoursAll();
-
+        summaryModel.set(0,{"hours": DB.getHoursToday()});
+        summaryModel.set(1,{"hours": DB.getHoursThisWeek()});
+        summaryModel.set(2,{"hours": DB.getHoursThisMonth()});
+        summaryModel.set(3,{"hours": DB.getHoursThisYear()});
+        summaryModel.set(4,{"hours": DB.getHoursAll()});
     }
     function setHours(uid,date,duration,description) {
         DB.setHours(uid,date,duration,description)
@@ -81,7 +64,6 @@ Page {
     function getAll(){
         return DB.getAll();
     }
-
     function getStartTime(){
         return DB.getStartTime();
     }
@@ -101,11 +83,12 @@ Page {
         // Initialize the database
         DB.initialize();
         console.log("Get hours from database...");
-        DB.getHoursToday();
-        DB.getHoursThisWeek();
-        DB.getHoursThisMonth();
-        DB.getHoursThisYear();
-        DB.getHoursAll();
+        summaryModel.set(0,{"hours": DB.getHoursToday()});
+        summaryModel.set(1,{"hours": DB.getHoursThisWeek()});
+        summaryModel.set(2,{"hours": DB.getHoursThisMonth()});
+        summaryModel.set(3,{"hours": DB.getHoursThisYear()});
+        summaryModel.set(4,{"hours": DB.getHoursAll()});
+        console.log(DB.getHoursAll())
     }
 
     ListModel {

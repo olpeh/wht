@@ -286,6 +286,7 @@ Dialog {
                     updateDateText()
                 //update durationText
                 durationText = countHours(duration) + ":" + countMinutes(duration)
+                //console.log(dataContainer)
             }
         }
     }

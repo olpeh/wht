@@ -25,6 +25,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../config.js" as DB
 
 Page {
     id: timerPage
@@ -33,33 +34,23 @@ Page {
     property int startSelectedHour : -1
     property int startSelectedMinute : -1
 
+    function pad(n) { return ("0" + n).slice(-2); }
+
     function getStartTime(){
-        if (dataContainer !=null){
-            startTime = timerPage.dataContainer.getStartTime();
-            console.log(startTime);
-        }
+        startTime = DB.getStartTime();
+        console.log(startTime);
     }
     function start(){
-        startTime = timerPage.dataContainer.startTimer();
+        startTime = DB.startTimer();
         console.log(startTime);
     }
 
     function updateStartTime(){
+        //getStartTime();
         var splitted = startTime.split(":");
         startSelectedHour = parseInt(splitted[0]);
         startSelectedMinute = parseInt(splitted[1]);
-
-        if(splitted[0].length === 1)
-            var hour = "0"+ splitted[0];
-        else
-            var hour = splitted[0];
-        if(splitted[1].length === 1)
-            var minute = "0"+ splitted[1];
-        else
-            var minute = splitted[1];
-
-        startedAt.text = hour +":"+minute;
-
+        startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
 
     function updateDuration(){
@@ -68,10 +59,10 @@ Page {
         var minutesNow = dateNow.getMinutes();
         var nowInMinutes = hoursNow * 60 + minutesNow;
         var splitted = startTime.split(":");
-        //console.log(splitted);
+        console.log(splitted);
         var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
-        console.log(nowInMinutes);
-        console.log(startInMinutes);
+        //console.log(nowInMinutes);
+        //console.log(startInMinutes);
         if (nowInMinutes < startInMinutes)
             nowInMinutes += 24*60
         var difference = nowInMinutes - startInMinutes;
@@ -83,13 +74,22 @@ Page {
     function stop(){
         console.log("Stop clicked!");
         if (dataContainer !=null && startSelectedMinute != -1 && startSelectedHour != -1){
-            timerPage.dataContainer.stopTimer();
+            DB.stopTimer();
             var dateNow = new Date();
             var endSelectedHour = dateNow.getHours();
             var endSelectedMinute = dateNow.getMinutes();
-            var duration = ((((endSelectedHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-            pageStack.replace(Qt.resolvedUrl("Add.qml"), {dataContainer: dataContainer, uid: 0,startSelectedMinute:startSelectedMinute, startSelectedHour:startSelectedHour,
-                                  endSelectedHour:endSelectedHour, endSelectedMinute:endSelectedMinute, duration:duration})
+            var endHour = endSelectedHour
+            if (endSelectedHour < startSelectedHour)
+                endHour +=24
+            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+            pageStack.replace(Qt.resolvedUrl("Add.qml"), {
+                                  dataContainer: dataContainer,
+                                  uid: 0,
+                                  startSelectedMinute:startSelectedMinute,
+                                  startSelectedHour:startSelectedHour,
+                                  endSelectedHour:endSelectedHour,
+                                  endSelectedMinute:endSelectedMinute,
+                                  duration:duration })
         }
         else
             console.log("Error when stopping the timer!");
@@ -97,7 +97,7 @@ Page {
     function reset(){
         console.log("Reset clicked!");
         if (dataContainer !=null && startSelectedMinute != -1 && startSelectedHour != -1){
-            timerPage.dataContainer.stopTimer();
+            DB.stopTimer();
             start();
             updateStartTime();
             updateDuration();
