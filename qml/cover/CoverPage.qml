@@ -44,9 +44,9 @@ CoverBackground {
             timerRunning = true
         console.log(timerRunning)
         console.log(startTime)
-        today: DB.getHoursToday()
-        thisWeek: DB.getHoursThisWeek()
-        thisMonth: DB.getHoursThisMonth()
+        today = DB.getHoursToday()
+        thisWeek = DB.getHoursThisWeek()
+        thisMonth = DB.getHoursThisMonth()
     }
     function updateDuration(){
         var dateNow = new Date();
@@ -111,7 +111,7 @@ CoverBackground {
                                        duration:duration })
                     }
                     else {
-                        pageStack.push(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
+                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
                                        dataContainer: appWindow.firstPage,
                                        uid: 0,
                                        startSelectedMinute:startSelectedMinute,
