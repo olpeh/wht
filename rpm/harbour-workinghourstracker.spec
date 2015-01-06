@@ -13,7 +13,7 @@ Name:       harbour-workinghourstracker
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Working Hours Tracker
-Version:    0.6.5
+Version:    0.7.0
 Release:    1
 Group:      Qt/Qt
 License:    BSD

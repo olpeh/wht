@@ -171,13 +171,23 @@ CoverBackground {
             radius: 10.0
             width: 210
             height: 80
+            IconButton {
+                id: iconButton
+                icon.source: "image://theme/icon-cover-timer"
+                scale: 0.5
+                //anchors {
+                //    rightMargin: Theme.paddingSmall
+                //}
+            }
+
             Label {
-                anchors.centerIn: parent
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: iconButton.right
                 id: timer
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
                 color: Theme.highlightColor
-                text: "Timer: " + durationNow
+                text: durationNow
             }
         }
     }

@@ -9,7 +9,7 @@
 # - Summary of changes
 
 * Tue Jan 06 2015 Olavi Haapala <ojhaapala@gmail.com> 0.7.0-1
-- Added cover action
+- Added new cover action
 - Added cover info
 - Adjusted colors
 - Added possibility to change duration when adding
