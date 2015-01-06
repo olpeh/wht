@@ -8,6 +8,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Jan 06 2015 Olavi Haapala <ojhaapala@gmail.com> 0.7.0-1
+- Added cover action
+- Added cover info
+- Adjusted colors
+- Added possibility to change duration when adding
+
 * Mon Jan 05 2015 Olavi Haapala <ojhaapala@gmail.com> 0.6.5-1
 - Added placeholder text
 - Added category to pageheader

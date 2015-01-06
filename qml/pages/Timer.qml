@@ -159,13 +159,13 @@ Page {
             }
             Rectangle {
                 anchors.horizontalCenter: startedSection.horizontalCenter
-                color: Theme.highlightColor
+                color: Theme.secondaryHighlightColor
                 radius: 10.0
                 width: 175
                 height: 80
                 Text {
                     id: startedAt
-                    color: "green"
+                    color: Theme.highlightColor
                     anchors.centerIn: parent
                     font.pointSize: 24
                     text: "Error"
@@ -177,13 +177,13 @@ Page {
             }
             Rectangle {
                 anchors.horizontalCenter: durationSection.horizontalCenter
-                color: Theme.highlightColor
+                color: Theme.secondaryHighlightColor
                 radius: 10.0
                 width: 175
                 height: 80
                 Text {
                     id: durationNow
-                    color: "green"
+                    color: Theme.highlightColor
                     anchors.centerIn: parent
                     font.pointSize: 24
                     text: "00:00"

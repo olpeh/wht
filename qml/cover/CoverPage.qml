@@ -31,7 +31,6 @@ CoverBackground {
     property bool timerRunning: false
     property string startTime: ""
     property string durationNow: "Not running"
-    property double today: 0
     property double thisWeek: 0
     property double thisMonth: 0
 
@@ -42,9 +41,8 @@ CoverBackground {
         startTime = DB.getStartTime()
         if (startTime!= "Not started")
             timerRunning = true
-        console.log(timerRunning)
-        console.log(startTime)
-        today = DB.getHoursToday()
+        //console.log(timerRunning)
+        //console.log(startTime)
         thisWeek = DB.getHoursThisWeek()
         thisMonth = DB.getHoursThisMonth()
     }
@@ -69,7 +67,7 @@ CoverBackground {
         id: icon
         icon.source: "wht.png"
         anchors.fill: parent
-        opacity: 0.6
+        //opacity: 0.6
     }
     CoverActionList {
         id: coverAction
@@ -131,39 +129,62 @@ CoverBackground {
             }
         }
     }
-    Column{
-        Column {
-            spacing: Theme.paddingMedium;
-            anchors.leftMargin: Theme.paddingMedium;
+
+    Column {
+        spacing: Theme.paddingMedium;
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: Theme.paddingMedium
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
-                font.pixelSize: Theme.fontSizeMedium;
-                color: Theme.primaryColor;
-                text: "Today: " + today
-            }
-            Label {
-                font.pixelSize: Theme.fontSizeLarge;
-                color: Theme.primaryColor;
+                anchors.centerIn: parent
+                id: week
+                font.pixelSize: Theme.fontSizeMedium
+                font.bold: true
+                color: Theme.highlightColor
                 text: "Week: " + thisWeek
             }
+        }
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
-                font.pixelSize: Theme.fontSizeLarge;
-                color: Theme.primaryColor;
+                anchors.centerIn: parent
+                id: month
+                font.pixelSize: Theme.fontSizeMedium
+                font.bold: true
+                color: Theme.highlightColor
                 text: "Month: " + thisMonth
             }
         }
-        Column {
+        Rectangle {
             visible: timerRunning
-            spacing: Theme.paddingMedium;
-            anchors.leftMargin: Theme.paddingMedium;
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
-                font.pixelSize: Theme.fontSizeMedium;
-                color: Theme.primaryColor;
+                anchors.centerIn: parent
+                id: timer
+                font.pixelSize: Theme.fontSizeMedium
+                font.bold: true
+                color: Theme.highlightColor
                 text: "Timer: " + durationNow
             }
         }
     }
     Component.onCompleted: {
         refreshCover()
+        if (timerRunning)
+            updateDuration()
     }
     Timer {
         interval: 60000; running: timerRunning; repeat: true
