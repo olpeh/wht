@@ -88,7 +88,7 @@ Page {
         summaryModel.set(2,{"hours": DB.getHoursThisMonth()});
         summaryModel.set(3,{"hours": DB.getHoursThisYear()});
         summaryModel.set(4,{"hours": DB.getHoursAll()});
-        console.log(DB.getHoursAll())
+        //console.log(DB.getHoursAll())
     }
 
     ListModel {

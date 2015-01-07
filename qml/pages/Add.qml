@@ -34,9 +34,10 @@ Dialog {
     property string description: "No description"
     property string project: "default" //coming later
     property double duration: 8
+    property double breakDuration: 0
+    property double netDuration: 8
     property string uid: "0"
     property string dateText: "Today"
-    property string durationText: "08:00"
     property date selectedDate : new Date()
     property date timeNow : new Date()
     property int startSelectedHour : timeNow.getHours() - 8
@@ -87,7 +88,7 @@ Dialog {
     // helper functions for giving duration in hh:mm format
     function countMinutes(duration) {
         var minutes = duration * 60
-        console.log(Math.round(minutes % 60))
+        //console.log(Math.round(minutes % 60))
         return pad(Math.round(minutes % 60))
     }
     function countHours(duration) {
@@ -109,6 +110,17 @@ Dialog {
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
     }
 
+    //udpating netDuration
+    function updateNetDuration() {
+        netDuration = duration - breakDuration
+        netDurationButton.value = countHours(netDuration) + ":" + countMinutes(netDuration)
+    }
+
+    //udpating duration
+    function updateduration() {
+        durationButton.value = countHours(duration) + ":" + countMinutes(duration)
+    }
+
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -125,6 +137,7 @@ Dialog {
             spacing: 20
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: Theme.PaddingLarge
 
             SectionHeader { text: "Description" }
             TextField{
@@ -141,7 +154,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 300
+                width: 315
                 height: 80
                 ValueButton {
                     id: datePicked
@@ -167,7 +180,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 300
+                width: 315
                 height: 80
                 ValueButton {
                     id: startTime
@@ -201,7 +214,7 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 300
+                width: 315
                 height: 80
                 ValueButton {
                     id: endTime
@@ -231,12 +244,12 @@ Dialog {
                     onClicked: openTimeDialog()
                 }
             }
-            SectionHeader { text: "Duration" }
+            SectionHeader { text: "Duration and break" }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 300
+                width: 315
                 height: 80
                 ValueButton {
                     id: durationButton
@@ -264,7 +277,83 @@ Dialog {
                     }
 
                     label: "Duration: "
-                    value: durationText
+                    value: countHours(duration) + ":" + countMinutes(duration);
+                    width: parent.width
+                    onClicked: openTimeDialog()
+                }
+            }
+
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 315
+                height: 80
+                ValueButton {
+                    id: breakDurationButton
+                    anchors.centerIn: parent
+                    function openTimeDialog() {
+                        var durationHour = countHours(breakDuration)
+                        var durationMinute = countMinutes(breakDuration)
+                        var dialog;
+                        dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: durationHour,
+                                        minute: durationMinute,
+                                        // @TODO fix this
+                                        //canAccept: (((selector.hour)*60 + selector.minute) / 60).toFixed(2) < duration
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            durationHour = dialog.hour
+                            durationMinute = dialog.minute
+                            console.log(durationMinute)
+                            breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                            console.log(duration)
+                            value = pad(durationHour) + ":" + pad(durationMinute)
+                            updateNetDuration();
+                        })
+                    }
+
+                    label: "Break: "
+                    value: "-"
+                    width: parent.width
+                    onClicked: openTimeDialog()
+                }
+            }
+            Rectangle {
+                visible: breakDuration
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 315
+                height: 80
+                ValueButton {
+                    id: netDurationButton
+                    anchors.centerIn: parent
+                    function openTimeDialog() {
+                        var durationHour = countHours(netDuration)
+                        var durationMinute = countMinutes(netDuration)
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: durationHour,
+                                        minute: durationMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            durationHour = dialog.hour
+                            durationMinute = dialog.minute
+                            netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                            value = pad(durationHour) + ":" + pad(durationMinute)
+                            duration = netDuration + breakDuration
+                            updateduration();
+                            updateStartTime();
+
+                        })
+                    }
+
+                    label: "Net duration: "
+                    value: countHours(netDuration) +":"+countMinutes(netDuration)
                     width: parent.width
                     onClicked: openTimeDialog()
                 }
@@ -284,9 +373,11 @@ Dialog {
                     descriptionTextArea.text = description;
                 if(dateText != "Today")
                     updateDateText()
-                //update durationText
-                durationText = countHours(duration) + ":" + countMinutes(duration)
+                updateDuration()
                 //console.log(dataContainer)
+                if (breakDuration > 0)
+                    updateNetDuration();
+
             }
         }
     }
