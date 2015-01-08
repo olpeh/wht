@@ -107,6 +107,7 @@ Dialog {
             startSelectedMinute+=60
             startSelectedHour-=1
         }
+
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
     }
 
@@ -197,10 +198,16 @@ Dialog {
                             startSelectedHour = dialog.hour
                             startSelectedMinute = dialog.minute
                             var endHour = endSelectedHour
-                            if (endSelectedHour < startSelectedHour)
+                            var endMinute = endSelectedMinute
+                            if (endMinute - startSelectedMinute < 0) {
+                                endMinute +=60
+                                endHour -=1
+                            }
+                            if (endHour - startSelectedHour < 0)
                                 endHour +=24
-                            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-                            durationButton.value = countHours(duration) + ":" + countMinutes(duration)
+
+                            duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
+                            updateDuration()
                          })
                     }
 
@@ -231,10 +238,15 @@ Dialog {
                             endSelectedHour = dialog.hour
                             endSelectedMinute = dialog.minute
                             var endHour = endSelectedHour
-                            if (endSelectedHour < startSelectedHour)
+                            var endMinute = endSelectedMinute
+                            if (endMinute - startSelectedMinute < 0) {
+                                endMinute +=60
+                                endHour -=1
+                            }
+                            if (endHour - startSelectedHour < 0)
                                 endHour +=24
-                            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-                            durationButton.value = countHours(duration) + ":" + countMinutes(duration)
+                            duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
+                            updateDuration()
                         })
                     }
 

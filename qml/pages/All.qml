@@ -144,7 +144,7 @@ Page {
                 }
                 Label {
                     id: breakDuration
-                    visible: breakDuration
+                    visible: model.breakDuration > 0
                     text: "(" + model.breakDuration + "h break)"
                     font{
                         pixelSize: Theme.fontSizeExtraSmall

@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Jan 08 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.0-1
+- Added break possibility
+- Minor bugfixes
+
 * Tue Jan 06 2015 Olavi Haapala <ojhaapala@gmail.com> 0.7.0-1
 - Added new cover action
 - Added cover info
