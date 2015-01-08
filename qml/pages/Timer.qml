@@ -81,7 +81,7 @@ Page {
             var endHour = endSelectedHour
             if (endSelectedHour < startSelectedHour)
                 endHour +=24
-            duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+            var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
             pageStack.replace(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: dataContainer,
                                   uid: 0,
@@ -138,7 +138,7 @@ Page {
         Column {
             id: column
             width: parent.width
-            spacing: 30
+            spacing: 25
 
             PageHeader { title: "Timer" }
             Text {
@@ -146,12 +146,25 @@ Page {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: Theme.paddingLarge +25
+                    leftMargin: Theme.paddingLarge
                 }
                 wrapMode: Text.WordWrap
                 color: Theme.highlightColor
                 font {pixelSize: Theme.fontSizeMedium; bold:true}
                 text: {"An error occured when starting the timer."}
+            }
+            Text {
+                id: info
+                width: parent.width
+                wrapMode: Text.WordWrap
+                color: Theme.highlightColor
+                font {pixelSize: Theme.fontSizeSmall}
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: Theme.paddingLarge
+                }
+                text: {"Please try again."}
             }
             SectionHeader {
                 id: startedSection
@@ -161,7 +174,7 @@ Page {
                 anchors.horizontalCenter: startedSection.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 175
+                width: 180
                 height: 80
                 Text {
                     id: startedAt
@@ -179,7 +192,7 @@ Page {
                 anchors.horizontalCenter: durationSection.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 175
+                width: 180
                 height: 80
                 Text {
                     id: durationNow
@@ -189,20 +202,23 @@ Page {
                     text: "00:00"
                 }
             }
-            Text {
-                id: info
-                width: parent.width
-                wrapMode: Text.WordWrap
-                color: Theme.highlightColor
-                font {pixelSize: Theme.fontSizeMedium}
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-                }
-                text: {"Please try again."}
+            SectionHeader {
+                text: "Control"
             }
-
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 125
+                height: 80
+                ValueButton {
+                    id: stopTimerButton
+                    anchors.centerIn: parent
+                    label: "Stop"
+                    width: parent.width
+                    onClicked: stop()
+                }
+            }
         }
         Timer {
             interval: 60000; running: true; repeat: true

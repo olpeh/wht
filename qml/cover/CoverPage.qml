@@ -33,6 +33,7 @@ CoverBackground {
     property string durationNow: "0h 0min"
     property double thisWeek: 0
     property double thisMonth: 0
+    property double today: 0
 
     property bool active: status == Cover.Active
     onActiveChanged: refreshCover()
@@ -43,6 +44,7 @@ CoverBackground {
             timerRunning = true
         //console.log(timerRunning)
         //console.log(startTime)
+        today = DB.getHoursToday().toFixed(2)
         thisWeek = DB.getHoursThisWeek().toFixed(2)
         thisMonth = DB.getHoursThisMonth().toFixed(2)
     }
@@ -76,9 +78,9 @@ CoverBackground {
             iconSource: "image://theme/icon-cover-new"
             onTriggered: {
                 if(pageStack.depth > 1)
-                    pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0})
+                    pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
                 else
-                    pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0})
+                    pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
                 appWindow.activate()
             }
         }
@@ -106,7 +108,7 @@ CoverBackground {
                                        uid: 0,
                                        startSelectedMinute:startSelectedMinute,
                                        startSelectedHour:startSelectedHour,
-                                       duration:duration })
+                                       duration:duration, fromCover: true })
                     }
                     else {
                         pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
@@ -114,7 +116,7 @@ CoverBackground {
                                        uid: 0,
                                        startSelectedMinute:startSelectedMinute,
                                        startSelectedHour:startSelectedHour,
-                                       duration:duration })
+                                       duration:duration, fromCover: true })
                     }
                     console.log("Stopping")
                     appWindow.activate()
@@ -142,6 +144,21 @@ CoverBackground {
             height: 80
             Label {
                 anchors.centerIn: parent
+                id: todayLabel
+                font.pixelSize: Theme.fontSizeMedium
+                font.bold: true
+                color: Theme.highlightColor
+                text: "Today: " + today
+            }
+        }
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
+            Label {
+                anchors.centerIn: parent
                 id: week
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
@@ -150,6 +167,7 @@ CoverBackground {
             }
         }
         Rectangle {
+            visible: !timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             radius: 10.0

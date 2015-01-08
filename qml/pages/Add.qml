@@ -28,7 +28,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
-
+    canAccept: validateHours()
     property QtObject dataContainer: null
     property QtObject editMode: null
     property string description: "No description"
@@ -44,6 +44,12 @@ Dialog {
     property int startSelectedMinute : timeNow.getMinutes()
     property int endSelectedHour : timeNow.getHours()
     property int endSelectedMinute : timeNow.getMinutes()
+    property bool fromCover: false
+
+    //Simple validator to avoid adding negative or errorous hours
+    function validateHours() {
+        return (duration >=0 && netDuration >=0 && breakDuration >=0 && startSelectedHour < 24 && startSelectedMinute < 60 && endSelectedHour < 24 && endSelectedMinute < 60)
+    }
 
     function pad(n) { return ("0" + n).slice(-2); }
 
@@ -213,6 +219,7 @@ Dialog {
 
                             duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                             updateDuration()
+                            updateNetDuration()
                          })
                     }
 
@@ -252,6 +259,7 @@ Dialog {
                                 endHour +=24
                             duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                             updateDuration()
+                            updateNetDuration()
                         })
                     }
 
@@ -264,7 +272,7 @@ Dialog {
             SectionHeader { text: "Duration and break" }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
+                color: duration>=0 ? Theme.secondaryHighlightColor : "red"
                 radius: 10.0
                 width: 315
                 height: 80
@@ -286,7 +294,7 @@ Dialog {
                             durationMinute = dialog.minute
                             console.log(durationMinute)
                             duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            console.log(duration)
+                            //console.log(duration)
                             value = pad(durationHour) + ":" + pad(durationMinute)
                             console.log(countMinutes(duration))
                             updateStartTime()
@@ -301,7 +309,7 @@ Dialog {
             }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
+                color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
                 radius: 10.0
                 width: 315
                 height: 80
@@ -338,7 +346,7 @@ Dialog {
             Rectangle {
                 visible: breakDuration
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
+                color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
                 radius: 10.0
                 width: 315
                 height: 80
@@ -405,5 +413,7 @@ Dialog {
             if (result == DialogResult.Accepted) {
                 saveHours();
             }
+            if(fromCover)
+                appWindow.deactivate()
     }
 }
