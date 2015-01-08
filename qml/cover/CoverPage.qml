@@ -43,8 +43,8 @@ CoverBackground {
             timerRunning = true
         //console.log(timerRunning)
         //console.log(startTime)
-        thisWeek = DB.getHoursThisWeek()
-        thisMonth = DB.getHoursThisMonth()
+        thisWeek = DB.getHoursThisWeek().toFixed(2)
+        thisMonth = DB.getHoursThisMonth().toFixed(2)
     }
     function updateDuration(){
         var dateNow = new Date();

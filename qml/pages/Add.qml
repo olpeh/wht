@@ -111,6 +111,11 @@ Dialog {
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
     }
 
+    //udpating breakDuration
+    function updateBreakDuration() {
+        breakDurationButton.value = countHours(breakDuration) + ":" + countMinutes(breakDuration)
+    }
+
     //udpating netDuration
     function updateNetDuration() {
         netDuration = duration - breakDuration
@@ -388,8 +393,10 @@ Dialog {
                     updateDateText()
                 updateDuration()
                 //console.log(dataContainer)
-                if (breakDuration > 0)
+                if (breakDuration > 0) {
+                    updateBreakDuration();
                     updateNetDuration();
+                }
 
             }
         }
