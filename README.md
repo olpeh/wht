@@ -14,6 +14,10 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Changing effort times by adjusting duration
 
 ## Changelog
+### 0.8.0-1
+- Added break possibility
+- Minor bugfixes
+
 ### 0.7.0-2
 - Added new cover action
 - Added cover info
