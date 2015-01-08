@@ -15,6 +15,9 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Adding break possibility
 
 ## Changelog
+### 0.8.1-1
+- Fixed a bug in database creation
+
 ### 0.8.0-1
 - Added break possibility
 - Minor bugfixes
