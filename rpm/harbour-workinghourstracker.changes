@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Jan 08 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.1-1
+- Fixed a bug in database creation
+
 * Thu Jan 08 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.0-1
 - Added break possibility
 - Minor bugfixes

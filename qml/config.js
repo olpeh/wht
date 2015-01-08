@@ -60,23 +60,30 @@ function initialize() {
     var db = getDatabase();
     db.transaction(
         function(tx){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
+            tx.executeSql('PRAGMA user_version=2;');
+    });
+}
+function updateIfNeeded () {
+    var db = getDatabase();
+    db.transaction(
+        function(tx){
             var rs = tx.executeSql('PRAGMA user_version');
-            console.log(rs.rows.item(0).user_version);
+            //console.log(rs.rows.item(0).user_version);
             if (rs.rows.item(0).user_version < 2){
                 var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
                 if (ex.rows.item(0).name ==="hours") {
-                    console.log(ex.rows.item(0).name);
+                    //console.log(ex.rows.item(0).name);
                     tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
                     tx.executeSql('PRAGMA user_version=2;');
                     var r = tx.executeSql('PRAGMA user_version;');
-                    console.log(r.rows.item(0).user_version);
+                    //console.log(r.rows.item(0).user_version);
                 }
                 else
                     console.log("Error in updating table.")
             }
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
-        });
+    });
 }
 
 // This function is used to write hours into the database

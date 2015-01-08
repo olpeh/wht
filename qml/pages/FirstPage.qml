@@ -82,6 +82,7 @@ Page {
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
+        DB.updateIfNeeded();
         console.log("Get hours from database...");
         summaryModel.set(0,{"hours": DB.getHoursToday()});
         summaryModel.set(1,{"hours": DB.getHoursThisWeek()});
