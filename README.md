@@ -12,6 +12,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Cover actions for timer and adding new hours
 * Cover info for week and month
 * Changing effort times by adjusting duration
+* Adding break possibility
 
 ## Changelog
 ### 0.8.0-1
@@ -59,6 +60,5 @@ Sourcecode is released under the terms of the BSD License.
 * Different projects
 * Hours per project/all
 * More customization
-* Break time
 * Graphs?
 * Exporting/Importing database
