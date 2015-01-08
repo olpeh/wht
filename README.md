@@ -55,10 +55,6 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 ## License
 Sourcecode is released under the terms of the BSD License.
 
-## Currently known issues:
-* Item touch area in listing mode is too small
-* Please report more 
-
 ## Upcoming features:
 * Different projects
 * Hours per project/all
