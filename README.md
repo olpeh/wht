@@ -15,6 +15,14 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Adding break possibility
 
 ## Changelog
+
+### 0.8.2-1
+- Added validator for adding hours
+- Added today to cover
+- Added stop timer button to timer page
+- Appwindow gets now deactivated when adding hours from the cover
+- Two bugfixes
+
 ### 0.8.1-1
 - Fixed a bug in database creation
 
