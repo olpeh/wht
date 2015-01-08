@@ -64,7 +64,8 @@ Page {
                                'endTime': allHours[i].endTime,
                                'duration': allHours[i].duration,
                                'project' : allHours[i].project,
-                               'description': allHours[i].description})
+                               'description': allHours[i].description,
+                               'breakDuration': allHours[i].breakDuration })
             }
         }
     }
@@ -111,7 +112,7 @@ Page {
                     }
                     anchors {
                         left: parent.left
-                        leftMargin: Theme.paddingLarge
+                        leftMargin: Theme.paddingMedium
                     }
                 }
                 Label {
@@ -123,20 +124,34 @@ Page {
                     }
                     anchors {
                         left: date.right
-                        leftMargin: Theme.paddingLarge
+                        leftMargin: Theme.paddingMedium
                         baseline: date.baseline
                     }
                 }
                 Label {
                     id: duration
-                    text: model.duration + "h"
+                    property double netDur : model.duration - model.breakDuration
+                    text: netDur + "h"
                     font{
                         bold: true
                         pixelSize: Theme.fontSizeMedium
                     }
                     anchors {
                         left: times.right
-                        leftMargin: Theme.paddingLarge
+                        leftMargin: Theme.paddingMedium
+                        baseline: date.baseline
+                    }
+                }
+                Label {
+                    id: breakDuration
+                    visible: breakDuration
+                    text: "(" + model.breakDuration + "h break)"
+                    font{
+                        pixelSize: Theme.fontSizeExtraSmall
+                    }
+                    anchors {
+                        left: duration.right
+                        leftMargin: Theme.paddingMedium
                         baseline: date.baseline
                     }
                 }
@@ -147,7 +162,7 @@ Page {
                     anchors {
                         top: duration.bottom
                         left: parent.left
-                        leftMargin: Theme.paddingLarge
+                        leftMargin: Theme.paddingMedium
                     }
                 }
                 Label {
@@ -160,7 +175,7 @@ Page {
                     anchors {
                         top: project.bottom
                         left: parent.left
-                        leftMargin: Theme.paddingLarge
+                        leftMargin: Theme.paddingMedium
                     }
                 }
 
