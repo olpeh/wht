@@ -80,12 +80,12 @@ function initialize() {
 }
 
 // This function is used to write hours into the database
-function setHours(uid,date,startTime, endTime, duration,project,description) {
+function setHours(uid,date,startTime, endTime, duration,project,description, breakDuration) {
     console.log(date)
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             console.log ("Saved to database");
@@ -104,9 +104,10 @@ function getHoursToday() {
     var db = getDatabase();
     var dur =0;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime");');
+        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime");');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
+            dur-= rs.rows.item(i).breakDuration;
         }
     })
     //console.log(dur);
@@ -118,9 +119,10 @@ function getHoursThisWeek() {
     var db = getDatabase();
     var dur=0;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0")');
+        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0")');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
+            dur-= rs.rows.item(i).breakDuration;
         }
     })
     //console.log(dur);
@@ -132,9 +134,10 @@ function getHoursThisMonth() {
     var db = getDatabase();
     var dur=0;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of month") AND strftime("%Y-%m-%d", "now", "localtime")');
+        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of month") AND strftime("%Y-%m-%d", "now", "localtime")');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
+            dur-= rs.rows.item(i).breakDuration;
         }
     })
     //console.log(dur);
@@ -146,9 +149,10 @@ function getHoursThisYear() {
     var db = getDatabase();
     var dur=0;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime")');
+        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime")');
          for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
+            dur-= rs.rows.item(i).breakDuration;
         }
     })
     //console.log(dur);
@@ -163,6 +167,7 @@ function getHoursAll() {
         var rs = tx.executeSql('SELECT * FROM hours');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
+            dur-= rs.rows.item(i).breakDuration;
         }
     })
     //console.log(dur);
@@ -187,6 +192,7 @@ function getAll() {
              item["duration"]=rs.rows.item(i).duration;
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
+             item["breakDuration"]= rs.rows.item(i).breakDuration;
              allHours.push(item);
             //console.log(item);
         }
@@ -211,6 +217,7 @@ function getAllToday() {
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
+            item["breakDuration"]= rs.rows.item(i).breakDuration;
             allHours.push(item);
            //console.log(item);
         }
@@ -236,6 +243,7 @@ function getAllThisWeek() {
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
+            item["breakDuration"]= rs.rows.item(i).breakDuration;
             allHours.push(item);
            //console.log(item);
         }
@@ -260,6 +268,7 @@ function getAllThisMonth() {
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
+            item["breakDuration"]= rs.rows.item(i).breakDuration;
             allHours.push(item);
            //console.log(item);
         }
@@ -283,6 +292,7 @@ function getAllThisYear() {
              item["duration"]=rs.rows.item(i).duration;
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
+             item["breakDuration"]= rs.rows.item(i).breakDuration;
              allHours.push(item);
             //console.log(item);
         }

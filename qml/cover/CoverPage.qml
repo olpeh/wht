@@ -30,7 +30,7 @@ import "../config.js" as DB
 CoverBackground {
     property bool timerRunning: false
     property string startTime: ""
-    property string durationNow: "Not running"
+    property string durationNow: "0h 0min"
     property double thisWeek: 0
     property double thisMonth: 0
 
@@ -98,7 +98,7 @@ CoverBackground {
                     var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
                     DB.stopTimer();
                     timerRunning = false
-                    durationNow = 0
+                    durationNow = "0h 0min"
                     //pageStack.replace(Qt.resolvedUrl("../pages/FirstPage.qml"))
                     if(pageStack.depth > 1) {
                         pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
@@ -175,9 +175,6 @@ CoverBackground {
                 id: iconButton
                 icon.source: "image://theme/icon-cover-timer"
                 scale: 0.5
-                //anchors {
-                //    rightMargin: Theme.paddingSmall
-                //}
             }
 
             Label {

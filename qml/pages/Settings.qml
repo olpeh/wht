@@ -75,8 +75,10 @@ Page {
                     width: parent.width
                     onClicked: remorse.execute(settingsPage,"Resetting database", function() {
                         console.log("Resetting database");
-                        if (dataContainer != null)
+                        if (dataContainer != null){
                            settingsPage.dataContainer.resetDatabase();
+                           pageStack.replace(Qt.resolvedUrl("FirstPage.qml"));
+                        }
                     })
                 }
             }

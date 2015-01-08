@@ -46,8 +46,8 @@ Page {
         summaryModel.set(3,{"hours": DB.getHoursThisYear()});
         summaryModel.set(4,{"hours": DB.getHoursAll()});
     }
-    function setHours(uid,date,duration,description) {
-        DB.setHours(uid,date,duration,description)
+    function setHours(uid,date,duration,description, breakDuration) {
+        DB.setHours(uid,date,duration,description, breakDuration)
     }
     function getAllToday(){
         return DB.getAllToday();

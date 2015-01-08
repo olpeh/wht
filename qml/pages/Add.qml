@@ -77,7 +77,7 @@ Dialog {
 
         console.log(dateString)
         //.replace(/-/g,"")
-        DB.setHours(uid,dateString,startTime, endTime, duration,project,description)
+        DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration)
         if (dataContainer != null)
             page.dataContainer.getHours()
 
@@ -100,12 +100,12 @@ Dialog {
     function updateStartTime() {
         startSelectedHour = endSelectedHour - countHours(duration)
         startSelectedMinute = endSelectedMinute - countMinutes(duration)
+        if (startSelectedHour < 0) {
+            startSelectedHour+=24
+        }
         if (startSelectedMinute < 0) {
             startSelectedMinute+=60
             startSelectedHour-=1
-        }
-        if (startSelectedHour < 0) {
-            startSelectedHour+=24
         }
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
     }
@@ -117,7 +117,7 @@ Dialog {
     }
 
     //udpating duration
-    function updateduration() {
+    function updateDuration() {
         durationButton.value = countHours(duration) + ":" + countMinutes(duration)
     }
 
@@ -282,7 +282,6 @@ Dialog {
                     onClicked: openTimeDialog()
                 }
             }
-
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
@@ -293,17 +292,15 @@ Dialog {
                     id: breakDurationButton
                     anchors.centerIn: parent
                     function openTimeDialog() {
+                        var dialog;
                         var durationHour = countHours(breakDuration)
                         var durationMinute = countMinutes(breakDuration)
-                        var dialog;
-                        dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: durationHour,
-                                        minute: durationMinute,
-                                        // @TODO fix this
-                                        //canAccept: (((selector.hour)*60 + selector.minute) / 60).toFixed(2) < duration
-                                     })
-
+                        dialog = pageStack.push("MyTimePicker.qml", {
+                                                    hourMode: (DateTime.TwentyFourHours),
+                                                    hour: durationHour,
+                                                    minute: durationMinute,
+                                                    duration: duration
+                                                 })
                         dialog.accepted.connect(function() {
                             durationHour = dialog.hour
                             durationMinute = dialog.minute
@@ -316,7 +313,7 @@ Dialog {
                     }
 
                     label: "Break: "
-                    value: "-"
+                    value: "00:00"
                     width: parent.width
                     onClicked: openTimeDialog()
                 }
@@ -346,7 +343,7 @@ Dialog {
                             netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                             value = pad(durationHour) + ":" + pad(durationMinute)
                             duration = netDuration + breakDuration
-                            updateduration();
+                            updateDuration();
                             updateStartTime();
 
                         })
@@ -357,6 +354,10 @@ Dialog {
                     width: parent.width
                     onClicked: openTimeDialog()
                 }
+            }
+            Item {
+                width: parent.width
+                height: 10
             }
             Component.onCompleted: {
                 if (startSelectedHour < 0)
