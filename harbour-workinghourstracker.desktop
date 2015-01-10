@@ -3,8 +3,7 @@ Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-workinghourstracker
 Exec=harbour-workinghourstracker
-Name=harbour-workinghourstracker
+Name=Work Tracker
 # translation example:
 # your app name in German locale (de)
-Name[de]=harbour-workinghourstracker
-
+Name[de]=Work Tracker
