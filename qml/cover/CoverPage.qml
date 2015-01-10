@@ -65,11 +65,12 @@ CoverBackground {
         var diffMinutes = difference % 60;
         durationNow = diffHours + "h " + diffMinutes + "min";
     }
-    CoverPlaceholder {
-        id: icon
-        icon.source: "wht.png"
-        anchors.fill: parent
-        //opacity: 0.6
+    Image {
+	source: 'cover.png'
+	anchors.horizontalCenter: parent.horizontalCenter
+	width: parent.width
+	height: sourceSize.height * width / sourceSize.width
+	opacity: 0.1
     }
     CoverActionList {
         id: coverAction
@@ -138,7 +139,7 @@ CoverBackground {
         y: Theme.paddingMedium
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
+            color: "transparent"
             radius: 10.0
             width: 210
             height: 80
@@ -153,7 +154,7 @@ CoverBackground {
         }
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
+            color: "transparent"
             radius: 10.0
             width: 210
             height: 80
@@ -169,7 +170,7 @@ CoverBackground {
         Rectangle {
             visible: !timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
+            color: "transparent"
             radius: 10.0
             width: 210
             height: 80
@@ -185,7 +186,7 @@ CoverBackground {
         Rectangle {
             visible: timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
+            color: "transparent"
             radius: 10.0
             width: 210
             height: 80
