@@ -94,7 +94,7 @@ Dialog {
     // helper functions for giving duration in hh:mm format
     function countMinutes(duration) {
         var minutes = duration * 60
-        //console.log(Math.round(minutes % 60))
+        console.log(Math.round(minutes % 60))
         return pad(Math.round(minutes % 60))
     }
     function countHours(duration) {
@@ -102,10 +102,10 @@ Dialog {
         return pad(Math.floor(minutes / 60))
     }
 
-    // changed duration - move start time
+    //move start time
     function updateStartTime() {
-        startSelectedHour = endSelectedHour - countHours(duration)
-        startSelectedMinute = endSelectedMinute - countMinutes(duration)
+        startSelectedHour = endSelectedHour - parseInt(countHours(duration))
+        startSelectedMinute = endSelectedMinute - parseInt(countMinutes(duration))
         if (startSelectedHour < 0) {
             startSelectedHour+=24
         }
@@ -113,8 +113,31 @@ Dialog {
             startSelectedMinute+=60
             startSelectedHour-=1
         }
+        if (startSelectedHour < 0) {
+            startSelectedHour+=24
+        }
 
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+    }
+
+    // move end time
+    function updateEndTime() {
+        endSelectedHour = startSelectedHour + parseInt(countHours(duration))
+        console.log(endSelectedHour)
+        endSelectedMinute = startSelectedMinute + parseInt(countMinutes(duration))
+        console.log(endSelectedMinute)
+        if (endSelectedHour >= 24) {
+            endSelectedHour-=24
+        }
+        if (endSelectedMinute >= 60) {
+            endSelectedMinute-=60
+            endSelectedHour+=1
+        }
+        if (endSelectedHour >= 24) {
+            endSelectedHour-=24
+        }
+        endTime.value = pad(endSelectedHour) + ":" + pad(endSelectedMinute)
+        console.log(pad(endSelectedHour) + ":" + pad(endSelectedMinute))
     }
 
     //udpating breakDuration
@@ -133,6 +156,26 @@ Dialog {
         durationButton.value = countHours(duration) + ":" + countMinutes(duration)
     }
 
+    //if(checked)
+    function setEndNow() {
+        console.log("end now")
+        var now = new Date()
+        endSelectedHour = now.getHours()
+        endSelectedMinute= now.getMinutes()
+        endTime.value = pad(endSelectedHour) + ":" + pad(endSelectedMinute)
+        updateStartTime()
+    }
+
+    //start now
+    function setStartNow() {
+        console.log("start now")
+        var now = new Date()
+        startSelectedHour = now.getHours()
+        startSelectedMinute= now.getMinutes()
+        startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+        updateEndTime()
+    }
+
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -140,12 +183,10 @@ Dialog {
         //contentHeight: column.y + column.height
         Column {
             id: column
-
             DialogHeader {
                         acceptText: "Save"
                         cancelText: "Cancel"
             }
-
             spacing: 20
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
@@ -162,6 +203,20 @@ Dialog {
             }
 
             SectionHeader { text: "Select date and time" }
+            TextSwitch {
+                id: timeSwitch
+                checked: true
+                text: "Ends now"
+                description: "Endtime will be set to now."
+                onCheckedChanged: {
+                    timeSwitch.text = checked ? "Ends now" : "Starts now"
+                    timeSwitch.description = checked ? "Endtime will be set to now." : "Starttime will be set to now."
+                    if(checked)
+                        setEndNow()
+                    else
+                        setStartNow()
+                }
+            }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
@@ -220,6 +275,9 @@ Dialog {
                             duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                             updateDuration()
                             updateNetDuration()
+                            timeSwitch.checked = true
+                            timeSwitch.text = "Starttime changed"
+                            timeSwitch.description = "Uncheck to restore start time to now."
                          })
                     }
 
@@ -260,6 +318,9 @@ Dialog {
                             duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                             updateDuration()
                             updateNetDuration()
+                            timeSwitch.checked = false
+                            timeSwitch.text = "Endtime changed"
+                            timeSwitch.description = "Check to restore end time to now."
                         })
                     }
 
@@ -280,8 +341,8 @@ Dialog {
                     id: durationButton
                     anchors.centerIn: parent
                     function openTimeDialog() {
-                        var durationHour = countHours(duration)
-                        var durationMinute = countMinutes(duration)
+                        var durationHour = parseInt(countHours(duration))
+                        var durationMinute = parseInt(countMinutes(duration))
                         var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                         hourMode: (DateTime.TwentyFourHours),
                                         hour: durationHour,
@@ -318,8 +379,8 @@ Dialog {
                     anchors.centerIn: parent
                     function openTimeDialog() {
                         var dialog;
-                        var durationHour = countHours(breakDuration)
-                        var durationMinute = countMinutes(breakDuration)
+                        var durationHour = parseInt(countHours(breakDuration))
+                        var durationMinute = parseInt(countMinutes(breakDuration))
                         dialog = pageStack.push("MyTimePicker.qml", {
                                                     hourMode: (DateTime.TwentyFourHours),
                                                     hour: durationHour,
@@ -354,8 +415,8 @@ Dialog {
                     id: netDurationButton
                     anchors.centerIn: parent
                     function openTimeDialog() {
-                        var durationHour = countHours(netDuration)
-                        var durationMinute = countMinutes(netDuration)
+                        var durationHour = parseInt(countHours(netDuration))
+                        var durationMinute = parseInt(countMinutes(netDuration))
                         var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                         hourMode: (DateTime.TwentyFourHours),
                                         hour: durationHour,
