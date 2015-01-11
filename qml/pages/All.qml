@@ -203,10 +203,9 @@ Page {
             }
             RemorseItem { id: remorse }
             function remove() {
-                var idx = index
                 console.log(index)
                 console.log(model.uid)
-                remorse.execute(myListItem, "Deleting", function() { all.dataContainer.remove(model.uid); hoursModel.remove(idx); all.dataContainer.getHours();} )
+                remorse.execute(myListItem, "Deleting", function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
 
             }
         }
