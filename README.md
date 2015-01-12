@@ -66,6 +66,7 @@ Sourcecode is released under the terms of the BSD License.
 ## Upcoming features:
 * Different projects
 * Hours per project/all
+* Price calculator
 * More customization
 * Graphs?
 * Exporting/Importing database
