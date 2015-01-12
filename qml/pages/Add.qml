@@ -245,7 +245,7 @@ Dialog {
             }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
+                color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
                 radius: 10.0
                 width: 315
                 height: 80
@@ -289,7 +289,7 @@ Dialog {
             }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
+                color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
                 radius: 10.0
                 width: 315
                 height: 80
