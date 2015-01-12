@@ -129,7 +129,7 @@ Page {
                     onClicked: openTimeDialog()
                 }
             }
-            Text {
+            /*Text {
                 font.pointSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
@@ -140,6 +140,39 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: "More settings to come"
+            }*/
+
+            SectionHeader { text: "Adding hours" }
+            TextSwitch {
+                id: timeSwitch
+                checked: true
+                text: "Ends now by default"
+                description: "Endtime will be set to now by default."
+                onCheckedChanged: {
+                    timeSwitch.text = checked ? "Ends now by default" : "Starts now by default"
+                    timeSwitch.description = checked ? "Endtime will be set to now by default." : "Starttime will be set to now by default."
+                    if(checked){
+                        settings.setValue("endsNowByDefault", 1)
+                    }
+                    else {
+                        settings.setValue("endsNowByDefault", 0)
+                    }
+                }
+            }
+            SectionHeader { text: "Adding break" }
+            TextSwitch {
+                id: fixedSwitch
+                checked: true
+                text: "Endtime stays fixed by default."
+                description: "Starttime will flex if duration is changed."
+                onCheckedChanged: {
+                    fixedSwitch.text = checked ? "Endtime stays fixed by default." : "Starttime stays fixed by default."
+                    fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
+                    if(checked)
+                        settings.setValue("endTimeStaysFixed", 1)
+                    else
+                        settings.setValue("endTimeStaysFixed", 0)
+                }
             }
 
 
@@ -190,6 +223,18 @@ Page {
         if(brk !==0){
             defaultBreakDuration = brk
         }
+        var endFixed = settings.value("endTimeStaysFixed",1)
+        if(endFixed === 1)
+            fixedSwitch.checked = true
+        else if(endFixed === 0)
+            fixedSwitch.checked = false
+
+        var nowByDefault = settings.value("endsNowByDefault",1)
+        if(nowByDefault === 1)
+            timeSwitch.checked = true
+        else if(nowByDefault === 0)
+            timeSwitch.checked = false
+
     }
 }
 

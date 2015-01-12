@@ -481,6 +481,17 @@ Dialog {
                         breakDuration = brk
                     }
                 }
+                var endFixed = settings.value("endTimeStaysFixed",1)
+                if(endFixed === 1)
+                    fixedSwitch.checked = true
+                else if(endFixed === 0)
+                    fixedSwitch.checked = false
+
+                var nowByDefault = settings.value("endsNowByDefault",1)
+                if(nowByDefault === 1)
+                    timeSwitch.checked = true
+                else if(nowByDefault === 0)
+                    timeSwitch.checked = false
                 /*
                 if (startSelectedHour < 0)
                     startSelectedHour = endSelectedHour + 16;
@@ -502,7 +513,6 @@ Dialog {
                     updateBreakDuration();
                     updateNetDuration();
                 }
-
             }
         }
     }
