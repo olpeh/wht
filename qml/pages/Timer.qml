@@ -89,7 +89,8 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration })
+                                  duration:duration,
+                                  fromTimer: true })
         }
         else
             console.log("Error when stopping the timer!");

@@ -45,6 +45,7 @@ Dialog {
     property int endSelectedHour : timeNow.getHours()
     property int endSelectedMinute : timeNow.getMinutes()
     property bool fromCover: false
+    property bool fromTimer: false
     property bool endTimeStaysFixed: true
 
     //Simple validator to avoid adding negative or erroneous hours
@@ -470,6 +471,17 @@ Dialog {
                 height: 10
             }
             Component.onCompleted: {
+                if(!editMode && !fromCover && !fromTimer) {
+                    var dur = settings.value("defaultDuration", 8)
+                    if(dur !==8){
+                        duration = dur
+                    }
+                    var brk = settings.value("defaultBreakDuration", 0)
+                    if(brk !==8){
+                        breakDuration = brk
+                    }
+                }
+                /*
                 if (startSelectedHour < 0)
                     startSelectedHour = endSelectedHour + 16;
                 if (startSelectedHour.length === 1)
@@ -479,7 +491,7 @@ Dialog {
                 if (startSelectedMinute.length === 1)
                     startSelectedMinute = "0" + startSelectedMinute;
                 if (endSelectedMinute.length === 1)
-                    endSelectedMinute = "0" + endSelectedMinute;
+                    endSelectedMinute = "0" + endSelectedMinute;*/
                 if (description != "No description")
                     descriptionTextArea.text = description;
                 if(dateText != "Today")

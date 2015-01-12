@@ -27,9 +27,22 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+
+    property double defaultDuration: 8
+    property double defaultBreakDuration: 0
     id: settingsPage
     property QtObject dataContainer: null
 
+    // helper functions for giving duration in hh:mm format
+    function countMinutes(duration) {
+        var minutes = duration * 60
+        return pad(Math.round(minutes % 60))
+    }
+    function countHours(duration) {
+        var minutes = duration * 60
+        return pad(Math.floor(minutes / 60))
+    }
+    function pad(n) { return ("0" + n).slice(-2); }
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -45,7 +58,77 @@ Page {
                 title: "Settings"
             }
             RemorseItem { id: remorse }
-            SectionHeader { text: "General" }
+            SectionHeader { text: "Default duration" }
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 315
+                height: 80
+                ValueButton {
+                    id: defaultDurationButton
+                    anchors.centerIn: parent
+                    function openTimeDialog() {
+                        var durationHour = parseInt(countHours(defaultDuration))
+                        var durationMinute = parseInt(countMinutes(defaultDuration))
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: durationHour,
+                                        minute: durationMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            value = dialog.timeText
+                            durationHour = dialog.hour
+                            durationMinute = dialog.minute
+                            defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                            console.log(defaultDuration)
+                            value = pad(durationHour) + ":" + pad(durationMinute)
+                            settings.setValue("defaultDuration", defaultDuration)
+                        })
+                    }
+
+                    label: "Value:"
+                    value: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
+                    width: parent.width
+                    onClicked: openTimeDialog()
+                }
+            }
+            SectionHeader { text: "Default break duration" }
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                width: 315
+                height: 80
+                ValueButton {
+                    id: defaultBreakDurationButton
+                    anchors.centerIn: parent
+                    function openTimeDialog() {
+                        var durationHour = parseInt(countHours(defaultBreakDuration))
+                        var durationMinute = parseInt(countMinutes(defaultBreakDuration))
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: durationHour,
+                                        minute: durationMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            value = dialog.timeText
+                            durationHour = dialog.hour
+                            durationMinute = dialog.minute
+                            defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                            value = pad(durationHour) + ":" + pad(durationMinute)
+                            settings.setValue("defaultBreakDuration", defaultBreakDuration)
+                        })
+                    }
+
+                    label: "Value:"
+                    value: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
+                    width: parent.width
+                    onClicked: openTimeDialog()
+                }
+            }
             Text {
                 font.pointSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
@@ -96,6 +179,16 @@ Page {
                 text: "Warning: You will loose all your Working Hours data if you reset the database!"
             }
 
+        }
+    }
+    Component.onCompleted: {
+        var dur = settings.value("defaultDuration", 8)
+        if(dur !==8){
+            defaultDuration = dur
+        }
+        var brk = settings.value("defaultBreakDuration", 0)
+        if(brk !==0){
+            defaultBreakDuration = brk
         }
     }
 }
