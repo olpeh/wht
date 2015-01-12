@@ -147,7 +147,7 @@ CoverBackground {
                 id: todayLabel
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
-                color: Theme.highlightColor
+                color: Theme.primaryColor
                 text: "Today: " + today
             }
         }
@@ -162,7 +162,7 @@ CoverBackground {
                 id: week
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
-                color: Theme.highlightColor
+                color: Theme.primaryColor
                 text: "Week: " + thisWeek
             }
         }
@@ -178,7 +178,7 @@ CoverBackground {
                 id: month
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
-                color: Theme.highlightColor
+                color: Theme.primaryColor
                 text: "Month: " + thisMonth
             }
         }
@@ -201,7 +201,7 @@ CoverBackground {
                 id: timer
                 font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
-                color: Theme.highlightColor
+                color: Theme.primaryColor
                 text: durationNow
             }
         }
