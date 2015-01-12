@@ -45,8 +45,9 @@ Dialog {
     property int endSelectedHour : timeNow.getHours()
     property int endSelectedMinute : timeNow.getMinutes()
     property bool fromCover: false
+    property bool endTimeStaysFixed: true
 
-    //Simple validator to avoid adding negative or errorous hours
+    //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
         return (duration >=0 && netDuration >=0 && breakDuration >=0 && startSelectedHour < 24 && startSelectedMinute < 60 && endSelectedHour < 24 && endSelectedMinute < 60)
     }
@@ -156,7 +157,7 @@ Dialog {
         durationButton.value = countHours(duration) + ":" + countMinutes(duration)
     }
 
-    //if(checked)
+    //end now
     function setEndNow() {
         console.log("end now")
         var now = new Date()
@@ -192,17 +193,7 @@ Dialog {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
-            SectionHeader { text: "Description" }
-            TextField{
-                id: descriptionTextArea
-                //focus: true
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
-                width: parent.width
-                placeholderText: "Enter an optional description"
-            }
-
-            SectionHeader { text: "Select date and time" }
+            /*SectionHeader { text: "Select date and time" }*/
             TextSwitch {
                 id: timeSwitch
                 checked: true
@@ -211,10 +202,14 @@ Dialog {
                 onCheckedChanged: {
                     timeSwitch.text = checked ? "Ends now" : "Starts now"
                     timeSwitch.description = checked ? "Endtime will be set to now." : "Starttime will be set to now."
-                    if(checked)
+                    if(checked){
                         setEndNow()
-                    else
+                        fixedSwitch.checked = true
+                    }
+                    else {
                         setStartNow()
+                        fixedSwitch.checked = false
+                    }
                 }
             }
             Rectangle {
@@ -330,7 +325,21 @@ Dialog {
                     onClicked: openTimeDialog()
                 }
             }
-            SectionHeader { text: "Duration and break" }
+            /*SectionHeader { text: "Duration and break" }*/
+            TextSwitch {
+                id: fixedSwitch
+                checked: true
+                text: "Endtime stays fixed"
+                description: "Starttime will flex if duration is changed."
+                onCheckedChanged: {
+                    fixedSwitch.text = checked ? "Endtime stays fixed" : "Starttime stays fixed"
+                    fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
+                    if(checked)
+                        endTimeStaysFixed = true
+                    else
+                        endTimeStaysFixed = false
+                }
+            }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: duration>=0 ? Theme.secondaryHighlightColor : "red"
@@ -358,7 +367,10 @@ Dialog {
                             //console.log(duration)
                             value = pad(durationHour) + ":" + pad(durationMinute)
                             console.log(countMinutes(duration))
-                            updateStartTime()
+                            if(endTimeStaysFixed)
+                                updateStartTime()
+                            else
+                                updateEndTime()
                         })
                     }
 
@@ -430,7 +442,10 @@ Dialog {
                             value = pad(durationHour) + ":" + pad(durationMinute)
                             duration = netDuration + breakDuration
                             updateDuration();
-                            updateStartTime();
+                            if(endTimeStaysFixed)
+                                updateStartTime()
+                            else
+                                updateEndTime()
 
                         })
                     }
@@ -440,6 +455,15 @@ Dialog {
                     width: parent.width
                     onClicked: openTimeDialog()
                 }
+            }
+            /*SectionHeader { text: "Description" }*/
+            TextField{
+                id: descriptionTextArea
+                //focus: true
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
+                width: parent.width
+                placeholderText: "Enter an optional description"
             }
             Item {
                 width: parent.width
