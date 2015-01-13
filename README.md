@@ -13,8 +13,17 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Cover info for week and month
 * Changing effort times by adjusting duration
 * Adding break possibility
+* Settings for default duration and default break
 
 ## Changelog
+
+### 0.8.3-3
+- Modified cover text color
+- Changed desktop name
+- Added toggles to adding hours
+- Added settings for default duration and break
+- Fixed bug in deleting items
+- Added donation links
 
 ### 0.8.2-1
 - Added validator for adding hours
