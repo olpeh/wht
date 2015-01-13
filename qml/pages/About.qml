@@ -87,20 +87,33 @@ Page {
                 }
                 text: "Contributions and bug reporst are welcome. Please report issues in github. Link below."
             }
-            ValueButton {
-                id: github
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 20
-                label: "<a href=\"https://github.com/ojhaapala/wht\">https://github.com/ojhaapala/wht</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://github.com/ojhaapala/wht")
-                }
-            }
             Item {
                 width: parent.width
                 height: 10
             }
+            ValueButton {
+                id: github
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 20
+                label: "<a href=\"https://github.com/ojhaapala/wht/issues\">github.com/ojhaapala/wht</a>"
+                onClicked: {
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                }
+            }
+
             SectionHeader { text: "Donate" }
+            Text {
+                //font.pointSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "If you like my work, please feel free to donate. Donations help me to use more time on development."
+            }
             Button {
               text: "Paypal EUR"
               anchors.horizontalCenter: parent.horizontalCenter
