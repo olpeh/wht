@@ -17,6 +17,10 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 ## Changelog
 
+### 0.8.4-1
+- Fix for settings (now gets saved)
+- Small bugfix for values shown in firstpage
+
 ### 0.8.3-3
 - Modified cover text color
 - Changed desktop name
