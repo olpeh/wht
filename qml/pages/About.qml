@@ -96,7 +96,41 @@ Page {
                     Qt.openUrlExternally("https://github.com/ojhaapala/wht")
                 }
             }
-
+            Item {
+                width: parent.width
+                height: 10
+            }
+            SectionHeader { text: "Donate" }
+            Button {
+              text: "Paypal EUR"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+            }
+            Button {
+              text: "Paypal USD"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+            }
+            Item {
+                width: parent.width
+                height: 10
+            }
+            SectionHeader { text: "Bitcoin" }
+            TextField {
+                id: bitcoinText
+                readOnly: true
+                focusOnClick: true
+                onClicked: {
+                    console.log("Clicked")
+                    select()
+                    copy()
+                    bitcoinText.label = "Copied to clipboard"
+                }
+                label: "Donate to my bitcoin address"
+                text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
+                font.pointSize: Theme.fontSizeExtraSmall
+                EnterKey.onClicked: parent.focus = true
+            }
             SectionHeader { text: "Contact" }
             Text {
                 //font.pointSize: Theme.fontSizeSmall
@@ -118,6 +152,10 @@ Page {
                 onClicked: {
                     Qt.openUrlExternally("https://twitter.com/olpetik")
                 }
+            }
+            Item {
+                width: parent.width
+                height: 10
             }
         }
     }

@@ -8,6 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Jan 13 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.3-3
+- Modified cover text color
+- Changed desktop name
+- Added toggles to adding hours
+- Added settings for default duration and break
+- Fixed bug in deleting items
+- Added donation links
+
 * Thu Jan 08 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.2-1
 - Added validator for adding hours
 - Added today to cover
