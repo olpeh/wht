@@ -63,8 +63,8 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 315
-                height: 80
+                width: 250
+                height: 75
                 ValueButton {
                     id: defaultDurationButton
                     anchors.centerIn: parent
@@ -99,8 +99,8 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 315
-                height: 80
+                width: 250
+                height: 75
                 ValueButton {
                     id: defaultBreakDurationButton
                     anchors.centerIn: parent
@@ -129,7 +129,7 @@ Page {
                     onClicked: openTimeDialog()
                 }
             }
-            /*Text {
+            Text {
                 font.pointSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
@@ -140,8 +140,9 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: "More settings to come"
-            }*/
+            }
 
+            /* @TODO fix this - didn't work
             SectionHeader { text: "Adding hours" }
             TextSwitch {
                 id: timeSwitch
@@ -152,13 +153,14 @@ Page {
                     timeSwitch.text = checked ? "Ends now by default" : "Starts now by default"
                     timeSwitch.description = checked ? "Endtime will be set to now by default." : "Starttime will be set to now by default."
                     if(checked){
-                        settings.setValue("endsNowByDefault", 1)
+                        settings.setValue("endsNowByDefault", true)
                     }
                     else {
-                        settings.setValue("endsNowByDefault", 0)
+                        settings.setValue("endsNowByDefault", false)
                     }
                 }
             }
+
             SectionHeader { text: "Adding break" }
             TextSwitch {
                 id: fixedSwitch
@@ -169,12 +171,12 @@ Page {
                     fixedSwitch.text = checked ? "Endtime stays fixed by default." : "Starttime stays fixed by default."
                     fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
                     if(checked)
-                        settings.setValue("endTimeStaysFixed", 1)
+                        settings.setValue("endTimeStaysFixed", true)
                     else
-                        settings.setValue("endTimeStaysFixed", 0)
+                        settings.setValue("endTimeStaysFixed", false)
                 }
             }
-
+            */
 
             SectionHeader { text: "DANGER ZONE!" }
 
@@ -215,26 +217,36 @@ Page {
         }
     }
     Component.onCompleted: {
-        var dur = settings.value("defaultDuration", 8)
-        if(dur !==8){
+        var dur = settings.value("defaultDuration", -1)
+        if(dur >=0){
             defaultDuration = dur
         }
-        var brk = settings.value("defaultBreakDuration", 0)
-        if(brk !==0){
+        else
+            console.log("Error when getting defaultDuration")
+
+        var brk = settings.value("defaultBreakDuration", -1)
+        if(brk >= 0){
             defaultBreakDuration = brk
         }
-        var endFixed = settings.value("endTimeStaysFixed",1)
-        if(endFixed === 1)
+        else
+            console.log("Error when getting defaultBreakDuration")
+        /* @TODO fix this - didn't work
+        var endFixed = settings.value("endTimeStaysFixed",-1)
+        if(endFixed === true)
             fixedSwitch.checked = true
-        else if(endFixed === 0)
+        else if(endFixed === false)
             fixedSwitch.checked = false
+        else
+            console.log("Error when getting endTimeStaysFixed")
 
-        var nowByDefault = settings.value("endsNowByDefault",1)
-        if(nowByDefault === 1)
+        var nowByDefault = settings.value("endsNowByDefault",-1)
+        if(nowByDefault === true)
             timeSwitch.checked = true
-        else if(nowByDefault === 0)
+        else if(nowByDefault === false)
             timeSwitch.checked = false
-
+        else
+            console.log("Error when getting endsNowByDefault")
+        */
     }
 }
 

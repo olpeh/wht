@@ -205,11 +205,11 @@ Dialog {
                     timeSwitch.description = checked ? "Endtime will be set to now." : "Starttime will be set to now."
                     if(checked){
                         setEndNow()
-                        fixedSwitch.checked = true
+                        //fixedSwitch.checked = true
                     }
                     else {
                         setStartNow()
-                        fixedSwitch.checked = false
+                        //fixedSwitch.checked = false
                     }
                 }
             }
@@ -472,26 +472,39 @@ Dialog {
             }
             Component.onCompleted: {
                 if(!editMode && !fromCover && !fromTimer) {
-                    var dur = settings.value("defaultDuration", 8)
-                    if(dur !==8){
+                    var dur = settings.value("defaultDuration", -1)
+                    if(dur >=0){
                         duration = dur
                     }
-                    var brk = settings.value("defaultBreakDuration", 0)
-                    if(brk !==8){
+                    else
+                        console.log("Error getting defaultDuration")
+
+                    var brk = settings.value("defaultBreakDuration", -1)
+                    if(brk >=0){
                         breakDuration = brk
                     }
-                }
-                var endFixed = settings.value("endTimeStaysFixed",1)
-                if(endFixed === 1)
-                    fixedSwitch.checked = true
-                else if(endFixed === 0)
-                    fixedSwitch.checked = false
+                    else
+                        console.log("Error getting defaultBreakDuration")
 
-                var nowByDefault = settings.value("endsNowByDefault",1)
-                if(nowByDefault === 1)
+                }
+                /* @TODO fix this - didn't work
+                var endFixed = settings.value("endTimeStaysFixed",-1)
+                if(endFixed === true)
+                    fixedSwitch.checked = true
+                else if(endFixed === false)
+                    fixedSwitch.checked = false
+                else
+                    console.log("Error getting endTimeStaysFixed")
+
+                var nowByDefault = settings.value("endsNowByDefault",-1)
+                if(nowByDefault === true)
                     timeSwitch.checked = true
-                else if(nowByDefault === 0)
+                else if(nowByDefault === false)
                     timeSwitch.checked = false
+                else
+                    console.log("Error getting endsNowByDefault")
+                */
+
                 /*
                 if (startSelectedHour < 0)
                     startSelectedHour = endSelectedHour + 16;
@@ -513,6 +526,10 @@ Dialog {
                     updateBreakDuration();
                     updateNetDuration();
                 }
+                //if(nowByDefault)
+                    updateStartTime()
+                //else
+                //    updateEndTime()
             }
         }
     }

@@ -37,7 +37,7 @@ Page {
             MenuItem {
                 text: "Settings"
                 onClicked: {
-                    console.log (dataContainer)
+                    //console.log (dataContainer)
                     pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: dataContainer})
                 }
             }
@@ -121,9 +121,9 @@ Page {
             }
         }
     }
-    Component.onCompleted: {
-       console.log(dataContainer);
-    }
+    /*Component.onCompleted: {
+       //console.log(dataContainer);
+    }*/
 }
 
 
