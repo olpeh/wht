@@ -18,8 +18,7 @@ int main(int argc, char *argv[])
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, "$XDG_CONFIG_HOME/harbour-workinghourstracker");
     Settings settings;
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-    app->setOrganizationName("Olpe");
-    app->setApplicationName(QFileInfo(app->applicationFilePath()).baseName());\
+    app->setApplicationName("harbour-workinghourstracker");\
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("settings", &settings);

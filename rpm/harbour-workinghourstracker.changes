@@ -8,7 +8,7 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Tue Jan 13 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.3-4
+* Tue Jan 13 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.4-1
 - Fix for settings (now gets saved)
 - Small bugfix for values shown in firstpage
 
