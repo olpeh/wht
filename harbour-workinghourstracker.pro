@@ -15,7 +15,7 @@ TARGET = harbour-workinghourstracker
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-workinghourstracker.cpp \
-    src/settings.cpp
+    src/SettingsClass.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -39,5 +39,5 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-workinghourstracker-de.ts
 
 HEADERS += \
-    src/settings.h
+    src/SettingsClass.h
 

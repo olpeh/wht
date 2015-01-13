@@ -38,6 +38,7 @@ Page {
         summaryModel.set(3,{"hours": 0});
         summaryModel.set(4,{"hours": 0});
     }
+
     function getHours() {
         //Update hours view after adding or deleting hours
         summaryModel.set(0,{"hours": DB.getHoursToday()});

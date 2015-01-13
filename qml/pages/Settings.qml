@@ -84,7 +84,7 @@ Page {
                             defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                             console.log(defaultDuration)
                             value = pad(durationHour) + ":" + pad(durationMinute)
-                            settings.setValue("defaultDuration", defaultDuration)
+                            settings.setDefaultDuration(defaultDuration)
                         })
                     }
 
@@ -119,7 +119,7 @@ Page {
                             durationMinute = dialog.minute
                             defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                             value = pad(durationHour) + ":" + pad(durationMinute)
-                            settings.setValue("defaultBreakDuration", defaultBreakDuration)
+                            settings.setDefaultBreakDuration(defaultBreakDuration)
                         })
                     }
 
@@ -141,8 +141,6 @@ Page {
                 }
                 text: "More settings to come"
             }
-
-            /* @TODO fix this - didn't work
             SectionHeader { text: "Adding hours" }
             TextSwitch {
                 id: timeSwitch
@@ -153,10 +151,10 @@ Page {
                     timeSwitch.text = checked ? "Ends now by default" : "Starts now by default"
                     timeSwitch.description = checked ? "Endtime will be set to now by default." : "Starttime will be set to now by default."
                     if(checked){
-                        settings.setValue("endsNowByDefault", true)
+                        settings.setEndsNowByDefault("yes")
                     }
                     else {
-                        settings.setValue("endsNowByDefault", false)
+                        settings.setEndsNowByDefault("no")
                     }
                 }
             }
@@ -171,12 +169,11 @@ Page {
                     fixedSwitch.text = checked ? "Endtime stays fixed by default." : "Starttime stays fixed by default."
                     fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
                     if(checked)
-                        settings.setValue("endTimeStaysFixed", true)
+                        settings.setEndTimeStaysFixed("yes")
                     else
-                        settings.setValue("endTimeStaysFixed", false)
+                        settings.setEndTimeStaysFixed("no")
                 }
             }
-            */
 
             SectionHeader { text: "DANGER ZONE!" }
 
@@ -217,36 +214,35 @@ Page {
         }
     }
     Component.onCompleted: {
-        var dur = settings.value("defaultDuration", -1)
+        var dur = settings.getDefaultDuration()
         if(dur >=0){
             defaultDuration = dur
         }
         else
             console.log("Error when getting defaultDuration")
 
-        var brk = settings.value("defaultBreakDuration", -1)
+        var brk = settings.getDefaultBreakDuration()
         if(brk >= 0){
             defaultBreakDuration = brk
         }
         else
             console.log("Error when getting defaultBreakDuration")
-        /* @TODO fix this - didn't work
-        var endFixed = settings.value("endTimeStaysFixed",-1)
-        if(endFixed === true)
+
+        var endFixed = settings.getEndTimeStaysFixed()
+        if(endFixed === "yes")
             fixedSwitch.checked = true
-        else if(endFixed === false)
+        else if(endFixed === "no")
             fixedSwitch.checked = false
         else
             console.log("Error when getting endTimeStaysFixed")
 
-        var nowByDefault = settings.value("endsNowByDefault",-1)
-        if(nowByDefault === true)
+        var nowByDefault = settings.getEndsNowByDefault()
+        if(nowByDefault === "yes")
             timeSwitch.checked = true
-        else if(nowByDefault === false)
+        else if(nowByDefault === "no")
             timeSwitch.checked = false
         else
             console.log("Error when getting endsNowByDefault")
-        */
     }
 }
 

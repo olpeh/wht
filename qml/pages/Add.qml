@@ -82,9 +82,6 @@ Dialog {
 
         var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
         var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
-
-        console.log(dateString)
-        //.replace(/-/g,"")
         DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration)
         if (dataContainer != null)
             page.dataContainer.getHours()
@@ -96,7 +93,6 @@ Dialog {
     // helper functions for giving duration in hh:mm format
     function countMinutes(duration) {
         var minutes = duration * 60
-        console.log(Math.round(minutes % 60))
         return pad(Math.round(minutes % 60))
     }
     function countHours(duration) {
@@ -472,38 +468,35 @@ Dialog {
             }
             Component.onCompleted: {
                 if(!editMode && !fromCover && !fromTimer) {
-                    var dur = settings.value("defaultDuration", -1)
+                    var dur = settings.getDefaultDuration()
                     if(dur >=0){
                         duration = dur
                     }
                     else
-                        console.log("Error getting defaultDuration")
+                        console.log("Error when getting defaultDuration")
 
-                    var brk = settings.value("defaultBreakDuration", -1)
-                    if(brk >=0){
+                    var brk = settings.getDefaultBreakDuration()
+                    if(brk >= 0){
                         breakDuration = brk
                     }
                     else
-                        console.log("Error getting defaultBreakDuration")
-
+                        console.log("Error when getting defaultBreakDuration")
                 }
-                /* @TODO fix this - didn't work
-                var endFixed = settings.value("endTimeStaysFixed",-1)
-                if(endFixed === true)
+                var endFixed = settings.getEndTimeStaysFixed()
+                if(endFixed === "yes")
                     fixedSwitch.checked = true
-                else if(endFixed === false)
+                else if(endFixed === "no")
                     fixedSwitch.checked = false
                 else
-                    console.log("Error getting endTimeStaysFixed")
+                    console.log("Error when getting endTimeStaysFixed")
 
-                var nowByDefault = settings.value("endsNowByDefault",-1)
-                if(nowByDefault === true)
+                var nowByDefault = settings.getEndsNowByDefault()
+                if(nowByDefault === "yes")
                     timeSwitch.checked = true
-                else if(nowByDefault === false)
+                else if(nowByDefault === "no")
                     timeSwitch.checked = false
                 else
-                    console.log("Error getting endsNowByDefault")
-                */
+                    console.log("Error when getting endsNowByDefault")
 
                 /*
                 if (startSelectedHour < 0)
