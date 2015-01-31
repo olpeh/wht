@@ -149,9 +149,9 @@ function getHoursMonth(offset) {
     var dur = 0;
     var sqlstr = "";
     if (offset === 0)
-        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "start of month", "localtime") AND strftime("%Y-%m-%d","now","localtime");';
+        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime");';
     else {
-        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d","now", "start of month", "-1 day", "localtime");';
+        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day");';
     }
      db.transaction(function(tx) {
         var rs = tx.executeSql(sqlstr);

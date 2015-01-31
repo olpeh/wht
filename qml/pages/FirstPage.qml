@@ -84,6 +84,7 @@ Page {
         DB.updateIfNeeded();
         //console.log("Get hours from database...");
         getHours();
+        console.log(DB.getHoursMonth(0))
     }
 
     ListModel {
