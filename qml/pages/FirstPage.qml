@@ -33,9 +33,9 @@ Page {
         //console.log(hours);
         DB.resetDatabase();
         summaryModel.set(0,{"hours": 0, "hoursLast": 0});
-        summaryModel.set(0,{"hours": 1, "hoursLast": 0});
-        summaryModel.set(0,{"hours": 2, "hoursLast": 0});
-        summaryModel.set(0,{"hours": 3, "hoursLast": 0});
+        summaryModel.set(1,{"hours": 0, "hoursLast": 0});
+        summaryModel.set(2,{"hours": 0, "hoursLast": 0});
+        summaryModel.set(3,{"hours": 0, "hoursLast": 0});
      }
 
     function getHours() {
@@ -115,7 +115,8 @@ Page {
     }
     SilicaListView {
         id: listView
-        anchors.fill: parent
+        width: parent.width
+        height: 5*130 + 3*Theme.paddingLarge
         PullDownMenu {
             MenuItem {
                 text: "About"
@@ -139,24 +140,19 @@ Page {
         model: summaryModel
         header: PageHeader { title: "Working Hours Tracker" }
 
-        /*section {
-            property: 'section'
-            delegate: SectionHeader {
-                text: section
-            }
-        }*/
-
         delegate: Item {
             width: listView.width
             height: 130 + Theme.paddingLarge
-            BackgroundItem {
+            MouseArea {
+                width: listView.width/2
+                height: 130
                 Rectangle {
                     anchors {
                          rightMargin: Theme.paddingLarge
                     }
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: parent.width/2-1.5*Theme.paddingLarge
+                    width: listView.width/2-1.5*Theme.paddingLarge
                     height: 130
                     x: Theme.paddingLarge
                     Label {
@@ -171,15 +167,18 @@ Page {
                         font.bold: true
                     }
                 }
-                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: sectionLast})
+                onClicked: {console.log("last clicked!"); pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.sectionLast})}
             }
-            BackgroundItem {
+            MouseArea {
+                width: listView.width/2
+                height: 130
+                x: listView.width/2
                 Rectangle {
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: parent.width/2-1.5*Theme.paddingLarge
+                    width: listView.width/2-1.5*Theme.paddingLarge
                     height: 130
-                    x: parent.width/2 + 0.5*Theme.paddingLarge
+                    x: 0.5*Theme.paddingLarge
                     Label {
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -192,10 +191,33 @@ Page {
                         font.bold: true
                     }
                 }
-                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: section})
+                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.section})
             }
         }
-        VerticalScrollDecorator {}
+    }
+    BackgroundItem {
+        anchors.top: listView.bottom
+        height: 130
+        width: parent.width
+        Rectangle {
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: parent.width-2*Theme.paddingLarge
+            height: 130
+            x: Theme.paddingLarge
+            Label {
+                y: Theme.paddingLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Timer is not running"
+            }
+            Label {
+                y: 3* Theme.paddingLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Click to start"
+                font.bold: true
+            }
+        }
+        onClicked: console.log("Start timer here")
     }
 }
 
