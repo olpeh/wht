@@ -32,20 +32,18 @@ Page {
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
-        summaryModel.set(0,{"hours": 0});
-        summaryModel.set(1,{"hours": 0});
-        summaryModel.set(2,{"hours": 0});
-        summaryModel.set(3,{"hours": 0});
-        summaryModel.set(4,{"hours": 0});
-    }
+        summaryModel.set(0,{"hours": 0, "hoursLast": 0});
+        summaryModel.set(0,{"hours": 1, "hoursLast": 0});
+        summaryModel.set(0,{"hours": 2, "hoursLast": 0});
+        summaryModel.set(0,{"hours": 3, "hoursLast": 0});
+     }
 
     function getHours() {
         //Update hours view after adding or deleting hours
-        summaryModel.set(0,{"hours": DB.getHoursToday()});
-        summaryModel.set(1,{"hours": DB.getHoursThisWeek()});
-        summaryModel.set(2,{"hours": DB.getHoursThisMonth()});
-        summaryModel.set(3,{"hours": DB.getHoursThisYear()});
-        summaryModel.set(4,{"hours": DB.getHoursAll()});
+        summaryModel.set(0,{"hours": DB.getHoursDay(0), "hoursLast": DB.getHoursDay(1)});
+        summaryModel.set(1,{"hours": DB.getHoursWeek(0), "hoursLast": DB.getHoursWeek(1)});
+        summaryModel.set(2,{"hours": DB.getHoursMonth(0), "hoursLast": DB.getHoursMonth(1)});
+        summaryModel.set(3,{"hours": DB.getHoursYear(0), "hoursLast": DB.getHoursAll()});
     }
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
@@ -84,13 +82,8 @@ Page {
         // Initialize the database
         DB.initialize();
         DB.updateIfNeeded();
-        console.log("Get hours from database...");
-        summaryModel.set(0,{"hours": DB.getHoursToday()});
-        summaryModel.set(1,{"hours": DB.getHoursThisWeek()});
-        summaryModel.set(2,{"hours": DB.getHoursThisMonth()});
-        summaryModel.set(3,{"hours": DB.getHoursThisYear()});
-        summaryModel.set(4,{"hours": DB.getHoursAll()});
-        //console.log(DB.getHoursAll())
+        //console.log("Get hours from database...");
+        getHours();
     }
 
     ListModel {
@@ -98,22 +91,26 @@ Page {
         ListElement {
             hours: 0
             section: "Today"
+            hoursLast: 0
+            sectionLast: "Yesterday"
         }
         ListElement {
             hours: 0
             section: "This week"
+            hoursLast: 0
+            sectionLast: "Last week"
         }
         ListElement {
             hours: 0
             section: "This month"
+            hoursLast: 0
+            sectionLast: "Last month"
         }
         ListElement {
             hours: 0
             section: "This year"
-        }
-        ListElement {
-            hours: 0
-            section: "All"
+            hoursLast: 0
+            sectionLast: "All"
         }
     }
     SilicaListView {
@@ -141,28 +138,62 @@ Page {
         }
         model: summaryModel
         header: PageHeader { title: "Working Hours Tracker" }
-        section {
+
+        /*section {
             property: 'section'
             delegate: SectionHeader {
                 text: section
             }
-        }
-        delegate: BackgroundItem {
+        }*/
+
+        delegate: Item {
             width: listView.width
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                radius: 10.0
-                width: 175
-                height: 80
-                Label {
-                    anchors.centerIn: parent
-                    id: duration
-                    text: model.hours
+            height: 130 + Theme.paddingLarge
+            BackgroundItem {
+                Rectangle {
+                    anchors {
+                         rightMargin: Theme.paddingLarge
+                    }
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width/2-1.5*Theme.paddingLarge
+                    height: 130
                     x: Theme.paddingLarge
+                    Label {
+                        y: Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.sectionLast
+                    }
+                    Label {
+                        y: 3* Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.hoursLast
+                        font.bold: true
+                    }
                 }
+                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: sectionLast})
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: section})
+            BackgroundItem {
+                Rectangle {
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width/2-1.5*Theme.paddingLarge
+                    height: 130
+                    x: parent.width/2 + 0.5*Theme.paddingLarge
+                    Label {
+                        y: Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.section
+                    }
+                    Label {
+                        y: 3* Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.hours
+                        font.bold: true
+                    }
+                }
+                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: section})
+            }
         }
         VerticalScrollDecorator {}
     }

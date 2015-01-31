@@ -44,11 +44,12 @@ CoverBackground {
             timerRunning = true
         //console.log(timerRunning)
         //console.log(startTime)
-        today = DB.getHoursToday().toFixed(2)
-        thisWeek = DB.getHoursThisWeek().toFixed(2)
-        thisMonth = DB.getHoursThisMonth().toFixed(2)
+        today = DB.getHoursDay(0).toFixed(2)
+        thisWeek = DB.getHoursWeek(0).toFixed(2)
+        thisMonth = DB.getHoursMonth(0).toFixed(2)
     }
     function updateDuration(){
+        console.log("Triggered")
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -212,7 +213,7 @@ CoverBackground {
             updateDuration()
     }
     Timer {
-        interval: 60000; running: timerRunning; repeat: true
+        interval: 60000; running: timerRunning && active; repeat: true
         onTriggered: updateDuration()
     }
 }

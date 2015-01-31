@@ -106,12 +106,13 @@ function setHours(uid,date,startTime, endTime, duration,project,description, bre
     return res;
 }
 
-// This function is used to retrieve hours today from the database
-function getHoursToday() {
+// This function is used to retrieve hours for a day from the database
+function getHoursDay(offset) {
     var db = getDatabase();
     var dur =0;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime");');
+        var sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime");';
+        var rs = tx.executeSql(sqlstr);
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -121,12 +122,18 @@ function getHoursToday() {
     return dur;
 }
 
-// This function is used to retrieve hours this week from the database
-function getHoursThisWeek() {
+// This function is used to retrieve hours for a week from the database
+function getHoursWeek(offset) {
     var db = getDatabase();
-    var dur=0;
+    var dur = 0;
+    //TODO: optimize these
+    var sqlstr = ""
+    if (offset === 0)
+        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0");';
+    else
+        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days");';
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0")');
+        var rs = tx.executeSql(sqlstr);
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -136,12 +143,18 @@ function getHoursThisWeek() {
     return dur;
 }
 
-// This function is used to retrieve hours this month from the database
-function getHoursThisMonth() {
+// This function is used to retrieve hours for a month from the database
+function getHoursMonth(offset) {
     var db = getDatabase();
-    var dur=0;
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of month") AND strftime("%Y-%m-%d", "now", "localtime")');
+    var dur = 0;
+    var sqlstr = "";
+    if (offset === 0)
+        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "start of month", "localtime") AND strftime("%Y-%m-%d","now","localtime");';
+    else {
+        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d","now", "start of month", "-1 day", "localtime");';
+    }
+     db.transaction(function(tx) {
+        var rs = tx.executeSql(sqlstr);
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -151,13 +164,19 @@ function getHoursThisMonth() {
     return dur;
 }
 
-// This function is used to retrieve hours this year from the database
-function getHoursThisYear() {
+// This function is used to retrieve hours for a year from the database
+function getHoursYear(offset) {
     var db = getDatabase();
     var dur=0;
+    var sqlstr="";
+    if (offset ===0)
+        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");';
+    else {
+        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");';
+    }
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime")');
-         for (var i = 0; i < rs.rows.length; i++) {
+        var rs = tx.executeSql(sqlstr);
+        for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
