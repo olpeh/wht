@@ -39,11 +39,17 @@ Page {
         if (dataContainer != null && section != ""){
             console.log(section)
             if (section === "Today")
-                var allHours = all.dataContainer.getAllToday();
+                var allHours = all.dataContainer.getAllDay(0);
+            else if (section === "Yesterday")
+                var allHours = all.dataContainer.getAllDay(1);
             else if(section === "This week")
-                var allHours = all.dataContainer.getAllThisWeek();
+                var allHours = all.dataContainer.getAllWeek(0);
+            else if(section === "Last week")
+                var allHours = all.dataContainer.getAllWeek(1);
             else if (section === "This month")
-                var allHours = all.dataContainer.getAllThisMonth();
+                var allHours = all.dataContainer.getAllMonth(0);
+            else if (section === "Last month")
+                var allHours = all.dataContainer.getAllMonth(1);
             else if (section === "This year")
                 var allHours = all.dataContainer.getAllThisYear();
             else if (section === "All")

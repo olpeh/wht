@@ -47,14 +47,14 @@ Page {
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
-    function getAllToday(){
-        return DB.getAllToday();
+    function getAllDay(offset){
+        return DB.getAllDay(offset);
     }
-    function getAllThisWeek(){
-        return DB.getAllThisWeek();
+    function getAllWeek(offset){
+        return DB.getAllWeek(offset);
     }
-    function getAllThisMonth(){
-        return DB.getAllThisMonth();
+    function getAllMonth(offset){
+        return DB.getAllMonth(offset);
     }
     function getAllThisYear(){
         return DB.getAllThisYear();
