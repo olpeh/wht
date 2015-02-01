@@ -328,6 +328,17 @@ Page {
             interval: 60000; running: timerRunning && applicationActive; repeat: true
             onTriggered: updateDuration()
         }
+        PushUpMenu {
+            visible: timerRunning
+            MenuItem {
+                text: "Reset the timer"
+                onClicked: reset()
+            }
+            MenuItem {
+                text: "Adjust timer start time"
+                onClicked: console.log("Coming up!")
+            }
+        }
     }
 }
 
