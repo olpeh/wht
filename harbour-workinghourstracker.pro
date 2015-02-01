@@ -28,7 +28,6 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/Add.qml \
     qml/config.js \
     qml/pages/All.qml \
-    qml/pages/Timer.qml \
     rpm/harbour-workinghourstracker.changes \
     qml/pages/Settings.qml \
     qml/pages/MyTimePicker.qml

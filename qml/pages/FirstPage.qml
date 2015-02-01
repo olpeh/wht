@@ -37,7 +37,6 @@ Page {
         summaryModel.set(2,{"hours": 0, "hoursLast": 0});
         summaryModel.set(3,{"hours": 0, "hoursLast": 0});
      }
-
     function getHours() {
         //Update hours view after adding or deleting hours
         summaryModel.set(0,{"hours": DB.getHoursDay(0), "hoursLast": DB.getHoursDay(1)});
@@ -63,19 +62,78 @@ Page {
     function getAll(){
         return DB.getAll();
     }
-    function getStartTime(){
-        return DB.getStartTime();
-    }
-    function startTimer(){
-        return DB.startTimer();
-    }
-    function stopTimer(){
-        DB.stopTimer();
-    }
     function remove(uid){
         console.log("Trying to remove from database!")
         console.log(uid);
         DB.remove(uid);
+    }
+    property string startTime: ""
+    property int startSelectedHour : -1
+    property int startSelectedMinute : -1
+    property bool timerRunning: false
+
+    function pad(n) { return ("0" + n).slice(-2); }
+
+    function getStartTime(){
+        startTime = DB.getStartTime();
+    }
+    function start(){
+        startTime = DB.startTimer();
+        updateStartTime();
+        timerRunning = true
+    }
+
+    function updateStartTime(){
+        var splitted = startTime.split(":");
+        startSelectedHour = parseInt(splitted[0]);
+        startSelectedMinute = parseInt(splitted[1]);
+        startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
+    }
+
+    function updateDuration(){
+        var dateNow = new Date();
+        var hoursNow = dateNow.getHours();
+        var minutesNow = dateNow.getMinutes();
+        var nowInMinutes = hoursNow * 60 + minutesNow;
+        var splitted = startTime.split(":");
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        if (nowInMinutes < startInMinutes)
+            nowInMinutes += 24*60
+        var difference = nowInMinutes - startInMinutes;
+        var diffHours = Math.floor(difference / 60)
+        var diffMinutes = difference % 60;
+        durationNow.text = diffHours + "h " + diffMinutes + "min";
+    }
+
+    function stop(){
+        console.log("Stop clicked!");
+        DB.stopTimer();
+        durationNow.text = "0h 0min";
+        var dateNow = new Date();
+        var endSelectedHour = dateNow.getHours();
+        var endSelectedMinute = dateNow.getMinutes();
+        var endHour = endSelectedHour
+        if (endSelectedHour < startSelectedHour)
+            endHour +=24
+        var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+        pageStack.push(Qt.resolvedUrl("Add.qml"), {
+                              dataContainer: root,
+                              uid: 0,
+                              startSelectedMinute:startSelectedMinute,
+                              startSelectedHour:startSelectedHour,
+                              endSelectedHour:endSelectedHour,
+                              endSelectedMinute:endSelectedMinute,
+                              duration:duration,
+                              fromTimer: true })
+        timerRunning = false;
+    }
+    function reset(){
+        console.log("Reset clicked!");
+        DB.stopTimer();
+        start();
+        updateStartTime();
+        updateDuration();
+        timerRunning = true
     }
 
     Component.onCompleted: {
@@ -84,40 +142,15 @@ Page {
         DB.updateIfNeeded();
         //console.log("Get hours from database...");
         getHours();
-        console.log(DB.getHoursMonth(0))
-    }
-
-    ListModel {
-        id: summaryModel
-        ListElement {
-            hours: 0
-            section: "Today"
-            hoursLast: 0
-            sectionLast: "Yesterday"
-        }
-        ListElement {
-            hours: 0
-            section: "This week"
-            hoursLast: 0
-            sectionLast: "Last week"
-        }
-        ListElement {
-            hours: 0
-            section: "This month"
-            hoursLast: 0
-            sectionLast: "Last month"
-        }
-        ListElement {
-            hours: 0
-            section: "This year"
-            hoursLast: 0
-            sectionLast: "All"
+        getStartTime();
+        if(startTime !== "Not started"){
+            timerRunning = true;
+            updateStartTime();
+            updateDuration();
         }
     }
-    SilicaListView {
-        id: listView
-        width: parent.width
-        height: 5*130 + 3*Theme.paddingLarge
+    SilicaFlickable {
+        anchors.fill: parent
         PullDownMenu {
             MenuItem {
                 text: "About"
@@ -132,93 +165,169 @@ Page {
                 }
             }
             MenuItem {
-                text: "Timer"
+                text: timerRunning ? "Stop timer" : "Start timer"
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Timer.qml"), {dataContainer: root})
+                    if (timerRunning)
+                        stop();
+                    else
+                        start();
                 }
             }
         }
-        model: summaryModel
-        header: PageHeader { title: "Working Hours Tracker" }
-
-        delegate: Item {
-            width: listView.width
-            height: 130 + Theme.paddingLarge
-            MouseArea {
-                width: listView.width/2
-                height: 130
-                Rectangle {
-                    anchors {
-                         rightMargin: Theme.paddingLarge
+        ListModel {
+            id: summaryModel
+            ListElement {
+                hours: 0
+                section: "Today"
+                hoursLast: 0
+                sectionLast: "Yesterday"
+            }
+            ListElement {
+                hours: 0
+                section: "This week"
+                hoursLast: 0
+                sectionLast: "Last week"
+            }
+            ListElement {
+                hours: 0
+                section: "This month"
+                hoursLast: 0
+                sectionLast: "Last month"
+            }
+            ListElement {
+                hours: 0
+                section: "This year"
+                hoursLast: 0
+                sectionLast: "All"
+            }
+        }
+        SilicaListView {
+            id: listView
+            header: PageHeader { title: "Working Hours Tracker" }
+            anchors.fill: parent
+            model: summaryModel
+            delegate: Item {
+                width: listView.width
+                height: 140 + Theme.paddingLarge
+                BackgroundItem {
+                    width: listView.width/2
+                    height: 140
+                    Rectangle {
+                        anchors {
+                             rightMargin: Theme.paddingLarge
+                        }
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: listView.width/2-1.5*Theme.paddingLarge
+                        height: 140
+                        x: Theme.paddingLarge
+                        Label {
+                            y: Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.sectionLast
+                        }
+                        Label {
+                            y: 3 * Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.hoursLast
+                            font.bold: true
+                        }
                     }
+                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.sectionLast})
+                }
+                BackgroundItem {
+                    width: listView.width/2
+                    height: 140
+                    x: listView.width/2
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: listView.width/2-1.5*Theme.paddingLarge
+                        height: 140
+                        x: 0.5*Theme.paddingLarge
+                        Label {
+                            y: Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.section
+                        }
+                        Label {
+                            y:3 * Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: model.hours
+                            font.bold: true
+                        }
+                    }
+                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.section})
+                }
+            }
+            BackgroundItem {
+                y: 110 + 4*140 + 4*Theme.paddingLarge
+                height: 140
+                width: parent.width
+                Rectangle {
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: listView.width/2-1.5*Theme.paddingLarge
-                    height: 130
+                    width: parent.width-2*Theme.paddingLarge
+                    height: 140
                     x: Theme.paddingLarge
                     Label {
+                        visible: !timerRunning
+                        id: timerText
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: model.sectionLast
+                        text: "Timer is not running"
+                    }
+                    Item {
+                        visible: timerRunning
+                        width: parent.width
+                        Label {
+                            x: Theme.paddingLarge
+                            y: Theme.paddingLarge
+                            id: started
+                            text: "Started"
+                        }
+                        Label {
+                            x: Theme.paddingLarge
+                            y:3 * Theme.paddingLarge
+                            id: startedAt
+                            font.bold: true
+                            text: "Now"
+                        }
+                        IconButton {
+                            id: iconButton
+                            icon.source: "image://theme/icon-cover-timer"
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: Theme.paddingSmall
+                            scale: 0.5
+                        }
+                        Label {
+                            x: parent.width - this.width - Theme.paddingLarge
+                            y: Theme.paddingLarge
+                            id: durText
+                            text: "Duration"
+                        }
+                        Label {
+                            x: parent.width - this.width - Theme.paddingLarge
+                            y:3 * Theme.paddingLarge
+                            id: durationNow
+                            font.bold: true
+                            text: "0h 0min"
+                        }
                     }
                     Label {
-                        y: 3* Theme.paddingLarge
+                        y:3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: model.hoursLast
+                        text: timerRunning ? "Click to stop" : "Click to start"
                         font.bold: true
                     }
                 }
-                onClicked: {console.log("last clicked!"); pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.sectionLast})}
-            }
-            MouseArea {
-                width: listView.width/2
-                height: 130
-                x: listView.width/2
-                Rectangle {
-                    color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: listView.width/2-1.5*Theme.paddingLarge
-                    height: 130
-                    x: 0.5*Theme.paddingLarge
-                    Label {
-                        y: Theme.paddingLarge
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: model.section
-                    }
-                    Label {
-                        y: 3* Theme.paddingLarge
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: model.hours
-                        font.bold: true
-                    }
-                }
-                onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.section})
+                onClicked: timerRunning ? stop() : start()
             }
         }
-    }
-    BackgroundItem {
-        anchors.top: listView.bottom
-        height: 130
-        width: parent.width
-        Rectangle {
-            color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: parent.width-2*Theme.paddingLarge
-            height: 130
-            x: Theme.paddingLarge
-            Label {
-                y: Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Timer is not running"
-            }
-            Label {
-                y: 3* Theme.paddingLarge
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Click to start"
-                font.bold: true
-            }
+        Timer {
+            interval: 60000; running: timerRunning && applicationActive; repeat: true
+            onTriggered: updateDuration()
         }
-        onClicked: console.log("Start timer here")
     }
 }
 
