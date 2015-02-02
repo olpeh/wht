@@ -271,9 +271,6 @@ Dialog {
                                 duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                                 updateDuration()
                                 updateNetDuration()
-                                timeSwitch.checked = true
-                                timeSwitch.text = "Starttime changed"
-                                timeSwitch.description = "Uncheck to restore start time to now."
                              })
                         }
 
@@ -317,9 +314,6 @@ Dialog {
                                 duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
                                 updateDuration()
                                 updateNetDuration()
-                                timeSwitch.checked = false
-                                timeSwitch.text = "Endtime changed"
-                                timeSwitch.description = "Check to restore end time to now."
                             })
                         }
 
@@ -418,7 +412,6 @@ Dialog {
                                 updateNetDuration();
                             })
                         }
-
                         label: "Break: "
                         value: "00:00"
                         width: parent.width
