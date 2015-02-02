@@ -78,6 +78,7 @@ Page {
     function start(){
         startTime = DB.startTimer();
         updateStartTime();
+        updateDuration()
         timerRunning = true
     }
 

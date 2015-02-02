@@ -209,120 +209,128 @@ Dialog {
                     }
                 }
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: datePicked
-                    anchors.centerIn: parent
-                    function openDateDialog() {
-                        var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", {
-                                        date: new Date()
-                                     })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: datePicked
+                        anchors.centerIn: parent
+                        function openDateDialog() {
+                            var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", {
+                                            date: new Date()
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            value = dialog.dateText
-                            selectedDate = dialog.date
-                        })
+                            dialog.accepted.connect(function() {
+                                value = dialog.dateText
+                                selectedDate = dialog.date
+                            })
+                        }
+
+                        label: "Date:"
+                        value: dateText
+                        width: parent.width
+                        onClicked: openDateDialog()
                     }
-
-                    label: "Date:"
-                    value: dateText
-                    width: parent.width
-                    onClicked: openDateDialog()
                 }
+                onClicked: datePicked.openDateDialog()
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: startTime
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: startSelectedHour,
-                                        minute: startSelectedMinute,
-                                     })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: startTime
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: startSelectedHour,
+                                            minute: startSelectedMinute,
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            value = dialog.timeText
-                            startSelectedHour = dialog.hour
-                            startSelectedMinute = dialog.minute
-                            var endHour = endSelectedHour
-                            var endMinute = endSelectedMinute
-                            if (endMinute - startSelectedMinute < 0) {
-                                endMinute +=60
-                                endHour -=1
-                            }
-                            if (endHour - startSelectedHour < 0)
-                                endHour +=24
+                            dialog.accepted.connect(function() {
+                                value = dialog.timeText
+                                startSelectedHour = dialog.hour
+                                startSelectedMinute = dialog.minute
+                                var endHour = endSelectedHour
+                                var endMinute = endSelectedMinute
+                                if (endMinute - startSelectedMinute < 0) {
+                                    endMinute +=60
+                                    endHour -=1
+                                }
+                                if (endHour - startSelectedHour < 0)
+                                    endHour +=24
 
-                            duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
-                            updateDuration()
-                            updateNetDuration()
-                            timeSwitch.checked = true
-                            timeSwitch.text = "Starttime changed"
-                            timeSwitch.description = "Uncheck to restore start time to now."
-                         })
+                                duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
+                                updateDuration()
+                                updateNetDuration()
+                                timeSwitch.checked = true
+                                timeSwitch.text = "Starttime changed"
+                                timeSwitch.description = "Uncheck to restore start time to now."
+                             })
+                        }
+
+                        label: "Start time:"
+                        value: pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "Start time:"
-                    value: pad(startSelectedHour) + ":" + pad(startSelectedMinute)
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: startTime.openTimeDialog()
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: endTime
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: endSelectedHour,
-                                        minute: endSelectedMinute,
-                                     })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: endTime
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: endSelectedHour,
+                                            minute: endSelectedMinute,
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            value = dialog.timeText
-                            endSelectedHour = dialog.hour
-                            endSelectedMinute = dialog.minute
-                            var endHour = endSelectedHour
-                            var endMinute = endSelectedMinute
-                            if (endMinute - startSelectedMinute < 0) {
-                                endMinute +=60
-                                endHour -=1
-                            }
-                            if (endHour - startSelectedHour < 0)
-                                endHour +=24
-                            duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
-                            updateDuration()
-                            updateNetDuration()
-                            timeSwitch.checked = false
-                            timeSwitch.text = "Endtime changed"
-                            timeSwitch.description = "Check to restore end time to now."
-                        })
+                            dialog.accepted.connect(function() {
+                                value = dialog.timeText
+                                endSelectedHour = dialog.hour
+                                endSelectedMinute = dialog.minute
+                                var endHour = endSelectedHour
+                                var endMinute = endSelectedMinute
+                                if (endMinute - startSelectedMinute < 0) {
+                                    endMinute +=60
+                                    endHour -=1
+                                }
+                                if (endHour - startSelectedHour < 0)
+                                    endHour +=24
+                                duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
+                                updateDuration()
+                                updateNetDuration()
+                                timeSwitch.checked = false
+                                timeSwitch.text = "Endtime changed"
+                                timeSwitch.description = "Check to restore end time to now."
+                            })
+                        }
+
+                        label: "End time:"
+                        value: pad(endSelectedHour) + ":" + pad(endSelectedMinute)
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "End time:"
-                    value: pad(endSelectedHour) + ":" + pad(endSelectedMinute)
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: endTime.openTimeDialog()
             }
-            /*SectionHeader { text: "Duration and break" }*/
             TextSwitch {
                 id: fixedSwitch
                 checked: true
@@ -337,123 +345,131 @@ Dialog {
                         endTimeStaysFixed = false
                 }
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: duration>=0 ? Theme.secondaryHighlightColor : "red"
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: durationButton
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var durationHour = parseInt(countHours(duration))
-                        var durationMinute = parseInt(countMinutes(duration))
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: durationHour,
-                                        minute: durationMinute,
-                                     })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: duration>=0 ? Theme.secondaryHighlightColor : "red"
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: durationButton
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var durationHour = parseInt(countHours(duration))
+                            var durationMinute = parseInt(countMinutes(duration))
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: durationHour,
+                                            minute: durationMinute,
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            value = dialog.timeText
-                            durationHour = dialog.hour
-                            durationMinute = dialog.minute
-                            console.log(durationMinute)
-                            duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            //console.log(duration)
-                            value = pad(durationHour) + ":" + pad(durationMinute)
-                            console.log(countMinutes(duration))
-                            if(endTimeStaysFixed)
-                                updateStartTime()
-                            else
-                                updateEndTime()
-                        })
+                            dialog.accepted.connect(function() {
+                                value = dialog.timeText
+                                durationHour = dialog.hour
+                                durationMinute = dialog.minute
+                                console.log(durationMinute)
+                                duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                                //console.log(duration)
+                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                console.log(countMinutes(duration))
+                                if(endTimeStaysFixed)
+                                    updateStartTime()
+                                else
+                                    updateEndTime()
+                            })
+                        }
+
+                        label: "Duration: "
+                        value: countHours(duration) + ":" + countMinutes(duration);
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "Duration: "
-                    value: countHours(duration) + ":" + countMinutes(duration);
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: durationButton.openTimeDialog()
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: breakDurationButton
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var dialog;
-                        var durationHour = parseInt(countHours(breakDuration))
-                        var durationMinute = parseInt(countMinutes(breakDuration))
-                        dialog = pageStack.push("MyTimePicker.qml", {
-                                                    hourMode: (DateTime.TwentyFourHours),
-                                                    hour: durationHour,
-                                                    minute: durationMinute,
-                                                    duration: duration
-                                                 })
-                        dialog.accepted.connect(function() {
-                            durationHour = dialog.hour
-                            durationMinute = dialog.minute
-                            console.log(durationMinute)
-                            breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            console.log(duration)
-                            value = pad(durationHour) + ":" + pad(durationMinute)
-                            updateNetDuration();
-                        })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: breakDurationButton
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var dialog;
+                            var durationHour = parseInt(countHours(breakDuration))
+                            var durationMinute = parseInt(countMinutes(breakDuration))
+                            dialog = pageStack.push("MyTimePicker.qml", {
+                                                        hourMode: (DateTime.TwentyFourHours),
+                                                        hour: durationHour,
+                                                        minute: durationMinute,
+                                                        duration: duration
+                                                     })
+                            dialog.accepted.connect(function() {
+                                durationHour = dialog.hour
+                                durationMinute = dialog.minute
+                                console.log(durationMinute)
+                                breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                                console.log(duration)
+                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                updateNetDuration();
+                            })
+                        }
+
+                        label: "Break: "
+                        value: "00:00"
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "Break: "
-                    value: "00:00"
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: breakDurationButton.openTimeDialog()
             }
-            Rectangle {
+            BackgroundItem {
                 visible: breakDuration
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: netDurationButton
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var durationHour = parseInt(countHours(netDuration))
-                        var durationMinute = parseInt(countMinutes(netDuration))
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: durationHour,
-                                        minute: durationMinute,
-                                     })
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: netDurationButton
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var durationHour = parseInt(countHours(netDuration))
+                            var durationMinute = parseInt(countMinutes(netDuration))
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: durationHour,
+                                            minute: durationMinute,
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            durationHour = dialog.hour
-                            durationMinute = dialog.minute
-                            netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            value = pad(durationHour) + ":" + pad(durationMinute)
-                            duration = netDuration + breakDuration
-                            updateDuration();
-                            if(endTimeStaysFixed)
-                                updateStartTime()
-                            else
-                                updateEndTime()
+                            dialog.accepted.connect(function() {
+                                durationHour = dialog.hour
+                                durationMinute = dialog.minute
+                                netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                duration = netDuration + breakDuration
+                                updateDuration();
+                                if(endTimeStaysFixed)
+                                    updateStartTime()
+                                else
+                                    updateEndTime()
 
-                        })
+                            })
+                        }
+
+                        label: "Net duration: "
+                        value: countHours(netDuration) +":"+countMinutes(netDuration)
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "Net duration: "
-                    value: countHours(netDuration) +":"+countMinutes(netDuration)
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: netDurationButton.openTimeDialog()
             }
-            /*SectionHeader { text: "Description" }*/
             TextField{
                 id: descriptionTextArea
                 //focus: true

@@ -73,7 +73,6 @@ CoverBackground {
                 }
                 else {
                     firstPage.start()
-                    firstPage.updateDuration()
                 }
             }
         }
