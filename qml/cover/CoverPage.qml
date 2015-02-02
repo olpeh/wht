@@ -28,44 +28,23 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 CoverBackground {
-    property bool timerRunning: false
-    property string startTime: ""
-    property string durationNow: "0h 0min"
     property double thisWeek: 0
     property double thisMonth: 0
     property double today: 0
-
     property bool active: status == Cover.Active
-    onActiveChanged: refreshCover()
+    onActiveChanged: { refreshCover(); firstPage.updateDuration();}
 
     function refreshCover() {
-        startTime = DB.getStartTime()
-        if (startTime!= "Not started")
-            timerRunning = true
+       //startTime = DB.getStartTime()
+        //if (startTime!= "Not started")
+        //    timerRunning = true
         //console.log(timerRunning)
         //console.log(startTime)
         today = DB.getHoursDay(0).toFixed(2)
         thisWeek = DB.getHoursWeek(0).toFixed(2)
         thisMonth = DB.getHoursMonth(0).toFixed(2)
     }
-    function updateDuration(){
-        console.log("Triggered")
-        var dateNow = new Date();
-        var hoursNow = dateNow.getHours();
-        var minutesNow = dateNow.getMinutes();
-        var nowInMinutes = hoursNow * 60 + minutesNow;
-        var splitted = startTime.split(":");
-        //console.log(splitted);
-        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
-        //console.log(nowInMinutes);
-        //console.log(startInMinutes);
-        if (nowInMinutes < startInMinutes)
-            nowInMinutes += 24*60
-        var difference = nowInMinutes - startInMinutes;
-        var diffHours = Math.floor(difference / 60)
-        var diffMinutes = difference % 60;
-        durationNow = diffHours + "h " + diffMinutes + "min";
-    }
+
     CoverPlaceholder {
         id: icon
         icon.source: "wht.png"
@@ -89,45 +68,12 @@ CoverBackground {
             iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
                 if (timerRunning) {
-                    var splitted = startTime.split(":");
-                    var startSelectedMinute = parseInt(splitted[1])
-                    var startSelectedHour = parseInt(splitted[0])
-                    var dateNow = new Date();
-                    var endSelectedHour = dateNow.getHours();
-                    var endSelectedMinute = dateNow.getMinutes();
-                    var endHour = endSelectedHour
-                    if (endSelectedHour < startSelectedHour)
-                        endHour +=24
-                    var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-                    DB.stopTimer();
-                    timerRunning = false
-                    durationNow = "0h 0min"
-                    //pageStack.replace(Qt.resolvedUrl("../pages/FirstPage.qml"))
-                    if(pageStack.depth > 1) {
-                        pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
-                                       dataContainer: appWindow.firstPage,
-                                       uid: 0,
-                                       startSelectedMinute:startSelectedMinute,
-                                       startSelectedHour:startSelectedHour,
-                                       duration:duration, fromCover: true })
-                    }
-                    else {
-                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
-                                       dataContainer: appWindow.firstPage,
-                                       uid: 0,
-                                       startSelectedMinute:startSelectedMinute,
-                                       startSelectedHour:startSelectedHour,
-                                       duration:duration, fromCover: true })
-                    }
-                    console.log("Stopping")
+                    firstPage.stop()
                     appWindow.activate()
-                } else {
-                    startTime = DB.getStartTime();
-                    if(startTime === "Not started"){
-                        startTime = DB.startTimer();
-                    }
-                    updateDuration();
-                    timerRunning = true
+                }
+                else {
+                    firstPage.start()
+                    firstPage.updateDuration()
                 }
             }
         }
@@ -210,11 +156,11 @@ CoverBackground {
     Component.onCompleted: {
         refreshCover()
         if (timerRunning)
-            updateDuration()
+            firstPage.updateDuration()
     }
     Timer {
         interval: 60000; running: timerRunning && active; repeat: true
-        onTriggered: updateDuration()
+        onTriggered: firstPage.updateDuration()
     }
 }
 

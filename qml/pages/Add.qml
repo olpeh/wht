@@ -497,30 +497,21 @@ Dialog {
                     timeSwitch.checked = false
                 else
                     console.log("Error when getting endsNowByDefault")
-
-                /*
-                if (startSelectedHour < 0)
-                    startSelectedHour = endSelectedHour + 16;
-                if (startSelectedHour.length === 1)
-                    startSelectedHour = "0" + startSelectedHour;
-                if (endSelectedHour.length === 1)
-                    endSelectedHour = "0" + endSelectedHour;
-                if (startSelectedMinute.length === 1)
-                    startSelectedMinute = "0" + startSelectedMinute;
-                if (endSelectedMinute.length === 1)
-                    endSelectedMinute = "0" + endSelectedMinute;*/
                 if (description != "No description")
                     descriptionTextArea.text = description;
                 if(dateText != "Today")
                     updateDateText()
-                updateDuration()
+
                 //console.log(dataContainer)
                 if (breakDuration > 0) {
                     updateBreakDuration();
                     updateNetDuration();
                 }
                 //if(nowByDefault)
+                //@TODO ota huomioon timerista tulo
+                updateDuration()
                     updateStartTime()
+
                 //else
                 //    updateEndTime()
             }

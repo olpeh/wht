@@ -67,10 +67,8 @@ Page {
         console.log(uid);
         DB.remove(uid);
     }
-    property string startTime: ""
     property int startSelectedHour : -1
     property int startSelectedMinute : -1
-    property bool timerRunning: false
 
     function pad(n) { return ("0" + n).slice(-2); }
 
@@ -89,8 +87,8 @@ Page {
         startSelectedMinute = parseInt(splitted[1]);
         startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
-
     function updateDuration(){
+        console.log("Triggered")
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -102,13 +100,14 @@ Page {
         var difference = nowInMinutes - startInMinutes;
         var diffHours = Math.floor(difference / 60)
         var diffMinutes = difference % 60;
-        durationNow.text = diffHours + "h " + diffMinutes + "min";
+        durationNow = diffHours + "h " + diffMinutes + "min";
     }
 
-    function stop(){
+    function stop(fromCover){
         console.log("Stop clicked!");
         DB.stopTimer();
-        durationNow.text = "0h 0min";
+        durationNow = "0h 0min"
+        timerRunning = false;
         var dateNow = new Date();
         var endSelectedHour = dateNow.getHours();
         var endSelectedMinute = dateNow.getMinutes();
@@ -116,17 +115,38 @@ Page {
         if (endSelectedHour < startSelectedHour)
             endHour +=24
         var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-        pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                              dataContainer: root,
-                              uid: 0,
-                              startSelectedMinute:startSelectedMinute,
-                              startSelectedHour:startSelectedHour,
-                              endSelectedHour:endSelectedHour,
-                              endSelectedMinute:endSelectedMinute,
-                              duration:duration,
-                              fromTimer: true })
-        timerRunning = false;
+
+        if(!fromCover) {
+            pageStack.push(Qt.resolvedUrl("Add.qml"), {
+                                  dataContainer: root,
+                                  uid: 0,
+                                  startSelectedMinute:startSelectedMinute,
+                                  startSelectedHour:startSelectedHour,
+                                  endSelectedHour:endSelectedHour,
+                                  endSelectedMinute:endSelectedMinute,
+                                  duration:duration, fromTimer: true })
+
+        }
+        else {
+            if(pageStack.depth > 1) {
+                pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
+                               dataContainer: root,
+                               uid: 0,
+                               startSelectedMinute:startSelectedMinute,
+                               startSelectedHour:startSelectedHour,
+                               duration:duration, fromCover: true })
+            }
+            else {
+                pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
+                               dataContainer: root,
+                               uid: 0,
+                               startSelectedMinute:startSelectedMinute,
+                               startSelectedHour:startSelectedHour,
+                               duration:duration, fromCover: true })
+            }
+        }
     }
+
     function reset(){
         console.log("Reset clicked!");
         DB.stopTimer();
@@ -168,10 +188,21 @@ Page {
                 text: timerRunning ? "Stop timer" : "Start timer"
                 onClicked: {
                     if (timerRunning)
-                        stop();
+                        stop(false);
                     else
                         start();
                 }
+            }
+        }
+        PushUpMenu {
+            visible: timerRunning
+            MenuItem {
+                text: "Reset the timer"
+                onClicked: reset()
+            }
+            MenuItem {
+                text: "Adjust timer start time"
+                onClicked: console.log("Coming up!")
             }
         }
         ListModel {
@@ -309,9 +340,9 @@ Page {
                         Label {
                             x: parent.width - this.width - Theme.paddingLarge
                             y:3 * Theme.paddingLarge
-                            id: durationNow
+                            id: durationNowLabel
                             font.bold: true
-                            text: "0h 0min"
+                            text: durationNow
                         }
                     }
                     Label {
@@ -321,23 +352,12 @@ Page {
                         font.bold: true
                     }
                 }
-                onClicked: timerRunning ? stop() : start()
+                onClicked: timerRunning ? stop(false) : start()
             }
         }
         Timer {
-            interval: 60000; running: timerRunning && applicationActive; repeat: true
+            interval: 60000; running: timerRunning; repeat: true
             onTriggered: updateDuration()
-        }
-        PushUpMenu {
-            visible: timerRunning
-            MenuItem {
-                text: "Reset the timer"
-                onClicked: reset()
-            }
-            MenuItem {
-                text: "Adjust timer start time"
-                onClicked: console.log("Coming up!")
-            }
         }
     }
 }

@@ -29,6 +29,9 @@ import "pages"
 
 ApplicationWindow
 {
+    property bool timerRunning: false
+    property string startTime: ""
+    property string durationNow: "0h 0min"
     property Item firstPage
     id: appWindow
     initialPage: Component {
