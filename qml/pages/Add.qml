@@ -510,19 +510,12 @@ Dialog {
                     descriptionTextArea.text = description;
                 if(dateText != "Today")
                     updateDateText()
-
-                //console.log(dataContainer)
                 if (breakDuration > 0) {
                     updateBreakDuration();
                     updateNetDuration();
                 }
-                //if(nowByDefault)
-                //@TODO ota huomioon timerista tulo
                 updateDuration()
                     updateStartTime()
-
-                //else
-                //    updateEndTime()
             }
         }
     }

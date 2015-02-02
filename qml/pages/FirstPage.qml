@@ -195,7 +195,8 @@ Page {
                 }
             }
         }
-        PushUpMenu {
+        // @TODO did not work here
+        /*PushUpMenu {
             visible: timerRunning
             MenuItem {
                 text: "Reset the timer"
@@ -205,7 +206,7 @@ Page {
                 text: "Adjust timer start time"
                 onClicked: console.log("Coming up!")
             }
-        }
+        }*/
         ListModel {
             id: summaryModel
             ListElement {
