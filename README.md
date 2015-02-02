@@ -17,6 +17,11 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 ## Changelog
 
+### 0.8.6-1
+- redesigned the firstpage
+- moved timer to firstpage
+- fixed a few issues
+
 ### 0.8.4-1
 - Fix for settings (now gets saved)
 - Small bugfix for values shown in firstpage
