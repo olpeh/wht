@@ -30,6 +30,7 @@ Page {
 
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
+    property bool timerAutoStart : false
     id: settingsPage
     property QtObject dataContainer: null
 
@@ -129,18 +130,7 @@ Page {
                     onClicked: openTimeDialog()
                 }
             }
-            Text {
-                font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
-                wrapMode: Text.WordWrap
-                width: root.width
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-                }
-                text: "More settings to come"
-            }
+
             SectionHeader { text: "Adding hours" }
             TextSwitch {
                 id: timeSwitch
@@ -174,6 +164,21 @@ Page {
                         settings.setEndTimeStaysFixed("no")
                 }
             }
+            SectionHeader { text: "Startup options" }
+            TextSwitch {
+                id: autoStartSwitch
+                checked: false
+                text: "Autostart timer on app startup"
+                description: "Timer will get started automatically if not running."
+                onCheckedChanged: {
+                    autoStartSwitch.description = checked ? "Timer will now get started automatically if not running." : "Timer will not get started automatically."
+                    if(checked)
+                        settings.setTimerAutoStart(true)
+                    else
+                        settings.setTimerAutoStart(false)
+                }
+            }
+
 
             SectionHeader { text: "DANGER ZONE!" }
 
@@ -243,6 +248,15 @@ Page {
             timeSwitch.checked = false
         else
             console.log("Error when getting endsNowByDefault")
+        var timerAutoStart = settings.getTimerAutoStart()
+        if(timerAutoStart === true)
+            autoStartSwitch.checked = true
+        else if(timerAutoStart === false)
+            autoStartSwitch.checked = false
+        else
+            console.log("Error when getting timerAutoStart")
+
+
     }
 }
 

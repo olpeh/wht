@@ -169,6 +169,9 @@ Page {
             updateStartTime();
             updateDuration();
         }
+        else if(settings.getTimerAutoStart()){
+            start();
+        }
     }
     SilicaFlickable {
         anchors.fill: parent

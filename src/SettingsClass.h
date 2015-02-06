@@ -24,11 +24,15 @@ public:
     Q_INVOKABLE QString getEndTimeStaysFixed();
     Q_INVOKABLE void setEndTimeStaysFixed(QString value);
 
+    Q_INVOKABLE bool getTimerAutoStart();
+    Q_INVOKABLE void setTimerAutoStart(bool value);
+
 private:
     QString defaultProject;
     double defaultDuration;
     double defaultBreakDuration;
     QString endsNowByDefault;
     QString endTimeStaysFixed;
+    bool timerAutoStart;
 };
 #endif // SETTINGSCLASS_H

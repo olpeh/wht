@@ -86,4 +86,18 @@ QString Settings::getEndTimeStaysFixed()
    return endTimeStaysFixed;
 }
 
+bool Settings::getTimerAutoStart()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    timerAutoStart= s.value("timerAutoStart").toBool();
+    s.endGroup();
+    return timerAutoStart;
+}
 
+void Settings::setTimerAutoStart(bool value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("timerAutoStart", value);
+    s.endGroup();
+}
