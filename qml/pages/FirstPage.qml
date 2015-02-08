@@ -105,10 +105,14 @@ Page {
     }
 
     function stop(fromCover){
+        if(breakTimerRunning)
+            stopBreakTimer();
         console.log("Stop clicked!");
         DB.stopTimer();
         durationNow = "0h 0min"
         timerRunning = false;
+        var breakDuration = getBreakTimerDuration();
+        clearBreakTimer();
         var dateNow = new Date();
         var endSelectedHour = dateNow.getHours();
         var endSelectedMinute = dateNow.getMinutes();
@@ -125,7 +129,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, fromTimer: true })
+                                  duration:duration, breakDuration:breakDuration, fromTimer: true })
 
         }
         else {
@@ -135,7 +139,7 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true })
             }
             else {
                 pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
@@ -143,7 +147,7 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true })
             }
         }
     }
@@ -157,6 +161,59 @@ Page {
         timerRunning = true
     }
 
+    // Break timer functions
+    function getBreakStartTime() {
+        breakStartTime = DB.getBreakStartTime();
+    }
+    function startBreakTimer() {
+        breakStartTime = DB.startBreakTimer();
+        updateBreakTimerDuration();
+        breakTimerRunning = true;
+    }
+    function updateBreakTimerDuration() {
+        console.log("Updating breakTimerDuration Triggered");
+        var dateNow = new Date();
+        var hoursNow = dateNow.getHours();
+        var minutesNow = dateNow.getMinutes();
+        var nowInMinutes = hoursNow * 60 + minutesNow;
+        var splitted = breakStartTime.split(":");
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        if (nowInMinutes < startInMinutes)
+            nowInMinutes += 24*60;
+        var difference = nowInMinutes - startInMinutes;
+        var diffHours = Math.floor(difference / 60);
+        var diffMinutes = difference % 60;
+        breakDurationNow = diffHours + "h " + diffMinutes + "min";
+    }
+
+    function stopBreakTimer() {
+        console.log("stopBreakTimer clicked!");
+        var splitted = breakStartTime.split(":");
+        var timerStartHour = parseInt(splitted[0]);
+        var timerStartMinute = parseInt(splitted[1]);
+        var dateNow = new Date();
+        var endSelectedHour = dateNow.getHours();
+        var endSelectedMinute = dateNow.getMinutes();
+        var endHour = endSelectedHour
+        if (endSelectedHour < timerStartHour)
+            endHour +=24
+        var duration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
+        console.log("Break duration was:", duration);
+        DB.stopBreakTimer(duration);
+        breakDurationNow = "0h 0min"
+        breakTimerRunning = false;
+    }
+
+    function getBreakTimerDuration(){
+        return DB.getBreakTimerDuration();
+
+    }
+    function clearBreakTimer(){
+        DB.clearBreakTimer();
+    }
+
+
+
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
@@ -169,6 +226,12 @@ Page {
             updateStartTime();
             updateDuration();
         }
+        getBreakStartTime();
+        if(breakStartTime !== "Not started"){
+            breakTimerRunning = true;
+            updateBreakTimerDuration();
+        }
+        // Automatically start timer if setting allowed
         else if(settings.getTimerAutoStart()){
             start();
         }
@@ -359,9 +422,67 @@ Page {
                 }
                 onClicked: timerRunning ? stop(false) : start()
             }
+            /*
+            Item {
+                width: parent.width
+                y: 110 + 5*140 + 5*Theme.paddingLarge
+                height: 140 + Theme.paddingLarge
+                BackgroundItem {
+                    width: parent.width
+                    height: 140
+                    Rectangle {
+                        anchors {
+                             rightMargin: Theme.paddingLarge
+                        }
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: parent.width/2-1.5*Theme.paddingLarge
+                        height: 140
+                        x: Theme.paddingLarge
+                        Label {
+                            y: Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "Adjust timer"
+                        }
+                        Label {
+                            y: 3 * Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "Change start time"
+                            font.bold: true
+                        }
+                    }
+                    onClicked: console.log("Adjust here")
+                }
+                BackgroundItem {
+                    width: parent.width/2
+                    height: 140
+                    x: parent.width/2
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: parent.width/2-1.5*Theme.paddingLarge
+                        height: 140
+                        x: 0.5*Theme.paddingLarge
+                        Label {
+                            y: Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "Pause"
+                        }
+                        Label {
+                            y:3 * Theme.paddingLarge
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: "Click to start pause"
+                            font.bold: true
+                        }
+                    }
+                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.section})
+                }
+            }*/
+
         }
+
         Timer {
-            interval: 60000; running: timerRunning; repeat: true
+            interval: 60000; running: timerRunning&&!breakTimerRunning; repeat: true
             onTriggered: updateDuration()
         }
     }

@@ -32,7 +32,11 @@ CoverBackground {
     property double thisMonth: 0
     property double today: 0
     property bool active: status == Cover.Active
-    onActiveChanged: { refreshCover(); firstPage.updateDuration();}
+    onActiveChanged: {
+        refreshCover();
+        if(!breakTimerRunning)
+            firstPage.updateDuration();
+    }
 
     function refreshCover() {
        //startTime = DB.getStartTime()
@@ -53,15 +57,27 @@ CoverBackground {
     }
     CoverActionList {
         id: coverAction
-
         CoverAction {
-            iconSource: "image://theme/icon-cover-new"
+            id: pauseAddAction
+            iconSource:  timerRunning? "image://theme/icon-cover-pause" : "image://theme/icon-cover-new"
             onTriggered: {
-                if(pageStack.depth > 1)
-                    pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
-                else
-                    pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
-                appWindow.activate()
+                if (timerRunning && !breakTimerRunning) {
+                    console.log("Break starts...");
+                    firstPage.startBreakTimer()
+                    pauseAddAction.iconSource = "image://theme/icon-cover-play"
+                }
+                else if (breakTimerRunning) {
+                    console.log("Break ends...");
+                    firstPage.stopBreakTimer()
+                    pauseAddAction.iconSource = "image://theme/icon-cover-pause"
+                }
+                else {
+                    if(pageStack.depth > 1)
+                        pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+                    else
+                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+                    appWindow.activate()
+                }
             }
         }
         CoverAction {
@@ -158,7 +174,7 @@ CoverBackground {
             firstPage.updateDuration()
     }
     Timer {
-        interval: 60000; running: timerRunning && active; repeat: true
+        interval: 60000; running: timerRunning &&!breakTimerRunning && active; repeat: true
         onTriggered: firstPage.updateDuration()
     }
 }

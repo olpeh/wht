@@ -37,8 +37,10 @@ function resetDatabase() {
         function(tx) {
             tx.executeSql('DROP TABLE hours')
             tx.executeSql('DROP TABLE timer')
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL);');
+            tx.executeSql('DROP TABLE breaks')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             console.log("Database reset");
         });
 }
@@ -60,8 +62,9 @@ function initialize() {
     var db = getDatabase();
     db.transaction(
         function(tx){
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('PRAGMA user_version=2;');
     });
 }
@@ -169,7 +172,7 @@ function getHoursYear(offset) {
     var db = getDatabase();
     var dur=0;
     var sqlstr="";
-    if (offset ===0)
+    if (offset===0)
         sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");';
     else {
         sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");';
@@ -414,3 +417,104 @@ function stopTimer(){
         }
     })
 }
+
+
+
+// BREAK TIMER FUNCTIONS
+// break timer
+function getBreakStartTime(){
+    var db = getDatabase();
+    var started = 0;
+    var resp="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
+        if(rs.rows.length > 0) {
+            started = rs.rows.item(0).started;
+            if(started)
+                resp = rs.rows.item(0).startTime;
+            else
+                resp = "Not started";
+        }
+        else{
+            resp = "Not started";
+        }
+    })
+    return resp;
+}
+
+//Start the break timer
+function startBreakTimer(){
+    var db = getDatabase();
+    var resp="";
+    var datenow = new Date();
+    var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    console.log(startTime);
+    db.transaction(function(tx) {
+
+        var rs = tx.executeSql('INSERT INTO breaks VALUES (NULL,?,?,?)', [startTime, 1, -1]);
+        if (rs.rowsAffected > 0) {
+            resp = startTime;
+            console.log ("break Timer was started and saved to database");
+        } else {
+            resp = "Error";
+            console.log ("Error starting the break timer");
+        }
+    })
+    return resp;
+}
+
+//Stop the break timer
+function stopBreakTimer(duration){
+    var db = getDatabase();
+    var id = 0;
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
+        if(rs.rows.length > 0) {
+            id = rs.rows.item(0).id;
+        }
+    })
+    if(id) {
+        db.transaction(function(tx) {
+            var rs = tx.executeSql('REPLACE INTO breaks VALUES (?,?,?,?);', [id, startTime, 0, duration]);
+            if (rs.rowsAffected > 0) {
+                console.log ("breakTimer was stopped");
+            } else {
+                resp = "Error";
+                console.log ("Error stopping the breaktimer");
+            }
+        })
+    }
+    else
+        console.log("error getting last row id")
+}
+
+//Get the break durations
+function getBreakTimerDuration(){
+    var db = getDatabase();
+    var dur=0;
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks');
+        if(rs.rows.length > 0) {
+            for(var i =0; i<rs.rows.length; i++) {
+                if (rs.rows.item(i).duration ===-1)
+                    console.log("Duration was not set for row number: ", i);
+                else
+                    dur += rs.rows.item(i).duration;
+            }
+        }
+    })
+    return dur;
+}
+
+// Clear out the breaktimer
+function clearBreakTimer(){
+    var db = getDatabase();
+    db.transaction(function(tx) {
+        tx.executeSql('DELETE FROM breaks');
+    })
+}
+
+
+
+
+

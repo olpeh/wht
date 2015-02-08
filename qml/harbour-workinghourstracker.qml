@@ -30,8 +30,11 @@ import "pages"
 ApplicationWindow
 {
     property bool timerRunning: false
+    property bool breakTimerRunning: false
     property string startTime: ""
     property string durationNow: "0h 0min"
+     property string breakStartTime: ""
+    property string breakDurationNow: "0h 0min"
     property Item firstPage
     id: appWindow
     initialPage: Component {
