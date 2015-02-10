@@ -145,7 +145,7 @@ CoverBackground {
             }
         }
         Rectangle {
-            visible: timerRunning
+            visible: timerRunning && !breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             radius: 10.0
@@ -167,16 +167,43 @@ CoverBackground {
                 text: durationNow
             }
         }
+        Rectangle {
+            visible: breakTimerRunning
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
+            IconButton {
+                id: pauseIconButton
+                icon.source: "image://theme/icon-cover-pause"
+                scale: 0.2
+            }
+            Label {
+                y: Theme.paddingMedium
+                anchors.left: pauseIconButton.right
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.primaryColor
+                text: durationNow
+            }
+            Label {
+                y: 3 * Theme.paddingMedium
+                anchors.left: pauseIconButton.right
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.primaryColor
+                text: breakDurationNow
+            }
+        }
     }
     Component.onCompleted: {
         refreshCover()
         if (timerRunning)
             firstPage.updateDuration()
     }
-    Timer {
+    /*Timer {
         interval: 60000; running: timerRunning &&!breakTimerRunning && active; repeat: true
         onTriggered: firstPage.updateDuration()
-    }
+    }*/
 }
 
 

@@ -78,7 +78,6 @@ Page {
     function start(){
         startTime = DB.startTimer();
         updateStartTime();
-        updateDuration()
         timerRunning = true
     }
 
@@ -89,7 +88,9 @@ Page {
         startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
     function updateDuration(){
-        console.log("Triggered")
+        console.log("Update duration triggered");
+        breakDuration = getBreakTimerDuration();
+        console.log(breakDuration);
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -98,29 +99,28 @@ Page {
         var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
         if (nowInMinutes < startInMinutes)
             nowInMinutes += 24*60
-        var difference = nowInMinutes - startInMinutes;
+        var breakInMinutes = Math.round(breakDuration *60);
+        console.log(breakInMinutes);
+        var difference = nowInMinutes - startInMinutes - breakInMinutes;
         var diffHours = Math.floor(difference / 60)
         var diffMinutes = difference % 60;
         durationNow = diffHours + "h " + diffMinutes + "min";
     }
 
     function stop(fromCover){
-        if(breakTimerRunning)
-            stopBreakTimer();
         console.log("Stop clicked!");
-        DB.stopTimer();
-        durationNow = "0h 0min"
-        timerRunning = false;
-        var breakDuration = getBreakTimerDuration();
-        clearBreakTimer();
+        if(breakTimerRunning) {
+            stopBreakTimer();
+            breakTimerRunning = false;
+        }
+        breakDuration = getBreakTimerDuration();
         var dateNow = new Date();
         var endSelectedHour = dateNow.getHours();
         var endSelectedMinute = dateNow.getMinutes();
         var endHour = endSelectedHour
         if (endSelectedHour < startSelectedHour)
             endHour +=24
-        var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-
+        duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
         if(!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,
@@ -129,8 +129,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration})
-
+                                  duration:duration, breakDuration:breakDuration, fromTimer: true})
         }
         else {
             if(pageStack.depth > 1) {
@@ -139,7 +138,7 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
             else {
                 pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
@@ -147,18 +146,17 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
         }
-    }
-
-    function reset(){
-        console.log("Reset clicked!");
+        breakDurationNow = "0h 0min";
+        breakDuration = 0;
+        durationNow = "0h 0min";
+        duration = 0;
         DB.stopTimer();
-        start();
-        updateStartTime();
-        updateDuration();
-        timerRunning = true
+        timerRunning = false;
+        clearBreakTimer();
+
     }
 
     // Break timer functions
@@ -166,8 +164,9 @@ Page {
         breakStartTime = DB.getBreakStartTime();
     }
     function startBreakTimer() {
+        breakDuration = 0;
+        breakDurationNow = "0h 0min";
         breakStartTime = DB.startBreakTimer();
-        updateBreakTimerDuration();
         breakTimerRunning = true;
     }
     function updateBreakTimerDuration() {
@@ -197,10 +196,9 @@ Page {
         var endHour = endSelectedHour
         if (endSelectedHour < timerStartHour)
             endHour +=24
-        var duration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
-        console.log("Break duration was:", duration);
-        DB.stopBreakTimer(duration);
-        breakDurationNow = "0h 0min"
+        breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
+        console.log("Break duration was:", breakDuration);
+        DB.stopBreakTimer(breakDuration);
         breakTimerRunning = false;
     }
 
@@ -210,9 +208,8 @@ Page {
     }
     function clearBreakTimer(){
         DB.clearBreakTimer();
+        breakDuration=0;
     }
-
-
 
     Component.onCompleted: {
         // Initialize the database
@@ -484,6 +481,10 @@ Page {
         Timer {
             interval: 60000; running: timerRunning&&!breakTimerRunning; repeat: true
             onTriggered: updateDuration()
+        }
+        Timer {
+            interval: 60000; running: breakTimerRunning; repeat: true
+            onTriggered: updateBreakTimerDuration()
         }
     }
 }

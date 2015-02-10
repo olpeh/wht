@@ -431,7 +431,7 @@ function getBreakStartTime(){
         if(rs.rows.length > 0) {
             started = rs.rows.item(0).started;
             if(started)
-                resp = rs.rows.item(0).startTime;
+                resp = rs.rows.item(0).starttime;
             else
                 resp = "Not started";
         }
@@ -465,6 +465,7 @@ function startBreakTimer(){
 
 //Stop the break timer
 function stopBreakTimer(duration){
+    console.log(duration)
     var db = getDatabase();
     var id = 0;
     db.transaction(function(tx) {
@@ -491,7 +492,7 @@ function stopBreakTimer(duration){
 //Get the break durations
 function getBreakTimerDuration(){
     var db = getDatabase();
-    var dur=0;
+    var dur=0.0;
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks');
         if(rs.rows.length > 0) {
@@ -502,6 +503,8 @@ function getBreakTimerDuration(){
                     dur += rs.rows.item(i).duration;
             }
         }
+        else
+            console.log("No breaktimer rows found");
     })
     return dur;
 }
