@@ -84,7 +84,7 @@ CoverBackground {
             iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
                 if (timerRunning) {
-                    firstPage.stop()
+                    firstPage.stop(true)
                     appWindow.activate()
                 }
                 else {

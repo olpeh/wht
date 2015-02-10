@@ -29,7 +29,7 @@ import "pages"
 
 ApplicationWindow
 {
-    property bool timerRunning: false
+    property bool timerRunning : false
     property bool breakTimerRunning: false
     property string startTime: ""
     property string durationNow: "0h 0min"

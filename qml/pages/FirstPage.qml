@@ -129,7 +129,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration, fromTimer: true })
+                                  duration:duration, breakDuration:breakDuration})
 
         }
         else {
