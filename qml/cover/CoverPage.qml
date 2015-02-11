@@ -39,11 +39,6 @@ CoverBackground {
     }
 
     function refreshCover() {
-       //startTime = DB.getStartTime()
-        //if (startTime!= "Not started")
-        //    timerRunning = true
-        //console.log(timerRunning)
-        //console.log(startTime)
         today = DB.getHoursDay(0).toFixed(2)
         thisWeek = DB.getHoursWeek(0).toFixed(2)
         thisMonth = DB.getHoursMonth(0).toFixed(2)
@@ -174,36 +169,64 @@ CoverBackground {
             radius: 10.0
             width: 210
             height: 80
-            IconButton {
-                id: pauseIconButton
-                icon.source: "image://theme/icon-cover-pause"
-                scale: 0.2
-            }
-            Label {
+            Item {
+            width: childrenRect.width
+                anchors.horizontalCenter: parent.horizontalCenter
                 y: Theme.paddingMedium
-                anchors.left: pauseIconButton.right
-                font.pixelSize: Theme.fontSizeExtraSmall
-                color: Theme.primaryColor
-                text: durationNow
+                Image {
+                    id: timerIconButton
+                    source: "image://theme/icon-cover-timer"
+                    width: 20
+                    height: 20
+                    anchors.rightMargin: Theme.paddingLarge
+                }
+                Item {
+                    id: spacer
+                    width: Theme.paddingMedium
+                    anchors.left: timerIconButton.right
+                }
+                Label {
+                    anchors.left: spacer.right
+                    anchors.verticalCenter: timerIconButton.verticalCenter
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.secondaryColor
+                    text: durationNow
+                }
             }
-            Label {
+            Item {
+                width: childrenRect.width
+                anchors.horizontalCenter: parent.horizontalCenter
                 y: 3 * Theme.paddingMedium
-                anchors.left: pauseIconButton.right
-                font.pixelSize: Theme.fontSizeExtraSmall
-                color: Theme.primaryColor
-                text: breakDurationNow
+                Image {
+                    id: pauseIconButton
+                    source: "image://theme/icon-cover-pause"
+                    width: 30
+                    height: 30
+                    anchors.rightMargin: Theme.paddingLarge
+                }
+                Item {
+                    id: spacer2
+                    width: Theme.paddingMedium
+                    anchors.left: pauseIconButton.right
+                }
+                Label {
+                    anchors.left: spacer2.right
+                    anchors.verticalCenter: pauseIconButton.verticalCenter
+                    font.pixelSize: Theme.fontSizeSmall
+                    font.bold: true
+                    color: Theme.primaryColor
+                    text: breakDurationNow
+                }
             }
         }
     }
     Component.onCompleted: {
         refreshCover()
         if (timerRunning)
-            firstPage.updateDuration()
+            firstPage.updateDuration();
+        if (breakTimerRunning)
+            pauseAddAction.iconSource = "image://theme/icon-cover-play";
     }
-    /*Timer {
-        interval: 60000; running: timerRunning &&!breakTimerRunning && active; repeat: true
-        onTriggered: firstPage.updateDuration()
-    }*/
 }
 
 

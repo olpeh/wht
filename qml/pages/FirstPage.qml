@@ -80,7 +80,6 @@ Page {
         updateStartTime();
         timerRunning = true
     }
-
     function updateStartTime(){
         var splitted = startTime.split(":");
         startSelectedHour = parseInt(splitted[0]);
@@ -222,15 +221,25 @@ Page {
             timerRunning = true;
             updateStartTime();
             updateDuration();
+
+            getBreakStartTime();
+            if(breakStartTime !== "Not started"){
+                breakTimerRunning = true;
+                updateBreakTimerDuration();
+            }
+            else {
+                breakDuration = 0;
+                breakDurationNow = "0h 0min";
+            }
         }
-        getBreakStartTime();
-        if(breakStartTime !== "Not started"){
-            breakTimerRunning = true;
-            updateBreakTimerDuration();
-        }
-        // Automatically start timer if setting allowed
-        else if(settings.getTimerAutoStart()){
-            start();
+        else {
+            duration = 0;
+            durationNow = "0h 0min";
+
+            // Automatically start timer if allowed in settings
+            if(settings.getTimerAutoStart()){
+                start();
+            }
         }
     }
     SilicaFlickable {
@@ -349,7 +358,7 @@ Page {
                         Label {
                             y:3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours
+                            text: model.hours.toFixed(2)
                             font.bold: true
                         }
                     }

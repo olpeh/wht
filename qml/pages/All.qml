@@ -136,7 +136,7 @@ Page {
                 }
                 Label {
                     id: duration
-                    property double netDur : model.duration - model.breakDuration
+                    property double netDur : (model.duration - model.breakDuration).toFixed(2)
                     text: netDur + "h"
                     font{
                         bold: true
@@ -151,7 +151,7 @@ Page {
                 Label {
                     id: breakDuration
                     visible: model.breakDuration > 0
-                    text: "(" + model.breakDuration + "h break)"
+                    text: "(" + (model.breakDuration).toFixed(2) + "h break)"
                     font{
                         pixelSize: Theme.fontSizeExtraSmall
                     }
