@@ -25,7 +25,7 @@
 
 //config.js
 .import QtQuick.LocalStorage 2.0 as LS
-// First, let's create a short helper function to get the database connection
+// Helper function to get the database connection
 function getDatabase() {
     return LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 }
@@ -346,7 +346,8 @@ function getAllThisYear() {
     return allHours;
 }
 
-// This function is used to remove
+/* This function is used to remove items from the
+  hours table */
 function remove(uid) {
     console.log(uid);
     var db = getDatabase();
@@ -360,7 +361,8 @@ function remove(uid) {
     })
 }
 
-//timer
+/* Get timer starttime
+returns the starttime or "Not started" */
 function getStartTime(){
     var db = getDatabase();
     var started = 0;
@@ -381,7 +383,9 @@ function getStartTime(){
     return resp;
 }
 
-//Start the timer
+/* Start the timer
+Simply sets the starttime and started to 1
+Returns the starttime if inserting is succesful */
 function startTimer(){
     var db = getDatabase();
     var resp="";
@@ -401,7 +405,10 @@ function startTimer(){
     return resp;
 }
 
-//Stop the timer
+/* Stop the timer
+ Stops the timer, sets started to 0
+ and saves the endTime
+ NOTE: the endtime is not used anywhere atm. */
 function stopTimer(){
     var db = getDatabase();
     var datenow = new Date();
@@ -420,8 +427,12 @@ function stopTimer(){
 
 
 
-// BREAK TIMER FUNCTIONS
-// break timer
+/* BREAK TIMER FUNCTIONS
+These functions are used when the timer
+is running and the user pauses it */
+
+/* Get break timer starttime
+returns the starttime or "Not started" */
 function getBreakStartTime(){
     var db = getDatabase();
     var started = 0;
@@ -442,7 +453,9 @@ function getBreakStartTime(){
     return resp;
 }
 
-//Start the break timer
+/* Start the break timer
+Simply sets the break starttime and started to 1
+Returns the starttime if inserting is succesful */
 function startBreakTimer(){
     var db = getDatabase();
     var resp="";
@@ -463,7 +476,10 @@ function startBreakTimer(){
     return resp;
 }
 
-//Stop the break timer
+/* Stop the break timer
+Gets the id of the last added row which
+should be the current breaktimer row and
+saves the duration in to that row. */
 function stopBreakTimer(duration){
     console.log(duration)
     var db = getDatabase();
@@ -489,7 +505,9 @@ function stopBreakTimer(duration){
         console.log("error getting last row id")
 }
 
-//Get the break durations
+/* Get the break durations from the database
+Gets all break rows. Users may use the breaktimer
+several times during a work day. */
 function getBreakTimerDuration(){
     var db = getDatabase();
     var dur=0.0;
@@ -509,7 +527,10 @@ function getBreakTimerDuration(){
     return dur;
 }
 
-// Clear out the breaktimer
+/* Clear out the breaktimer
+Only the duration of the breaks
+are added to the hours table.
+Breaks table can be cleared everytime */
 function clearBreakTimer(){
     var db = getDatabase();
     db.transaction(function(tx) {
