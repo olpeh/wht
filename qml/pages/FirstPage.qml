@@ -75,8 +75,8 @@ Page {
     function getStartTime(){
         startTime = DB.getStartTime();
     }
-    function start(){
-        startTime = DB.startTimer();
+    function start(newValue){
+        startTime = DB.startTimer(newValue);
         updateStartTime();
         timerRunning = true
     }
@@ -210,6 +210,12 @@ Page {
         breakDuration=0;
     }
 
+    function refreshCover() {
+        today = DB.getHoursDay(0).toFixed(2)
+        thisWeek = DB.getHoursWeek(0).toFixed(2)
+        thisMonth = DB.getHoursMonth(0).toFixed(2)
+    }
+
     Component.onCompleted: {
         // Initialize the database
         DB.initialize();
@@ -334,7 +340,7 @@ Page {
                         Label {
                             y: 3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast
+                            text: model.hoursLast.toFixed(2)
                             font.bold: true
                         }
                     }
@@ -407,36 +413,36 @@ Page {
                         width: (timerItem.width-4*Theme.paddingLarge) / 3
                         height: 140
                         x: Theme.paddingLarge
-                        Item {
-                            visible: timerRunning
-                            width: parent.width
-                            Label {
-                                id: breakLabel
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                y: Theme.paddingMedium
-                                font.bold: true
-                                font.pixelSize: Theme.fontSizeSmall
-                                text: "Break"
-                            }
-                            Image {
-                                id: pauseImage
-                                source: "image://theme/icon-cover-pause"
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                scale: 0.7
-                                y:40
-                            }
+                        Label {
+                            visible: breakTimerRunning
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: Theme.paddingMedium
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: breakDurationNow
+                        }
+                        Image {
+                            id: pauseImage
+                            source: "image://theme/icon-cover-pause"
+                            anchors.centerIn: parent
+                            scale: 0.5
+                        }
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: parent.height - this.height - Theme.paddingMedium
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Break"
                         }
                     }
                     onClicked: {
                         if(!breakTimerRunning) {
                             startBreakTimer()
                             pauseImage.source = "image://theme/icon-cover-play"
-                            breakLabel.text = breakDurationNow
                         }
                         else {
                             stopBreakTimer()
                             pauseImage.source = "image://theme/icon-cover-pause"
-                            breakLabel.text = "Break"
                         }
                     }
                 }
@@ -445,6 +451,7 @@ Page {
                     height: 140
                     x: timerItem.width/3
                     Rectangle {
+                        opacity: breakTimerRunning? 0.5 : 1
                         color: Theme.secondaryHighlightColor
                         radius: 10.0
                         width: (timerItem.width-4*Theme.paddingLarge) / 3
@@ -453,47 +460,78 @@ Page {
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
                             y: Theme.paddingMedium
-                            color: breakTimerRunning ? Theme.secondaryColor : Theme.primaryColor
+                            color: Theme.primaryColor
                             id: durationNowLabel
-                            font.bold: !breakTimerRunning
-                            font.pixelSize: breakTimerRunning ? Theme.fontSizeExtraSmall : Theme.fontSizeSmall
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
                             text: durationNow
                         }
                         Image {
                             id: stopImage
                             source: "image://theme/icon-cover-cancel"
+                            anchors.centerIn: parent
+                            scale: 0.5
+                        }
+                        Label {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            scale: 0.7
-                            y:40
+                            y: parent.height - this.height - Theme.paddingMedium
+                            color: Theme.primaryColor
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Stop"
                         }
                     }
-                    onClicked: stop(false)
+                    onClicked: if(!breakTimerRunning) stop(false)
                 }
                 BackgroundItem {
                     width: timerItem.width /3
                     height: 140
                     x: 2 * timerItem.width/3
+                    function openTimeDialog() {
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: startSelectedHour,
+                                        minute: startSelectedMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            startSelectedHour = dialog.hour
+                            startSelectedMinute = dialog.minute
+                            var newValue = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                            start(newValue)
+                            updateDuration()
+                        })
+                    }
                     Rectangle {
+                        opacity: breakTimerRunning? 0.5 : 1
                         color: Theme.secondaryHighlightColor
                         radius: 10.0
                         width: (timerItem.width-4*Theme.paddingLarge) / 3
                         height: 140
-                        x: 0.5*Theme.paddingLarge
+                        x: (1/3)*Theme.paddingLarge
                         Label {
-                            x: Theme.paddingLarge
-                            y: Theme.paddingLarge
-                            id: started
+                            y: Theme.paddingMedium
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
                             text: "Started"
                         }
                         Label {
-                            x: Theme.paddingLarge
-                            y:3 * Theme.paddingLarge
+                            anchors.centerIn: parent
                             id: startedAt
+                            color: Theme.secondaryColor
                             font.bold: true
-                            text: "Now"
+                            text: startTime
+                        }
+                        Label {
+                            y: parent.height - this.height - Theme.paddingMedium
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Adjust"
                         }
                     }
-                    onClicked: console.log("Jou")
+                    onClicked: if(!breakTimerRunning) openTimeDialog()
                 }
             }
         }

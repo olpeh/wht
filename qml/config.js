@@ -386,20 +386,20 @@ function getStartTime(){
 /* Start the timer
 Simply sets the starttime and started to 1
 Returns the starttime if inserting is succesful */
-function startTimer(){
+function startTimer(newValue){
     var db = getDatabase();
     var resp="";
     var datenow = new Date();
-    var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    var startTime = newValue || datenow.getHours().toString() +":" + datenow.getMinutes().toString();
     console.log(startTime);
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO timer VALUES (?,?,?)', [1, startTime, 1]);
         if (rs.rowsAffected > 0) {
             resp = startTime;
-            console.log ("Timer was started and saved to database");
+            console.log ("Timer was saved to database");
         } else {
             resp = "Error";
-            console.log ("Error starting the timer");
+            console.log ("Error saving the timer");
         }
     })
     return resp;
@@ -455,7 +455,8 @@ function getBreakStartTime(){
 
 /* Start the break timer
 Simply sets the break starttime and started to 1
-Returns the starttime if inserting is succesful */
+Returns the starttime if inserting is succesful.
+Also used for adjusting the starttime */
 function startBreakTimer(){
     var db = getDatabase();
     var resp="";

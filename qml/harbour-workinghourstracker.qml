@@ -37,6 +37,9 @@ ApplicationWindow
     property string breakStartTime: ""
     property string breakDurationNow: "0h 0min"
     property double breakDuration: 0
+    property double thisWeek: 0
+    property double thisMonth: 0
+    property double today: 0
     property Item firstPage
     id: appWindow
     initialPage: Component {

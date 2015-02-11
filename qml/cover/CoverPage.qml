@@ -28,21 +28,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 CoverBackground {
-    property double thisWeek: 0
-    property double thisMonth: 0
-    property double today: 0
     property bool active: status == Cover.Active
-    onActiveChanged: {
-        refreshCover();
-        if(!breakTimerRunning)
-            firstPage.updateDuration();
-    }
-
-    function refreshCover() {
-        today = DB.getHoursDay(0).toFixed(2)
-        thisWeek = DB.getHoursWeek(0).toFixed(2)
-        thisMonth = DB.getHoursMonth(0).toFixed(2)
-    }
 
     CoverPlaceholder {
         id: icon
@@ -221,7 +207,7 @@ CoverBackground {
         }
     }
     Component.onCompleted: {
-        refreshCover()
+        firstPage.refreshCover()
         if (timerRunning)
             firstPage.updateDuration();
         if (breakTimerRunning)
