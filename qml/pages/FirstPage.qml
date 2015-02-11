@@ -89,7 +89,7 @@ Page {
     function updateDuration(){
         console.log("Update duration triggered");
         breakDuration = getBreakTimerDuration();
-        console.log(breakDuration);
+        //console.log(breakDuration);
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -99,7 +99,7 @@ Page {
         if (nowInMinutes < startInMinutes)
             nowInMinutes += 24*60
         var breakInMinutes = Math.round(breakDuration *60);
-        console.log(breakInMinutes);
+        //console.log(breakInMinutes);
         var difference = nowInMinutes - startInMinutes - breakInMinutes;
         var diffHours = Math.floor(difference / 60)
         var diffMinutes = difference % 60;
@@ -366,6 +366,7 @@ Page {
                 }
             }
             BackgroundItem {
+                visible: !timerRunning
                 y: 110 + 4*140 + 4*Theme.paddingLarge
                 height: 140
                 width: parent.width
@@ -376,15 +377,108 @@ Page {
                     height: 140
                     x: Theme.paddingLarge
                     Label {
-                        visible: !timerRunning
                         id: timerText
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: "Timer is not running"
                     }
-                    Item {
-                        visible: timerRunning
-                        width: parent.width
+                    Label {
+                        y:3 * Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "Click to start"
+                        font.bold: true
+                    }
+                }
+                onClicked: start()
+            }
+
+            Item {
+                id: timerItem
+                visible: timerRunning
+                y: 110 + 4*140 + 4*Theme.paddingLarge
+                height: 140
+                width: parent.width
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: Theme.paddingLarge
+                        Item {
+                            visible: timerRunning
+                            width: parent.width
+                            Label {
+                                id: breakLabel
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                y: Theme.paddingMedium
+                                font.bold: true
+                                font.pixelSize: Theme.fontSizeSmall
+                                text: "Break"
+                            }
+                            Image {
+                                id: pauseImage
+                                source: "image://theme/icon-cover-pause"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                scale: 0.7
+                                y:40
+                            }
+                        }
+                    }
+                    onClicked: {
+                        if(!breakTimerRunning) {
+                            startBreakTimer()
+                            pauseImage.source = "image://theme/icon-cover-play"
+                            breakLabel.text = breakDurationNow
+                        }
+                        else {
+                            stopBreakTimer()
+                            pauseImage.source = "image://theme/icon-cover-pause"
+                            breakLabel.text = "Break"
+                        }
+                    }
+                }
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    x: timerItem.width/3
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: (2/3) * Theme.paddingLarge
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: Theme.paddingMedium
+                            color: breakTimerRunning ? Theme.secondaryColor : Theme.primaryColor
+                            id: durationNowLabel
+                            font.bold: !breakTimerRunning
+                            font.pixelSize: breakTimerRunning ? Theme.fontSizeExtraSmall : Theme.fontSizeSmall
+                            text: durationNow
+                        }
+                        Image {
+                            id: stopImage
+                            source: "image://theme/icon-cover-cancel"
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            scale: 0.7
+                            y:40
+                        }
+                    }
+                    onClicked: stop(false)
+                }
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    x: 2 * timerItem.width/3
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: 0.5*Theme.paddingLarge
                         Label {
                             x: Theme.paddingLarge
                             y: Theme.paddingLarge
@@ -398,93 +492,10 @@ Page {
                             font.bold: true
                             text: "Now"
                         }
-                        IconButton {
-                            id: iconButton
-                            icon.source: "image://theme/icon-cover-timer"
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: Theme.paddingSmall
-                            scale: 0.5
-                        }
-                        Label {
-                            x: parent.width - this.width - Theme.paddingLarge
-                            y: Theme.paddingLarge
-                            id: durText
-                            text: "Duration"
-                        }
-                        Label {
-                            x: parent.width - this.width - Theme.paddingLarge
-                            y:3 * Theme.paddingLarge
-                            id: durationNowLabel
-                            font.bold: true
-                            text: durationNow
-                        }
                     }
-                    Label {
-                        y:3 * Theme.paddingLarge
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: timerRunning ? "Click to stop" : "Click to start"
-                        font.bold: true
-                    }
+                    onClicked: console.log("Jou")
                 }
-                onClicked: timerRunning ? stop(false) : start()
             }
-            /*
-            Item {
-                width: parent.width
-                y: 110 + 5*140 + 5*Theme.paddingLarge
-                height: 140 + Theme.paddingLarge
-                BackgroundItem {
-                    width: parent.width
-                    height: 140
-                    Rectangle {
-                        anchors {
-                             rightMargin: Theme.paddingLarge
-                        }
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: parent.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "Adjust timer"
-                        }
-                        Label {
-                            y: 3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "Change start time"
-                            font.bold: true
-                        }
-                    }
-                    onClicked: console.log("Adjust here")
-                }
-                BackgroundItem {
-                    width: parent.width/2
-                    height: 140
-                    x: parent.width/2
-                    Rectangle {
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: parent.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: 0.5*Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "Pause"
-                        }
-                        Label {
-                            y:3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "Click to start pause"
-                            font.bold: true
-                        }
-                    }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.section})
-                }
-            }*/
-
         }
 
         Timer {

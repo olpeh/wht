@@ -521,8 +521,8 @@ function getBreakTimerDuration(){
                     dur += rs.rows.item(i).duration;
             }
         }
-        else
-            console.log("No breaktimer rows found");
+        //else
+            //console.log("No breaktimer rows found");
     })
     return dur;
 }
