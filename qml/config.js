@@ -38,10 +38,12 @@ function resetDatabase() {
             tx.executeSql('DROP TABLE hours')
             tx.executeSql('DROP TABLE timer')
             tx.executeSql('DROP TABLE breaks')
+            tx.executeSql('DROP TABLE projects')
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
-            console.log("Database reset");
+            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, expenses REAL DEFAULT 0);');
+            console.log("Database was reset");
         });
 }
 
@@ -65,6 +67,7 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, expenses REAL DEFAULT 0);');
             tx.executeSql('PRAGMA user_version=2;');
     });
 }
@@ -74,7 +77,7 @@ function updateIfNeeded () {
         function(tx){
             var rs = tx.executeSql('PRAGMA user_version');
             //console.log(rs.rows.item(0).user_version);
-            if (rs.rows.item(0).user_version < 2){
+            if (rs.rows.item(0).user_version < 2) {
                 var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
                 if (ex.rows.item(0).name ==="hours") {
                     //console.log(ex.rows.item(0).name);
@@ -90,7 +93,7 @@ function updateIfNeeded () {
 }
 
 // This function is used to write hours into the database
-function setHours(uid,date,startTime, endTime, duration,project,description, breakDuration) {
+function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration) {
     console.log(date)
     var db = getDatabase();
     var res = "";
@@ -539,7 +542,70 @@ function clearBreakTimer(){
     })
 }
 
+/* PROJECT FUNCTIONS
+These functions are for projects */
 
+/* */
+function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, expenses){
+    var db = getDatabase();
+    var resp = "";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, expenses]);
+        if(rs.rows.length > 0) {
+            resp = "OK";
+        }
+        else {
+            resp = "ERROR";
+        }
+    })
+    return resp;
+}
 
+/* Get project names and ids */
+function getProjectNames(){
+    var db = getDatabase();
+    var resp = [];
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT id, name FROM projects');
+        if(rs.rows.length > 0) {
+            for (var i=0; i<rs.rows.length; i++) {
+                resp.push({id: rs.rows[i].id, name: rs.rows[i].name})
+            }
+        }
+    })
+    return resp;
+}
 
+/* Get project by id */
+function getProjectById(id){
+    var db = getDatabase();
+    var resp = {};
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
+        if(rs.rows.length > 0) {
+            for (var i=0; i<rs.rows.length; i++) {
+                resp.push({id: rs.rows[i].id, name: rs.rows[i].name})
+            }
+        }
+    })
+    return resp;
+}
 
+function removeProject(id){
+    var db = getDatabase();
+    db.transaction(function(tx) {
+        tx.executeSql('DELETE FROM WHERE id=?;' , [id]);
+        if (rs.rowsAffected > 0) {
+            console.log ("Project deleted!");
+        } else {
+            console.log ("Error deleting project. No deletion occured.");
+        }
+    })
+}
+
+function removeProjects(){
+    var db = getDatabase();
+    db.transaction(function(tx) {
+        tx.executeSql('DELETE FROM projects');
+    })
+}

@@ -41,6 +41,7 @@ ApplicationWindow
     property double thisMonth: 0
     property double today: 0
     property Item firstPage
+    property variant projects: []
     id: appWindow
     initialPage: Component {
         FirstPage {

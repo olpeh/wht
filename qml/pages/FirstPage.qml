@@ -224,13 +224,20 @@ Page {
         // Initialize the database
         DB.initialize();
         DB.updateIfNeeded();
+        projects = DB.getProjectNames();
+        if (projects.length === 0) {
+            var id = DB.getUniqueId();
+            DB.setProject(id, "Default", 0, 0, 0, 0, 0);
+            projects = DB.getProjectNames();
+        }
+        console.log(projects[0].idh);
+        console.log(projects[0].name);
         //console.log("Get hours from database...");
         getHours();
         getStartTime();
         if(startTime !== "Not started"){
             timerRunning = true;
             updateStartTime();
-
             getBreakStartTime();
             if(breakStartTime !== "Not started"){
                 breakTimerRunning = true;
