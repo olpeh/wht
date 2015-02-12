@@ -92,8 +92,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 Sourcecode is released under the terms of the BSD License.
 
 Copyright (C) 2015 Olavi Haapala.<br />
-Contact: Olavi Haapala<br />
-<ojhaapala@gmail.com><br />
+Email: [ojhaapala@gmail.com]<mailto:ojhaapala@gmail.com><br />
 Twitter: [@olpetik]<https://twitter.com/olpetik>
 
 All rights reserved.
