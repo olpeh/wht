@@ -1,4 +1,4 @@
-## Working Hours Tracker
+## Working Hours Tracker
 
 An easy to use and simple Working Hours Tracker for SailfishOS
 
