@@ -40,17 +40,24 @@ CoverBackground {
         id: coverAction
         CoverAction {
             id: pauseAddAction
-            iconSource:  timerRunning? "image://theme/icon-cover-pause" : "image://theme/icon-cover-new"
+            iconSource:  {
+                if(timerRunning && breakTimerRunning)
+                    "image://theme/icon-cover-play"
+                else if(timerRunning)
+                    "image://theme/icon-cover-pause"
+                else
+                    "image://theme/icon-cover-new"
+            }
             onTriggered: {
                 if (timerRunning && !breakTimerRunning) {
                     console.log("Break starts...");
                     firstPage.startBreakTimer()
-                    pauseAddAction.iconSource = "image://theme/icon-cover-play"
+                    //pauseAddAction.iconSource = "image://theme/icon-cover-play"
                 }
                 else if (breakTimerRunning) {
                     console.log("Break ends...");
                     firstPage.stopBreakTimer()
-                    pauseAddAction.iconSource = "image://theme/icon-cover-pause"
+                    //pauseAddAction.iconSource = "image://theme/icon-cover-pause"
                 }
                 else {
                     if(pageStack.depth > 1)
@@ -208,10 +215,6 @@ CoverBackground {
     }
     Component.onCompleted: {
         firstPage.refreshCover()
-        if (timerRunning)
-            firstPage.updateDuration();
-        if (breakTimerRunning)
-            pauseAddAction.iconSource = "image://theme/icon-cover-play";
     }
 }
 

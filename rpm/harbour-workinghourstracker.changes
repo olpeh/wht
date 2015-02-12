@@ -8,6 +8,13 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Thu Feb 12 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.7-2
+- Added setting to autostart timer on app startup
+- Added break functionality to the timer
+- Fixed an issue when timer used from cover
+- Simplified parts of the code
+- Small bugfixes
+
 * Mon Feb 02 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.6-1
 - redesigned the firstpage
 - moved timer to firstpage

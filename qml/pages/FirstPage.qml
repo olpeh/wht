@@ -86,9 +86,11 @@ Page {
         startSelectedMinute = parseInt(splitted[1]);
         startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
-    function updateDuration(){
+    function updateDuration(breakDur){
         console.log("Update duration triggered");
         breakDuration = getBreakTimerDuration();
+        if(breakDur)
+            breakDuration += breakDur
         //console.log(breakDuration);
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
@@ -182,6 +184,8 @@ Page {
         var diffHours = Math.floor(difference / 60);
         var diffMinutes = difference % 60;
         breakDurationNow = diffHours + "h " + diffMinutes + "min";
+        // return the duration in hours
+        return (difference/60)
     }
 
     function stopBreakTimer() {
@@ -226,16 +230,16 @@ Page {
         if(startTime !== "Not started"){
             timerRunning = true;
             updateStartTime();
-            updateDuration();
 
             getBreakStartTime();
             if(breakStartTime !== "Not started"){
                 breakTimerRunning = true;
-                updateBreakTimerDuration();
+                updateDuration(updateBreakTimerDuration());
             }
             else {
                 breakDuration = 0;
                 breakDurationNow = "0h 0min";
+                updateDuration();
             }
         }
         else {
@@ -423,7 +427,7 @@ Page {
                         }
                         Image {
                             id: pauseImage
-                            source: "image://theme/icon-cover-pause"
+                            source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                             anchors.centerIn: parent
                             scale: 0.5
                         }
@@ -438,11 +442,9 @@ Page {
                     onClicked: {
                         if(!breakTimerRunning) {
                             startBreakTimer()
-                            pauseImage.source = "image://theme/icon-cover-play"
                         }
                         else {
                             stopBreakTimer()
-                            pauseImage.source = "image://theme/icon-cover-pause"
                         }
                     }
                 }
@@ -537,7 +539,7 @@ Page {
         }
 
         Timer {
-            interval: 60000; running: timerRunning&&!breakTimerRunning; repeat: true
+            interval: 60000; running: timerRunning && !breakTimerRunning; repeat: true
             onTriggered: updateDuration()
         }
         Timer {

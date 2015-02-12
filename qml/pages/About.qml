@@ -61,9 +61,9 @@ Page {
                 }
                 text: "Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours."
             }
-            SectionHeader { text: "License" }
+            SectionHeader { text: "Contact" }
             Text {
-                //font.pointSize: Theme.fontSizeMedium
+                //font.pointSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -72,7 +72,64 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Copyright (C) 2015 Olavi Haapala \nLicensed under BSD."
+                text: "Email: ojhaapala@gmail.com"
+            }
+            ValueButton {
+                id: twitter
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 20
+                label: "<a href=\"https://twitter.com/olpetik\">Twitter: @olpetik</a>"
+                onClicked: {
+                    Qt.openUrlExternally("https://twitter.com/olpetik")
+                }
+            }
+            Item {
+                width: parent.width
+                height: 10
+            }
+
+            SectionHeader { text: "Donate" }
+            Text {
+                //font.pointSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "If you like my work, please donate. Donations help me to use more time on development."
+            }
+            Button {
+              text: "Paypal EUR"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+            }
+            Button {
+              text: "Paypal USD"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+            }
+            Item {
+                width: parent.width
+                height: 10
+            }
+            SectionHeader { text: "Bitcoin" }
+            TextField {
+                id: bitcoinText
+                readOnly: true
+                focusOnClick: true
+                onClicked: {
+                    console.log("Clicked")
+                    select()
+                    copy()
+                    bitcoinText.label = "Copied to clipboard"
+                }
+                label: "Donate to my bitcoin account"
+                text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
+                font.pointSize: Theme.fontSizeExtraSmall
+                EnterKey.onClicked: parent.focus = true
             }
             SectionHeader { text: "Source" }
             Text {
@@ -100,53 +157,13 @@ Page {
                     Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
                 }
             }
-
-            SectionHeader { text: "Donate" }
-            Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
-                wrapMode: Text.WordWrap
-                width: root.width
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-                }
-                text: "If you like my work, please feel free to donate. Donations help me to use more time on development."
-            }
-            Button {
-              text: "Paypal EUR"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
-            }
-            Button {
-              text: "Paypal USD"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
-            }
             Item {
                 width: parent.width
                 height: 10
             }
-            SectionHeader { text: "Bitcoin" }
-            TextField {
-                id: bitcoinText
-                readOnly: true
-                focusOnClick: true
-                onClicked: {
-                    console.log("Clicked")
-                    select()
-                    copy()
-                    bitcoinText.label = "Copied to clipboard"
-                }
-                label: "Donate to my bitcoin address"
-                text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
-                font.pointSize: Theme.fontSizeExtraSmall
-                EnterKey.onClicked: parent.focus = true
-            }
-            SectionHeader { text: "Contact" }
+            SectionHeader { text: "License" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
+                //font.pointSize: Theme.fontSizeMedium
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -155,16 +172,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Email: ojhaapala@gmail.com"
-            }
-            ValueButton {
-                id: twitter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 20
-                label: "<a href=\"https://twitter.com/olpetik\">Twitter: @olpetik</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://twitter.com/olpetik")
-                }
+                text: "Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD."
             }
             Item {
                 width: parent.width
@@ -172,9 +180,6 @@ Page {
             }
         }
     }
-    /*Component.onCompleted: {
-       //console.log(dataContainer);
-    }*/
 }
 
 
