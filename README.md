@@ -14,8 +14,18 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Changing effort times by adjusting duration
 * Adding break possibility
 * Settings for default duration and default break
+* Setting for timer autostart on app startup
+* Break functionality in timer
+* Possibility to adjust timer start time
 
 ## Changelog
+
+### 0.8.7-2
+- Added setting to autostart timer on app startup
+- Added break functionality to the timer
+- Fixed an issue when timer used from cover
+- Simplified parts of the code
+- Small bugfixes
 
 ### 0.8.6-1
 - redesigned the firstpage
