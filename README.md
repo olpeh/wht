@@ -93,7 +93,7 @@ Sourcecode is released under the terms of the BSD License.
 
 Copyright (C) 2015 Olavi Haapala.
 Contact: Olavi Haapala <ojhaapala@gmail.com>
-Twitter: @olpetik
+Twitter: <https://twitter.com/olpetik>
 
 All rights reserved.
 
