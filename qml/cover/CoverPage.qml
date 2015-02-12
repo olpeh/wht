@@ -28,22 +28,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 CoverBackground {
-    property double thisWeek: 0
-    property double thisMonth: 0
-    property double today: 0
     property bool active: status == Cover.Active
-    onActiveChanged: { refreshCover(); firstPage.updateDuration();}
-
-    function refreshCover() {
-       //startTime = DB.getStartTime()
-        //if (startTime!= "Not started")
-        //    timerRunning = true
-        //console.log(timerRunning)
-        //console.log(startTime)
-        today = DB.getHoursDay(0).toFixed(2)
-        thisWeek = DB.getHoursWeek(0).toFixed(2)
-        thisMonth = DB.getHoursMonth(0).toFixed(2)
-    }
 
     CoverPlaceholder {
         id: icon
@@ -53,22 +38,41 @@ CoverBackground {
     }
     CoverActionList {
         id: coverAction
-
         CoverAction {
-            iconSource: "image://theme/icon-cover-new"
-            onTriggered: {
-                if(pageStack.depth > 1)
-                    pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+            id: pauseAddAction
+            iconSource:  {
+                if(timerRunning && breakTimerRunning)
+                    "image://theme/icon-cover-play"
+                else if(timerRunning)
+                    "image://theme/icon-cover-pause"
                 else
-                    pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
-                appWindow.activate()
+                    "image://theme/icon-cover-new"
+            }
+            onTriggered: {
+                if (timerRunning && !breakTimerRunning) {
+                    console.log("Break starts...");
+                    firstPage.startBreakTimer()
+                    //pauseAddAction.iconSource = "image://theme/icon-cover-play"
+                }
+                else if (breakTimerRunning) {
+                    console.log("Break ends...");
+                    firstPage.stopBreakTimer()
+                    //pauseAddAction.iconSource = "image://theme/icon-cover-pause"
+                }
+                else {
+                    if(pageStack.depth > 1)
+                        pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+                    else
+                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+                    appWindow.activate()
+                }
             }
         }
         CoverAction {
             iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
                 if (timerRunning) {
-                    firstPage.stop()
+                    firstPage.stop(true)
                     appWindow.activate()
                 }
                 else {
@@ -129,7 +133,7 @@ CoverBackground {
             }
         }
         Rectangle {
-            visible: timerRunning
+            visible: timerRunning && !breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             radius: 10.0
@@ -151,15 +155,66 @@ CoverBackground {
                 text: durationNow
             }
         }
+        Rectangle {
+            visible: breakTimerRunning
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            width: 210
+            height: 80
+            Item {
+            width: childrenRect.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: Theme.paddingMedium
+                Image {
+                    id: timerIconButton
+                    source: "image://theme/icon-cover-timer"
+                    width: 20
+                    height: 20
+                    anchors.rightMargin: Theme.paddingLarge
+                }
+                Item {
+                    id: spacer
+                    width: Theme.paddingMedium
+                    anchors.left: timerIconButton.right
+                }
+                Label {
+                    anchors.left: spacer.right
+                    anchors.verticalCenter: timerIconButton.verticalCenter
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.secondaryColor
+                    text: durationNow
+                }
+            }
+            Item {
+                width: childrenRect.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 3 * Theme.paddingMedium
+                Image {
+                    id: pauseIconButton
+                    source: "image://theme/icon-cover-pause"
+                    width: 30
+                    height: 30
+                    anchors.rightMargin: Theme.paddingLarge
+                }
+                Item {
+                    id: spacer2
+                    width: Theme.paddingMedium
+                    anchors.left: pauseIconButton.right
+                }
+                Label {
+                    anchors.left: spacer2.right
+                    anchors.verticalCenter: pauseIconButton.verticalCenter
+                    font.pixelSize: Theme.fontSizeSmall
+                    font.bold: true
+                    color: Theme.primaryColor
+                    text: breakDurationNow
+                }
+            }
+        }
     }
     Component.onCompleted: {
-        refreshCover()
-        if (timerRunning)
-            firstPage.updateDuration()
-    }
-    Timer {
-        interval: 60000; running: timerRunning && active; repeat: true
-        onTriggered: firstPage.updateDuration()
+        firstPage.refreshCover()
     }
 }
 

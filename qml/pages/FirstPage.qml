@@ -75,21 +75,23 @@ Page {
     function getStartTime(){
         startTime = DB.getStartTime();
     }
-    function start(){
-        startTime = DB.startTimer();
+    function start(newValue){
+        startTime = DB.startTimer(newValue);
         updateStartTime();
-        updateDuration()
         timerRunning = true
     }
-
     function updateStartTime(){
         var splitted = startTime.split(":");
         startSelectedHour = parseInt(splitted[0]);
         startSelectedMinute = parseInt(splitted[1]);
         startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
-    function updateDuration(){
-        console.log("Triggered")
+    function updateDuration(breakDur){
+        console.log("Update duration triggered");
+        breakDuration = getBreakTimerDuration();
+        if(breakDur)
+            breakDuration += breakDur
+        //console.log(breakDuration);
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -98,7 +100,9 @@ Page {
         var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
         if (nowInMinutes < startInMinutes)
             nowInMinutes += 24*60
-        var difference = nowInMinutes - startInMinutes;
+        var breakInMinutes = Math.round(breakDuration *60);
+        //console.log(breakInMinutes);
+        var difference = nowInMinutes - startInMinutes - breakInMinutes;
         var diffHours = Math.floor(difference / 60)
         var diffMinutes = difference % 60;
         durationNow = diffHours + "h " + diffMinutes + "min";
@@ -106,17 +110,18 @@ Page {
 
     function stop(fromCover){
         console.log("Stop clicked!");
-        DB.stopTimer();
-        durationNow = "0h 0min"
-        timerRunning = false;
+        if(breakTimerRunning) {
+            stopBreakTimer();
+            breakTimerRunning = false;
+        }
+        breakDuration = getBreakTimerDuration();
         var dateNow = new Date();
         var endSelectedHour = dateNow.getHours();
         var endSelectedMinute = dateNow.getMinutes();
         var endHour = endSelectedHour
         if (endSelectedHour < startSelectedHour)
             endHour +=24
-        var duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-
+        duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
         if(!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,
@@ -125,8 +130,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, fromTimer: true })
-
+                                  duration:duration, breakDuration:breakDuration, fromTimer: true})
         }
         else {
             if(pageStack.depth > 1) {
@@ -135,7 +139,7 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
             else {
                 pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
@@ -143,18 +147,77 @@ Page {
                                uid: 0,
                                startSelectedMinute:startSelectedMinute,
                                startSelectedHour:startSelectedHour,
-                               duration:duration, fromCover: true })
+                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
         }
+        breakDurationNow = "0h 0min";
+        breakDuration = 0;
+        durationNow = "0h 0min";
+        duration = 0;
+        DB.stopTimer();
+        timerRunning = false;
+        clearBreakTimer();
+
     }
 
-    function reset(){
-        console.log("Reset clicked!");
-        DB.stopTimer();
-        start();
-        updateStartTime();
-        updateDuration();
-        timerRunning = true
+    // Break timer functions
+    function getBreakStartTime() {
+        breakStartTime = DB.getBreakStartTime();
+    }
+    function startBreakTimer() {
+        breakDuration = 0;
+        breakDurationNow = "0h 0min";
+        breakStartTime = DB.startBreakTimer();
+        breakTimerRunning = true;
+    }
+    function updateBreakTimerDuration() {
+        console.log("Updating breakTimerDuration Triggered");
+        var dateNow = new Date();
+        var hoursNow = dateNow.getHours();
+        var minutesNow = dateNow.getMinutes();
+        var nowInMinutes = hoursNow * 60 + minutesNow;
+        var splitted = breakStartTime.split(":");
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        if (nowInMinutes < startInMinutes)
+            nowInMinutes += 24*60;
+        var difference = nowInMinutes - startInMinutes;
+        var diffHours = Math.floor(difference / 60);
+        var diffMinutes = difference % 60;
+        breakDurationNow = diffHours + "h " + diffMinutes + "min";
+        // return the duration in hours
+        return (difference/60)
+    }
+
+    function stopBreakTimer() {
+        console.log("stopBreakTimer clicked!");
+        var splitted = breakStartTime.split(":");
+        var timerStartHour = parseInt(splitted[0]);
+        var timerStartMinute = parseInt(splitted[1]);
+        var dateNow = new Date();
+        var endSelectedHour = dateNow.getHours();
+        var endSelectedMinute = dateNow.getMinutes();
+        var endHour = endSelectedHour
+        if (endSelectedHour < timerStartHour)
+            endHour +=24
+        breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
+        console.log("Break duration was:", breakDuration);
+        DB.stopBreakTimer(breakDuration);
+        breakTimerRunning = false;
+    }
+
+    function getBreakTimerDuration(){
+        return DB.getBreakTimerDuration();
+
+    }
+    function clearBreakTimer(){
+        DB.clearBreakTimer();
+        breakDuration=0;
+    }
+
+    function refreshCover() {
+        today = DB.getHoursDay(0).toFixed(2)
+        thisWeek = DB.getHoursWeek(0).toFixed(2)
+        thisMonth = DB.getHoursMonth(0).toFixed(2)
     }
 
     Component.onCompleted: {
@@ -167,7 +230,26 @@ Page {
         if(startTime !== "Not started"){
             timerRunning = true;
             updateStartTime();
-            updateDuration();
+
+            getBreakStartTime();
+            if(breakStartTime !== "Not started"){
+                breakTimerRunning = true;
+                updateDuration(updateBreakTimerDuration());
+            }
+            else {
+                breakDuration = 0;
+                breakDurationNow = "0h 0min";
+                updateDuration();
+            }
+        }
+        else {
+            duration = 0;
+            durationNow = "0h 0min";
+
+            // Automatically start timer if allowed in settings
+            if(settings.getTimerAutoStart()){
+                start();
+            }
         }
     }
     SilicaFlickable {
@@ -262,7 +344,7 @@ Page {
                         Label {
                             y: 3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast
+                            text: model.hoursLast.toFixed(2)
                             font.bold: true
                         }
                     }
@@ -286,7 +368,7 @@ Page {
                         Label {
                             y:3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours
+                            text: model.hours.toFixed(2)
                             font.bold: true
                         }
                     }
@@ -294,6 +376,7 @@ Page {
                 }
             }
             BackgroundItem {
+                visible: !timerRunning
                 y: 110 + 4*140 + 4*Theme.paddingLarge
                 height: 140
                 width: parent.width
@@ -304,62 +387,164 @@ Page {
                     height: 140
                     x: Theme.paddingLarge
                     Label {
-                        visible: !timerRunning
                         id: timerText
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: "Timer is not running"
                     }
-                    Item {
-                        visible: timerRunning
-                        width: parent.width
-                        Label {
-                            x: Theme.paddingLarge
-                            y: Theme.paddingLarge
-                            id: started
-                            text: "Started"
-                        }
-                        Label {
-                            x: Theme.paddingLarge
-                            y:3 * Theme.paddingLarge
-                            id: startedAt
-                            font.bold: true
-                            text: "Now"
-                        }
-                        IconButton {
-                            id: iconButton
-                            icon.source: "image://theme/icon-cover-timer"
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: Theme.paddingSmall
-                            scale: 0.5
-                        }
-                        Label {
-                            x: parent.width - this.width - Theme.paddingLarge
-                            y: Theme.paddingLarge
-                            id: durText
-                            text: "Duration"
-                        }
-                        Label {
-                            x: parent.width - this.width - Theme.paddingLarge
-                            y:3 * Theme.paddingLarge
-                            id: durationNowLabel
-                            font.bold: true
-                            text: durationNow
-                        }
-                    }
                     Label {
                         y:3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: timerRunning ? "Click to stop" : "Click to start"
+                        text: "Click to start"
                         font.bold: true
                     }
                 }
-                onClicked: timerRunning ? stop(false) : start()
+                onClicked: start()
+            }
+
+            Item {
+                id: timerItem
+                visible: timerRunning
+                y: 110 + 4*140 + 4*Theme.paddingLarge
+                height: 140
+                width: parent.width
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    Rectangle {
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: Theme.paddingLarge
+                        Label {
+                            visible: breakTimerRunning
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: Theme.paddingMedium
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: breakDurationNow
+                        }
+                        Image {
+                            id: pauseImage
+                            source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
+                            anchors.centerIn: parent
+                            scale: 0.5
+                        }
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: parent.height - this.height - Theme.paddingMedium
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Break"
+                        }
+                    }
+                    onClicked: {
+                        if(!breakTimerRunning) {
+                            startBreakTimer()
+                        }
+                        else {
+                            stopBreakTimer()
+                        }
+                    }
+                }
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    x: timerItem.width/3
+                    Rectangle {
+                        opacity: breakTimerRunning? 0.5 : 1
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: (2/3) * Theme.paddingLarge
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: Theme.paddingMedium
+                            color: Theme.primaryColor
+                            id: durationNowLabel
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: durationNow
+                        }
+                        Image {
+                            id: stopImage
+                            source: "image://theme/icon-cover-cancel"
+                            anchors.centerIn: parent
+                            scale: 0.5
+                        }
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y: parent.height - this.height - Theme.paddingMedium
+                            color: Theme.primaryColor
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Stop"
+                        }
+                    }
+                    onClicked: if(!breakTimerRunning) stop(false)
+                }
+                BackgroundItem {
+                    width: timerItem.width /3
+                    height: 140
+                    x: 2 * timerItem.width/3
+                    function openTimeDialog() {
+                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                        hourMode: (DateTime.TwentyFourHours),
+                                        hour: startSelectedHour,
+                                        minute: startSelectedMinute,
+                                     })
+
+                        dialog.accepted.connect(function() {
+                            startSelectedHour = dialog.hour
+                            startSelectedMinute = dialog.minute
+                            var newValue = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                            start(newValue)
+                            updateDuration()
+                        })
+                    }
+                    Rectangle {
+                        opacity: breakTimerRunning? 0.5 : 1
+                        color: Theme.secondaryHighlightColor
+                        radius: 10.0
+                        width: (timerItem.width-4*Theme.paddingLarge) / 3
+                        height: 140
+                        x: (1/3)*Theme.paddingLarge
+                        Label {
+                            y: Theme.paddingMedium
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Started"
+                        }
+                        Label {
+                            anchors.centerIn: parent
+                            id: startedAt
+                            color: Theme.secondaryColor
+                            font.bold: true
+                            text: startTime
+                        }
+                        Label {
+                            y: parent.height - this.height - Theme.paddingMedium
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            font.pixelSize: Theme.fontSizeSmall
+                            text: "Adjust"
+                        }
+                    }
+                    onClicked: if(!breakTimerRunning) openTimeDialog()
+                }
             }
         }
+
         Timer {
-            interval: 60000; running: timerRunning; repeat: true
+            interval: 60000; running: timerRunning && !breakTimerRunning; repeat: true
             onTriggered: updateDuration()
+        }
+        Timer {
+            interval: 60000; running: breakTimerRunning; repeat: true
+            onTriggered: updateBreakTimerDuration()
         }
     }
 }

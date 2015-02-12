@@ -25,7 +25,7 @@
 
 //config.js
 .import QtQuick.LocalStorage 2.0 as LS
-// First, let's create a short helper function to get the database connection
+// Helper function to get the database connection
 function getDatabase() {
     return LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 }
@@ -37,8 +37,10 @@ function resetDatabase() {
         function(tx) {
             tx.executeSql('DROP TABLE hours')
             tx.executeSql('DROP TABLE timer')
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL);');
+            tx.executeSql('DROP TABLE breaks')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             console.log("Database reset");
         });
 }
@@ -60,8 +62,9 @@ function initialize() {
     var db = getDatabase();
     db.transaction(
         function(tx){
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('PRAGMA user_version=2;');
     });
 }
@@ -169,7 +172,7 @@ function getHoursYear(offset) {
     var db = getDatabase();
     var dur=0;
     var sqlstr="";
-    if (offset ===0)
+    if (offset===0)
         sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");';
     else {
         sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");';
@@ -343,7 +346,8 @@ function getAllThisYear() {
     return allHours;
 }
 
-// This function is used to remove
+/* This function is used to remove items from the
+  hours table */
 function remove(uid) {
     console.log(uid);
     var db = getDatabase();
@@ -357,7 +361,8 @@ function remove(uid) {
     })
 }
 
-//timer
+/* Get timer starttime
+returns the starttime or "Not started" */
 function getStartTime(){
     var db = getDatabase();
     var started = 0;
@@ -378,27 +383,32 @@ function getStartTime(){
     return resp;
 }
 
-//Start the timer
-function startTimer(){
+/* Start the timer
+Simply sets the starttime and started to 1
+Returns the starttime if inserting is succesful */
+function startTimer(newValue){
     var db = getDatabase();
     var resp="";
     var datenow = new Date();
-    var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    var startTime = newValue || datenow.getHours().toString() +":" + datenow.getMinutes().toString();
     console.log(startTime);
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO timer VALUES (?,?,?)', [1, startTime, 1]);
         if (rs.rowsAffected > 0) {
             resp = startTime;
-            console.log ("Timer was started and saved to database");
+            console.log ("Timer was saved to database");
         } else {
             resp = "Error";
-            console.log ("Error starting the timer");
+            console.log ("Error saving the timer");
         }
     })
     return resp;
 }
 
-//Stop the timer
+/* Stop the timer
+ Stops the timer, sets started to 0
+ and saves the endTime
+ NOTE: the endtime is not used anywhere atm. */
 function stopTimer(){
     var db = getDatabase();
     var datenow = new Date();
@@ -414,3 +424,122 @@ function stopTimer(){
         }
     })
 }
+
+
+
+/* BREAK TIMER FUNCTIONS
+These functions are used when the timer
+is running and the user pauses it */
+
+/* Get break timer starttime
+returns the starttime or "Not started" */
+function getBreakStartTime(){
+    var db = getDatabase();
+    var started = 0;
+    var resp="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
+        if(rs.rows.length > 0) {
+            started = rs.rows.item(0).started;
+            if(started)
+                resp = rs.rows.item(0).starttime;
+            else
+                resp = "Not started";
+        }
+        else{
+            resp = "Not started";
+        }
+    })
+    return resp;
+}
+
+/* Start the break timer
+Simply sets the break starttime and started to 1
+Returns the starttime if inserting is succesful.
+Also used for adjusting the starttime */
+function startBreakTimer(){
+    var db = getDatabase();
+    var resp="";
+    var datenow = new Date();
+    var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    console.log(startTime);
+    db.transaction(function(tx) {
+
+        var rs = tx.executeSql('INSERT INTO breaks VALUES (NULL,?,?,?)', [startTime, 1, -1]);
+        if (rs.rowsAffected > 0) {
+            resp = startTime;
+            console.log ("break Timer was started and saved to database");
+        } else {
+            resp = "Error";
+            console.log ("Error starting the break timer");
+        }
+    })
+    return resp;
+}
+
+/* Stop the break timer
+Gets the id of the last added row which
+should be the current breaktimer row and
+saves the duration in to that row. */
+function stopBreakTimer(duration){
+    console.log(duration)
+    var db = getDatabase();
+    var id = 0;
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
+        if(rs.rows.length > 0) {
+            id = rs.rows.item(0).id;
+        }
+    })
+    if(id) {
+        db.transaction(function(tx) {
+            var rs = tx.executeSql('REPLACE INTO breaks VALUES (?,?,?,?);', [id, startTime, 0, duration]);
+            if (rs.rowsAffected > 0) {
+                console.log ("breakTimer was stopped");
+            } else {
+                resp = "Error";
+                console.log ("Error stopping the breaktimer");
+            }
+        })
+    }
+    else
+        console.log("error getting last row id")
+}
+
+/* Get the break durations from the database
+Gets all break rows. Users may use the breaktimer
+several times during a work day. */
+function getBreakTimerDuration(){
+    var db = getDatabase();
+    var dur=0.0;
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM breaks');
+        if(rs.rows.length > 0) {
+            for(var i =0; i<rs.rows.length; i++) {
+                if (rs.rows.item(i).duration ===-1)
+                    console.log("Duration was not set for row number: ", i);
+                else
+                    dur += rs.rows.item(i).duration;
+            }
+        }
+        //else
+            //console.log("No breaktimer rows found");
+    })
+    return dur;
+}
+
+/* Clear out the breaktimer
+Only the duration of the breaks
+are added to the hours table.
+Breaks table can be cleared everytime */
+function clearBreakTimer(){
+    var db = getDatabase();
+    db.transaction(function(tx) {
+        tx.executeSql('DELETE FROM breaks');
+    })
+}
+
+
+
+
+
