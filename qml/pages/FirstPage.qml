@@ -221,9 +221,10 @@ Page {
     }
 
     Component.onCompleted: {
+        // Update tables for previous versions
+        DB.updateIfNeeded();
         // Initialize the database
         DB.initialize();
-        DB.updateIfNeeded();
         var projects = DB.getProjects();
         if (projects.length === 0) {
             var id = DB.getUniqueId();
