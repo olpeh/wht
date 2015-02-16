@@ -63,6 +63,7 @@ Page {
             //console.log(allHours);
             //uid,date,duration,project,description
             for (var i = 0; i < allHours.length; i++) {
+                var project = all.dataContainer.getProject(allHours[i].project);
                 hoursModel.set(i, {
                                'uid': allHours[i].uid,
                                'date': allHours[i].date,
@@ -71,7 +72,8 @@ Page {
                                'duration': allHours[i].duration,
                                'project' : allHours[i].project,
                                'description': allHours[i].description,
-                               'breakDuration': allHours[i].breakDuration })
+                               'breakDuration': allHours[i].breakDuration,
+                               'labelColor': project.labelColor })
             }
         }
     }
@@ -88,7 +90,7 @@ Page {
         header: PageHeader {
             title: section
         }
-        spacing: Theme.paddingLarge +10
+        spacing: Theme.paddingLarge
         anchors.fill: parent
         quickScroll: true
         model: hoursModel
@@ -108,83 +110,85 @@ Page {
             BackgroundItem {
                 id: contentItem
                 width: parent.width
+                Rectangle {
+                    anchors.fill: parent
+                    color: model.labelColor
+                    Label {
+                        id: project
+                        text: "Project: " + model.project
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        anchors {
+                            left: parent.left
+                            leftMargin: Theme.paddingMedium
+                        }
+                    }
+                    Label {
+                        id: date
+                        text: model.date
+                        font{
+                            bold: true
+                            pixelSize: Theme.fontSizeMedium
+                        }
+                        anchors {
+                            left: parent.left
+                            leftMargin: Theme.paddingMedium
+                        }
+                    }
+                    Label {
+                        id: times
+                        text: model.startTime + "-" + model.endTime
+                        font{
+                            bold: true
+                            pixelSize: Theme.fontSizeMedium
+                        }
+                        anchors {
+                            left: date.right
+                            leftMargin: Theme.paddingMedium
+                            baseline: date.baseline
+                        }
+                    }
+                    Label {
+                        id: duration
+                        property double netDur : (model.duration - model.breakDuration).toFixed(2)
+                        text: netDur + "h"
+                        font{
+                            bold: true
+                            pixelSize: Theme.fontSizeMedium
+                        }
+                        anchors {
+                            left: times.right
+                            leftMargin: Theme.paddingMedium
+                            baseline: date.baseline
+                        }
+                    }
+                    Label {
+                        id: breakDuration
+                        visible: model.breakDuration > 0
+                        text: "(" + (model.breakDuration).toFixed(2) + "h break)"
+                        font{
+                            pixelSize: Theme.fontSizeExtraSmall
+                        }
+                        anchors {
+                            left: duration.right
+                            leftMargin: Theme.paddingMedium
+                            baseline: date.baseline
+                        }
+                    }
 
-                Label {
-                    id: date
-                    text: model.date
-                    font{
-                        bold: true
-                        pixelSize: Theme.fontSizeMedium
-                    }
-                    anchors {
-                        left: parent.left
-                        leftMargin: Theme.paddingMedium
-                    }
-                }
-                Label {
-                    id: times
-                    text: model.startTime + "-" + model.endTime
-                    font{
-                        bold: true
-                        pixelSize: Theme.fontSizeMedium
-                    }
-                    anchors {
-                        left: date.right
-                        leftMargin: Theme.paddingMedium
-                        baseline: date.baseline
+                    Label {
+                        id: description
+                        text: "Description: " + model.description
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        truncationMode: TruncationMode.Fade
+                        anchors {
+                            top: project.bottom
+                            left: parent.left
+                            leftMargin: Theme.paddingMedium
+                        }
                     }
                 }
-                Label {
-                    id: duration
-                    property double netDur : (model.duration - model.breakDuration).toFixed(2)
-                    text: netDur + "h"
-                    font{
-                        bold: true
-                        pixelSize: Theme.fontSizeMedium
-                    }
-                    anchors {
-                        left: times.right
-                        leftMargin: Theme.paddingMedium
-                        baseline: date.baseline
-                    }
-                }
-                Label {
-                    id: breakDuration
-                    visible: model.breakDuration > 0
-                    text: "(" + (model.breakDuration).toFixed(2) + "h break)"
-                    font{
-                        pixelSize: Theme.fontSizeExtraSmall
-                    }
-                    anchors {
-                        left: duration.right
-                        leftMargin: Theme.paddingMedium
-                        baseline: date.baseline
-                    }
-                }
-                Label {
-                    id: project
-                    text: "Project: " + model.project
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    anchors {
-                        top: duration.bottom
-                        left: parent.left
-                        leftMargin: Theme.paddingMedium
-                    }
-                }
-                Label {
-                    id: description
-                    text: "Description: " + model.description
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    wrapMode: Text.WordWrap
-                    maximumLineCount: 2
-                    truncationMode: TruncationMode.Fade
-                    anchors {
-                        top: project.bottom
-                        left: parent.left
-                        leftMargin: Theme.paddingMedium
-                    }
-                }
-
                 onClicked: {
                     console.log("Clikkaus")
                     var splitted = model.startTime.split(":");

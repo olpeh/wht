@@ -67,6 +67,9 @@ Page {
         console.log(uid);
         DB.remove(uid);
     }
+    function getProject(projectId){
+        return DB.getProjectById(projectId);
+    }
     property int startSelectedHour : -1
     property int startSelectedMinute : -1
 
@@ -228,7 +231,7 @@ Page {
         var projects = DB.getProjects();
         if (projects.length === 0) {
             var id = DB.getUniqueId();
-            DB.setProject(id, "default", 0, 0, 0, 0, 0, "");
+            DB.setProject(id, "default", 0, 0, 0, 0, 0, "Theme.secondaryHighlightColor");
         }
         //console.log("Get hours from database...");
         getHours();

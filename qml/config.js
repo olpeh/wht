@@ -592,12 +592,11 @@ function getProjects(){
 /* Get project by id */
 function getProjectById(id){
     var db = getDatabase();
-    var resp = [];
+    var item ={};
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
-                var item ={};
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
                 item["hourlyRate"]=rs.rows.item(i).hourlyRate;
@@ -606,7 +605,22 @@ function getProjectById(id){
                 item["hourBudget"]=rs.rows.item(i).hourBudget;
                 item["labelColor"]=rs.rows.item(i).labelColor;
                 item["breakDuration"]= rs.rows.item(i).breakDuration;
-                resp.push(item);
+                break;
+            }
+        }
+    })
+    return item;
+}
+
+/* Get project label color */
+function getProjectLabelColor(id){
+    var db = getDatabase();
+    var resp = "Theme.secondaryHighlightColor";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT labelColor FROM projects WHERE id=?;', [id]);
+        if(rs.rows.length > 0) {
+            for (var i=0; i<rs.rows.length; i++) {
+                resp = rs.rows.item(i).labelColor;
             }
         }
     })

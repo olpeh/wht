@@ -464,13 +464,16 @@ Dialog {
             }
             ComboBox {
                 id: projectCombo
-                property string defaultValue: "20151131423782795354"
                 label: qsTr("Project")
                 menu: ContextMenu {
                     Repeater {
                         width: parent.width
                         model: modelSource
-                        delegate: MenuItem { text: model.name }
+                        delegate: MenuItem {
+                            text: model.name
+                            color: model.labelColor
+                            font.bold: true
+                        }
                     }
                 }
                 onCurrentItemChanged: {
@@ -488,7 +491,7 @@ Dialog {
                     defaultProjectId = "20151131423782795354";
                     _updating = false
                     for (var i = 0; i < modelSource.count; i++) {
-                        if (modelSource.get(i).id == defaultValue) {
+                        if (modelSource.get(i).id == defaultProjectId) {
                             currentIndex = i
                             break
                         }

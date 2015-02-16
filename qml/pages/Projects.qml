@@ -69,7 +69,7 @@ Page {
                     }
                 }
             }
-            spacing: Theme.paddingLarge +10
+            spacing: Theme.paddingLarge
             anchors.fill: parent
             quickScroll: true
             model: projectsModel
@@ -89,16 +89,18 @@ Page {
                 BackgroundItem {
                     id: contentItem
                     width: parent.width
-                    Label {
-                        id: projectName
-                        text: model.name + " " + model.id
-                        font{
-                            bold: true
-                            pixelSize: Theme.fontSizeMedium
-                        }
-                        anchors {
-                            left: parent.left
-                            leftMargin: Theme.paddingMedium
+                    Rectangle{
+                        color: model.labelColor
+                        opacity: 0.6
+                        anchors.fill: parent
+                        Label {
+                            id: projectName
+                            text: model.name
+                            font{
+                                bold: true
+                                pixelSize: Theme.fontSizeMedium
+                            }
+                            anchors.centerIn: parent
                         }
                     }
                     onClicked: {
