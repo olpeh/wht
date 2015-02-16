@@ -42,7 +42,7 @@ function resetDatabase() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, expenses REAL DEFAULT 0);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             console.log("Database was reset");
         });
 }
@@ -67,7 +67,7 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, expenses REAL DEFAULT 0);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
     });
 }
@@ -546,30 +546,42 @@ function clearBreakTimer(){
 These functions are for projects */
 
 /* */
-function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, expenses){
+function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor){
+    console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
     var db = getDatabase();
     var resp = "";
     db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, expenses]);
-        if(rs.rows.length > 0) {
+        var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, labelColor]);
+        if (rs.rowsAffected > 0) {
             resp = "OK";
-        }
-        else {
-            resp = "ERROR";
+            console.log ("Saved to database");
+        } else {
+            resp = "Error";
+            console.log ("Error saving to database");
         }
     })
+    console.log(resp);
     return resp;
 }
 
 /* Get project names and ids */
-function getProjectNames(){
+function getProjects(){
     var db = getDatabase();
     var resp = [];
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT id, name FROM projects');
+        var rs = tx.executeSql('SELECT * FROM projects');
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
-                resp.push({id: rs.rows[i].id, name: rs.rows[i].name})
+                var item ={};
+                item["id"]=rs.rows.item(i).id;
+                item["name"]= rs.rows.item(i).name;
+                item["hourlyRate"]=rs.rows.item(i).hourlyRate;
+                item["contractRate"]=rs.rows.item(i).contractRate;
+                item["budget"]=rs.rows.item(i).budget;
+                item["hourBudget"]=rs.rows.item(i).hourBudget;
+                item["labelColor"]=rs.rows.item(i).labelColor;
+                item["breakDuration"]= rs.rows.item(i).breakDuration;
+                resp.push(item);
             }
         }
     })
@@ -579,12 +591,21 @@ function getProjectNames(){
 /* Get project by id */
 function getProjectById(id){
     var db = getDatabase();
-    var resp = {};
+    var resp = [];
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
-                resp.push({id: rs.rows[i].id, name: rs.rows[i].name})
+                var item ={};
+                item["id"]=rs.rows.item(i).id;
+                item["name"]= rs.rows.item(i).name;
+                item["hourlyRate"]=rs.rows.item(i).hourlyRate;
+                item["contractRate"]=rs.rows.item(i).contractRate;
+                item["budget"]=rs.rows.item(i).budget;
+                item["hourBudget"]=rs.rows.item(i).hourBudget;
+                item["labelColor"]=rs.rows.item(i).labelColor;
+                item["breakDuration"]= rs.rows.item(i).breakDuration;
+                resp.push(item);
             }
         }
     })
@@ -594,7 +615,7 @@ function getProjectById(id){
 function removeProject(id){
     var db = getDatabase();
     db.transaction(function(tx) {
-        tx.executeSql('DELETE FROM WHERE id=?;' , [id]);
+        var rs = tx.executeSql('DELETE FROM projects WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
             console.log ("Project deleted!");
         } else {

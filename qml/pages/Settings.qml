@@ -59,76 +59,102 @@ Page {
                 title: "Settings"
             }
             RemorseItem { id: remorse }
-            SectionHeader { text: "Default duration" }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                radius: 10.0
-                width: 250
-                height: 75
-                ValueButton {
-                    id: defaultDurationButton
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var durationHour = parseInt(countHours(defaultDuration))
-                        var durationMinute = parseInt(countMinutes(defaultDuration))
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: durationHour,
-                                        minute: durationMinute,
-                                     })
-
-                        dialog.accepted.connect(function() {
-                            value = dialog.timeText
-                            durationHour = dialog.hour
-                            durationMinute = dialog.minute
-                            defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            console.log(defaultDuration)
-                            value = pad(durationHour) + ":" + pad(durationMinute)
-                            settings.setDefaultDuration(defaultDuration)
-                        })
+            SectionHeader { text: "Projects" }
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: editProjectsButton
+                        anchors.centerIn: parent
+                        label: "Edit projects"
+                        value: ""
+                        width: parent.width
+                        onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
                     }
-
-                    label: "Value:"
-                    value: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
+            }
+
+            SectionHeader { text: "Default duration" }
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: defaultDurationButton
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var durationHour = parseInt(countHours(defaultDuration))
+                            var durationMinute = parseInt(countMinutes(defaultDuration))
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: durationHour,
+                                            minute: durationMinute,
+                                         })
+
+                            dialog.accepted.connect(function() {
+                                value = dialog.timeText
+                                durationHour = dialog.hour
+                                durationMinute = dialog.minute
+                                defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                                console.log(defaultDuration)
+                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                settings.setDefaultDuration(defaultDuration)
+                            })
+                        }
+
+                        label: "Value:"
+                        value: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
+                        width: parent.width
+                        onClicked: openTimeDialog()
+                    }
+                }
+                onClicked: defaultDurationButton.openTimeDialog()
             }
             SectionHeader { text: "Default break duration" }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                radius: 10.0
-                width: 250
-                height: 75
-                ValueButton {
-                    id: defaultBreakDurationButton
-                    anchors.centerIn: parent
-                    function openTimeDialog() {
-                        var durationHour = parseInt(countHours(defaultBreakDuration))
-                        var durationMinute = parseInt(countMinutes(defaultBreakDuration))
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: durationHour,
-                                        minute: durationMinute,
-                                     })
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    ValueButton {
+                        id: defaultBreakDurationButton
+                        anchors.centerIn: parent
+                        function openTimeDialog() {
+                            var durationHour = parseInt(countHours(defaultBreakDuration))
+                            var durationMinute = parseInt(countMinutes(defaultBreakDuration))
+                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                            hourMode: (DateTime.TwentyFourHours),
+                                            hour: durationHour,
+                                            minute: durationMinute,
+                                         })
 
-                        dialog.accepted.connect(function() {
-                            value = dialog.timeText
-                            durationHour = dialog.hour
-                            durationMinute = dialog.minute
-                            defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                            value = pad(durationHour) + ":" + pad(durationMinute)
-                            settings.setDefaultBreakDuration(defaultBreakDuration)
-                        })
+                            dialog.accepted.connect(function() {
+                                value = dialog.timeText
+                                durationHour = dialog.hour
+                                durationMinute = dialog.minute
+                                defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
+                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                settings.setDefaultBreakDuration(defaultBreakDuration)
+                            })
+                        }
+
+                        label: "Value:"
+                        value: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
+                        width: parent.width
+                        onClicked: openTimeDialog()
                     }
-
-                    label: "Value:"
-                    value: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
-                    width: parent.width
-                    onClicked: openTimeDialog()
                 }
+                onClicked: defaultBreakDurationButton.openTimeDialog()
             }
 
             SectionHeader { text: "Adding hours" }
@@ -186,8 +212,8 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
-                width: 250
-                height: 75
+                width: 315
+                height: 80
                 ValueButton {
                     id: resetButton
                     anchors.centerIn: parent

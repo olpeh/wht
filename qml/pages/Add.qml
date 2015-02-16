@@ -32,7 +32,7 @@ Dialog {
     property QtObject dataContainer: null
     property QtObject editMode: null
     property string description: "No description"
-    property string project: "default" //coming later
+    property string project: "" //default
     property double duration: 8
     property double breakDuration: 0
     property double netDuration: 8
@@ -47,6 +47,7 @@ Dialog {
     property bool fromCover: false
     property bool fromTimer: false
     property bool endTimeStaysFixed: true
+    property string defaultProjectId: ""
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
@@ -71,7 +72,6 @@ Dialog {
            description = descriptionTextArea.text
         if (uid == "0")
             uid = DB.getUniqueId()
-
         var d = selectedDate
         console.log(d)
         //YYYY-MM-DD
@@ -79,9 +79,10 @@ Dialog {
         var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
         var dd  = d.getDate().toString();
         var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
-
         var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
         var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
+        console.log(modelSource.get(projectCombo.currentIndex).id);
+        project = modelSource.get(projectCombo.currentIndex).id;
         DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration)
         if (dataContainer != null)
             page.dataContainer.getHours()
@@ -182,8 +183,8 @@ Dialog {
         Column {
             id: column
             DialogHeader {
-                        acceptText: "Save"
-                        cancelText: "Cancel"
+                acceptText: "Save"
+                cancelText: "Cancel"
             }
             spacing: 20
             width: parent.width
@@ -451,10 +452,8 @@ Dialog {
                                     updateStartTime()
                                 else
                                     updateEndTime()
-
                             })
                         }
-
                         label: "Net duration: "
                         value: countHours(netDuration) +":"+countMinutes(netDuration)
                         width: parent.width
@@ -463,6 +462,45 @@ Dialog {
                 }
                 onClicked: netDurationButton.openTimeDialog()
             }
+            ComboBox {
+                id: projectCombo
+                property string defaultValue: "20151131423782795354"
+                label: qsTr("Project")
+                menu: ContextMenu {
+                    Repeater {
+                        width: parent.width
+                        model: modelSource
+                        delegate: MenuItem { text: model.name }
+                    }
+                }
+                onCurrentItemChanged: {
+                    var selectedValue = modelSource.get(currentIndex).value
+                }
+                Component.onCompleted: {
+                    var projects = DB.getProjects();
+                    for (var i = 0; i < projects.length; i++) {
+                        modelSource.set(i, {
+                                       'id': projects[i].id,
+                                       'name': projects[i].name,
+                                       'labelColor': projects[i].labelColor
+                                        })
+                    }
+                    defaultProjectId = "20151131423782795354";
+                    _updating = false
+                    for (var i = 0; i < modelSource.count; i++) {
+                        if (modelSource.get(i).id == defaultValue) {
+                            currentIndex = i
+                            break
+                        }
+                    }
+                }
+                description: "Add or edit projects in settings"
+            }
+
+            ListModel {
+                id: modelSource
+            }
+
             TextField{
                 id: descriptionTextArea
                 //focus: true
