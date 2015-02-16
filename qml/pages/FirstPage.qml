@@ -221,9 +221,10 @@ Page {
     }
 
     Component.onCompleted: {
+        // Update tables for previous versions
+        DB.updateIfNeeded();
         // Initialize the database
         DB.initialize();
-        DB.updateIfNeeded();
         //console.log("Get hours from database...");
         getHours();
         getStartTime();

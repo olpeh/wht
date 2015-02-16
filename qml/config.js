@@ -41,6 +41,7 @@ function resetDatabase() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
+            tx.executeSql('PRAGMA user_version=2;');
             console.log("Database reset");
         });
 }
@@ -84,7 +85,7 @@ function updateIfNeeded () {
                     //console.log(r.rows.item(0).user_version);
                 }
                 else
-                    console.log("Error in updating table.")
+                    console.log("No table named hours...")
             }
     });
 }
