@@ -47,7 +47,6 @@ Dialog {
     property bool fromCover: false
     property bool fromTimer: false
     property bool endTimeStaysFixed: true
-    property string defaultProjectId: ""
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
@@ -488,7 +487,6 @@ Dialog {
                                        'labelColor': projects[i].labelColor
                                         })
                     }
-                    defaultProjectId = "20151131423782795354";
                     _updating = false
                     for (var i = 0; i < modelSource.count; i++) {
                         if (modelSource.get(i).id == defaultProjectId) {

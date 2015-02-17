@@ -29,7 +29,6 @@ import "../config.js" as DB
 
 Page {
     id: projects
-    property string defaultProjectId: ""
     function getProjects() {
         var projects = DB.getProjects();
         for (var i = 0; i < projects.length; i++) {
@@ -52,7 +51,8 @@ Page {
         }
 
         Component.onCompleted: {
-            //defaultProjectId = settings.getDefaultProjecId()
+            defaultProjectId = settings.getDefaultProjecId();
+            console.log("default project id: ", defaultProjectId);
             getProjects();
         }
         SilicaListView {
@@ -93,14 +93,28 @@ Page {
                         color: model.labelColor
                         opacity: 0.6
                         anchors.fill: parent
-                        Label {
-                            id: projectName
-                            text: model.name
-                            font{
-                                bold: true
-                                pixelSize: Theme.fontSizeMedium
-                            }
+                        Item {
+                            height: 10
+                            width: childrenRect.width
                             anchors.centerIn: parent
+                            Label {
+                                id: projectName
+                                text: model.name
+                                font{
+                                    bold: true
+                                    pixelSize: Theme.fontSizeMedium
+                                }
+                            }
+                            Label {
+                                visible: model.id === defaultProjectId
+                                id: defaultProjectLabel
+                                text: "(Default project)"
+                                font{
+                                    bold: true
+                                    pixelSize: Theme.fontSizeMedium
+                                }
+                                anchors.left: projectName.right
+                            }
                         }
                     }
                     onClicked: {

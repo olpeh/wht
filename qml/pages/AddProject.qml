@@ -54,7 +54,10 @@ Dialog {
         labelColor = colorIndicator.color;
         DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
-        //if (editMode != null)
+        if(defaultSwitch.checked) {
+            defaultProjectId = id;
+            settings.setDefaultProjecId(id);
+        }
         page.prev.getProjects();
     }
 

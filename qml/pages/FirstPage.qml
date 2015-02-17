@@ -232,7 +232,13 @@ Page {
         if (projects.length === 0) {
             var id = DB.getUniqueId();
             DB.setProject(id, "default", 0, 0, 0, 0, 0, "Theme.secondaryHighlightColor");
+            defaultProjectId = id;
+            settings.setDefaultProjecId(id);
         }
+        else {
+            defaultProjectId = settings.getDefaultProjecId();
+        }
+
         //console.log("Get hours from database...");
         getHours();
         getStartTime();

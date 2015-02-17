@@ -27,6 +27,9 @@ public:
     Q_INVOKABLE bool getTimerAutoStart();
     Q_INVOKABLE void setTimerAutoStart(bool value);
 
+    Q_INVOKABLE QString getDefaultProjecId();
+    Q_INVOKABLE bool setDefaultProjecId(QString value);
+
 private:
     QString defaultProject;
     double defaultDuration;
@@ -34,5 +37,6 @@ private:
     QString endsNowByDefault;
     QString endTimeStaysFixed;
     bool timerAutoStart;
+    QString defaultProjectId;
 };
 #endif // SETTINGSCLASS_H

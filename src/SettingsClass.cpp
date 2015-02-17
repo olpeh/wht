@@ -101,3 +101,18 @@ void Settings::setTimerAutoStart(bool value) {
     s.setValue("timerAutoStart", value);
     s.endGroup();
 }
+
+QString Settings::getDefaultProjecId() {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    defaultProjectId= s.value("defaultProjectId").toString();
+    s.endGroup();
+    return defaultProjectId;
+}
+
+bool Settings::setDefaultProjecId(QString value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("defaultProjectId", value);
+    s.endGroup();
+}

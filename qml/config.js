@@ -570,7 +570,7 @@ function getProjects(){
     var db = getDatabase();
     var resp = [];
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM projects');
+        var rs = tx.executeSql('SELECT * FROM projects ORDER BY id DESC');
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
                 var item ={};
@@ -610,21 +610,6 @@ function getProjectById(id){
         }
     })
     return item;
-}
-
-/* Get project label color */
-function getProjectLabelColor(id){
-    var db = getDatabase();
-    var resp = "Theme.secondaryHighlightColor";
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT labelColor FROM projects WHERE id=?;', [id]);
-        if(rs.rows.length > 0) {
-            for (var i=0; i<rs.rows.length; i++) {
-                resp = rs.rows.item(i).labelColor;
-            }
-        }
-    })
-    return resp;
 }
 
 function removeProject(id){
