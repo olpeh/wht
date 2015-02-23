@@ -97,9 +97,9 @@ Dialog {
             SectionHeader { text: "Optional" }
             TextField{
                 id: hourlyRateTextArea
-                focus: true
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+                EnterKey.onClicked: budgetTextArea.focus = true
                 width: parent.width
                 placeholderText: "Hourly rate"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
@@ -107,9 +107,9 @@ Dialog {
             }
             TextField{
                 id: contractRateTextArea
-                focus: true
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-next"
+                EnterKey.onClicked: hourBudgetTextArea.focus = true
                 width: parent.width
                 placeholderText: "Contract rate"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
@@ -117,7 +117,7 @@ Dialog {
             }
             TextField{
                 id: budgetTextArea
-                focus: true
+                focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
@@ -127,7 +127,7 @@ Dialog {
             }
             TextField{
                 id: hourBudgetTextArea
-                focus: true
+                focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
@@ -138,6 +138,7 @@ Dialog {
             BackgroundItem {
                 Rectangle {
                     id: colorIndicator
+                    opacity: 0.6
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
@@ -156,6 +157,23 @@ Dialog {
                         labelColor = dialog.color
                     })
                 }
+            }
+            BackgroundItem {
+                Rectangle {
+                    id: colorReset
+                    opacity: 0.6
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 315
+                    height: 80
+                    Label {
+                        anchors.centerIn: parent
+                        text: "Reset coloring"
+                        font.bold: true
+                    }
+                }
+                onClicked: { colorIndicator.color = Theme.secondaryHighlightColor; labelColor = Theme.secondaryHighlightColor }
             }
             Item {
                 width: parent.width

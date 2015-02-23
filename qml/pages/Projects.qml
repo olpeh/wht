@@ -90,13 +90,14 @@ Page {
                     id: contentItem
                     width: parent.width
                     Rectangle{
+                        height: 15
                         color: model.labelColor
                         opacity: 0.6
                         anchors.fill: parent
                         Item {
-                            height: 10
                             width: childrenRect.width
-                            anchors.centerIn: parent
+                            y: Theme.paddingLarge
+                            x: 2*Theme.paddingLarge
                             Label {
                                 id: projectName
                                 text: model.name
@@ -108,7 +109,7 @@ Page {
                             Label {
                                 visible: model.id === defaultProjectId
                                 id: defaultProjectLabel
-                                text: "(Default project)"
+                                text: "   (Default project)"
                                 font{
                                     bold: true
                                     pixelSize: Theme.fontSizeMedium
