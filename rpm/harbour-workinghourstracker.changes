@@ -8,6 +8,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Feb 24 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.8-4
+- Support for different projects
+- Project coloring
+- Category view renewed layout
+
 * Thu Feb 12 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.7-2
 - Added setting to autostart timer on app startup
 - Added break functionality to the timer
