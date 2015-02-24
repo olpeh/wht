@@ -28,9 +28,9 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 Page {
-    id: projects
+    id: projectsPage
     function getProjects() {
-        var projects = DB.getProjects();
+        projects = DB.getProjects();
         for (var i = 0; i < projects.length; i++) {
             projectsModel.set(i, {
                 'id': projects[i].id,
@@ -65,7 +65,7 @@ Page {
                     text: "Add project"
                     onClicked: {
                         //console.log (dataContainer)
-                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{ prev: projects})
+                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{ prev: projectsPage})
                     }
                 }
             }
@@ -91,13 +91,12 @@ Page {
                     width: parent.width
                     Rectangle{
                         height: 15
-                        color: model.labelColor
-                        opacity: 0.6
+                        color: Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity)
                         anchors.fill: parent
                         Item {
                             width: childrenRect.width
                             y: Theme.paddingLarge
-                            x: 2*Theme.paddingLarge
+                            x: Theme.paddingLarge
                             Label {
                                 id: projectName
                                 text: model.name
@@ -109,7 +108,7 @@ Page {
                             Label {
                                 visible: model.id === defaultProjectId
                                 id: defaultProjectLabel
-                                text: "   (Default project)"
+                                text: "  (Default project)"
                                 font{
                                     bold: true
                                     pixelSize: Theme.fontSizeMedium

@@ -67,8 +67,8 @@ Page {
         console.log(uid);
         DB.remove(uid);
     }
-    function getProject(projectId){
-        return DB.getProjectById(projectId);
+    function getProjects(){
+        return DB.getProjects();
     }
     property int startSelectedHour : -1
     property int startSelectedMinute : -1

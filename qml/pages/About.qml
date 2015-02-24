@@ -31,6 +31,7 @@ Page {
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent
+        anchors.bottomMargin: Theme.paddingLarge
         contentHeight: column.y + column.height
         //contentHeight: childrenRect.height
         PullDownMenu {

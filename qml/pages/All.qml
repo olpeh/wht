@@ -34,6 +34,14 @@ Page {
     }
     property QtObject dataContainer: null
     property string section: ""
+    function getProject(projectId) {
+        for (var i = 0; i < projects.length; i++) {
+            if (projects[i].id === projectId)
+                return projects[i];
+        }
+        console.log("Project name was not found");
+        return [];
+    }
 
     function getAllHours(){
         if (dataContainer != null && section != ""){
@@ -63,7 +71,7 @@ Page {
             //console.log(allHours);
             //uid,date,duration,project,description
             for (var i = 0; i < allHours.length; i++) {
-                var project = all.dataContainer.getProject(allHours[i].project);
+                var project = getProject(allHours[i].project);
                 hoursModel.set(i, {
                                'uid': allHours[i].uid,
                                'date': allHours[i].date,
@@ -71,9 +79,11 @@ Page {
                                'endTime': allHours[i].endTime,
                                'duration': allHours[i].duration,
                                'project' : allHours[i].project,
+                               'projectName': project.name,
                                'description': allHours[i].description,
                                'breakDuration': allHours[i].breakDuration,
-                               'labelColor': project.labelColor })
+                               'labelColor': project.labelColor,
+                               'hourlyRate': project.hourlyRate })
             }
         }
     }
@@ -82,7 +92,13 @@ Page {
         getAllHours();
     }
 
+    function formateDate(datestring) {
+        var d = new Date(datestring);
+        return d.toLocaleDateString();
+    }
+
     Component.onCompleted: {
+        projects = all.dataContainer.getProjects();
         getAllHours();
     }
     SilicaListView {
@@ -92,6 +108,7 @@ Page {
         }
         spacing: Theme.paddingLarge
         anchors.fill: parent
+        anchors.bottomMargin: Theme.paddingLarge
         quickScroll: true
         model: hoursModel
         VerticalScrollDecorator {}
@@ -104,91 +121,59 @@ Page {
             id: myListItem
             property Item contextMenu
             property bool menuOpen: contextMenu != null && contextMenu.parent === myListItem
+            property double netDur : (model.duration - model.breakDuration).toFixed(2)
             width: ListView.view.width
             height: menuOpen ? contextMenu.height + contentItem.childrenRect.height: contentItem.childrenRect.height
-
             BackgroundItem {
                 id: contentItem
                 width: parent.width
+                height: model.hourlyRate > 0 ? 210 : 180
                 Rectangle {
                     anchors.fill: parent
-                    color: model.labelColor
-                    Label {
-                        id: project
-                        text: "Project: " + model.project
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        anchors {
-                            left: parent.left
-                            leftMargin: Theme.paddingMedium
+                    color: Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity)
+                    Column {
+                        id: column
+                        width: parent.width
+                        x: Theme.paddingMedium
+                        y: Theme.paddingMedium
+                        Label {
+                            id: project
+                            text: "Project: " + model.projectName
+                            font.pixelSize: Theme.fontSizeMedium
+                            font.bold : true
                         }
-                    }
-                    Label {
-                        id: date
-                        text: model.date
-                        font{
-                            bold: true
-                            pixelSize: Theme.fontSizeMedium
+                        Label {
+                            id: duration
+                            font{
+                                pixelSize: Theme.fontSizeMedium
+                            }
+                            text: formateDate(model.date) + " " + "<strong>" + netDur + "h</strong>"
                         }
-                        anchors {
-                            left: parent.left
-                            leftMargin: Theme.paddingMedium
+                        Label {
+                            id: description
+                            text: model.description
+                            font.pixelSize: Theme.fontSizeSmall
+                            truncationMode: TruncationMode.Fade
                         }
-                    }
-                    Label {
-                        id: times
-                        text: model.startTime + "-" + model.endTime
-                        font{
-                            bold: true
-                            pixelSize: Theme.fontSizeMedium
+                        Label {
+                            id: date
+                            font{
+                                pixelSize: Theme.fontSizeSmall
+                            }
+                            text: model.breakDuration > 0 ? model.startTime + " - " + model.endTime + " (" + (model.breakDuration).toFixed(2) + "h break)" : model.startTime + " - " + model.endTime
                         }
-                        anchors {
-                            left: date.right
-                            leftMargin: Theme.paddingMedium
-                            baseline: date.baseline
-                        }
-                    }
-                    Label {
-                        id: duration
-                        property double netDur : (model.duration - model.breakDuration).toFixed(2)
-                        text: netDur + "h"
-                        font{
-                            bold: true
-                            pixelSize: Theme.fontSizeMedium
-                        }
-                        anchors {
-                            left: times.right
-                            leftMargin: Theme.paddingMedium
-                            baseline: date.baseline
-                        }
-                    }
-                    Label {
-                        id: breakDuration
-                        visible: model.breakDuration > 0
-                        text: "(" + (model.breakDuration).toFixed(2) + "h break)"
-                        font{
-                            pixelSize: Theme.fontSizeExtraSmall
-                        }
-                        anchors {
-                            left: duration.right
-                            leftMargin: Theme.paddingMedium
-                            baseline: date.baseline
+                        Label {
+                            id: price
+                            visible: model.hourlyRate > 0
+                            font{
+                                pixelSize: Theme.fontSizeSmall
+                            }
+                            text: (netDur * model.hourlyRate).toFixed(2) + "€"
                         }
                     }
 
-                    Label {
-                        id: description
-                        text: "Description: " + model.description
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        wrapMode: Text.WordWrap
-                        maximumLineCount: 2
-                        truncationMode: TruncationMode.Fade
-                        anchors {
-                            top: project.bottom
-                            left: parent.left
-                            leftMargin: Theme.paddingMedium
-                        }
-                    }
                 }
+
                 onClicked: {
                     console.log("Clikkaus")
                     var splitted = model.startTime.split(":");
@@ -210,6 +195,10 @@ Page {
                         contextMenu = contextMenuComponent.createObject(listView)
                     contextMenu.show(myListItem)
                 }
+            }
+            Item {
+                width: parent.width
+                height: 10
             }
             RemorseItem { id: remorse }
             function remove() {

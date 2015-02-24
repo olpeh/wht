@@ -15,7 +15,6 @@
 
 int main(int argc, char *argv[])
 {
-    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, "$XDG_CONFIG_HOME/harbour-workinghourstracker");
     Settings settings;
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     app->setApplicationName("harbour-workinghourstracker");

@@ -140,7 +140,7 @@ Dialog {
                     id: colorIndicator
                     opacity: 0.6
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
+                    color: Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
                     radius: 10.0
                     width: 315
                     height: 80
@@ -153,7 +153,7 @@ Dialog {
                 onClicked: {
                     var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
                     dialog.accepted.connect(function() {
-                        colorIndicator.color = dialog.color
+                        colorIndicator.color = Theme.rgba(dialog.color, Theme.highlightBackgroundOpacity)
                         labelColor = dialog.color
                     })
                 }
@@ -163,7 +163,7 @@ Dialog {
                     id: colorReset
                     opacity: 0.6
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
+                    color: Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
                     radius: 10.0
                     width: 315
                     height: 80

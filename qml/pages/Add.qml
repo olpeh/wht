@@ -479,7 +479,7 @@ Dialog {
                     var selectedValue = modelSource.get(currentIndex).value
                 }
                 Component.onCompleted: {
-                    var projects = DB.getProjects();
+                    projects = DB.getProjects();
                     for (var i = 0; i < projects.length; i++) {
                         modelSource.set(i, {
                                        'id': projects[i].id,

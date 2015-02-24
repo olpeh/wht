@@ -42,7 +42,8 @@ ApplicationWindow
     property double today: 0
     property Item firstPage
     property string defaultProjectId: ""
-    //property variant projects: []
+    property variant projects: []
+
     id: appWindow
     initialPage: Component {
         FirstPage {
