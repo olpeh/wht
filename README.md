@@ -17,8 +17,17 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Setting for timer autostart on app startup
 * Break functionality in timer
 * Possibility to adjust timer start time
+* Support for different projects
+* Project coloring
+* Shows price for efforts if project hourlyrate is set
 
 ## Changelog
+
+### 0.8.8-4
+- Support for different projects
+- Project coloring
+- Category view renewed layout
+
 
 ### 0.8.7-2
 - Added setting to autostart timer on app startup
