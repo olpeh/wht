@@ -28,7 +28,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 Page {
-    id: projectsPage
+    id: projectss
     function getProjects() {
         projects = DB.getProjects();
         for (var i = 0; i < projects.length; i++) {
@@ -65,7 +65,7 @@ Page {
                     text: "Add project"
                     onClicked: {
                         //console.log (dataContainer)
-                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{ prev: projectsPage})
+                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{prev: projectss})
                     }
                 }
             }
@@ -121,7 +121,7 @@ Page {
                         console.log("Clikkaus")
                         console.log(model.id, model.name, model.hourlyRate, model.contractRate, model.budget, model.hourBudget, model.labelColor);
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{
-                                           prev: projects,
+                                           prev: projectss,
                                            editMode: true,
                                            id: model.id,
                                            name: model.name,

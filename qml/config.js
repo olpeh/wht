@@ -565,7 +565,7 @@ function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labe
     return resp;
 }
 
-/* Get project names and ids */
+/* Get projects */
 function getProjects(){
     var db = getDatabase();
     var resp = [];
@@ -629,4 +629,45 @@ function removeProjects(){
     db.transaction(function(tx) {
         tx.executeSql('DELETE FROM projects');
     })
+}
+
+function moveAllHoursToProject(id) {
+    var db = getDatabase();
+    var resp = "OK";
+    var sqlstr = "UPDATE hours SET project='"+id+"';";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql(sqlstr);
+        if (rs.rowsAffected > 0) {
+            console.log ("Updated hours to project id: ",id);
+        } else {
+            resp = "Error!"
+            console.log ("Error updating existing hours");
+        }
+    }
+    );
+    return resp;
+}
+
+function moveAllHoursToProjectByDesc(defaultProjectId) {
+    var db = getDatabase();
+    var resp = "OK";
+    var projects = getProjects();
+    var allhours = getAll();
+    var i=0
+    for (; i < allhours.length; i++) {
+        var sqlstr = "UPDATE hours SET project='"+ defaultProjectId +"' WHERE uid='"+ allhours[i].uid +"';";
+        if (allhours[i].description !== "No description") {
+            for (var k=0; k< projects.length; k++) {
+                if((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1){
+                    sqlstr = "UPDATE hours SET project='"+ projects[k].id +"' WHERE uid='"+ allhours[i].uid +"';";
+                    console.log("FOund one!!");
+                }
+            }
+        }
+        db.transaction(function(tx) {
+            var rs = tx.executeSql(sqlstr);
+        }
+        );
+    }
+    return "Updated: " + i + " rows";
 }

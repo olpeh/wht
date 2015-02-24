@@ -47,10 +47,10 @@ Dialog {
         name = nameTextArea.text;
         if (id == "0" && !editMode)
             id = DB.getUniqueId();
-        hourlyRate = parseFloat(hourlyRateTextArea.text);
-        contractRate = parseFloat(contractRateTextArea.text);
-        budget = parseFloat(budgetTextArea.text);
-        hourBudget = parseFloat(hourBudgetTextArea.text);
+        hourlyRate = parseFloat(hourlyRateTextArea.text) || 0;
+        contractRate = parseFloat(contractRateTextArea.text || 0);
+        budget = parseFloat(budgetTextArea.text || 0);
+        hourBudget = parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
         DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
@@ -58,7 +58,8 @@ Dialog {
             defaultProjectId = id;
             settings.setDefaultProjecId(id);
         }
-        page.prev.getProjects();
+        if(prev)
+            page.prev.getProjects();
     }
 
     SilicaFlickable {

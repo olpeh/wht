@@ -44,10 +44,12 @@ Page {
         return pad(Math.floor(minutes / 60))
     }
     function pad(n) { return ("0" + n).slice(-2); }
+
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
+        anchors.bottomMargin: Theme.paddingLarge
         //contentHeight: column.y + column.height
         Column {
             id: column
@@ -78,7 +80,6 @@ Page {
                 }
                 onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
             }
-
             SectionHeader { text: "Default duration" }
             BackgroundItem {
                 Rectangle {
@@ -205,9 +206,89 @@ Page {
                 }
             }
 
+            SectionHeader { text: "Move all hours to default" }
+            Text {
+                font.pointSize: Theme.fontSizeExtraSmall
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "Move ALL your existing hours to the project which is set as default."
+            }
+
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 330
+                    height: 80
+                    ValueButton {
+                        id: moveHoursButton
+                        anchors.centerIn: parent
+                        label: "Move all to default"
+                        value: ""
+                        width: parent.width
+                        onClicked: {
+                            if (defaultProjectId !== "")
+                                moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId)
+                            else
+                                moveHoursButton.label =  "No default project set"
+                        }
+                    }
+                }
+                onClicked:{
+                    if (defaultProjectId !== "")
+                        moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId)
+                    else
+                        moveHoursButton.label =  "No default project set"
+                }
+            }
+            SectionHeader { text: "Move by project name in description" }
+            Text {
+                font.pointSize: Theme.fontSizeExtraSmall
+                color: Theme.highlightColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "Try to move hours to existing projects. Sets correct project if the project name is found in the description. This is only meant to be used if you have written your project name in the description. This might take a while."
+            }
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: 330
+                    height: 80
+                    ValueButton {
+                        id: movingHoursButton
+                        anchors.centerIn: parent
+                        label: "Move existing hours"
+                        value: ""
+                        width: parent.width
+                        onClicked: {
+                                movingHoursButton.value = "..."
+                                movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc()
+                        }
+                    }
+                }
+                onClicked: {
+                        movingHoursButton.value = "..."
+                        movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc()
+                }
+            }
+
+
 
             SectionHeader { text: "DANGER ZONE!" }
-
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor

@@ -40,7 +40,7 @@ Page {
                 return projects[i];
         }
         console.log("Project name was not found");
-        return [];
+        return {'name':'Project was not found', 'labelColor': '#00cce7'};
     }
 
     function getAllHours(){
@@ -138,7 +138,7 @@ Page {
                         y: Theme.paddingMedium
                         Label {
                             id: project
-                            text: "Project: " + model.projectName
+                            text: model.projectName + "   " + netDur +"h"
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }
@@ -147,7 +147,7 @@ Page {
                             font{
                                 pixelSize: Theme.fontSizeMedium
                             }
-                            text: formateDate(model.date) + " " + "<strong>" + netDur + "h</strong>"
+                            text: formateDate(model.date)
                         }
                         Label {
                             id: description
