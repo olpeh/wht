@@ -39,7 +39,6 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
-        console.log("Project name was not found");
         return {'name':'Project was not found', 'labelColor': '#00cce7'};
     }
 

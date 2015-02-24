@@ -480,6 +480,16 @@ Dialog {
                 }
                 Component.onCompleted: {
                     projects = DB.getProjects();
+                    if (projects.length === 0) {
+                        var id = DB.getUniqueId();
+                        DB.setProject(id, "default", 0, 0, 0, 0, "#65b3cc");
+                        defaultProjectId = id;
+                        settings.setDefaultProjecId(id);
+                        if (dataContainer != null)
+                            page.dataContainer.moveAllHoursTo(id);
+                        projects = DB.getProjects();
+                    }
+
                     for (var i = 0; i < projects.length; i++) {
                         modelSource.set(i, {
                                        'id': projects[i].id,
