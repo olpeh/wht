@@ -121,9 +121,9 @@ Dialog {
     // move end time
     function updateEndTime() {
         endSelectedHour = startSelectedHour + parseInt(countHours(duration))
-        console.log(endSelectedHour)
+        //console.log(endSelectedHour)
         endSelectedMinute = startSelectedMinute + parseInt(countMinutes(duration))
-        console.log(endSelectedMinute)
+        //console.log(endSelectedMinute)
         if (endSelectedHour >= 24) {
             endSelectedHour-=24
         }
@@ -135,7 +135,7 @@ Dialog {
             endSelectedHour-=24
         }
         endTime.value = pad(endSelectedHour) + ":" + pad(endSelectedMinute)
-        console.log(pad(endSelectedHour) + ":" + pad(endSelectedMinute))
+        //console.log(pad(endSelectedHour) + ":" + pad(endSelectedMinute))
     }
 
     //udpating breakDuration

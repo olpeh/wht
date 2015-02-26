@@ -208,8 +208,8 @@ Page {
 
             SectionHeader { text: "Move all hours to default" }
             Text {
-                font.pointSize: Theme.fontSizeExtraSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -235,7 +235,10 @@ Page {
                         width: parent.width
                         onClicked: {
                             if (defaultProjectId !== "")
-                                moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId)
+                               remorse.execute(settingsPage,"Move all hours to default project", function() {
+                                   moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
+                                   moveHoursButton.value ="Done";
+                               })
                             else
                                 moveHoursButton.label =  "No default project set"
                         }
@@ -243,15 +246,18 @@ Page {
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
-                        moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId)
+                        remorse.execute(settingsPage,"Move all hours to default project", function() {
+                            moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
+                            moveHoursButton.value ="Done"
+                        })
                     else
                         moveHoursButton.label =  "No default project set"
                 }
             }
             SectionHeader { text: "Move by project name in description" }
             Text {
-                font.pointSize: Theme.fontSizeExtraSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -259,7 +265,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Try to move hours to existing projects. Sets correct project if the project name is found in the description. This is only meant to be used if you have written your project name in the description. This might take a while."
+                text: "Try to move hours to existing projects. Sets correct project if the project name is found in the description. This is only meant to be used if you have used earlier versions of this app and written your project name in the description. This might take a while."
             }
             BackgroundItem {
                 Rectangle {
@@ -275,15 +281,17 @@ Page {
                         value: ""
                         width: parent.width
                         onClicked: {
-                                movingHoursButton.value = "..."
-                                movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc()
+                                remorse.execute(settingsPage,"Moving hours to project in description", function() {
+                                     movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
+                                 })
                         }
                     }
                 }
                 onClicked: {
-                        movingHoursButton.value = "..."
-                        movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc()
-                }
+                    remorse.execute(settingsPage,"Moving hours to project in description", function() {
+                         movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
+                     })
+                 }
             }
 
 

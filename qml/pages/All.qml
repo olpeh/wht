@@ -32,7 +32,9 @@ Page {
     ListModel {
         id: hoursModel
     }
+
     property QtObject dataContainer: null
+    property bool sortedByProject: false
     property string section: ""
     function getProject(projectId) {
         for (var i = 0; i < projects.length; i++) {
@@ -42,25 +44,25 @@ Page {
         return {'name':'Project was not found', 'labelColor': '#00cce7'};
     }
 
-    function getAllHours(){
+    function getAllHours(sortby){
         if (dataContainer != null && section != ""){
             console.log(section)
             if (section === "Today")
-                var allHours = all.dataContainer.getAllDay(0);
+                var allHours = all.dataContainer.getAllDay(0, sortby);
             else if (section === "Yesterday")
-                var allHours = all.dataContainer.getAllDay(1);
+                var allHours = all.dataContainer.getAllDay(1, sortby);
             else if(section === "This week")
-                var allHours = all.dataContainer.getAllWeek(0);
+                var allHours = all.dataContainer.getAllWeek(0, sortby);
             else if(section === "Last week")
-                var allHours = all.dataContainer.getAllWeek(1);
+                var allHours = all.dataContainer.getAllWeek(1, sortby);
             else if (section === "This month")
-                var allHours = all.dataContainer.getAllMonth(0);
+                var allHours = all.dataContainer.getAllMonth(0, sortby);
             else if (section === "Last month")
-                var allHours = all.dataContainer.getAllMonth(1);
+                var allHours = all.dataContainer.getAllMonth(1, sortby);
             else if (section === "This year")
-                var allHours = all.dataContainer.getAllThisYear();
+                var allHours = all.dataContainer.getAllThisYear(sortby);
             else if (section === "All")
-                var allHours = all.dataContainer.getAll();
+                var allHours = all.dataContainer.getAll(sortby);
 
             else{
                 console.log("Unknown section");
@@ -104,6 +106,18 @@ Page {
         id: listView
         header: PageHeader {
             title: section
+        }
+        PullDownMenu {
+            MenuItem {
+                text: sortedByProject ? "Sort by date" : "Sort by project"
+                onClicked: {
+                    sortedByProject = !sortedByProject;
+                    if(sortedByProject)
+                       getAllHours("project");
+                    else
+                        getAllHours();
+                }
+            }
         }
         spacing: Theme.paddingLarge
         anchors.fill: parent

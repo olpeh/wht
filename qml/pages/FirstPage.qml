@@ -47,20 +47,20 @@ Page {
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
-    function getAllDay(offset){
-        return DB.getAllDay(offset);
+    function getAllDay(offset, sortby){
+        return DB.getAllDay(offset, sortby);
     }
-    function getAllWeek(offset){
-        return DB.getAllWeek(offset);
+    function getAllWeek(offset, sortby){
+        return DB.getAllWeek(offset, sortby);
     }
-    function getAllMonth(offset){
-        return DB.getAllMonth(offset);
+    function getAllMonth(offset, sortby){
+        return DB.getAllMonth(offset, sortby);
     }
-    function getAllThisYear(){
-        return DB.getAllThisYear();
+    function getAllThisYear(sortby){
+        return DB.getAllThisYear(sortby);
     }
-    function getAll(){
-        return DB.getAll();
+    function getAll(sortby){
+        return DB.getAll(sortby);
     }
     function remove(uid){
         console.log("Trying to remove from database!")
