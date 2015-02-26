@@ -108,6 +108,7 @@ Page {
             title: section
         }
         PullDownMenu {
+            visible: listView.count != 0
             MenuItem {
                 text: sortedByProject ? "Sort by date" : "Sort by project"
                 onClicked: {
