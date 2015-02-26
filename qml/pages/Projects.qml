@@ -41,7 +41,7 @@ Page {
                 'hourBudget': projects[i].hourBudget,
                 'labelColor': projects[i].labelColor
             })
-            console.log(projects[i].id, projects[i].name, projects[i].hourlyRate, projects[i].contractRate, projects[i].budget, projects[i].hourBudget, projects[i].labelColor);
+            //console.log(projects[i].id, projects[i].name, projects[i].hourlyRate, projects[i].contractRate, projects[i].budget, projects[i].hourBudget, projects[i].labelColor);
         }
     }
     SilicaFlickable{

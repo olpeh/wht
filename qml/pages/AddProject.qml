@@ -48,9 +48,9 @@ Dialog {
         if (id == "0" && !editMode)
             id = DB.getUniqueId();
         hourlyRate = parseFloat(hourlyRateTextArea.text) || 0;
-        contractRate = parseFloat(contractRateTextArea.text || 0);
-        budget = parseFloat(budgetTextArea.text || 0);
-        hourBudget = parseFloat(hourBudgetTextArea.text) || 0;
+        contractRate = 0; //parseFloat(contractRateTextArea.text || 0);
+        budget = 0; //parseFloat(budgetTextArea.text || 0);
+        hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
         DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
@@ -105,7 +105,7 @@ Dialog {
                 placeholderText: "Hourly rate"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: "Hourly rate"
-            }
+            }/* Lets hide these for now...
             TextField{
                 id: contractRateTextArea
                 focus: false
@@ -135,7 +135,7 @@ Dialog {
                 placeholderText: "Hour budget"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: "Hour budget"
-            }
+            }*/
             BackgroundItem {
                 Rectangle {
                     id: colorIndicator
