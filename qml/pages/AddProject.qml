@@ -174,7 +174,7 @@ Dialog {
                         font.bold: true
                     }
                 }
-                onClicked: { colorIndicator.color = Theme.secondaryHighlightColor; labelColor = Theme.secondaryHighlightColor }
+                onClicked: { colorIndicator.color = "#65b3cc"; labelColor = "#65b3cc" }
             }
             Item {
                 width: parent.width
@@ -184,9 +184,9 @@ Dialog {
                 if (editMode){
                     nameTextArea.text = name;
                     hourlyRateTextArea.text = hourlyRate;
-                    contractRateTextArea.text = contractRate;
-                    budgetTextArea.text = budget;
-                    hourBudgetTextArea.text = hourBudget;
+                    //contractRateTextArea.text = contractRate;
+                    //budgetTextArea.text = budget;
+                    //hourBudgetTextArea.text = hourBudget;
                     colorIndicator.color = labelColor
                 }
             }

@@ -289,12 +289,18 @@ Page {
                 }
             }
             MenuItem {
+                text: "Settings"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: root})
+                }
+            }
+            MenuItem {
                 text: "Add Hours"
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
                 }
             }
-            MenuItem {
+            /*MenuItem {
                 text: timerRunning ? "Stop timer" : "Start timer"
                 onClicked: {
                     if (timerRunning)
@@ -302,7 +308,7 @@ Page {
                     else
                         start();
                 }
-            }
+            }*/
         }
         // @TODO did not work here
         /*PushUpMenu {

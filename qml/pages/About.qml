@@ -34,15 +34,6 @@ Page {
         anchors.bottomMargin: Theme.paddingLarge
         contentHeight: column.y + column.height
         //contentHeight: childrenRect.height
-        PullDownMenu {
-            MenuItem {
-                text: "Settings"
-                onClicked: {
-                    //console.log (dataContainer)
-                    pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: dataContainer})
-                }
-            }
-        }
         Column {
             id: column
             PageHeader {
