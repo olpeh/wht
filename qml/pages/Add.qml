@@ -498,8 +498,10 @@ Dialog {
                                         })
                     }
                     _updating = false
+                    if(project === "")
+                        project = defaultProjectId
                     for (var i = 0; i < modelSource.count; i++) {
-                        if (modelSource.get(i).id == defaultProjectId) {
+                        if (modelSource.get(i).id == project) {
                             currentIndex = i
                             break
                         }

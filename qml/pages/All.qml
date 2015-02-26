@@ -183,9 +183,21 @@ Page {
                     console.log(endSplitted);
                     var endSelectedHour = endSplitted[0];
                     var endSelectedMinute = endSplitted[1];
-                    pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: dataContainer, uid: model.uid, selectedDate: model.date, startSelectedMinute:startSelectedMinute, startSelectedHour:startSelectedHour,
-                                                     endSelectedHour:endSelectedHour, endSelectedMinute:endSelectedMinute, duration:model.duration, description: model.description, project: model.project,
-                                                     dateText: model.date, breakDuration: model.breakDuration, editMode: all})
+                    pageStack.push(Qt.resolvedUrl("Add.qml"), {
+                                       dataContainer: dataContainer,
+                                       uid: model.uid,
+                                       selectedDate: model.date,
+                                       startSelectedMinute:startSelectedMinute,
+                                       startSelectedHour:startSelectedHour,
+                                       endSelectedHour:endSelectedHour,
+                                       endSelectedMinute:endSelectedMinute,
+                                       duration:model.duration,
+                                       description: model.description,
+                                       project: model.project,
+                                       dateText: model.date,
+                                       breakDuration: model.breakDuration,
+                                       editMode: all
+                                   })
 
                 }
                 onPressAndHold: {
