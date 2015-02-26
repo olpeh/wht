@@ -8,7 +8,7 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Tue Feb 24 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.9-2
+* Thu Feb 26 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.9-2
 - Removed unused project properties
 - Moved settings to first page pulley
 - Added remorse timers to 2 settings
