@@ -23,6 +23,12 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 ## Changelog
 
+### 0.8.9-2
+- Removed unused project properties
+- Moved settings to first page pulley
+- Added remorse timers to 2 settings
+- Bugfix for #8 project was resetted to default
+
 ### 0.8.8-4
 - Support for different projects
 - Project coloring
