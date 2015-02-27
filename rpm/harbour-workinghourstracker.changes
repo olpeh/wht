@@ -8,6 +8,9 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Fri Feb 27 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.9-3
+- Hotfix for bug in db creation on fresh installations
+
 * Thu Feb 26 2015 Olavi Haapala <ojhaapala@gmail.com> 0.8.9-2
 - Removed unused project properties
 - Moved settings to first page pulley

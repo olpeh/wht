@@ -78,17 +78,24 @@ function updateIfNeeded () {
         function(tx){
             var rs = tx.executeSql('PRAGMA user_version');
             //console.log(rs.rows.item(0).user_version);
-            if (rs.rows.item(0).user_version < 2) {
-                var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
-                if (ex.rows.item(0).name ==="hours") {
-                    //console.log(ex.rows.item(0).name);
-                    tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
-                    tx.executeSql('PRAGMA user_version=2;');
-                    var r = tx.executeSql('PRAGMA user_version;');
-                    //console.log(r.rows.item(0).user_version);
+            if(rs.rows.length > 0) {
+                if (rs.rows.item(0).user_version < 2) {
+                    var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
+                    //check if rows exist
+                    if(ex.rows.length > 0) {
+                        if (ex.rows.item(0).name ==="hours") {
+                            //console.log(ex.rows.item(0).name);
+                            tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
+                            tx.executeSql('PRAGMA user_version=2;');
+                            var r = tx.executeSql('PRAGMA user_version;');
+                            //console.log(r.rows.item(0).user_version);
+                        }
+                        else
+                            console.log("No table named hours...");
+                    }
+                    else
+                        console.log("No table named hours...");
                 }
-                else
-                    console.log("No table named hours...")
             }
     });
 }
