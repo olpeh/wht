@@ -26,7 +26,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-
 Page {
     id: all
     ListModel {
@@ -36,6 +35,12 @@ Page {
     property QtObject dataContainer: null
     property bool sortedByProject: false
     property string section: ""
+    //for the summary View
+    property double categoryDuration: 0
+    property double categoryPrice: 0
+    property int categoryWorkdays: 0
+    property int categoryEntries: 0
+
     function getProject(projectId) {
         for (var i = 0; i < projects.length; i++) {
             if (projects[i].id === projectId)
@@ -48,49 +53,57 @@ Page {
         if (dataContainer != null && section != ""){
             console.log(section)
             if (section === "Today")
-                var allHours = all.dataContainer.getAllDay(0, sortby);
+                return all.dataContainer.getAllDay(0, sortby);
             else if (section === "Yesterday")
-                var allHours = all.dataContainer.getAllDay(1, sortby);
+                return all.dataContainer.getAllDay(1, sortby);
             else if(section === "This week")
-                var allHours = all.dataContainer.getAllWeek(0, sortby);
+                return all.dataContainer.getAllWeek(0, sortby);
             else if(section === "Last week")
-                var allHours = all.dataContainer.getAllWeek(1, sortby);
+                return all.dataContainer.getAllWeek(1, sortby);
             else if (section === "This month")
-                var allHours = all.dataContainer.getAllMonth(0, sortby);
+                return all.dataContainer.getAllMonth(0, sortby);
             else if (section === "Last month")
-                var allHours = all.dataContainer.getAllMonth(1, sortby);
+                return all.dataContainer.getAllMonth(1, sortby);
             else if (section === "This year")
-                var allHours = all.dataContainer.getAllThisYear(sortby);
+                return all.dataContainer.getAllThisYear(sortby);
             else if (section === "All")
-                var allHours = all.dataContainer.getAll(sortby);
+                return all.dataContainer.getAll(sortby);
 
             else{
                 console.log("Unknown section");
-                var allHours = [];
-            }
-
-            //console.log(allHours);
-            //uid,date,duration,project,description
-            for (var i = 0; i < allHours.length; i++) {
-                var project = getProject(allHours[i].project);
-                hoursModel.set(i, {
-                               'uid': allHours[i].uid,
-                               'date': allHours[i].date,
-                               'startTime': allHours[i].startTime,
-                               'endTime': allHours[i].endTime,
-                               'duration': allHours[i].duration,
-                               'project' : allHours[i].project,
-                               'projectName': project.name,
-                               'description': allHours[i].description,
-                               'breakDuration': allHours[i].breakDuration,
-                               'labelColor': project.labelColor,
-                               'hourlyRate': project.hourlyRate })
+                return [];
             }
         }
     }
 
     function updateView() {
-        getAllHours();
+        var allHours = getAllHours();
+        var lastDate = "";
+        for (var i = 0; i < allHours.length; i++) {
+            var project = getProject(allHours[i].project);
+            hoursModel.set(i, {
+                           'uid': allHours[i].uid,
+                           'date': allHours[i].date,
+                           'startTime': allHours[i].startTime,
+                           'endTime': allHours[i].endTime,
+                           'duration': allHours[i].duration,
+                           'project' : allHours[i].project,
+                           'projectName': project.name,
+                           'description': allHours[i].description,
+                           'breakDuration': allHours[i].breakDuration,
+                           'labelColor': project.labelColor,
+                           'hourlyRate': project.hourlyRate
+            })
+            var netDuration = allHours[i].duration - allHours[i].breakDuration;
+            categoryDuration+= netDuration;
+            if (project.hourlyRate)
+                categoryPrice += project.hourlyRate * netDuration;
+            if(allHours[i].date!==lastDate){
+                categoryWorkdays+=1;
+                lastDate = allHours[i].date;
+            }
+            categoryEntries+=1;
+        }
     }
 
     function formateDate(datestring) {
@@ -98,9 +111,24 @@ Page {
         return d.toLocaleDateString();
     }
 
+    onStatusChanged: {
+        if (all.status === PageStatus.Active && listView.count) {
+            if (pageStack._currentContainer.attachedContainer == null) {
+                pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
+                                           dataContainer: all,
+                                           section: section,
+                                           categoryDuration: categoryDuration,
+                                           categoryPrice: categoryPrice,
+                                           categoryWorkdays: categoryWorkdays,
+                                           categoryEntries: categoryEntries
+                                       });
+            }
+        }
+    }
+
     Component.onCompleted: {
         projects = all.dataContainer.getProjects();
-        getAllHours();
+        updateView();
     }
     SilicaListView {
         id: listView

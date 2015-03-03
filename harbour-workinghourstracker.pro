@@ -32,7 +32,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/Settings.qml \
     qml/pages/MyTimePicker.qml \
     qml/pages/Projects.qml \
-    qml/pages/AddProject.qml
+    qml/pages/AddProject.qml \
+    qml/pages/CategorySummary.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

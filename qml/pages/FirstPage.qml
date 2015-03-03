@@ -381,7 +381,9 @@ Page {
                             font.bold: true
                         }
                     }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.sectionLast})
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: model.sectionLast})
+                    }
                 }
                 BackgroundItem {
                     width: listView.width/2
