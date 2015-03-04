@@ -102,7 +102,7 @@ Page {
         startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
     }
     function updateDuration(breakDur){
-        console.log("Update duration triggered");
+        //console.log("Update duration triggered");
         breakDuration = getBreakTimerDuration();
         if(breakDur)
             breakDuration += breakDur
