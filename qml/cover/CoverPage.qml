@@ -29,6 +29,22 @@ import "../config.js" as DB
 
 CoverBackground {
     property bool active: status == Cover.Active
+    onActiveChanged: {
+        if(active) {
+            if(timerRunning && !breakTimerRunning){
+                //console.log("Timer refresh triggered");
+                firstPage.updateDuration();
+            }
+            else if (breakTimerRunning) {
+                //console.log("Break refresh triggered");
+                firstPage.updateBreakTimerDuration();
+            }
+            else {
+               //console.log("refresh triggered");
+               firstPage.refreshCover();
+            }
+        }
+    }
 
     CoverPlaceholder {
         id: icon
