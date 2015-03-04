@@ -112,7 +112,7 @@ Page {
     }
 
     onStatusChanged: {
-        if (all.status === PageStatus.Active && listView.count) {
+        if (all.status === PageStatus.Active && listView.count > 1) {
             if (pageStack._currentContainer.attachedContainer == null) {
                 pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
                                            dataContainer: all,

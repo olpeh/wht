@@ -51,42 +51,52 @@ Page {
             // get hours sorted by projects
             var allHours = dataContainer.getAllHours("project")
             var lastDate = "";
-            var lastProject = {};
-            var projectDuration = 0;
-            var projectPrice = 0;
-            var projectWorkdays = 0;
-            var projectEntries = 0;
-            var counter = 1;
+            var results=[];
+            var item ={
+                'project': {},
+                'projectDuration': 0,
+                'projectPrice': 0,
+                'projectWorkdays': 0,
+                'projectEntries': 0
+            }
             for (var i = 0; i < allHours.length; i++) {
                 var project = dataContainer.getProject(allHours[i].project);
-
+                if(i === 0) {
+                    item.project = project;
+                }
+                if(project.id !== item.project.id) {
+                    results.push(item);
+                    item ={
+                        'project': project,
+                        'projectDuration': 0,
+                        'projectPrice': 0,
+                        'projectWorkdays': 0,
+                        'projectEntries': 0
+                    };
+                    lastDate = "";
+                }
                 var netDuration = allHours[i].duration - allHours[i].breakDuration;
-                projectDuration+= netDuration;
+                item.projectDuration+= netDuration;
                 if (project.hourlyRate)
-                    projectPrice += project.hourlyRate * netDuration;
+                    item.projectPrice += project.hourlyRate * netDuration;
                 if(allHours[i].date!==lastDate){
-                    projectWorkdays+=1;
+                    item.projectWorkdays+=1;
                     lastDate = allHours[i].date;
                 }
-                projectEntries+=1;
-                if(i && project !== lastProject){
-                    hoursModel.set(counter, {
-                                       'header': project.name,
-                                       'duration': "Duration: " + projectDuration,
-                                       'days': "Workdays: " + projectWorkdays,
-                                       'entries': "Entries: " + projectEntries,
-                                       'price': projectPrice,
-                                       'labelColor': project.labelColor
+                item.projectEntries+=1;
+            }
+            results.push(item);
+            if(results.length > 1) {
+                for(var j=0; j<results.length; j++) {
+                    hoursModel.set(j+1, {
+                           'header': results[j].project.name,
+                           'duration': "Duration: " + results[j].projectDuration,
+                           'days': "Workdays: " + results[j].projectWorkdays,
+                           'entries': "Entries: " + results[j].projectEntries,
+                           'price': results[j].projectPrice,
+                           'labelColor': results[j].project.labelColor
                     })
-                    counter ++;
-                    projectDuration = 0;
-                    projectPrice = 0;
-                    projectWorkdays = 0;
-                    projectEntries = 0;
-                    lastProject = project;
                 }
-                if(i === 0)
-                    lastProject = project;
             }
         }
     }
@@ -100,19 +110,7 @@ Page {
         header: PageHeader {
             title: "Summary for " + section
         }
-        /*PullDownMenu {
-            visible: listView.count != 0
-            MenuItem {
-                text: sortedByProject ? "Sort by date" : "Sort by project"
-                onClicked: {
-                    sortedByProject = !sortedByProject;
-                    if(sortedByProject)
-                       getAllHours("project");
-                    else
-                        getAllHours();
-                }
-            }
-        }*/
+
         spacing: Theme.paddingLarge
         anchors.fill: parent
         anchors.bottomMargin: Theme.paddingLarge
@@ -128,6 +126,7 @@ Page {
             width: ListView.view.width
 
             height: model.price > 0 ? 210 : 180
+
             Rectangle {
                 anchors.fill: parent
                 color: model.labelColor ? Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity) : Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
