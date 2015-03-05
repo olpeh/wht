@@ -42,7 +42,7 @@ Page {
     function initializeContent(){
         hoursModel.set(0, {
                        'header': "Total " + section,
-                       'duration': "Duration: " + (categoryDuration).toFixed(2),
+                       'duration': "Duration: " + (categoryDuration).toFixed(2) + "h",
                        'days': "Workdays: " + categoryWorkdays,
                        'entries': "Entries: " + categoryEntries,
                        'price': categoryPrice
