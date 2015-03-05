@@ -175,7 +175,7 @@ Dialog {
                         font.bold: true
                     }
                 }
-                onClicked: { colorIndicator.color = "#65b3cc"; labelColor = "#65b3cc" }
+                onClicked: { colorIndicator.color = Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity); labelColor = Theme.secondaryHighlightColor}
             }
             Item {
                 width: parent.width
@@ -188,7 +188,7 @@ Dialog {
                     //contractRateTextArea.text = contractRate;
                     //budgetTextArea.text = budget;
                     //hourBudgetTextArea.text = hourBudget;
-                    colorIndicator.color = labelColor
+                    colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
                 }
             }
         }

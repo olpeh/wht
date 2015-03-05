@@ -30,7 +30,7 @@ import "../config.js" as DB
 Page {
     id: projectPage
     property QtObject dataContainer: null
-    property variant project: {'name':'Project was not found', 'labelColor': '#00cce7'};
+    property variant project: {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
 
     Component.onCompleted: {
         project = getProject(defaultProjectId);
@@ -49,7 +49,7 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
-        return {'name':'Project was not found', 'labelColor': '#00cce7'};
+        return {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
     }
 
     SilicaFlickable {
