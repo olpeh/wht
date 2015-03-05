@@ -2,6 +2,10 @@
 
 An easy to use and simple Working Hours Tracker for SailfishOS
 
+Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+
+Coming to Jolla store soon
+
 ## Current features:
 * Adding hours
 * Timer - saves starting time to database
