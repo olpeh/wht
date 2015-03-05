@@ -77,8 +77,13 @@ Page {
         }
     }
 
-    function updateView() {
-        var allHours = getAllHours();
+    function updateView(hours) {
+        var allHours = []
+        if(hours)
+            allHours = hours;
+        else
+            allHours =  getAllHours();
+
         var lastDate = "";
         for (var i = 0; i < allHours.length; i++) {
             var project = getProject(allHours[i].project);
@@ -136,15 +141,17 @@ Page {
             title: section
         }
         PullDownMenu {
-            visible: listView.count != 0
+            visible: listView.count != 0 && projectId === ""
             MenuItem {
                 text: sortedByProject ? "Sort by date" : "Sort by project"
                 onClicked: {
                     sortedByProject = !sortedByProject;
-                    if(sortedByProject)
-                       getAllHours("project");
+                    if(sortedByProject){
+                        var hours = getAllHours("project");
+                        updateView(hours);
+                    }
                     else
-                        getAllHours();
+                        updateView();
                 }
             }
         }
