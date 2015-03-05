@@ -20,8 +20,17 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 * Support for different projects
 * Project coloring
 * Shows price for efforts if project hourlyrate is set
+* Project view
+* Category summary
 
 ## Changelog
+
+### 0.9.2-2
+- Added category summary view
+- Added project view
+- Changed to hh:mm format
+- Added option to select currency string
+- 2 bugfixes
 
 ### 0.8.9-2
 - Removed unused project properties
