@@ -28,10 +28,10 @@ public:
     Q_INVOKABLE void setTimerAutoStart(bool value);
 
     Q_INVOKABLE QString getDefaultProjecId();
-    Q_INVOKABLE bool setDefaultProjecId(QString value);
+    Q_INVOKABLE void setDefaultProjecId(QString value);
 
     Q_INVOKABLE QString getCurrencyString();
-    Q_INVOKABLE bool setCurrencyString(QString value);
+    Q_INVOKABLE void setCurrencyString(QString value);
 
 private:
     QString defaultProject;

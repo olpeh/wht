@@ -110,7 +110,7 @@ QString Settings::getDefaultProjecId() {
     return defaultProjectId;
 }
 
-bool Settings::setDefaultProjecId(QString value) {
+void Settings::setDefaultProjecId(QString value) {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("defaultProjectId", value);
@@ -125,7 +125,7 @@ QString Settings::getCurrencyString() {
     return currencyString;
 }
 
-bool Settings::setCurrencyString(QString value) {
+void Settings::setCurrencyString(QString value) {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("currencyString", value);
