@@ -148,7 +148,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Upcoming features:
 
-* Summary for project
-* More customization
 * Graphs?
 * Exporting/Importing database
