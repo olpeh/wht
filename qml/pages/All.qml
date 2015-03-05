@@ -35,6 +35,7 @@ Page {
     property QtObject dataContainer: null
     property bool sortedByProject: false
     property string section: ""
+    property string projectId: ""
     //for the summary View
     property double categoryDuration: 0
     property double categoryPrice: 0
@@ -51,24 +52,24 @@ Page {
 
     function getAllHours(sortby){
         if (dataContainer != null && section != ""){
-            console.log(section)
+            //console.log(section)
+            //console.log(projectId)
             if (section === "Today")
-                return all.dataContainer.getAllDay(0, sortby);
+                return all.dataContainer.getAllDay(0, sortby, projectId);
             else if (section === "Yesterday")
-                return all.dataContainer.getAllDay(1, sortby);
+                return all.dataContainer.getAllDay(1, sortby, projectId);
             else if(section === "This week")
-                return all.dataContainer.getAllWeek(0, sortby);
+                return all.dataContainer.getAllWeek(0, sortby, projectId);
             else if(section === "Last week")
-                return all.dataContainer.getAllWeek(1, sortby);
+                return all.dataContainer.getAllWeek(1, sortby, projectId);
             else if (section === "This month")
-                return all.dataContainer.getAllMonth(0, sortby);
+                return all.dataContainer.getAllMonth(0, sortby, projectId);
             else if (section === "Last month")
-                return all.dataContainer.getAllMonth(1, sortby);
+                return all.dataContainer.getAllMonth(1, sortby, projectId);
             else if (section === "This year")
-                return all.dataContainer.getAllThisYear(sortby);
+                return all.dataContainer.getAllThisYear(sortby, projectId);
             else if (section === "All")
-                return all.dataContainer.getAll(sortby);
-
+                return all.dataContainer.getAll(sortby, projectId);
             else{
                 console.log("Unknown section");
                 return [];
@@ -127,7 +128,6 @@ Page {
     }
 
     Component.onCompleted: {
-        projects = all.dataContainer.getProjects();
         updateView();
     }
     SilicaListView {

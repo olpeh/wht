@@ -121,12 +121,17 @@ function setHours(uid,date,startTime, endTime, duration, project, description, b
 }
 
 // This function is used to retrieve hours for a day from the database
-function getHoursDay(offset) {
+function getHoursDay(offset, projectId) {
     var db = getDatabase();
     var dur =0;
+    var rs;
+
     db.transaction(function(tx) {
-        var sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime");';
-        var rs = tx.executeSql(sqlstr);
+        if(projectId)
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime") AND project=?;', [projectId]);
+
+        else
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime");');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -137,17 +142,23 @@ function getHoursDay(offset) {
 }
 
 // This function is used to retrieve hours for a week from the database
-function getHoursWeek(offset) {
+function getHoursWeek(offset, projectId) {
     var db = getDatabase();
     var dur = 0;
-    //TODO: optimize these
-    var sqlstr = ""
-    if (offset === 0)
-        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0");';
-    else
-        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days");';
+    var rs;
+
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        if (offset === 0) {
+            if(projectId)
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") AND  project=?;', [projectId]);
+            else
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0");');
+        }
+        else if (projectId)
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") AND  project=?;', [projectId]);
+
+        else
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days");');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -158,17 +169,23 @@ function getHoursWeek(offset) {
 }
 
 // This function is used to retrieve hours for a month from the database
-function getHoursMonth(offset) {
+function getHoursMonth(offset, projectId) {
     var db = getDatabase();
     var dur = 0;
-    var sqlstr = "";
-    if (offset === 0)
-        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime");';
-    else {
-        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day");';
-    }
+    var rs;
      db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+         if (offset === 0){
+             if(projectId)
+                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime") AND  project=?;', [projectId]);
+             else
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime");');
+         }
+         else {
+             if(projectId)
+                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") AND  project=?;', [projectId]);
+             else
+                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day");');
+        }
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -179,17 +196,22 @@ function getHoursMonth(offset) {
 }
 
 // This function is used to retrieve hours for a year from the database
-function getHoursYear(offset) {
+function getHoursYear(offset, projectId) {
     var db = getDatabase();
     var dur=0;
-    var sqlstr="";
-    if (offset===0)
-        sqlstr = 'SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");';
-    else {
-        sqlstr ='SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");';
-    }
+    var rs;
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        if (offset===0) {
+            if(projectId)
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") AND  project=?;', [projectId]);
+            else
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");');
+        }
+        else {
+            if(projectId)
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day") AND  project=?;', [projectId]);
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");');
+        }
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -200,11 +222,15 @@ function getHoursYear(offset) {
 }
 
 // This function is used to retrieve all hours from the database
-function getHoursAll() {
+function getHoursAll(projectId) {
     var dur=0;
     var db = getDatabase();
+    var rs;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM hours');
+        if(projectId)
+            rs = tx.executeSql('SELECT * FROM hours WHERE  project=?;', [projectId]);
+        else
+            rs = tx.executeSql('SELECT * FROM hours;');
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -216,15 +242,25 @@ function getHoursAll() {
 
 
 // This function is used to get all data from the database
-function getAll(sortby) {
+function getAll(sortby, projectId) {
     var db = getDatabase();
     var allHours=[];
-    var sqlstr = 'SELECT * FROM hours ORDER BY date DESC, startTime DESC;'
-    if(sortby === "project")
-        sqlstr = 'SELECT * FROM hours ORDER BY project DESC, date DESC, startTime DESC;'
-
+    var rs;
+    //console.log(projectId)
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        if(projectId){
+            if(sortby === "project")
+                rs = tx.executeSql('SELECT * FROM hours WHERE project=? ORDER BY project DESC, date DESC, startTime DESC;', [projectId]);
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE project=? ORDER BY date DESC, startTime DESC;', [projectId]);
+        }
+        else {
+            if(sortby === "project")
+                rs = tx.executeSql('SELECT * FROM hours ORDER BY project DESC, date DESC, startTime DESC;');
+            else
+                rs = tx.executeSql('SELECT * FROM hours ORDER BY date DESC, startTime DESC;');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
              var item ={};
              //uid,date,duration,project,description
@@ -245,20 +281,28 @@ function getAll(sortby) {
 }
 
 // This function is used to retrieve data for a day from the database
-function getAllDay(offset, sortby) {
+function getAllDay(offset, sortby, projectId) {
     var db = getDatabase();
     var allHours =[];
-    var sqlstr="";
-    var orderby = "ORDER BY date DESC, startTime DESC";
-    if(sortby === "project")
-        orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-    if (offset ===0)
-        sqlstr = 'SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';';
-    else
-        sqlstr ='SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime", "-1 day") ' + orderby + ';';
+    var rs;
 
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        var orderby = "ORDER BY date DESC, startTime DESC";
+        if(sortby === "project")
+            orderby = "ORDER BY project DESC, date DESC, startTime DESC";
+        if(projectId){
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime", "-1 day") AND project=? ' + orderby + ';', [projectId]);
+        }
+        else {
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime", "-1 day") ' + orderby + ';');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             var item ={};
             //uid,date,duration,project,description
@@ -280,20 +324,27 @@ function getAllDay(offset, sortby) {
 }
 
 // This function is used to retrieve data this week from the database
-function getAllWeek(offset, sortby) {
+function getAllWeek(offset, sortby, projectId) {
     var db = getDatabase();
     var allHours=[];
-    var orderby = "ORDER BY date DESC, startTime DESC";
-    if(sortby === "project")
-        orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-    var sqlstr="";
-    if (offset ===0)
-        sqlstr = 'SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") ' + orderby + ';';
-    else
-        sqlstr ='SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") ' + orderby + ';';
-
+    var rs;
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        var orderby = "ORDER BY date DESC, startTime DESC";
+        if(sortby === "project")
+            orderby = "ORDER BY project DESC, date DESC, startTime DESC";
+        if(projectId) {
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") AND project=? ' + orderby + ';', [projectId]);
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") AND project=? ' + orderby + ';', [projectId]);
+        }
+        else {
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") ' + orderby + ';');
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") ' + orderby + ';');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             var item ={};
             //uid,date,duration,project,description
@@ -314,19 +365,27 @@ function getAllWeek(offset, sortby) {
 }
 
 // This function is used to retrieve data this month from the database
-function getAllMonth(offset, sortby) {
+function getAllMonth(offset, sortby, projectId) {
     var allHours=[];
     var db = getDatabase();
     var orderby = "ORDER BY date DESC, startTime DESC";
     if(sortby === "project")
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-    var sqlstr="";
-    if (offset ===0)
-        sqlstr = 'SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';';
-    else
-        sqlstr = 'SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") ' + orderby + ';';
+    var rs;
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
+        if(projectId) {
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") AND project=? ' + orderby + ';', [projectId]);
+        }
+        else {
+            if (offset ===0)
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
+            else
+                rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") ' + orderby + ';');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             var item ={};
             //uid,date,duration,project,description
@@ -347,15 +406,19 @@ function getAllMonth(offset, sortby) {
 }
 
 // This function is used to retrieve data this year from the database
-function getAllThisYear(sortby) {
+function getAllThisYear(sortby, projectId) {
     var db = getDatabase();
     var orderby = "ORDER BY date DESC, startTime DESC";
     if(sortby === "project")
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
     var allHours =[];
+    var rs;
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
-         for (var i = 0; i < rs.rows.length; i++) {
+        if(projectId)
+            rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
+        else
+            rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
+        for (var i = 0; i < rs.rows.length; i++) {
              var item ={};
              //uid,date,duration,project,description
              item["uid"]=rs.rows.item(i).uid;

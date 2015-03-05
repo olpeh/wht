@@ -47,20 +47,21 @@ Page {
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
-    function getAllDay(offset, sortby){
-        return DB.getAllDay(offset, sortby);
+    function getAllDay(offset, sortby, projectId){
+        return DB.getAllDay(offset, sortby, projectId);
     }
-    function getAllWeek(offset, sortby){
-        return DB.getAllWeek(offset, sortby);
+    function getAllWeek(offset, sortby, projectId){
+        return DB.getAllWeek(offset, sortby, projectId);
     }
-    function getAllMonth(offset, sortby){
-        return DB.getAllMonth(offset, sortby);
+    function getAllMonth(offset, sortby, projectId){
+        return DB.getAllMonth(offset, sortby, projectId);
     }
-    function getAllThisYear(sortby){
-        return DB.getAllThisYear(sortby);
+    function getAllThisYear(sortby, projectId){
+        return DB.getAllThisYear(sortby, projectId);
     }
-    function getAll(sortby){
-        return DB.getAll(sortby);
+    function getAll(sortby, projectId){
+        return DB.getAll(sortby, projectId);
+        //console.log(projectId);
     }
     function remove(uid){
         console.log("Trying to remove from database!")
@@ -234,13 +235,20 @@ Page {
         thisWeek = DB.getHoursWeek(0).toFixed(2)
         thisMonth = DB.getHoursMonth(0).toFixed(2)
     }
+    onStatusChanged: {
+        if (root.status === PageStatus.Active && projects.length > 1) {
+            if (pageStack._currentContainer.attachedContainer == null) {
+                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root});
+            }
+        }
+    }
 
     Component.onCompleted: {
         // Update tables for previous versions
         DB.updateIfNeeded();
         // Initialize the database
         DB.initialize();
-        var projects = DB.getProjects();
+        projects = DB.getProjects();
         if (projects.length === 0) {
             var id = DB.getUniqueId();
             DB.setProject(id, "default", 0, 0, 0, 0, "#65b3cc");
