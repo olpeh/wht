@@ -41,7 +41,8 @@ Dialog {
 
     //Simple validator to avoid adding empty projects
     function validateInput() {
-        return nameTextArea.text !== ""
+        // TODO validate other project properties if used
+        return nameTextArea.text !== "" && (hourlyRateTextArea.text === "" || !isNaN(parseFloat(hourlyRateTextArea.text)) || parseFloat(hourlyRateTextArea.text) >=0)
     }
     function saveProject() {
         name = nameTextArea.text;
