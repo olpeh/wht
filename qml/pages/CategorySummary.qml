@@ -160,7 +160,7 @@ Page {
                         font{
                             pixelSize: Theme.fontSizeSmall
                         }
-                        text: model.price.toFixed(2) + "€"
+                        text: model.price.toFixed(2) + " " + currencyString
                     }
                 }
             }

@@ -44,6 +44,7 @@ ApplicationWindow
     property Item firstPage
     property string defaultProjectId: ""
     property variant projects: []
+    property string currencyString: "€"
 
     id: appWindow
     initialPage: Component {

@@ -205,6 +205,16 @@ Page {
                         settings.setTimerAutoStart(false)
                 }
             }
+            SectionHeader { text: "Set currency" }
+            TextField{
+                id: currencyTextArea
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: {settings.setCurrencyString(currencyTextArea.text); currencyString =currencyTextArea.text; focus = false}
+                width: parent.width
+                placeholderText: "Set currency string"
+                label: "Currency string"
+            }
 
             SectionHeader { text: "Move all hours to default" }
             Text {
@@ -371,6 +381,7 @@ Page {
         else
             console.log("Error when getting timerAutoStart")
 
+        currencyTextArea.text = settings.getCurrencyString();
 
     }
 }

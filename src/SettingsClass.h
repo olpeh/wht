@@ -30,6 +30,9 @@ public:
     Q_INVOKABLE QString getDefaultProjecId();
     Q_INVOKABLE bool setDefaultProjecId(QString value);
 
+    Q_INVOKABLE QString getCurrencyString();
+    Q_INVOKABLE bool setCurrencyString(QString value);
+
 private:
     QString defaultProject;
     double defaultDuration;
@@ -38,5 +41,6 @@ private:
     QString endTimeStaysFixed;
     bool timerAutoStart;
     QString defaultProjectId;
+    QString currencyString;
 };
 #endif // SETTINGSCLASS_H

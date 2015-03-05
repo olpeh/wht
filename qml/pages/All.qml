@@ -217,7 +217,7 @@ Page {
                             font{
                                 pixelSize: Theme.fontSizeSmall
                             }
-                            text: (netDur * model.hourlyRate).toFixed(2) + "€"
+                            text: (netDur * model.hourlyRate).toFixed(2) + " " + currencyString
                         }
                     }
 

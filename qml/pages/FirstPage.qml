@@ -287,6 +287,11 @@ Page {
                 start();
             }
         }
+        currencyString = settings.getCurrencyString();
+        if(!currencyString){
+            currencyString = "€";
+            settings.setCurrencyString(currencyString);
+        }
     }
     SilicaFlickable {
         anchors.fill: parent
