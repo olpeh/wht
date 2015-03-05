@@ -27,22 +27,23 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "../config.js" as DB
 
+
 Page {
     id: root
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
-        summaryModel.set(0,{"hours": 0, "hoursLast": 0});
-        summaryModel.set(1,{"hours": 0, "hoursLast": 0});
-        summaryModel.set(2,{"hours": 0, "hoursLast": 0});
-        summaryModel.set(3,{"hours": 0, "hoursLast": 0});
+        summaryModel.set(0,{"hours": "0", "hoursLast": "0"});
+        summaryModel.set(1,{"hours": "0", "hoursLast": "0"});
+        summaryModel.set(2,{"hours": "0", "hoursLast": "0"});
+        summaryModel.set(3,{"hours": "0", "hoursLast": "0"});
      }
     function getHours() {
         //Update hours view after adding or deleting hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(0), "hoursLast": DB.getHoursDay(1)});
-        summaryModel.set(1,{"hours": DB.getHoursWeek(0), "hoursLast": DB.getHoursWeek(1)});
-        summaryModel.set(2,{"hours": DB.getHoursMonth(0), "hoursLast": DB.getHoursMonth(1)});
-        summaryModel.set(3,{"hours": DB.getHoursYear(0), "hoursLast": DB.getHoursAll()});
+        summaryModel.set(0,{"hours": DB.getHoursDay(0).toString().toHHMM(), "hoursLast": DB.getHoursDay(1).toString().toHHMM()});
+        summaryModel.set(1,{"hours": DB.getHoursWeek(0).toString().toHHMM(), "hoursLast": DB.getHoursWeek(1).toString().toHHMM()});
+        summaryModel.set(2,{"hours": DB.getHoursMonth(0).toString().toHHMM(), "hoursLast": DB.getHoursMonth(1).toString().toHHMM()});
+        summaryModel.set(3,{"hours": DB.getHoursYear(0).toString().toHHMM(), "hoursLast": DB.getHoursAll().toString().toHHMM()});
     }
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
@@ -231,9 +232,9 @@ Page {
     }
 
     function refreshCover() {
-        today = DB.getHoursDay(0).toFixed(2)
-        thisWeek = DB.getHoursWeek(0).toFixed(2)
-        thisMonth = DB.getHoursMonth(0).toFixed(2)
+        today = DB.getHoursDay(0).toString().toHHMM()
+        thisWeek = DB.getHoursWeek(0).toString().toHHMM()
+        thisMonth = DB.getHoursMonth(0).toString().toHHMM()
     }
     onStatusChanged: {
         if (root.status === PageStatus.Active && projects.length > 1) {
@@ -333,27 +334,27 @@ Page {
         ListModel {
             id: summaryModel
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "Today"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Yesterday"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This week"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Last week"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This month"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Last month"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This year"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "All"
             }
         }
@@ -385,7 +386,7 @@ Page {
                         Label {
                             y: 3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast.toFixed(2)
+                            text: model.hoursLast
                             font.bold: true
                         }
                     }
@@ -411,7 +412,7 @@ Page {
                         Label {
                             y:3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours.toFixed(2)
+                            text: model.hours
                             font.bold: true
                         }
                     }

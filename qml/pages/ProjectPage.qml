@@ -38,10 +38,10 @@ Page {
     }
     function getHours() {
         //Update hours view after adding or deleting hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(0, project.id), "hoursLast": DB.getHoursDay(1, project.id)});
-        summaryModel.set(1,{"hours": DB.getHoursWeek(0, project.id), "hoursLast": DB.getHoursWeek(1, project.id)});
-        summaryModel.set(2,{"hours": DB.getHoursMonth(0, project.id), "hoursLast": DB.getHoursMonth(1, project.id)});
-        summaryModel.set(3,{"hours": DB.getHoursYear(0, project.id), "hoursLast": DB.getHoursAll(project.id)});
+        summaryModel.set(0,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursDay(1, project.id).toString().toHHMM()});
+        summaryModel.set(1,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursWeek(1, project.id).toString().toHHMM()});
+        summaryModel.set(2,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursMonth(1, project.id).toString().toHHMM()});
+        summaryModel.set(3,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursAll(project.id).toString().toHHMM()});
     }
 
     function getProject(projectId) {
@@ -57,27 +57,27 @@ Page {
         ListModel {
             id: summaryModel
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "Today"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Yesterday"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This week"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Last week"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This month"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "Last month"
             }
             ListElement {
-                hours: 0
+                hours: "0"
                 section: "This year"
-                hoursLast: 0
+                hoursLast: "0"
                 sectionLast: "All"
             }
         }
@@ -109,7 +109,7 @@ Page {
                         Label {
                             y: 3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast.toFixed(2)
+                            text: model.hoursLast
                             font.bold: true
                         }
                     }
@@ -136,7 +136,7 @@ Page {
                         Label {
                             y:3 * Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours.toFixed(2)
+                            text: model.hours
                             font.bold: true
                         }
                     }

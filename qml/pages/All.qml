@@ -187,7 +187,7 @@ Page {
                         y: Theme.paddingMedium
                         Label {
                             id: project
-                            text: netDur + "h   " + model.projectName
+                            text: "[" + netDur.toString().toHHMM() + "]  " + model.projectName
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }
@@ -209,7 +209,7 @@ Page {
                             font{
                                 pixelSize: Theme.fontSizeSmall
                             }
-                            text: model.breakDuration > 0 ? model.startTime + " - " + model.endTime + " (" + (model.breakDuration).toFixed(2) + "h break)" : model.startTime + " - " + model.endTime
+                            text: model.breakDuration > 0 ? model.startTime + " - " + model.endTime + " (" + (model.breakDuration).toString().toHHMM() + " break)" : model.startTime + " - " + model.endTime
                         }
                         Label {
                             id: price

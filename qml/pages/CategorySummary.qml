@@ -42,7 +42,7 @@ Page {
     function initializeContent(){
         hoursModel.set(0, {
                        'header': "Total " + section,
-                       'duration': "Duration: " + (categoryDuration).toFixed(2) + "h",
+                       'duration': "Duration: " + (categoryDuration).toString().toHHMM(),
                        'days': "Workdays: " + categoryWorkdays,
                        'entries': "Entries: " + categoryEntries,
                        'price': categoryPrice
@@ -90,7 +90,7 @@ Page {
                 for(var j=0; j<results.length; j++) {
                     hoursModel.set(j+1, {
                            'header': results[j].project.name,
-                           'duration': "Duration: " + results[j].projectDuration,
+                           'duration': "Duration: " + results[j].projectDuration.toString().toHHMM(),
                            'days': "Workdays: " + results[j].projectWorkdays,
                            'entries': "Entries: " + results[j].projectEntries,
                            'price': results[j].projectPrice,
