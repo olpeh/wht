@@ -187,7 +187,7 @@ Page {
                         y: Theme.paddingMedium
                         Label {
                             id: project
-                            text: model.projectName + "   " + netDur +"h"
+                            text: netDur + "h   " + model.projectName
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }
