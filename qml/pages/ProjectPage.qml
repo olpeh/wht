@@ -174,7 +174,7 @@ Page {
                 }
                 _updating = false
                 for (var i = 0; i < modelSource.count; i++) {
-                    if (modelSource.get(i).id == project.id) {
+                    if (modelSource.get(i).id === defaultProjectId) {
                         currentIndex = i
                         break
                     }
