@@ -49,11 +49,8 @@ Page {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
-        anchors.bottomMargin: Theme.paddingLarge
-        //contentHeight: column.y + column.height
         Column {
             id: column
-
             spacing: 20
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
@@ -175,8 +172,6 @@ Page {
                     }
                 }
             }
-
-            SectionHeader { text: "Adding break" }
             TextSwitch {
                 id: fixedSwitch
                 checked: true
@@ -307,6 +302,19 @@ Page {
 
 
             SectionHeader { text: "DANGER ZONE!" }
+            Text {
+                id: warningText2
+                font.pointSize: Theme.fontSizeMedium
+                color: Theme.highlightColor
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: "Please be aware!"
+            }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.secondaryHighlightColor
@@ -339,6 +347,11 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: "Warning: You will loose all your Working Hours data if you reset the database!"
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
             }
 
         }
