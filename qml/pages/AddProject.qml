@@ -100,8 +100,8 @@ Dialog {
             TextField{
                 id: hourlyRateTextArea
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-next"
-                EnterKey.onClicked: budgetTextArea.focus = true
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false //budgetTextArea.focus = true
                 width: parent.width
                 placeholderText: "Hourly rate"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
