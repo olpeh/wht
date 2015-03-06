@@ -33,7 +33,14 @@ Page {
         anchors.fill: parent
         anchors.bottomMargin: Theme.paddingLarge
         contentHeight: column.y + column.height
-        //contentHeight: childrenRect.height
+        PullDownMenu {
+            MenuItem {
+                text: "How to use"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("HowTo.qml"))
+                }
+            }
+        }
         Column {
             id: column
             PageHeader {
@@ -42,8 +49,8 @@ Page {
             width: parent.width
             SectionHeader { text: "General" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -53,10 +60,10 @@ Page {
                 }
                 text: "Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours."
             }
-            SectionHeader { text: "Contact" }
+            SectionHeader { text: "Usage" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -64,16 +71,35 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Email: ojhaapala@gmail.com"
+                text: "Read more about how to use this app by accessing the pulley menu or clicking the button below."
             }
-            ValueButton {
-                id: twitter
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 20
-                label: "<a href=\"https://twitter.com/olpetik\">Twitter: @olpetik</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://twitter.com/olpetik")
+            Button {
+              text: "How to use"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: pageStack.push(Qt.resolvedUrl("HowTo.qml"))
+            }
+            SectionHeader { text: "Author" }
+            Text {
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                horizontalAlignment: Text.AlignHCenter
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
                 }
+                text: "Olavi Haapala"
+            }
+            Button {
+              text: "ojhaapala@gmail.com"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+            }
+            Button {
+              text: "Twitter: @olpetik"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://twitter.com/olpetik")
             }
             Item {
                 width: parent.width
@@ -82,8 +108,8 @@ Page {
 
             SectionHeader { text: "Donate" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -91,7 +117,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "If you like my work, please donate. Donations help me to use more time on development."
+                text: "Please donate if you like my work. Donations help me to use more time on development."
             }
             Button {
               text: "Paypal EUR"
@@ -109,24 +135,23 @@ Page {
             }
             SectionHeader { text: "Bitcoin" }
             TextField {
+                font.pixelSize: Theme.fontSizeSmall
                 id: bitcoinText
                 readOnly: true
                 focusOnClick: true
                 onClicked: {
                     console.log("Clicked")
-                    select()
+                    selectAll()
                     copy()
                     bitcoinText.label = "Copied to clipboard"
                 }
                 label: "Donate to my bitcoin account"
                 text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
-                font.pointSize: Theme.fontSizeExtraSmall
-                EnterKey.onClicked: parent.focus = true
             }
             SectionHeader { text: "Source" }
             Text {
-                //font.pointSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
@@ -134,20 +159,21 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Contributions and bug reporst are welcome. Please report issues in github. Link below."
+                text: "Contributions, bug reports and ideas are welcome. Please report issues in github. Link below."
             }
             Item {
                 width: parent.width
                 height: 10
             }
-            ValueButton {
-                id: github
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 20
-                label: "<a href=\"https://github.com/ojhaapala/wht/issues\">github.com/ojhaapala/wht</a>"
-                onClicked: {
-                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
-                }
+            Button {
+              text: "Issues in GitHub"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+            }
+            Button {
+              text: "Project in GitHub"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht")
             }
             Item {
                 width: parent.width
@@ -155,8 +181,8 @@ Page {
             }
             SectionHeader { text: "License" }
             Text {
-                //font.pointSize: Theme.fontSizeMedium
-                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
                 anchors {
