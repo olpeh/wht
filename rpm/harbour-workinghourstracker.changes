@@ -8,7 +8,7 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Fri Feb 27 2015 Olavi Haapala <ojhaapala@gmail.com> 0.9.2-2
+* Thu Mar 05 2015 Olavi Haapala <ojhaapala@gmail.com> 0.9.2-2
 - Added category summary view
 - Added project view
 - Changed to hh:mm format
