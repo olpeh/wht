@@ -44,6 +44,12 @@ Paypal [USD] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY2
 
 ## Changelog
 
+### 1.0.0-1
+- Initial harbour release
+- Updated about page
+- Added howto page
+- Fixed two bugs
+
 ### 0.9.2-2
 - Added category summary view
 - Added project view
