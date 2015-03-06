@@ -106,7 +106,8 @@ Dialog {
                 placeholderText: "Hourly rate"
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: "Hourly rate"
-            }/* Lets hide these for now...
+            }
+            /* Lets hide these for now...
             TextField{
                 id: contractRateTextArea
                 focus: false
