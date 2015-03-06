@@ -155,3 +155,48 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 * Graphs?
 * Exporting/Importing database
+
+
+## How to use
+
+### Adding hours
+
+Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.\n\n1. You can access the add hours in the pulley menu on the first page. It takes you to the add page. \n\n2. Start the timer when starting to work. You can then close the app if you want to and the timer will stay running. At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.
+
+### Adding projects
+
+Projects can be added and edited in the settings. You can select the labelcolor and hourlyrate for a project. You can edit projects by clicking them. When editing a project you can select if you want to make that project the
+default project which will be automatically selected when adding hours. If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.
+
+### Using the timer
+
+Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.\n\nOn the left you have a break button which is meant to be used if you have a break 
+during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.\n\nThe button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.\n\nOn the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.
+ 
+### Using the cover
+
+Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.\n\nWhen stopping the timer from the cover, it should open up the appwindow in the add view and after closing the dialog it should get minimized back to cover.
+
+### Summaries
+
+On the first page you will see total hours for different categories. If you have more than one projects you should see a attached page that can be accessed by swiping left from the first page. There you can see hours for one project at a time
+
+Clicking a category will take you to the detailed listing view where you can see all entries in that category. You can edit those entries by clicking them.
+
+By swiping left in the detailed view you can see a detailed summary for that category.
+
+### Settings
+
+There are a few settings in the settings page that makes adding hours faster and easier. Default duration and default break duration will be used when manually adding hours. Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.
+
+Other settings are explained in the settings page and more will come in the future versions.
+
+
+
+
+
+
+
+
+
+
