@@ -6,11 +6,11 @@ Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-trac
 
 Coming to Jolla store soon...
 
-Quick links  \n
-[Changelog] (#changelog)\n
-[Current features] (#current-features)\n
-[License] (#license)\n
-[Upcoming features] (#upcoming-features)\n
+Quick links<br />
+[Changelog] (#changelog)<br />
+[Current features] (#current-features)<br />
+[License] (#license)<br />
+[Upcoming features] (#upcoming-features)<br />
 [How to use] (#how-to-use)
 
 Donations are welcome :)<br />
