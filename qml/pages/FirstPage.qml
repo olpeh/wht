@@ -188,7 +188,7 @@ Page {
         breakTimerRunning = true;
     }
     function updateBreakTimerDuration() {
-        console.log("Updating breakTimerDuration Triggered");
+        //console.log("Updating breakTimerDuration Triggered");
         var dateNow = new Date();
         var hoursNow = dateNow.getHours();
         var minutesNow = dateNow.getMinutes();
@@ -206,7 +206,7 @@ Page {
     }
 
     function stopBreakTimer() {
-        console.log("stopBreakTimer clicked!");
+        //console.log("stopBreakTimer clicked!");
         var splitted = breakStartTime.split(":");
         var timerStartHour = parseInt(splitted[0]);
         var timerStartMinute = parseInt(splitted[1]);
