@@ -190,6 +190,9 @@ Dialog {
                     //budgetTextArea.text = budget;
                     //hourBudgetTextArea.text = hourBudget;
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
+                    if(defaultProjectId === id) {
+                        defaultSwitch.visible = false;
+                    }
                 }
             }
         }
