@@ -161,7 +161,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Adding hours
 
-Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.\n\n1. You can access the add hours in the pulley menu on the first page. It takes you to the add page. \n\n2. Start the timer when starting to work. You can then close the app if you want to and the timer will stay running. At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.
+Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.
+
+1. You can access the add hours in the pulley menu on the first page. It takes you to the add page.
+2. Start the timer when starting to work. You can then close the app if you want to and the timer will stay running. At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.
 
 ### Adding projects
 
@@ -170,12 +173,20 @@ default project which will be automatically selected when adding hours. If you s
 
 ### Using the timer
 
-Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.\n\nOn the left you have a break button which is meant to be used if you have a break 
-during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.\n\nThe button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.\n\nOn the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.
+Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.
+
+On the left you have a break button which is meant to be used if you have a break 
+during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.
+
+The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.
+
+On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.
  
 ### Using the cover
 
-Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.\n\nWhen stopping the timer from the cover, it should open up the appwindow in the add view and after closing the dialog it should get minimized back to cover.
+Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.
+
+When stopping the timer from the cover, it should open up the appwindow in the add view and after closing the dialog it should get minimized back to cover.
 
 ### Summaries
 
