@@ -52,6 +52,25 @@ Page {
         return {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
     }
 
+    property int projectAmount: projects.length
+    onProjectAmountChanged: { setProjects() }
+    function setProjects() {
+        for (var i = 0; i < projects.length; i++) {
+            modelSource.set(i, {
+                           'id': projects[i].id,
+                           'name': projects[i].name,
+                           'labelColor': projects[i].labelColor
+                            })
+        }
+        projectCombo._updating = false
+        for (var i = 0; i < modelSource.count; i++) {
+            if (modelSource.get(i).id === defaultProjectId) {
+                projectCombo.currentIndex = i
+                break
+            }
+        }
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         ListModel {
@@ -144,6 +163,7 @@ Page {
                 }
             }
         }
+
         ComboBox {
             id: projectCombo
             y: 110 + 4*140 + 4*Theme.paddingLarge
@@ -165,20 +185,7 @@ Page {
                 getHours()
             }
             Component.onCompleted: {
-                for (var i = 0; i < projects.length; i++) {
-                    modelSource.set(i, {
-                                   'id': projects[i].id,
-                                   'name': projects[i].name,
-                                   'labelColor': projects[i].labelColor
-                                    })
-                }
-                _updating = false
-                for (var i = 0; i < modelSource.count; i++) {
-                    if (modelSource.get(i).id === defaultProjectId) {
-                        currentIndex = i
-                        break
-                    }
-                }
+                projectPage.setProjects();
             }
         }
         ListModel {
