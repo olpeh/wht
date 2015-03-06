@@ -6,12 +6,15 @@ Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-trac
 
 Coming to Jolla store soon...
 
-Quick links<br />
+### Quick links
+
 [Changelog] (#changelog)<br />
 [Current features] (#current-features)<br />
 [License] (#license)<br />
 [Upcoming features] (#upcoming-features)<br />
 [How to use] (#how-to-use)
+
+### Donate
 
 Donations are welcome :)<br />
 Paypal [EUR] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
