@@ -11,7 +11,7 @@ v. 1.0.0-1 available in Jolla store (09.03.2015)
 [Changelog] (#changelog)<br />
 [Current features] (#current-features)<br />
 [License] (#license)<br />
-[Upcoming features] (#upcoming-features)<br />
+[Roadmap] (#roadmap)<br />
 [How to use] (#how-to-use)
 
 ### Donate
@@ -41,6 +41,14 @@ Paypal [USD] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY2
 * Shows price for efforts if project hourlyrate is set
 * Project view
 * Category summary
+
+## Roadmap:
+
+* Exporting/Importing database
+* Translations
+* Graphs?
+
+
 
 ## Changelog
 
@@ -166,12 +174,6 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-## Upcoming features:
-
-* Graphs?
-* Exporting/Importing database
-
 
 ## How to use
 
