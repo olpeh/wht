@@ -297,19 +297,19 @@ Page {
         anchors.fill: parent
         PullDownMenu {
             MenuItem {
-                text: "About"
+                text: qsTr("About")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
             }
             MenuItem {
-                text: "Settings"
+                text: qsTr("Settings")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: root})
                 }
             }
             MenuItem {
-                text: "Add Hours"
+                text: qsTr("Add Hours")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
                 }

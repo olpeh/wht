@@ -4,6 +4,30 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-workinghourstracker
 Exec=harbour-workinghourstracker
 Name=Work Hours
-# translation example:
-# your app name in German locale (de)
-Name[de]=Zeiterfassung
+# Danish (da)
+#Name[da]=The Name
+# German (de)
+#Name[de]=Zeiterfassung
+# Spanish (es)
+#Name[es]=The Name
+# Finnish (fi)
+Name[fi]=Kellokalle
+# French (fr)
+#Name[fr]=The Name
+# Italian (it)
+#Name[it]=The Name
+# Norwegian (no)
+#Name[no]=The Name
+# Polish (pl)
+#Name[pl]=The Name
+# Portuguese (pt)
+#Name[pt]=The Name
+# Russian (ru)
+#Name[ru]=The Name
+# Swedish (sv)
+#Name[sv]=The Name
+# Simplified Chinese (zh_cn)
+#Name[zh_CN]=The Name
+# Traditional Chinese (zh_hk)
+#Name[zh_HK]=The Name
+
