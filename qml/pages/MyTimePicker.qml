@@ -86,7 +86,7 @@ Dialog {
                 right: parent.right
                 margins: Theme.paddingLarge
             }
-            text: "Break can not be longer than the duration!"
+            text: qsTr("Break can not be longer than the duration!")
         }
     }
 

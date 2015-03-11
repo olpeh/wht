@@ -41,10 +41,10 @@ Page {
 
     function initializeContent(){
         hoursModel.set(0, {
-                       'header': "Total " + section,
-                       'duration': "Duration: " + (categoryDuration).toString().toHHMM(),
-                       'days': "Workdays: " + categoryWorkdays,
-                       'entries': "Entries: " + categoryEntries,
+                       'header': qsTr("Total ") + section,
+                       'duration': qsTr("Duration")+": " + (categoryDuration).toString().toHHMM(),
+                       'days': qsTr("Workdays") + ": " + categoryWorkdays,
+                       'entries': qsTr("Entries") + ": " + categoryEntries,
                        'price': categoryPrice
         })
         if(dataContainer){
@@ -90,9 +90,9 @@ Page {
                 for(var j=0; j<results.length; j++) {
                     hoursModel.set(j+1, {
                            'header': results[j].project.name,
-                           'duration': "Duration: " + results[j].projectDuration.toString().toHHMM(),
-                           'days': "Workdays: " + results[j].projectWorkdays,
-                           'entries': "Entries: " + results[j].projectEntries,
+                           'duration': qsTr("Duration") + ": " + results[j].projectDuration.toString().toHHMM(),
+                           'days': qsTr("Workdays") + ": " + results[j].projectWorkdays,
+                           'entries': qsTr("Entries") + ": " + results[j].projectEntries,
                            'price': results[j].projectPrice,
                            'labelColor': results[j].project.labelColor
                     })
@@ -102,13 +102,12 @@ Page {
     }
 
     Component.onCompleted: {
-        console.log("Now im attached..");
         initializeContent();
     }
     SilicaListView {
         id: listView
         header: PageHeader {
-            title: "Summary for " + section
+            title: qsTr("Summary for ") + section
         }
 
         spacing: Theme.paddingLarge
@@ -119,7 +118,7 @@ Page {
         VerticalScrollDecorator {}
         ViewPlaceholder {
                     enabled: listView.count == 0
-                    text: "Something went wrong"
+                    text: qsTr("Something went wrong")
         }
         delegate: Item {
             id: myListItem

@@ -65,8 +65,6 @@ Page {
         //console.log(projectId);
     }
     function remove(uid){
-        console.log("Trying to remove from database!")
-        console.log(uid);
         DB.remove(uid);
     }
     function getProjects(){
@@ -82,7 +80,7 @@ Page {
     function moveAllHoursToProjectByDesc(){
         if (defaultProjectId !== "")
             return DB.moveAllHoursToProjectByDesc(defaultProjectId);
-        return "No default project found"
+        return qsTr("No default project found")
     }
     property int startSelectedHour : -1
     property int startSelectedMinute : -1
@@ -126,7 +124,6 @@ Page {
     }
 
     function stop(fromCover){
-        console.log("Stop clicked!");
         if(breakTimerRunning) {
             stopBreakTimer();
             breakTimerRunning = false;
@@ -217,7 +214,6 @@ Page {
         if (endSelectedHour < timerStartHour)
             endHour +=24
         breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
-        console.log("Break duration was:", breakDuration);
         DB.stopBreakTimer(breakDuration);
         breakTimerRunning = false;
     }
@@ -252,7 +248,7 @@ Page {
         projects = DB.getProjects();
         if (projects.length === 0) {
             var id = DB.getUniqueId();
-            DB.setProject(id, "default", 0, 0, 0, 0, Theme.secondaryHighlightColor);
+            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor);
             defaultProjectId = id;
             settings.setDefaultProjecId(id);
             moveAllHoursTo(id);
@@ -314,53 +310,33 @@ Page {
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
                 }
             }
-            /*MenuItem {
-                text: timerRunning ? "Stop timer" : "Start timer"
-                onClicked: {
-                    if (timerRunning)
-                        stop(false);
-                    else
-                        start();
-                }
-            }*/
         }
-        // @TODO did not work here
-        /*PushUpMenu {
-            visible: timerRunning
-            MenuItem {
-                text: "Reset the timer"
-                onClicked: reset()
-            }
-            MenuItem {
-                text: "Adjust timer start time"
-                onClicked: console.log("Coming up!")
-            }
-        }*/
+
         ListModel {
             id: summaryModel
             ListElement {
                 hours: "0"
-                section: "Today"
+                section: qsTr("Today")
                 hoursLast: "0"
-                sectionLast: "Yesterday"
+                sectionLast: qsTr("Yesterday")
             }
             ListElement {
                 hours: "0"
-                section: "This week"
+                section: qsTr("This week")
                 hoursLast: "0"
-                sectionLast: "Last week"
+                sectionLast: qsTr("Last week")
             }
             ListElement {
                 hours: "0"
-                section: "This month"
+                section: qsTr("This month")
                 hoursLast: "0"
-                sectionLast: "Last month"
+                sectionLast: qsTr("Last month")
             }
             ListElement {
                 hours: "0"
-                section: "This year"
+                section: qsTr("This year")
                 hoursLast: "0"
-                sectionLast: "All"
+                sectionLast: qsTr("All")
             }
         }
         SilicaListView {
@@ -439,12 +415,12 @@ Page {
                         id: timerText
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "Timer is not running"
+                        text: qsTr("Timer is not running")
                     }
                     Label {
                         y:3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "Click to start"
+                        text: qsTr("Click to start")
                         font.bold: true
                     }
                 }
@@ -485,7 +461,7 @@ Page {
                             y: parent.height - this.height - Theme.paddingMedium
                             font.bold: true
                             font.pixelSize: Theme.fontSizeSmall
-                            text: "Break"
+                            text: qsTr("Break")
                         }
                     }
                     onClicked: {
@@ -529,7 +505,7 @@ Page {
                             color: Theme.primaryColor
                             font.bold: true
                             font.pixelSize: Theme.fontSizeSmall
-                            text: "Stop"
+                            text: qsTr("Stop")
                         }
                     }
                     onClicked: if(!breakTimerRunning) stop(false)
@@ -565,7 +541,7 @@ Page {
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.bold: true
                             font.pixelSize: Theme.fontSizeSmall
-                            text: "Started"
+                            text: qsTr("Started")
                         }
                         Label {
                             anchors.centerIn: parent
@@ -579,7 +555,7 @@ Page {
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.bold: true
                             font.pixelSize: Theme.fontSizeSmall
-                            text: "Adjust"
+                            text: qsTr("Adjust")
                         }
                     }
                     onClicked: if(!breakTimerRunning) openTimeDialog()

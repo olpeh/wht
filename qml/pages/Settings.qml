@@ -55,10 +55,10 @@ Page {
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             PageHeader {
-                title: "Settings"
+                title: qsTr("Settings")
             }
             RemorseItem { id: remorse }
-            SectionHeader { text: "Projects" }
+            SectionHeader { text: qsTr("Projects") }
             BackgroundItem {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -69,7 +69,7 @@ Page {
                     ValueButton {
                         id: editProjectsButton
                         anchors.centerIn: parent
-                        label: "Edit projects"
+                        label: qsTr("Edit projects")
                         value: ""
                         width: parent.width
                         onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
@@ -77,7 +77,7 @@ Page {
                 }
                 onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
             }
-            SectionHeader { text: "Default duration" }
+            SectionHeader { text: qsTr("Default duration") }
             BackgroundItem {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -108,7 +108,7 @@ Page {
                             })
                         }
 
-                        label: "Value:"
+                        label: qsTr("Value") + ":"
                         value: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -116,7 +116,7 @@ Page {
                 }
                 onClicked: defaultDurationButton.openTimeDialog()
             }
-            SectionHeader { text: "Default break duration" }
+            SectionHeader { text: qsTr("Default break duration") }
             BackgroundItem {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -146,7 +146,7 @@ Page {
                             })
                         }
 
-                        label: "Value:"
+                        label: qsTr("Value") + ":"
                         value: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -155,15 +155,15 @@ Page {
                 onClicked: defaultBreakDurationButton.openTimeDialog()
             }
 
-            SectionHeader { text: "Adding hours" }
+            SectionHeader { text: qsTr("Adding hours") }
             TextSwitch {
                 id: timeSwitch
                 checked: true
-                text: "Ends now by default"
-                description: "Endtime will be set to now by default."
+                text: qsTr("Ends now by default")
+                description: qsTr("Endtime will be set to now by default.")
                 onCheckedChanged: {
-                    timeSwitch.text = checked ? "Ends now by default" : "Starts now by default"
-                    timeSwitch.description = checked ? "Endtime will be set to now by default." : "Starttime will be set to now by default."
+                    timeSwitch.text = checked ? qsTr("Ends now by default") : qsTr("Starts now by default")
+                    timeSwitch.description = checked ? qsTr("Endtime will be set to now by default.") : qsTr("Starttime will be set to now by default.")
                     if(checked){
                         settings.setEndsNowByDefault("yes")
                     }
@@ -175,43 +175,43 @@ Page {
             TextSwitch {
                 id: fixedSwitch
                 checked: true
-                text: "Endtime stays fixed by default."
-                description: "Starttime will flex if duration is changed."
+                text: qsTr("Endtime stays fixed by default.")
+                description: qsTr("Starttime will flex if duration is changed.")
                 onCheckedChanged: {
-                    fixedSwitch.text = checked ? "Endtime stays fixed by default." : "Starttime stays fixed by default."
-                    fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
+                    fixedSwitch.text = checked ? qsTr("Endtime stays fixed by default.") : qsTr("Starttime stays fixed by default.")
+                    fixedSwitch.description = checked ? qsTr("Starttime will flex if duration is changed.") : qsTr("Endtime will flex if duration is changed.")
                     if(checked)
                         settings.setEndTimeStaysFixed("yes")
                     else
                         settings.setEndTimeStaysFixed("no")
                 }
             }
-            SectionHeader { text: "Startup options" }
+            SectionHeader { text: qsTr("Startup options") }
             TextSwitch {
                 id: autoStartSwitch
                 checked: false
-                text: "Autostart timer on app startup"
-                description: "Timer will get started automatically if not running."
+                text: qsTr("Autostart timer on app startup")
+                description: qsTr("Timer will get started automatically if not already running.")
                 onCheckedChanged: {
-                    autoStartSwitch.description = checked ? "Timer will now get started automatically if not running." : "Timer will not get started automatically."
+                    autoStartSwitch.description = checked ? qsTr("Timer will get started automatically if not already running.") : qsTr("Timer will not get started automatically.")
                     if(checked)
                         settings.setTimerAutoStart(true)
                     else
                         settings.setTimerAutoStart(false)
                 }
             }
-            SectionHeader { text: "Set currency" }
+            SectionHeader { text: qsTr("Set currency") }
             TextField{
                 id: currencyTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: {settings.setCurrencyString(currencyTextArea.text); currencyString =currencyTextArea.text; focus = false}
                 width: parent.width
-                placeholderText: "Set currency string"
-                label: "Currency string"
+                placeholderText: qsTr("Set currency string")
+                label: qsTr("Currency string")
             }
 
-            SectionHeader { text: "Move all hours to default" }
+            SectionHeader { text: qsTr("Move all hours to default") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -222,7 +222,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Move ALL your existing hours to the project which is set as default."
+                text: qsTr("Move ALL your existing hours to the project which is set as default.")
             }
 
             BackgroundItem {
@@ -235,31 +235,31 @@ Page {
                     ValueButton {
                         id: moveHoursButton
                         anchors.centerIn: parent
-                        label: "Move all to default"
+                        label: qsTr("Move all to default")
                         value: ""
                         width: parent.width
                         onClicked: {
                             if (defaultProjectId !== "")
-                               remorse.execute(settingsPage,"Move all hours to default project", function() {
+                               remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
                                    moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
-                                   moveHoursButton.value ="Done";
+                                   moveHoursButton.value = qsTr("Done");
                                })
                             else
-                                moveHoursButton.label =  "No default project set"
+                                moveHoursButton.label =  qsTr("No default project set")
                         }
                     }
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
-                        remorse.execute(settingsPage,"Move all hours to default project", function() {
+                        remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
                             moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
-                            moveHoursButton.value ="Done"
+                            moveHoursButton.value = qsTr("Done")
                         })
                     else
-                        moveHoursButton.label =  "No default project set"
+                        moveHoursButton.label =  qsTr("No default project set")
                 }
             }
-            SectionHeader { text: "Move by project name in description" }
+            SectionHeader { text: qsTr("Move by project name in description") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -270,7 +270,10 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Try to move hours to existing projects. Sets correct project if the project name is found in the description. This is only meant to be used if you have used earlier versions of this app and written your project name in the description. This might take a while."
+                text: qsTr("Try to move hours to existing projects.") + " "
+                + qsTr("Sets correct project if the project name is found in the description.") + " "
+                + qsTr("This is only meant to be used if you have used earlier versions of this app and written your project name in the description.") +" "
+                + qsTr("This might take a while.")
             }
             BackgroundItem {
                 Rectangle {
@@ -282,18 +285,18 @@ Page {
                     ValueButton {
                         id: movingHoursButton
                         anchors.centerIn: parent
-                        label: "Move existing hours"
+                        label: qsTr("Move existing hours")
                         value: ""
                         width: parent.width
                         onClicked: {
-                                remorse.execute(settingsPage,"Moving hours to project in description", function() {
+                                remorse.execute(settingsPage,qsTr("Moving hours to projects in description"), function() {
                                      movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
                                  })
                         }
                     }
                 }
                 onClicked: {
-                    remorse.execute(settingsPage,"Moving hours to project in description", function() {
+                    remorse.execute(settingsPage,qsTr("Moving hours to projects in description"), function() {
                          movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
                      })
                  }
@@ -313,7 +316,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Please be aware!"
+                text: qsTr("Please be aware!")
             }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -324,10 +327,9 @@ Page {
                 ValueButton {
                     id: resetButton
                     anchors.centerIn: parent
-                    label: "Reset database"
+                    label: qsTr("Reset database")
                     width: parent.width
-                    onClicked: remorse.execute(settingsPage,"Resetting database", function() {
-                        console.log("Resetting database");
+                    onClicked: remorse.execute(settingsPage,qsTr("Resetting database"), function() {
                         if (dataContainer != null){
                            settingsPage.dataContainer.resetDatabase();
                            pageStack.replace(Qt.resolvedUrl("FirstPage.qml"));
@@ -346,7 +348,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Warning: You will loose all your Working Hours data if you reset the database!"
+                text: qsTr("Warning: You will loose all your Working Hours data if you reset the database!")
             }
             Rectangle {
                 opacity: 0

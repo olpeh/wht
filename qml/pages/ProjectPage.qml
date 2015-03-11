@@ -30,7 +30,7 @@ import "../config.js" as DB
 Page {
     id: projectPage
     property QtObject dataContainer: null
-    property variant project: {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
+    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
 
     Component.onCompleted: {
         project = getProject(defaultProjectId);
@@ -49,7 +49,7 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
-        return {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
     }
 
     property int projectAmount: projects.length
@@ -77,32 +77,32 @@ Page {
             id: summaryModel
             ListElement {
                 hours: "0"
-                section: "Today"
+                section: qsTr("Today")
                 hoursLast: "0"
-                sectionLast: "Yesterday"
+                sectionLast: qsTr("Yesterday")
             }
             ListElement {
                 hours: "0"
-                section: "This week"
+                section: qsTr("This week")
                 hoursLast: "0"
-                sectionLast: "Last week"
+                sectionLast: qsTr("Last week")
             }
             ListElement {
                 hours: "0"
-                section: "This month"
+                section: qsTr("This month")
                 hoursLast: "0"
-                sectionLast: "Last month"
+                sectionLast: qsTr("Last month")
             }
             ListElement {
                 hours: "0"
-                section: "This year"
+                section: qsTr("This year")
                 hoursLast: "0"
-                sectionLast: "All"
+                sectionLast: qsTr("All")
             }
         }
         SilicaListView {
             id: listView
-            header: PageHeader { title: "Hours for "+project.name }
+            header: PageHeader { title: qsTr("Hours for") + " " +project.name }
             anchors.fill: parent
             model: summaryModel
             delegate: Item {
