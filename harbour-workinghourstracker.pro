@@ -41,7 +41,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
-TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts
+TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
+    translations/harbour-workinghourstracker-zh_CN.ts
 
 HEADERS += \
     src/SettingsClass.h
