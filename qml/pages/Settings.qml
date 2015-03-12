@@ -205,10 +205,11 @@ Page {
                 id: currencyTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {settings.setCurrencyString(currencyTextArea.text); currencyString =currencyTextArea.text; focus = false}
+                EnterKey.onClicked: focus = false
                 width: parent.width
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
+                onFocusChanged: { settings.setCurrencyString(currencyTextArea.text); currencyString = currencyTextArea.text; }
             }
 
             SectionHeader { text: qsTr("Move all hours to default") }
