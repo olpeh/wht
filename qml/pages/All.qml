@@ -259,8 +259,8 @@ Page {
             }
             RemorseItem { id: remorse }
             function remove() {
-                console.log(index)
-                console.log(model.uid)
+                //console.log(index)
+                //console.log(model.uid)
                 remorse.execute(myListItem, qsTr("Removing"), function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
 
             }
