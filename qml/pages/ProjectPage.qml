@@ -77,27 +77,34 @@ Page {
             id: summaryModel
             ListElement {
                 hours: "0"
-                section: qsTr("Today")
                 hoursLast: "0"
-                sectionLast: qsTr("Yesterday")
             }
             ListElement {
                 hours: "0"
-                section: qsTr("This week")
                 hoursLast: "0"
-                sectionLast: qsTr("Last week")
             }
             ListElement {
                 hours: "0"
-                section: qsTr("This month")
                 hoursLast: "0"
-                sectionLast: qsTr("Last month")
             }
             ListElement {
                 hours: "0"
-                section: qsTr("This year")
                 hoursLast: "0"
-                sectionLast: qsTr("All")
+            }
+            function section(index) {
+                if (section["text"] === undefined) {
+                    section.text = [
+                        qsTr("Today"),
+                        qsTr("This week"),
+                        qsTr("This month"),
+                        qsTr("This year"),
+                        qsTr("Yesterday"),
+                        qsTr("Last week"),
+                        qsTr("Last month"),
+                        qsTr("All")
+                    ]
+                }
+                return section.text[index]
             }
         }
         SilicaListView {
@@ -123,7 +130,7 @@ Page {
                         Label {
                             y: Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.sectionLast
+                            text: listView.model.section(index +4)
                         }
                         Label {
                             y: 3 * Theme.paddingLarge
@@ -133,8 +140,7 @@ Page {
                         }
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: model.sectionLast, projectId: project.id})
-                        console.log(project.id)
+                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index +4), projectId: project.id})
                     }
                 }
                 BackgroundItem {
@@ -150,7 +156,7 @@ Page {
                         Label {
                             y: Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.section
+                            text: listView.model.section(index)
                         }
                         Label {
                             y:3 * Theme.paddingLarge
@@ -159,7 +165,7 @@ Page {
                             font.bold: true
                         }
                     }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: model.section, projectId: project.id})
+                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index), projectId: project.id})
                 }
             }
         }
