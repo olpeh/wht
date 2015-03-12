@@ -114,7 +114,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: "Today: " + today
+                text: qsTr("Today")+ ": " + today
             }
         }
         Rectangle {
@@ -129,7 +129,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: "Week: " + thisWeek
+                text: qsTr("Week")+ ": " + thisWeek
             }
         }
         Rectangle {
@@ -145,7 +145,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: "Month: " + thisMonth
+                text: qsTr("Month")+ ": " + thisMonth
             }
         }
         Rectangle {

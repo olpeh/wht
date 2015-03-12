@@ -30,7 +30,7 @@ import "../config.js" as DB
 Page {
     id: projectPage
     property QtObject dataContainer: null
-    property variant project: {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
+    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
 
     Component.onCompleted: {
         project = getProject(defaultProjectId);
@@ -49,7 +49,7 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
-        return {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
     }
 
     property int projectAmount: projects.length
@@ -77,32 +77,39 @@ Page {
             id: summaryModel
             ListElement {
                 hours: "0"
-                section: "Today"
                 hoursLast: "0"
-                sectionLast: "Yesterday"
             }
             ListElement {
                 hours: "0"
-                section: "This week"
                 hoursLast: "0"
-                sectionLast: "Last week"
             }
             ListElement {
                 hours: "0"
-                section: "This month"
                 hoursLast: "0"
-                sectionLast: "Last month"
             }
             ListElement {
                 hours: "0"
-                section: "This year"
                 hoursLast: "0"
-                sectionLast: "All"
+            }
+            function section(index) {
+                if (section["text"] === undefined) {
+                    section.text = [
+                        qsTr("Today"),
+                        qsTr("This week"),
+                        qsTr("This month"),
+                        qsTr("This year"),
+                        qsTr("Yesterday"),
+                        qsTr("Last week"),
+                        qsTr("Last month"),
+                        qsTr("All")
+                    ]
+                }
+                return section.text[index]
             }
         }
         SilicaListView {
             id: listView
-            header: PageHeader { title: "Hours for "+project.name }
+            header: PageHeader { title: qsTr("Hours for") + " " +project.name }
             anchors.fill: parent
             model: summaryModel
             delegate: Item {
@@ -123,7 +130,7 @@ Page {
                         Label {
                             y: Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.sectionLast
+                            text: listView.model.section(index +4)
                         }
                         Label {
                             y: 3 * Theme.paddingLarge
@@ -133,8 +140,7 @@ Page {
                         }
                     }
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: model.sectionLast, projectId: project.id})
-                        console.log(project.id)
+                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index +4), projectId: project.id})
                     }
                 }
                 BackgroundItem {
@@ -150,7 +156,7 @@ Page {
                         Label {
                             y: Theme.paddingLarge
                             anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.section
+                            text: listView.model.section(index)
                         }
                         Label {
                             y:3 * Theme.paddingLarge
@@ -159,7 +165,7 @@ Page {
                             font.bold: true
                         }
                     }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: model.section, projectId: project.id})
+                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index), projectId: project.id})
                 }
             }
         }

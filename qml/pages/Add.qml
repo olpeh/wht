@@ -31,13 +31,13 @@ Dialog {
     canAccept: validateHours()
     property QtObject dataContainer: null
     property QtObject editMode: null
-    property string description: "No description"
+    property string description: qsTr("No description")
     property string project: "" //default
     property double duration: 8
     property double breakDuration: 0
     property double netDuration: 8
     property string uid: "0"
-    property string dateText: "Today"
+    property string dateText: qsTr("Today")
     property date selectedDate : new Date()
     property date timeNow : new Date()
     property int startSelectedHour : timeNow.getHours() - 8
@@ -59,7 +59,7 @@ Dialog {
         var date = new Date(dateText);
         var now = new Date();
         if(now.toDateString() === date.toDateString())
-            datePicked.value = "Today"
+            datePicked.value = qsTr("Today")
         else {
             var splitted = date.toDateString().split(" ");
             datePicked.value = splitted[1] + " " +splitted[2] + " "+ splitted[3];
@@ -156,7 +156,6 @@ Dialog {
 
     //end now
     function setEndNow() {
-        console.log("end now")
         var now = new Date()
         endSelectedHour = now.getHours()
         endSelectedMinute= now.getMinutes()
@@ -166,7 +165,6 @@ Dialog {
 
     //start now
     function setStartNow() {
-        console.log("start now")
         var now = new Date()
         startSelectedHour = now.getHours()
         startSelectedMinute= now.getMinutes()
@@ -178,34 +176,30 @@ Dialog {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
-        //contentHeight: column.y + column.height
         Column {
             id: column
             DialogHeader {
-                acceptText: "Save"
-                cancelText: "Cancel"
+                acceptText: qsTr("Save")
+                cancelText: qsTr("Cancel")
             }
             spacing: 20
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
-            /*SectionHeader { text: "Select date and time" }*/
             TextSwitch {
                 id: timeSwitch
                 checked: true
-                text: "Ends now"
-                description: "Endtime will be set to now."
+                text: qsTr("Ends now")
+                description: qsTr("Endtime will be set to now.")
                 onCheckedChanged: {
-                    timeSwitch.text = checked ? "Ends now" : "Starts now"
-                    timeSwitch.description = checked ? "Endtime will be set to now." : "Starttime will be set to now."
+                    timeSwitch.text = checked ? qsTr("Ends now") : qsTr("Starts now")
+                    timeSwitch.description = checked ? qsTr("Endtime will be set to now.") : qsTr("Starttime will be set to now.")
                     if(checked){
                         setEndNow()
-                        //fixedSwitch.checked = true
                     }
                     else {
                         setStartNow()
-                        //fixedSwitch.checked = false
                     }
                 }
             }
@@ -230,7 +224,7 @@ Dialog {
                             })
                         }
 
-                        label: "Date:"
+                        label: qsTr("Date:")
                         value: dateText
                         width: parent.width
                         onClicked: openDateDialog()
@@ -274,7 +268,7 @@ Dialog {
                              })
                         }
 
-                        label: "Start time:"
+                        label: qsTr("Start time:")
                         value: pad(startSelectedHour) + ":" + pad(startSelectedMinute)
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -317,7 +311,7 @@ Dialog {
                             })
                         }
 
-                        label: "End time:"
+                        label: qsTr("End time:")
                         value: pad(endSelectedHour) + ":" + pad(endSelectedMinute)
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -328,11 +322,11 @@ Dialog {
             TextSwitch {
                 id: fixedSwitch
                 checked: true
-                text: "Endtime stays fixed"
-                description: "Starttime will flex if duration is changed."
+                text: qsTr("Endtime stays fixed")
+                description: qsTr("Starttime will flex if duration is changed.")
                 onCheckedChanged: {
-                    fixedSwitch.text = checked ? "Endtime stays fixed" : "Starttime stays fixed"
-                    fixedSwitch.description = checked ? "Starttime will flex if duration is changed." : "Endtime will flex if duration is changed."
+                    fixedSwitch.text = checked ? qsTr("Endtime stays fixed") : qsTr("Starttime stays fixed")
+                    fixedSwitch.description = checked ? qsTr("Starttime will flex if duration is changed.") : qsTr("Endtime will flex if duration is changed.")
                     if(checked)
                         endTimeStaysFixed = true
                     else
@@ -362,11 +356,9 @@ Dialog {
                                 value = dialog.timeText
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
-                                console.log(durationMinute)
                                 duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                                 //console.log(duration)
                                 value = pad(durationHour) + ":" + pad(durationMinute)
-                                console.log(countMinutes(duration))
                                 if(endTimeStaysFixed)
                                     updateStartTime()
                                 else
@@ -374,7 +366,7 @@ Dialog {
                             })
                         }
 
-                        label: "Duration: "
+                        label: qsTr("Duration")+": "
                         value: countHours(duration) + ":" + countMinutes(duration);
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -412,7 +404,7 @@ Dialog {
                                 updateNetDuration();
                             })
                         }
-                        label: "Break: "
+                        label: qsTr("Break")+": "
                         value: "00:00"
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -453,7 +445,7 @@ Dialog {
                                     updateEndTime()
                             })
                         }
-                        label: "Net duration: "
+                        label: qsTr("Net duration")+": "
                         value: countHours(netDuration) +":"+countMinutes(netDuration)
                         width: parent.width
                         onClicked: openTimeDialog()
@@ -507,7 +499,7 @@ Dialog {
                         }
                     }
                 }
-                description: "Add or edit projects in settings"
+                description: qsTr("Add or edit projects in settings")
             }
 
             ListModel {
@@ -516,11 +508,10 @@ Dialog {
 
             TextField{
                 id: descriptionTextArea
-                //focus: true
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
-                placeholderText: "Enter an optional description"
+                placeholderText: qsTr("Enter an optional description")
             }
             Item {
                 width: parent.width
@@ -557,9 +548,9 @@ Dialog {
                     timeSwitch.checked = false
                 else
                     console.log("Error when getting endsNowByDefault")
-                if (description != "No description")
+                if (description != qsTr("No description"))
                     descriptionTextArea.text = description;
-                if(dateText != "Today")
+                if(dateText != qsTr("Today"))
                     updateDateText()
                 if (breakDuration > 0) {
                     updateBreakDuration();

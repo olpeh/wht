@@ -47,28 +47,28 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
-        return {'name':'Project was not found', 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
     }
 
     function getAllHours(sortby){
         if (dataContainer != null && section != ""){
             //console.log(section)
             //console.log(projectId)
-            if (section === "Today")
+            if (section === qsTr("Today"))
                 return all.dataContainer.getAllDay(0, sortby, projectId);
-            else if (section === "Yesterday")
+            else if (section === qsTr("Yesterday"))
                 return all.dataContainer.getAllDay(1, sortby, projectId);
-            else if(section === "This week")
+            else if(section === qsTr("This week"))
                 return all.dataContainer.getAllWeek(0, sortby, projectId);
-            else if(section === "Last week")
+            else if(section === qsTr("Last week"))
                 return all.dataContainer.getAllWeek(1, sortby, projectId);
-            else if (section === "This month")
+            else if (section === qsTr("This month"))
                 return all.dataContainer.getAllMonth(0, sortby, projectId);
-            else if (section === "Last month")
+            else if (section === qsTr("Last month"))
                 return all.dataContainer.getAllMonth(1, sortby, projectId);
-            else if (section === "This year")
+            else if (section === qsTr("This year"))
                 return all.dataContainer.getAllThisYear(sortby, projectId);
-            else if (section === "All")
+            else if (section === qsTr("All"))
                 return all.dataContainer.getAll(sortby, projectId);
             else{
                 console.log("Unknown section");
@@ -143,7 +143,7 @@ Page {
         PullDownMenu {
             visible: listView.count != 0 && projectId === ""
             MenuItem {
-                text: sortedByProject ? "Sort by date" : "Sort by project"
+                text: sortedByProject ? qsTr("Sort by date") : qsTr("Sort by project")
                 onClicked: {
                     sortedByProject = !sortedByProject;
                     if(sortedByProject){
@@ -164,7 +164,7 @@ Page {
 
         ViewPlaceholder {
                     enabled: listView.count == 0
-                    text: "No items in this category yet"
+                    text: qsTr("No items in this category yet")
         }
         delegate: Item {
             id: myListItem
@@ -248,7 +248,6 @@ Page {
 
                 }
                 onPressAndHold: {
-                    console.log("Press and hold")
                     if (!contextMenu)
                         contextMenu = contextMenuComponent.createObject(listView)
                     contextMenu.show(myListItem)
@@ -260,9 +259,9 @@ Page {
             }
             RemorseItem { id: remorse }
             function remove() {
-                console.log(index)
-                console.log(model.uid)
-                remorse.execute(myListItem, "Deleting", function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
+                //console.log(index)
+                //console.log(model.uid)
+                remorse.execute(myListItem, qsTr("Removing"), function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
 
             }
         }
@@ -271,10 +270,9 @@ Page {
            ContextMenu {
                id: menu
                MenuItem {
-                   text: "Remove"
+                   text: qsTr("Remove")
                    onClicked: {
                        menu.parent.remove();
-                       console.log("Remove clicked!")
                    }
                }
            }

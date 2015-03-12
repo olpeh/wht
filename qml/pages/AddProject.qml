@@ -67,45 +67,44 @@ Dialog {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
-        //contentHeight: column.y + column.height
         Column {
             id: column
             DialogHeader {
-                acceptText: "Save"
-                cancelText: "Cancel"
+                acceptText: qsTr("Save")
+                cancelText: qsTr("Cancel")
             }
             spacing: 20
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
-            SectionHeader { text: "Required" }
+            SectionHeader { text: qsTr("Required") }
             TextField{
                 id: nameTextArea
                 focus: !editMode
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
-                placeholderText: "Please enter a name for the project"
+                placeholderText: qsTr("Please enter a name for the project")
             }
             TextSwitch {
                 id: defaultSwitch
                 checked: false
-                text: "Make this the default project"
+                text: qsTr("Make this the default project")
             }
             Separator {
                 width: parent.width
             }
-            SectionHeader { text: "Optional" }
+            SectionHeader { text: qsTr("Optional") }
             TextField{
                 id: hourlyRateTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false //budgetTextArea.focus = true
                 width: parent.width
-                placeholderText: "Hourly rate"
+                placeholderText: qsTr("Hourly rate")
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
-                label: "Hourly rate"
+                label: qsTr("Hourly rate")
             }
             /* Lets hide these for now...
             TextField{
@@ -114,9 +113,9 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-m-enter-next"
                 EnterKey.onClicked: hourBudgetTextArea.focus = true
                 width: parent.width
-                placeholderText: "Contract rate"
+                placeholderText: qsTr("Contract rate")
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
-                label: "Contract rate"
+                label: qsTr("Contract rate")
             }
             TextField{
                 id: budgetTextArea
@@ -124,9 +123,9 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
-                placeholderText: "Budget"
+                placeholderText: qsTr("Budget")
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
-                label: "Budget"
+                label: qsTr("Budget")
             }
             TextField{
                 id: hourBudgetTextArea
@@ -134,9 +133,9 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
                 width: parent.width
-                placeholderText: "Hour budget"
+                placeholderText: qsTr("Hour budget")
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
-                label: "Hour budget"
+                label: qsTr("Hour budget")
             }*/
             BackgroundItem {
                 Rectangle {
@@ -149,7 +148,7 @@ Dialog {
                     height: 80
                     Label {
                         anchors.centerIn: parent
-                        text: "Select label color"
+                        text: qsTr("Select label color")
                         font.bold: true
                     }
                 }
@@ -172,7 +171,7 @@ Dialog {
                     height: 80
                     Label {
                         anchors.centerIn: parent
-                        text: "Reset coloring"
+                        text: qsTr("Reset coloring")
                         font.bold: true
                     }
                 }
@@ -199,7 +198,6 @@ Dialog {
     }
     onDone: {
             if (result == DialogResult.Accepted) {
-                console.log("Save the project!")
                 saveProject()
             }
     }

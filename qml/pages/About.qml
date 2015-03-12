@@ -35,7 +35,7 @@ Page {
         contentHeight: column.y + column.height
         PullDownMenu {
             MenuItem {
-                text: "How to use"
+                text: qsTr("How to use")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("HowTo.qml"))
                 }
@@ -44,10 +44,10 @@ Page {
         Column {
             id: column
             PageHeader {
-                title: "About"
+                title: qsTr("About")
             }
             width: parent.width
-            SectionHeader { text: "General" }
+            SectionHeader { text: qsTr("General") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -58,9 +58,9 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours."
+                text: qsTr("Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours.")
             }
-            SectionHeader { text: "Usage" }
+            SectionHeader { text: qsTr("Usage") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -71,14 +71,14 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Read more about how to use this app by accessing the pulley menu or clicking the button below."
+                text: qsTr("Read more about how to use this app by accessing the pulley menu or clicking the button below.")
             }
             Button {
-              text: "How to use"
+              text: qsTr("How to use")
               anchors.horizontalCenter: parent.horizontalCenter
               onClicked: pageStack.push(Qt.resolvedUrl("HowTo.qml"))
             }
-            SectionHeader { text: "Author" }
+            SectionHeader { text: qsTr("Author") }
             Text {
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
@@ -106,7 +106,7 @@ Page {
                 height: 10
             }
 
-            SectionHeader { text: "Donate" }
+            SectionHeader { text: qsTr("Donate") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -117,7 +117,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Please donate if you like my work. Donations help me to use more time on development."
+                text: qsTr("Please donate if you like my work. Donations help me to use more time on development.")
             }
             Button {
               text: "Paypal EUR"
@@ -140,15 +140,14 @@ Page {
                 readOnly: true
                 focusOnClick: true
                 onClicked: {
-                    console.log("Clicked")
                     selectAll()
                     copy()
-                    bitcoinText.label = "Copied to clipboard"
+                    bitcoinText.label = qsTr("Copied to clipboard")
                 }
-                label: "Donate to my bitcoin account"
+                label: qsTr("Donate to my bitcoin account")
                 text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
             }
-            SectionHeader { text: "Source" }
+            SectionHeader { text: qsTr("Source") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -159,19 +158,19 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Contributions, bug reports and ideas are welcome. Please report issues in github. Link below."
+                text: qsTr("Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.")
             }
             Item {
                 width: parent.width
                 height: 10
             }
             Button {
-              text: "Issues in GitHub"
+              text: qsTr("Issues in GitHub")
               anchors.horizontalCenter: parent.horizontalCenter
               onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
             }
             Button {
-              text: "Project in GitHub"
+              text: qsTr("Project in GitHub")
               anchors.horizontalCenter: parent.horizontalCenter
               onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht")
             }
@@ -179,7 +178,7 @@ Page {
                 width: parent.width
                 height: 10
             }
-            SectionHeader { text: "License" }
+            SectionHeader { text: qsTr("License") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -190,7 +189,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: "Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD."
+                text: qsTr("Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD.")
             }
             Item {
                 width: parent.width

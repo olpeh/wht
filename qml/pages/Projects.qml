@@ -52,17 +52,17 @@ Page {
 
         Component.onCompleted: {
             defaultProjectId = settings.getDefaultProjecId();
-            console.log("default project id: ", defaultProjectId);
+            //console.log("default project id: ", defaultProjectId);
             getProjects();
         }
         SilicaListView {
             id: listView
             header: PageHeader {
-                title: "All projects"
+                title: qsTr("All projects")
             }
             PullDownMenu {
                 MenuItem {
-                    text: "Add project"
+                    text: qsTr("Add project")
                     onClicked: {
                         //console.log (dataContainer)
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{prev: projectss})
@@ -77,7 +77,7 @@ Page {
 
             ViewPlaceholder {
                         enabled: listView.count == 0
-                        text: "No projects found"
+                        text: qsTr("No projects found")
             }
             delegate: Item {
                 id: myListItem
@@ -108,7 +108,7 @@ Page {
                             Label {
                                 visible: model.id === defaultProjectId
                                 id: defaultProjectLabel
-                                text: "  (Default project)"
+                                text: "  (" + qsTr("Default project") + ")"
                                 font{
                                     bold: true
                                     pixelSize: Theme.fontSizeMedium
@@ -118,8 +118,7 @@ Page {
                         }
                     }
                     onClicked: {
-                        console.log("Clikkaus")
-                        console.log(model.id, model.name, model.hourlyRate, model.contractRate, model.budget, model.hourBudget, model.labelColor);
+                        //console.log(model.id, model.name, model.hourlyRate, model.contractRate, model.budget, model.hourBudget, model.labelColor);
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{
                                            prev: projectss,
                                            editMode: true,
@@ -133,7 +132,6 @@ Page {
                                        })
                     }
                     onPressAndHold: {
-                        console.log("Press and hold")
                         if (!contextMenu)
                             contextMenu = contextMenuComponent.createObject(listView)
                         contextMenu.show(myListItem)
@@ -143,7 +141,7 @@ Page {
                 function remove() {
                     console.log(index)
                     console.log(model.id)
-                    remorse.execute(myListItem, "Deleting", function() { DB.removeProject(model.id); projectsModel.remove(index);})
+                    remorse.execute(myListItem, qsTr("Removing"), function() { DB.removeProject(model.id); projectsModel.remove(index);})
                 }
             }
             Component {
@@ -151,10 +149,10 @@ Page {
                ContextMenu {
                    id: menu
                    MenuItem {
-                       text: "Remove"
+                       text: qsTr("Remove")
                        onClicked: {
                            menu.parent.remove();
-                           console.log("Remove clicked!")
+                           //console.log("Remove clicked!")
                        }
                    }
                }
