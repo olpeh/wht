@@ -41,7 +41,7 @@ CoverBackground {
             }
             else {
                //console.log("refresh triggered");
-               firstPage.refreshCover();
+               firstPage.getHours();
             }
         }
     }
@@ -228,9 +228,6 @@ CoverBackground {
                 }
             }
         }
-    }
-    Component.onCompleted: {
-        firstPage.refreshCover()
     }
 }
 

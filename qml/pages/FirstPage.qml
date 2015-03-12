@@ -39,10 +39,14 @@ Page {
         summaryModel.set(3,{"hours": "0", "hoursLast": "0"});
      }
     function getHours() {
-        //Update hours view after adding or deleting hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(0).toString().toHHMM(), "hoursLast": DB.getHoursDay(1).toString().toHHMM()});
-        summaryModel.set(1,{"hours": DB.getHoursWeek(0).toString().toHHMM(), "hoursLast": DB.getHoursWeek(1).toString().toHHMM()});
-        summaryModel.set(2,{"hours": DB.getHoursMonth(0).toString().toHHMM(), "hoursLast": DB.getHoursMonth(1).toString().toHHMM()});
+        //Update hours view and cover
+        console.log("Updating hours")
+        today = DB.getHoursDay(0).toString().toHHMM()
+        thisWeek = DB.getHoursWeek(0).toString().toHHMM()
+        thisMonth = DB.getHoursMonth(0).toString().toHHMM()
+        summaryModel.set(0,{"hours": today, "hoursLast": DB.getHoursDay(1).toString().toHHMM()});
+        summaryModel.set(1,{"hours": thisWeek, "hoursLast": DB.getHoursWeek(1).toString().toHHMM()});
+        summaryModel.set(2,{"hours": thisMonth, "hoursLast": DB.getHoursMonth(1).toString().toHHMM()});
         summaryModel.set(3,{"hours": DB.getHoursYear(0).toString().toHHMM(), "hoursLast": DB.getHoursAll().toString().toHHMM()});
     }
     function setHours(uid,date,duration,description, breakDuration) {
@@ -227,11 +231,6 @@ Page {
         breakDuration=0;
     }
 
-    function refreshCover() {
-        today = DB.getHoursDay(0).toString().toHHMM()
-        thisWeek = DB.getHoursWeek(0).toString().toHHMM()
-        thisMonth = DB.getHoursMonth(0).toString().toHHMM()
-    }
     onStatusChanged: {
         if (root.status === PageStatus.Active && projects.length > 1) {
             if (pageStack._currentContainer.attachedContainer == null) {
@@ -520,7 +519,7 @@ Page {
                 BackgroundItem {
                     width: timerItem.width /3
                     height: 140
-                    x: 2 * timerItem.width/3
+                    x: 2 * timerItem.width /3
                     function openTimeDialog() {
                         var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                         hourMode: (DateTime.TwentyFourHours),

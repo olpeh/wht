@@ -565,7 +565,7 @@ Dialog {
             if (result == DialogResult.Accepted) {
                 saveHours();
                 if (dataContainer != null)
-                    page.dataContainer.refreshCover();
+                    page.dataContainer.getHours();
             }
             if(fromCover)
                 appWindow.deactivate()
