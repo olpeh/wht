@@ -16,12 +16,6 @@
         <translation>概要</translation>
     </message>
     <message>
-        <source>Working Hours Tracker for SailfishOS
-A simple working hours tracker to keep track on working hours.</source>
-        <translation type="vanished">Sailfish系统的Working Hours Tracker
-一个简易的工作时长记录器，可以持续记录工作时间。</translation>
-    </message>
-    <message>
         <source>Usage</source>
         <translation>用法</translation>
     </message>
@@ -70,15 +64,16 @@ A simple working hours tracker to keep track on working hours.</source>
         <translation>许可协议</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala
-The source code is licensed under BSD.</source>
-        <translation type="vanished">Copyright (C) 2015 Olavi Haapala
-源代码在BSD许可协议下发布。</translation>
-    </message>
-    <message>
         <source>Working Hours Tracker for SailfishOS 
 A simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sailfish系统的Working Hours Tracker
+        一个简易的工作时长记录器，可以持续记录工作时间。</translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2015 Olavi Haapala 
+The source code is licensed under BSD.</source>
+        <translation>Copyright (C) 2015 Olavi Haapala
+        源代码在BSD许可协议下发布。</translation>
     </message>
 </context>
 <context>
