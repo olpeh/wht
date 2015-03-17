@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Tue Mar 17 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.1-1
+- Bugfixes: #10, #13 and #6
+- Added translations for ca, zh_CN, nl_NL, fi, de, es
+
 * Sat Mar 07 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.0-1
 - Initial harbour release
 - Updated about page

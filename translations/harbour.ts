@@ -30,7 +30,10 @@ Current features:
 
 Please report any issues and send ideas for improvements.
 
-Donations are also welcome.</source>
+Donations are also welcome.
+
+If you want to contribute to the translations please do so by following the link below.
+            </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
