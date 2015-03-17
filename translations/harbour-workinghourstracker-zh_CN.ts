@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -262,10 +264,6 @@ The source code is licensed under BSD.</source>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>总计</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>持续时间</translation>
     </message>
@@ -278,12 +276,16 @@ The source code is licensed under BSD.</source>
         <translation>记录</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>总结</translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>出了点问题</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>总计</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>总结</translation>
     </message>
 </context>
 <context>

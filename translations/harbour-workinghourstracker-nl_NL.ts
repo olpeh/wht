@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nl_NL">
 <context>
     <name>About</name>
     <message>
@@ -262,10 +264,6 @@ De broncode is gelicenseerd onder de BSD-licentie.</translation>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>Totaal</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>Duur</translation>
     </message>
@@ -278,12 +276,16 @@ De broncode is gelicenseerd onder de BSD-licentie.</translation>
         <translation>Invoeren</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>Samenvatting voor</translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>Er ging iets mis</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>Totaal</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>Samenvatting voor</translation>
     </message>
 </context>
 <context>

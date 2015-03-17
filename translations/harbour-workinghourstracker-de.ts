@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="de">
 <context>
     <name>About</name>
     <message>
@@ -262,10 +264,6 @@ Der Quellcode steht unter der der BSD Lizenz.</translation>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>Insgesamt</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>Dauer</translation>
     </message>
@@ -278,12 +276,16 @@ Der Quellcode steht unter der der BSD Lizenz.</translation>
         <translation>Einträge</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>Zusammenfassung für</translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>Etwas ist schief gelaufen</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>Insgesamt</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>Zusammenfassung für</translation>
     </message>
 </context>
 <context>

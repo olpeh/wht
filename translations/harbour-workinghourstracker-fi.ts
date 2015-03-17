@@ -279,7 +279,7 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
     </message>
     <message>
         <source>Summary for </source>
-        <translation>Yhteenveto kategorialle</translation>
+        <translation>Yhteenveto: </translation>
     </message>
     <message>
         <source>Something went wrong</source>
@@ -716,7 +716,7 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
     </message>
     <message>
         <source>Move all hours to default project</source>
-        <translation>Siirrä kaikki tunnit oletusprojektiin</translation>
+        <translation>Siirrä kaikki tunnit</translation>
     </message>
     <message>
         <source>Done</source>
@@ -728,7 +728,7 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
     </message>
     <message>
         <source>Move by project name in description</source>
-        <translation>Siirrä kuvauksessa olevan projektin nimen perusteella</translation>
+        <translation>Siirrä projektin nimen perusteella</translation>
     </message>
     <message>
         <source>Try to move hours to existing projects.</source>
@@ -748,7 +748,7 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
     </message>
     <message>
         <source>Move existing hours</source>
-        <translation>Siirrä olemassaolevat tunnit</translation>
+        <translation>Siirrä tunnit</translation>
     </message>
     <message>
         <source>Moving hours to projects in description</source>

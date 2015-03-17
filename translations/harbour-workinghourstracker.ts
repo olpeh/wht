@@ -262,10 +262,6 @@ The source code is licensed under BSD.</source>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -278,11 +274,15 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Summary for </source>
+        <source>Something went wrong</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Something went wrong</source>
+        <source>Total</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary for</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

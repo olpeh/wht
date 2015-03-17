@@ -14,9 +14,9 @@
         <translation>General</translation>
     </message>
     <message>
-        <source>Working Hours Tracker for SailfishOS 
+        <source>Working Hours Tracker for SailfishOS
 A simple working hours tracker to keep track on working hours.</source>
-        <translation>Working Hours Tracker para SailfishOS 
+        <translation>Working Hours Tracker para SailfishOS
 Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</translation>
     </message>
     <message>
@@ -68,9 +68,9 @@ Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</
         <translation>Licencia</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
+        <source>Copyright (C) 2015 Olavi Haapala
 The source code is licensed under BSD.</source>
-        <translation>Copyright (C) 2015 Olavi Haapala 
+        <translation>Copyright (C) 2015 Olavi Haapala
 El código fuente está autorizado bajo la licencia BSD.</translation>
     </message>
 </context>

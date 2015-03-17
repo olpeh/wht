@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ca">
 <context>
     <name>About</name>
     <message>
@@ -262,10 +264,6 @@ El codi font està sota llicència BSD.</translation>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>Total</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>Durada</translation>
     </message>
@@ -278,12 +276,16 @@ El codi font està sota llicència BSD.</translation>
         <translation>Entrades</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>Resum per</translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>S&apos;ha produït un error</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>Total</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>Resum per</translation>
     </message>
 </context>
 <context>
