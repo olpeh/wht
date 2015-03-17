@@ -7,9 +7,9 @@ Name=Work Hours
 # Danish (da)
 #Name[da]=The Name
 # German (de)
-#Name[de]=Zeiterfassung
+Name[de]=Zeiterfassung
 # Spanish (es)
-#Name[es]=The Name
+Name[es]=Work Hours
 # Finnish (fi)
 Name[fi]=Kellokalle
 # French (fr)
@@ -30,4 +30,7 @@ Name[fi]=Kellokalle
 Name[zh_CN]=工时大师
 # Traditional Chinese (zh_hk)
 #Name[zh_HK]=The Name
-
+# Catalanian (ca)
+Name[ca]=Work Hours
+# Dutch (nl_NL)
+Name[nl_NL]=Work Hours
