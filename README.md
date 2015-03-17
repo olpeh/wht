@@ -57,6 +57,10 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## Changelog
 
+### 1.0.1-1
+- Bugfixes: #10, #13 and #6
+- Added translations for ca, zh_CN, nl_NL, fi, de, es
+
 ### 1.0.0-1
 - Initial harbour release
 - Updated about page
