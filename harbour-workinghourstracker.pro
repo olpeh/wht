@@ -42,7 +42,11 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
-    translations/harbour-workinghourstracker-zh_CN.ts
+    translations/harbour-workinghourstracker-zh_CN.ts \
+    translations/harbour-workinghourstracker-de.ts \
+    translations/harbour-workinghourstracker-nl_NL.ts \
+    translations/harbour-workinghourstracker-es.ts \
+    translations/harbour-workinghourstracker-ca.ts
 
 HEADERS += \
     src/SettingsClass.h
