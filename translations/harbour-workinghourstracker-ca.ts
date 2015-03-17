@@ -1,774 +1,774 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
 <context>
     <name>About</name>
     <message>
         <source>How to use</source>
-        <translation>Käyttöohjeet</translation>
+        <translation>Guia d&apos;ús</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Tietoa</translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Yleistä</translation>
+        <translation>General</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS 
 A simple working hours tracker to keep track on working hours.</source>
-        <translation>Working Hours Tracker for SailfishOS
-Yksinkertainen ja helppokäyttöinen ohjelma työajanseurantaan.</translation>
+        <translation>Working Hours Tracker per a SailfishOS
+Un control·lador senzill i funcional per fer el seguiment de les hores de treball.</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation>Käyttäminen</translation>
+        <translation>Ús</translation>
     </message>
     <message>
         <source>Read more about how to use this app by accessing the pulley menu or clicking the button below.</source>
-        <translation>Lue lisää käyttöohjeita valitsemalla käyttöohjeet alasvetovalikosta tai klikkaamalla allaolevaa linkkiä.</translation>
+        <translation>Trobareu més informació sobre l&apos;ús d&apos;aquesta aplicació si accediu al menú lliscant superior o bé cliqueu al botó inferior.</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation>Kehittäjä</translation>
+        <translation>Autor</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>Lahjoita</translation>
+        <translation>Feu una donació</translation>
     </message>
     <message>
         <source>Please donate if you like my work. Donations help me to use more time on development.</source>
-        <translation>Ole ystävällinen ja lahjoita, mikäli pidät työstäni. Lahjoitusten ansiosta voin käyttää enemmän aikaa kehitykseen.</translation>
+        <translation>Si us agrada la feina de l&apos;autor podeu fer una donació per ajudar-lo en el desenvolupament.</translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
-        <translation>Kopioitu leikepöydälle</translation>
+        <translation>S&apos;ha copiat al porta-retalls</translation>
     </message>
     <message>
         <source>Donate to my bitcoin account</source>
-        <translation>Lahjoita bitcoin tililleni</translation>
+        <translation>Feu una donació al compte de bitcoin de l&apos;autor</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation>Lähdekoodi</translation>
+        <translation>Origen</translation>
     </message>
     <message>
         <source>Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.</source>
-        <translation>Bugi-ilmoitukset, ideat ja apu ovat tervetulleita. Bugi-ilmoitukset mielellään githubiin allaolevan linkin kautta.</translation>
+        <translation>Les contribucions, informes d&apos;error i idees són benvingudes. Podeu informar les incidències a github, amb l&apos;enllaç aquí sota.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation>Bugit GitHubissa</translation>
+        <translation>Incidències a GitHub</translation>
     </message>
     <message>
         <source>Project in GitHub</source>
-        <translation>Projekti GitHubissa</translation>
+        <translation>Projecte a GitHub</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>Lisenssi</translation>
+        <translation>Llicència</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD.</source>
-        <translation>Copyright (C) 2015 Olavi Haapala
-Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
+        <translation>Copyright (C) 2015 Olavi Haapala 
+El codi font està sota llicència BSD.</translation>
     </message>
 </context>
 <context>
     <name>Add</name>
     <message>
         <source>Project</source>
-        <translation>Projekti</translation>
+        <translation>Projecte</translation>
     </message>
     <message>
         <source>No description</source>
-        <translation>Ei kuvausta</translation>
+        <translation>No hi ha cap descripció</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Tänään</translation>
+        <translation>Avui</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Tallenna</translation>
+        <translation>Desa</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Peruuta</translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Ends now</source>
-        <translation>Päättyy nyt</translation>
+        <translation>Finalitza ara</translation>
     </message>
     <message>
         <source>Endtime will be set to now.</source>
-        <translation>Lopetusaika asetetaan tähän hetkeen.</translation>
+        <translation>L&apos;hora de finalització s&apos;establirà a &apos;ara&apos;.</translation>
     </message>
     <message>
         <source>Starts now</source>
-        <translation>Alkaa nyt</translation>
+        <translation>S&apos;inicia ara</translation>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation>Aloitusaika asetetaan tähän hetkeen.</translation>
+        <translation>L&apos;hora d&apos;inici s&apos;establirà a &apos;ara&apos;.</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Päivämäärä:</translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Start time:</source>
-        <translation>Aloitusaika:</translation>
+        <translation>Hora d&apos;inici:</translation>
     </message>
     <message>
         <source>End time:</source>
-        <translation>Lopetusaika:</translation>
+        <translation>Hora de finalització:</translation>
     </message>
     <message>
         <source>Endtime stays fixed</source>
-        <translation>Lopetusaika pysyy muuttumattomana</translation>
+        <translation>L&apos;hora de finalització queda fixada</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation>Aloitusaika siirtyy, jos kestoa muutetaan.</translation>
+        <translation>L&apos;hora d&apos;inici pot variar si es canvia la durada.</translation>
     </message>
     <message>
         <source>Starttime stays fixed</source>
-        <translation>Aloitusaika pysyy muuttumattomana</translation>
+        <translation>L&apos;hora d&apos;inici queda fixada</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation>Lopetusaika siirtyy, jos kestoa muutetaan.</translation>
+        <translation>L&apos;hora de finalització pot variar si es canvia la durada.</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Kesto</translation>
+        <translation>Durada</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>Tauko</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Net duration</source>
-        <translation>Kokonaiskesto</translation>
+        <translation>Durada neta</translation>
     </message>
     <message>
         <source>Add or edit projects in settings</source>
-        <translation>Lisää tai muokkaa projekteja asetuksissa</translation>
+        <translation>Afegiu o editeu projectes a la configuració</translation>
     </message>
     <message>
         <source>Enter an optional description</source>
-        <translation>Lisää vapaaehtoinen kuvaus</translation>
+        <translation>Introduïu una descripció opcional</translation>
     </message>
 </context>
 <context>
     <name>AddProject</name>
     <message>
         <source>Save</source>
-        <translation>Tallenna</translation>
+        <translation>Desa</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Peruuta</translation>
+        <translation>Cancel·la</translation>
     </message>
     <message>
         <source>Required</source>
-        <translation>Pakolliset</translation>
+        <translation>Obligatori</translation>
     </message>
     <message>
         <source>Please enter a name for the project</source>
-        <translation>Kirjoita projektin nimi</translation>
+        <translation>Introduïu un nom per al projecte</translation>
     </message>
     <message>
         <source>Make this the default project</source>
-        <translation>Käytä oletuksena tätä projektia</translation>
+        <translation>Assigna&apos;l com a projecte per defecte</translation>
     </message>
     <message>
         <source>Optional</source>
-        <translation>Vapaaehtoiset</translation>
+        <translation>Opcional</translation>
     </message>
     <message>
         <source>Hourly rate</source>
-        <translation>Tuntiveloitus</translation>
+        <translation>Preu per hora</translation>
     </message>
     <message>
         <source>Select label color</source>
-        <translation>Valitse projektin väri</translation>
+        <translation>Seleccioneu un color d&apos;etiqueta</translation>
     </message>
     <message>
         <source>Reset coloring</source>
-        <translation>Palauta oletusväri</translation>
+        <translation>Reinicia els colors d&apos;etiqueta</translation>
     </message>
 </context>
 <context>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Projektia ei löytynyt</translation>
+        <translation>No s&apos;ha trobat el projecte</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Tänään</translation>
+        <translation>Avui</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>Eilen</translation>
+        <translation>Ahir</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>Tällä viikolla</translation>
+        <translation>Aquesta setmana</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>Viime viikolla</translation>
+        <translation>La setmana passada</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>Tässä kuussa</translation>
+        <translation>Aquest mes</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>Viime kuussa</translation>
+        <translation>El mes passat</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>Tänä vuonna</translation>
+        <translation>Aquest any</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Kaikki</translation>
+        <translation>Tot</translation>
     </message>
     <message>
         <source>Sort by date</source>
-        <translation>Järjestä päivämäärän mukaan</translation>
+        <translation>Ordena per data</translation>
     </message>
     <message>
         <source>Sort by project</source>
-        <translation>Järjestä projektin mukaan</translation>
+        <translation>Ordena per projecte</translation>
     </message>
     <message>
         <source>No items in this category yet</source>
-        <translation>Tässä kategoriassa ei ole vielä mitään</translation>
+        <translation>No hi ha cap element en aquesta categoria</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation>Poistetaan</translation>
+        <translation>S&apos;està eliminant</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Poista</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>CategorySummary</name>
     <message>
         <source>Total </source>
-        <translation>Yhteensä</translation>
+        <translation>Total</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Kesto</translation>
+        <translation>Durada</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation>Työpäiviä</translation>
+        <translation>Dies laborables</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation>Kirjauksia</translation>
+        <translation>Entrades</translation>
     </message>
     <message>
         <source>Summary for </source>
-        <translation>Yhteenveto kategorialle</translation>
+        <translation>Resum per</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Jokin meni pieleen</translation>
+        <translation>S&apos;ha produït un error</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>Today</source>
-        <translation>Tänään</translation>
+        <translation>Avui</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Viikko</translation>
+        <translation>Setmana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Kuukausi</translation>
+        <translation>Mes</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>About</source>
-        <translation>Tietoa</translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation>Configuració</translation>
     </message>
     <message>
         <source>Add Hours</source>
-        <translation>Lisää tunteja</translation>
+        <translation>Afegeix horaris</translation>
     </message>
     <message>
         <source>No default project found</source>
-        <translation>Oletusprojektia ei löytynyt</translation>
+        <translation>No s&apos;ha trobat un projecte per defecte</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>oletus</translation>
+        <translation>per defecte</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Tänään</translation>
+        <translation>Avui</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>Eilen</translation>
+        <translation>Ahir</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>Tällä viikolla</translation>
+        <translation>Aquesta setmana</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>Viime viikolla</translation>
+        <translation>La setmana passada</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>Tässä kuussa</translation>
+        <translation>Aquest mes</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>Viime kuussa</translation>
+        <translation>El mes passat</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>Tänä vuonna</translation>
+        <translation>Aquest any</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Kaikki</translation>
+        <translation>Tot</translation>
     </message>
     <message>
         <source>Timer is not running</source>
-        <translation>Ajastin ei ole käynnissä</translation>
+        <translation>El temporitzador no està en funcionament</translation>
     </message>
     <message>
         <source>Click to start</source>
-        <translation>Klikkaa käynnistääksesi</translation>
+        <translation>Cliqueu per iniciar</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>Tauko</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Pysäytä</translation>
+        <translation>Atura</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation>Aloitusaika</translation>
+        <translation>S&apos;ha iniciat</translation>
     </message>
     <message>
         <source>Adjust</source>
-        <translation>Muuta</translation>
+        <translation>Configura</translation>
     </message>
 </context>
 <context>
     <name>HowTo</name>
     <message>
         <source>How to</source>
-        <translation>Ohjeet</translation>
+        <translation>Guia d&apos;ús</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation>Tuntien lisäämine</translation>
+        <translation>Addició d&apos;hores</translation>
     </message>
     <message>
         <source>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</source>
-        <translation>Working Hours Tracker on melko helppokäyttöinen. Tuntien lisääminen onistuu kahdella tavalla.</translation>
+        <translation>Working Hours Tracker és ben senzill d&apos;utilitzar. Podeu afegir hores de 2 maneres diferents.</translation>
     </message>
     <message>
         <source>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</source>
-        <translation>Voit valita lisää tunteja alasvetovalikosta etusivulta. Se vie sinut lisäyssivulle.</translation>
+        <translation>Es pot accedir a la pàgina d&apos;afegir hores amb el menú lliscant superior de la primera pàgina. </translation>
     </message>
     <message>
         <source>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.</source>
-        <translation>Käynnistä ajastin, kun aloitat työt. Voit sen jälkeen sulkea ohjelman halutessasi. Ajastin pysyy käynnissä.</translation>
+        <translation>Quan es comenci una feina cal iniciar el temporitzador. Encara que tanqueu l&apos;aplicació el temporitzador continuarà funcionant.</translation>
     </message>
     <message>
         <source>At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</source>
-        <translation>Työpäivän jälkeen pysäytä ajastin, jolloin tulet lisäyssivulle, jossa voit muuttaa aikoja, kuvausta, muita tietoja ja valita projektin.</translation>
+        <translation>Al final del dia de treball, cal aturar el temporitzador. Això us durà a la pàgina d&apos;afegir hores des d&apos;on podreu configurar els detalls, afegir una descripció i seleccionar el projecte.</translation>
     </message>
     <message>
         <source>Adding projects</source>
-        <translation>Projektien lisääminen</translation>
+        <translation>Addició de projectes</translation>
     </message>
     <message>
         <source>Projects can be added and edited in the settings.</source>
-        <translation>Projekteja voi lisätä ja muokata asetuksissa.</translation>
+        <translation>Els projectes es poden afegir i editar a la configuració.</translation>
     </message>
     <message>
         <source>You can select the labelcolor and hourlyrate for a project.</source>
-        <translation>Voit valita projektille värin ja tuntiveloituksen.</translation>
+        <translation>Es pot aplicar un color per etiquetar el projecte i establir-ne un preu per hora.</translation>
     </message>
     <message>
         <source>You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.</source>
-        <translation>Voit muokata projektia klikkaamalla sitä. Kun muokkaat projektia, voit tehdä siitä oletusprojektin, joka valitaan automaattisesti kun lisäät tunteja.</translation>
+        <translation>Els projectes es poden editar si es clica damunt. En l&apos;edició de projectes pot indicar-se si es tracta del projecte per defecte, cosa que provoca que es seleccioni automàticament en afegir hores.</translation>
     </message>
     <message>
         <source>If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</source>
-        <translation>Jos asetat projektille tuntiveloituksen, näet käytettyjä tunteja vastaavat hinnat listausnäkymässä ja yhteenvedoissa.</translation>
+        <translation>Si s&apos;estableix un preu per hora, es pot obtenir l&apos;import segons les hores treballades als llistats detallats i als resums.</translation>
     </message>
     <message>
         <source>Using the timer</source>
-        <translation>Ajastimen käyttö</translation>
+        <translation>Ús del temporitzador</translation>
     </message>
     <message>
         <source>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</source>
-        <translation>Ajastinta voidaan käyttää painamalla isoa nappia etusivulla. Kun ajastin on käynnissä, näet kolme nappia, joilla voit kontrolloida ajastinta.</translation>
+        <translation>El temporitzador s&apos;activa mitjançant el botó gran a la primera pàgina. Quan s&apos;inicia, apareixen tres botons per control·lar-lo.</translation>
     </message>
     <message>
         <source>On the left you have a break button which is meant to be used if you have a break during your workday that you don&apos;t want to include in the duration.</source>
-        <translation>Vasemmalla on taukonappi, jota on tarkoitus käyttää mikäli pidät työpäivän aikana tauon, jonka haluat vähentää tunneista.</translation>
+        <translation>El botó de pausa es troba a l&apos;esquerra. Es pot accionar en el cas que la jornada de treball inclogui algun descans que no es vulgui incloure en la durada.</translation>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation>Tauko toimii aivan kuten ajastin: aloitat sen klikkaamalla ja klikkaat toisen kerran lopettaaksesi tauon.</translation>
+        <translation>La pausa funciona igual que el temporitzador: s&apos;inicia en clicar el botó i s&apos;atura en clicar de nou quan la pausa hagi acabat.</translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
-        <translation>Keskimmäinen nappi pysäyttää ajastimen ja vie lisäyssivulle, jossa voit muokata aikoja ja lisätietoja ennen tallennusta.</translation>
+        <translation>El botó central atura el temporitzador i condueix a la pàgina d&apos;afegir hores des d&apos;on es pot ajustar l&apos;hora d&apos;inici i finalització i altres detalls de la feina.</translation>
     </message>
     <message>
         <source> The hours will be saved only when accepting the dialog.</source>
-        <translation>Tunnit tallennetaan vain mikäli kysely hyväksytään.</translation>
+        <translation>Les hores es desen en el moment que es prem per acceptar el diàleg.</translation>
     </message>
     <message>
         <source>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</source>
-        <translation>Oikeassa reunassa on nappi, jonka avulla ajastimen aloitusaikaa voi muuttaa. Sitä voi hyödyntää, jos unohtaa käynnistää ajastimen.</translation>
+        <translation>El botó de la dreta s&apos;utilitza per ajustar l&apos;hora d&apos;inici del temporitzador. Es pot utilitzar si us heu oblidat d&apos;iniciar el temporitzador quan heu començat a treballar.</translation>
     </message>
     <message>
         <source>Using the cover</source>
-        <translation>Cover-toimintojen käyttö</translation>
+        <translation>Ús de la portada</translation>
     </message>
     <message>
         <source>Cover actions can be used to quickly add hours or to control the timer.</source>
-        <translation>Cover-toimintoja käyttämällä voi nopeasti lisätä tunteja tai käyttää ajastinta.</translation>
+        <translation>Les accions de portada permeten afegir hores o control·lar el temporitzador de manera ràpida.</translation>
     </message>
     <message>
         <source>Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</source>
-        <translation>Cover-toimintoihin kuuluvat tuntien lisäys, ajastimen käynnistys, tauon käynnistys, tauon lopetus ja ajastimen pysäytys.</translation>
+        <translation>Les accions de portada possibles són l&apos;addició d&apos;hores, l&apos;inici del temporitzador, l&apos;inici d&apos;una pausa, la finalització d&apos;una pausa i l&apos;aturada del temporitzador.</translation>
     </message>
     <message>
         <source>When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.</source>
-        <translation>Kun ajastin pysäytetään cover-toiminnolla, aukeaa ohjelman ikkuna lisäyssivulle, ja tallennuksen jälkeen se pienenee takaisin taustalle.</translation>
+        <translation>Quan s&apos;aturi el temporitzador des de la portada, l&apos;aplicació s&apos;obrirà amb la pàgina d&apos;afegir hores i en tancar el diàleg tornarà a minimitzar-se com a portada.</translation>
     </message>
     <message>
         <source>Summaries</source>
-        <translation>Yhteenvedot</translation>
+        <translation>Resums</translation>
     </message>
     <message>
         <source>On the first page you will see total hours for different categories.</source>
-        <translation>Etusivulla näet kokonaistunnit kategorioittain.</translation>
+        <translation>A la primera pàgina es mostra el total d&apos;hores per les diferents categories.</translation>
     </message>
     <message>
         <source>If you have more than one project you should see an attached page that can be accessed by swiping left from the first page.</source>
-        <translation>Jos sinulla on käytössäsi enemmän kuin yksi projekti, näet etusivun oikealla puolella liitettynä sivun, jonne pääset pyyhkäisemällä vasemmalle.</translation>
+        <translation>Si es gestiona més d&apos;un projecte podeu lliscar cap a l&apos;esquerre cap a una pàgina adjacent.</translation>
     </message>
     <message>
         <source>There you can see hours for one project at a time.</source>
-        <translation>Siellä näet yhden projektin tunnit kerrallaan.</translation>
+        <translation>Allà podeu veure les hores individualment per cada projecte.</translation>
     </message>
     <message>
         <source>Clicking a category will take you to the detailed listing view where you can see all entries in that category.</source>
-        <translation>Klikkaamalla jotakin kategoriaa siirryt listausnäkymään, jossa näet kaikki sen kategorian tunnit.</translation>
+        <translation>En clicar una categoria podeu accedir a una llista detallada de cadascuna de les entrades d&apos;aquella categoria.</translation>
     </message>
     <message>
         <source>You can edit those entries by clicking them.</source>
-        <translation>Voit muokata niitä klikkaamalla.</translation>
+        <translation>Aquestes entrades poden editar-se clicant damunt d&apos;elles.</translation>
     </message>
     <message>
         <source>By swiping left in the detailed view you can see a detailed summary for that category.</source>
-        <translation>Pyyhkäisemällä vasemmalla listausnäkymästä näet tarkemman yhteenvedon kategorialle.</translation>
+        <translation>Fent lliscar cap a l&apos;esquerre a la vista detallada es pot accedir a un resum detallat per aquella categoria.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation>Configuració</translation>
     </message>
     <message>
         <source>There are a few settings in the settings page that makes adding hours faster and easier.</source>
-        <translation>Asetuksissa on useita asetuksia, jotka helpottavat ja nopeuttavat tuntien lisäystä.</translation>
+        <translation>Poden ajustar-se elements a la configuració per aconseguir que l&apos;addició d&apos;hores sigui més ràpida i fàcil.</translation>
     </message>
     <message>
         <source>Default duration and default break duration will be used when manually adding hours.</source>
-        <translation>Oletuskestoa ja oletustaukoa käytetään, kun manuaalisesti lisätään tunteja. </translation>
+        <translation>La durada per defecte i la durada de la pausa per defecte s&apos;utilitzaran quan s&apos;afegeixin hores manualment.</translation>
     </message>
     <message>
         <source>Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</source>
-        <translation>Alkaa nyt tai Loppuu nyt oletuksena tarkoittavat asetusta, jonka mukaan joko aloitusaika tai lopetusaika asetetaan nykyhetkeen kun lisätään tunteja.</translation>
+        <translation>S&apos;inicia ara o Finalitza ara per defecte, s&apos;utilitza per indicar que l&apos;hora d&apos;inici o de finalització s&apos;ha d&apos;establir en funció de l&apos;hora que sigui ara quan s&apos;afegeixen hores manualment.</translation>
     </message>
     <message>
         <source>Other settings are explained in the settings page and more will come in the future versions.</source>
-        <translation>Muut asetukset on selitetty asetussivulla. Lisää asetuksia tulossa tulevissa versioissa.</translation>
+        <translation>Els altres elements de configuració estan explicats a la pàgina de configuració i d&apos;altres arribaran en futures versions.</translation>
     </message>
     <message>
         <source>More questions?</source>
-        <translation>Lisää kysyttävää?</translation>
+        <translation>Alguna pregunta més?</translation>
     </message>
     <message>
         <source>Please don&apos;t hesitate to contact the developer if you have any questions.</source>
-        <translation>Älä epäröi ottaa yhteyttä kehittäjään, mikäli sinulla on kysyttävää.</translation>
+        <translation>No dubteu a contactar el desenvolupador si teniu altres qüestions.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation>Bugit GitHubissa</translation>
+        <translation>Incidències a GitHub</translation>
     </message>
 </context>
 <context>
     <name>MyTimePicker</name>
     <message>
         <source>Break can not be longer than the duration!</source>
-        <translation>Tauko ei voi olla pidempi kuin työaika!</translation>
+        <translation>La pausa no pot ser més llarga que la durada!</translation>
     </message>
 </context>
 <context>
     <name>ProjectPage</name>
     <message>
         <source>Selected project</source>
-        <translation>Valittu projekti</translation>
+        <translation>Projecte seleccionat</translation>
     </message>
     <message>
         <source>Project was not found</source>
-        <translation>Projektia ei löytynyt</translation>
+        <translation>No s&apos;ha trobat cap projecte</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Tänään</translation>
+        <translation>Avui</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>Eilen</translation>
+        <translation>Ahir</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>Tällä viikolla</translation>
+        <translation>Aquesta setmana</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>Viime viikolla</translation>
+        <translation>La setmana passada</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>Tässä kuussa</translation>
+        <translation>Aquest mes</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>Viime kuussa</translation>
+        <translation>El mes passat</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>Tänä vuonna</translation>
+        <translation>Aquest any</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Kaikki</translation>
+        <translation>Tot</translation>
     </message>
     <message>
         <source>Hours for</source>
-        <translation>Tunnit</translation>
+        <translation>Hores per</translation>
     </message>
 </context>
 <context>
     <name>Projects</name>
     <message>
         <source>All projects</source>
-        <translation>Kaikki projektit</translation>
+        <translation>Tots els projectes</translation>
     </message>
     <message>
         <source>Add project</source>
-        <translation>Lisää projekti</translation>
+        <translation>Afegeix un projecte</translation>
     </message>
     <message>
         <source>No projects found</source>
-        <translation>Projekteja ei löytynyt</translation>
+        <translation>No s&apos;han trobat projectes</translation>
     </message>
     <message>
         <source>Default project</source>
-        <translation>Oletusprojekti</translation>
+        <translation>Projecte per defecte</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation>Poistetaan</translation>
+        <translation>S&apos;està eliminant</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Poista</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>Settings</source>
-        <translation>Asetukset</translation>
+        <translation>Configuració</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>Projektit</translation>
+        <translation>Projectes</translation>
     </message>
     <message>
         <source>Edit projects</source>
-        <translation>Muokkaa projekteja</translation>
+        <translation>Edita els projectes</translation>
     </message>
     <message>
         <source>Default duration</source>
-        <translation>Oletuskesto</translation>
+        <translation>Durada per defecte</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Arvo</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Default break duration</source>
-        <translation>Oletustauko</translation>
+        <translation>Durada de la pausa per defecte</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation>Tuntien lisäys</translation>
+        <translation>Addició d&apos;hores</translation>
     </message>
     <message>
         <source>Ends now by default</source>
-        <translation>Päättyy nyt oletuksena</translation>
+        <translation>Finalitza ara per defecte</translation>
     </message>
     <message>
         <source>Endtime will be set to now by default.</source>
-        <translation>Lopetusaika asetetaan tähän hetkeen oletuksena.</translation>
+        <translation>L&apos;hora de finalització s&apos;establirà a &apos;ara&apos; per defecte.</translation>
     </message>
     <message>
         <source>Starts now by default</source>
-        <translation>Alkaa nyt oletuksena</translation>
+        <translation>S&apos;inicia ara per defecte</translation>
     </message>
     <message>
         <source>Starttime will be set to now by default.</source>
-        <translation>Aloitusaika asetetaan tähän hetkeen oletuksena.</translation>
+        <translation>L&apos;hora d&apos;inici s&apos;establirà a &apos;ara&apos; per defecte.</translation>
     </message>
     <message>
         <source>Endtime stays fixed by default.</source>
-        <translation>Lopetusaika pysyy muuttumattomana oletuksena.</translation>
+        <translation>L&apos;hora de finalització queda fixada per defecte.</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation>Aloitusaika siirtyy, jos kestoa muutetaan.</translation>
+        <translation>L&apos;hora d&apos;inici variarà si la durada canvia.</translation>
     </message>
     <message>
         <source>Starttime stays fixed by default.</source>
-        <translation>Aloitusaika pysyy muuttumattomana oletuksena.</translation>
+        <translation>L&apos;hora d&apos;inici queda fixada per defecte.</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation>Lopetusaika siirtyy, jos kestoa muutetaan.</translation>
+        <translation>L&apos;hora de finalització variarà si la durada canvia.</translation>
     </message>
     <message>
         <source>Startup options</source>
-        <translation>Käynnistysasetukset</translation>
+        <translation>Opcions d&apos;inici</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
-        <translation>Käynnistä ajastin automaattisesti ohjelman käynnistyessä</translation>
+        <translation>Inici automàtic del temporitzador</translation>
     </message>
     <message>
         <source>Timer will get started automatically if not already running.</source>
-        <translation>Ajastin käynnistetään automaattisesti, jos se ei ole käynnissä.</translation>
+        <translation>El temporitzador s&apos;iniciarà automàticament si no està en funcionament.</translation>
     </message>
     <message>
         <source>Timer will not get started automatically.</source>
-        <translation>Ajastin ei käynnisty automaattisesti.</translation>
+        <translation>El temporitzador no s&apos;iniciarà automàticament.</translation>
     </message>
     <message>
         <source>Set currency</source>
-        <translation>Valitse valuutta</translation>
+        <translation>Estableix la divisa</translation>
     </message>
     <message>
         <source>Set currency string</source>
-        <translation>Valitse valuutan symboli</translation>
+        <translation>Estableix la cadena de la divisa</translation>
     </message>
     <message>
         <source>Currency string</source>
-        <translation>Valuuttasymboli</translation>
+        <translation>Cadena de la divisa</translation>
     </message>
     <message>
         <source>Move all hours to default</source>
-        <translation>Siirrä kaikki tunnit oletusprojektiin</translation>
+        <translation>Restableix totes les hores per defecte</translation>
     </message>
     <message>
         <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation>Siirrä KAIKKI olemassaolevat tunnit projektiin, joka on asetettu oletusprojektiksi.</translation>
+        <translation>Es mouran totes les hores dels vostres projectes al projecte que estigui establert per defecte.</translation>
     </message>
     <message>
         <source>Move all to default</source>
-        <translation>Siirrä kaikki oletusprojektiin</translation>
+        <translation>Mou-ho tot per defecte</translation>
     </message>
     <message>
         <source>Move all hours to default project</source>
-        <translation>Siirrä kaikki tunnit oletusprojektiin</translation>
+        <translation>Es mouran totes les hores al projecte per defecte</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Valmis</translation>
+        <translation>Fet</translation>
     </message>
     <message>
         <source>No default project set</source>
-        <translation>Oletusprojektia ei ole asetettu</translation>
+        <translation>No hi ha cap projecte per defecte establert</translation>
     </message>
     <message>
         <source>Move by project name in description</source>
-        <translation>Siirrä kuvauksessa olevan projektin nimen perusteella</translation>
+        <translation>Mou segons el nom de la descripció del projecte</translation>
     </message>
     <message>
         <source>Try to move hours to existing projects.</source>
-        <translation>Yritä siirtää tunnit olemassa oleviin projekteihin.</translation>
+        <translation>Intenta moure hores a projectes existents.</translation>
     </message>
     <message>
         <source>Sets correct project if the project name is found in the description.</source>
-        <translation>Asettaa oikean projektin, jos projektin nimi löytyy kuvauksesta.</translation>
+        <translation>Estableix el projecte correcte si troba el nom del projecte a la descripció.</translation>
     </message>
     <message>
         <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation>Tämä on tarkoitettu käytettäväksi vain mikäli olet käyttänyt ohjelman varhaisia versioita ja olet kirjoittanut projektin nimen kuvauksiin.</translation>
+        <translation>Només és útil en el cas d&apos;haver utilitzat versions anteriors d&apos;aquesta aplicació i haver escrit el nom del projecte a la descripció.</translation>
     </message>
     <message>
         <source>This might take a while.</source>
-        <translation>Tämä saattaa kestää hetken.</translation>
+        <translation>Pot trigar una estona.</translation>
     </message>
     <message>
         <source>Move existing hours</source>
-        <translation>Siirrä olemassaolevat tunnit</translation>
+        <translation>Mou hores ja existents</translation>
     </message>
     <message>
         <source>Moving hours to projects in description</source>
-        <translation>Siirretään tunnit kuvauksen mukaiseen projektiin</translation>
+        <translation>S&apos;estan movent hores als projectes descrits</translation>
     </message>
     <message>
         <source>Please be aware!</source>
-        <translation>Varoitus!</translation>
+        <translation>Cal que aneu en compte!</translation>
     </message>
     <message>
         <source>Reset database</source>
-        <translation>Resetoi tietokanta</translation>
+        <translation>Reinicia la base de dades</translation>
     </message>
     <message>
         <source>Resetting database</source>
-        <translation>Resetoidaan tietokanta</translation>
+        <translation>S&apos;està reiniciant la base de dades</translation>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
-        <translation>Varoitus: Menetät kaikki merkkaamasi työtunnit ja muun datan mikäli resetoit tietokannan!</translation>
+        <translation>Advertiment: si es reinicia la base de dades es perdran totes les dades de l&apos;aplicació!</translation>
     </message>
 </context>
 </TS>

@@ -41,4 +41,11 @@ Donations are also welcome.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>Desktop</name>
+    <message>
+        <source>Work Hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

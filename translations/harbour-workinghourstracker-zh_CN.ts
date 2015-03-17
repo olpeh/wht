@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -14,6 +12,12 @@
     <message>
         <source>General</source>
         <translation>概要</translation>
+    </message>
+    <message>
+        <source>Working Hours Tracker for SailfishOS 
+A simple working hours tracker to keep track on working hours.</source>
+        <translation>Sailfish系统的Working Hours Tracker
+        一个简易的工作时长记录器，可以持续记录工作时间。</translation>
     </message>
     <message>
         <source>Usage</source>
@@ -62,12 +66,6 @@
     <message>
         <source>License</source>
         <translation>许可协议</translation>
-    </message>
-    <message>
-        <source>Working Hours Tracker for SailfishOS 
-A simple working hours tracker to keep track on working hours.</source>
-        <translation>Sailfish系统的Working Hours Tracker
-        一个简易的工作时长记录器，可以持续记录工作时间。</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
