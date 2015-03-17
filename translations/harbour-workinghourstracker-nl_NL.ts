@@ -1,777 +1,776 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>About</name>
     <message>
         <source>How to use</source>
-        <translation>如何使用</translation>
+        <translation>Hoe te gebruiken</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>概要</translation>
+        <translation>Algemeen</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS 
 A simple working hours tracker to keep track on working hours.</source>
-        <translation>Sailfish系统的Working Hours Tracker
-        一个简易的工作时长记录器，可以持续记录工作时间。</translation>
+        <translation>Working Hours Tracker voor SailfishOS.
+Een eenvoudige werkurenbeheerder om werkende uren bij te houden.</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation>用法</translation>
+        <translation>Gebruik</translation>
     </message>
     <message>
         <source>Read more about how to use this app by accessing the pulley menu or clicking the button below.</source>
-        <translation>在选择下拉菜单或点击下方按钮获取更多关于这个应用使用方法的信息</translation>
+        <translation>Lees meer over het gebruiken van deze applicatie door het trekmenu omlaag te trekken of op onderstaande knop te drukken.</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation>作者</translation>
+        <translation>Auteur</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation>捐赠</translation>
+        <translation>Doneren</translation>
     </message>
     <message>
         <source>Please donate if you like my work. Donations help me to use more time on development.</source>
-        <translation>如果你喜欢我的这份作品，请捐助我，让我可以在开发上花更多的时间。</translation>
+        <translation>Doe een donatie als u mijn werk waardeert. Donaties helpen mij om meer tijd te besteden aan de ontwikkeling.</translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
-        <translation>复制到剪贴板</translation>
+        <translation>Gekopieerd naar het klembord</translation>
     </message>
     <message>
         <source>Donate to my bitcoin account</source>
-        <translation>捐助到我的比特币账户</translation>
+        <translation>Doneren aan mijn Bitcoin-account</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation>源代码</translation>
+        <translation>Bron</translation>
     </message>
     <message>
         <source>Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.</source>
-        <translation>欢迎贡献代码、反馈BUG和想法。请将问题反馈到github。连接在下方。</translation>
+        <translation>Bijdragen, bugrapporten en ideeën zijn van harte welkom. Op GitHub kunt u problemren rapporteren; zie onderstaande link.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation>GitHub上的问题</translation>
+        <translation>Issues op GitHub</translation>
     </message>
     <message>
         <source>Project in GitHub</source>
-        <translation>GitHub上的项目</translation>
+        <translation>Project op GitHub</translation>
     </message>
     <message>
         <source>License</source>
-        <translation>许可协议</translation>
+        <translation>Licentie</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD.</source>
-        <translation>Copyright (C) 2015 Olavi Haapala
-        源代码在BSD许可协议下发布。</translation>
+        <translation>Copyright (C) 2015 Olavi Haapala 
+De broncode is gelicenseerd onder de BSD-licentie.</translation>
     </message>
 </context>
 <context>
     <name>Add</name>
     <message>
         <source>Project</source>
-        <translation>项目</translation>
+        <translation>Project</translation>
     </message>
     <message>
         <source>No description</source>
-        <translation>没有描述</translation>
+        <translation>Geen omschrijving</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>今天</translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>保存</translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Ends now</source>
-        <translation>结束在当前时刻</translation>
+        <translation>Eindigt op dit moment</translation>
     </message>
     <message>
         <source>Endtime will be set to now.</source>
-        <translation>结束时间将被设定为当前时刻。</translation>
+        <translation>De eindtijd zal worden ingesteld op dit moment.</translation>
     </message>
     <message>
         <source>Starts now</source>
-        <translation>开始在当前时刻</translation>
+        <translation>Begint op dit moment</translation>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation>开始时间将被设定为当前时刻。</translation>
+        <translation>De begintijd zal worden ingesteld op dit moment</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>日期：</translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Start time:</source>
-        <translation>开始时间：</translation>
+        <translation>Begintijd:</translation>
     </message>
     <message>
         <source>End time:</source>
-        <translation>结束时间：</translation>
+        <translation>Eindtijd:</translation>
     </message>
     <message>
         <source>Endtime stays fixed</source>
-        <translation>固定的结束时间</translation>
+        <translation>De eindtijd is vastgezet</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation>修改持续时间时自动调整开始时间</translation>
+        <translation>De begintijd zal variëren als de duur wordt gewijzigd.</translation>
     </message>
     <message>
         <source>Starttime stays fixed</source>
-        <translation>开始时间保持不变</translation>
+        <translation>De begintijd is vastgezet</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation>修改持续时间时自动调整结束时间</translation>
+        <translation>De eindtijd zal variëren als de duur wordt gewijzigd.</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>持续时间</translation>
+        <translation>Duur</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>休息时间</translation>
+        <translation>Pauze</translation>
     </message>
     <message>
         <source>Net duration</source>
-        <translation>净休息时间</translation>
+        <translation>Nettoduur</translation>
     </message>
     <message>
         <source>Add or edit projects in settings</source>
-        <translation>在设置中添加或修改项目</translation>
+        <translation>Projecten toevoegen of bewerken in de instellingen</translation>
     </message>
     <message>
         <source>Enter an optional description</source>
-        <translation>输入可选描述</translation>
+        <translation>Voeg desgewenst een omschrijving toe</translation>
     </message>
 </context>
 <context>
     <name>AddProject</name>
     <message>
         <source>Save</source>
-        <translation>保存</translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Required</source>
-        <translation>必填</translation>
+        <translation>Vereist</translation>
     </message>
     <message>
         <source>Please enter a name for the project</source>
-        <translation>请输入项目名称</translation>
+        <translation>Vul een naam in voor het project</translation>
     </message>
     <message>
         <source>Make this the default project</source>
-        <translation>设为默认项目</translation>
+        <translation>Maak dit het standard project</translation>
     </message>
     <message>
         <source>Optional</source>
-        <translation>可选</translation>
+        <translation>Optioneel</translation>
     </message>
     <message>
         <source>Hourly rate</source>
-        <translation>小时比率</translation>
+        <translation>Uurtarief</translation>
     </message>
     <message>
         <source>Select label color</source>
-        <translation>选择标签颜色</translation>
+        <translation>Selecteer labelkleur</translation>
     </message>
     <message>
         <source>Reset coloring</source>
-        <translation>重置颜色</translation>
+        <translation>Kleuren herstellen</translation>
     </message>
 </context>
 <context>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>项目未找到</translation>
+        <translation>Het project kon niet worden gevonden</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>今天</translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>昨天</translation>
+        <translation>Gisteren</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>本周</translation>
+        <translation>Deze week</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>上周</translation>
+        <translation>Vorige week</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>本月</translation>
+        <translation>Deze maand</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>上月</translation>
+        <translation>Vorige maand</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>今年</translation>
+        <translation>Dit jaar</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>全部</translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Sort by date</source>
-        <translation>根据日期排序</translation>
+        <translation>Sorteren op datum</translation>
     </message>
     <message>
         <source>Sort by project</source>
-        <translation>根据项目排序</translation>
+        <translation>Sorteren op project</translation>
     </message>
     <message>
         <source>No items in this category yet</source>
-        <translation>该分类下还没有项目</translation>
+        <translation>Er zijn nog geen items in deze categorie</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation>正在移除</translation>
+        <translation>Bezig met verwijderen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>移除</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>CategorySummary</name>
     <message>
         <source>Duration</source>
-        <translation>持续时间</translation>
+        <translation>Duur</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation>工作日</translation>
+        <translation>Werkdagen</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation>记录</translation>
+        <translation>Invoeren</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>出了点问题</translation>
+        <translation>Er ging iets mis</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation>总计</translation>
+        <translation>Totaal</translation>
     </message>
     <message>
         <source>Summary for</source>
-        <translation>总结</translation>
+        <translation>Samenvatting voor</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>Today</source>
-        <translation>今天</translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>周</translation>
+        <translation>Week</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>月</translation>
+        <translation>Maand</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>设置</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Add Hours</source>
-        <translation>添加时间</translation>
+        <translation>Uren toevoegen</translation>
     </message>
     <message>
         <source>No default project found</source>
-        <translation>未找到默认的项目</translation>
+        <translation>Er is geen standard project gevonden</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>默认</translation>
+        <translation>standaard</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>今天</translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>昨天</translation>
+        <translation>Gisteren</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>本周</translation>
+        <translation>Deze week</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>上周</translation>
+        <translation>Vorige week</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>本月</translation>
+        <translation>Deze maand</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>上月</translation>
+        <translation>Vorige maand</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>本年</translation>
+        <translation>Dit jaar</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>所有</translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Timer is not running</source>
-        <translation>计时器没有运行</translation>
+        <translation>De timer loopt niet</translation>
     </message>
     <message>
         <source>Click to start</source>
-        <translation>点击开始</translation>
+        <translation>Raak aan om te beginnen</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>休息</translation>
+        <translation>Pauze</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>停止</translation>
+        <translation>Stoppen</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation>已开始</translation>
+        <translation>Begonnen</translation>
     </message>
     <message>
         <source>Adjust</source>
-        <translation>调整</translation>
+        <translation>Aanpassen</translation>
     </message>
 </context>
 <context>
     <name>HowTo</name>
     <message>
         <source>How to</source>
-        <translation>如何使用</translation>
+        <translation>Hulp bij</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation>添加时间</translation>
+        <translation>Het toevoegen van uren</translation>
     </message>
     <message>
         <source>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</source>
-        <translation>Working Hours Tracker非常易用。有两个方式添加时间。</translation>
+        <translation>Working Hours Tracker is eenvoudig te gebruiken. Het toevoegen van uren kan op twee manier worden gedaan.</translation>
     </message>
     <message>
         <source>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</source>
-        <translation>你可以在第一页的下拉菜单中选择添加时间。菜单将带你跳转到添加页面</translation>
+        <translation>U kunt het toevoegen van uren vinden in het trekmenu op de eerste pagina. U wordt dan geleid naar de toevoegpagina.</translation>
     </message>
     <message>
         <source>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.</source>
-        <translation>开始工作时启动计时器。如有需要，你可以关闭应用，计时器会继续运作。</translation>
+        <translation>Start de timer wanneer het werken start. U kunt, als u dat wilt, de app daarna sluiten; de timer zal blijven lopen.</translation>
     </message>
     <message>
         <source>At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</source>
-        <translation>当你的工作结束时，停止计时器，它会带你到添加页面，你可以在那里调整细节、添加描述和选择项目。</translation>
+        <translation>Zet de timer stop op het einde van uw werkdag. Dit zou u dan moeten leiden naar de toevoegpagina van waaruit u de details kunt wijzigen, een omschrijving kunt toevoegen en projectselectie kunt doen.</translation>
     </message>
     <message>
         <source>Adding projects</source>
-        <translation>添加项目</translation>
+        <translation>Het toevoegen van projecten</translation>
     </message>
     <message>
         <source>Projects can be added and edited in the settings.</source>
-        <translation>项目可以在设置中添加和编辑</translation>
+        <translation>Projecten kunnen worden toegevoegd en bewerkt in de instellingen.</translation>
     </message>
     <message>
         <source>You can select the labelcolor and hourlyrate for a project.</source>
-        <translation>你可以为项目选择标签颜色和每小时工资率。</translation>
+        <translation>U kunt de labelkleur en het uurtarief van een project selecteren.</translation>
     </message>
     <message>
         <source>You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.</source>
-        <translation>你可以通过点击项目来编辑。编辑时你可以选择是否将其设为默认项目。默认项目将在你添加时间时自动选中。</translation>
+        <translation>U kunt projecten wijzigen door ze aan te raken. Tijdens het bewerken van een project kunt u selecteren of u dat project het standaard project wilt maken, welke automatisch zal worden geselecteerd zodra u uren gaat toevoegen.</translation>
     </message>
     <message>
         <source>If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</source>
-        <translation>如果项目设定了每小时工资率，你可以在详细列表和总结中看到话费时间的价格。</translation>
+        <translation>Als u een uurtarief instelt voor een project, kunt u de prijs voor uitgevoerde uren zien in de gedetailleerde lijst en samenvattingen.</translation>
     </message>
     <message>
         <source>Using the timer</source>
-        <translation>使用计时器</translation>
+        <translation>Het gebruiken van de timer</translation>
     </message>
     <message>
         <source>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</source>
-        <translation>通过按下第一页的大按钮来使用计时器。计时器开始后，你可以看到三个控制计时器的按钮。</translation>
+        <translation>De timer kan worden gebruikt door de grote knop op de eerste pagina aan te raken. Zodra de timer is gestart, ziet u drie knoppen om de timer te bedienen.</translation>
     </message>
     <message>
         <source>On the left you have a break button which is meant to be used if you have a break during your workday that you don&apos;t want to include in the duration.</source>
-        <translation>左边是休息按钮。如果你在工作中休息而不希望把这个时间算进工作时长中，你可以使用这个按钮</translation>
+        <translation>Aan de linkerkant vindt u de pauzeknop welke bedoeld is om te gebruiken wanneer u een pauze hebt tijdens uw werkdag die u niet in de duur wilt opnemen.</translation>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation>休息跟计时器用法一样：你通过点击来标记休息的开始和结束。</translation>
+        <translation>De pauze werkt net zoals de timer: u begint de pauze door hem aan te raken en kunt hem beëindigen wanneer de pauze voorbij is.</translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
-        <translation>中间的按钮停止计时器，并跳转到添加页面，
-            你可以在那里调整开始时间、结束时间和其它细节。</translation>
+        <translation>In het midden vindt u een knop die de timer stopzet en u leidt naar de toevoegpagina van waaruit u de begin- en eindtijd en andere details voor de inspanning kunt wijzigen.</translation>
     </message>
     <message>
         <source> The hours will be saved only when accepting the dialog.</source>
-        <translation>只有在对话框中选择接收才能保存时间。</translation>
+        <translation>De uren zullen alleen worden opgeslagen wanneer het dialoogvenster wordt geaccepteerd.</translation>
     </message>
     <message>
         <source>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</source>
-        <translation>右边的按钮可以调整计时器的开始时间。如果你已经开始工作了却忘了启动计时器时，可以用它来调整。</translation>
+        <translation>Aan de rechterkant vindt u een knop voor het aanpassen van de starttijd van de timer. Deze kan worden gebruikt als u vergeet om de timer te starten zodra u begint met werken.</translation>
     </message>
     <message>
         <source>Using the cover</source>
-        <translation>使用封面</translation>
+        <translation>Het gebruiken van de omslag</translation>
     </message>
     <message>
         <source>Cover actions can be used to quickly add hours or to control the timer.</source>
-        <translation>封面动作可以快速添加时间或控制计时器。</translation>
+        <translation>Omslagacties kunnen worden gebruikt om snel uren toe te voegen of de timer te besturen.</translation>
     </message>
     <message>
         <source>Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</source>
-        <translation>封面动作包括添加时间，启动计时器，开始休息，结束休息和停止计时器。</translation>
+        <translation>De omslagacties zijn onder meer: het toevoegen van uren, het starten van de timer, het beginnen van de pauze, het beëindigen van de pauze en het stoppen van de timer.</translation>
     </message>
     <message>
         <source>When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.</source>
-        <translation>当从封面结束计时器时，会自动打开应用的添加页面。当关闭对话框时会自动最小化。</translation>
+        <translation>Wanneer u de timer stoptzet vanaf de omslag, zou het applicatievenster met de toevoegpagina moeten worden geopend en na het sluiten van de pagina zou de applicatie automatisch moeten minimaliseren naar de omslag.</translation>
     </message>
     <message>
         <source>Summaries</source>
-        <translation>总计</translation>
+        <translation>Samenvattingen</translation>
     </message>
     <message>
         <source>On the first page you will see total hours for different categories.</source>
-        <translation>在第一页你会看见不同分类的时间总计。</translation>
+        <translation>Op de eerste pagina zult het totaan aantal uren voor verschillende categorieën zien.</translation>
     </message>
     <message>
         <source>If you have more than one project you should see an attached page that can be accessed by swiping left from the first page.</source>
-        <translation>如果你有超过一个项目，你可以在第一页向左扫来进入一个附加页。</translation>
+        <translation>Als u meer dan één project heeft zult een aanvullende pagina zien die u kunt bereiken door naar links te vegen op de eerste pagina.</translation>
     </message>
     <message>
         <source>There you can see hours for one project at a time.</source>
-        <translation>在那里你可以一次查看一个项目的时间。</translation>
+        <translation>Daar kunt u de uren voor een project één voor één zien.</translation>
     </message>
     <message>
         <source>Clicking a category will take you to the detailed listing view where you can see all entries in that category.</source>
-        <translation>点击一个分类会跳转到详细列表视图，你可以在那里看到那个分类的所有记录。</translation>
+        <translation>Het aanraken van een categorie zal u leiden naar de gedetailleerde lijstweergave waar u alle invoeren in die categorie kunt zien.</translation>
     </message>
     <message>
         <source>You can edit those entries by clicking them.</source>
-        <translation>你可以通过点击来修改这些记录。</translation>
+        <translation>U kunt deze invoeren bewerken door ze aan te raken.</translation>
     </message>
     <message>
         <source>By swiping left in the detailed view you can see a detailed summary for that category.</source>
-        <translation>在详细视图中左扫，你可以看到这个分类的详细总结。</translation>
+        <translation>Door naar links te vegen in de gedetailleerde weergave kunt een gedetailleerde samenvatting bekijken voor die categorie.</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>设置</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>There are a few settings in the settings page that makes adding hours faster and easier.</source>
-        <translation>设置页面的一些设置可以让添加时间更快更容易</translation>
+        <translation>Er zijn een paar instellingen op de instellingenpagina die het toevoegen van uren sneller en eenvoudiger maken.</translation>
     </message>
     <message>
         <source>Default duration and default break duration will be used when manually adding hours.</source>
-        <translation>手动添加时间时会使用默认的工作时长和休息时长。</translation>
+        <translation>De standard duur en standard pauzeduur zullen worden gebruikt wanneer u handmatig uren toevoegt.</translation>
     </message>
     <message>
         <source>Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</source>
-        <translation>默认开始在当前时刻或结束在当前时刻意味着，当手动添加时间时，你希望开始时间或结束时间设置为当前时刻。</translation>
+        <translation>Begint op dit moment of Eindigt op dit moment standard betekent dat de optie om te selecteren of de begintijd of eindtijd om in te stellen wordt gezet op de huidige tijd wanneer u handmatig uren toevoegt.</translation>
     </message>
     <message>
         <source>Other settings are explained in the settings page and more will come in the future versions.</source>
-        <translation>其它设置在设置页面有自己的解释。以后的版本会有更多设置。</translation>
+        <translation>Andere instellingen worden nader uitgelegd op de instellingenpagina en er zullen er meer volgen in toekomstige versies.</translation>
     </message>
     <message>
         <source>More questions?</source>
-        <translation>还有问题？</translation>
+        <translation>Heeft u meer vragen?</translation>
     </message>
     <message>
         <source>Please don&apos;t hesitate to contact the developer if you have any questions.</source>
-        <translation>如果你有任何疑问，请联系开发者，不要犹豫。</translation>
+        <translation>U kunt altijd contact opnemen met de ontwikkelaar als u vragen heeft.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation>GitHub上的问题</translation>
+        <translation>Issues op GitHub</translation>
     </message>
 </context>
 <context>
     <name>MyTimePicker</name>
     <message>
         <source>Break can not be longer than the duration!</source>
-        <translation>休息时间不能长于总时间！</translation>
+        <translation>De pauze mag niet langer zijn dan de duur!</translation>
     </message>
 </context>
 <context>
     <name>ProjectPage</name>
     <message>
         <source>Selected project</source>
-        <translation>选择的项目</translation>
+        <translation>Geselecteerd project</translation>
     </message>
     <message>
         <source>Project was not found</source>
-        <translation>未找到项目</translation>
+        <translation>Het project kon niet worden gevonden</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>今天</translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation>昨天</translation>
+        <translation>Gisteren</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation>本周</translation>
+        <translation>Deze week</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation>上周</translation>
+        <translation>Vorige week</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation>本月</translation>
+        <translation>Deze maand</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation>上月</translation>
+        <translation>Vorige maand</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation>今年</translation>
+        <translation>Dit jaar</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>总计</translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Hours for</source>
-        <translation>时间</translation>
+        <translation>Uren voor</translation>
     </message>
 </context>
 <context>
     <name>Projects</name>
     <message>
         <source>All projects</source>
-        <translation>所有项目</translation>
+        <translation>Alle projecten</translation>
     </message>
     <message>
         <source>Add project</source>
-        <translation>添加项目</translation>
+        <translation>Project toevoegen</translation>
     </message>
     <message>
         <source>No projects found</source>
-        <translation>未找到任何项目</translation>
+        <translation>Er zijn geen projecten gevonden</translation>
     </message>
     <message>
         <source>Default project</source>
-        <translation>默认项目</translation>
+        <translation>Standaard project</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation>正在移除</translation>
+        <translation>Bezig met verwijderen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>移除</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>Settings</source>
-        <translation>设置</translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation>项目</translation>
+        <translation>Projecten</translation>
     </message>
     <message>
         <source>Edit projects</source>
-        <translation>编辑项目</translation>
+        <translation>Projecten bewerken</translation>
     </message>
     <message>
         <source>Default duration</source>
-        <translation>默认时长</translation>
+        <translation>Standaard duur</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>值</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Default break duration</source>
-        <translation>默认休息时长</translation>
+        <translation>Standaard pauzeduur</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation>添加时间</translation>
+        <translation>Uren toevoegen</translation>
     </message>
     <message>
         <source>Ends now by default</source>
-        <translation>默认结束时间为当前时刻</translation>
+        <translation>Eindigt standaard op dit moment</translation>
     </message>
     <message>
         <source>Endtime will be set to now by default.</source>
-        <translation>默认结束时间将设为当前时刻</translation>
+        <translation>De eindtijd zal standaard op op dit moment worden gezet.</translation>
     </message>
     <message>
         <source>Starts now by default</source>
-        <translation>默认开始时间为当前时刻</translation>
+        <translation>Begint standaard op dit moment</translation>
     </message>
     <message>
         <source>Starttime will be set to now by default.</source>
-        <translation>默认开始时间将设为当前时刻</translation>
+        <translation>De begintijd zal standaard op op dit moment worden gezet.</translation>
     </message>
     <message>
         <source>Endtime stays fixed by default.</source>
-        <translation>默认保持结束时间。</translation>
+        <translation>De eindtijd is standaard vastgezet.</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation>修改持续时间时会自动调整开始时间。</translation>
+        <translation>De begintijd zal variëren als de duur wordt gewijzigd.</translation>
     </message>
     <message>
         <source>Starttime stays fixed by default.</source>
-        <translation>默认保持开始时间。</translation>
+        <translation>De begintijd is standaard vastgezet.</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation>修改持续时间时会自动调整结束时间。</translation>
+        <translation>De eindtijd zal variëren als de duur wordt gewijzigd</translation>
     </message>
     <message>
         <source>Startup options</source>
-        <translation>开始选项</translation>
+        <translation>Opstartinstellingen</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
-        <translation>打开应用时自动开始计时</translation>
+        <translation>De timer automatisch starten wanneer de applicatie opstart</translation>
     </message>
     <message>
         <source>Timer will get started automatically if not already running.</source>
-        <translation>如果计时器未启动则自动启动。</translation>
+        <translation>De timer zal automatisch worden gestart als deze nog niet draait.</translation>
     </message>
     <message>
         <source>Timer will not get started automatically.</source>
-        <translation>计时器不会自动启动。</translation>
+        <translation>De timer zal niet automatisch worden gestart.</translation>
     </message>
     <message>
         <source>Set currency</source>
-        <translation>设置货币</translation>
+        <translation>Munteenheid instellen</translation>
     </message>
     <message>
         <source>Set currency string</source>
-        <translation>设置货币符号</translation>
+        <translation>Stel de munteenheidstring in</translation>
     </message>
     <message>
         <source>Currency string</source>
-        <translation>货币符号</translation>
+        <translation>Munteenheidstring</translation>
     </message>
     <message>
         <source>Move all hours to default</source>
-        <translation>移动所有时间到默认</translation>
+        <translation>Verplaats alle uren naar standaard</translation>
     </message>
     <message>
         <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation>将所有你现存的时间到默认项目</translation>
+        <translation>Verplaats AL uw bestaande uren naar het project dat is ingesteld als standaard.</translation>
     </message>
     <message>
         <source>Move all to default</source>
-        <translation>移动所有到默认</translation>
+        <translation>Alles naar standaard verplaatsen</translation>
     </message>
     <message>
         <source>Move all hours to default project</source>
-        <translation>移动所有时间到默认项目</translation>
+        <translation>Alle uren naar het standaard project verplaatsen</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>完成</translation>
+        <translation>Afgerond</translation>
     </message>
     <message>
         <source>No default project set</source>
-        <translation>未设置默认项目</translation>
+        <translation>U heeft geen standard project ingesteld</translation>
     </message>
     <message>
         <source>Move by project name in description</source>
-        <translation>根据描述中的项目名移动</translation>
+        <translation>Verplaats middels de projectnaam in de omschrijving</translation>
     </message>
     <message>
         <source>Try to move hours to existing projects.</source>
-        <translation>尝试移动时间到现存的项目中。</translation>
+        <translation>Probeer om uren te verplaatsen naar bestaande projecten.</translation>
     </message>
     <message>
         <source>Sets correct project if the project name is found in the description.</source>
-        <translation>如果项目名称出现在描述中，设置为这个项目。</translation>
+        <translation>Stelt het juiste project in als de projectnaam wordt gevonden in de omschrijving.</translation>
     </message>
     <message>
         <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation>仅用于如果你使用过早期的版本并将项目名写在了描述中</translation>
+        <translation>Dit is alleen bedoeld voor gebruik wanneer u een eerdere versie van deze applicatie hebt gebruikt en de projectnaam in de omschrijving hebt ingevuld.</translation>
     </message>
     <message>
         <source>This might take a while.</source>
-        <translation>这将花费些时间。</translation>
+        <translation>Dit kan even duren.</translation>
     </message>
     <message>
         <source>Move existing hours</source>
-        <translation>移动现存时间</translation>
+        <translation>Bestaande uren verschuiven</translation>
     </message>
     <message>
         <source>Moving hours to projects in description</source>
-        <translation>根据描述移动时间到项目</translation>
+        <translation>Bezig met verschuiven van de bestaande uren naar de projecten in de omschrijving</translation>
     </message>
     <message>
         <source>Please be aware!</source>
-        <translation>请注意！</translation>
+        <translation>Let op!</translation>
     </message>
     <message>
         <source>Reset database</source>
-        <translation>重置数据库</translation>
+        <translation>Database terugzetten</translation>
     </message>
     <message>
         <source>Resetting database</source>
-        <translation>正在重置数据库</translation>
+        <translation>Bezig met terugzetten van de database</translation>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
-        <translation>警告：重置数据库将抹除Working Hours上你的所有数据！</translation>
+        <translation>Waarschuwing: u zult al uw applicatiedata verliezen als u de database terugzet!</translation>
     </message>
 </context>
 </TS>

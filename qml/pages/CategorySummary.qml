@@ -41,7 +41,7 @@ Page {
 
     function initializeContent(){
         hoursModel.set(0, {
-                       'header': qsTr("Total ") + section,
+                       'header': qsTr("Total") +": " + section,
                        'duration': qsTr("Duration")+": " + (categoryDuration).toString().toHHMM(),
                        'days': qsTr("Workdays") + ": " + categoryWorkdays,
                        'entries': qsTr("Entries") + ": " + categoryEntries,
@@ -107,7 +107,7 @@ Page {
     SilicaListView {
         id: listView
         header: PageHeader {
-            title: qsTr("Summary for ") + section
+            title: qsTr("Summary for") + ": " +section
         }
 
         spacing: Theme.paddingLarge
