@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>About</name>
     <message>
@@ -262,10 +264,6 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>Yhteensä</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>Kesto</translation>
     </message>
@@ -278,12 +276,16 @@ Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
         <translation>Kirjauksia</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>Yhteenveto: </translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>Jokin meni pieleen</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>Yhteensä</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>Yhteenveto: </translation>
     </message>
 </context>
 <context>

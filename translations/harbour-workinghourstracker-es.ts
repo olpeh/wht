@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>About</name>
     <message>
@@ -12,12 +14,6 @@
     <message>
         <source>General</source>
         <translation>General</translation>
-    </message>
-    <message>
-        <source>Working Hours Tracker for SailfishOS
-A simple working hours tracker to keep track on working hours.</source>
-        <translation>Working Hours Tracker para SailfishOS
-Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</translation>
     </message>
     <message>
         <source>Usage</source>
@@ -68,10 +64,16 @@ Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</
         <translation>Licencia</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala
+        <source>Working Hours Tracker for SailfishOS 
+A simple working hours tracker to keep track on working hours.</source>
+        <translation>Working Hours Tracker para SailfishOS
+        Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD.</source>
         <translation>Copyright (C) 2015 Olavi Haapala
-El código fuente está autorizado bajo la licencia BSD.</translation>
+        El código fuente está autorizado bajo la licencia BSD.</translation>
     </message>
 </context>
 <context>
@@ -262,10 +264,6 @@ El código fuente está autorizado bajo la licencia BSD.</translation>
 <context>
     <name>CategorySummary</name>
     <message>
-        <source>Total </source>
-        <translation>Total</translation>
-    </message>
-    <message>
         <source>Duration</source>
         <translation>Duración</translation>
     </message>
@@ -278,12 +276,16 @@ El código fuente está autorizado bajo la licencia BSD.</translation>
         <translation>Entradas</translation>
     </message>
     <message>
-        <source>Summary for </source>
-        <translation>Resumen por</translation>
-    </message>
-    <message>
         <source>Something went wrong</source>
         <translation>Algo salió mal</translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation>Total</translation>
+    </message>
+    <message>
+        <source>Summary for</source>
+        <translation>Resumen por</translation>
     </message>
 </context>
 <context>
