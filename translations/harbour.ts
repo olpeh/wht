@@ -4,8 +4,7 @@
 <context>
     <name>Description</name>
     <message>
-        <source>
-Keep track on your working hours easily with a native Working Hours Tracker application.
+        <source>Keep track on your working hours easily with a native Working Hours Tracker application.
 
 Current features:
 - Adding hours
@@ -32,8 +31,7 @@ Please report any issues and send ideas for improvements.
 
 Donations are also welcome.
 
-If you want to contribute to the translations please do so by following the link below.
-            </source>
+If you want to contribute to the translations please do so by following the link below.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
