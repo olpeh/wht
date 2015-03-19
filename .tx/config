@@ -1,0 +1,15 @@
+[main]
+host = https://www.transifex.com
+
+[working-hours-tracker.harbourts]
+file_filter = translations/store-<lang>.ts
+source_file = translations/store.ts
+source_lang = en
+type = QT
+
+[working-hours-tracker.harbour-workinghourstrackerts]
+file_filter = translations/harbour-workinghourstracker-<lang>.ts
+source_file = translations/harbour-workinghourstracker.ts
+source_lang = en
+type = QT
+
