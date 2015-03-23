@@ -260,6 +260,38 @@ El codi font està sota llicència BSD.</translation>
         <source>Remove</source>
         <translation>Elimina</translation>
     </message>
+    <message>
+        <source>Send report as email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished">Total</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Durada</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Dies laborables</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Entrades</translation>
+    </message>
+    <message>
+        <source>for project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>

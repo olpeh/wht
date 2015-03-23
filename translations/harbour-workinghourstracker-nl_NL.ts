@@ -260,6 +260,38 @@ De broncode is gelicenseerd onder de BSD-licentie.</translation>
         <source>Remove</source>
         <translation>Verwijderen</translation>
     </message>
+    <message>
+        <source>Send report as email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished">Totaal</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Duur</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Werkdagen</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Invoeren</translation>
+    </message>
+    <message>
+        <source>for project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>

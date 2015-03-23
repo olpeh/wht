@@ -41,6 +41,7 @@ Page {
     property double categoryPrice: 0
     property int categoryWorkdays: 0
     property int categoryEntries: 0
+    property variant allHours: []
 
     function getProject(projectId) {
         for (var i = 0; i < projects.length; i++) {
@@ -78,7 +79,6 @@ Page {
     }
 
     function updateView(hours) {
-        var allHours = []
         if(hours)
             allHours = hours;
         else
@@ -117,6 +117,41 @@ Page {
         return d.toLocaleDateString();
     }
 
+    function createEmailBody(){
+        var r = qsTr("Report of working hours") + " " + section + " ";
+        if (projectId !== ""){
+            var pr = getProject(projectId);
+            var prname = pr.name;
+            r += qsTr("for project") +": " + prname;
+        }
+        r += "\n\n";
+        for (var i = 0; i < allHours.length; i++) {
+            var project = getProject(allHours[i].project);
+            var netDuration = allHours[i].duration - allHours[i].breakDuration;
+            r += "[" + (netDuration).toString().toHHMM() + "] ";
+            if (projectId === "")
+                r += project.name + " ";
+            var d = formateDate(allHours[i].date)
+            r += d + "\n";
+            r += allHours[i].description + "\n";
+            r += allHours[i].startTime + " - " + allHours[i].endTime;
+            if(allHours[i].breakDuration)
+                r += "(" + allHours[i].breakDuration + ") ";
+            if(project.hourlyRate) {
+                r += " " + netDuration * project.hourlyRate + " " + currencyString;
+            }
+            r += "\n\n";
+        }
+        r += qsTr("Total") + ": " + section + "\n";
+        r += qsTr("Duration") + ": " + (categoryDuration).toString().toHHMM() + "\n";
+        r += qsTr("Workdays") + ": " + categoryWorkdays + "\n";
+        r += qsTr("Entries") + ": " + categoryEntries + "\n";
+        if (categoryPrice)
+            r += categoryPrice + " " + currencyString + "\n";
+
+        return r;
+    }
+
     onStatusChanged: {
         if (all.status === PageStatus.Active && listView.count > 1) {
             if (pageStack._currentContainer.attachedContainer == null) {
@@ -141,8 +176,28 @@ Page {
             title: section
         }
         PullDownMenu {
-            visible: listView.count != 0 && projectId === ""
             MenuItem {
+                text: qsTr("Send report by email")
+                onClicked: {
+                    var toAddress = "";
+                    var ccAddress = "";
+                    var bccAddress = "";
+                    var d = new Date();
+                    var da = d.toLocaleDateString();
+                    var subject = qsTr("Report of working hours") + " " + section + " ";
+                    if (projectId !== ""){
+                        var pr = getProject(projectId);
+                        var prname = pr.name;
+                        subject += qsTr("for project") +": " + prname;
+                    }
+                    subject += qsTr("Created") + " " + da;
+                    var body = createEmailBody();
+                    console.log("Trying to launch");
+                    launcher.sendEmail(toAddress, ccAddress, bccAddress, subject, body);
+                }
+            }
+            MenuItem {
+                visible: listView.count != 0 && projectId === ""
                 text: sortedByProject ? qsTr("Sort by date") : qsTr("Sort by project")
                 onClicked: {
                     sortedByProject = !sortedByProject;

@@ -260,6 +260,38 @@ The source code is licensed under BSD.</source>
         <source>Remove</source>
         <translation>移除</translation>
     </message>
+    <message>
+        <source>Send report as email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished">总计</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">持续时间</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">工作日</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">记录</translation>
+    </message>
+    <message>
+        <source>for project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>
