@@ -49,7 +49,7 @@ Page {
         })
         if(dataContainer){
             // get hours sorted by projects
-            var allHours = dataContainer.allHours //getAllHours("project")
+            var allHours = dataContainer.getAllHours("project")
             var lastDate = "";
             var results=[];
             var item ={
