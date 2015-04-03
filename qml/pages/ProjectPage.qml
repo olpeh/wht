@@ -32,6 +32,15 @@ Page {
     property QtObject dataContainer: null
     property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
 
+    onStatusChanged: {
+
+        // Data are refreshed each time the page is activated.
+        // Otherwise, they may not be up to date if changes have occurred for the displayed project.
+        if (projectPage.status === PageStatus.Activating) {
+            getHours();
+        }
+    }
+
     Component.onCompleted: {
         project = getProject(defaultProjectId);
         getHours();
