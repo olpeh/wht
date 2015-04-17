@@ -179,9 +179,9 @@ Page {
             MenuItem {
                 text: qsTr("Send report by email")
                 onClicked: {
-                    var toAddress = "";
-                    var ccAddress = "";
-                    var bccAddress = "";
+                    var toAddress = settings.getToAddress();
+                    var ccAddress = settings.getCcAddress();
+                    var bccAddress = settings.getBccAddress();
                     var d = new Date();
                     var da = d.toLocaleDateString();
                     var subject = qsTr("Report of working hours") + " " + section + " ";

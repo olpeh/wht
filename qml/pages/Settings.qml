@@ -211,6 +211,53 @@ Page {
                 label: qsTr("Currency string")
                 onFocusChanged: { settings.setCurrencyString(currencyTextArea.text); currencyString = currencyTextArea.text; }
             }
+            SectionHeader { text: qsTr("Email reports") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("These email addresses will be automatically filled in when selecting to send a report by email.") + " "
+                + qsTr("No emails will be sent automatically.") + " "
+                + qsTr("You can also decide to fill them in manually when sending a report.") +" "
+                + qsTr("This is just for making it faster.")
+            }
+            TextField{
+                id: toTextArea
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
+                width: parent.width
+                placeholderText: qsTr("Set default to address")
+                label: qsTr("Default to address")
+                onFocusChanged: { settings.setToAddress(toTextArea.text);}
+            }
+            TextField{
+                id: ccTextArea
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
+                width: parent.width
+                placeholderText: qsTr("Set default cc address")
+                label: qsTr("Default cc address")
+                onFocusChanged: { settings.setCcAddress(ccTextArea.text);}
+            }
+            TextField{
+                id: bccTextArea
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
+                width: parent.width
+                placeholderText: qsTr("Set default bcc address")
+                label: qsTr("Default bcc address")
+                onFocusChanged: { settings.setBccAddress(bccTextArea.text);}
+            }
+
 
             SectionHeader { text: qsTr("Move all hours to default") }
             Text {
@@ -399,7 +446,9 @@ Page {
             console.log("Error when getting timerAutoStart")
 
         currencyTextArea.text = settings.getCurrencyString();
-
+        toTextArea.text = settings.getToAddress();
+        ccTextArea.text = settings.getCcAddress();
+        bccTextArea.text = settings.getBccAddress();
     }
 }
 
