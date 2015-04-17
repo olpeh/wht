@@ -259,10 +259,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send report as email</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Report of working hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -288,6 +284,10 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send report by email</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -800,6 +800,50 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No emails will be sent automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can also decide to fill them in manually when sending a report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is just for making it faster.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default bcc address</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
