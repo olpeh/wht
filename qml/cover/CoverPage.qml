@@ -50,7 +50,8 @@ CoverBackground {
         id: icon
         icon.source: "wht.png"
         anchors.fill: parent
-        //opacity: 0.6
+        opacity: 0.8
+        anchors.topMargin: 35
     }
     CoverActionList {
         id: coverAction
