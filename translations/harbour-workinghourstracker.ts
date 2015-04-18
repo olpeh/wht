@@ -73,6 +73,10 @@ A simple working hours tracker to keep track on working hours.</source>
 The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -288,6 +292,10 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -659,18 +667,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Adding hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -748,10 +744,6 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Move all hours to default project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -859,15 +851,31 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export hours as CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

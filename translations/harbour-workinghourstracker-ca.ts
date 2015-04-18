@@ -75,6 +75,10 @@ The source code is licensed under BSD.</source>
         <translation>Copyright (C) 2015 Olavi Haapala 
 El codi font està sota llicència BSD.</translation>
     </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -290,6 +294,10 @@ El codi font està sota llicència BSD.</translation>
     </message>
     <message>
         <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -666,7 +674,7 @@ El codi font està sota llicència BSD.</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Valor</translation>
+        <translation type="vanished">Valor</translation>
     </message>
     <message>
         <source>Default break duration</source>
@@ -754,7 +762,7 @@ El codi font està sota llicència BSD.</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fet</translation>
+        <translation type="vanished">Fet</translation>
     </message>
     <message>
         <source>No default project set</source>
@@ -861,15 +869,23 @@ El codi font està sota llicència BSD.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export hours as CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

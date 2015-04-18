@@ -75,6 +75,10 @@ The source code is licensed under BSD.</source>
         <translation>Copyright (C) 2015 Olavi Haapala
         源代码在BSD许可协议下发布。</translation>
     </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -290,6 +294,10 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -667,7 +675,7 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Value</source>
-        <translation>值</translation>
+        <translation type="vanished">值</translation>
     </message>
     <message>
         <source>Default break duration</source>
@@ -755,7 +763,7 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Done</source>
-        <translation>完成</translation>
+        <translation type="vanished">完成</translation>
     </message>
     <message>
         <source>No default project set</source>
@@ -862,15 +870,23 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export hours as CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
