@@ -27,6 +27,9 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    Banner {
+        id: banner
+    }
 
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
@@ -60,32 +63,31 @@ Page {
             RemorseItem { id: remorse }
             SectionHeader { text: qsTr("Projects") }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 315
-                    height: 80
-                    ValueButton {
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
                         id: editProjectsButton
                         anchors.centerIn: parent
-                        label: qsTr("Edit projects")
-                        value: ""
-                        width: parent.width
-                        onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
+                        text: qsTr("Edit projects")
                     }
                 }
                 onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
             }
             SectionHeader { text: qsTr("Default duration") }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 315
-                    height: 80
-                    ValueButton {
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
                         id: defaultDurationButton
                         anchors.centerIn: parent
                         function openTimeDialog() {
@@ -107,24 +109,21 @@ Page {
                                 settings.setDefaultDuration(defaultDuration)
                             })
                         }
-
-                        label: qsTr("Value") + ":"
-                        value: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
-                        width: parent.width
-                        onClicked: openTimeDialog()
+                        text: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
                     }
                 }
                 onClicked: defaultDurationButton.openTimeDialog()
             }
             SectionHeader { text: qsTr("Default break duration") }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 315
-                    height: 80
-                    ValueButton {
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
                         id: defaultBreakDurationButton
                         anchors.centerIn: parent
                         function openTimeDialog() {
@@ -145,11 +144,7 @@ Page {
                                 settings.setDefaultBreakDuration(defaultBreakDuration)
                             })
                         }
-
-                        label: qsTr("Value") + ":"
-                        value: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
-                        width: parent.width
-                        onClicked: openTimeDialog()
+                        text: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
                     }
                 }
                 onClicked: defaultBreakDurationButton.openTimeDialog()
@@ -271,41 +266,53 @@ Page {
                 }
                 text: qsTr("Here you can export your Working Hours data.") + " "
                 + qsTr("Please note that CSV uses ';' as the separator due to some locales using comma as a decimal separator.") +" "
-                + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.")
+                + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.") +" "
+                + qsTr("It will export everything needed to rebuild the database e.g on another device.")
             }
             Button {
-              text: "Read more about exporting syntax"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
+                text: "Read more about exporting syntax"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                  banner.notify("Launching external browser")
+                  Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
+                }
             }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
                     width: parent.width - 2*Theme.paddingLarge
-                    height: 80
+                    height: 100
                     Label {
                         id: exportHoursCSV
                         anchors.centerIn: parent
                         text: qsTr("Export hours as CSV")
-                        //width: parent.width
                     }
                 }
                 onClicked:{
                     console.log("Exporting hours as CSV");
-                    exportHoursCSV.text = exporter.exportHoursToCSV();
+                    var file = exporter.exportHoursToCSV();
+                    exportHoursCSV.text = file
+                    banner.notify("CSV saved to: " + file);
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
+            }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     id: projectCSV
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
                     width: parent.width - 2*Theme.paddingLarge
-                    height: 80
+                    height: 100
                     Label {
                         id: exportProjectsCSV
                         anchors.centerIn: parent
@@ -314,8 +321,38 @@ Page {
                 }
                 onClicked:{
                     console.log("Exporting projects as CSV");
-                    exportProjectsCSV.text = exporter.exportProjectsToCSV();
+                    var file = exporter.exportProjectsToCSV();
+                    exportProjectsCSV.text = file;
+                    banner.notify("CSV saved to: " + file);
                     exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall;
+                }
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
+            }
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    id: dump
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: dumpLabel
+                        anchors.centerIn: parent
+                        text: qsTr("Export the whole database")
+                    }
+                }
+                onClicked:{
+                    console.log("Dumping the database");
+                    var file = exporter.dump();
+                    banner.notify("Database saved to: " + file);
+                    dumpLabel.text = file;
+                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
                 }
             }
 
@@ -335,37 +372,26 @@ Page {
             }
 
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 330
-                    height: 80
-                    ValueButton {
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
                         id: moveHoursButton
                         anchors.centerIn: parent
-                        label: qsTr("Move all to default")
-                        value: ""
-                        width: parent.width
-                        onClicked: {
-                            if (defaultProjectId !== "")
-                               remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
-                                   moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
-                                   moveHoursButton.value = qsTr("Done");
-                               })
-                            else
-                                moveHoursButton.label =  qsTr("No default project set")
-                        }
+                        text: qsTr("Move all to default")
                     }
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
                         remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
-                            moveHoursButton.label = settingsPage.dataContainer.moveAllHoursTo(defaultProjectId);
-                            moveHoursButton.value = qsTr("Done")
+                            banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId));
                         })
                     else
-                        moveHoursButton.label =  qsTr("No default project set")
+                       banner.notify(qsTr("No default project set"))
                 }
             }
             SectionHeader { text: qsTr("Move by project name in description") }
@@ -385,33 +411,25 @@ Page {
                 + qsTr("This might take a while.")
             }
             BackgroundItem {
+                height: 100
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 330
-                    height: 80
-                    ValueButton {
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
                         id: movingHoursButton
                         anchors.centerIn: parent
-                        label: qsTr("Move existing hours")
-                        value: ""
-                        width: parent.width
-                        onClicked: {
-                                remorse.execute(settingsPage,qsTr("Moving hours to projects in description"), function() {
-                                     movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
-                                 })
-                        }
+                        text: qsTr("Move existing hours")
                     }
                 }
                 onClicked: {
                     remorse.execute(settingsPage,qsTr("Moving hours to projects in description"), function() {
-                         movingHoursButton.label = settingsPage.dataContainer.moveAllHoursToProjectByDesc();
+                         banner.notify(settingsPage.dataContainer.moveAllHoursToProjectByDesc());
                      })
                  }
             }
-
-
 
             SectionHeader { text: "DANGER ZONE!" }
             Text {
@@ -427,26 +445,29 @@ Page {
                 }
                 text: qsTr("Please be aware!")
             }
-            Rectangle {
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.secondaryHighlightColor
-                radius: 10.0
-                width: 315
-                height: 80
-                ValueButton {
-                    id: resetButton
-                    anchors.centerIn: parent
-                    label: qsTr("Reset database")
-                    width: parent.width
-                    onClicked: remorse.execute(settingsPage,qsTr("Resetting database"), function() {
-                        if (dataContainer != null){
-                           settingsPage.dataContainer.resetDatabase();
-                           projects = settingsPage.dataContainer.getProjects();
-                           pageStack.replace(Qt.resolvedUrl("FirstPage.qml"));
-                        }
-                    })
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: resetButton
+                        anchors.centerIn: parent
+                        text: qsTr("Reset database")
+                    }
                 }
+                onClicked: remorse.execute(settingsPage,qsTr("Resetting database"), function() {
+                    if (dataContainer != null){
+                       settingsPage.dataContainer.resetDatabase();
+                       projects = settingsPage.dataContainer.getProjects();
+                       pageStack.replace(Qt.resolvedUrl("FirstPage.qml"));
+                    }
+                })
             }
+
             Text {
                 id: warningText
                 font.pointSize: Theme.fontSizeMedium
