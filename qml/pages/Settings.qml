@@ -26,6 +26,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
 Page {
     Banner {
         id: banner
@@ -265,7 +266,6 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: qsTr("Here you can export your Working Hours data.") + " "
-                + qsTr("Please note that CSV uses ';' as the separator due to some locales using comma as a decimal separator.") +" "
                 + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.") +" "
                 + qsTr("It will export everything needed to rebuild the database e.g on another device.")
             }
@@ -356,6 +356,117 @@ Page {
                 }
             }
 
+
+            SectionHeader { text: qsTr("Importing") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("Here you can import data into Working Hours Tracker.") + " "
+                + qsTr("There should become no duplicates due to unique constraints.") + " "
+                + qsTr("Duplicate rows are not inserted but fail on insertion.")
+            }
+            Button {
+                text: "Read more about the syntax"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                  banner.notify("Launching external browser")
+                  Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
+                }
+            }
+            /*
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: importHoursCSV
+                        anchors.centerIn: parent
+                        text: qsTr("Import hours from CSV")
+                    }
+                }
+                onClicked:{
+                    console.log("Importing hours from CSV");
+                    var filename = "/home/nemo/Documents/workinghours.csv";
+                    var resp = exporter.importHoursFromCSV(filename);
+                    banner.notify(resp);
+                }
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
+            }
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: importProjectsCSV
+                        anchors.centerIn: parent
+                        text: qsTr("Import projects from CSV")
+                    }
+                }
+                onClicked:{
+                    console.log("Importing projects from CSV");
+                    var filename = "/home/nemo/Documents/whtProjects.csv";
+                    var resp = exporter.importProjectsFromCSV(filename);
+                    banner.notify(resp);
+                }
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
+            }
+            */
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text:  qsTr("Import from a .sql dump exported by Working Hours Tracker.") + " "
+                + qsTr("Hit enter to run the import function.")
+            }
+            TextField{
+                id: dumpImport
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: {
+                    focus = false;
+                    console.log("Importing: " +dumpImport.text);
+                    //var filename = "/home/nemo/Documents/wht.sql";
+                    if (dumpImport.text) {
+                        var resp = exporter.importDump(dumpImport.text);
+                        banner.notify(resp);
+                    }
+                    else {
+                        banner.notify(qstr("No file path given"))
+                    }
+                }
+                width: parent.width
+                placeholderText: qsTr("Full path to .sql file")
+                label: qsTr("Full path to .sql file")
+            }
 
             SectionHeader { text: qsTr("Move all hours to default") }
             Text {
@@ -531,6 +642,7 @@ Page {
         toTextArea.text = settings.getToAddress();
         ccTextArea.text = settings.getCcAddress();
         bccTextArea.text = settings.getBccAddress();
+        dumpImport.text = "/home/nemo/Documents/wht.sql";
     }
 }
 

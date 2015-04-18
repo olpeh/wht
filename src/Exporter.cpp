@@ -117,10 +117,9 @@ QString Exporter::exportHoursToCSV()
 {
     qDebug() << "Exporting hours";
 
-    QLocale loc = QLocale::system(); /* Should return current locale */
-
-    QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    qDebug() << "Using" << separator << "as separator";
+    //QLocale loc = QLocale::system(); /* Should return current locale */
+    //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
+    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/workinghours.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
     qDebug() << "Output filename is" << filename;
@@ -137,11 +136,10 @@ QString Exporter::exportHoursToCSV()
     {
         QVariantMap data = i.next().value<QVariantMap>();
         //uid|date|startTime|endTime|duration|project|description|breakDuration
-        out << data["uid"].toString() << separator << data["date"].toString() << separator << data["startTime"].toString() << separator << data["endTime"].toString() << separator << data["duration"].toString().replace('.', loc.decimalPoint())  << separator << data["project"].toString() << separator << data["description"].toString().replace('.', ' ').replace(',', ' ') << separator << data["breakDuration"].toString() << "\n";
+        out << data["uid"].toString() << ',' << data["date"].toString() << ',' << data["startTime"].toString() << ',' << data["endTime"].toString() << ',' << data["duration"].toString().replace(',', '.') << ',' << data["project"].toString() << ',' << data["description"].toString().replace(',', ' ') << ','  << data["breakDuration"].toString().replace(',', '.') << "\n";
     }
 
     out.flush();
-
     file.close();
 
     return filename;
@@ -155,10 +153,9 @@ QString Exporter::exportProjectsToCSV()
 {
     qDebug() << "Exporting projects";
 
-    QLocale loc = QLocale::system(); /* Should return current locale */
-
-    QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    qDebug() << "Using" << separator << "as separator";
+    //QLocale loc = QLocale::system(); /* Should return current locale */
+    //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
+    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/whtProjects.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
     qDebug() << "Output filename is" << filename;
@@ -175,11 +172,10 @@ QString Exporter::exportProjectsToCSV()
     {
         QVariantMap data = n.next().value<QVariantMap>();
         //id|name|hourlyRate|contractRate|budget|hourBudget|labelColor
-        out << data["id"].toString() << separator << data["name"].toString().replace('.', ' ').replace(',', ' ') << separator << data["hourlyRate"].toString().replace('.', loc.decimalPoint()) << separator << data["contractRate"].toString().replace('.', loc.decimalPoint()) << separator << data["budget"].toString().replace('.', loc.decimalPoint()) << separator << data["hourBudget"].toString().replace('.', loc.decimalPoint()) << separator << data["labelColor"].toString() << "\n";
+        out << data["id"].toString() << ',' << data["name"].toString().replace(',', ' ') << ',' << data["hourlyRate"].toString().replace(',', '.') << ',' << data["contractRate"].toString().replace(',',',') << ',' << data["budget"].toString().replace(',', '.') << ',' << data["hourBudget"].toString().replace(',','.') << ',' << data["labelColor"].toString() << "\n";
     }
 
     out.flush();
-
     file.close();
 
     return filename;
@@ -188,10 +184,9 @@ QString Exporter::exportProjectsToCSV()
 QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     qDebug() << "Exporting hours for " << section;
 
-    QLocale loc = QLocale::system(); /* Should return current locale */
-
-    QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    qDebug() << "Using" << separator << "as separator";
+    //QLocale loc = QLocale::system(); /* Should return current locale */
+    //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
+    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), section);
     qDebug() << "Output filename is" << filename;
@@ -207,11 +202,10 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     {
         QVariantMap data = n.next().value<QVariantMap>();
         //uid|date|startTime|endTime|duration|project|description|breakDuration
-        out << data["uid"].toString() << separator << data["date"].toString() << separator << data["startTime"].toString() << separator << data["endTime"].toString() << separator << data["duration"].toString() << separator << data["project"].toString() << separator << data["description"].toString().replace(',', ' ').replace('.', ' ') << separator << data["breakDuration"].toString() << "\n";
+        out << data["uid"].toString() << ',' << data["date"].toString() << ',' << data["startTime"].toString() << ',' << data["endTime"].toString() << ',' << data["duration"].toString().replace(',','.') << ',' << data["project"].toString() << ',' << data["description"].toString().replace(',', ' ') << ',' << data["breakDuration"].toString() << "\n";
     }
 
     out.flush();
-
     file.close();
 
     return filename;
@@ -237,5 +231,67 @@ QString Exporter::dump() {
     return filename;
 }
 
+QString Exporter::importHoursFromCSV(QString filename) {
+    return "Not implemented";
+}
+
+QString Exporter::importProjectsFromCSV(QString filename) {
+    return "Not implemented";
+}
+
+QString Exporter::importDump(QString filename){
+    qDebug() << "Trying to import from a dump file";
+    qDebug() << "Input filename is" << filename;
+
+    /**
+    * @brief executeQueriesFromFile Read each line from a .sql QFile
+    * (assumed to not have been opened before this function), and when ; is reached, execute
+    * the SQL gathered until then on the query object. Then do this until a COMMIT SQL
+    * statement is found. In other words, this function assumes each file is a single
+    * SQL transaction, ending with a COMMIT line.
+    */
+
+    QFile file(filename);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QSqlQuery query;
+    int counter = 0;
+    int errors = 0;
+    while (!file.atEnd()){
+        counter++;
+        QByteArray readLine="";
+        QString cleanedLine;
+        QString line="";
+        bool finished=false;
+        while(!finished){
+            readLine = file.readLine();
+            cleanedLine=readLine.trimmed();
+            // remove comments at end of line
+            //QStringList strings=cleanedLine.split("--");
+            //cleanedLine=strings.at(0);
+
+            // remove lines with only comment, and DROP lines
+            if(!cleanedLine.startsWith("--") && !cleanedLine.startsWith("DROP")&& !cleanedLine.isEmpty()){
+                line+=cleanedLine;
+            }
+            if(cleanedLine.endsWith(";")){
+                break;
+            }
+            if(cleanedLine.startsWith("COMMIT")){
+                finished=true;
+            }
+        }
+        if(!line.isEmpty()){
+            query.exec(line);
+        }
+        if(!query.isActive()){
+            errors++;
+            qDebug() <<  query.lastError();
+            qDebug() << "Last query:"<< query.lastQuery();
+        }
+    }
+    int inserted = counter - errors;
+    QString ret = QString("Done with %1 errors. %2 rows inserted.").arg(errors, inserted);
+    return ret;
+}
 
 Exporter::~Exporter(){}

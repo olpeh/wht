@@ -25,6 +25,10 @@ public:
     Q_INVOKABLE QString dump();
     Q_INVOKABLE QVariantList readHours();
     Q_INVOKABLE QVariantList readProjects();
+    Q_INVOKABLE QString importHoursFromCSV(QString filename);
+    Q_INVOKABLE QString importProjectsFromCSV(QString filename);
+    Q_INVOKABLE QString importDump(QString filename);
+
 
     static const QString DB_NAME;
 
