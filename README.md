@@ -240,11 +240,10 @@ In the settings you find different methods for exporting data from Working Hours
 
 When selecting to export Hours as CSV the syntax will look like this: <br />
 
-uid,date,startTime,endTime,duration,project,description,breakDuration <br />
-Where the separator will be comma unless it is used as a decimal separator in your locale. In that case a semicolon will be used. <br /><br />
-
-When exporting projects as CSV the syntax will look like this:<br />
-id,name,hourlyRate,contractRate,budget,hourBudget,labelColor
+<strong>uid,date,startTime,endTime,duration,project,description,breakDuration</strong><br /><br />
+Where the separator will be comma unless it is used as a decimal separator in your locale. In that case a semicolon will be used. <br />
+When exporting projects as CSV the syntax will look like this:<br /> <br />
+<strong>id,name,hourlyRate,contractRate,budget,hourBudget,labelColor</strong>
 
 
 
