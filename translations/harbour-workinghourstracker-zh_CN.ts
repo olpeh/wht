@@ -849,5 +849,29 @@ The source code is licensed under BSD.</source>
         <source>Default bcc address</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can export your Working Hours data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please note that CSV uses &apos;;&apos; as the separator due to some locales using comma as a decimal separator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export hours as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
