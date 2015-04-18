@@ -73,6 +73,10 @@ A simple working hours tracker to keep track on working hours.</source>
 The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -256,6 +260,42 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>for project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -627,18 +667,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Adding hours</source>
         <translation type="unfinished"></translation>
     </message>
@@ -719,10 +747,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Done</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No default project set</source>
         <translation type="unfinished"></translation>
     </message>
@@ -768,6 +792,90 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No emails will be sent automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can also decide to fill them in manually when sending a report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is just for making it faster.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can export your Working Hours data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please note that CSV uses &apos;;&apos; as the separator due to some locales using comma as a decimal separator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export hours as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

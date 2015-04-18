@@ -132,3 +132,46 @@ void Settings::setCurrencyString(QString value) {
     s.endGroup();
 }
 
+QString Settings::getToAddress() {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    toAddress = s.value("toAddress","error").toString();
+    s.endGroup();
+    return toAddress;
+}
+
+void Settings::setToAddress(QString value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("toAddress", value);
+    s.endGroup();
+}
+
+QString Settings::getCcAddress() {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    ccAddress = s.value("ccAddress","error").toString();
+    s.endGroup();
+    return ccAddress;
+}
+
+void Settings::setCcAddress(QString value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("ccAddress", value);
+    s.endGroup();
+}
+QString Settings::getBccAddress() {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    bccAddress = s.value("bccAddress","error").toString();
+    s.endGroup();
+    return bccAddress;
+}
+
+void Settings::setBccAddress(QString value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("bccAddress", value);
+    s.endGroup();
+}

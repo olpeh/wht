@@ -75,6 +75,10 @@ The source code is licensed under BSD.</source>
         <translation>Copyright (C) 2015 Olavi Haapala
         源代码在BSD许可协议下发布。</translation>
     </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -259,6 +263,42 @@ The source code is licensed under BSD.</source>
     <message>
         <source>Remove</source>
         <translation>移除</translation>
+    </message>
+    <message>
+        <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished">总计</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">持续时间</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">工作日</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">记录</translation>
+    </message>
+    <message>
+        <source>for project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export as CSV</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -635,7 +675,7 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Value</source>
-        <translation>值</translation>
+        <translation type="vanished">值</translation>
     </message>
     <message>
         <source>Default break duration</source>
@@ -723,7 +763,7 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Done</source>
-        <translation>完成</translation>
+        <translation type="vanished">完成</translation>
     </message>
     <message>
         <source>No default project set</source>
@@ -772,6 +812,82 @@ The source code is licensed under BSD.</source>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
         <translation>警告：重置数据库将抹除Working Hours上你的所有数据！</translation>
+    </message>
+    <message>
+        <source>Email reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No emails will be sent automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can also decide to fill them in manually when sending a report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is just for making it faster.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can export your Working Hours data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please note that CSV uses &apos;;&apos; as the separator due to some locales using comma as a decimal separator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export hours as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

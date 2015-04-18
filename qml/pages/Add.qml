@@ -208,7 +208,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: datePicked
@@ -223,10 +223,8 @@ Dialog {
                                 selectedDate = dialog.date
                             })
                         }
-
                         label: qsTr("Date:")
                         value: dateText
-                        width: parent.width
                         onClicked: openDateDialog()
                     }
                 }
@@ -237,7 +235,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: startTime
@@ -281,7 +279,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: endTime
@@ -338,7 +336,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: duration>=0 ? Theme.secondaryHighlightColor : "red"
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: durationButton
@@ -379,7 +377,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: breakDurationButton
@@ -418,7 +416,7 @@ Dialog {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
                     radius: 10.0
-                    width: 340
+                    width: 380
                     height: 80
                     ValueButton {
                         id: netDurationButton

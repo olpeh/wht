@@ -33,6 +33,14 @@ public:
     Q_INVOKABLE QString getCurrencyString();
     Q_INVOKABLE void setCurrencyString(QString value);
 
+    Q_INVOKABLE QString getToAddress();
+    Q_INVOKABLE void setToAddress(QString value);
+    Q_INVOKABLE QString getCcAddress();
+    Q_INVOKABLE void setCcAddress(QString value);
+    Q_INVOKABLE QString getBccAddress();
+    Q_INVOKABLE void setBccAddress(QString value);
+
+
 private:
     QString defaultProject;
     double defaultDuration;
@@ -42,5 +50,8 @@ private:
     bool timerAutoStart;
     QString defaultProjectId;
     QString currencyString;
+    QString toAddress;
+    QString ccAddress;
+    QString bccAddress;
 };
 #endif // SETTINGSCLASS_H

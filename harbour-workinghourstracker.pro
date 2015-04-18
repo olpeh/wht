@@ -15,7 +15,9 @@ TARGET = harbour-workinghourstracker
 CONFIG += sailfishapp
 
 SOURCES += src/harbour-workinghourstracker.cpp \
-    src/SettingsClass.cpp
+    src/SettingsClass.cpp \
+    src/Launcher.cpp \
+    src/Exporter.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -36,7 +38,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/CategorySummary.qml \
     qml/pages/ProjectPage.qml \
     qml/helpers.js \
-    qml/pages/HowTo.qml
+    qml/pages/HowTo.qml \
+    qml/pages/Banner.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -49,5 +52,9 @@ TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
     translations/harbour-workinghourstracker-ca.ts
 
 HEADERS += \
-    src/SettingsClass.h
+    src/SettingsClass.h \
+    src/Launcher.h \
+    src/Exporter.h
 
+QT += dbus \
+   core sql
