@@ -15,7 +15,8 @@ Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-trac
 [Current features] (#current-features)<br />
 [License] (#license)<br />
 [Roadmap] (#roadmap)<br />
-[How to use] (#how-to-use)
+[How to use] (#how-to-use)<br />
+[Exporting] (#exporting)
 
 ### Donate
 
@@ -231,6 +232,19 @@ By swiping left in the detailed view you can see a detailed summary for that cat
 There are a few settings in the settings page that makes adding hours faster and easier. Default duration and default break duration will be used when manually adding hours. Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.
 
 Other settings are explained in the settings page and more will come in the future versions.
+
+
+### Exporting
+
+In the settings you find different methods for exporting data from Working Hours Tracker.
+
+When selecting to export Hours as CSV the syntax will look like this: <br />
+
+uid,date,startTime,endTime,duration,project,description,breakDuration <br />
+Where the separator will be comma unless it is used as a decimal separator in your locale. In that case a semicolon will be used. <br /><br />
+
+When exporting projects as CSV the syntax will look like this:<br />
+id,name,hourlyRate,contractRate,budget,hourBudget,labelColor
 
 
 
