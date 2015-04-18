@@ -21,6 +21,8 @@ public:
 
     Q_INVOKABLE QString exportHoursToCSV();
     Q_INVOKABLE QString exportProjectsToCSV();
+    Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
+    Q_INVOKABLE QString dump();
     Q_INVOKABLE QVariantList readHours();
     Q_INVOKABLE QVariantList readProjects();
 

@@ -6,6 +6,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 #include "Exporter.h"
+#include "Launcher.h"
 #include <QCoreApplication>
 #include <QtSql>
 #include <QFile>
@@ -136,7 +137,7 @@ QString Exporter::exportHoursToCSV()
     {
         QVariantMap data = i.next().value<QVariantMap>();
         //uid|date|startTime|endTime|duration|project|description|breakDuration
-        out << data["uid"].toString() << separator << data["date"].toString() << separator << data["startTime"].toString() << separator << data["endTime"].toString() << separator << data["duration"].toString() << separator << data["project"].toString() << separator << data["description"].toString() << separator << data["breakDuration"].toString() << "\n";
+        out << data["uid"].toString() << separator << data["date"].toString() << separator << data["startTime"].toString() << separator << data["endTime"].toString() << separator << data["duration"].toString().replace('.', loc.decimalPoint())  << separator << data["project"].toString() << separator << data["description"].toString().replace('.', ' ').replace(',', ' ') << separator << data["breakDuration"].toString() << "\n";
     }
 
     out.flush();
@@ -174,13 +175,65 @@ QString Exporter::exportProjectsToCSV()
     {
         QVariantMap data = n.next().value<QVariantMap>();
         //id|name|hourlyRate|contractRate|budget|hourBudget|labelColor
-        out << data["id"].toString() << separator << data["name"].toString() << separator << data["hourlyRate"].toString().replace('.', loc.decimalPoint()) << separator << data["contractRate"].toString().replace('.', loc.decimalPoint()) << separator << data["budget"].toString().replace('.', loc.decimalPoint()) << separator << data["hourBudget"].toString().replace('.', loc.decimalPoint()) << separator << data["labelColor"].toString() << "\n";
+        out << data["id"].toString() << separator << data["name"].toString().replace('.', ' ').replace(',', ' ') << separator << data["hourlyRate"].toString().replace('.', loc.decimalPoint()) << separator << data["contractRate"].toString().replace('.', loc.decimalPoint()) << separator << data["budget"].toString().replace('.', loc.decimalPoint()) << separator << data["hourBudget"].toString().replace('.', loc.decimalPoint()) << separator << data["labelColor"].toString() << "\n";
     }
 
     out.flush();
 
     file.close();
 
+    return filename;
+}
+
+QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
+    qDebug() << "Exporting hours for " << section;
+
+    QLocale loc = QLocale::system(); /* Should return current locale */
+
+    QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
+    qDebug() << "Using" << separator << "as separator";
+
+    QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), section);
+    qDebug() << "Output filename is" << filename;
+
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out.setCodec("ISO-8859-1");
+
+    QListIterator<QVariant> n(allHours);
+
+    while (n.hasNext())
+    {
+        QVariantMap data = n.next().value<QVariantMap>();
+        //uid|date|startTime|endTime|duration|project|description|breakDuration
+        out << data["uid"].toString() << separator << data["date"].toString() << separator << data["startTime"].toString() << separator << data["endTime"].toString() << separator << data["duration"].toString() << separator << data["project"].toString() << separator << data["description"].toString().replace(',', ' ').replace('.', ' ') << separator << data["breakDuration"].toString() << "\n";
+    }
+
+    out.flush();
+
+    file.close();
+
+    return filename;
+}
+
+QString Exporter::dump() {
+    qDebug() << "Dumping the database";
+
+    QString filename = QString("%1/wht.sql").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+    qDebug() << "Output filename is" << filename;
+
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out.setCodec("ISO-8859-1");
+    Launcher l;
+    QString retval = l.launch("sqlite3 /home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite .dump");
+    out << retval;
+    file.close();
+
+    if (retval.length() < 1)
+        return "Error";
     return filename;
 }
 
