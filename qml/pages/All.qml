@@ -151,10 +151,14 @@ Page {
 
         return r;
     }
+    Banner {
+        id: banner
+    }
+
 
     onStatusChanged: {
         if (all.status === PageStatus.Active && listView.count > 1) {
-            if (pageStack._currentContainer.attachedContainer == null) {
+            if (pageStack._currentContainer.attachedContainer === null) {
                 pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
                                            dataContainer: all,
                                            section: section,
@@ -177,6 +181,18 @@ Page {
         }
         PullDownMenu {
             MenuItem {
+                text: qsTr("Export as CSV")
+                onClicked: {
+                    var filename = section.replace(" ", "")
+                    if(projectId !== "") {
+                        var project = getProject(projectId);
+                        filename+=project.name.replace(" ", "");
+                    }
+                    banner.notify("Saved to: " + exporter.exportCategoryToCSV(filename, allHours));
+                }
+            }
+
+            MenuItem {
                 text: qsTr("Send report by email")
                 onClicked: {
                     var toAddress = settings.getToAddress();
@@ -192,7 +208,7 @@ Page {
                     }
                     subject += qsTr("Created") + " " + da;
                     var body = createEmailBody();
-                    console.log("Trying to launch");
+                    banner.notify("Trying to launch email app");
                     launcher.sendEmail(toAddress, ccAddress, bccAddress, subject, body);
                 }
             }
