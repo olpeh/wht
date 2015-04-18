@@ -28,6 +28,9 @@ import Sailfish.Silica 1.0
 
 Page {
     id: aboutPage
+    Banner {
+        id: banner
+    }
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent
@@ -92,14 +95,20 @@ Page {
                 text: "Olavi Haapala"
             }
             Button {
-              text: "ojhaapala@gmail.com"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+                text: "ojhaapala@gmail.com"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                  banner.notify("Launching external email app")
+                  Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+                }
             }
             Button {
-              text: "Twitter: @olpetik"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://twitter.com/olpetik")
+                text: "Twitter: @olpetik"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://twitter.com/olpetik")
+                }
             }
             Item {
                 width: parent.width
@@ -120,14 +129,20 @@ Page {
                 text: qsTr("Please donate if you like my work. Donations help me to use more time on development.")
             }
             Button {
-              text: "Paypal EUR"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+                text: "Paypal EUR"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+                }
             }
             Button {
-              text: "Paypal USD"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+                text: "Paypal USD"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
+                }
             }
             Item {
                 width: parent.width
@@ -142,7 +157,7 @@ Page {
                 onClicked: {
                     selectAll()
                     copy()
-                    bitcoinText.label = qsTr("Copied to clipboard")
+                    banner.notify(qsTr("Copied to clipboard"))
                 }
                 label: qsTr("Donate to my bitcoin account")
                 text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
@@ -165,14 +180,20 @@ Page {
                 height: 10
             }
             Button {
-              text: qsTr("Issues in GitHub")
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                text: qsTr("Issues in GitHub")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify("Launching external browser")
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                }
             }
             Button {
-              text: qsTr("Project in GitHub")
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht")
+                text: qsTr("Project in GitHub")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify("Launching external browser")
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht")
+                }
             }
             Item {
                 width: parent.width
