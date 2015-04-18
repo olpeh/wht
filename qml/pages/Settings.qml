@@ -258,6 +258,67 @@ Page {
                 onFocusChanged: { settings.setBccAddress(bccTextArea.text);}
             }
 
+            SectionHeader { text: qsTr("Exporting") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("Here you can export your Working Hours data.") + " "
+                + qsTr("Please note that CSV uses ';' as the separator due to some locales using comma as a decimal separator.") +" "
+                + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export as SQL button.")
+            }
+            Button {
+              text: "Read more about exporting syntax"
+              anchors.horizontalCenter: parent.horizontalCenter
+              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
+            }
+            BackgroundItem {
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 80
+                    Label {
+                        id: exportHoursCSV
+                        anchors.centerIn: parent
+                        text: qsTr("Export hours as CSV")
+                        //width: parent.width
+                    }
+                }
+                onClicked:{
+                    console.log("Exporting hours as CSV");
+                    exportHoursCSV.text = exporter.exportHoursToCSV();
+                    exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
+                }
+            }
+            BackgroundItem {
+                Rectangle {
+                    id: projectCSV
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 80
+                    Label {
+                        id: exportProjectsCSV
+                        anchors.centerIn: parent
+                        text: qsTr("Export projects as CSV")
+                    }
+                }
+                onClicked:{
+                    console.log("Exporting projects as CSV");
+                    exportProjectsCSV.text = exporter.exportProjectsToCSV();
+                    exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall;
+                }
+            }
+
 
             SectionHeader { text: qsTr("Move all hours to default") }
             Text {
