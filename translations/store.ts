@@ -88,6 +88,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>- Email reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>- Exporting as csv</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>- Exporting as .sql</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>- Importing .sql</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please report any issues and send ideas for improvements.</source>
         <translation type="unfinished"></translation>
     </message>

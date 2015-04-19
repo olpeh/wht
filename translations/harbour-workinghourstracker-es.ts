@@ -588,6 +588,14 @@ The source code is licensed under BSD.</source>
         <source>Issues in GitHub</source>
         <translation>Incidencias en GitHub</translation>
     </message>
+    <message>
+        <source>Launching email app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MyTimePicker</name>
@@ -921,10 +929,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hit enter to run the import function.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Duplicate rows are not inserted but fail on insertion.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -974,6 +978,14 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>DANGER ZONE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Give the full path to the file and then hit the button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import now!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
