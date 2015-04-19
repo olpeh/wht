@@ -244,8 +244,7 @@ QString Exporter::importDump(QString filename){
     qDebug() << "Input filename is" << filename;
 
     /**
-    * @brief executeQueriesFromFile Read each line from a .sql QFile
-    * (assumed to not have been opened before this function), and when ; is reached, execute
+    * Read each line from a .sql QFile and when ; is reached, execute
     * the SQL gathered until then on the query object. Then do this until a COMMIT SQL
     * statement is found. In other words, this function assumes each file is a single
     * SQL transaction, ending with a COMMIT line.
@@ -280,6 +279,8 @@ QString Exporter::importDump(QString filename){
                 }
             }
             if(!line.isEmpty()){
+                if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
+                    counter++;
                 // Change to INSERT OR REPLACE
                 if(line.startsWith("INSERT")) {
                     line.replace(QString("INSERT"), QString("INSERT OR REPLACE"));
@@ -292,8 +293,6 @@ QString Exporter::importDump(QString filename){
 
                 if(query.exec(line)) {
                     qDebug() << "Succesful line: "<< line;
-                    if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
-                        counter++;
                 }
                 else {
                     if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
@@ -303,9 +302,13 @@ QString Exporter::importDump(QString filename){
                 }
             }
         }
-        int inserted = counter - errors;
-        QString ret = QString("Done: %1 rows inserted or updated \n%2 errors occured.").arg(inserted).arg(errors);
-        return ret;
+        if (errors) {
+            int inserted = counter - errors;
+            return QString("Done: %1 rows inserted or updated \n%2 errors occured.").arg(inserted).arg(errors);
+        }
+        else
+            return QString("Done: %1 rows inserted or updated").arg(inserted);
+
     }
     return "Error opening the file!";
 }
