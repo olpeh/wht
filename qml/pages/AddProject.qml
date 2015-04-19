@@ -28,6 +28,9 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
+    Banner {
+        id: banner
+    }
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
@@ -54,13 +57,21 @@ Dialog {
         hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
         DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
-        console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
+        //console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         if(defaultSwitch.checked) {
             defaultProjectId = id;
             settings.setDefaultProjecId(id);
         }
         if(prev)
             page.prev.getProjects();
+    }
+
+    // Not the best way of doing this but we don't want ; or , in the inputs
+    function removeInvalidCharacters(text) {
+        var tmp = text
+        text = text.split(",").join("")
+        text =  text.split(";").join("")
+        return text;
     }
 
     SilicaFlickable {
@@ -83,9 +94,14 @@ Dialog {
                 id: nameTextArea
                 focus: !editMode
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Please enter a name for the project")
+                onFocusChanged: {
+                    nameTextArea.text = removeInvalidCharacters(nameTextArea.text)
+                }
             }
             TextSwitch {
                 id: defaultSwitch
@@ -100,11 +116,14 @@ Dialog {
                 id: hourlyRateTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false //budgetTextArea.focus = true
+                EnterKey.onClicked: {
+                    focus = false //budgetTextArea.focus = true
+                }
                 width: parent.width
                 placeholderText: qsTr("Hourly rate")
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: qsTr("Hourly rate")
+                onFocusChanged: hourlyRateTextArea.text = hourlyRateTextArea.text.replace(",",".")
             }
             /* Lets hide these for now...
             TextField{

@@ -26,6 +26,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
 Page {
     Banner {
         id: banner
@@ -47,6 +48,12 @@ Page {
         return pad(Math.floor(minutes / 60))
     }
     function pad(n) { return ("0" + n).slice(-2); }
+
+    // Email validator
+    function validEmail(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    }
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -200,11 +207,20 @@ Page {
                 id: currencyTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    if(currencyTextArea.text.length > 3) {
+                        banner.notify(qsTr("Currency string too long!"))
+                        currencyTextArea.text = settings.getCurrencyString()
+                    }
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
-                onFocusChanged: { settings.setCurrencyString(currencyTextArea.text); currencyString = currencyTextArea.text; }
+                onFocusChanged: {
+                    settings.setCurrencyString(currencyTextArea.text);
+                    currencyString = currencyTextArea.text;
+                }
             }
             SectionHeader { text: qsTr("Email reports") }
             Text {
@@ -226,31 +242,57 @@ Page {
                 id: toTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default to address")
                 label: qsTr("Default to address")
-                onFocusChanged: { settings.setToAddress(toTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(toTextArea.text)) {
+                        banner.notify(qsTr("Invalid to email address!"))
+                        toTextArea.text = settings.getToAddress()
+                    }
+                    settings.setToAddress(toTextArea.text);
+                }
             }
             TextField{
                 id: ccTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default cc address")
                 label: qsTr("Default cc address")
-                onFocusChanged: { settings.setCcAddress(ccTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(ccTextArea.text)) {
+                        banner.notify(qsTr("Invalid cc email address!"))
+                        ccTextArea.text = settings.getCcAddress()
+                    }
+                    else
+                        settings.setCcAddress(ccTextArea.text);
+                }
             }
             TextField{
                 id: bccTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default bcc address")
                 label: qsTr("Default bcc address")
-                onFocusChanged: { settings.setBccAddress(bccTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(bccTextArea.text)) {
+                        banner.notify(qsTr("Invalid bcc email address!"))
+                        bccTextArea.text = settings.getBccAddress()
+                    }
+                    else
+                        settings.setBccAddress(bccTextArea.text);
+                }
             }
 
             SectionHeader { text: qsTr("Exporting") }
@@ -265,17 +307,46 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: qsTr("Here you can export your Working Hours data.") + " "
-                + qsTr("Please note that CSV uses ';' as the separator due to some locales using comma as a decimal separator.") +" "
                 + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.") +" "
-                + qsTr("It will export everything needed to rebuild the database e.g on another device.")
+                + qsTr("It will export everything needed to rebuild the database e.g on another device.") +" "
+                + qsTr("At the moment you will not be able to import csv files yet. Coming soon.")
             }
             Button {
-                text: "Read more about exporting syntax"
+                text: qsTr("Read more about exporting")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                  banner.notify("Launching external browser")
+                  banner.notify(qsTr("Launching external browser"))
                   Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
                 }
+            }
+
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    id: dump
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: dumpLabel
+                        anchors.centerIn: parent
+                        text: qsTr("Export the whole database")
+                    }
+                }
+                onClicked:{
+                    console.log("Dumping the database");
+                    var file = exporter.dump();
+                    banner.notify(qsTr("Database saved to")+ ": " + file);
+                    dumpLabel.text = file;
+                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
+                }
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
             }
             BackgroundItem {
                 height: 100
@@ -295,7 +366,7 @@ Page {
                     console.log("Exporting hours as CSV");
                     var file = exporter.exportHoursToCSV();
                     exportHoursCSV.text = file
-                    banner.notify("CSV saved to: " + file);
+                    banner.notify(qsTr("CSV saved to") +": " + file);
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
@@ -323,8 +394,54 @@ Page {
                     console.log("Exporting projects as CSV");
                     var file = exporter.exportProjectsToCSV();
                     exportProjectsCSV.text = file;
-                    banner.notify("CSV saved to: " + file);
+                    banner.notify(qsTr("CSV saved to") +": " + file);
                     exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall;
+                }
+            }
+
+            SectionHeader { text: qsTr("Importing") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("Here you can import data into Working Hours Tracker.") + " "
+                + qsTr("There should become no duplicates due to unique constraints.") + " "
+                + qsTr("Duplicate rows are not inserted but fail on insertion.")
+            }
+            Button {
+                text: qsTr("Read more about importing")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                  banner.notify(qsTr("Launching external browser"))
+                  Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
+                }
+            }
+            /*
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: importHoursCSV
+                        anchors.centerIn: parent
+                        text: qsTr("Import hours from CSV")
+                    }
+                }
+                onClicked:{
+                    console.log("Importing hours from CSV");
+                    var filename = "/home/nemo/Documents/workinghours.csv";
+                    var resp = exporter.importHoursFromCSV(filename);
+                    banner.notify(resp);
                 }
             }
             Rectangle {
@@ -335,27 +452,63 @@ Page {
             BackgroundItem {
                 height: 100
                 Rectangle {
-                    id: dump
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
                     width: parent.width - 2*Theme.paddingLarge
                     height: 100
                     Label {
-                        id: dumpLabel
+                        id: importProjectsCSV
                         anchors.centerIn: parent
-                        text: qsTr("Export the whole database")
+                        text: qsTr("Import projects from CSV")
                     }
                 }
                 onClicked:{
-                    console.log("Dumping the database");
-                    var file = exporter.dump();
-                    banner.notify("Database saved to: " + file);
-                    dumpLabel.text = file;
-                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
+                    console.log("Importing projects from CSV");
+                    var filename = "/home/nemo/Documents/whtProjects.csv";
+                    var resp = exporter.importProjectsFromCSV(filename);
+                    banner.notify(resp);
                 }
             }
-
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
+            }
+            */
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text:  qsTr("Import from a .sql dump exported by Working Hours Tracker.") + " "
+                + qsTr("Hit enter to run the import function.")
+            }
+            TextField{
+                id: dumpImport
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: {
+                    focus = false;
+                    console.log("Importing: " +dumpImport.text);
+                    //var filename = "/home/nemo/Documents/wht.sql";
+                    if (dumpImport.text) {
+                        var resp = exporter.importDump(dumpImport.text);
+                        banner.notify(resp);
+                    }
+                    else {
+                        banner.notify(qsTr("No file path given"))
+                    }
+                }
+                width: parent.width
+                placeholderText: qsTr("Full path to .sql file")
+                label: qsTr("Full path to .sql file")
+            }
 
             SectionHeader { text: qsTr("Move all hours to default") }
             Text {
@@ -387,7 +540,7 @@ Page {
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
-                        remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
+                        remorse.execute(settingsPage, qsTr("Move all hours to default project"), function() {
                             banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId));
                         })
                     else
@@ -431,7 +584,7 @@ Page {
                  }
             }
 
-            SectionHeader { text: "DANGER ZONE!" }
+            SectionHeader { text: qsTr("DANGER ZONE!") }
             Text {
                 id: warningText2
                 font.pointSize: Theme.fontSizeMedium
@@ -531,6 +684,7 @@ Page {
         toTextArea.text = settings.getToAddress();
         ccTextArea.text = settings.getCcAddress();
         bccTextArea.text = settings.getBccAddress();
+        dumpImport.text = "/home/nemo/Documents/wht.sql";
     }
 }
 

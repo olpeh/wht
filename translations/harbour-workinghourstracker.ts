@@ -16,11 +16,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Working Hours Tracker for SailfishOS 
-A simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Usage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -75,6 +70,14 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external email app</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -298,6 +301,10 @@ The source code is licensed under BSD.</source>
         <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>
@@ -417,6 +424,10 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Adjust</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -847,10 +858,6 @@ The source code is licensed under BSD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please note that CSV uses &apos;;&apos; as the separator due to some locales using comma as a decimal separator.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export hours as CSV</source>
         <translation type="unfinished"></translation>
     </message>
@@ -876,6 +883,82 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Export the whole database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Importing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can import data into Working Hours Tracker.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There should become no duplicates due to unique constraints.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full path to .sql file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from a .sql dump exported by Working Hours Tracker.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hit enter to run the import function.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate rows are not inserted but fail on insertion.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currency string too long!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid to email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid cc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid bcc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about importing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file path given</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DANGER ZONE!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
