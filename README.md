@@ -5,7 +5,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 <strong>v. 1.0.1-1 available in Jolla store (18.03.2015)</strong> <br />
 v. 1.0.0-1 available in Jolla store (09.03.2015)
 
-Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.0.2-1 Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -50,16 +50,29 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Shows price for efforts if project hourlyrate is set
 * Project view
 * Category summary
+* Email reports
+* Exporting as csv
+* Exporting as .sql dump
+* Importing database dump
+* Translations
 
 ## Roadmap:
-
-* Exporting/Importing database
-* Translations
+* Importing .csv
+* Requested features
 * Graphs?
 
 
 
 ## Changelog
+
+### 1.0.2-1
+- Fix the bug #23 (thx ttln)
+- Added notification banner
+- Added email reports sending
+- Added exporting as CSV
+- Added exporting as .sql
+- Added importing .sql
+- More input validation
 
 ### 1.0.1-1
 - Bugfixes: #10, #13 and #6
@@ -244,7 +257,10 @@ Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
 <strong>id,name,hourlyRate,contractRate,budget,hourBudget,labelColor</strong><br />
 
+### Importing
 
+At the moment importing is only possible from a .sql file. .csv file support will come later.
+Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.
 
 
 
