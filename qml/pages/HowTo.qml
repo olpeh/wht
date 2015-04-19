@@ -28,6 +28,9 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    Banner {
+        id: banner
+    }
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -165,19 +168,28 @@ Page {
                 text: "Olavi Haapala"
             }
             Button {
-              text: "ojhaapala@gmail.com"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+                text: "ojhaapala@gmail.com"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching email app"))
+                    Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+                }
             }
             Button {
-              text: "Twitter: @olpetik"
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://twitter.com/olpetik")
+                text: "Twitter: @olpetik"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://twitter.com/olpetik")
+                }
             }
             Button {
-              text: qsTr("Issues in GitHub")
-              anchors.horizontalCenter: parent.horizontalCenter
-              onClicked: Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                text: qsTr("Issues in GitHub")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                }
             }
             Rectangle {
                 opacity: 0
