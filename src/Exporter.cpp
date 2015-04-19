@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014-2015 kimmoli kimmo.lindholm@gmail.com @likimmo
+Copyright (C) 2015 Olavi Haapala ojhaapala@gmail.com  Twitter: @olpetik
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -188,7 +188,7 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
     //qDebug() << "Using" << separator << "as separator";
 
-    QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), section);
+    QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)).arg(section);
     qDebug() << "Output filename is" << filename;
 
     QFile file(filename);
@@ -252,46 +252,51 @@ QString Exporter::importDump(QString filename){
     */
 
     QFile file(filename);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QSqlQuery query;
-    int counter = 0;
-    int errors = 0;
-    while (!file.atEnd()){
-        counter++;
-        QByteArray readLine="";
-        QString cleanedLine;
-        QString line="";
-        bool finished=false;
-        while(!finished){
-            readLine = file.readLine();
-            cleanedLine=readLine.trimmed();
-            // remove comments at end of line
-            //QStringList strings=cleanedLine.split("--");
-            //cleanedLine=strings.at(0);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QSqlQuery query;
+        int counter = 0;
+        int errors = 0;
+        while (!file.atEnd()){
+            QByteArray readLine="";
+            QString cleanedLine;
+            QString line="";
+            bool finished=false;
+            while(!finished){
+                readLine = file.readLine();
+                cleanedLine=readLine.trimmed();
+                // remove comments at end of line
+                //QStringList strings=cleanedLine.split("--");
+                //cleanedLine=strings.at(0);
 
-            // remove lines with only comment, and DROP lines
-            if(!cleanedLine.startsWith("--") && !cleanedLine.startsWith("DROP")&& !cleanedLine.isEmpty()){
-                line+=cleanedLine;
+                // remove lines with only comment, and DROP lines
+                if(!cleanedLine.startsWith("--") && !cleanedLine.startsWith("DROP")&& !cleanedLine.isEmpty()){
+                    line+=cleanedLine;
+                }
+                if(cleanedLine.endsWith(";")){
+                    break;
+                }
+                if(cleanedLine.startsWith("COMMIT")){
+                    finished=true;
+                }
             }
-            if(cleanedLine.endsWith(";")){
-                break;
+            if(!line.isEmpty()){
+                if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN"))
+                    counter++;
+                if(query.exec(line)) {
+                    qDebug() << "Succesful line: "<< line;
+                }
             }
-            if(cleanedLine.startsWith("COMMIT")){
-                finished=true;
+            if(!query.isActive()){
+                errors++;
+                qDebug() <<  query.lastError();
+                qDebug() << "Error in query: "<< query.lastQuery();
             }
         }
-        if(!line.isEmpty()){
-            query.exec(line);
-        }
-        if(!query.isActive()){
-            errors++;
-            qDebug() <<  query.lastError();
-            qDebug() << "Last query:"<< query.lastQuery();
-        }
+        int inserted = counter - errors;
+        QString ret = QString("Done: %1 rows inserted, %2 errors.").arg(inserted).arg(errors);
+        return ret;
     }
-    int inserted = counter - errors;
-    QString ret = QString("Done with %1 errors. %2 rows inserted.").arg(errors, inserted);
-    return ret;
+    return "Error opening the file!";
 }
 
 Exporter::~Exporter(){}
