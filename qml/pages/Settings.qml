@@ -49,6 +49,12 @@ Page {
     }
     function pad(n) { return ("0" + n).slice(-2); }
 
+    // Email validator
+    function validEmail(email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
+    }
+
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -201,11 +207,20 @@ Page {
                 id: currencyTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    if(currencyTextArea.text.length > 3) {
+                        banner.notify(qsTr("Currency string too long!"))
+                        currencyTextArea.text = settings.getCurrencyString()
+                    }
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
-                onFocusChanged: { settings.setCurrencyString(currencyTextArea.text); currencyString = currencyTextArea.text; }
+                onFocusChanged: {
+                    settings.setCurrencyString(currencyTextArea.text);
+                    currencyString = currencyTextArea.text;
+                }
             }
             SectionHeader { text: qsTr("Email reports") }
             Text {
@@ -227,31 +242,57 @@ Page {
                 id: toTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default to address")
                 label: qsTr("Default to address")
-                onFocusChanged: { settings.setToAddress(toTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(toTextArea.text)) {
+                        banner.notify(qsTr("Invalid to email address!"))
+                        toTextArea.text = settings.getToAddress()
+                    }
+                    settings.setToAddress(toTextArea.text);
+                }
             }
             TextField{
                 id: ccTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default cc address")
                 label: qsTr("Default cc address")
-                onFocusChanged: { settings.setCcAddress(ccTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(ccTextArea.text)) {
+                        banner.notify(qsTr("Invalid cc email address!"))
+                        ccTextArea.text = settings.getCcAddress()
+                    }
+                    else
+                        settings.setCcAddress(ccTextArea.text);
+                }
             }
             TextField{
                 id: bccTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: focus = false
+                EnterKey.onClicked: {
+                    focus = false
+                }
                 width: parent.width
                 placeholderText: qsTr("Set default bcc address")
                 label: qsTr("Default bcc address")
-                onFocusChanged: { settings.setBccAddress(bccTextArea.text);}
+                onFocusChanged: {
+                    if(!validEmail(bccTextArea.text)) {
+                        banner.notify(qsTr("Invalid bcc email address!"))
+                        bccTextArea.text = settings.getBccAddress()
+                    }
+                    else
+                        settings.setBccAddress(bccTextArea.text);
+                }
             }
 
             SectionHeader { text: qsTr("Exporting") }
@@ -267,15 +308,45 @@ Page {
                 }
                 text: qsTr("Here you can export your Working Hours data.") + " "
                 + qsTr("If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.") +" "
-                + qsTr("It will export everything needed to rebuild the database e.g on another device.")
+                + qsTr("It will export everything needed to rebuild the database e.g on another device.") +" "
+                + qsTr("At the moment you will not be able to import csv files yet. Coming soon.")
             }
             Button {
-                text: "Read more about exporting syntax"
+                text: qsTr("Read more about exporting")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                  banner.notify("Launching external browser")
+                  banner.notify(qsTr("Launching external browser"))
                   Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
                 }
+            }
+
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    id: dump
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: dumpLabel
+                        anchors.centerIn: parent
+                        text: qsTr("Export the whole database")
+                    }
+                }
+                onClicked:{
+                    console.log("Dumping the database");
+                    var file = exporter.dump();
+                    banner.notify(qsTr("Database saved to")+ ": " + file);
+                    dumpLabel.text = file;
+                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
+                }
+            }
+            Rectangle {
+                opacity: 0
+                width: parent.width
+                height: 10
             }
             BackgroundItem {
                 height: 100
@@ -295,7 +366,7 @@ Page {
                     console.log("Exporting hours as CSV");
                     var file = exporter.exportHoursToCSV();
                     exportHoursCSV.text = file
-                    banner.notify("CSV saved to: " + file);
+                    banner.notify(qsTr("CSV saved to") +": " + file);
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
@@ -323,39 +394,10 @@ Page {
                     console.log("Exporting projects as CSV");
                     var file = exporter.exportProjectsToCSV();
                     exportProjectsCSV.text = file;
-                    banner.notify("CSV saved to: " + file);
+                    banner.notify(qsTr("CSV saved to") +": " + file);
                     exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall;
                 }
             }
-            Rectangle {
-                opacity: 0
-                width: parent.width
-                height: 10
-            }
-            BackgroundItem {
-                height: 100
-                Rectangle {
-                    id: dump
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
-                    height: 100
-                    Label {
-                        id: dumpLabel
-                        anchors.centerIn: parent
-                        text: qsTr("Export the whole database")
-                    }
-                }
-                onClicked:{
-                    console.log("Dumping the database");
-                    var file = exporter.dump();
-                    banner.notify("Database saved to: " + file);
-                    dumpLabel.text = file;
-                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
-                }
-            }
-
 
             SectionHeader { text: qsTr("Importing") }
             Text {
@@ -373,10 +415,10 @@ Page {
                 + qsTr("Duplicate rows are not inserted but fail on insertion.")
             }
             Button {
-                text: "Read more about the syntax"
+                text: qsTr("Read more about importing")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                  banner.notify("Launching external browser")
+                  banner.notify(qsTr("Launching external browser"))
                   Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
                 }
             }
@@ -460,7 +502,7 @@ Page {
                         banner.notify(resp);
                     }
                     else {
-                        banner.notify(qstr("No file path given"))
+                        banner.notify(qsTr("No file path given"))
                     }
                 }
                 width: parent.width
@@ -498,7 +540,7 @@ Page {
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
-                        remorse.execute(settingsPage,qsTr("Move all hours to default project"), function() {
+                        remorse.execute(settingsPage, qsTr("Move all hours to default project"), function() {
                             banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId));
                         })
                     else
@@ -542,7 +584,7 @@ Page {
                  }
             }
 
-            SectionHeader { text: "DANGER ZONE!" }
+            SectionHeader { text: qsTr("DANGER ZONE!") }
             Text {
                 id: warningText2
                 font.pointSize: Theme.fontSizeMedium
