@@ -25,7 +25,7 @@ MouseArea {
         id: hideTimer
         triggeredOnStart: false
         repeat: false
-        interval: 5000
+        interval: 7000
         onTriggered: popup.hide()
     }
 
