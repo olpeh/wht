@@ -50,11 +50,15 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Shows price for efforts if project hourlyrate is set
 * Project view
 * Category summary
+* Email reports
+* Exporting as csv
+* Exporting as .sql dump
+* Importing database dump
+* Translations
 
 ## Roadmap:
-
-* Exporting/Importing database
-* Translations
+* Importing .csv
+* Requested features
 * Graphs?
 
 
