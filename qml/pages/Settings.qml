@@ -51,6 +51,8 @@ Page {
 
     // Email validator
     function validEmail(email) {
+        if (email === "")
+            return true;
         var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         return re.test(email);
     }
@@ -487,7 +489,7 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text:  qsTr("Import from a .sql dump exported by Working Hours Tracker.") + " "
-                + qsTr("Hit enter to run the import function.")
+                + qsTr("Give the full path to the file and then hit the button")
             }
             TextField{
                 id: dumpImport
@@ -495,6 +497,26 @@ Page {
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: {
                     focus = false;
+                }
+                width: parent.width
+                placeholderText: qsTr("Full path to .sql file")
+                label: qsTr("Full path to .sql file")
+            }
+            BackgroundItem {
+                height: 100
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: 10.0
+                    width: parent.width - 2*Theme.paddingLarge
+                    height: 100
+                    Label {
+                        id: importButton
+                        anchors.centerIn: parent
+                        text: qsTr("Import now!")
+                    }
+                }
+                onClicked:{
                     console.log("Importing: " +dumpImport.text);
                     //var filename = "/home/nemo/Documents/wht.sql";
                     if (dumpImport.text) {
@@ -505,9 +527,6 @@ Page {
                         banner.notify(qsTr("No file path given"))
                     }
                 }
-                width: parent.width
-                placeholderText: qsTr("Full path to .sql file")
-                label: qsTr("Full path to .sql file")
             }
 
             SectionHeader { text: qsTr("Move all hours to default") }
