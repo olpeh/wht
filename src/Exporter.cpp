@@ -18,16 +18,9 @@ Exporter::Exporter(QObject *parent) :
     QObject(parent)
 {
     /* Open the SQLite database */
-    QDir dbdir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-
-    if (!dbdir.exists())
-    {
-        dbdir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-    }
-    qDebug() << QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
 
-    db->setDatabaseName(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
+    db->setDatabaseName("/home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
 
     if (db->open())
     {
@@ -63,9 +56,6 @@ QVariantList Exporter::readHours()
             map.insert("description", query.record().value("description").toString());
             map.insert("breakDuration", query.record().value("breakDuration").toString());
             tmp.append(map);
-
-
-
         }
     }
     else
@@ -106,8 +96,6 @@ QVariantList Exporter::readProjects()
 
     return tmp;
 }
-
-
 
 
 /*
@@ -255,6 +243,7 @@ QString Exporter::importDump(QString filename){
         QSqlQuery query;
         int counter = 0;
         int errors = 0;
+        int success = 0;
         while (!file.atEnd()){
             QByteArray readLine="";
             QString cleanedLine;
@@ -293,21 +282,21 @@ QString Exporter::importDump(QString filename){
 
                 if(query.exec(line)) {
                     qDebug() << "Succesful line: "<< line;
+                    success++;
                 }
                 else {
                     if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
                         errors++;
                     qDebug() <<  query.lastError();
-                    qDebug() << "Error in query: "<< query.lastQuery();
+                    qDebug() << "Error in query: " << query.lastQuery();
                 }
             }
         }
         if (errors) {
-            int inserted = counter - errors;
-            return QString("Done: %1 rows inserted or updated \n%2 errors occured.").arg(inserted).arg(errors);
+            return QString("Done: %1 rows inserted or updated \n%2 errors occured.").arg(success).arg(errors);
         }
         else
-            return QString("Done: %1 rows inserted or updated").arg(inserted);
+            return QString("Done: %1 rows inserted or updated").arg(success);
 
     }
     return "Error opening the file!";
