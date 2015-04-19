@@ -8,6 +8,16 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Sun Apr 19 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.2-1
+- Fix the bug #23 (thx ttln)
+- Added notification banner
+- Added email reports sending
+- Added exporting as CSV
+- Added exporting as .sql
+- Added importing .sql
+- More input validation
+
+
 * Tue Mar 17 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.1-1
 - Bugfixes: #10, #13 and #6
 - Added translations for ca, zh_CN, nl_NL, fi, de, es
