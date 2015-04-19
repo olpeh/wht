@@ -28,6 +28,9 @@ import Sailfish.Silica 1.0
 
 Page {
     id: all
+    Banner {
+        id: banner
+    }
     ListModel {
         id: hoursModel
     }
@@ -48,6 +51,7 @@ Page {
             if (projects[i].id === projectId)
                 return projects[i];
         }
+        banner.notify(qsTr("Project was not found"))
         return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
     }
 
@@ -151,10 +155,6 @@ Page {
 
         return r;
     }
-    Banner {
-        id: banner
-    }
-
 
     onStatusChanged: {
         if (all.status === PageStatus.Active && listView.count > 1) {
@@ -180,6 +180,7 @@ Page {
             title: section
         }
         PullDownMenu {
+            visible: listView.count != 0
             MenuItem {
                 text: qsTr("Export as CSV")
                 onClicked: {
@@ -188,7 +189,7 @@ Page {
                         var project = getProject(projectId);
                         filename+=project.name.replace(" ", "");
                     }
-                    banner.notify("Saved to: " + exporter.exportCategoryToCSV(filename, allHours));
+                    banner.notify(qsTr("Saved to") +": " + exporter.exportCategoryToCSV(filename, allHours));
                 }
             }
 
@@ -213,7 +214,7 @@ Page {
                 }
             }
             MenuItem {
-                visible: listView.count != 0 && projectId === ""
+                visible: projectId === "" && projects.length > 1
                 text: sortedByProject ? qsTr("Sort by date") : qsTr("Sort by project")
                 onClicked: {
                     sortedByProject = !sortedByProject;

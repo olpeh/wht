@@ -30,6 +30,9 @@ import "../config.js" as DB
 
 Page {
     id: root
+    Banner {
+        id: banner
+    }
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
@@ -279,6 +282,7 @@ Page {
 
             // Automatically start timer if allowed in settings
             if(settings.getTimerAutoStart()){
+                banner.notify(qsTr("Timer was autostarted"))
                 start();
             }
         }
