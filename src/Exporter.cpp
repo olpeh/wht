@@ -280,20 +280,31 @@ QString Exporter::importDump(QString filename){
                 }
             }
             if(!line.isEmpty()){
-                if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN"))
-                    counter++;
+                // Change to INSERT OR REPLACE
+                if(line.startsWith("INSERT")) {
+                    line.replace(QString("INSERT"), QString("INSERT OR REPLACE"));
+                }
+
+                // Change to CREATE TABLE IF NOT EXISTS
+                if(line.startsWith("CREATE TABLE")) {
+                    line.replace(QString("CREATE TABLE"), QString("CREATE TABLE IF NOT EXISTS"));
+                }
+
                 if(query.exec(line)) {
                     qDebug() << "Succesful line: "<< line;
+                    if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
+                        counter++;
                 }
-            }
-            if(!query.isActive()){
-                errors++;
-                qDebug() <<  query.lastError();
-                qDebug() << "Error in query: "<< query.lastQuery();
+                else {
+                    if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
+                        errors++;
+                    qDebug() <<  query.lastError();
+                    qDebug() << "Error in query: "<< query.lastQuery();
+                }
             }
         }
         int inserted = counter - errors;
-        QString ret = QString("Done: %1 rows inserted, %2 errors.").arg(inserted).arg(errors);
+        QString ret = QString("Done: %1 rows inserted or updated \n%2 errors occured.").arg(inserted).arg(errors);
         return ret;
     }
     return "Error opening the file!";

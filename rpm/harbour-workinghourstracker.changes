@@ -8,7 +8,7 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Apr 19 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.2-1
+* Sun Apr 19 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.2-2
 - Fix the bug #23 (thx ttln)
 - Added notification banner
 - Added email reports sending
@@ -16,6 +16,7 @@
 - Added exporting as .sql
 - Added importing .sql
 - More input validation
+- Improved importing
 
 
 * Tue Mar 17 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.1-1
