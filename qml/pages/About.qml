@@ -61,7 +61,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: qsTr("Working Hours Tracker for SailfishOS \nA simple working hours tracker to keep track on working hours.")
+                text: qsTr("Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.")
             }
             SectionHeader { text: qsTr("Usage") }
             Text {
@@ -98,7 +98,7 @@ Page {
                 text: "ojhaapala@gmail.com"
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                  banner.notify("Launching external email app")
+                  banner.notify(qsTr("Launching external email app"))
                   Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
                 }
             }
@@ -183,7 +183,7 @@ Page {
                 text: qsTr("Issues in GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                    banner.notify("Launching external browser")
+                    banner.notify(qsTr("Launching external browser"))
                     Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
                 }
             }
@@ -191,7 +191,7 @@ Page {
                 text: qsTr("Project in GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
-                    banner.notify("Launching external browser")
+                    banner.notify(qsTr("Launching external browser"))
                     Qt.openUrlExternally("https://github.com/ojhaapala/wht")
                 }
             }
