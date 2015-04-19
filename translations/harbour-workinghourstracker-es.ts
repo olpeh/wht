@@ -66,7 +66,7 @@
     <message>
         <source>Working Hours Tracker for SailfishOS 
 A simple working hours tracker to keep track on working hours.</source>
-        <translation>Working Hours Tracker para SailfishOS
+        <translation type="vanished">Working Hours Tracker para SailfishOS
         Una aplicación sencilla para realizar el seguimiento de las horas trabajadas.</translation>
     </message>
     <message>
@@ -77,6 +77,14 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external email app</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -300,6 +308,10 @@ The source code is licensed under BSD.</source>
         <source>Export as CSV</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>
@@ -420,6 +432,10 @@ The source code is licensed under BSD.</source>
     <message>
         <source>Adjust</source>
         <translation>Ajustar</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -910,6 +926,54 @@ The source code is licensed under BSD.</source>
     </message>
     <message>
         <source>Duplicate rows are not inserted but fail on insertion.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currency string too long!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid to email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid cc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid bcc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about importing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file path given</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DANGER ZONE!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
