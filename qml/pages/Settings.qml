@@ -522,6 +522,8 @@ Page {
                     if (dumpImport.text) {
                         var resp = exporter.importDump(dumpImport.text);
                         banner.notify(resp);
+                        settingsPage.dataContainer.getHours();
+                        projects = settingsPage.dataContainer.getProjects();
                     }
                     else {
                         banner.notify(qsTr("No file path given"))
