@@ -951,10 +951,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Duplicate rows are not inserted but fail on insertion.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Currency string too long!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1012,6 +1008,14 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>View logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows are replaced from the imported file in case of entries already in the database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This makes it possible to update edited rows.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
