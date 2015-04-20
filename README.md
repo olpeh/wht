@@ -247,6 +247,9 @@ Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
 <strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br />
 
+An example project line would look like this:
+'20153191429477190454','Project name',0,0,0,0,'#ccb865'
+
 Exporting the whole database creates a sqlite dump of the database.<br />
 
 ### Importing
