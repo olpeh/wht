@@ -426,7 +426,8 @@ Page {
                 }
                 text: qsTr("Here you can import data into Working Hours Tracker.") + " "
                 + qsTr("There should become no duplicates due to unique constraints.") + " "
-                + qsTr("Duplicate rows are not inserted but fail on insertion.")
+                + qsTr("Rows are replaced from the imported file in case of entries already in the database.")+ " "
+                + qsTr("This makes it possible to update edited rows.")
             }
             Button {
                 text: qsTr("Read more about importing")
@@ -529,12 +530,14 @@ Page {
                     }
                 }
                 onClicked:{
-                    Log.info("Trying to import: " +dumpImport.text);
                     if (dumpImport.text) {
-                        var resp = exporter.importDump(dumpImport.text);
-                        banner.notify(resp);
-                        settingsPage.dataContainer.getHours();
-                        projects = settingsPage.dataContainer.getProjects();
+                        remorse.execute(settingsPage, qsTr("Importing") + " " + dumpImport.text, function() {
+                            Log.info(qsTr("Trying to import")+": " +dumpImport.text);
+                            var resp = exporter.importDump(dumpImport.text);
+                            banner.notify(resp);
+                            settingsPage.dataContainer.getHours();
+                            projects = settingsPage.dataContainer.getProjects();
+                        })
                     }
                     else {
                         banner.notify(qsTr("No file path given"))
