@@ -2,10 +2,9 @@
 
 An easy to use and simple Working Hours Tracker for SailfishOS
 
-<strong>v. 1.0.1-1 available in Jolla store (18.03.2015)</strong> <br />
-v. 1.0.0-1 available in Jolla store (09.03.2015)
+v. 1.0.1-1 available in Jolla store (18.03.2015)<br />
 
-v. 1.0.2-2 Available in  [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.0.3-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -13,10 +12,11 @@ v. 1.0.2-2 Available in  [openrepos] (https://openrepos.net/content/olpe/working
 
 [Changelog] (#changelog)<br />
 [Current features] (#current-features)<br />
-[License] (#license)<br />
+[License] (https://github.com/ojhaapala/wht/blob/master/LICENSE.md)<br />
 [Roadmap] (#roadmap)<br />
 [How to use] (#how-to-use)<br />
-[Exporting] (#exporting)
+[Exporting] (#exporting)<br />
+[Importing] (#importing)
 
 ### Donate
 
@@ -55,6 +55,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Exporting as .sql dump
 * Importing database dump
 * Translations
+* Logging
 
 ## Roadmap:
 * Importing .csv
@@ -64,6 +65,13 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 
 ## Changelog
+
+### 1.0.3-1
+- Fixed issue with banner
+- Added logging
+- Added saving log file
+- Added sending log file
+- Small improvements
 
 ### 1.0.2-1
 - Fix the bug #23 (thx ttln)
@@ -172,34 +180,9 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 - Some bugfixes 
 
 ## License
-Sourcecode is released under the terms of the BSD License.
 
-Copyright (C) 2015 Olavi Haapala.<br />
-Email: <mailto:ojhaapala@gmail.com><br />
-Twitter: [@olpetik] (https://twitter.com/olpetik)
+[See license here] (https://github.com/ojhaapala/wht/blob/master/LICENSE.md)
 
-All rights reserved.
-
-You may use this file under the terms of BSD license as follows:
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright
-  notice, this list of conditions and the following disclaimer.
-* Redistributions in binary form must reproduce the above copyright
-  notice, this list of conditions and the following disclaimer in the
-  documentation and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## How to use
 
@@ -252,15 +235,30 @@ Other settings are explained in the settings page and more will come in the futu
 In the settings you find different methods for exporting data from Working Hours Tracker.
 
 When selecting to export Hours as CSV the syntax will look like this: <br />
-<strong>uid,date,startTime,endTime,duration,project,description,breakDuration</strong><br /><br />
+<strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br />
+
+Where entries surrounded by ' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:
+
+'2015231425401087574','2015-04-20','12:38','18:44',6.1,'20153191429477190454','Code review',0
+
+This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <br />
+<strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br />
+           
 Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
-<strong>id,name,hourlyRate,contractRate,budget,hourBudget,labelColor</strong><br />
+<strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br />
+
+An example project line would look like this:<br />
+'20153191429477190454','Project name',0,0,0,0,'#ccb865'
+
+Exporting the whole database creates a sqlite dump of the database.<br />
 
 ### Importing
 
-At the moment importing is only possible from a .sql file. .csv file support will come later.
-Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.
+At the moment importing is only possible from a .sql file. The .csv file support will come later.<br />
+Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br />
+
+<strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
 
 
 
