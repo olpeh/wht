@@ -28,9 +28,6 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
-    Banner {
-        id: banner
-    }
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
@@ -66,13 +63,13 @@ Dialog {
             page.prev.getProjects();
     }
 
-    // Not the best way of doing this but we don't want ; or , in the inputs
-    function removeInvalidCharacters(text) {
+    //Not needed
+    /*function removeInvalidCharacters(text) {
         var tmp = text
         text = text.split(",").join("")
         text =  text.split(";").join("")
         return text;
-    }
+    }*/
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -99,9 +96,9 @@ Dialog {
                 }
                 width: parent.width
                 placeholderText: qsTr("Please enter a name for the project")
-                onFocusChanged: {
+                /*onFocusChanged: {
                     nameTextArea.text = removeInvalidCharacters(nameTextArea.text)
-                }
+                }*/
             }
             TextSwitch {
                 id: defaultSwitch
@@ -219,5 +216,8 @@ Dialog {
             if (result == DialogResult.Accepted) {
                 saveProject()
             }
+    }
+    Banner {
+        id: banner
     }
 }

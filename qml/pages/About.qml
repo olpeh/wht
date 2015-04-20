@@ -28,9 +28,6 @@ import Sailfish.Silica 1.0
 
 Page {
     id: aboutPage
-    Banner {
-        id: banner
-    }
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent
@@ -217,6 +214,9 @@ Page {
                 height: 10
             }
         }
+    }
+    Banner {
+        id: banner
     }
 }
 

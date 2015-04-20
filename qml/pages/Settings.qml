@@ -28,10 +28,6 @@ import Sailfish.Silica 1.0
 
 
 Page {
-    Banner {
-        id: banner
-    }
-
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
     property bool timerAutoStart : false
@@ -706,6 +702,9 @@ Page {
         ccTextArea.text = settings.getCcAddress();
         bccTextArea.text = settings.getBccAddress();
         dumpImport.text = "/home/nemo/Documents/wht.sql";
+    }
+    Banner {
+        id: banner
     }
 }
 

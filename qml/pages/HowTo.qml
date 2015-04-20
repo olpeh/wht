@@ -28,9 +28,6 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
-    Banner {
-        id: banner
-    }
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
@@ -197,6 +194,9 @@ Page {
                 height: 20
             }
         }
+    }
+    Banner {
+        id: banner
     }
 }
 

@@ -30,9 +30,6 @@ import "../config.js" as DB
 
 Page {
     id: root
-    Banner {
-        id: banner
-    }
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
@@ -581,6 +578,9 @@ Page {
             interval: 60000; running: breakTimerRunning; repeat: true
             onTriggered: updateBreakTimerDuration()
         }
+    }
+    Banner {
+        id: banner
     }
 }
 

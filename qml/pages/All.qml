@@ -28,9 +28,6 @@ import Sailfish.Silica 1.0
 
 Page {
     id: all
-    Banner {
-        id: banner
-    }
     ListModel {
         id: hoursModel
     }
@@ -349,6 +346,9 @@ Page {
                }
            }
         }
+    }
+    Banner {
+        id: banner
     }
 }
 

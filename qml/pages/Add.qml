@@ -28,9 +28,6 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
-    Banner {
-        id: banner
-    }
     canAccept: validateHours()
     property QtObject dataContainer: null
     property QtObject editMode: null
@@ -175,13 +172,15 @@ Dialog {
         updateEndTime()
     }
 
-    // Not the best way of doing this but we don't want ; or , in the inputs
+    // Not needed
+    /*
     function removeInvalidCharacters(text) {
         var tmp = text
         text = text.split(",").join("")
         text =  text.split(";").join("")
+        banner.notify("Removed invalid characters.")
         return text;
-    }
+    }*/
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -521,7 +520,7 @@ Dialog {
                 EnterKey.onClicked: focus = false
                 width: parent.width
                 placeholderText: qsTr("Enter an optional description")
-                onFocusChanged: descriptionTextArea.text = removeInvalidCharacters(descriptionTextArea.text)
+                //onFocusChanged: descriptionTextArea.text = removeInvalidCharacters(descriptionTextArea.text)
 
             }
             Item {
@@ -580,5 +579,8 @@ Dialog {
             }
             if(fromCover)
                 appWindow.deactivate()
+    }
+    Banner {
+        id: banner
     }
 }
