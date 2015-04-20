@@ -79,6 +79,7 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
     });
+    Log.info("Database initialized.")
 }
 function updateIfNeeded () {
     var db = getDatabase();
@@ -92,7 +93,7 @@ function updateIfNeeded () {
                     //check if rows exist
                     if(ex.rows.length > 0) {
                         if (ex.rows.item(0).name ==="hours") {
-                            //console.log(ex.rows.item(0).name);
+                            Log.info("Updating table hours to user_version 2.");
                             tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
                             tx.executeSql('PRAGMA user_version=2;');
                             var r = tx.executeSql('PRAGMA user_version;');
