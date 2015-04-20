@@ -215,7 +215,15 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: qsTr("Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD.")
+                text: qsTr("Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD 3-clause.")
+            }
+            Button {
+                text: qsTr("Read the license")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/LICENSE.md")
+                }
             }
             Item {
                 width: parent.width
