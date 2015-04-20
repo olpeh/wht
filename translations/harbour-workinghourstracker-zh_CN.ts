@@ -96,6 +96,10 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Read the license</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -608,6 +612,35 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
 </context>
 <context>
+    <name>LogViewer</name>
+    <message>
+        <source>Log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save log</source>
+        <extracomment>Menu action allowing the user to save application log</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving the log</source>
+        <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send to the developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching email app</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MyTimePicker</name>
     <message>
         <source>Break can not be longer than the duration!</source>
@@ -996,6 +1029,10 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Import now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View logs</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
