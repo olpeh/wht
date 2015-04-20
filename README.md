@@ -235,9 +235,9 @@ Other settings are explained in the settings page and more will come in the futu
 In the settings you find different methods for exporting data from Working Hours Tracker.
 
 When selecting to export Hours as CSV the syntax will look like this: <br />
-<strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br /><br />
+<strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br />
 
-Where entries marked with '' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:
+Where entries surrounded by ' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:
 
 '2015231425401087574','2015-04-20','12:38','18:44',6.1,'20153191429477190454','Code review',0
 
