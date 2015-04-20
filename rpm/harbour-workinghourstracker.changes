@@ -8,6 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Apr 20 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.3-1
+- Fixed issue with banner
+- Added logging
+- Added saving log file
+- Added sending log file
+- Small improvements
+
+
 * Sun Apr 19 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.2-2
 - Fix the bug #23 (thx ttln)
 - Added notification banner
