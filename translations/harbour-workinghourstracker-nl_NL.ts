@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -14,12 +12,6 @@
     <message>
         <source>General</source>
         <translation>Algemeen</translation>
-    </message>
-    <message>
-        <source>Working Hours Tracker for SailfishOS 
-A simple working hours tracker to keep track on working hours.</source>
-        <translation type="vanished">Working Hours Tracker voor SailfishOS.
-Een eenvoudige werkurenbeheerder om werkende uren bij te houden.</translation>
     </message>
     <message>
         <source>Usage</source>
@@ -70,35 +62,29 @@ Een eenvoudige werkurenbeheerder om werkende uren bij te houden.</translation>
         <translation>Licentie</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
-The source code is licensed under BSD.</source>
-        <translation type="vanished">Copyright (C) 2015 Olavi Haapala 
-De broncode is gelicenseerd onder de BSD-licentie.</translation>
-    </message>
-    <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -287,43 +273,43 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished">Totaal</translation>
+        <translation>Totaal</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Duur</translation>
+        <translation>Duur</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished">Werkdagen</translation>
+        <translation>Werkdagen</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished">Invoeren</translation>
+        <translation>Invoeren</translation>
     </message>
     <message>
         <source>for project</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -448,7 +434,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -603,40 +589,40 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -735,18 +721,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Projecten bewerken</translation>
     </message>
     <message>
-        <source>Default duration</source>
-        <translation>Standaard duur</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Waarde</translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation>Standaard pauzeduur</translation>
-    </message>
-    <message>
         <source>Adding hours</source>
         <translation>Uren toevoegen</translation>
     </message>
@@ -827,10 +801,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Alle uren naar het standaard project verplaatsen</translation>
     </message>
     <message>
-        <source>Done</source>
-        <translation type="vanished">Afgerond</translation>
-    </message>
-    <message>
         <source>No default project set</source>
         <translation>U heeft geen standard project ingesteld</translation>
     </message>
@@ -880,167 +850,171 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation>Standaard duur</translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
+        <translation>Standaard pauzeduur</translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -16,18 +14,12 @@
         <translation>Yleistä</translation>
     </message>
     <message>
-        <source>Working Hours Tracker for SailfishOS 
-A simple working hours tracker to keep track on working hours.</source>
-        <translation type="vanished">Working Hours Tracker for SailfishOS
-Yksinkertainen ja helppokäyttöinen ohjelma työajanseurantaan.</translation>
-    </message>
-    <message>
         <source>Usage</source>
         <translation>Käyttäminen</translation>
     </message>
     <message>
         <source>Read more about how to use this app by accessing the pulley menu or clicking the button below.</source>
-        <translation>Lue lisää käyttöohjeita valitsemalla käyttöohjeet alasvetovalikosta tai klikkaamalla allaolevaa linkkiä.</translation>
+        <translation>Lue lisää käyttöohjeita valitsemalla käyttöohjeet alasvetovalikosta tai klikkaamalla allaolevaa nappia.</translation>
     </message>
     <message>
         <source>Author</source>
@@ -70,35 +62,30 @@ Yksinkertainen ja helppokäyttöinen ohjelma työajanseurantaan.</translation>
         <translation>Lisenssi</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
-The source code is licensed under BSD.</source>
-        <translation type="vanished">Copyright (C) 2015 Olavi Haapala
-Lähdekoodi on lisensoitu BSD lisenssillä.</translation>
-    </message>
-    <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään selainta</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation>Working Hours Tracker for SailfishOS on yksinkertainen ja helppokäyttöinen ohjelma työajanseurantaan.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään sähköpostiohjelmaa</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2015 Olavi Haapala
+Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"></translation>
+        <translation>Lue lisenssi</translation>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mikäli kohtaat virheitä tai ongelmia, voit tarkistaa lokiraportin menemällä asetukset -&gt; Näytä loki. Halutessasi voit lähettää sen kehittäjälle.</translation>
     </message>
 </context>
 <context>
@@ -185,7 +172,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Enter an optional description</source>
-        <translation>Lisää vapaaehtoinen kuvaus</translation>
+        <translation>Lisää kuvaus halutessasi</translation>
     </message>
 </context>
 <context>
@@ -287,43 +274,43 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Raportti työtunneista</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished">Yhteensä</translation>
+        <translation>Yhteensä</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Kesto</translation>
+        <translation>Kesto</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished">Työpäiviä</translation>
+        <translation>Työpäiviä</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished">Kirjauksia</translation>
+        <translation>Kirjauksia</translation>
     </message>
     <message>
         <source>for project</source>
-        <translation type="unfinished"></translation>
+        <translation>projektille</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Luotu</translation>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähetä raportti sähköpostilla</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie CSV tiedostoon</translation>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallennettu</translation>
     </message>
 </context>
 <context>
@@ -448,7 +435,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajastin käynnistetty automaattisesti</translation>
     </message>
 </context>
 <context>
@@ -459,7 +446,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation>Tuntien lisäämine</translation>
+        <translation>Tuntien lisääminen</translation>
     </message>
     <message>
         <source>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</source>
@@ -511,7 +498,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation>Tauko toimii aivan kuten ajastin: aloitat sen klikkaamalla ja klikkaat toisen kerran lopettaaksesi tauon.</translation>
+        <translation>Tauko toimii aivan kuten ajastinkin: aloitat sen klikkaamalla ja klikkaat toisen kerran lopettaaksesi tauon.</translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
@@ -519,7 +506,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source> The hours will be saved only when accepting the dialog.</source>
-        <translation>Tunnit tallennetaan vain mikäli kysely hyväksytään.</translation>
+        <translation>Tunnit tallennetaan vain mikäli hyväksyt lomakkeen.</translation>
     </message>
     <message>
         <source>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</source>
@@ -603,40 +590,40 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään sähköpostiohjelmaa</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään selainta</translation>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokiraportti</translation>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna loki</translation>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Loki tallennetaan</translation>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>Loki tallennettu</translation>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lähetä kehittäjälle</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään sähköpostiohjelmaa</translation>
     </message>
 </context>
 <context>
@@ -735,20 +722,8 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Muokkaa projekteja</translation>
     </message>
     <message>
-        <source>Default duration</source>
-        <translation>Oletuskesto</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Arvo</translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation>Oletustauko</translation>
-    </message>
-    <message>
         <source>Adding hours</source>
-        <translation>Tuntien lisäys</translation>
+        <translation>Tuntien lisääminen</translation>
     </message>
     <message>
         <source>Ends now by default</source>
@@ -827,10 +802,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Siirrä kaikki tunnit</translation>
     </message>
     <message>
-        <source>Done</source>
-        <translation type="vanished">Valmis</translation>
-    </message>
-    <message>
         <source>No default project set</source>
         <translation>Oletusprojektia ei ole asetettu</translation>
     </message>
@@ -880,167 +851,171 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Raportit sähköpostilla</translation>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nämä sähköpostiosoitteet lisätään automaattisesti kun valitset raportin lähettäminen sähköpostilla.</translation>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yhtään sähköpostia ei lähetetä automaattisesti.</translation>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voit myös lisätä sähköpostiosoitteen manuaalisesti kun lähetät raportin.</translation>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämän on tarkoitus nopeuttaa raportin lähetystä.</translation>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Aseta oletusosoite, johon lähetetään</translation>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletusosoite, johon lähetetään</translation>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Aseta oletuskopio-osoite</translation>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuskopio-osoite</translation>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Aseta oletuspiilokopio-osoite</translation>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuspiilokopio-osoite</translation>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienti</translation>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Täällä voit viedä tyotunnit tiedostoon.</translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie tunnit CSV formaatissa</translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie projektit CSV formaatissa</translation>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation>Oletuskesto</translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
+        <translation>Oletustauon pituus</translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mikäli haluat tuoda työtuntisi Working Hours Trackeriin esimerkiksi toisella laitteella, käytä vie koko tietokanta nappia.</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se vie tiedostoon kaiken tarvittavan, jotta tietokanta voidaan laittaa pystyyn esimerkiksi toisella laitteella.</translation>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie koko tietokanta</translation>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuonti</translation>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Täällä voit tuoda tietoja Working Hours Trackeriin.</translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikaatteja ei pitäisi ilmestyä yksilöllisyysrajoitusten ansiosta.</translation>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
+        <translation>Polku .sql tiedostoon</translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo työtunnit generoidusta .sql dump tiedostosta.</translation>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
+        <translation>Valuuttasymboli on liian pitkä!</translation>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sähköpostiosoite ei kelpaa!</translation>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuskopio-osoite ei kelpaa!</translation>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuspiilokopio-osoite ei kelpaa!</translation>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tällä hetkellä ei vielä ole mahdollisuutta tuoda csv tiedostoja. Tulossa pian.</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>Lue lisää viennistä</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään selainta</translation>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV tallennettu</translation>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietokanta tallennettu</translation>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lue lisää tuonnista</translation>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiedostopolkua ei annettu</translation>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
+        <translation>VAARAVYÖHYKE!</translation>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
+        <translation>Anna koko tiedostopolku ja paina sen jälkeen nappia</translation>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuo nyt!</translation>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä loki</translation>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rivit korvataan tiedostosta tuoduilla riveillä, mikäli sama rivi on jo tietokannassa.</translation>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä mahdollistaa muokattujen rivien päivittämisen.</translation>
     </message>
 </context>
 </TS>

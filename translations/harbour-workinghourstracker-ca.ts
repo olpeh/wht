@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -14,12 +12,6 @@
     <message>
         <source>General</source>
         <translation>General</translation>
-    </message>
-    <message>
-        <source>Working Hours Tracker for SailfishOS 
-A simple working hours tracker to keep track on working hours.</source>
-        <translation type="vanished">Working Hours Tracker per a SailfishOS
-Un control·lador senzill i funcional per fer el seguiment de les hores de treball.</translation>
     </message>
     <message>
         <source>Usage</source>
@@ -70,35 +62,30 @@ Un control·lador senzill i funcional per fer el seguiment de les hores de treba
         <translation>Llicència</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
-The source code is licensed under BSD.</source>
-        <translation type="vanished">Copyright (C) 2015 Olavi Haapala 
-El codi font està sota llicència BSD.</translation>
-    </message>
-    <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint el navegador extern</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation>Working Hours Tracker per a SailfishOS és un control·lador senzill i funcional per fer el seguiment de les hores de treball.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint l&apos;aplicació externa de correu electrònic</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2015 Olavi Haapala 
+El codi font està sota llicència BSD 3-clause.</translation>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"></translation>
+        <translation>Llegiu la llicència</translation>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si localitzeu alguna incidència o error podeu trobar els fitxers de registre a l&apos;opció de configuració-&gt;Mostra els registres per enviar-los al desenvolupador.</translation>
     </message>
 </context>
 <context>
@@ -287,43 +274,43 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Resums de les hores de treball</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished">Total</translation>
+        <translation>Total</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished">Durada</translation>
+        <translation>Durada</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished">Dies laborables</translation>
+        <translation>Dies laborables</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished">Entrades</translation>
+        <translation>Entrades</translation>
     </message>
     <message>
         <source>for project</source>
-        <translation type="unfinished"></translation>
+        <translation>per al projecte</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Creat el</translation>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"></translation>
+        <translation>Envieu el resum per correu electrònic</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporta com a CSV</translation>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha desat a</translation>
     </message>
 </context>
 <context>
@@ -448,7 +435,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
+        <translation>El temporitzador estava amb inici automàtic</translation>
     </message>
 </context>
 <context>
@@ -603,40 +590,40 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint l&apos;aplicació de correu electrònic</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint el navegador extern</translation>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualitzador de registres</translation>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Desa el registre</translation>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està desant el registre</translation>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha desat el registre a </translation>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Envieu-los al desenvolupador</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint l&apos;aplicació de correu electrònic</translation>
     </message>
 </context>
 <context>
@@ -735,18 +722,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Edita els projectes</translation>
     </message>
     <message>
-        <source>Default duration</source>
-        <translation>Durada per defecte</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Valor</translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation>Durada de la pausa per defecte</translation>
-    </message>
-    <message>
         <source>Adding hours</source>
         <translation>Addició d&apos;hores</translation>
     </message>
@@ -827,10 +802,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Es mouran totes les hores al projecte per defecte</translation>
     </message>
     <message>
-        <source>Done</source>
-        <translation type="vanished">Fet</translation>
-    </message>
-    <message>
         <source>No default project set</source>
         <translation>No hi ha cap projecte per defecte establert</translation>
     </message>
@@ -880,167 +851,171 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Resums per correu electrònic</translation>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les adreces electròniques s&apos;ompliran automàticament quan es seleccioni per enviar un resum per correu electrònic.</translation>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;enviarà cap correu electrònic automàticament.</translation>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"></translation>
+        <translation>També podeu omplir les adreces electròniques manualment.</translation>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"></translation>
+        <translation>Només és per enviar-ho més ràpid.</translation>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Establiu l&apos;adreça electrònica per defecte</translation>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça per defecte</translation>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Establiu l&apos;adreça electrònica de còpia per defecte</translation>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça de còpia per defecte</translation>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Establiu l&apos;adreça electrònica de còpia oculta per defecte</translation>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça de còpia oculta per defecte</translation>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està exportant</translation>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquí podeu exportar les vostres dades de Working Hours</translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporta com a CSV</translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporta els projectes com a CSV</translation>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation>Durada per defecte</translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
+        <translation>Durada de la pausa per defecte</translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si voleu importar les vostres dades a Working Hours, per exemple en un altre dispositiu, utilitzeu el botó d&apos;exportació de la base de dades sencera.</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Amb això s&apos;exportarà tot el contingut necessari per replicar la base de dades en un altre dispositiu.</translation>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporta la base de dades sencera</translation>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està important</translation>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquí podeu importar les vostres dades de Working Hours</translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;haurien de duplicar els resultats degut a restriccions d&apos;unicitat.</translation>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta completa al fitxer .sql</translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa des d&apos;un fitxer .sql exportat per Working Hours.</translation>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
+        <translation>La cadena de divisa és massa llarga.</translation>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça electrònica no vàlida.</translation>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça electrònica no vàlida.</translation>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreça electrònica no vàlida.</translation>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
+        <translation>De moment no és possible importar fitxers CSV. Aviat arribarà aquesta funció.</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>Llegiu més sobre exportació de fitxers</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;està obrint el navegador extern</translation>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha desat el fitxer CSV a</translation>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha desat la base de dades a</translation>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Llegiu més sobre la importació de fitxers.</translation>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha introduït la ruta al fitxer</translation>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
+        <translation>ZONA DE PERILL!</translation>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduïu la ruta sencera al fitxer i premeu el botó</translation>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa ara!</translation>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el registre</translation>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
