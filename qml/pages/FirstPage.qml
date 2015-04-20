@@ -248,19 +248,13 @@ Page {
     }
 
     Component.onCompleted: {
-        /*
-        Log.debug("Debug - test!")
-        Log.info("Info - test!")
-        Log.error("Error - test!")
-        Log.warn("Warning - test!")
-        */
-
         // Update tables for previous versions
         DB.updateIfNeeded();
         // Initialize the database
         DB.initialize();
         projects = DB.getProjects();
         if (projects.length === 0) {
+            Log.info("No projects found so let's create one.");
             var id = DB.getUniqueId();
             DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor);
             defaultProjectId = id;
