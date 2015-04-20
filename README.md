@@ -241,7 +241,8 @@ Where entries marked with '' are strings (LONGVARCHAR or TEXT in the sqlite data
 
 '2015231425401087574','2015-04-20','12:38','18:44',6.1,'20153191429477190454','Code review',0
 
-This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br />
+This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <br />
+<strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br />
            
 Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
