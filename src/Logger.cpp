@@ -7,7 +7,8 @@
  * Twitter: @olpetik
  * IRC: olpe
  *
- * -renamed everything to Logger
+ * -Renamed everything to Logger
+ * -Added sending as email
  *
  * All rights reserved.
  *
@@ -37,6 +38,7 @@
  */
 
 #include "Logger.h"
+#include "Launcher.h"
 #include <QDebug>
 #include <QDir>
 //#include <qtconcurrentrun.h>
@@ -44,6 +46,7 @@
 namespace {
 int kLogCacheSize = 200;
 const char kLogFileName[] = "Documents/workinghourstracker.log";
+const char logEmailAddress[] = "harbourwht@gmail.com";
 }
 
 static QString _log_str_arr[] = {
@@ -162,6 +165,25 @@ Logger::saveLogToFile()
     log_file.close();
 
     instance().logSaved(path);
+}
+
+void Logger::send()
+{
+    QString toAddress = logEmailAddress;
+    QString subject = QString("WHT Logfile");
+    QString body ("Logfile start\n\n");
+    Q_ASSERT(!_log_cache.isEmpty());
+
+    int i = _log_cache.firstIndex();
+    for (;i != _log_cache.lastIndex(); i++) {
+        body +=  _log_cache.at(i).value("message").toString();
+        body += "\n";
+    }
+    body += "\nLogfile end";
+
+    Launcher l;
+    // sendEmail(const QString &toAddress, const QString &ccAddress, const QString &bccAddress, const QString &subject, const QString &body) {
+    l.sendEmail(toAddress, "", "", subject, body);
 }
 
 void

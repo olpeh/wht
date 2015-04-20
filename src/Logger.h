@@ -7,7 +7,8 @@
  * Twitter: @olpetik
  * IRC: olpe
  *
- * -renamed everything to Logger
+ * -Renamed everything to Logger
+ * -Added sending as email
  *
  * All rights reserved.
  *
@@ -63,6 +64,7 @@ public:
     static Logger& instance();
 
     Q_INVOKABLE void save();
+    Q_INVOKABLE void send();
 
     Q_INVOKABLE void debug(QString msg) { _log(LOG_DEBUG, msg); }
     Q_INVOKABLE void error(QString msg) { _log(LOG_ERROR, msg); }

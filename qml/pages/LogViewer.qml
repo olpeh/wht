@@ -9,6 +9,7 @@
  * -Renamed everything to Logger
  * -Changed notification to banner.notify()
  * -Simplified
+ * -Added sending as email
  *
  * All rights reserved.
  *
@@ -51,6 +52,13 @@ Page {
         }
 
         PullDownMenu {
+            MenuItem {
+                text: qsTr("Send to the developer")
+                onClicked: {
+                    banner.notify(qsTr("Launching email app"))
+                    Log.send();
+                }
+            }
             MenuItem {
                 //: Menu action allowing the user to save application log
                 text: qsTr("Save log")
