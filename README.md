@@ -235,14 +235,23 @@ Other settings are explained in the settings page and more will come in the futu
 In the settings you find different methods for exporting data from Working Hours Tracker.
 
 When selecting to export Hours as CSV the syntax will look like this: <br />
-<strong>uid,date,startTime,endTime,duration,project,description,breakDuration</strong><br /><br />
+<strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br /><br />
+
+Where entries marked with '' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:
+
+'2015231425401087574','2015-04-20','12:38','18:44',6.1,'20151241424802900414','Code review',0
+
+This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br />
+           
 Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
-<strong>id,name,hourlyRate,contractRate,budget,hourBudget,labelColor</strong><br />
+<strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br />
+
+Exporting the whole database creates a sqlite dump of the database.<br />
 
 ### Importing
 
-At the moment importing is only possible from a .sql file. .csv file support will come later.
+At the moment importing is only possible from a .sql file. The .csv file support will come later.<br />
 Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br />
 
 <strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
