@@ -1039,5 +1039,9 @@ The source code is licensed under BSD 3-clause.</source>
         <source>This makes it possible to update edited rows.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Trying to import</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
