@@ -43,10 +43,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QQmlContext>
 #include <QDebug>
 #include <QFileInfo>
+
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
-
+#include "Logger.h"
 
 int main(int argc, char *argv[])
 {
@@ -55,11 +56,18 @@ int main(int argc, char *argv[])
     Exporter exporter;
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     app->setApplicationName("harbour-workinghourstracker");
+
+    // Make sure the logger is initialized
+    Logger::instance();
+
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);
+
+    view->rootContext()->setContextProperty("Log", &Logger::instance());
+
     view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));
     view->setResizeMode(QQuickView::SizeRootObjectToView);
     view->show();

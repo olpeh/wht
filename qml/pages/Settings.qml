@@ -65,6 +65,17 @@ Page {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("View logs")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("LogViewer.qml"))
+                }
+            }
+        }
+
+
         Column {
             id: column
             spacing: 20
