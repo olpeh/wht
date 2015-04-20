@@ -454,7 +454,6 @@ Page {
                 }
                 onClicked:{
                     console.log("Importing hours from CSV");
-                    var filename = "/home/nemo/Documents/workinghours.csv";
                     var resp = exporter.importHoursFromCSV(filename);
                     banner.notify(resp);
                 }
@@ -480,7 +479,6 @@ Page {
                 }
                 onClicked:{
                     console.log("Importing projects from CSV");
-                    var filename = "/home/nemo/Documents/whtProjects.csv";
                     var resp = exporter.importProjectsFromCSV(filename);
                     banner.notify(resp);
                 }
@@ -710,7 +708,7 @@ Page {
         toTextArea.text = settings.getToAddress();
         ccTextArea.text = settings.getCcAddress();
         bccTextArea.text = settings.getBccAddress();
-        dumpImport.text = "/home/nemo/Documents/wht.sql";
+        dumpImport.text = documentsLocation + "/wht.sql";
     }
     Banner {
         id: banner

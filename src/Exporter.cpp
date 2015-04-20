@@ -20,9 +20,13 @@ Exporter::Exporter(QObject *parent) :
 {
     /* Open the SQLite database */
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-
-    db->setDatabaseName("/home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
-
+    QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    qDebug() << data;
+    if (data.length() && !data.endsWith("share")) {
+        data = data.split("/mdeclarativecache_pre_initialized_qapplication").at(0);
+        qDebug() << data;
+    }
+    db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
     if (db->open())
     {
         qDebug() << "Opening the database successful";
@@ -210,7 +214,7 @@ QString Exporter::dump() {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
     Launcher l;
-    QString retval = l.launch("sqlite3 /home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite .dump");
+    QString retval = l.launch("sqlite3 "+ QStandardPaths::writableLocation(QStandardPaths::DataLocation) +"/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite .dump");
     out << retval;
     file.close();
 
