@@ -483,7 +483,7 @@ function getStartTime(){
 
 /* Start the timer
 Simply sets the starttime and started to 1
-Returns the starttime if inserting is succesful */
+Returns the starttime if inserting is successful */
 function startTimer(newValue){
     var db = getDatabase();
     var resp="";
@@ -551,7 +551,7 @@ function getBreakStartTime(){
 
 /* Start the break timer
 Simply sets the break starttime and started to 1
-Returns the starttime if inserting is succesful.
+Returns the starttime if inserting is successful.
 Also used for adjusting the starttime */
 function startBreakTimer(){
     var db = getDatabase();
