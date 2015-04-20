@@ -17,7 +17,8 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
-    src/Exporter.cpp
+    src/Exporter.cpp \
+    src/Logger.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -54,7 +55,8 @@ TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
 HEADERS += \
     src/SettingsClass.h \
     src/Launcher.h \
-    src/Exporter.h
+    src/Exporter.h \
+    src/Logger.h
 
 QT += dbus \
    core sql

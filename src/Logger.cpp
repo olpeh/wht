@@ -30,26 +30,3 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-
-#ifndef LAUNCHER_H
-#define LAUNCHER_H
-
-#include <QObject>
-#include <QProcess>
-#include <QDBusInterface>
-
-class Launcher : public QObject
-{
-    Q_OBJECT
-
-public:
-    explicit Launcher(QObject *parent = 0);
-    ~Launcher();
-    Q_INVOKABLE QString launch(const QString &program);
-    Q_INVOKABLE void sendEmail(const QString &toAddress, const QString &ccAddress, const QString &bccAddress, const QString &subject, const QString &body);
-
-protected:
-    QProcess *m_process;
-};
-
-#endif // LAUNCHER_H

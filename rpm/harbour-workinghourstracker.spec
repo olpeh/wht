@@ -16,7 +16,7 @@ Summary:    Working Hours Tracker
 Version:    1.0.2
 Release:    3
 Group:      Qt/Qt
-License:    BSD
+License:    BSD 3-clause
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-workinghourstracker.yaml
