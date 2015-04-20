@@ -72,7 +72,7 @@ Un control·lador senzill i funcional per fer el seguiment de les hores de treba
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD.</source>
-        <translation>Copyright (C) 2015 Olavi Haapala 
+        <translation type="vanished">Copyright (C) 2015 Olavi Haapala 
 El codi font està sota llicència BSD.</translation>
     </message>
     <message>
@@ -85,6 +85,15 @@ El codi font està sota llicència BSD.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2015 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the license</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

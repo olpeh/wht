@@ -72,7 +72,7 @@ Een eenvoudige werkurenbeheerder om werkende uren bij te houden.</translation>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD.</source>
-        <translation>Copyright (C) 2015 Olavi Haapala 
+        <translation type="vanished">Copyright (C) 2015 Olavi Haapala 
 De broncode is gelicenseerd onder de BSD-licentie.</translation>
     </message>
     <message>
@@ -85,6 +85,15 @@ De broncode is gelicenseerd onder de BSD-licentie.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2015 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the license</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
