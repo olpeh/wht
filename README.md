@@ -243,7 +243,7 @@ When exporting projects as CSV the syntax will look like this:<br />
 ### Importing
 
 At the moment importing is only possible from a .sql file. .csv file support will come later.
-Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br /><br />
+Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br />
 
 <strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
 
