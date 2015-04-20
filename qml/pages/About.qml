@@ -200,6 +200,18 @@ Page {
                     Qt.openUrlExternally("https://github.com/ojhaapala/wht")
                 }
             }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("In case of issues or bugs please check the logs in settings->View logs and consider sending it to the developer.")
+            }
             Item {
                 width: parent.width
                 height: 10
