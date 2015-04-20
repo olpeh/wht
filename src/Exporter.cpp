@@ -25,7 +25,7 @@ Exporter::Exporter(QObject *parent) :
 
     if (db->open())
     {
-        qDebug() << "Opening the database success";
+        qDebug() << "Opening the database successful";
     }
     else
     {
@@ -280,7 +280,7 @@ QString Exporter::importDump(QString filename){
                 }
 
                 if(query.exec(line)) {
-                    qDebug() << "Succesful line: "<< line;
+                    qDebug() << "Successful line: "<< line;
                     success++;
                 }
                 else {
