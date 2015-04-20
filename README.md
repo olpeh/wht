@@ -55,6 +55,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Exporting as .sql dump
 * Importing database dump
 * Translations
+* Logging
 
 ## Roadmap:
 * Importing .csv
@@ -64,6 +65,13 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 
 ## Changelog
+
+### 1.0.3-1
+- Fixed issue with banner
+- Added logging
+- Added saving log file
+- Added sending log file
+- Small improvements
 
 ### 1.0.2-1
 - Fix the bug #23 (thx ttln)
