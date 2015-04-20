@@ -147,8 +147,8 @@ Page {
                 }
                 RemorseItem { id: remorse }
                 function remove() {
-                    console.log(index)
-                    console.log(model.id)
+                    //console.log(index)
+                    //console.log(model.id)
                     remorse.execute(myListItem, qsTr("Removing"), function() {
                         DB.removeProject(model.id);
                         projectsModel.remove(index);

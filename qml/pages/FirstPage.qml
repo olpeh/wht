@@ -48,7 +48,7 @@ Page {
      }
     function getHours() {
         //Update hours view and cover
-        console.log("Updating hours")
+        //Log.info("Updating hours")
         today = DB.getHoursDay(0).toString().toHHMM()
         thisWeek = DB.getHoursWeek(0).toString().toHHMM()
         thisMonth = DB.getHoursMonth(0).toString().toHHMM()
@@ -248,6 +248,13 @@ Page {
     }
 
     Component.onCompleted: {
+        /*
+        Log.debug("Debug - test!")
+        Log.info("Info - test!")
+        Log.error("Error - test!")
+        Log.warn("Warning - test!")
+        */
+
         // Update tables for previous versions
         DB.updateIfNeeded();
         // Initialize the database

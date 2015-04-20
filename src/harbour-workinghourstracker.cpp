@@ -51,14 +51,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 int main(int argc, char *argv[])
 {
+    // Make sure the logger is initialized
+    Logger::instance();
+
     Settings settings;
     Launcher launcher;
     Exporter exporter;
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     app->setApplicationName("harbour-workinghourstracker");
 
-    // Make sure the logger is initialized
-    Logger::instance();
 
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());

@@ -75,12 +75,12 @@ CoverBackground {
             }
             onTriggered: {
                 if (timerRunning && !breakTimerRunning) {
-                    console.log("Break starts...");
+                    Log.info("Break starts...");
                     firstPage.startBreakTimer()
                     //pauseAddAction.iconSource = "image://theme/icon-cover-play"
                 }
                 else if (breakTimerRunning) {
-                    console.log("Break ends...");
+                    Log.info("Break ends...");
                     firstPage.stopBreakTimer()
                     //pauseAddAction.iconSource = "image://theme/icon-cover-pause"
                 }

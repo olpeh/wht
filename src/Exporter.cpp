@@ -25,12 +25,11 @@ Exporter::Exporter(QObject *parent) :
 
     if (db->open())
     {
-        qDebug() << "Open Success";
+        qDebug() << "Opening the database success";
     }
     else
     {
-        qDebug() << "Open error";
-        qDebug() << " " << db->lastError().text();
+        qCritical() << "Open error" << " " << db->lastError().text();
     }
 }
 
@@ -92,7 +91,7 @@ QVariantList Exporter::readProjects()
     }
     else
     {
-        qDebug() << "readHours failed " << query.lastError();
+        qDebug() << "readProjects failed " << query.lastError();
     }
 
     return tmp;
@@ -104,14 +103,14 @@ QVariantList Exporter::readProjects()
  */
 QString Exporter::exportHoursToCSV()
 {
-    qDebug() << "Exporting hours";
+    qDebug() << "Exporting hours to CSV";
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
     //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/workinghours.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is" << filename;
+    qDebug() << "Output filename is " << filename;
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -140,14 +139,14 @@ QString Exporter::exportHoursToCSV()
  */
 QString Exporter::exportProjectsToCSV()
 {
-    qDebug() << "Exporting projects";
+    qDebug() << "Exporting projects to CSV";
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
     //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/whtProjects.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is" << filename;
+    qDebug() << "Output filename is " << filename;
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -178,7 +177,7 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)).arg(section);
-    qDebug() << "Output filename is" << filename;
+    qDebug() << "Output filename is " << filename;
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -204,7 +203,7 @@ QString Exporter::dump() {
     qDebug() << "Dumping the database";
 
     QString filename = QString("%1/wht.sql").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is" << filename;
+    qDebug() << "Output filename is " << filename;
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -229,8 +228,7 @@ QString Exporter::importProjectsFromCSV(QString filename) {
 }
 
 QString Exporter::importDump(QString filename){
-    qDebug() << "Trying to import from a dump file";
-    qDebug() << "Input filename is" << filename;
+    qDebug() << "Trying to import from a dump file: " << filename;
 
     /**
     * Read each line from a .sql QFile and when ; is reached, execute
@@ -288,8 +286,8 @@ QString Exporter::importDump(QString filename){
                 else {
                     if(!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE"))
                         errors++;
-                    qDebug() <<  query.lastError();
-                    qDebug() << "Error in query: " << query.lastQuery();
+                    qCritical() <<  query.lastError();
+                    qCritical() << "Error in query: " << query.lastQuery();
                 }
             }
         }

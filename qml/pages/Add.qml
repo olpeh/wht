@@ -80,7 +80,6 @@ Dialog {
         if (uid == "0")
             uid = DB.getUniqueId()
         var d = selectedDate
-        console.log(d)
         //YYYY-MM-DD
         var yyyy = d.getFullYear().toString();
         var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
@@ -88,8 +87,9 @@ Dialog {
         var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
         var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
         var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
-        console.log(modelSource.get(projectCombo.currentIndex).id);
+        //console.log(modelSource.get(projectCombo.currentIndex).id);
         project = modelSource.get(projectCombo.currentIndex).id;
+        Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration)
         DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration)
         if (dataContainer != null)
             page.dataContainer.getHours()
@@ -413,9 +413,9 @@ Dialog {
                             dialog.accepted.connect(function() {
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
-                                console.log(durationMinute)
+                                //console.log(durationMinute)
                                 breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                console.log(duration)
+                                //console.log(duration)
                                 value = pad(durationHour) + ":" + pad(durationMinute)
                                 updateNetDuration();
                             })
@@ -541,31 +541,25 @@ Dialog {
                     if(dur >=0){
                         duration = dur
                     }
-                    else
-                        console.log("Error when getting defaultDuration")
 
                     var brk = settings.getDefaultBreakDuration()
                     if(brk >= 0){
                         breakDuration = brk
                     }
-                    else
-                        console.log("Error when getting defaultBreakDuration")
+
                 }
                 var endFixed = settings.getEndTimeStaysFixed()
                 if(endFixed === "yes")
                     fixedSwitch.checked = true
                 else if(endFixed === "no")
                     fixedSwitch.checked = false
-                else
-                    console.log("Error when getting endTimeStaysFixed")
 
                 var nowByDefault = settings.getEndsNowByDefault()
                 if(nowByDefault === "yes")
                     timeSwitch.checked = true
                 else if(nowByDefault === "no")
                     timeSwitch.checked = false
-                else
-                    console.log("Error when getting endsNowByDefault")
+
                 if (description != qsTr("No description"))
                     descriptionTextArea.text = description;
                 if(dateText != qsTr("Today"))

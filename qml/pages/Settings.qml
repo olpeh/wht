@@ -124,12 +124,12 @@ Page {
                                          })
 
                             dialog.accepted.connect(function() {
-                                value = dialog.timeText
+                                defaultDurationButton.text = dialog.timeText
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
                                 defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                console.log(defaultDuration)
-                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                //console.log(defaultDuration)
+                                //value = pad(durationHour) + ":" + pad(durationMinute)
                                 settings.setDefaultDuration(defaultDuration)
                             })
                         }
@@ -160,11 +160,11 @@ Page {
                                          })
 
                             dialog.accepted.connect(function() {
-                                value = dialog.timeText
+                                defaultBreakDurationButton.text = dialog.timeText
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
                                 defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                //value = pad(durationHour) + ":" + pad(durationMinute)
                                 settings.setDefaultBreakDuration(defaultBreakDuration)
                             })
                         }
@@ -353,7 +353,6 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Dumping the database");
                     var file = exporter.dump();
                     banner.notify(qsTr("Database saved to")+ ": " + file);
                     dumpLabel.text = file;
@@ -380,7 +379,6 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Exporting hours as CSV");
                     var file = exporter.exportHoursToCSV();
                     exportHoursCSV.text = file
                     banner.notify(qsTr("CSV saved to") +": " + file);
@@ -408,7 +406,6 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Exporting projects as CSV");
                     var file = exporter.exportProjectsToCSV();
                     exportProjectsCSV.text = file;
                     banner.notify(qsTr("CSV saved to") +": " + file);
@@ -532,8 +529,7 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Importing: " +dumpImport.text);
-                    //var filename = "/home/nemo/Documents/wht.sql";
+                    Log.info("Trying to import: " +dumpImport.text);
                     if (dumpImport.text) {
                         var resp = exporter.importDump(dumpImport.text);
                         banner.notify(resp);
@@ -683,38 +679,29 @@ Page {
         if(dur >=0){
             defaultDuration = dur
         }
-        else
-            console.log("Error when getting defaultDuration")
 
         var brk = settings.getDefaultBreakDuration()
         if(brk >= 0){
             defaultBreakDuration = brk
         }
-        else
-            console.log("Error when getting defaultBreakDuration")
 
         var endFixed = settings.getEndTimeStaysFixed()
         if(endFixed === "yes")
             fixedSwitch.checked = true
         else if(endFixed === "no")
             fixedSwitch.checked = false
-        else
-            console.log("Error when getting endTimeStaysFixed")
 
         var nowByDefault = settings.getEndsNowByDefault()
         if(nowByDefault === "yes")
             timeSwitch.checked = true
         else if(nowByDefault === "no")
             timeSwitch.checked = false
-        else
-            console.log("Error when getting endsNowByDefault")
+
         var timerAutoStart = settings.getTimerAutoStart()
         if(timerAutoStart === true)
             autoStartSwitch.checked = true
         else if(timerAutoStart === false)
             autoStartSwitch.checked = false
-        else
-            console.log("Error when getting timerAutoStart")
 
         currencyTextArea.text = settings.getCurrencyString();
         toTextArea.text = settings.getToAddress();

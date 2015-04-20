@@ -52,7 +52,7 @@ function resetDatabase() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
-            console.log("Database reset");
+            Log.info("Database was resetted");
         });
 }
 
@@ -99,10 +99,10 @@ function updateIfNeeded () {
                             //console.log(r.rows.item(0).user_version);
                         }
                         else
-                            console.log("No table named hours...");
+                            Log.error("No table named hours...");
                     }
                     else
-                        console.log("No table named hours...");
+                        Log.error("No table named hours...");
                 }
             }
     });
@@ -110,17 +110,16 @@ function updateIfNeeded () {
 
 // This function is used to write hours into the database
 function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration) {
-    console.log(date)
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration]);
         if (rs.rowsAffected > 0) {
             res = "OK";
-            console.log ("Saved to database");
+            Log.info("Hours saved to database");
         } else {
             res = "Error";
-            console.log ("Error saving to database");
+            Log.error("Error saving hours to database");
         }
     }
     );
@@ -447,14 +446,14 @@ function getAllThisYear(sortby, projectId) {
 /* This function is used to remove items from the
   hours table */
 function remove(uid) {
-    console.log(uid);
+    Log.info("Removing: " + uid);
     var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM hours WHERE uid=?;' , [uid]);
         if (rs.rowsAffected > 0) {
-            console.log ("Deleted!");
+            Log.info("Deleted!");
         } else {
-            console.log ("Error deleting. No deletion occured.");
+            Log.error("Error deleting. No deletion occured.");
         }
     })
 }
@@ -489,15 +488,14 @@ function startTimer(newValue){
     var resp="";
     var datenow = new Date();
     var startTime = newValue || datenow.getHours().toString() +":" + datenow.getMinutes().toString();
-    console.log(startTime);
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO timer VALUES (?,?,?)', [1, startTime, 1]);
         if (rs.rowsAffected > 0) {
             resp = startTime;
-            console.log ("Timer was saved to database");
+            Log.info("Timer was saved to database at: " + startTime);
         } else {
             resp = "Error";
-            console.log ("Error saving the timer");
+            Log.error("Error saving the timer");
         }
     })
     return resp;
@@ -511,14 +509,13 @@ function stopTimer(){
     var db = getDatabase();
     var datenow = new Date();
     var endTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
-    console.log(endTime);
     db.transaction(function(tx) {
         var rs = tx.executeSql('REPLACE INTO timer VALUES (?,?,?);', [1, endTime, 0]);
         if (rs.rowsAffected > 0) {
-            console.log ("Timer was stopped");
+            Log.info("Timer was stopped at: "+ endTime);
         } else {
             resp = "Error";
-            console.log ("Error stopping the timer");
+            Log.error("Error stopping the timer");
         }
     })
 }
@@ -560,16 +557,15 @@ function startBreakTimer(){
     var resp="";
     var datenow = new Date();
     var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
-    console.log(startTime);
     db.transaction(function(tx) {
 
         var rs = tx.executeSql('INSERT INTO breaks VALUES (NULL,?,?,?)', [startTime, 1, -1]);
         if (rs.rowsAffected > 0) {
             resp = startTime;
-            console.log ("break Timer was started and saved to database");
+            Log.info("Break Timer was started at: " + startTime);
         } else {
             resp = "Error";
-            console.log ("Error starting the break timer");
+            Log.error("Error starting the break timer");
         }
     })
     return resp;
@@ -580,7 +576,6 @@ Gets the id of the last added row which
 should be the current breaktimer row and
 saves the duration in to that row. */
 function stopBreakTimer(duration){
-    console.log(duration)
     var db = getDatabase();
     var id = 0;
     db.transaction(function(tx) {
@@ -593,15 +588,15 @@ function stopBreakTimer(duration){
         db.transaction(function(tx) {
             var rs = tx.executeSql('REPLACE INTO breaks VALUES (?,?,?,?);', [id, startTime, 0, duration]);
             if (rs.rowsAffected > 0) {
-                console.log ("breakTimer was stopped");
+                Log.info("BreakTimer was stopped, duration was: " + duration);
             } else {
                 resp = "Error";
-                console.log ("Error stopping the breaktimer");
+                Log.error("Error stopping the breaktimer");
             }
         })
     }
     else
-        console.log("error getting last row id")
+        Log.error("Error getting last row id");
 }
 
 /* Get the break durations from the database
@@ -614,9 +609,7 @@ function getBreakTimerDuration(){
         var rs = tx.executeSql('SELECT * FROM breaks');
         if(rs.rows.length > 0) {
             for(var i =0; i<rs.rows.length; i++) {
-                if (rs.rows.item(i).duration ===-1)
-                    console.log("Duration was not set for row number: ", i);
-                else
+                if (rs.rows.item(i).duration !==-1)
                     dur += rs.rows.item(i).duration;
             }
         }
@@ -642,20 +635,19 @@ These functions are for projects */
 
 /* */
 function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor){
-    console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
+    //console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
     var db = getDatabase();
     var resp = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, labelColor]);
         if (rs.rowsAffected > 0) {
             resp = "OK";
-            console.log ("Saved to database");
+            Log.info("Project saved to database");
         } else {
             resp = "Error";
-            console.log ("Error saving to database");
+            Log.error("Error saving project to database");
         }
     })
-    console.log(resp);
     return resp;
 }
 
@@ -711,9 +703,9 @@ function removeProject(id){
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM projects WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
-            console.log ("Project deleted!");
+            Log.info("Project deleted from database!");
         } else {
-            console.log ("Error deleting project. No deletion occured.");
+            Log.info("Error deleting project. No deletion occured.");
         }
     })
 }
@@ -727,15 +719,12 @@ function removeProjects(){
 
 function moveAllHoursToProject(id) {
     var db = getDatabase();
-    var resp = "OK";
+    var resp = "Error updating existing hours!";
     var sqlstr = "UPDATE hours SET project='"+id+"';";
     db.transaction(function(tx) {
         var rs = tx.executeSql(sqlstr);
         if (rs.rowsAffected > 0) {
-            console.log ("Updated hours to project id: ",id);
-        } else {
-            resp = "Error!"
-            console.log ("Error updating existing hours");
+            resp = "Updated hours to project id: " + id;
         }
     }
     );
@@ -754,7 +743,6 @@ function moveAllHoursToProjectByDesc(defaultProjectId) {
             for (var k=0; k< projects.length; k++) {
                 if((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1){
                     sqlstr = "UPDATE hours SET project='"+ projects[k].id +"' WHERE uid='"+ allhours[i].uid +"';";
-                    console.log("FOund one!!");
                 }
             }
         }

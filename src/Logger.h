@@ -56,9 +56,9 @@ class Logger : public QAbstractListModel
 public:
     enum LogType {
         LOG_DEBUG = 0,
-        LOG_ERROR,
-        LOG_WARN,
-        LOG_INFO
+        LOG_ERROR = 1,
+        LOG_WARN = 2,
+        LOG_INFO = 3
     };
 
     static Logger& instance();

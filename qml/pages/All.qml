@@ -81,7 +81,7 @@ Page {
             else if (section === qsTr("All"))
                 return all.dataContainer.getAll(sortby, projectId);
             else{
-                console.log("Unknown section");
+                Log.error("Unknown section: " + section);
                 return [];
             }
         }

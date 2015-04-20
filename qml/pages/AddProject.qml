@@ -61,8 +61,8 @@ Dialog {
         budget = 0; //parseFloat(budgetTextArea.text || 0);
         hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
+        Log.info("Saving project: " + "," + id + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
         DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
-        //console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         if(defaultSwitch.checked) {
             defaultProjectId = id;
             settings.setDefaultProjecId(id);
