@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>About</name>
     <message>
@@ -1016,6 +1018,10 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     <message>
         <source>This makes it possible to update edited rows.</source>
         <translation>Tämä mahdollistaa muokattujen rivien päivittämisen.</translation>
+    </message>
+    <message>
+        <source>Trying to import</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

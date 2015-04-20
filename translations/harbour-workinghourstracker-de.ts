@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="de">
 <context>
     <name>About</name>
     <message>
@@ -1016,6 +1018,10 @@ Der Quellcode ist under BSD 3-Klausel veröffentlicht</translation>
     <message>
         <source>This makes it possible to update edited rows.</source>
         <translation>Das macht es möglich veränderte Reihen zu aktualisieren. </translation>
+    </message>
+    <message>
+        <source>Trying to import</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
