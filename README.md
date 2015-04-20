@@ -16,7 +16,8 @@ v. 1.0.2-2 Available in  [openrepos] (https://openrepos.net/content/olpe/working
 [License] (#license)<br />
 [Roadmap] (#roadmap)<br />
 [How to use] (#how-to-use)<br />
-[Exporting] (#exporting)
+[Exporting] (#exporting)<br />
+[Importing] (#importing)
 
 ### Donate
 
