@@ -66,6 +66,11 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## Changelog
 
+
+### 1.0.3-2
+- Updated translations
+- Prepare for harbour update
+
 ### 1.0.3-1
 - Fixed issue with banner
 - Added logging
