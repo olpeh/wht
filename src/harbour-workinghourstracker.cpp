@@ -43,6 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QQmlContext>
 #include <QDebug>
 #include <QFileInfo>
+#include <QStandardPaths>
 
 #include "SettingsClass.h"
 #include "Launcher.h"
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
     Exporter exporter;
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     app->setApplicationName("harbour-workinghourstracker");
-
+    QCoreApplication::setApplicationName("harbour-workinghourstracker");
 
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());
@@ -68,6 +69,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("exporter", &exporter);
 
     view->rootContext()->setContextProperty("Log", &Logger::instance());
+    view->rootContext()->setContextProperty("documentsLocation",QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 
     view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));
     view->setResizeMode(QQuickView::SizeRootObjectToView);
