@@ -33,11 +33,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtFeedback 5.0
 import "../config.js" as DB
 
 
 Page {
     id: root
+
+    ThemeEffect {
+        id: buttonBuzz
+        effect: ThemeEffect.Press
+    }
+
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
@@ -440,7 +447,7 @@ Page {
                         font.bold: true
                     }
                 }
-                onClicked: start()
+                onClicked: { buttonBuzz.play(); start()}
             }
 
             Item {
@@ -481,6 +488,7 @@ Page {
                         }
                     }
                     onClicked: {
+                        buttonBuzz.play()
                         if(!breakTimerRunning) {
                             startBreakTimer()
                         }
@@ -524,7 +532,12 @@ Page {
                             text: qsTr("Stop")
                         }
                     }
-                    onClicked: if(!breakTimerRunning) stop(false)
+                    onClicked: {
+                        if(!breakTimerRunning) {
+                            buttonBuzz.play()
+                            stop(false)
+                        }
+                    }
                 }
                 BackgroundItem {
                     width: timerItem.width /3
@@ -574,7 +587,12 @@ Page {
                             text: qsTr("Adjust")
                         }
                     }
-                    onClicked: if(!breakTimerRunning) openTimeDialog()
+                    onClicked: {
+                        if(!breakTimerRunning) {
+                            openTimeDialog()
+                            buttonBuzz.play()
+                        }
+                    }
                 }
             }
         }
