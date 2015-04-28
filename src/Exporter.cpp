@@ -26,6 +26,10 @@ Exporter::Exporter(QObject *parent) :
         data = data.split("/mdeclarativecache_pre_initialized_qapplication").at(0);
         qDebug() << data;
     }
+    else if (data.length() && data.endsWith("/harbour-workinghourstracker/harbour-workinghourstracker")) {
+        data = data.split("/harbour-workinghourstracker/harbour-workinghourstracker").at(0);
+        qDebug() << data;
+    }
     db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
     if (db->open())
     {
