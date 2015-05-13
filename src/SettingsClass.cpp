@@ -135,6 +135,22 @@ void Settings::setTimerAutoStart(bool value) {
     s.endGroup();
 }
 
+bool Settings::getDefaultBreakInTimer()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    defaultBreakInTimer = s.value("defaultBreakInTimer", true).toBool();
+    s.endGroup();
+    return defaultBreakInTimer;
+}
+
+void Settings::setDefaultBreakInTimer(bool value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("defaultBreakInTimer", value);
+    s.endGroup();
+}
+
 QString Settings::getDefaultProjecId() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
