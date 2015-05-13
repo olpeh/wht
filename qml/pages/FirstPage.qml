@@ -148,6 +148,7 @@ Page {
             breakTimerRunning = false;
         }
         breakDuration = getBreakTimerDuration();
+
         var dateNow = new Date();
         var endSelectedHour = dateNow.getHours();
         var endSelectedMinute = dateNow.getMinutes();
@@ -155,6 +156,14 @@ Page {
         if (endSelectedHour < startSelectedHour)
             endHour +=24
         duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
+
+        // Add default break duration if settings allow and no break recorded
+        // Also only add it if it is less than the duration
+        var defaultDur = settings.getDefaultBreakDuration()
+        if (!breakDuration && settings.getDefaultBreakInTimer() && defaultDur < duration) {
+            breakDuration = defaultDur
+        }
+
         if(!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,

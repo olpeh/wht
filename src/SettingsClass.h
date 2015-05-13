@@ -60,6 +60,9 @@ public:
     Q_INVOKABLE bool getTimerAutoStart();
     Q_INVOKABLE void setTimerAutoStart(bool value);
 
+    Q_INVOKABLE bool getDefaultBreakInTimer();
+    Q_INVOKABLE void setDefaultBreakInTimer(bool value);
+
     Q_INVOKABLE QString getDefaultProjecId();
     Q_INVOKABLE void setDefaultProjecId(QString value);
 
@@ -81,6 +84,7 @@ private:
     QString endsNowByDefault;
     QString endTimeStaysFixed;
     bool timerAutoStart;
+    bool defaultBreakInTimer;
     QString defaultProjectId;
     QString currencyString;
     QString toAddress;
