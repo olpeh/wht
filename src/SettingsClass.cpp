@@ -139,7 +139,7 @@ bool Settings::getDefaultBreakInTimer()
 {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    defaultBreakInTimer = s.value("defaultBreakInTimer").toBool();
+    defaultBreakInTimer = s.value("defaultBreakInTimer", true).toBool();
     s.endGroup();
     return defaultBreakInTimer;
 }
