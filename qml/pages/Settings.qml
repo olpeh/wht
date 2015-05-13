@@ -205,7 +205,7 @@ Page {
                         settings.setEndTimeStaysFixed("no")
                 }
             }
-            SectionHeader { text: qsTr("Startup options") }
+            SectionHeader { text: qsTr("Timer options") }
             TextSwitch {
                 id: autoStartSwitch
                 checked: false
@@ -217,6 +217,19 @@ Page {
                         settings.setTimerAutoStart(true)
                     else
                         settings.setTimerAutoStart(false)
+                }
+            }
+            TextSwitch {
+                id: defaultBreakInTimerSwitch
+                checked: false
+                text: qsTr("Add break when using timer")
+                description: qsTr("Default break is not added automatically when using timer.")
+                onCheckedChanged: {
+                    defaultBreakInTimerSwitch.description = checked ? qsTr("Default break is added automatically when using timer. Only added when break is not recorded with the break timer.") : qsTr("Default break is not added automatically when using timer.")
+                    if(checked)
+                        settings.setDefaultBreakInTimer(true)
+                    else
+                        settings.setDefaultBreakInTimer(false)
                 }
             }
             SectionHeader { text: qsTr("Set currency") }
@@ -703,6 +716,8 @@ Page {
             autoStartSwitch.checked = true
         else if(timerAutoStart === false)
             autoStartSwitch.checked = false
+
+        defaultBreakInTimerSwitch.checked = settings.getDefaultBreakInTimer()
 
         currencyTextArea.text = settings.getCurrencyString();
         toTextArea.text = settings.getToAddress();
