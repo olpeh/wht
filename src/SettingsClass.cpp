@@ -168,7 +168,7 @@ void Settings::setCurrencyString(QString value) {
 QString Settings::getToAddress() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    toAddress = s.value("toAddress","error").toString();
+    toAddress = s.value("toAddress","").toString();
     s.endGroup();
     return toAddress;
 }
@@ -183,7 +183,7 @@ void Settings::setToAddress(QString value) {
 QString Settings::getCcAddress() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    ccAddress = s.value("ccAddress","error").toString();
+    ccAddress = s.value("ccAddress","").toString();
     s.endGroup();
     return ccAddress;
 }
@@ -197,7 +197,7 @@ void Settings::setCcAddress(QString value) {
 QString Settings::getBccAddress() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    bccAddress = s.value("bccAddress","error").toString();
+    bccAddress = s.value("bccAddress","").toString();
     s.endGroup();
     return bccAddress;
 }
