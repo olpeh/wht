@@ -145,9 +145,9 @@ Page {
             r += allHours[i].description + "\n";
             r += allHours[i].startTime + " - " + allHours[i].endTime;
             if(allHours[i].breakDuration)
-                r += "(" + allHours[i].breakDuration + ") ";
+                r += " (" + allHours[i].breakDuration + ") ";
             if(project.hourlyRate) {
-                r += " " + netDuration * project.hourlyRate + " " + currencyString;
+                r += " " + (netDuration * project.hourlyRate).toFixed(2) + " " + currencyString;
             }
             r += "\n\n";
         }
@@ -156,7 +156,7 @@ Page {
         r += qsTr("Workdays") + ": " + categoryWorkdays + "\n";
         r += qsTr("Entries") + ": " + categoryEntries + "\n";
         if (categoryPrice)
-            r += categoryPrice + " " + currencyString + "\n";
+            r += categoryPrice.toFixed(2) + " " + currencyString + "\n";
 
         return r;
     }
