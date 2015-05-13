@@ -4,7 +4,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.0.4-3 available in Jolla store (22.04.2015)<br />
 
-v. 1.0.3-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.0.5-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -56,6 +56,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Importing database dump
 * Translations
 * Logging
+* Setting for default break in timer
 
 ## Roadmap:
 * Importing .csv
@@ -66,6 +67,11 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## Changelog
 
+### 1.0.5-1
+- Setting to use default break also in timer
+- Fixed error with empty emails
+- Use of haptics
+- Fixed rounding bug in email reports
 
 ### 1.0.4-3
 - Updated translations
