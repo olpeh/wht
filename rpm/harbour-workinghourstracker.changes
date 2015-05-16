@@ -8,6 +8,12 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Mon Apr 20 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.5-1
+- Setting to use default break also in timer
+- Fixed error with empty emails
+- Use of haptics
+- Fixed rounding bug in email reports
+
 * Mon Apr 20 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.4-3
 - Updated translations
 - Prepare for harbour update
