@@ -51,6 +51,7 @@ function resetDatabase() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, projectId REFERENCES projects(id), name TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
             Log.info("Database was resetted");
         });
@@ -77,9 +78,10 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, projectId REFERENCES projects(id), name TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
     });
-    Log.info("Database initialized.")
+    Log.info("Database ready.")
 }
 function updateIfNeeded () {
     var db = getDatabase();
@@ -754,3 +756,72 @@ function moveAllHoursToProjectByDesc(defaultProjectId) {
     }
     return "Updated: " + i + " rows";
 }
+
+
+
+// Tasks
+
+// Save task
+function setTask(taskId, projectId, name){
+    var db = getDatabase();
+    var resp = "";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('INSERT OR REPLACE INTO tasks VALUES (?,?,?);', [taskId, projectId, name]);
+        if (rs.rowsAffected > 0) {
+            resp = "OK";
+            Log.info("Task saved to database");
+        } else {
+            resp = "Error";
+            Log.error("Error saving task to database");
+        }
+    })
+    return resp;
+}
+
+/* Get tasks for project */
+function getTasks(projectID){
+    var db = getDatabase();
+    var resp = [];
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectID]);
+        if(rs.rows.length > 0) {
+            for (var i=0; i<rs.rows.length; i++) {
+                var item ={};
+                item["id"]=rs.rows.item(i).id;
+                item["name"]= rs.rows.item(i).name;
+                resp.push(item);
+            }
+        }
+    })
+    return resp;
+}
+
+/* Get project by id */
+function getTaskById(id){
+    var db = getDatabase();
+    var item ={};
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM tasks WHERE id=?;', [id]);
+        if(rs.rows.length > 0) {
+            for (var i=0; i<rs.rows.length; i++) {
+                item["id"]=rs.rows.item(i).id;
+                item["name"]= rs.rows.item(i).name;
+                break;
+            }
+        }
+    })
+    return item;
+}
+
+function removeTask(id){
+    var db = getDatabase();
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('DELETE FROM tasks WHERE id=?;' , [id]);
+        if (rs.rowsAffected > 0) {
+            Log.info("Task was deleted from database!");
+        } else {
+            Log.info("Error deleting task. No deletion occured.");
+        }
+    })
+}
+
