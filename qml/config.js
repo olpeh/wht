@@ -47,11 +47,12 @@ function resetDatabase() {
             tx.executeSql('DROP TABLE timer')
             tx.executeSql('DROP TABLE breaks')
             tx.executeSql('DROP TABLE projects')
+            tx.executeSql('DROP TABLE tasks')
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, projectId REFERENCES projects(id), name TEXT);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
             Log.info("Database was resetted");
         });
@@ -78,7 +79,7 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, projectId REFERENCES projects(id), name TEXT);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
             tx.executeSql('PRAGMA user_version=2;');
     });
     Log.info("Database ready.")

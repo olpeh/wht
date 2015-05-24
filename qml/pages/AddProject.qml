@@ -64,7 +64,7 @@ Dialog {
         budget = 0; //parseFloat(budgetTextArea.text || 0);
         hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
-        Log.info("Saving project: " + "," + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
+        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
         DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         if(defaultSwitch.checked) {
             defaultProjectId = projectId;
@@ -81,6 +81,8 @@ Dialog {
     }
 
     function saveTask(name, taskId) {
+        if (!taskId || taskId === "" || taskId === " ")
+            taskId = DB.getUniqueId()
         return DB.setTask(taskId, projectId, name)
     }
 
@@ -93,7 +95,6 @@ Dialog {
     }*/
 
     SilicaFlickable {
-        id: flickable
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
@@ -151,6 +152,7 @@ Dialog {
                             visible: !taskLabel.visible
                             id: taskNameEditArea
                             focus: false
+                            y: Theme.paddingMedium
                             EnterKey.iconSource: "image://theme/icon-m-enter-close"
                             EnterKey.onClicked: {
                                 focus = false
