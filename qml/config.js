@@ -80,11 +80,11 @@ function initialize() {
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
-            tx.executeSql('PRAGMA user_version=2;');
+            tx.executeSql('PRAGMA user_version=3;');
     });
     Log.info("Database ready.")
 }
-function updateIfNeededToV2 () {
+function updateIfNeededToV2() {
     var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
@@ -96,10 +96,8 @@ function updateIfNeededToV2 () {
                 if(ex.rows.length > 0) {
                     if (ex.rows.item(0).name ==="hours") {
                         tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
-                        tx.executeSql('PRAGMA user_version=2;');
+                        tx.executeSql('PRAGMA user_version = 2;');
                         Log.info("Updating table hours to user_version 2. Adding breakDuration column.");
-                        var r = tx.executeSql('PRAGMA user_version;');
-                        //console.log(r.rows.item(0).user_version);
                     }
                     else
                         Log.error("No table named hours...");
@@ -110,11 +108,12 @@ function updateIfNeededToV2 () {
         }
     });
 }
-function updateIfNeededToV3 () {
+
+function updateIfNeededToV3() {
     var db = getDatabase();
+
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
-        //console.log(rs.rows.item(0).user_version);
         if(rs.rows.length > 0) {
             if (rs.rows.item(0).user_version < 3) {
                 //console.log(rs.rows.item(0).user_version)
@@ -122,10 +121,8 @@ function updateIfNeededToV3 () {
                 //check if rows exist
                 if(res.rows.length > 0) {
                     if (res.rows.item(0).name ==="hours") {
-                        tx.executeSql('PRAGMA user_version=3;');
-                        var r = tx.executeSql('PRAGMA user_version;');
-                        //console.log(r.rows.item(0).user_version);
                         tx.executeSql('ALTER TABLE hours ADD taskId TEXT;');
+                        tx.executeSql('PRAGMA user_version = 3;');
                         Log.info("Updating table hours to user_version 3. Adding taskId column.");
                     }
                     else
