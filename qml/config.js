@@ -88,7 +88,6 @@ function updateIfNeededToV2() {
     var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
-        //console.log(rs.rows.item(0).user_version);
         if(rs.rows.length > 0) {
             if (rs.rows.item(0).user_version < 2) {
                 var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
@@ -111,7 +110,6 @@ function updateIfNeededToV2() {
 
 function updateIfNeededToV3() {
     var db = getDatabase();
-
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
         if(rs.rows.length > 0) {
