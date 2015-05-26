@@ -84,7 +84,7 @@ function initialize() {
     });
     Log.info("Database ready.")
 }
-function updateIfNeeded () {
+function updateIfNeededToV2 () {
     var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
@@ -99,7 +99,7 @@ function updateIfNeeded () {
                         tx.executeSql('PRAGMA user_version=2;');
                         Log.info("Updating table hours to user_version 2. Adding breakDuration column.");
                         var r = tx.executeSql('PRAGMA user_version;');
-                        console.log(r.rows.item(0).user_version);
+                        //console.log(r.rows.item(0).user_version);
                     }
                     else
                         Log.error("No table named hours...");
@@ -109,19 +109,22 @@ function updateIfNeeded () {
             }
         }
     });
+}
+function updateIfNeededToV3 () {
+    var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
         //console.log(rs.rows.item(0).user_version);
         if(rs.rows.length > 0) {
             if (rs.rows.item(0).user_version < 3) {
-                console.log(rs.rows.item(0).user_version)
+                //console.log(rs.rows.item(0).user_version)
                 var res = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
                 //check if rows exist
                 if(res.rows.length > 0) {
                     if (res.rows.item(0).name ==="hours") {
                         tx.executeSql('PRAGMA user_version=3;');
                         var r = tx.executeSql('PRAGMA user_version;');
-                        console.log(r.rows.item(0).user_version);
+                        //console.log(r.rows.item(0).user_version);
                         tx.executeSql('ALTER TABLE hours ADD taskId TEXT;');
                         Log.info("Updating table hours to user_version 3. Adding taskId column.");
                     }
@@ -308,7 +311,10 @@ function getAll(sortby, projectId) {
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
              item["breakDuration"]= rs.rows.item(i).breakDuration;
-             item["taskId"] = rs.rows.item(i).taskId;
+             if (rs.rows.item(i).taskId)
+                item["taskId"] = rs.rows.item(i).taskId;
+             else
+                item["taskId"] = "0";
              allHours.push(item);
             //console.log(item);
         }
@@ -351,7 +357,10 @@ function getAllDay(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            item["taskId"] = rs.rows.item(i).taskId;
+            if (rs.rows.item(i).taskId)
+               item["taskId"] = rs.rows.item(i).taskId;
+            else
+               item["taskId"] = "0";
             allHours.push(item);
            //console.log(item);
         }
@@ -394,7 +403,10 @@ function getAllWeek(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            item["taskId"] = rs.rows.item(i).taskId;
+            if (rs.rows.item(i).taskId)
+               item["taskId"] = rs.rows.item(i).taskId;
+            else
+               item["taskId"] = "0";
             allHours.push(item);
            //console.log(item);
         }
@@ -436,7 +448,10 @@ function getAllMonth(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            item["taskId"] = rs.rows.item(i).taskId;
+            if (rs.rows.item(i).taskId)
+               item["taskId"] = rs.rows.item(i).taskId;
+            else
+               item["taskId"] = "0";
             allHours.push(item);
            //console.log(item);
         }
@@ -468,7 +483,10 @@ function getAllThisYear(sortby, projectId) {
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
              item["breakDuration"]= rs.rows.item(i).breakDuration;
-             item["taskId"] = rs.rows.item(i).taskId;
+             if (rs.rows.item(i).taskId)
+                item["taskId"] = rs.rows.item(i).taskId;
+             else
+                item["taskId"] = "0";
              allHours.push(item);
             //console.log(item);
         }
@@ -821,7 +839,7 @@ function getProjectTasks(projectId){
                 var item ={};
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
-                console.log(item['name']);
+                //console.log(item['name']);
                 resp.push(item);
             }
         }

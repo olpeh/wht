@@ -71,8 +71,6 @@ Page {
                     return project.tasks[i].name;
             }
         }
-        console.log("Did not find task")
-        console.log(taskId)
         return '';
     }
 
@@ -112,11 +110,11 @@ Page {
         var lastDate = "";
         for (var i = 0; i < allHours.length; i++) {
             var project = getProject(allHours[i].project);
-            var taskId = ""
+            var taskId = "0"
             if (allHours[i].taskId !== "0")
-                taskId = String(allHours[i].taskId)
+                taskId = allHours[i].taskId
             var taskName = ""
-            if (taskId && !project.error) {
+            if (taskId !=="" && taskId !=="0" && !project.error) {
                 taskName = getTaskName(project, allHours[i].taskId)
             }
             hoursModel.set(i, {

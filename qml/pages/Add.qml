@@ -41,7 +41,7 @@ Dialog {
     property QtObject editMode: null
     property string description: qsTr("No description")
     property string project: "" //default
-    property string taskId: ""
+    property string taskId: "0"
     property double duration: 8
     property double breakDuration: 0
     property double netDuration: 8
@@ -562,7 +562,7 @@ Dialog {
                     })
 
                     _updating = false
-                    if (taskId !== "") {
+                    if (taskId !== "0" || taskId !== "") {
                         for (var i = 0; i < taskModelSource.count; i++) {
                             if (taskModelSource.get(i).id === taskId) {
                                 currentIndex = i
