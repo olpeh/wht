@@ -59,7 +59,7 @@ Page {
         }
 
         Component.onCompleted: {
-            defaultProjectId = settings.getDefaultProjecId();
+            defaultProjectId = settings.getDefaultProjectId();
             //console.log("default project id: ", defaultProjectId);
             getProjects();
         }

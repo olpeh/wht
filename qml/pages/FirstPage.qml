@@ -274,11 +274,11 @@ Page {
             var id = DB.getUniqueId();
             DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor);
             defaultProjectId = id;
-            settings.setDefaultProjecId(id);
+            settings.setDefaultProjectId(id);
             moveAllHoursTo(id);
         }
         else {
-            defaultProjectId = settings.getDefaultProjecId();
+            defaultProjectId = settings.getDefaultProjectId();
         }
 
         //console.log("Get hours from database...");
