@@ -265,7 +265,8 @@ Page {
 
     Component.onCompleted: {
         // Update tables for previous versions
-        DB.updateIfNeeded();
+        DB.updateIfNeededToV2();
+        DB.updateIfNeededToV3();
         // Initialize the database
         DB.initialize();
         projects = DB.getProjects();
