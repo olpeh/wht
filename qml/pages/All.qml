@@ -57,7 +57,23 @@ Page {
                 return projects[i];
         }
         banner.notify(qsTr("Project was not found"))
-        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+        return {
+            'name':qsTr('Project was not found'),
+            'labelColor': Theme.secondaryHighlightColor,
+            'error': true
+        };
+    }
+
+    function getTaskName(project, taskId) {
+        if (project.tasks) {
+            for (var i = 0; i < project.tasks.length; i++) {
+                if (project.tasks[i].id === taskId)
+                    return project.tasks[i].name;
+            }
+        }
+        console.log("Did not find task")
+        console.log(taskId)
+        return '';
     }
 
     function getAllHours(sortby){
@@ -96,6 +112,13 @@ Page {
         var lastDate = "";
         for (var i = 0; i < allHours.length; i++) {
             var project = getProject(allHours[i].project);
+            var taskId = ""
+            if (allHours[i].taskId !== "0")
+                taskId = String(allHours[i].taskId)
+            var taskName = ""
+            if (taskId && !project.error) {
+                taskName = getTaskName(project, allHours[i].taskId)
+            }
             hoursModel.set(i, {
                            'uid': allHours[i].uid,
                            'date': allHours[i].date,
@@ -107,7 +130,9 @@ Page {
                            'description': allHours[i].description,
                            'breakDuration': allHours[i].breakDuration,
                            'labelColor': project.labelColor,
-                           'hourlyRate': project.hourlyRate
+                           'hourlyRate': project.hourlyRate,
+                           'taskId': taskId,
+                           'taskName': taskName
             })
             var netDuration = allHours[i].duration - allHours[i].breakDuration;
             categoryDuration+= netDuration;
@@ -264,7 +289,7 @@ Page {
                         y: Theme.paddingMedium
                         Label {
                             id: project
-                            text: "[" + netDur.toString().toHHMM() + "]  " + model.projectName
+                            text: "[" + netDur.toString().toHHMM() + "]  " + model.projectName + "  " + model.taskName
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }
@@ -320,7 +345,8 @@ Page {
                                        project: model.project,
                                        dateText: model.date,
                                        breakDuration: model.breakDuration,
-                                       editMode: all
+                                       editMode: all,
+                                       taskId: model.taskId
                                    })
 
                 }

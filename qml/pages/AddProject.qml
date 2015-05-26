@@ -68,7 +68,7 @@ Dialog {
         DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         if(defaultSwitch.checked) {
             defaultProjectId = projectId;
-            settings.setDefaultProjecId(projectId);
+            settings.setDefaultProjectId(projectId);
         }
         if(prev)
             page.prev.getProjects();
@@ -77,7 +77,7 @@ Dialog {
     function getTasks() {
         if (projectId == "0" && !editMode)
             projectId = DB.getUniqueId()
-        return DB.getTasks(projectId)
+        return DB.getProjectTasks(projectId)
     }
 
     function saveTask(name, taskId) {
@@ -207,6 +207,7 @@ Dialog {
                     if (taskNameArea.text.length) {
                         saveTask(taskNameArea.text)
                         repeater.model = getTasks()
+                        text = ''
                     }
                 }
                 width: parent.width

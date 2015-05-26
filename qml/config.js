@@ -48,12 +48,12 @@ function resetDatabase() {
             tx.executeSql('DROP TABLE breaks')
             tx.executeSql('DROP TABLE projects')
             tx.executeSql('DROP TABLE tasks')
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0, taskId TEXT);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
-            tx.executeSql('PRAGMA user_version=2;');
+            tx.executeSql('PRAGMA user_version=3;');
             Log.info("Database was resetted");
         });
 }
@@ -75,7 +75,7 @@ function initialize() {
     var db = getDatabase();
     db.transaction(
         function(tx){
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0);');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0, taskId TEXT);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
@@ -86,38 +86,61 @@ function initialize() {
 }
 function updateIfNeeded () {
     var db = getDatabase();
-    db.transaction(
-        function(tx){
-            var rs = tx.executeSql('PRAGMA user_version');
-            //console.log(rs.rows.item(0).user_version);
-            if(rs.rows.length > 0) {
-                if (rs.rows.item(0).user_version < 2) {
-                    var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
-                    //check if rows exist
-                    if(ex.rows.length > 0) {
-                        if (ex.rows.item(0).name ==="hours") {
-                            Log.info("Updating table hours to user_version 2.");
-                            tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
-                            tx.executeSql('PRAGMA user_version=2;');
-                            var r = tx.executeSql('PRAGMA user_version;');
-                            //console.log(r.rows.item(0).user_version);
-                        }
-                        else
-                            Log.error("No table named hours...");
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('PRAGMA user_version');
+        //console.log(rs.rows.item(0).user_version);
+        if(rs.rows.length > 0) {
+            if (rs.rows.item(0).user_version < 2) {
+                var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
+                //check if rows exist
+                if(ex.rows.length > 0) {
+                    if (ex.rows.item(0).name ==="hours") {
+                        tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
+                        tx.executeSql('PRAGMA user_version=2;');
+                        Log.info("Updating table hours to user_version 2. Adding breakDuration column.");
+                        var r = tx.executeSql('PRAGMA user_version;');
+                        console.log(r.rows.item(0).user_version);
                     }
                     else
                         Log.error("No table named hours...");
                 }
+                else
+                    Log.error("No table named hours...");
             }
+        }
+    });
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('PRAGMA user_version');
+        //console.log(rs.rows.item(0).user_version);
+        if(rs.rows.length > 0) {
+            if (rs.rows.item(0).user_version < 3) {
+                console.log(rs.rows.item(0).user_version)
+                var res = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
+                //check if rows exist
+                if(res.rows.length > 0) {
+                    if (res.rows.item(0).name ==="hours") {
+                        tx.executeSql('PRAGMA user_version=3;');
+                        var r = tx.executeSql('PRAGMA user_version;');
+                        console.log(r.rows.item(0).user_version);
+                        tx.executeSql('ALTER TABLE hours ADD taskId TEXT;');
+                        Log.info("Updating table hours to user_version 3. Adding taskId column.");
+                    }
+                    else
+                        Log.error("No table named hours...");
+                }
+                else
+                    Log.error("No table named hours...");
+            }
+        }
     });
 }
 
 // This function is used to write hours into the database
-function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration) {
+function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration, taskId) {
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration, taskId]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             Log.info("Hours saved to database");
@@ -138,11 +161,12 @@ function getHoursDay(offset, projectId) {
     var rs;
 
     db.transaction(function(tx) {
-        if(projectId)
+        if (projectId) {
             rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime") AND project=?;', [projectId]);
-
-        else
+        }
+        else {
             rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime");');
+        }
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
@@ -284,6 +308,7 @@ function getAll(sortby, projectId) {
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
              item["breakDuration"]= rs.rows.item(i).breakDuration;
+             item["taskId"] = rs.rows.item(i).taskId;
              allHours.push(item);
             //console.log(item);
         }
@@ -326,6 +351,7 @@ function getAllDay(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
+            item["taskId"] = rs.rows.item(i).taskId;
             allHours.push(item);
            //console.log(item);
         }
@@ -368,6 +394,7 @@ function getAllWeek(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
+            item["taskId"] = rs.rows.item(i).taskId;
             allHours.push(item);
            //console.log(item);
         }
@@ -409,6 +436,7 @@ function getAllMonth(offset, sortby, projectId) {
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
+            item["taskId"] = rs.rows.item(i).taskId;
             allHours.push(item);
            //console.log(item);
         }
@@ -440,6 +468,7 @@ function getAllThisYear(sortby, projectId) {
              item["project"]=rs.rows.item(i).project;
              item["description"]=rs.rows.item(i).description;
              item["breakDuration"]= rs.rows.item(i).breakDuration;
+             item["taskId"] = rs.rows.item(i).taskId;
              allHours.push(item);
             //console.log(item);
         }
@@ -663,8 +692,10 @@ function getProjects(){
         var rs = tx.executeSql('SELECT * FROM projects ORDER BY id DESC');
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
+                var projectId = rs.rows.item(i).id
+                var projectTasks = getProjectTasks(projectId)
                 var item ={};
-                item["id"]=rs.rows.item(i).id;
+                item["id"]=projectId;
                 item["name"]= rs.rows.item(i).name;
                 item["hourlyRate"]=rs.rows.item(i).hourlyRate;
                 item["contractRate"]=rs.rows.item(i).contractRate;
@@ -672,6 +703,7 @@ function getProjects(){
                 item["hourBudget"]=rs.rows.item(i).hourBudget;
                 item["labelColor"]=rs.rows.item(i).labelColor;
                 item["breakDuration"]= rs.rows.item(i).breakDuration;
+                item["tasks"]=projectTasks;
                 resp.push(item);
             }
         }
@@ -778,18 +810,18 @@ function setTask(taskId, projectId, name){
     })
     return resp;
 }
-
 /* Get tasks for project */
-function getTasks(projectID){
+function getProjectTasks(projectId){
     var db = getDatabase();
     var resp = [];
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectID]);
+        var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectId]);
         if(rs.rows.length > 0) {
             for (var i=0; i<rs.rows.length; i++) {
                 var item ={};
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
+                console.log(item['name']);
                 resp.push(item);
             }
         }
@@ -797,7 +829,7 @@ function getTasks(projectID){
     return resp;
 }
 
-/* Get project by id */
+/* Get task by id */
 function getTaskById(id){
     var db = getDatabase();
     var item ={};

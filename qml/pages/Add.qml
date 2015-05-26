@@ -41,6 +41,7 @@ Dialog {
     property QtObject editMode: null
     property string description: qsTr("No description")
     property string project: "" //default
+    property string taskId: ""
     property double duration: 8
     property double breakDuration: 0
     property double netDuration: 8
@@ -55,6 +56,7 @@ Dialog {
     property bool fromCover: false
     property bool fromTimer: false
     property bool endTimeStaysFixed: true
+    property variant tasks: []
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
@@ -79,6 +81,8 @@ Dialog {
            description = descriptionTextArea.text
         if (uid == "0")
             uid = DB.getUniqueId()
+        if (!taskId)
+            taskId = "0"
         var d = selectedDate
         //YYYY-MM-DD
         var yyyy = d.getFullYear().toString();
@@ -89,8 +93,8 @@ Dialog {
         var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
         //console.log(modelSource.get(projectCombo.currentIndex).id);
         project = modelSource.get(projectCombo.currentIndex).id;
-        Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration)
-        DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration)
+        Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+        DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
         if (dataContainer != null)
             page.dataContainer.getHours()
 
@@ -200,7 +204,7 @@ Dialog {
                 acceptText: qsTr("Save")
                 cancelText: qsTr("Cancel")
             }
-            spacing: 20
+            spacing: 15
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
@@ -485,6 +489,8 @@ Dialog {
                 }
                 onCurrentItemChanged: {
                     var selectedValue = modelSource.get(currentIndex).value
+                    project = modelSource.get(currentIndex).id;
+                    tasks = DB.getProjectTasks(project);
                 }
                 Component.onCompleted: {
                     projects = DB.getProjects();
@@ -492,7 +498,7 @@ Dialog {
                         var id = DB.getUniqueId();
                         DB.setProject(id, "default", 0, 0, 0, 0, Theme.secondaryHighlightColor);
                         defaultProjectId = id;
-                        settings.setDefaultProjecId(id);
+                        settings.setDefaultProjectId(id);
                         if (dataContainer != null)
                             page.dataContainer.moveAllHoursTo(id);
                         projects = DB.getProjects();
@@ -507,7 +513,7 @@ Dialog {
                     }
                     _updating = false
                     if(project === "")
-                        project = defaultProjectId
+                        project = settings.getDefaultProjectId();
                     for (var i = 0; i < modelSource.count; i++) {
                         if (modelSource.get(i).id == project) {
                             currentIndex = i
@@ -520,6 +526,60 @@ Dialog {
 
             ListModel {
                 id: modelSource
+            }
+
+            // Task ComboBox
+            ComboBox {
+                id: taskCombo
+                label: qsTr("Task")
+                menu: ContextMenu {
+                    Repeater {
+                        id: repeat
+                        width: parent.width
+                        model: taskModelSource
+                        delegate: MenuItem {
+                            text: model.name
+                            font.bold: true
+                        }
+                    }
+                }
+                onCurrentItemChanged: {
+                    var selectedValue = taskModelSource.get(currentIndex).value
+                    taskId = taskModelSource.get(currentIndex).id
+                }
+                Component.onCompleted: {
+                    tasks = DB.getProjectTasks(project);
+                    for (var i = 0; i < tasks.length; i++) {
+                        taskModelSource.set(i, {
+                            'id': tasks[i].id,
+                            'name': tasks[i].name
+                        })
+                    }
+                    taskModelSource.set(tasks.length, {
+                        'id': '0',
+                        'name': qsTr("No task defined"),
+                        'enabled': false
+                    })
+
+                    _updating = false
+                    if (taskId !== "") {
+                        for (var i = 0; i < taskModelSource.count; i++) {
+                            if (taskModelSource.get(i).id === taskId) {
+                                currentIndex = i
+                                break
+                            }
+                        }
+                    }
+                    else {
+                        currentIndex = -1
+                        currentItem = null
+                    }
+                }
+                description: qsTr("Add or edit projects in settings")
+            }
+
+            ListModel {
+                id: taskModelSource
             }
 
             TextField{
@@ -569,7 +629,9 @@ Dialog {
                     updateNetDuration();
                 }
                 updateDuration()
-                    updateStartTime()
+                updateStartTime()
+                if(project === "")
+                    project = settings.getDefaultProjectId()
             }
         }
     }
