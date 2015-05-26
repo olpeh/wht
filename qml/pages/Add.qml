@@ -490,7 +490,8 @@ Dialog {
                 onCurrentItemChanged: {
                     var selectedValue = modelSource.get(currentIndex).value
                     project = modelSource.get(currentIndex).id;
-                    tasks = DB.getProjectTasks(project);
+                    taskCombo.deleteAll();
+                    taskCombo.init();
                 }
                 Component.onCompleted: {
                     projects = DB.getProjects();
@@ -547,7 +548,12 @@ Dialog {
                     var selectedValue = taskModelSource.get(currentIndex).value
                     taskId = taskModelSource.get(currentIndex).id
                 }
-                Component.onCompleted: {
+                function deleteAll() {
+                    for (var i = 0; i < taskModelSource.length; i++) {
+                        modelSource.delete(i)
+                    }
+                }
+                function init() {
                     tasks = DB.getProjectTasks(project);
                     for (var i = 0; i < tasks.length; i++) {
                         taskModelSource.set(i, {
@@ -574,6 +580,9 @@ Dialog {
                         currentIndex = -1
                         currentItem = null
                     }
+                }
+                Component.onCompleted: {
+                    init()
                 }
                 description: qsTr("Add or edit projects in settings")
             }
