@@ -491,7 +491,7 @@ Dialog {
                     var selectedValue = modelSource.get(currentIndex).value
                     project = modelSource.get(currentIndex).id;
                     taskCombo.deleteAll();
-                    taskCombo.init();
+                    taskCombo.init(true);
                 }
                 Component.onCompleted: {
                     projects = DB.getProjects();
@@ -545,15 +545,18 @@ Dialog {
                     }
                 }
                 onCurrentItemChanged: {
-                    var selectedValue = taskModelSource.get(currentIndex).value
-                    taskId = taskModelSource.get(currentIndex).id
-                }
-                function deleteAll() {
-                    for (var i = 0; i < taskModelSource.length; i++) {
-                        modelSource.delete(i)
+                    if (currentIndex !==-1) {
+                        var selectedValue = taskModelSource.get(currentIndex).value
+                        taskId = taskModelSource.get(currentIndex).id
                     }
                 }
-                function init() {
+                function deleteAll() {
+                    // @TODO: Does not work
+                    for (var i = 0; i < taskModelSource.length; i++) {
+                        taskModelSource.delete(i)
+                    }
+                }
+                function init(deselect) {
                     tasks = DB.getProjectTasks(project);
                     for (var i = 0; i < tasks.length; i++) {
                         taskModelSource.set(i, {
@@ -568,7 +571,11 @@ Dialog {
                     })
 
                     _updating = false
-                    if (taskId !== "0" || taskId !== "") {
+                    if (deselect) {
+                        currentIndex = -1
+                        currentItem = null
+                    }
+                    else if (taskId !== "0" || taskId !== "") {
                         for (var i = 0; i < taskModelSource.count; i++) {
                             if (taskModelSource.get(i).id === taskId) {
                                 currentIndex = i
@@ -584,7 +591,7 @@ Dialog {
                 Component.onCompleted: {
                     init()
                 }
-                description: qsTr("Add or edit projects in settings")
+                description: qsTr("Add or edit tasks in project settings")
             }
 
             ListModel {
