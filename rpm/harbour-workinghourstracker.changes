@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Thu May 28 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.6-2
+- Added tasks selection
+- Tasks can be added and edited in settings
 
 * Mon Apr 20 2015 Olavi Haapala <ojhaapala@gmail.com> 1.0.5-1
 - Setting to use default break also in timer

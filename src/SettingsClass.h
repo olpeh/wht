@@ -63,8 +63,8 @@ public:
     Q_INVOKABLE bool getDefaultBreakInTimer();
     Q_INVOKABLE void setDefaultBreakInTimer(bool value);
 
-    Q_INVOKABLE QString getDefaultProjecId();
-    Q_INVOKABLE void setDefaultProjecId(QString value);
+    Q_INVOKABLE QString getDefaultProjectId();
+    Q_INVOKABLE void setDefaultProjectId(QString value);
 
     Q_INVOKABLE QString getCurrencyString();
     Q_INVOKABLE void setCurrencyString(QString value);

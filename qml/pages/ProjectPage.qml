@@ -42,7 +42,7 @@ Page {
 
     onStatusChanged: {
 
-        // Data are refreshed each time the page is activated.
+        // Data is refreshed each time the page is activated.
         // Otherwise, they may not be up to date if changes have occurred for the displayed project.
         if (projectPage.status === PageStatus.Activating) {
             getHours();

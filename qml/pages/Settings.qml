@@ -223,7 +223,7 @@ Page {
                 id: defaultBreakInTimerSwitch
                 checked: true
                 text: qsTr("Add break when using timer")
-                description: qsTr("Default break is not added automatically when using timer.")
+                description: qsTr("Default break is added automatically when using timer.")
                 onCheckedChanged: {
                     defaultBreakInTimerSwitch.description = checked ? qsTr("Default break is added automatically when using timer. Only added when break is not recorded with the break timer.") : qsTr("Default break is not added automatically when using timer.")
                     if(checked)

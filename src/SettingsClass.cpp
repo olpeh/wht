@@ -151,7 +151,7 @@ void Settings::setDefaultBreakInTimer(bool value) {
     s.endGroup();
 }
 
-QString Settings::getDefaultProjecId() {
+QString Settings::getDefaultProjectId() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     defaultProjectId= s.value("defaultProjectId").toString();
@@ -159,7 +159,7 @@ QString Settings::getDefaultProjecId() {
     return defaultProjectId;
 }
 
-void Settings::setDefaultProjecId(QString value) {
+void Settings::setDefaultProjectId(QString value) {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("defaultProjectId", value);

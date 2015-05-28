@@ -33,7 +33,7 @@ Exporter::Exporter(QObject *parent) :
     db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
     if (db->open())
     {
-        qDebug() << "Opening the database successful";
+        qDebug() << "Database OK";
     }
     else
     {

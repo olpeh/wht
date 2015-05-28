@@ -39,7 +39,7 @@ Dialog {
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
-    property string id: "0"
+    property string projectId: "0"
     property string name: ""
     property double hourlyRate: 0
     property double contractRate: 0
@@ -53,22 +53,37 @@ Dialog {
         return nameTextArea.text !== "" && (hourlyRateTextArea.text === "" || !isNaN(parseFloat(hourlyRateTextArea.text)) || parseFloat(hourlyRateTextArea.text) >=0)
     }
     function saveProject() {
+        if (taskNameArea.text.length) {
+            saveTask(taskNameArea.text)
+        }
         name = nameTextArea.text;
-        if (id == "0" && !editMode)
-            id = DB.getUniqueId();
+        if (projectId == "0" && !editMode)
+            projectId = DB.getUniqueId();
         hourlyRate = parseFloat(hourlyRateTextArea.text) || 0;
         contractRate = 0; //parseFloat(contractRateTextArea.text || 0);
         budget = 0; //parseFloat(budgetTextArea.text || 0);
         hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
         labelColor = colorIndicator.color;
-        Log.info("Saving project: " + "," + id + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
-        DB.setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
+        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
+        DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
         if(defaultSwitch.checked) {
-            defaultProjectId = id;
-            settings.setDefaultProjecId(id);
+            defaultProjectId = projectId;
+            settings.setDefaultProjectId(projectId);
         }
         if(prev)
             page.prev.getProjects();
+    }
+
+    function getTasks() {
+        if (projectId == "0" && !editMode)
+            projectId = DB.getUniqueId()
+        return DB.getProjectTasks(projectId)
+    }
+
+    function saveTask(name, taskId) {
+        if (!taskId || taskId === "" || taskId === " ")
+            taskId = DB.getUniqueId()
+        return DB.setTask(taskId, projectId, name)
     }
 
     //Not needed
@@ -89,12 +104,11 @@ Dialog {
                 acceptText: qsTr("Save")
                 cancelText: qsTr("Cancel")
             }
-            spacing: 20
+            spacing: 15
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
-            SectionHeader { text: qsTr("Required") }
             TextField{
                 id: nameTextArea
                 focus: !editMode
@@ -104,6 +118,7 @@ Dialog {
                 }
                 width: parent.width
                 placeholderText: qsTr("Please enter a name for the project")
+                label: qsTr("Project name")
                 /*onFocusChanged: {
                     nameTextArea.text = removeInvalidCharacters(nameTextArea.text)
                 }*/
@@ -113,10 +128,94 @@ Dialog {
                 checked: false
                 text: qsTr("Make this the default project")
             }
-            Separator {
-                width: parent.width
+
+            SectionHeader { text: qsTr("Tasks") }
+            Repeater {
+                id: repeater
+                model: getTasks()
+                BackgroundItem {
+                    id: contentItem
+                    Rectangle{
+                        color: colorIndicator.color
+                        anchors.fill: parent
+                        Label {
+                            id: taskLabel
+                            y: Theme.paddingLarge
+                            x: Theme.paddingLarge
+                            text: modelData.name
+                            font{
+                                bold: true
+                                pixelSize: Theme.fontSizeMedium
+                            }
+                        }
+                        TextField{
+                            visible: !taskLabel.visible
+                            id: taskNameEditArea
+                            focus: false
+                            y: Theme.paddingMedium
+                            EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                            EnterKey.onClicked: {
+                                focus = false
+                                taskLabel.visible = true
+                                if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
+                                    saveTask(taskNameEditArea.text, modelData.id)
+                                    console.log(modelData.id)
+                                    repeater.model = getTasks()
+                                }
+                            }
+                            onFocusChanged: {
+                                if (!taskNameEditArea.focus) {
+                                    taskLabel.visible = true
+                                    if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
+                                        saveTask(taskNameEditArea.text, modelData.id)
+                                        repeater.model = getTasks()
+                                    }
+                                }
+                            }
+                            width: parent.width
+                        }
+
+                    }
+                    onClicked: {
+                        taskLabel.visible = false
+                        taskNameEditArea.focus = true
+                        taskNameEditArea.text = taskLabel.text
+                    }
+                }
             }
-            SectionHeader { text: qsTr("Optional") }
+            BackgroundItem {
+                id: addTaskItem
+                Image {
+                    id: addImage
+                    source: "image://theme/icon-cover-new"
+                    anchors.centerIn: parent
+                    scale: 0.4
+                }
+                onClicked: {
+                    addTaskItem.visible = false
+                    taskNameArea.focus = true
+                }
+            }
+            TextField{
+                visible: !addTaskItem.visible
+                id: taskNameArea
+                focus: false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: {
+                    focus = false
+                    addTaskItem.visible = true
+                    if (taskNameArea.text.length) {
+                        saveTask(taskNameArea.text)
+                        repeater.model = getTasks()
+                        text = ''
+                    }
+                }
+                width: parent.width
+                placeholderText: qsTr("Task Name")
+                label: qsTr("Task Name")
+            }
+
+            SectionHeader { text: qsTr("Rates") }
             TextField{
                 id: hourlyRateTextArea
                 focus: false
@@ -161,6 +260,7 @@ Dialog {
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: qsTr("Hour budget")
             }*/
+            SectionHeader { text: qsTr("Coloring") }
             BackgroundItem {
                 Rectangle {
                     id: colorIndicator
@@ -206,6 +306,7 @@ Dialog {
                 height: 10
             }
             Component.onCompleted: {
+                getTasks();
                 if (editMode){
                     nameTextArea.text = name;
                     hourlyRateTextArea.text = hourlyRate;
@@ -213,7 +314,7 @@ Dialog {
                     //budgetTextArea.text = budget;
                     //hourBudgetTextArea.text = hourBudget;
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
-                    if(defaultProjectId === id) {
+                    if(defaultProjectId === projectId) {
                         defaultSwitch.visible = false;
                     }
                 }

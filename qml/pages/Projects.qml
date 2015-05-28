@@ -59,7 +59,7 @@ Page {
         }
 
         Component.onCompleted: {
-            defaultProjectId = settings.getDefaultProjecId();
+            defaultProjectId = settings.getDefaultProjectId();
             //console.log("default project id: ", defaultProjectId);
             getProjects();
         }
@@ -130,7 +130,7 @@ Page {
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{
                                            prev: projectss,
                                            editMode: true,
-                                           id: model.id,
+                                           projectId: model.id,
                                            name: model.name,
                                            hourlyRate: model.hourlyRate,
                                            contractRate: model.contractRate,
