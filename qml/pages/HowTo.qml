@@ -36,6 +36,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    allowedOrientations: Orientation.All
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width

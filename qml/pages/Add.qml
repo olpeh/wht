@@ -36,6 +36,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
+    allowedOrientations: Orientation.All
     canAccept: validateHours()
     property QtObject dataContainer: null
     property QtObject editMode: null

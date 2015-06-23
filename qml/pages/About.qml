@@ -36,6 +36,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: aboutPage
+    allowedOrientations: Orientation.All
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent

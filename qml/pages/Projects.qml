@@ -37,6 +37,7 @@ import "../config.js" as DB
 
 Page {
     id: projectss
+    allowedOrientations: Orientation.All
     function getProjects() {
         projects = DB.getProjects();
         for (var i = 0; i < projects.length; i++) {

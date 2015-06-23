@@ -37,6 +37,7 @@ import "../config.js" as DB
 
 Page {
     id: projectPage
+    allowedOrientations: Orientation.All
     property QtObject dataContainer: null
     property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
 

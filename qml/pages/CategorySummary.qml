@@ -37,6 +37,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: summary
+    allowedOrientations: Orientation.All
     ListModel {
         id: hoursModel
     }

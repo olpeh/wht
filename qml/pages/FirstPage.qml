@@ -39,6 +39,7 @@ import "../config.js" as DB
 
 Page {
     id: root
+    allowedOrientations: Orientation.All
 
     ThemeEffect {
         id: buttonBuzz

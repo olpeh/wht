@@ -40,6 +40,7 @@ Page {
     property double defaultBreakDuration: 0
     property bool timerAutoStart : false
     id: settingsPage
+    allowedOrientations: Orientation.All
     property QtObject dataContainer: null
 
     // helper functions for giving duration in hh:mm format
