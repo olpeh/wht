@@ -491,10 +491,9 @@ Dialog {
                 onCurrentItemChanged: {
                     var selectedValue = modelSource.get(currentIndex).value
                     project = modelSource.get(currentIndex).id;
-                    taskCombo.deleteAll();
-                    taskCombo.init(true);
+                    taskCombo.init();
                 }
-                Component.onCompleted: {
+                function init() {
                     projects = DB.getProjects();
                     if (projects.length === 0) {
                         var id = DB.getUniqueId();
@@ -572,11 +571,11 @@ Dialog {
                     })
 
                     _updating = false
-                    if (deselect) {
-                        currentIndex = -1
-                        currentItem = null
-                    }
-                    else if (taskId !== "0" || taskId !== "") {
+
+                    currentIndex = -1
+                    currentItem = null
+
+                    if (taskId !== "0" || taskId !== "") {
                         for (var i = 0; i < taskModelSource.count; i++) {
                             if (taskModelSource.get(i).id === taskId) {
                                 currentIndex = i
@@ -584,13 +583,6 @@ Dialog {
                             }
                         }
                     }
-                    else {
-                        currentIndex = -1
-                        currentItem = null
-                    }
-                }
-                Component.onCompleted: {
-                    init()
                 }
                 description: qsTr("Add or edit tasks in project settings")
             }
@@ -649,6 +641,9 @@ Dialog {
                 updateStartTime()
                 if(project === "")
                     project = settings.getDefaultProjectId()
+
+                projectCombo.init()
+                taskCombo.init()
             }
         }
     }
