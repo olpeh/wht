@@ -4,7 +4,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.0.4-3 available in Jolla store (22.04.2015)<br />
 
-v. 1.0.5-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.0.6-2 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -19,8 +19,10 @@ v. 1.0.5-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-
 [Importing] (#importing)
 
 ### Donate
-
 Donations are welcome :)<br />
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=olpe&url=https%3A%2F%2Fgithub.com%2Fojhaapala%2Fwht&tags=github&category=software)
+
 Paypal [EUR] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
 Paypal [USD] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
@@ -57,6 +59,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Translations
 * Logging
 * Setting for default break in timer
+* Tasks within projects
 
 ## Roadmap:
 * Importing .csv
@@ -66,6 +69,10 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 
 ## Changelog
+
+### 1.0.6-2
+- Added tasks selection
+- Tasks can be added and edited in settings
 
 ### 1.0.5-1
 - Setting to use default break also in timer
