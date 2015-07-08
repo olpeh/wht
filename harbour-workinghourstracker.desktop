@@ -5,7 +5,7 @@ Icon=harbour-workinghourstracker
 Exec=harbour-workinghourstracker
 Name=Work Hours
 # Danish (da)
-#Name[da]=The Name
+Name[da]=Work Hours
 # German (de)
 Name[de]=Zeiterfassung
 # Spanish (es)
@@ -13,19 +13,21 @@ Name[es]=Horas de trabajo
 # Finnish (fi)
 Name[fi]=Kellokalle
 # French (fr)
-#Name[fr]=The Name
+Name[fr]=Heures de travail
 # Italian (it)
 #Name[it]=The Name
 # Norwegian (no)
-#Name[no]=The Name
+Name[no]=Arbeidstimer
 # Polish (pl)
 #Name[pl]=The Name
 # Portuguese (pt)
-#Name[pt]=The Name
+Name[pt_BR]=Work Hours
+# Portuguese (pt)
+Name[pt_PT]=Work Hours
 # Russian (ru)
 #Name[ru]=The Name
 # Swedish (sv)
-#Name[sv]=The Name
+Name[sv]=Arbetstid
 # Simplified Chinese (zh_cn)
 Name[zh_CN]=工时大师
 # Traditional Chinese (zh_hk)
@@ -34,3 +36,4 @@ Name[zh_CN]=工时大师
 Name[ca]=Hores de Treball
 # Dutch (nl_NL)
 Name[nl_NL]=Work Hours
+

@@ -51,7 +51,13 @@ TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
     translations/harbour-workinghourstracker-de.ts \
     translations/harbour-workinghourstracker-nl_NL.ts \
     translations/harbour-workinghourstracker-es.ts \
-    translations/harbour-workinghourstracker-ca.ts
+    translations/harbour-workinghourstracker-ca.ts \
+    translations/harbour-workinghourstracker-da.ts \
+    translations/harbour-workinghourstracker-fr.ts \
+    translations/harbour-workinghourstracker-no.ts \
+    translations/harbour-workinghourstracker-pt_BR.ts \
+    translations/harbour-workinghourstracker-pt_PT.ts \
+    translations/harbour-workinghourstracker-sv.ts
 
 HEADERS += \
     src/SettingsClass.h \
