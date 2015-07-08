@@ -49,21 +49,29 @@ Page {
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
-        summaryModel.set(0,{"hours": "0", "hoursLast": "0"});
-        summaryModel.set(1,{"hours": "0", "hoursLast": "0"});
-        summaryModel.set(2,{"hours": "0", "hoursLast": "0"});
-        summaryModel.set(3,{"hours": "0", "hoursLast": "0"});
-     }
+        summaryModel.set(0,{"hours": "0"});
+        summaryModel.set(1,{"hours": "0"});
+        summaryModel.set(2,{"hours": "0"});
+        summaryModel.set(3,{"hours": "0"});
+        summaryModel.set(4,{"hours": "0"});
+        summaryModel.set(5,{"hours": "0"});
+        summaryModel.set(6,{"hours": "0"});
+        summaryModel.set(7,{"hours": "0"});
+    }
     function getHours() {
         //Update hours view and cover
         //Log.info("Updating hours")
         today = DB.getHoursDay(0).toString().toHHMM()
         thisWeek = DB.getHoursWeek(0).toString().toHHMM()
         thisMonth = DB.getHoursMonth(0).toString().toHHMM()
-        summaryModel.set(0,{"hours": today, "hoursLast": DB.getHoursDay(1).toString().toHHMM()});
-        summaryModel.set(1,{"hours": thisWeek, "hoursLast": DB.getHoursWeek(1).toString().toHHMM()});
-        summaryModel.set(2,{"hours": thisMonth, "hoursLast": DB.getHoursMonth(1).toString().toHHMM()});
-        summaryModel.set(3,{"hours": DB.getHoursYear(0).toString().toHHMM(), "hoursLast": DB.getHoursAll().toString().toHHMM()});
+        summaryModel.set(0,{"hours": DB.getHoursDay(1).toString().toHHMM() });
+        summaryModel.set(1,{"hours": today });
+        summaryModel.set(2,{"hours": DB.getHoursWeek(1).toString().toHHMM() });
+        summaryModel.set(3,{"hours": thisWeek });
+        summaryModel.set(4,{"hours": DB.getHoursMonth(1).toString().toHHMM() });
+        summaryModel.set(5,{"hours": thisMonth });
+        summaryModel.set(6,{"hours": DB.getHoursAll().toString().toHHMM() });
+        summaryModel.set(7,{"hours": DB.getHoursYear(0).toString().toHHMM() });
     }
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
@@ -316,8 +324,54 @@ Page {
             settings.setCurrencyString(currencyString);
         }
     }
-    SilicaFlickable {
+
+    ListModel {
+        id: summaryModel
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        function section(index) {
+            if (section["text"] === undefined) {
+                section.text = [
+                    qsTr("Yesterday"),
+                    qsTr("Today"),
+                    qsTr("Last week"),
+                    qsTr("This week"),
+                    qsTr("Last month"),
+                    qsTr("This month"),
+                    qsTr("All"),
+                    qsTr("This year"),
+                ]
+            }
+            return section.text[index]
+        }
+    }
+
+    SilicaGridView {
         anchors.fill: parent
+        id: grid
+
         PullDownMenu {
             MenuItem {
                 text: qsTr("About")
@@ -338,284 +392,240 @@ Page {
                 }
             }
         }
-
-        ListModel {
-            id: summaryModel
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            function section(index) {
-                if (section["text"] === undefined) {
-                    section.text = [
-                        qsTr("Today"),
-                        qsTr("This week"),
-                        qsTr("This month"),
-                        qsTr("This year"),
-                        qsTr("Yesterday"),
-                        qsTr("Last week"),
-                        qsTr("Last month"),
-                        qsTr("All")
-                    ]
-                }
-                return section.text[index]
-            }
+        property PageHeader pageHeader
+        header: PageHeader {
+            id: pageHeader
+            title: "Working Hours Tracker"
+            Component.onCompleted: grid.pageHeader = pageHeader
         }
-        SilicaListView {
-            id: listView
-            header: PageHeader { title: "Working Hours Tracker" }
-            anchors.fill: parent
-            model: summaryModel
-            delegate: Item {
-                width: listView.width
-                height: 140 + Theme.paddingLarge
-                BackgroundItem {
-                    width: listView.width/2
-                    height: 140
-                    Rectangle {
-                        anchors {
-                             rightMargin: Theme.paddingLarge
-                        }
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: listView.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: listView.model.section(index +4)
-                        }
-                        Label {
-                            y: 3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast
-                            font.bold: true
-                        }
-                    }
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: listView.model.section(index +4)})
-                    }
-                }
-                BackgroundItem {
-                    width: listView.width/2
-                    height: 140
-                    x: listView.width/2
-                    Rectangle {
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: listView.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: 0.5*Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text:  listView.model.section(index)
-                        }
-                        Label {
-                            y:3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours
-                            font.bold: true
-                        }
-                    }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: listView.model.section(index)})
-                }
-            }
+
+        cellWidth: {
+            if (root.orientation == Orientation.PortraitInverted || root.orientation == Orientation.Portrait)
+                root.width / 2
+            else
+                root.width / 4
+        }
+        cellHeight: {
+            if (root.orientation == Orientation.PortraitInverted || root.orientation == Orientation.Portrait)
+                (root.height / 5) - pageHeader.height / 5
+            else
+                (root.height / 3) - pageHeader.height / 3
+        }
+        model: summaryModel
+        snapMode: GridView.SnapToRow
+        delegate: Item {
+            width: grid.cellWidth
+            height: grid.cellHeight
             BackgroundItem {
-                visible: !timerRunning
-                y: 110 + 4*140 + 4*Theme.paddingLarge
-                height: 140
-                width: parent.width
+                anchors {
+                    fill: parent
+                    margins: Theme.paddingMedium
+                }
                 Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: 10.0
-                    width: parent.width-2*Theme.paddingLarge
-                    height: 140
-                    x: Theme.paddingLarge
+                    width: parent.width
+                    height: parent.height
                     Label {
-                        id: timerText
                         y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: qsTr("Timer is not running")
+                        text: summaryModel.section(index)
                     }
                     Label {
-                        y:3 * Theme.paddingLarge
+                        y: 3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: qsTr("Click to start")
+                        text: model.hours
                         font.bold: true
                     }
                 }
-                onClicked: { buttonBuzz.play(); start()}
-            }
-
-            Item {
-                id: timerItem
-                visible: timerRunning
-                y: 110 + 4*140 + 4*Theme.paddingLarge
-                height: 140
-                width: parent.width
-                BackgroundItem {
-                    width: timerItem.width /3
-                    height: 140
-                    Rectangle {
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: (timerItem.width-4*Theme.paddingLarge) / 3
-                        height: 140
-                        x: Theme.paddingLarge
-                        Label {
-                            visible: breakTimerRunning
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: Theme.paddingMedium
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: breakDurationNow
-                        }
-                        Image {
-                            id: pauseImage
-                            source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
-                            anchors.centerIn: parent
-                            scale: 0.5
-                        }
-                        Label {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: parent.height - this.height - Theme.paddingMedium
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: qsTr("Break")
-                        }
-                    }
-                    onClicked: {
-                        buttonBuzz.play()
-                        if(!breakTimerRunning) {
-                            startBreakTimer()
-                        }
-                        else {
-                            stopBreakTimer()
-                        }
-                    }
-                }
-                BackgroundItem {
-                    width: timerItem.width /3
-                    height: 140
-                    x: timerItem.width/3
-                    Rectangle {
-                        opacity: breakTimerRunning? 0.5 : 1
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: (timerItem.width-4*Theme.paddingLarge) / 3
-                        height: 140
-                        x: (2/3) * Theme.paddingLarge
-                        Label {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: Theme.paddingMedium
-                            color: Theme.primaryColor
-                            id: durationNowLabel
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: durationNow
-                        }
-                        Image {
-                            id: stopImage
-                            source: "image://theme/icon-cover-cancel"
-                            anchors.centerIn: parent
-                            scale: 0.5
-                        }
-                        Label {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            y: parent.height - this.height - Theme.paddingMedium
-                            color: Theme.primaryColor
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: qsTr("Stop")
-                        }
-                    }
-                    onClicked: {
-                        if(!breakTimerRunning) {
-                            buttonBuzz.play()
-                            stop(false)
-                        }
-                    }
-                }
-                BackgroundItem {
-                    width: timerItem.width /3
-                    height: 140
-                    x: 2 * timerItem.width /3
-                    function openTimeDialog() {
-                        var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                        hourMode: (DateTime.TwentyFourHours),
-                                        hour: startSelectedHour,
-                                        minute: startSelectedMinute,
-                                     })
-
-                        dialog.accepted.connect(function() {
-                            startSelectedHour = dialog.hour
-                            startSelectedMinute = dialog.minute
-                            var newValue = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
-                            start(newValue)
-                            updateDuration()
-                        })
-                    }
-                    Rectangle {
-                        opacity: breakTimerRunning? 0.5 : 1
-                        color: Theme.secondaryHighlightColor
-                        radius: 10.0
-                        width: (timerItem.width-4*Theme.paddingLarge) / 3
-                        height: 140
-                        x: (1/3)*Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingMedium
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: qsTr("Started")
-                        }
-                        Label {
-                            anchors.centerIn: parent
-                            id: startedAt
-                            color: Theme.secondaryColor
-                            font.bold: true
-                            text: startTime
-                        }
-                        Label {
-                            y: parent.height - this.height - Theme.paddingMedium
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                            font.pixelSize: Theme.fontSizeSmall
-                            text: qsTr("Adjust")
-                        }
-                    }
-                    onClicked: {
-                        if(!breakTimerRunning) {
-                            openTimeDialog()
-                            buttonBuzz.play()
-                        }
-                    }
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: summaryModel.section(index)})
                 }
             }
         }
+    } // SilicaGridView
 
-        Timer {
-            interval: 60000; running: timerRunning && !breakTimerRunning; repeat: true
-            onTriggered: updateDuration()
+    BackgroundItem {
+        id: timerControl
+        visible: !timerRunning
+        anchors {
+            bottom: root.bottom
         }
-        Timer {
-            interval: 60000; running: breakTimerRunning; repeat: true
-            onTriggered: updateBreakTimerDuration()
+        height: grid.cellHeight
+        width: parent.width
+        Rectangle {
+            color: Theme.secondaryHighlightColor
+            radius: 10.0
+            anchors.fill: parent
+            anchors.margins: Theme.paddingMedium
+
+            Label {
+                id: timerText
+                y: Theme.paddingLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Timer is not running")
+            }
+            Label {
+                y:3 * Theme.paddingLarge
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Click to start")
+                font.bold: true
+            }
         }
+        onClicked: { buttonBuzz.play(); start()}
+    }
+
+    Item {
+        id: timerItem
+        visible: timerRunning
+        anchors.bottom: root.bottom
+        height: timerControl.height
+        width: parent.width
+        BackgroundItem {
+            width: timerItem.width / 3
+            height: parent.height
+            Rectangle {
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                anchors.fill: parent
+                anchors.margins: Theme.paddingMedium
+                Label {
+                    visible: breakTimerRunning
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: Theme.paddingMedium
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: breakDurationNow
+                }
+                Image {
+                    id: pauseImage
+                    source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
+                    anchors.centerIn: parent
+                    scale: 0.5
+                }
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: parent.height - this.height - Theme.paddingMedium
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: qsTr("Break")
+                }
+            }
+            onClicked: {
+                buttonBuzz.play()
+                if(!breakTimerRunning) {
+                    startBreakTimer()
+                }
+                else {
+                    stopBreakTimer()
+                }
+            }
+        }
+        BackgroundItem {
+            width: timerItem.width / 3
+            height: timerControl.height
+            x: timerItem.width / 3
+            Rectangle {
+                opacity: breakTimerRunning? 0.5 : 1
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                anchors.fill: parent
+                anchors.margins: Theme.paddingMedium
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: Theme.paddingMedium
+                    color: Theme.primaryColor
+                    id: durationNowLabel
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: durationNow
+                }
+                Image {
+                    id: stopImage
+                    source: "image://theme/icon-cover-cancel"
+                    anchors.centerIn: parent
+                    scale: 0.5
+                }
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: parent.height - this.height - Theme.paddingMedium
+                    color: Theme.primaryColor
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: qsTr("Stop")
+                }
+            }
+            onClicked: {
+                if(!breakTimerRunning) {
+                    buttonBuzz.play()
+                    stop(false)
+                }
+            }
+        }
+        BackgroundItem {
+            width: timerItem.width / 3
+            height: timerControl.height
+            x: 2 * timerItem.width / 3
+            function openTimeDialog() {
+                var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
+                                hourMode: (DateTime.TwentyFourHours),
+                                hour: startSelectedHour,
+                                minute: startSelectedMinute,
+                             })
+
+                dialog.accepted.connect(function() {
+                    startSelectedHour = dialog.hour
+                    startSelectedMinute = dialog.minute
+                    var newValue = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                    start(newValue)
+                    updateDuration()
+                })
+            }
+            Rectangle {
+                opacity: breakTimerRunning? 0.5 : 1
+                color: Theme.secondaryHighlightColor
+                radius: 10.0
+                anchors.fill: parent
+                anchors.margins: Theme.paddingMedium
+                Label {
+                    y: Theme.paddingMedium
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: qsTr("Started")
+                }
+                Label {
+                    anchors.centerIn: parent
+                    id: startedAt
+                    color: Theme.secondaryColor
+                    font.bold: true
+                    text: startTime
+                }
+                Label {
+                    y: parent.height - this.height - Theme.paddingMedium
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: qsTr("Adjust")
+                }
+            }
+            onClicked: {
+                if(!breakTimerRunning) {
+                    openTimeDialog()
+                    buttonBuzz.play()
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 60000; running: timerRunning && !breakTimerRunning; repeat: true
+        onTriggered: updateDuration()
+    }
+    Timer {
+        interval: 60000; running: breakTimerRunning; repeat: true
+        onTriggered: updateBreakTimerDuration()
     }
     Banner {
         id: banner

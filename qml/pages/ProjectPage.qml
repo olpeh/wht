@@ -55,13 +55,16 @@ Page {
         getHours();
     }
     function getHours() {
-        //Update hours view after adding or deleting hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursDay(1, project.id).toString().toHHMM()});
-        summaryModel.set(1,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursWeek(1, project.id).toString().toHHMM()});
-        summaryModel.set(2,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursMonth(1, project.id).toString().toHHMM()});
-        summaryModel.set(3,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM(), "hoursLast": DB.getHoursAll(project.id).toString().toHHMM()});
+        //Update hours
+        summaryModel.set(0,{"hours": DB.getHoursDay(1, project.id).toString().toHHMM() });
+        summaryModel.set(1,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM() });
+        summaryModel.set(2,{"hours": DB.getHoursWeek(1, project.id).toString().toHHMM() });
+        summaryModel.set(3,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM() });
+        summaryModel.set(4,{"hours": DB.getHoursMonth(1, project.id).toString().toHHMM() });
+        summaryModel.set(5,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM() });
+        summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() });
+        summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() });
     }
-
     function getProject(projectId) {
         for (var i = 0; i < projects.length; i++) {
             if (projects[i].id === projectId)
@@ -89,133 +92,134 @@ Page {
         }
     }
 
-    SilicaFlickable {
-        anchors.fill: parent
-        ListModel {
-            id: summaryModel
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            ListElement {
-                hours: "0"
-                hoursLast: "0"
-            }
-            function section(index) {
-                if (section["text"] === undefined) {
-                    section.text = [
-                        qsTr("Today"),
-                        qsTr("This week"),
-                        qsTr("This month"),
-                        qsTr("This year"),
-                        qsTr("Yesterday"),
-                        qsTr("Last week"),
-                        qsTr("Last month"),
-                        qsTr("All")
-                    ]
-                }
-                return section.text[index]
-            }
+    ListModel {
+        id: summaryModel
+        ListElement {
+            hours: "0"
         }
-        SilicaListView {
-            id: listView
-            header: PageHeader { title: qsTr("Hours for") + " " +project.name }
-            anchors.fill: parent
-            model: summaryModel
-            delegate: Item {
-                width: listView.width
-                height: 140 + Theme.paddingLarge
-                BackgroundItem {
-                    width: listView.width/2
-                    height: 140
-                    Rectangle {
-                        anchors {
-                             rightMargin: Theme.paddingLarge
-                        }
-                        color: Theme.rgba(project.labelColor, Theme.highlightBackgroundOpacity)
-                        radius: 10.0
-                        width: listView.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: listView.model.section(index +4)
-                        }
-                        Label {
-                            y: 3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hoursLast
-                            font.bold: true
-                        }
-                    }
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index +4), projectId: project.id})
-                    }
-                }
-                BackgroundItem {
-                    width: listView.width/2
-                    height: 140
-                    x: listView.width/2
-                    Rectangle {
-                        color: Theme.rgba(project.labelColor, Theme.highlightBackgroundOpacity)
-                        radius: 10.0
-                        width: listView.width/2-1.5*Theme.paddingLarge
-                        height: 140
-                        x: 0.5*Theme.paddingLarge
-                        Label {
-                            y: Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: listView.model.section(index)
-                        }
-                        Label {
-                            y:3 * Theme.paddingLarge
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: model.hours
-                            font.bold: true
-                        }
-                    }
-                    onClicked: pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: listView.model.section(index), projectId: project.id})
-                }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        ListElement {
+            hours: "0"
+        }
+        function section(index) {
+            if (section["text"] === undefined) {
+                section.text = [
+                    qsTr("Yesterday"),
+                    qsTr("Today"),
+                    qsTr("Last week"),
+                    qsTr("This week"),
+                    qsTr("Last month"),
+                    qsTr("This month"),
+                    qsTr("All"),
+                    qsTr("This year"),
+                ]
             }
+            return section.text[index]
+        }
+    }
+
+    SilicaGridView {
+        height: projectPage.height - projectCombo.height
+        width: parent.width
+        id: grid
+
+        property PageHeader pageHeader
+        header: PageHeader {
+            id: pageHeader
+            title: qsTr("Hours for") + " " +project.name
+            Component.onCompleted: grid.pageHeader = pageHeader
         }
 
-        ComboBox {
-            id: projectCombo
-            y: 110 + 4*140 + 4*Theme.paddingLarge
-            label: qsTr("Selected project")
-            menu: ContextMenu {
-                Repeater {
+        cellWidth: {
+            if (projectPage.orientation == Orientation.PortraitInverted || projectPage.orientation == Orientation.Portrait)
+                projectPage.width / 2
+            else
+                projectPage.width / 4
+        }
+        cellHeight: {
+            if (projectPage.orientation == Orientation.PortraitInverted || projectPage.orientation == Orientation.Portrait)
+                (projectPage.height / 5) - pageHeader.height / 5
+            else
+                (projectPage.height / 3) - pageHeader.height / 3
+        }
+        model: summaryModel
+        snapMode: GridView.SnapToRow
+        delegate: Item {
+            width: grid.cellWidth
+            height: grid.cellHeight
+            BackgroundItem {
+                anchors {
+                    fill: parent
+                    margins: Theme.paddingMedium
+                }
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.rgba(project.labelColor, Theme.highlightBackgroundOpacity)
+                    radius: 10.0
                     width: parent.width
-                    model: modelSource
-                    delegate: MenuItem {
-                        text: model.name
-                        color: model.labelColor
+                    height: parent.height
+                    Label {
+                        y: Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: summaryModel.section(index)
+                    }
+                    Label {
+                        y: 3 * Theme.paddingLarge
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.hours
                         font.bold: true
                     }
                 }
-            }
-            onCurrentItemChanged: {
-                var selectedValue = modelSource.get(currentIndex).value
-                project = getProject(modelSource.get(currentIndex).id)
-                getHours()
-            }
-            Component.onCompleted: {
-                projectPage.setProjects();
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: summaryModel.section(index), projectId: project.id})
+                }
             }
         }
-        ListModel {
-            id: modelSource
+    } // SilicaGridView
+
+    ComboBox {
+        id: projectCombo
+        anchors.bottom: projectPage.bottom
+        anchors.margins: Theme.paddingLarge
+        label: qsTr("Selected project")
+        menu: ContextMenu {
+            Repeater {
+                width: parent.width
+                model: modelSource
+                delegate: MenuItem {
+                    text: model.name
+                    color: model.labelColor
+                    font.bold: true
+                }
+            }
+        }
+        onCurrentItemChanged: {
+            var selectedValue = modelSource.get(currentIndex).value
+            project = getProject(modelSource.get(currentIndex).id)
+            getHours()
+        }
+        Component.onCompleted: {
+            projectPage.setProjects();
         }
     }
+    ListModel {
+        id: modelSource
+    }
 }
-
-
