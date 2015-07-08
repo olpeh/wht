@@ -176,6 +176,18 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
         <source>Enter an optional description</source>
         <translation>Introduce una descripción opcional</translation>
     </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No task defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add or edit tasks in project settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddProject</name>
@@ -189,7 +201,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Required</source>
-        <translation>Obligatorio</translation>
+        <translation type="vanished">Obligatorio</translation>
     </message>
     <message>
         <source>Please enter a name for the project</source>
@@ -201,7 +213,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Optional</source>
-        <translation>Opcional</translation>
+        <translation type="vanished">Opcional</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -214,6 +226,34 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     <message>
         <source>Reset coloring</source>
         <translation>Restablecer color</translation>
+    </message>
+    <message>
+        <source>Removing</source>
+        <translation type="obsolete">Eliminando</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="obsolete">Eliminar</translation>
+    </message>
+    <message>
+        <source>Project name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coloring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -761,7 +801,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Startup options</source>
-        <translation>Opciones de inicio</translation>
+        <translation type="vanished">Opciones de inicio</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
@@ -1021,6 +1061,26 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Trying to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add break when using timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is not added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

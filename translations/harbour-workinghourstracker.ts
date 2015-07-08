@@ -175,6 +175,18 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Enter an optional description</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No task defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add or edit tasks in project settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddProject</name>
@@ -187,19 +199,11 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please enter a name for the project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Make this the default project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Optional</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -212,6 +216,26 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Reset coloring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coloring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -359,6 +383,18 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
+        <source>No default project found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -371,19 +407,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No default project found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -391,19 +415,23 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last week</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last month</source>
+        <source>This year</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This year</source>
+        <source>Yesterday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -432,10 +460,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adjust</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -759,10 +783,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Startup options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Autostart timer on app startup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1020,6 +1040,26 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Trying to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add break when using timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is not added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -176,6 +176,18 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
         <source>Enter an optional description</source>
         <translation>Lisää kuvaus halutessasi</translation>
     </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No task defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add or edit tasks in project settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddProject</name>
@@ -189,7 +201,7 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Required</source>
-        <translation>Pakolliset</translation>
+        <translation type="vanished">Pakolliset</translation>
     </message>
     <message>
         <source>Please enter a name for the project</source>
@@ -201,7 +213,7 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Optional</source>
-        <translation>Vapaaehtoiset</translation>
+        <translation type="vanished">Vapaaehtoiset</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -214,6 +226,34 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     <message>
         <source>Reset coloring</source>
         <translation>Palauta oletusväri</translation>
+    </message>
+    <message>
+        <source>Removing</source>
+        <translation type="obsolete">Poistetaan</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="obsolete">Poista</translation>
+    </message>
+    <message>
+        <source>Project name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coloring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -761,7 +801,7 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Startup options</source>
-        <translation>Käynnistysasetukset</translation>
+        <translation type="vanished">Käynnistysasetukset</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
@@ -1021,6 +1061,26 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Trying to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add break when using timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is not added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
