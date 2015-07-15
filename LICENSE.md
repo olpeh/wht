@@ -1,6 +1,6 @@
 Copyright (C) 2015 Olavi Haapala.
 <ojhaapala@gmail.com>
-Twitter: @olpetik
+Twitter: @0lpeh
 IRC: olpe
 All rights reserved.
 
