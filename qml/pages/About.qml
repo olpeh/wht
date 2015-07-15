@@ -101,19 +101,19 @@ Page {
                 text: "Olavi Haapala"
             }
             Button {
-                text: "ojhaapala@gmail.com"
+                text: "harbourwht@gmail.com"
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                   banner.notify(qsTr("Launching external email app"))
-                  Qt.openUrlExternally("mailto:ojhaapala@gmail.com")
+                  Qt.openUrlExternally("mailto:harbourwht@gmail.com")
                 }
             }
             Button {
-                text: "Twitter: @olpetik"
+                text: "Twitter: @0lpeh"
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     banner.notify(qsTr("Launching external browser"))
-                    Qt.openUrlExternally("https://twitter.com/olpetik")
+                    Qt.openUrlExternally("https://twitter.com/0lpeh")
                 }
             }
             Item {
@@ -190,7 +190,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     banner.notify(qsTr("Launching external browser"))
-                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/issues")
+                    Qt.openUrlExternally("https://github.com/olpeh/wht/issues")
                 }
             }
             Button {
@@ -198,7 +198,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     banner.notify(qsTr("Launching external browser"))
-                    Qt.openUrlExternally("https://github.com/ojhaapala/wht")
+                    Qt.openUrlExternally("https://github.com/olpeh/wht")
                 }
             }
             Text {
@@ -235,7 +235,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     banner.notify(qsTr("Launching external browser"))
-                    Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/LICENSE.md")
+                    Qt.openUrlExternally("https://github.com/olpeh/wht/blob/master/LICENSE.md")
                 }
             }
             Item {
