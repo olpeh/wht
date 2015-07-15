@@ -70,6 +70,11 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## Changelog
 
+### 1.0.8-1
+- Updated translations
+- Updated contactinfo
+- Added flattr link to about
+
 ### 1.0.7-1
 - Fixed task selection bug
 - More flexible layout
