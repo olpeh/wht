@@ -4,7 +4,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.0.4-3 available in Jolla store (22.04.2015)<br />
 
-v. 1.0.6-2 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.0.7-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -69,6 +69,12 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 
 ## Changelog
+
+### 1.0.7-1
+- Fixed task selection bug
+- More flexible layout
+- Enabled landscape mode
+- Added new languages and updated translations
 
 ### 1.0.6-2
 - Added tasks selection
