@@ -176,15 +176,15 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"/>
+        <translation>Oppgave</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"/>
+        <translation>Ingen oppgave valgt</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"/>
+        <translation>Legg til eller endre oppgaver i innstillinger</translation>
     </message>
 </context>
 <context>
@@ -219,23 +219,23 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Project name</source>
-        <translation type="unfinished"/>
+        <translation>Prosjektnavn</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"/>
+        <translation>Oppgaver</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"/>
+        <translation>Priser</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"/>
+        <translation>Farger</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"/>
+        <translation>Oppgavenavn</translation>
     </message>
 </context>
 <context>
@@ -1039,15 +1039,15 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"/>
+        <translation>Prøver å importere</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"/>
+        <translation>Tidtaker innstillinger</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"/>
+        <translation>Legg til pause ved bruk av tidtaker</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>

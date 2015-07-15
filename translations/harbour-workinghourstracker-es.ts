@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -33,7 +31,7 @@
     </message>
     <message>
         <source>Please donate if you like my work. Donations help me to use more time on development.</source>
-        <translation>Por favor, haz una donación si te gusta mi trabajo. Las donaciones me ayudan a dedicar mas tiempo al desarrollo.</translation>
+        <translation>Por favor, haz una donación si te gusta mi trabajo. Las donaciones me ayudarán a dedicar mas tiempo al desarrollo.</translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
@@ -49,7 +47,7 @@
     </message>
     <message>
         <source>Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.</source>
-        <translation>Las aportaciones, el reporte de errores y las ideas son bienvenidas. Por favor, informa de los fallos en GitHub. Enlace de abajo.</translation>
+        <translation>Las aportaciones, el envío de errores y las ideas son bienvenidas. Por favor, informa de los fallos en GitHub. Enlace de abajo.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
@@ -69,7 +67,7 @@
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation>Working Hours Tracker para SailfishOS es una aplicación sencilla de registro de horas trabajadas para realizar el seguimiento de las horas trabajadas.</translation>
+        <translation>Working Hours Tracker para SailfishOS es una aplicación sencilla de registro de horas trabajadas que sirve para realizar el seguimiento de tus horas trabajadas.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
@@ -87,7 +85,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation>En caso de incidencias o errores, por favor, comprueba el registro en Ajustes-&gt;Visor del registro y piensa en enviarlo al desarrollador</translation>
+        <translation>En caso de incidencias o errores, por favor, comprueba el registro en Ajustes-&gt;Visor del registro y considera el enviarlo al desarrollador</translation>
     </message>
 </context>
 <context>
@@ -178,15 +176,15 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarea</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay tareas definidas</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir o editar tareas en ajustes del proyecto</translation>
     </message>
 </context>
 <context>
@@ -200,20 +198,12 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Required</source>
-        <translation type="vanished">Obligatorio</translation>
-    </message>
-    <message>
         <source>Please enter a name for the project</source>
         <translation>Por favor, introduce un nombre para el proyecto</translation>
     </message>
     <message>
         <source>Make this the default project</source>
         <translation>Establece este proyecto como predeterminado</translation>
-    </message>
-    <message>
-        <source>Optional</source>
-        <translation type="vanished">Opcional</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -228,32 +218,24 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
         <translation>Restablecer color</translation>
     </message>
     <message>
-        <source>Removing</source>
-        <translation type="obsolete">Eliminando</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Eliminar</translation>
-    </message>
-    <message>
         <source>Project name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del proyecto</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tareas</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Costes</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"></translation>
+        <translation>Colorido</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la tarea</translation>
     </message>
 </context>
 <context>
@@ -400,6 +382,18 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
 <context>
     <name>FirstPage</name>
     <message>
+        <source>No default project found</source>
+        <translation>No se encontró ningún proyecto predeterminado</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>predeterminado</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>El temporizador se inició automáticamente</translation>
+    </message>
+    <message>
         <source>About</source>
         <translation>Acerca de</translation>
     </message>
@@ -412,40 +406,32 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
         <translation>Añadir horas</translation>
     </message>
     <message>
-        <source>No default project found</source>
-        <translation>No se encontró ningún proyecto predeterminado</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>predeterminado</translation>
-    </message>
-    <message>
         <source>Today</source>
         <translation>Hoy</translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
-        <translation>Ayer</translation>
     </message>
     <message>
         <source>This week</source>
         <translation>Esta semana</translation>
     </message>
     <message>
-        <source>Last week</source>
-        <translation>La semana pasada</translation>
-    </message>
-    <message>
         <source>This month</source>
         <translation>Este mes</translation>
     </message>
     <message>
-        <source>Last month</source>
-        <translation>El mes pasado</translation>
-    </message>
-    <message>
         <source>This year</source>
         <translation>Este año</translation>
+    </message>
+    <message>
+        <source>Yesterday</source>
+        <translation>Ayer</translation>
+    </message>
+    <message>
+        <source>Last week</source>
+        <translation>La semana pasada</translation>
+    </message>
+    <message>
+        <source>Last month</source>
+        <translation>El mes pasado</translation>
     </message>
     <message>
         <source>All</source>
@@ -474,10 +460,6 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     <message>
         <source>Adjust</source>
         <translation>Ajustar</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation>El temporizador se inició automáticamente</translation>
     </message>
 </context>
 <context>
@@ -632,7 +614,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Launching email app</source>
-        <translation>Abriendo la aplicación del correo electrónico</translation>
+        <translation>Abriendo aplicación del correo electrónico</translation>
     </message>
     <message>
         <source>Launching external browser</source>
@@ -665,7 +647,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Launching email app</source>
-        <translation>Abriendo la aplicación del correo electrónico</translation>
+        <translation>Abriendo aplicación del correo electrónico</translation>
     </message>
 </context>
 <context>
@@ -798,10 +780,6 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     <message>
         <source>Endtime will flex if duration is changed.</source>
         <translation>La hora de fin se ajustará si se modifica la duración.</translation>
-    </message>
-    <message>
-        <source>Startup options</source>
-        <translation type="vanished">Opciones de inicio</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
@@ -961,7 +939,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation>Si quieres importar sus datos a Working Hours Tracker, por ejemplo en otro dispositivo, utiliza el botón de exportar toda la base de datos.</translation>
+        <translation>Si quieres importar tus datos a Working Hours Tracker, por ejemplo en otro dispositivo, utiliza el botón de exportar toda la base de datos.</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
@@ -1009,7 +987,7 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation>Por el momento no podrás importar en fichero csv. Vendrá pronto.</translation>
+        <translation>Por el momento no podrás importar en fichero csv. Estará disponible pronto.</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
@@ -1053,35 +1031,35 @@ El código fuente está disponible bajo licencia BSD de 3 cláusulas.</translati
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las filas se sustituirán por las del archivo importado, en caso de que las entradas ya existan en la base de datos.</translation>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto hace que sea posible actualizar las filas editadas.</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Tratando de importar</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones del temporizador</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir descanso cuando uses el temporizador</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>El descanso por defecto no se añade automáticamente cuando uses el temporizador.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>El descanso por defecto se añade automáticamente cuando uses el temporizador. Sólo se añade cuando el descanso no se graba con la pausa del temporizador.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>El descanso por defecto se añade automáticamente cuando uses el temporizador.</translation>
     </message>
 </context>
 </TS>

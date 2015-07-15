@@ -160,7 +160,7 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>Paus</translation>
+        <translation>Rast</translation>
     </message>
     <message>
         <source>Net duration</source>
@@ -176,15 +176,15 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"/>
+        <translation>Aktivitet</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"/>
+        <translation>Ingen aktivitet definierad</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till eller redigera aktiviteter i projektinställningar</translation>
     </message>
 </context>
 <context>
@@ -219,23 +219,23 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Project name</source>
-        <translation type="unfinished"/>
+        <translation>Projektnamn</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"/>
+        <translation>Aktiviteter</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"/>
+        <translation>Priser</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"/>
+        <translation>Färgmärkning</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"/>
+        <translation>Aktivitetsnamn</translation>
     </message>
 </context>
 <context>
@@ -447,7 +447,7 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation>Paus</translation>
+        <translation>Rast</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -518,11 +518,11 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>On the left you have a break button which is meant to be used if you have a break during your workday that you don&apos;t want to include in the duration.</source>
-        <translation>Till vänster har du pausknappen, som används när du pausar under arbetsdagen, och inte vill räkna pauserna som arbetstid.</translation>
+        <translation>Till vänster har du rastknappen, som används när du pausar under arbetsdagen, och inte vill räkna rasterna som arbetstid.</translation>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation>Paus fungerar likadant som tidräkningen. Du startar den med ett tryck och stoppar när pausen är över.</translation>
+        <translation>Rast fungerar likadant som tidräkningen. Du startar den med ett tryck och stoppar när rasten är över.</translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
@@ -935,7 +935,7 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Default break duration</source>
-        <translation>Standardpaus</translation>
+        <translation>Standardrast</translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
@@ -1039,27 +1039,27 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"/>
+        <translation>Försöker importera</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"/>
+        <translation>Tidtagningsalternativ</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till rast när tidtagning används</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation>Standardrast läggs inte till automatiskt när tidtagning används.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"/>
+        <translation>Standardrast läggs till automatiskt när tidtagning används. Läggs till endast när rast inte bokförs med rasttidtagning.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation>Standardrast läggs till automatiskt när tidtagning används.</translation>
     </message>
 </context>
 </TS>

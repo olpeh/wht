@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -65,28 +63,29 @@
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动外部浏览器</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation>工时大师是Sailfish系统上一个简易的工作时长记录器，可以持续记录工作时间。</translation>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动外部邮件应用</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2015 Olavi Haapala
+源代码基于BSD 3-clause协议发布。</translation>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"></translation>
+        <translation>查看许可协议</translation>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
+        <translation>若遇到问题或BUG，请在设置-&gt;查看日志中查看日志，并考虑将其一并发送给开发者。</translation>
     </message>
 </context>
 <context>
@@ -177,15 +176,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>任务</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"></translation>
+        <translation>未设定任何任务</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"></translation>
+        <translation>在项目设置中添加或修改任务</translation>
     </message>
 </context>
 <context>
@@ -199,20 +198,12 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>取消</translation>
     </message>
     <message>
-        <source>Required</source>
-        <translation type="vanished">必填</translation>
-    </message>
-    <message>
         <source>Please enter a name for the project</source>
         <translation>请输入项目名称</translation>
     </message>
     <message>
         <source>Make this the default project</source>
         <translation>设为默认项目</translation>
-    </message>
-    <message>
-        <source>Optional</source>
-        <translation type="vanished">可选</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -227,32 +218,24 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>重置颜色</translation>
     </message>
     <message>
-        <source>Removing</source>
-        <translation type="obsolete">正在移除</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">移除</translation>
-    </message>
-    <message>
         <source>Project name</source>
-        <translation type="unfinished"></translation>
+        <translation>项目名称</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>任务</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"></translation>
+        <translation>评级</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"></translation>
+        <translation>任务名称</translation>
     </message>
 </context>
 <context>
@@ -315,7 +298,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"></translation>
+        <translation>汇报工作时长</translation>
     </message>
     <message>
         <source>Total</source>
@@ -335,23 +318,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>for project</source>
-        <translation type="unfinished"></translation>
+        <translation>项目</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"></translation>
+        <translation>已创建</translation>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"></translation>
+        <translation>通过邮件发送报告</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>导出为csv</translation>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>保存为</translation>
     </message>
 </context>
 <context>
@@ -399,6 +382,18 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
+        <source>No default project found</source>
+        <translation>未找到默认的项目</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>默认</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>计时器已自动启动</translation>
+    </message>
+    <message>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -411,40 +406,32 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>添加时间</translation>
     </message>
     <message>
-        <source>No default project found</source>
-        <translation>未找到默认的项目</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>默认</translation>
-    </message>
-    <message>
         <source>Today</source>
         <translation>今天</translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
-        <translation>昨天</translation>
     </message>
     <message>
         <source>This week</source>
         <translation>本周</translation>
     </message>
     <message>
-        <source>Last week</source>
-        <translation>上周</translation>
-    </message>
-    <message>
         <source>This month</source>
         <translation>本月</translation>
     </message>
     <message>
-        <source>Last month</source>
-        <translation>上月</translation>
-    </message>
-    <message>
         <source>This year</source>
         <translation>本年</translation>
+    </message>
+    <message>
+        <source>Yesterday</source>
+        <translation>昨天</translation>
+    </message>
+    <message>
+        <source>Last week</source>
+        <translation>上周</translation>
+    </message>
+    <message>
+        <source>Last month</source>
+        <translation>上月</translation>
     </message>
     <message>
         <source>All</source>
@@ -473,10 +460,6 @@ The source code is licensed under BSD 3-clause.</source>
     <message>
         <source>Adjust</source>
         <translation>调整</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -632,40 +615,40 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动邮件应用</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动外部浏览器</translation>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>日志查看器</translation>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>保存日志</translation>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>正在保存日志</translation>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>日志已保存到</translation>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
+        <translation>发送给开发者</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动邮件应用</translation>
     </message>
 </context>
 <context>
@@ -800,10 +783,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>修改持续时间时会自动调整结束时间。</translation>
     </message>
     <message>
-        <source>Startup options</source>
-        <translation type="vanished">开始选项</translation>
-    </message>
-    <message>
         <source>Autostart timer on app startup</source>
         <translation>打开应用时自动开始计时</translation>
     </message>
@@ -893,63 +872,63 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"></translation>
+        <translation>邮件反馈</translation>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"></translation>
+        <translation>选择使用邮件发送时，寄送地址将自动填充。</translation>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有自动发送的邮件。</translation>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"></translation>
+        <translation>你也可以在发送报告时手动填充。</translation>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"></translation>
+        <translation>这只是为了更快一些。</translation>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>设置为默认地址</translation>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>默认地址</translation>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>设置默认cc地址</translation>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>默认cc地址</translation>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>设置默认bcc地址</translation>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>默认bcc地址</translation>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>正在导出</translation>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
+        <translation>你可以从这里导出工时大师的数据。</translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>导出记录为CSV</translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>导出项目为CSV</translation>
     </message>
     <message>
         <source>Default duration</source>
@@ -961,127 +940,127 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果你想在其它设备上导入你的工时大师记录数据，使用“导出整个数据库”按钮。</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>这将导出所有必需的数据，以便在其它设备上重建数据。</translation>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
+        <translation>导出整个数据库</translation>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在导入</translation>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>你可以从这里导出工时大师的数据。</translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
+        <translation>由于唯一约束，这里应该不会有重复数据。</translation>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
+        <translation>.sql的完整文件路径</translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>从工时大师导出的.sql数据中导入数据。</translation>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
+        <translation>当前字符串太长！</translation>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>邮件地址不正确！</translation>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的cc邮件地址！</translation>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的bcc邮件地址！</translation>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前还无法导入csv文件。即将开启。</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>查看更多关于导出数据</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>正在启动外部浏览器</translation>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>CSV以保存到</translation>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>数据库已保存到</translation>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
+        <translation>查看更多关于导入数据</translation>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
+        <translation>未给出文件地址</translation>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
+        <translation>危险区域！</translation>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
+        <translation>输入文件完整地址并按下按钮</translation>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"></translation>
+        <translation>立刻导入！</translation>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"></translation>
+        <translation>查看日志</translation>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>为避免和已存进数据库的条目重复，所有行都会被替换掉。</translation>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
+        <translation>从而使更新已编辑的行成为可能。</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation>正在尝试导入</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"></translation>
+        <translation>计时器选项</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"></translation>
+        <translation>使用计时器时添加断点</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用计时器时不会自动添加默认断点。</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用计时器时将自动添加默认断点。仅在断点计时器未添加断点记录时使用。</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用计时器时默认断点会自动添加。</translation>
     </message>
 </context>
 </TS>

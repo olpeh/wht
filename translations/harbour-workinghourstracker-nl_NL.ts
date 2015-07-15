@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -53,7 +51,7 @@
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation>Issues op GitHub</translation>
+        <translation>Problemen op GitHub</translation>
     </message>
     <message>
         <source>Project in GitHub</source>
@@ -65,28 +63,29 @@
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe browser</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
+        <translation>Working Hours Tracker voor SailfishOS is een eenvoudige werkurenbeheerder om uw werkende uren bij te houden.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe e-mail-app</translation>
     </message>
     <message>
         <source>Copyright (C) 2015 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (C) 2015 Olavi Haapala 
+De broncode is gelicenseerd onder de BSD 3-licentie.</translation>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"></translation>
+        <translation>De licentie lezen</translation>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
+        <translation>ALs u problemen of bugs ervaart, controleer dan de logbestanden via Instellingen-&gt;Logbestanden weergeven en overweeg deze naar de ontwikkelaar te sturen.</translation>
     </message>
 </context>
 <context>
@@ -125,7 +124,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation>De begintijd zal worden ingesteld op dit moment</translation>
+        <translation>De begintijd zal worden ingesteld op dit moment.</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -177,15 +176,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Taak</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen opgegeven taak</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Taken toevoegen of bewerken in de projectinstellingen</translation>
     </message>
 </context>
 <context>
@@ -199,20 +198,12 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <source>Required</source>
-        <translation type="vanished">Vereist</translation>
-    </message>
-    <message>
         <source>Please enter a name for the project</source>
         <translation>Vul een naam in voor het project</translation>
     </message>
     <message>
         <source>Make this the default project</source>
         <translation>Maak dit het standard project</translation>
-    </message>
-    <message>
-        <source>Optional</source>
-        <translation type="vanished">Optioneel</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -227,32 +218,24 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Kleuren herstellen</translation>
     </message>
     <message>
-        <source>Removing</source>
-        <translation type="obsolete">Bezig met verwijderen</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Verwijderen</translation>
-    </message>
-    <message>
         <source>Project name</source>
-        <translation type="unfinished"></translation>
+        <translation>Projectnaam</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Taken</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarieven</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleuring</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Taaknaam</translation>
     </message>
 </context>
 <context>
@@ -315,7 +298,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapport van gewerkte uren</translation>
     </message>
     <message>
         <source>Total</source>
@@ -335,23 +318,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>for project</source>
-        <translation type="unfinished"></translation>
+        <translation>voor project</translation>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecreeërd</translation>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapport versturen via e-mail</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteren als CSV</translation>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>Opgeslagen naar</translation>
     </message>
 </context>
 <context>
@@ -399,6 +382,18 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
+        <source>No default project found</source>
+        <translation>Er is geen standard project gevonden</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>standaard</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>De timer is automatisch gestart</translation>
+    </message>
+    <message>
         <source>About</source>
         <translation>Over</translation>
     </message>
@@ -411,40 +406,32 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Uren toevoegen</translation>
     </message>
     <message>
-        <source>No default project found</source>
-        <translation>Er is geen standard project gevonden</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>standaard</translation>
-    </message>
-    <message>
         <source>Today</source>
         <translation>Vandaag</translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
-        <translation>Gisteren</translation>
     </message>
     <message>
         <source>This week</source>
         <translation>Deze week</translation>
     </message>
     <message>
-        <source>Last week</source>
-        <translation>Vorige week</translation>
-    </message>
-    <message>
         <source>This month</source>
         <translation>Deze maand</translation>
     </message>
     <message>
-        <source>Last month</source>
-        <translation>Vorige maand</translation>
-    </message>
-    <message>
         <source>This year</source>
         <translation>Dit jaar</translation>
+    </message>
+    <message>
+        <source>Yesterday</source>
+        <translation>Gisteren</translation>
+    </message>
+    <message>
+        <source>Last week</source>
+        <translation>Vorige week</translation>
+    </message>
+    <message>
+        <source>Last month</source>
+        <translation>Vorige maand</translation>
     </message>
     <message>
         <source>All</source>
@@ -473,10 +460,6 @@ The source code is licensed under BSD 3-clause.</source>
     <message>
         <source>Adjust</source>
         <translation>Aanpassen</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -631,40 +614,40 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe e-mail-app</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe browser</translation>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Logweergave</translation>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Log opslaan</translation>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het opslaan van het log</translation>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>Het log is opgeslagen naar</translation>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Versturen aan de ontwikkelaar</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe e-mail-app</translation>
     </message>
 </context>
 <context>
@@ -799,10 +782,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>De eindtijd zal variëren als de duur wordt gewijzigd</translation>
     </message>
     <message>
-        <source>Startup options</source>
-        <translation type="vanished">Opstartinstellingen</translation>
-    </message>
-    <message>
         <source>Autostart timer on app startup</source>
         <translation>De timer automatisch starten wanneer de applicatie opstart</translation>
     </message>
@@ -892,63 +871,63 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapporten e-mailen</translation>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze e-mailadressen zullen automatisch worden ingevuld wanneer u ervoor kiest om een rapport via e-mail te versturen.</translation>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er worden geen automatische e-mails verstuurd.</translation>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"></translation>
+        <translation>U kunt er ook voor kiezen deze handmatig in te vullen wanneer u een rapport verstuurt.</translation>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is alleen om de boel te versnellen.</translation>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;aan&apos;-adres instellen</translation>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;aan&apos;-adres</translation>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;CC&apos;-adres invullen</translation>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;CC&apos;-adres</translation>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;BCC&apos;-adres invullen</translation>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard &apos;BCC&apos;-adres</translation>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met exporteren</translation>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kunt u uw Working Hours-gegevens exporteren.</translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Uren exporteren als CSV</translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Projecten exporteren als CSV</translation>
     </message>
     <message>
         <source>Default duration</source>
@@ -960,127 +939,127 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als u uw gegevens wilt importeren naar Working Hours Tracker, bijv. op een ander apparaat, gebruik dan de export-knop om de hele database te exporteren.</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het zal alle benodigde gegevens exporteren die nodig zijn om de database te herbouwen op bijv. een ander apparaat.</translation>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
+        <translation>De hele database exporteren</translation>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met importeren</translation>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier kunt u uw Working Hours-gegevens importeren.</translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er moeten geen duplicaten ontstaan door unieke omvangen.</translation>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledige pad naar het .sql-bestand</translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeren vanuit een .sql-dump geëxporteerd door Working Hourse Tracker.</translation>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
+        <translation>De munteenheidsstring is te lang!</translation>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig e-mailadres!</translation>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig &apos;CC&apos;-e-mailadres!</translation>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig &apos;BCC&apos;-e-mailadres!</translation>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
+        <translation>Op dit moment kunt u nog geen CSV-bestanden importeren, maar binnenkort wel.</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees meer over het exporteren</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met het starten van externe browser</translation>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>De CSV is opgeslagen naar</translation>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"></translation>
+        <translation>De database is opgeslagen naar</translation>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Lees meer over het importeren</translation>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen bestandspad opgegeven</translation>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
+        <translation>GEVAARZONE!</translation>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef het volledige pad naar het bestand op en druk dan op de knop</translation>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu importeren!</translation>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Logbestanden weergeven</translation>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rijen worden vervangen door het geïmporteerde bestand wanneer deze al bestaan in de database.</translation>
     </message>
     <message>
         <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit maakt het mogelijk om bijgewerkte rijen te bewerken.</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezig met proberen te importeren</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"></translation>
+        <translation>Timer-opties</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pauze toevoegen bij het gebruik van de timer</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaard pauze wordt niet automatisch toegevoegd wanneer u de timer gebruikt.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaard pauze wordt automatisch toegevoegd wanneer u de timer gebruikt. Deze wordt alleen toegevoegd wanneer de pauze niet wordt opgenomen met de pauze-timer.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>De standaard pauze wordt automatisch toegevoegd wanneer u de timer gebruikt.</translation>
     </message>
 </context>
 </TS>

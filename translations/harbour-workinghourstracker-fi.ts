@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -178,15 +176,15 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Tehtävä</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei valittua tehtävää</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää tai muokkaa tehtäviä projektin asetuksissa</translation>
     </message>
 </context>
 <context>
@@ -200,20 +198,12 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
         <translation>Peruuta</translation>
     </message>
     <message>
-        <source>Required</source>
-        <translation type="vanished">Pakolliset</translation>
-    </message>
-    <message>
         <source>Please enter a name for the project</source>
         <translation>Kirjoita projektin nimi</translation>
     </message>
     <message>
         <source>Make this the default project</source>
         <translation>Käytä oletuksena tätä projektia</translation>
-    </message>
-    <message>
-        <source>Optional</source>
-        <translation type="vanished">Vapaaehtoiset</translation>
     </message>
     <message>
         <source>Hourly rate</source>
@@ -228,32 +218,24 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
         <translation>Palauta oletusväri</translation>
     </message>
     <message>
-        <source>Removing</source>
-        <translation type="obsolete">Poistetaan</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="obsolete">Poista</translation>
-    </message>
-    <message>
         <source>Project name</source>
-        <translation type="unfinished"></translation>
+        <translation>Projektin nimi</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tehtävät</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinnat</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"></translation>
+        <translation>Väritys</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Tehtävän nimi</translation>
     </message>
 </context>
 <context>
@@ -400,6 +382,18 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
 <context>
     <name>FirstPage</name>
     <message>
+        <source>No default project found</source>
+        <translation>Oletusprojektia ei löytynyt</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>oletus</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>Ajastin käynnistetty automaattisesti</translation>
+    </message>
+    <message>
         <source>About</source>
         <translation>Tietoa</translation>
     </message>
@@ -412,40 +406,32 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
         <translation>Lisää tunteja</translation>
     </message>
     <message>
-        <source>No default project found</source>
-        <translation>Oletusprojektia ei löytynyt</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>oletus</translation>
-    </message>
-    <message>
         <source>Today</source>
         <translation>Tänään</translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
-        <translation>Eilen</translation>
     </message>
     <message>
         <source>This week</source>
         <translation>Tällä viikolla</translation>
     </message>
     <message>
-        <source>Last week</source>
-        <translation>Viime viikolla</translation>
-    </message>
-    <message>
         <source>This month</source>
         <translation>Tässä kuussa</translation>
     </message>
     <message>
-        <source>Last month</source>
-        <translation>Viime kuussa</translation>
-    </message>
-    <message>
         <source>This year</source>
         <translation>Tänä vuonna</translation>
+    </message>
+    <message>
+        <source>Yesterday</source>
+        <translation>Eilen</translation>
+    </message>
+    <message>
+        <source>Last week</source>
+        <translation>Viime viikolla</translation>
+    </message>
+    <message>
+        <source>Last month</source>
+        <translation>Viime kuussa</translation>
     </message>
     <message>
         <source>All</source>
@@ -474,10 +460,6 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     <message>
         <source>Adjust</source>
         <translation>Muuta</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation>Ajastin käynnistetty automaattisesti</translation>
     </message>
 </context>
 <context>
@@ -800,10 +782,6 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
         <translation>Lopetusaika siirtyy, jos kestoa muutetaan.</translation>
     </message>
     <message>
-        <source>Startup options</source>
-        <translation type="vanished">Käynnistysasetukset</translation>
-    </message>
-    <message>
         <source>Autostart timer on app startup</source>
         <translation>Käynnistä ajastin automaattisesti ohjelman käynnistyessä</translation>
     </message>
@@ -1061,27 +1039,27 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"></translation>
+        <translation>Yritetään tuoda</translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajastimen asetukset</translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää tauko ajastinta käyttäessä</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletustaukoa ei tallenneta automaattisesti ajastinta käytettäessä.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletustauko tallennetaan automaattisesti ajastinta käytettäessä mikäli taukoa ei erikseen lisätä taukoajastimella.</translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletustauko tallennetaan automaattisesti ajastinta käytettäessä.</translation>
     </message>
 </context>
 </TS>

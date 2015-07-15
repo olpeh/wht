@@ -3,129 +3,129 @@
     <name>Description for store</name>
     <message>
         <source>Keep track on your working hours easily with a native Working Hours Tracker application.</source>
-        <translation type="unfinished"/>
+        <translation>Hold nemt styr på dine arbejdstimer med et arbejdstidsprogram til SailfishOS.</translation>
     </message>
     <message>
         <source>Current features:</source>
-        <translation type="unfinished"/>
+        <translation>Nuværende funktionalitet:</translation>
     </message>
     <message>
         <source>- Adding hours</source>
-        <translation type="unfinished"/>
+        <translation>- Tilføjer timer</translation>
     </message>
     <message>
         <source>- Timer - saves starting time to database</source>
-        <translation type="unfinished"/>
+        <translation>- Timer - gemmer starttidspunkt i databasen</translation>
     </message>
     <message>
         <source>- Viewing hours in different categories</source>
-        <translation type="unfinished"/>
+        <translation>- Visning af timer i forskellige kategorier</translation>
     </message>
     <message>
         <source>- Deleting</source>
-        <translation type="unfinished"/>
+        <translation>- Sletter</translation>
     </message>
     <message>
         <source>- Editing</source>
-        <translation type="unfinished"/>
+        <translation>- Redigerer</translation>
     </message>
     <message>
         <source>- Resetting database in settings</source>
-        <translation type="unfinished"/>
+        <translation>- Nulstiller database fra indstillinger</translation>
     </message>
     <message>
         <source>- Cover actions for timer and adding new hours</source>
-        <translation type="unfinished"/>
+        <translation>- Miniaturehandlinger for timer og tilføje nye timere</translation>
     </message>
     <message>
         <source>- Cover info for today, week and month</source>
-        <translation type="unfinished"/>
+        <translation>- Miniatureinfo for dag, uge ​​og måned</translation>
     </message>
     <message>
         <source>- Changing effort times by adjusting duration</source>
-        <translation type="unfinished"/>
+        <translation>- Ændrer indsatstid ved justering af varighed</translation>
     </message>
     <message>
         <source>- Adding break possibility</source>
-        <translation type="unfinished"/>
+        <translation>- Tilføjer mulighed for pause</translation>
     </message>
     <message>
         <source>- Settings for default duration and default break</source>
-        <translation type="unfinished"/>
+        <translation>- Indstillinger for standardvarighed og standardpause</translation>
     </message>
     <message>
         <source>- Setting for timer autostart on app startup</source>
-        <translation type="unfinished"/>
+        <translation>- Indstilling for timer autostart ved programstart</translation>
     </message>
     <message>
         <source>- Break functionality in timer</source>
-        <translation type="unfinished"/>
+        <translation>- Pausefunktionalitet i timer</translation>
     </message>
     <message>
         <source>- Possibility to adjust timer start time</source>
-        <translation type="unfinished"/>
+        <translation>- Mulighed for at justere timer starttidspunkt</translation>
     </message>
     <message>
         <source>- Support for different projects</source>
-        <translation type="unfinished"/>
+        <translation>- Understøttelse af forskellige projekter</translation>
     </message>
     <message>
         <source>- Project coloring</source>
-        <translation type="unfinished"/>
+        <translation>- Projektfarvning</translation>
     </message>
     <message>
         <source>- Shows price for efforts if project hourlyrate is set</source>
-        <translation type="unfinished"/>
+        <translation>- Viser pris for indsats, hvis projektets timetakst er defineret</translation>
     </message>
     <message>
         <source>- Project view</source>
-        <translation type="unfinished"/>
+        <translation>- Projektfremvisning</translation>
     </message>
     <message>
         <source>- Category summary</source>
-        <translation type="unfinished"/>
+        <translation>- Kategorioversigt</translation>
     </message>
     <message>
         <source>- Email reports</source>
-        <translation type="unfinished"/>
+        <translation>- Send rapporter med e-post</translation>
     </message>
     <message>
         <source>- Exporting as csv</source>
-        <translation type="unfinished"/>
+        <translation>- Eksporterer til CSV</translation>
     </message>
     <message>
         <source>- Exporting as .sql</source>
-        <translation type="unfinished"/>
+        <translation>- Eksporter som .sql</translation>
     </message>
     <message>
         <source>- Importing .sql</source>
-        <translation type="unfinished"/>
+        <translation>- Importerer .sql</translation>
     </message>
     <message>
         <source>Please report any issues and send ideas for improvements.</source>
-        <translation type="unfinished"/>
+        <translation>Rapportér venligst eventuelle problemer og send ideer til forbedringer.</translation>
     </message>
     <message>
         <source>Donations are also welcome.</source>
-        <translation type="unfinished"/>
+        <translation>Donationer er også velkomne.</translation>
     </message>
     <message>
         <source>If you want to contribute to the translations please do so by following the link below.</source>
-        <translation type="unfinished"/>
+        <translation>Hvis du ønsker at bidrage til oversættelserne kan du gøre det ved at følge nedenstående link.</translation>
     </message>
 </context>
 <context>
     <name>Summary for store</name>
     <message>
         <source>An easy to use and simple Working Hours Tracker for SailfishOS.</source>
-        <translation type="unfinished"/>
+        <translation>En simpel og brugervenlig Arbejdstidstracker for SailfishOS</translation>
     </message>
 </context>
 <context>
     <name>Desktop name for the app (must be short)</name>
     <message>
         <source>Work Hours</source>
-        <translation type="unfinished"/>
+        <translation>Arbejdstid</translation>
     </message>
 </context>
 </TS>
