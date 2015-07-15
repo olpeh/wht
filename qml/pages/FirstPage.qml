@@ -39,7 +39,7 @@ import "../config.js" as DB
 
 Page {
     id: root
-    allowedOrientations: Orientation.All
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     ThemeEffect {
         id: buttonBuzz

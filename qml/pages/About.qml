@@ -36,7 +36,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: aboutPage
-    allowedOrientations: Orientation.All
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
     SilicaFlickable{
         anchors.fill: parent

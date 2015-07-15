@@ -36,7 +36,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
-    allowedOrientations: Orientation.All
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width

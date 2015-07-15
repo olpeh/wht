@@ -36,7 +36,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 Dialog {
     id: page
-    allowedOrientations: Orientation.All
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
