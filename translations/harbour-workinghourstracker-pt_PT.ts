@@ -391,10 +391,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>omissão</translation>
     </message>
     <message>
-        <source>Timer was autostarted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About</source>
         <translation>Sobre</translation>
     </message>
@@ -443,10 +439,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Temporizador não está a correr</translation>
     </message>
     <message>
-        <source>Click to start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Break</source>
         <translation>Pausa</translation>
     </message>
@@ -455,12 +447,20 @@ The source code is licensed under BSD 3-clause.</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <source>Started</source>
+        <source>Adjust</source>
+        <translation>Ajustar</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Adjust</source>
-        <translation>Ajustar</translation>
+        <source>Click to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

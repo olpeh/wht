@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="no" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="no">
 <context>
     <name>About</name>
     <message>
@@ -1051,15 +1053,15 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
