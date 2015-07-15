@@ -134,6 +134,16 @@ Page {
                 }
                 text: qsTr("Please donate if you like my work. Donations help me to use more time on development.")
             }
+
+            IconButton {
+               icon.source: "http://api.flattr.com/button/flattr-badge-large.png"
+               anchors.horizontalCenter: parent.horizontalCenter
+               scale: 2.2
+               onClicked: {
+                    banner.notify(qsTr("Launching external browser"))
+                    Qt.openUrlExternally("https://flattr.com/submit/auto?user_id=olpe&url=http%3A%2F%2Fgithub.com/ojhaapala/wht")
+                }
+            }
             Button {
                 text: "Paypal EUR"
                 anchors.horizontalCenter: parent.horizontalCenter
