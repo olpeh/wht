@@ -12,7 +12,7 @@ v. 1.0.7-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-
 
 [Changelog] (#changelog)<br />
 [Current features] (#current-features)<br />
-[License] (https://github.com/ojhaapala/wht/blob/master/LICENSE.md)<br />
+[License] (https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
 [Roadmap] (#roadmap)<br />
 [How to use] (#how-to-use)<br />
 [Exporting] (#exporting)<br />
@@ -21,7 +21,7 @@ v. 1.0.7-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-
 ### Donate
 Donations are welcome :)<br />
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=olpe&url=https%3A%2F%2Fgithub.com%2Fojhaapala%2Fwht&tags=github&category=software)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=olpe&url=https%3A%2F%2Fgithub.com%2Folpeh%2Fwht&tags=github&category=software)
 
 Paypal [EUR] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
 Paypal [USD] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
@@ -210,7 +210,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## License
 
-[See license here] (https://github.com/ojhaapala/wht/blob/master/LICENSE.md)
+[See license here] (https://github.com/olpeh/wht/blob/master/LICENSE.md)
 
 
 ## How to use
