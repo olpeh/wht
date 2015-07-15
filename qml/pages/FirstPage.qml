@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtFeedback 5.0
+//import QtFeedback 5.0
 import "../config.js" as DB
 
 
@@ -41,10 +41,10 @@ Page {
     id: root
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
-    ThemeEffect {
-        id: buttonBuzz
-        effect: ThemeEffect.Press
-    }
+    //ThemeEffect {
+        //id: buttonBuzz
+        //effect: ThemeEffect.Press
+    //}
 
     function resetDatabase(){
         //console.log(hours);
@@ -473,7 +473,10 @@ Page {
                 font.bold: true
             }
         }
-        onClicked: { buttonBuzz.play(); start()}
+        onClicked: {
+            //buttonBuzz.play()
+            start()
+        }
     }
 
     Item {
@@ -513,7 +516,7 @@ Page {
                 }
             }
             onClicked: {
-                buttonBuzz.play()
+                //buttonBuzz.play()
                 if(!breakTimerRunning) {
                     startBreakTimer()
                 }
@@ -558,7 +561,7 @@ Page {
             }
             onClicked: {
                 if(!breakTimerRunning) {
-                    buttonBuzz.play()
+                    //buttonBuzz.play()
                     stop(false)
                 }
             }
@@ -613,7 +616,7 @@ Page {
             onClicked: {
                 if(!breakTimerRunning) {
                     openTimeDialog()
-                    buttonBuzz.play()
+                    //buttonBuzz.play()
                 }
             }
         }
