@@ -39,7 +39,8 @@ Dialog {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     canAccept: validateHours()
     property QtObject dataContainer: null
-    property QtObject editMode: null
+    property QtObject previousPage: null
+    property bool editMode: false
     property string description: qsTr("No description")
     property string project: "" //default
     property string taskId: "0"
@@ -99,8 +100,8 @@ Dialog {
         if (dataContainer != null)
             page.dataContainer.getHours()
 
-        if (editMode != null)
-            page.editMode.updateView()
+        if (previousPage != null)
+            page.previousPage.updateView()
     }
 
     // helper functions for giving duration in hh:mm format
@@ -605,7 +606,7 @@ Dialog {
                 height: 10
             }
             Component.onCompleted: {
-                if(!editMode && !fromCover && !fromTimer) {
+                if(!editMode && !fromTimer) {
                     var dur = settings.getDefaultDuration()
                     if(dur >=0){
                         duration = dur
@@ -615,7 +616,14 @@ Dialog {
                     if(brk >= 0){
                         breakDuration = brk
                     }
-
+                }
+                if (!editMode) {
+                    var lastUsed = DB.getLastUsed()
+                    project = lastUsed['projectId']
+                    if(project === "")
+                        project = settings.getDefaultProjectId()
+                    taskId = lastUsed['taskId']
+                    descriptionTextArea.text = lastUsed['description']
                 }
                 var endFixed = settings.getEndTimeStaysFixed()
                 if(endFixed === "yes")
@@ -639,8 +647,6 @@ Dialog {
                 }
                 updateDuration()
                 updateStartTime()
-                if(project === "")
-                    project = settings.getDefaultProjectId()
 
                 projectCombo.init()
                 taskCombo.init()

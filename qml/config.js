@@ -33,14 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 //config.js
 .import QtQuick.LocalStorage 2.0 as LS
-// Helper function to get the database connection
-function getDatabase() {
-    return LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
-}
+var db = LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 
 //reset database
 function resetDatabase() {
-    var db = getDatabase();
     db.transaction(
         function(tx) {
             tx.executeSql('DROP TABLE hours')
@@ -72,9 +68,8 @@ function getUniqueId()
 
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
 function initialize() {
-    var db = getDatabase();
     db.transaction(
-        function(tx){
+        function(tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0, taskId TEXT);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
             tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
@@ -85,7 +80,6 @@ function initialize() {
     Log.info("Database ready.")
 }
 function updateIfNeededToV2() {
-    var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
         if(rs.rows.length > 0) {
@@ -109,7 +103,6 @@ function updateIfNeededToV2() {
 }
 
 function updateIfNeededToV3() {
-    var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
         if(rs.rows.length > 0) {
@@ -135,7 +128,6 @@ function updateIfNeededToV3() {
 
 // This function is used to write hours into the database
 function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration, taskId) {
-    var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration, taskId]);
@@ -154,7 +146,6 @@ function setHours(uid,date,startTime, endTime, duration, project, description, b
 
 // This function is used to retrieve hours for a day from the database
 function getHoursDay(offset, projectId) {
-    var db = getDatabase();
     var dur =0;
     var rs;
 
@@ -176,7 +167,6 @@ function getHoursDay(offset, projectId) {
 
 // This function is used to retrieve hours for a week from the database
 function getHoursWeek(offset, projectId) {
-    var db = getDatabase();
     var dur = 0;
     var rs;
 
@@ -203,11 +193,10 @@ function getHoursWeek(offset, projectId) {
 
 // This function is used to retrieve hours for a month from the database
 function getHoursMonth(offset, projectId) {
-    var db = getDatabase();
     var dur = 0;
     var rs;
      db.transaction(function(tx) {
-         if (offset === 0){
+         if (offset === 0) {
              if(projectId)
                  rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime") AND  project=?;', [projectId]);
              else
@@ -230,7 +219,6 @@ function getHoursMonth(offset, projectId) {
 
 // This function is used to retrieve hours for a year from the database
 function getHoursYear(offset, projectId) {
-    var db = getDatabase();
     var dur=0;
     var rs;
     db.transaction(function(tx) {
@@ -257,7 +245,6 @@ function getHoursYear(offset, projectId) {
 // This function is used to retrieve all hours from the database
 function getHoursAll(projectId) {
     var dur=0;
-    var db = getDatabase();
     var rs;
     db.transaction(function(tx) {
         if(projectId)
@@ -276,12 +263,11 @@ function getHoursAll(projectId) {
 
 // This function is used to get all data from the database
 function getAll(sortby, projectId) {
-    var db = getDatabase();
     var allHours=[];
     var rs;
     //console.log(projectId)
     db.transaction(function(tx) {
-        if(projectId){
+        if(projectId) {
             if(sortby === "project")
                 rs = tx.executeSql('SELECT * FROM hours WHERE project=? ORDER BY project DESC, date DESC, startTime DESC;', [projectId]);
             else
@@ -319,7 +305,6 @@ function getAll(sortby, projectId) {
 
 // This function is used to retrieve data for a day from the database
 function getAllDay(offset, sortby, projectId) {
-    var db = getDatabase();
     var allHours =[];
     var rs;
 
@@ -327,7 +312,7 @@ function getAllDay(offset, sortby, projectId) {
         var orderby = "ORDER BY date DESC, startTime DESC";
         if(sortby === "project")
             orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-        if(projectId){
+        if(projectId) {
             if (offset ===0)
                 rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
             else
@@ -366,7 +351,6 @@ function getAllDay(offset, sortby, projectId) {
 
 // This function is used to retrieve data this week from the database
 function getAllWeek(offset, sortby, projectId) {
-    var db = getDatabase();
     var allHours=[];
     var rs;
     db.transaction(function(tx) {
@@ -412,7 +396,6 @@ function getAllWeek(offset, sortby, projectId) {
 // This function is used to retrieve data this month from the database
 function getAllMonth(offset, sortby, projectId) {
     var allHours=[];
-    var db = getDatabase();
     var orderby = "ORDER BY date DESC, startTime DESC";
     if(sortby === "project")
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
@@ -456,7 +439,6 @@ function getAllMonth(offset, sortby, projectId) {
 
 // This function is used to retrieve data this year from the database
 function getAllThisYear(sortby, projectId) {
-    var db = getDatabase();
     var orderby = "ORDER BY date DESC, startTime DESC";
     if(sortby === "project")
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
@@ -493,7 +475,6 @@ function getAllThisYear(sortby, projectId) {
   hours table */
 function remove(uid) {
     Log.info("Removing: " + uid);
-    var db = getDatabase();
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM hours WHERE uid=?;' , [uid]);
         if (rs.rowsAffected > 0) {
@@ -506,8 +487,7 @@ function remove(uid) {
 
 /* Get timer starttime
 returns the starttime or "Not started" */
-function getStartTime(){
-    var db = getDatabase();
+function getStartTime() {
     var started = 0;
     var resp="";
     db.transaction(function(tx) {
@@ -529,8 +509,7 @@ function getStartTime(){
 /* Start the timer
 Simply sets the starttime and started to 1
 Returns the starttime if inserting is successful */
-function startTimer(newValue){
-    var db = getDatabase();
+function startTimer(newValue) {
     var resp="";
     var datenow = new Date();
     var startTime = newValue || datenow.getHours().toString() +":" + datenow.getMinutes().toString();
@@ -551,8 +530,7 @@ function startTimer(newValue){
  Stops the timer, sets started to 0
  and saves the endTime
  NOTE: the endtime is not used anywhere atm. */
-function stopTimer(){
-    var db = getDatabase();
+function stopTimer() {
     var datenow = new Date();
     var endTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
     db.transaction(function(tx) {
@@ -574,8 +552,7 @@ is running and the user pauses it */
 
 /* Get break timer starttime
 returns the starttime or "Not started" */
-function getBreakStartTime(){
-    var db = getDatabase();
+function getBreakStartTime() {
     var started = 0;
     var resp="";
     db.transaction(function(tx) {
@@ -598,8 +575,7 @@ function getBreakStartTime(){
 Simply sets the break starttime and started to 1
 Returns the starttime if inserting is successful.
 Also used for adjusting the starttime */
-function startBreakTimer(){
-    var db = getDatabase();
+function startBreakTimer() {
     var resp="";
     var datenow = new Date();
     var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
@@ -621,8 +597,7 @@ function startBreakTimer(){
 Gets the id of the last added row which
 should be the current breaktimer row and
 saves the duration in to that row. */
-function stopBreakTimer(duration){
-    var db = getDatabase();
+function stopBreakTimer(duration) {
     var id = 0;
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
@@ -648,8 +623,7 @@ function stopBreakTimer(duration){
 /* Get the break durations from the database
 Gets all break rows. Users may use the breaktimer
 several times during a work day. */
-function getBreakTimerDuration(){
-    var db = getDatabase();
+function getBreakTimerDuration() {
     var dur=0.0;
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks');
@@ -669,8 +643,7 @@ function getBreakTimerDuration(){
 Only the duration of the breaks
 are added to the hours table.
 Breaks table can be cleared everytime */
-function clearBreakTimer(){
-    var db = getDatabase();
+function clearBreakTimer() {
     db.transaction(function(tx) {
         tx.executeSql('DELETE FROM breaks');
     })
@@ -680,9 +653,8 @@ function clearBreakTimer(){
 These functions are for projects */
 
 /* */
-function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor){
+function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor) {
     //console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
-    var db = getDatabase();
     var resp = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, labelColor]);
@@ -698,8 +670,7 @@ function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labe
 }
 
 /* Get projects */
-function getProjects(){
-    var db = getDatabase();
+function getProjects() {
     var resp = [];
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects ORDER BY id DESC');
@@ -725,8 +696,7 @@ function getProjects(){
 }
 
 /* Get project by id */
-function getProjectById(id){
-    var db = getDatabase();
+function getProjectById(id) {
     var item ={};
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
@@ -747,8 +717,7 @@ function getProjectById(id){
     return item;
 }
 
-function removeProject(id){
-    var db = getDatabase();
+function removeProject(id) {
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM projects WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
@@ -759,15 +728,14 @@ function removeProject(id){
     })
 }
 
-function removeProjects(){
-    var db = getDatabase();
+function removeProjects() {
     db.transaction(function(tx) {
         tx.executeSql('DELETE FROM projects');
     })
 }
 
 function moveAllHoursToProject(id) {
-    var db = getDatabase();
+
     var resp = "Error updating existing hours!";
     var sqlstr = "UPDATE hours SET project='"+id+"';";
     db.transaction(function(tx) {
@@ -781,7 +749,6 @@ function moveAllHoursToProject(id) {
 }
 
 function moveAllHoursToProjectByDesc(defaultProjectId) {
-    var db = getDatabase();
     var resp = "OK";
     var projects = getProjects();
     var allhours = getAll();
@@ -790,7 +757,7 @@ function moveAllHoursToProjectByDesc(defaultProjectId) {
         var sqlstr = "UPDATE hours SET project='"+ defaultProjectId +"' WHERE uid='"+ allhours[i].uid +"';";
         if (allhours[i].description !== "No description") {
             for (var k=0; k< projects.length; k++) {
-                if((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1){
+                if((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1) {
                     sqlstr = "UPDATE hours SET project='"+ projects[k].id +"' WHERE uid='"+ allhours[i].uid +"';";
                 }
             }
@@ -808,8 +775,7 @@ function moveAllHoursToProjectByDesc(defaultProjectId) {
 // Tasks
 
 // Save task
-function setTask(taskId, projectId, name){
-    var db = getDatabase();
+function setTask(taskId, projectId, name) {
     var resp = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO tasks VALUES (?,?,?);', [taskId, projectId, name]);
@@ -824,8 +790,7 @@ function setTask(taskId, projectId, name){
     return resp;
 }
 /* Get tasks for project */
-function getProjectTasks(projectId){
-    var db = getDatabase();
+function getProjectTasks(projectId) {
     var resp = [];
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectId]);
@@ -843,8 +808,7 @@ function getProjectTasks(projectId){
 }
 
 /* Get task by id */
-function getTaskById(id){
-    var db = getDatabase();
+function getTaskById(id) {
     var item ={};
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM tasks WHERE id=?;', [id]);
@@ -859,8 +823,7 @@ function getTaskById(id){
     return item;
 }
 
-function removeTask(id){
-    var db = getDatabase();
+function removeTask(id) {
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM tasks WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
@@ -871,3 +834,35 @@ function removeTask(id){
     })
 }
 
+/* Fetch last used input */
+function getLastUsed(projectId, taskId) {
+    var sql;
+    if (!projectId) {
+        sql = 'SELECT project, taskId, description FROM hours ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;';
+    }
+    else if (projectId && !taskId) {
+        sql = 'SELECT project, taskId, description FROM hours WHERE project=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId];
+    }
+    else {
+        sql = 'SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId];
+    }
+
+    var result = {
+        projectId: "",
+        taskId: "",
+        description: "",
+    }
+    
+    db.transaction(function(tx) {
+        var rs = tx.executeSql(sql);
+        if(rs.rows.length > 0) {
+            if (rs.rows.item(0).project)
+                result['projectId'] = rs.rows.item(0).project;
+            if (rs.rows.item(0).taskId)
+                result['taskId'] = rs.rows.item(0).taskId;
+            if (rs.rows.item(0).description && rs.rows.item(0).description != 'No description')
+                result['description'] = rs.rows.item(0).description;
+        }
+    })
+    return result;
+}

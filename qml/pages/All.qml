@@ -344,7 +344,8 @@ Page {
                                        project: model.project,
                                        dateText: model.date,
                                        breakDuration: model.breakDuration,
-                                       editMode: all,
+                                       editMode: true,
+                                       previousPage: all,
                                        taskId: model.taskId
                                    })
 
