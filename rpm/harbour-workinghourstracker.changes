@@ -7,6 +7,12 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Sat Jul 18 2015 Olavi Haapala <harbourwht@gmail.com> 1.0.9-1
+- Some code refactoring
+- Fixed a bug when adding hours from cover
+- Automatically select last used input when adding hours
+- BusyIndicator when loading hours from DB
+
 * Wed Jul 15 2015 Olavi Haapala <harbourwht@gmail.com> 1.0.8-1
 - Updated translations
 - Updated contactinfo

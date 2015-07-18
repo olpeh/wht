@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased]
+## [1.0.9-1] - 2015-07-18
 ### Changed
 - Some code refactoring
 
@@ -9,6 +9,7 @@
 
 ### Added
 - Automatically select last used input when adding hours
+- BusyIndicator when loading hours from DB
 
 ## [1.0.8-1] - 2015-07-15
 - Updated translations
