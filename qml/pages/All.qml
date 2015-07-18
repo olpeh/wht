@@ -118,7 +118,7 @@ Page {
             if (taskId !=="" && taskId !=="0" && !project.error) {
                 taskName = getTaskName(project, allHours[i].taskId)
             }
-            hoursModel.set(i, {
+            hoursModel.append({
                            'uid': allHours[i].uid,
                            'date': allHours[i].date,
                            'startTime': allHours[i].startTime,
@@ -186,6 +186,11 @@ Page {
     }
 
     onStatusChanged: {
+        if (all.status === PageStatus.Active) {
+            updateView();
+            busyIndicator.running = false
+        }
+
         if (all.status === PageStatus.Active && listView.count > 1) {
             if (pageStack._currentContainer.attachedContainer === null) {
                 pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
@@ -200,9 +205,6 @@ Page {
         }
     }
 
-    Component.onCompleted: {
-        updateView();
-    }
     SilicaListView {
         id: listView
         header: PageHeader {
@@ -264,9 +266,19 @@ Page {
         VerticalScrollDecorator {}
 
         ViewPlaceholder {
-                    enabled: listView.count == 0
-                    text: qsTr("No items in this category yet")
+            enabled: listView.count == 0 && !busyIndicator.running
+            text: qsTr("No items in this category yet")
         }
+        ViewPlaceholder {
+            enabled: busyIndicator.running
+            BusyIndicator {
+                id: busyIndicator
+                anchors.centerIn: parent
+                size: BusyIndicatorSize.Large
+                running: true
+            }
+        }
+
         delegate: Item {
             id: myListItem
             property Item contextMenu
