@@ -49,7 +49,7 @@ Page {
     property int categoryEntries: 0
 
     function initializeContent(){
-        hoursModel.set(0, {
+        hoursModel.append({
                        'header': qsTr("Total") +": " + section,
                        'duration': qsTr("Duration")+": " + (categoryDuration).toString().toHHMM(),
                        'days': qsTr("Workdays") + ": " + categoryWorkdays,
@@ -97,7 +97,7 @@ Page {
             results.push(item);
             if(results.length > 1) {
                 for(var j=0; j<results.length; j++) {
-                    hoursModel.set(j+1, {
+                    hoursModel.append({
                            'header': results[j].project.name,
                            'duration': qsTr("Duration") + ": " + results[j].projectDuration.toString().toHHMM(),
                            'days': qsTr("Workdays") + ": " + results[j].projectWorkdays,
