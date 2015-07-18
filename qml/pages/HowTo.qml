@@ -1,7 +1,7 @@
 /*
 Copyright (C) 2015 Olavi Haapala.
-<ojhaapala@gmail.com>
-Twitter: @olpetik
+<harbourwht@gmail.com>
+Twitter: @0lpeh
 IRC: olpe
 All rights reserved.
 
@@ -182,7 +182,7 @@ Page {
                 }
             }
             Button {
-                text: "Twitter: @olpetik"
+                text: "Twitter: @0lpeh"
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: {
                     banner.notify(qsTr("Launching external browser"))

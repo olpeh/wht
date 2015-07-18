@@ -2,8 +2,8 @@
  * Copyright (c) 2014 Peter Tworek
  *
  * Copyright (C) 2015 Olavi Haapala.
- * <ojhaapala@gmail.com>
- * Twitter: @olpetik
+ * <harbourwht@gmail.com>
+ * Twitter: @0lpeh
  * IRC: olpe
  *
  * -Renamed everything to Logger
