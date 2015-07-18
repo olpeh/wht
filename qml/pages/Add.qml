@@ -492,6 +492,9 @@ Dialog {
                 onCurrentItemChanged: {
                     var selectedValue = modelSource.get(currentIndex).value
                     project = modelSource.get(currentIndex).id;
+                    var lastUsed = DB.getLastUsed(project)
+                    taskId = lastUsed['taskId']
+                    descriptionTextArea.text = lastUsed['description']
                     taskCombo.init();
                 }
                 function init() {
@@ -549,6 +552,8 @@ Dialog {
                     if (currentIndex !==-1) {
                         var selectedValue = taskModelSource.get(currentIndex).value
                         taskId = taskModelSource.get(currentIndex).id
+                        var lastUsed = DB.getLastUsed(project, taskId)
+                        descriptionTextArea.text = lastUsed['description']
                     }
                 }
                 function deleteAll() {
@@ -617,14 +622,14 @@ Dialog {
                         breakDuration = brk
                     }
                 }
-                if (!editMode) {
+                /*if (!editMode) {
                     var lastUsed = DB.getLastUsed()
                     project = lastUsed['projectId']
                     if(project === "")
                         project = settings.getDefaultProjectId()
                     taskId = lastUsed['taskId']
                     descriptionTextArea.text = lastUsed['description']
-                }
+                }*/
                 var endFixed = settings.getEndTimeStaysFixed()
                 if(endFixed === "yes")
                     fixedSwitch.checked = true
@@ -649,7 +654,6 @@ Dialog {
                 updateStartTime()
 
                 projectCombo.init()
-                taskCombo.init()
             }
         }
     }

@@ -837,16 +837,6 @@ function removeTask(id) {
 /* Fetch last used input */
 function getLastUsed(projectId, taskId) {
     var sql;
-    if (!projectId) {
-        sql = 'SELECT project, taskId, description FROM hours ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;';
-    }
-    else if (projectId && !taskId) {
-        sql = 'SELECT project, taskId, description FROM hours WHERE project=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId];
-    }
-    else {
-        sql = 'SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId];
-    }
-
     var result = {
         projectId: "",
         taskId: "",
@@ -854,7 +844,15 @@ function getLastUsed(projectId, taskId) {
     }
     
     db.transaction(function(tx) {
-        var rs = tx.executeSql(sql);
+        if (projectId && taskId) {
+            var rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId]);
+        }
+        else if (projectId && !taskId) {
+            var rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId]);
+        }
+        else {
+            var rs = tx.executeSql('SELECT project, taskId, description FROM hours ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;');
+        }
         if(rs.rows.length > 0) {
             if (rs.rows.item(0).project)
                 result['projectId'] = rs.rows.item(0).project;
