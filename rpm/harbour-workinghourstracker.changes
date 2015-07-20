@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Mon Jul 20 2015 Olavi Haapala <harbourwht@gmail.com> 1.0.9-2
+- Fixed norwegian translation was not working
+
 * Sat Jul 18 2015 Olavi Haapala <harbourwht@gmail.com> 1.0.9-1
 - Some code refactoring
 - Fixed a bug when adding hours from cover

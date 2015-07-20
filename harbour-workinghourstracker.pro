@@ -54,7 +54,7 @@ TRANSLATIONS += translations/harbour-workinghourstracker-fi.ts \
     translations/harbour-workinghourstracker-ca.ts \
     translations/harbour-workinghourstracker-da.ts \
     translations/harbour-workinghourstracker-fr.ts \
-    translations/harbour-workinghourstracker-no.ts \
+    translations/harbour-workinghourstracker-nb_NO.ts \
     translations/harbour-workinghourstracker-pt_BR.ts \
     translations/harbour-workinghourstracker-pt_PT.ts \
     translations/harbour-workinghourstracker-sv.ts
