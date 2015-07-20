@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.9-2] - 2015-07-20
+### Fixed
+- Fixed norwegian translation was not working
+
 ## [1.0.9-1] - 2015-07-18
 ### Changed
 - Some code refactoring
