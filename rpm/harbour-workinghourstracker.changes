@@ -7,6 +7,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Wed Aug 12 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.0-1
+- Improved performance
+- Bugfix: unable to save hours
+
 * Mon Jul 20 2015 Olavi Haapala <harbourwht@gmail.com> 1.0.9-2
 - Fixed norwegian translation was not working
 

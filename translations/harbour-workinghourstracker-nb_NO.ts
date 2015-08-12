@@ -244,7 +244,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Prosjektet finnes ikke</translation>
+        <translation type="vanished">Prosjektet finnes ikke</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Noe gikk galt</translation>
+        <translation type="vanished">Noe gikk galt</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1062,6 +1062,25 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Varighet</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Arbeidsdager</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Poster</translation>
     </message>
 </context>
 </TS>

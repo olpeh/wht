@@ -242,10 +242,6 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>All</name>
     <message>
-        <source>Project was not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
@@ -283,10 +279,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Sort by project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No items in this category yet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -337,6 +329,10 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Saved to</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No items in this category yet</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>
@@ -350,10 +346,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Something went wrong</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1060,6 +1052,25 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

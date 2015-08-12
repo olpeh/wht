@@ -243,7 +243,7 @@ The source code is licensed under BSD 3-clause.</source>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Projeto não encontrado</translation>
+        <translation type="vanished">Projeto não encontrado</translation>
     </message>
     <message>
         <source>Today</source>
@@ -350,10 +350,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Something went wrong</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1060,6 +1056,25 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Projeto não encontrado</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Duração</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

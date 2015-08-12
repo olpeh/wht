@@ -260,7 +260,7 @@ Der Quellcode ist under BSD 3-Klausel veröffentlicht</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Projekt wurde nicht gefunden</translation>
+        <translation type="vanished">Projekt wurde nicht gefunden</translation>
     </message>
     <message>
         <source>Today</source>
@@ -371,7 +371,7 @@ Der Quellcode ist under BSD 3-Klausel veröffentlicht</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Etwas ist schief gelaufen</translation>
+        <translation type="vanished">Etwas ist schief gelaufen</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1082,6 +1082,25 @@ Der Quellcode ist under BSD 3-Klausel veröffentlicht</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Projekt wurde nicht gefunden</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Dauer</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Werktage</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Einträge</translation>
     </message>
 </context>
 </TS>

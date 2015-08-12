@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0-1] - 2015-08-12
+### Changed
+- Improved performance by using workerscript
+
+### Fixed
+- Bugfix: unable to save hours
+
 ## [1.0.9-2] - 2015-07-20
 ### Fixed
 - Fixed norwegian translation was not working

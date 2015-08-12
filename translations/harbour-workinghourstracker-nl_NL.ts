@@ -244,7 +244,7 @@ De broncode is gelicenseerd onder de BSD 3-licentie.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Het project kon niet worden gevonden</translation>
+        <translation type="vanished">Het project kon niet worden gevonden</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ De broncode is gelicenseerd onder de BSD 3-licentie.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Er ging iets mis</translation>
+        <translation type="vanished">Er ging iets mis</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1062,6 +1062,25 @@ De broncode is gelicenseerd onder de BSD 3-licentie.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation>De standaard pauze wordt automatisch toegevoegd wanneer u de timer gebruikt.</translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Het project kon niet worden gevonden</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Duur</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Werkdagen</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Invoeren</translation>
     </message>
 </context>
 </TS>

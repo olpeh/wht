@@ -244,7 +244,7 @@ The source code is licensed under BSD 3-clause.</source>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>项目未找到</translation>
+        <translation type="vanished">项目未找到</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>出了点问题</translation>
+        <translation type="vanished">出了点问题</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1063,6 +1063,25 @@ The source code is licensed under BSD 3-clause.</source>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation>使用计时器时默认断点会自动添加。</translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">持续时间</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">工作日</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">记录</translation>
     </message>
 </context>
 </TS>

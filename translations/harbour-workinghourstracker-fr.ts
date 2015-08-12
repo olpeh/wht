@@ -244,7 +244,7 @@ The code source est sous licence BSD 3-clause.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Le projet n&apos;a pas été trouvé</translation>
+        <translation type="vanished">Le projet n&apos;a pas été trouvé</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ The code source est sous licence BSD 3-clause.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Quelque chose s&apos;est mal passé</translation>
+        <translation type="vanished">Quelque chose s&apos;est mal passé</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1062,6 +1062,25 @@ The code source est sous licence BSD 3-clause.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Le projet n&apos;a pas été trouvé</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Durée</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Jours de travail</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Entrées</translation>
     </message>
 </context>
 </TS>

@@ -244,7 +244,7 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Projektia ei löytynyt</translation>
+        <translation type="vanished">Projektia ei löytynyt</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Jokin meni pieleen</translation>
+        <translation type="vanished">Jokin meni pieleen</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1062,6 +1062,25 @@ Lähdekoodi on lisensoitu BSD 3-clause lisenssillä.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation>Oletustauko tallennetaan automaattisesti ajastinta käytettäessä.</translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Projektia ei löytynyt</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Kesto</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Työpäiviä</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Kirjauksia</translation>
     </message>
 </context>
 </TS>

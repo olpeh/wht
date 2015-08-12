@@ -244,7 +244,7 @@ Källkoden är licensierad under BSD 3.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>Projektet kunde inte hittas</translation>
+        <translation type="vanished">Projektet kunde inte hittas</translation>
     </message>
     <message>
         <source>Today</source>
@@ -355,7 +355,7 @@ Källkoden är licensierad under BSD 3.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>Något gick fel</translation>
+        <translation type="vanished">Något gick fel</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1062,6 +1062,25 @@ Källkoden är licensierad under BSD 3.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation>Standardrast läggs till automatiskt när tidtagning används.</translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished">Projektet kunde inte hittas</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Varaktighet</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Arbetsdagar</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Poster</translation>
     </message>
 </context>
 </TS>

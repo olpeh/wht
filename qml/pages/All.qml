@@ -45,35 +45,7 @@ Page {
     property bool sortedByProject: false
     property string section: ""
     property string projectId: ""
-    //for the summary View
-    property double categoryDuration: 0
-    property double categoryPrice: 0
-    property int categoryWorkdays: 0
-    property int categoryEntries: 0
     property variant allHours: []
-
-    function getProject(projectId) {
-        for (var i = 0; i < projects.length; i++) {
-            if (projects[i].id === projectId)
-                return projects[i];
-        }
-        banner.notify(qsTr("Project was not found"))
-        return {
-            'name':qsTr('Project was not found'),
-            'labelColor': Theme.secondaryHighlightColor,
-            'error': true
-        };
-    }
-
-    function getTaskName(project, taskId) {
-        if (project.tasks) {
-            for (var i = 0; i < project.tasks.length; i++) {
-                if (project.tasks[i].id === taskId)
-                    return project.tasks[i].name;
-            }
-        }
-        return '';
-    }
 
     function getAllHours(sortby){
         if (dataContainer != null && section != ""){
@@ -107,42 +79,12 @@ Page {
             allHours = hours;
         else
             allHours =  getAllHours();
-
-        var lastDate = "";
-        for (var i = 0; i < allHours.length; i++) {
-            var project = getProject(allHours[i].project);
-            var taskId = "0"
-            if (allHours[i].taskId !== "0")
-                taskId = allHours[i].taskId
-            var taskName = ""
-            if (taskId !=="" && taskId !=="0" && !project.error) {
-                taskName = getTaskName(project, allHours[i].taskId)
-            }
-            hoursModel.append({
-                           'uid': allHours[i].uid,
-                           'date': allHours[i].date,
-                           'startTime': allHours[i].startTime,
-                           'endTime': allHours[i].endTime,
-                           'duration': allHours[i].duration,
-                           'project' : allHours[i].project,
-                           'projectName': project.name,
-                           'description': allHours[i].description,
-                           'breakDuration': allHours[i].breakDuration,
-                           'labelColor': project.labelColor,
-                           'hourlyRate': project.hourlyRate,
-                           'taskId': taskId,
-                           'taskName': taskName
-            })
-            var netDuration = allHours[i].duration - allHours[i].breakDuration;
-            categoryDuration+= netDuration;
-            if (project.hourlyRate)
-                categoryPrice += project.hourlyRate * netDuration;
-            if(allHours[i].date!==lastDate){
-                categoryWorkdays+=1;
-                lastDate = allHours[i].date;
-            }
-            categoryEntries+=1;
+        if (listView.count != 0){
+            console.log("I need refresh");
+            hoursModel.clear();
         }
+
+        myWorker.sendMessage({ 'type': 'all', 'allHours': allHours, 'projects': projects });
     }
 
     function formateDate(datestring) {
@@ -186,21 +128,40 @@ Page {
     }
 
     onStatusChanged: {
-        if (all.status === PageStatus.Active) {
+        if (all.status === PageStatus.Active && listView.count == 0) {
             updateView();
-            busyIndicator.running = false
         }
+    }
 
-        if (all.status === PageStatus.Active && listView.count > 1) {
-            if (pageStack._currentContainer.attachedContainer === null) {
-                pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
-                                           dataContainer: all,
-                                           section: section,
-                                           categoryDuration: categoryDuration,
-                                           categoryPrice: categoryPrice,
-                                           categoryWorkdays: categoryWorkdays,
-                                           categoryEntries: categoryEntries
-                                       });
+    WorkerScript {
+        id: myWorker
+        source: "../worker.js"
+        onMessage: {
+            busyIndicator.running = false;
+            if (messageObject.status === 'running') {
+                hoursModel.append(messageObject.data);
+            }
+            else if (messageObject.status === 'done') {
+                var data = messageObject.data
+                var categoryDuration = data.categoryDuration;
+                var categoryPrice = data.categoryPrice;
+                var categoryWorkdays = data.categoryWorkdays;
+                var categoryEntries = data.categoryEntries;
+                if (all.status === PageStatus.Active && listView.count > 1) {
+                    if (pageStack._currentContainer.attachedContainer === null) {
+                        pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
+                                                   dataContainer: all,
+                                                   section: section,
+                                                   categoryDuration: categoryDuration,
+                                                   categoryPrice: categoryPrice,
+                                                   categoryWorkdays: categoryWorkdays,
+                                                   categoryEntries: categoryEntries
+                                               });
+                    }
+                }
+            }
+            else {
+                console.log('WTF');
             }
         }
     }

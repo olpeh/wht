@@ -260,7 +260,7 @@ El codi font està sota llicència BSD 3-clause.</translation>
     <name>All</name>
     <message>
         <source>Project was not found</source>
-        <translation>No s&apos;ha trobat el projecte</translation>
+        <translation type="vanished">No s&apos;ha trobat el projecte</translation>
     </message>
     <message>
         <source>Today</source>
@@ -371,7 +371,7 @@ El codi font està sota llicència BSD 3-clause.</translation>
     </message>
     <message>
         <source>Something went wrong</source>
-        <translation>S&apos;ha produït un error</translation>
+        <translation type="vanished">S&apos;ha produït un error</translation>
     </message>
     <message>
         <source>Total</source>
@@ -1082,6 +1082,25 @@ El codi font està sota llicència BSD 3-clause.</translation>
     <message>
         <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">Durada</translation>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished">Dies laborables</translation>
+    </message>
+    <message>
+        <source>Entries</source>
+        <translation type="unfinished">Entrades</translation>
     </message>
 </context>
 </TS>

@@ -48,70 +48,35 @@ Page {
     property int categoryWorkdays: 0
     property int categoryEntries: 0
 
-    function initializeContent(){
+    function initializeContent() {
+        var defColor = String(Theme.secondaryHighlightColor)
         hoursModel.append({
                        'header': qsTr("Total") +": " + section,
                        'duration': qsTr("Duration")+": " + (categoryDuration).toString().toHHMM(),
                        'days': qsTr("Workdays") + ": " + categoryWorkdays,
                        'entries': qsTr("Entries") + ": " + categoryEntries,
-                       'price': categoryPrice
+                       'price': categoryPrice,
+                       'labelColor': defColor,
         })
         if(dataContainer){
             // get hours sorted by projects
             var allHours = dataContainer.getAllHours("project")
-            var lastDate = "";
-            var results=[];
-            var item ={
-                'project': {},
-                'projectDuration': 0,
-                'projectPrice': 0,
-                'projectWorkdays': 0,
-                'projectEntries': 0
-            }
-            for (var i = 0; i < allHours.length; i++) {
-                var project = dataContainer.getProject(allHours[i].project);
-                if(i === 0) {
-                    item.project = project;
-                }
-                if(project.id !== item.project.id) {
-                    results.push(item);
-                    item ={
-                        'project': project,
-                        'projectDuration': 0,
-                        'projectPrice': 0,
-                        'projectWorkdays': 0,
-                        'projectEntries': 0
-                    };
-                    lastDate = "";
-                }
-                var netDuration = allHours[i].duration - allHours[i].breakDuration;
-                item.projectDuration+= netDuration;
-                if (project.hourlyRate)
-                    item.projectPrice += project.hourlyRate * netDuration;
-                if(allHours[i].date!==lastDate){
-                    item.projectWorkdays+=1;
-                    lastDate = allHours[i].date;
-                }
-                item.projectEntries+=1;
-            }
-            results.push(item);
-            if(results.length > 1) {
-                for(var j=0; j<results.length; j++) {
-                    hoursModel.append({
-                           'header': results[j].project.name,
-                           'duration': qsTr("Duration") + ": " + results[j].projectDuration.toString().toHHMM(),
-                           'days': qsTr("Workdays") + ": " + results[j].projectWorkdays,
-                           'entries': qsTr("Entries") + ": " + results[j].projectEntries,
-                           'price': results[j].projectPrice,
-                           'labelColor': results[j].project.labelColor
-                    })
-                }
-            }
+            myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects });
         }
     }
 
     Component.onCompleted: {
         initializeContent();
+    }
+    WorkerScript {
+        id: myWorker
+        source: "../worker.js"
+        onMessage: {
+            busyIndicator.running = false;
+            if (messageObject.status === 'ok') {
+                hoursModel.append(messageObject.data);
+            }
+        }
     }
     SilicaListView {
         id: listView
@@ -126,8 +91,13 @@ Page {
         model: hoursModel
         VerticalScrollDecorator {}
         ViewPlaceholder {
-                    enabled: listView.count == 0
-                    text: qsTr("Something went wrong")
+            enabled: busyIndicator.running
+            BusyIndicator {
+                id: busyIndicator
+                anchors.centerIn: parent
+                size: BusyIndicatorSize.Large
+                running: true
+            }
         }
         delegate: Item {
             id: myListItem

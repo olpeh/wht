@@ -59,9 +59,15 @@ Dialog {
     property bool fromTimer: false
     property bool endTimeStaysFixed: true
     property variant tasks: []
+    property bool projectComboInitialized: false
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
+        // Lazyfix... sry
+        if (breakDuration < 0) {
+            breakDuration = 0;
+            breakDurationButton.value = "00:00";
+        }
         return (duration >=0 && netDuration >=0 && breakDuration >=0 && startSelectedHour < 24 && startSelectedMinute < 60 && endSelectedHour < 24 && endSelectedMinute < 60)
     }
 
@@ -490,11 +496,14 @@ Dialog {
                     }
                 }
                 onCurrentItemChanged: {
-                    var selectedValue = modelSource.get(currentIndex).value
-                    project = modelSource.get(currentIndex).id;
-                    var lastUsed = DB.getLastUsed(project)
-                    taskId = lastUsed['taskId']
-                    descriptionTextArea.text = lastUsed['description']
+                    if (projectComboInitialized) {
+                        var selectedValue = modelSource.get(currentIndex).value
+                        project = modelSource.get(currentIndex).id;
+                        var lastUsed = DB.getLastUsed(project)
+                        taskId = lastUsed['taskId']
+                        descriptionTextArea.text = lastUsed['description']
+                    }
+                    projectComboInitialized = true;
                     taskCombo.init();
                 }
                 function init() {
@@ -622,14 +631,6 @@ Dialog {
                         breakDuration = brk
                     }
                 }
-                /*if (!editMode) {
-                    var lastUsed = DB.getLastUsed()
-                    project = lastUsed['projectId']
-                    if(project === "")
-                        project = settings.getDefaultProjectId()
-                    taskId = lastUsed['taskId']
-                    descriptionTextArea.text = lastUsed['description']
-                }*/
                 var endFixed = settings.getEndTimeStaysFixed()
                 if(endFixed === "yes")
                     fixedSwitch.checked = true
