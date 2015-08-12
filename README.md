@@ -4,7 +4,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.0.9-2 available in Jolla store (30.07.2015)<br />
 
-v. 1.0.9-2 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.1.0-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
