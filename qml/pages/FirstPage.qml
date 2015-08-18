@@ -173,7 +173,28 @@ Page {
             breakDuration = defaultDur
         }
 
-        if(!fromCover) {
+        if (stopFromCommandLine) {
+            var description = "Automatically saved from command line"
+            var project = defaultProjectId
+            var uid = DB.getUniqueId()
+            var taskId = "0"
+
+            var d = new Date()
+            //YYYY-MM-DD
+            var yyyy = d.getFullYear().toString();
+            var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+            var dd  = d.getDate().toString();
+            var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
+            var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
+            var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
+
+            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+            DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
+
+            getHours()
+        }
+
+        else if(!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,
                                   uid: 0,
@@ -181,7 +202,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration, fromTimer: true})
+                                  duration:duration, breakDuration:breakDuration, fromTimer: true}, PageStackAction.Immediate)
         }
         else {
             if(pageStack.depth > 1) {
@@ -265,9 +286,14 @@ Page {
     }
 
     onStatusChanged: {
-        if (root.status === PageStatus.Active && projects.length > 1) {
-            if (pageStack._currentContainer.attachedContainer == null) {
-                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root});
+        if (root.status === PageStatus.Active) {
+            if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
+                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate);
+            }
+            if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
+                banner.notify(qsTr("Timer stopped by command line argument"));
+                stop();
+                pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
             }
         }
     }
@@ -294,7 +320,7 @@ Page {
         //console.log("Get hours from database...");
         getHours();
         getStartTime();
-        if(startTime !== "Not started"){
+        if(startTime !== "Not started") {
             timerRunning = true;
             updateStartTime();
             getBreakStartTime();
@@ -311,9 +337,14 @@ Page {
         else {
             duration = 0;
             durationNow = "0h 0min";
+            // Start timer from command line
+            if (startFromCommandLine) {
+                banner.notify(qsTr("Timer started by command line argument"));
+                start();
+            }
 
             // Automatically start timer if allowed in settings
-            if(settings.getTimerAutoStart()){
+            else if(settings.getTimerAutoStart()){
                 banner.notify(qsTr("Timer was autostarted"))
                 start();
             }

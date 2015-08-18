@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDebug>
 #include <QFileInfo>
 #include <QStandardPaths>
+#include <QCommandLineParser>
 
 #include "SettingsClass.h"
 #include "Launcher.h"
@@ -58,12 +59,61 @@ int main(int argc, char *argv[])
     Settings settings;
     Launcher launcher;
     Exporter exporter;
+
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+    QCommandLineParser parser;
+
+    // Starting the timer (--start)
+    QCommandLineOption startTimerOption("start", QCoreApplication::translate("main", "Start the timer"));
+    parser.addOption(startTimerOption);
+
+    // Stopping the timer (--stop)
+    QCommandLineOption stopTimerOption("stop", QCoreApplication::translate("main", "Stop the timer"));
+    parser.addOption(stopTimerOption);
+
+    // An option select the project with (-p [projectId])
+    // Only useful when stopping the timer
+    QCommandLineOption selectProjectOption(QStringList() << "p" << "project",
+            QCoreApplication::translate("main", "Select project by id."),
+            QCoreApplication::translate("main", "project"));
+    parser.addOption(selectProjectOption);
+
+    // An option select the task with (-t [taskId])
+    // Only useful when stopping the timer
+    QCommandLineOption selectTaskOption(QStringList() << "t" << "task",
+            QCoreApplication::translate("main", "Select task by id."),
+            QCoreApplication::translate("main", "task"));
+    parser.addOption(selectTaskOption);
+
+    // An option to set the description (-d [description])
+    // Only useful when stopping the timer
+    QCommandLineOption setDescriptionOption(QStringList() << "d" << "description",
+            QCoreApplication::translate("main", "Set description"),
+            QCoreApplication::translate("main", "description"));
+    parser.addOption(setDescriptionOption);
+
+    // Process the actual command line arguments given by the user
+    parser.process(*app);
+    bool isStartCommand = parser.isSet(startTimerOption);
+    bool isStopCommand = parser.isSet(stopTimerOption);
+    QString selectedProject = parser.value(selectProjectOption);
+    QString selectedTask = parser.value(selectTaskOption);
+    QString setDescription = parser.value(setDescriptionOption);
+    qDebug() << isStartCommand;
+    qDebug() << isStopCommand;
+    qDebug() << selectedProject;
+    qDebug() << selectedTask;
+    qDebug() << setDescription;
+
     app->setApplicationName("harbour-workinghourstracker");
     QCoreApplication::setApplicationName("harbour-workinghourstracker");
 
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
+    view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
+
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);
@@ -73,6 +123,7 @@ int main(int argc, char *argv[])
 
     view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));
     view->setResizeMode(QQuickView::SizeRootObjectToView);
+
     view->show();
     return app->exec();
 }
