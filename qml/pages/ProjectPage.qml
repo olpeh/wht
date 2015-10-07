@@ -65,10 +65,11 @@ Page {
         summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() });
         summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() });
     }
+
     function getProject(projectId) {
-        for (var i = 0; i < projects.length; i++) {
-            if (projects[i].id === projectId)
-                return projects[i];
+        var found = projects.findById(projectId)
+        if(found) {
+            return found;
         }
         return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
     }

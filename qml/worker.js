@@ -153,11 +153,10 @@ function all(message){
     WorkerScript.sendMessage({ 'status': 'done', 'data': summary });
 }
 
-
 function getProject(projectId, projects) {
-    for (var i = 0; i < projects.length; i++) {
-        if (projects[i].id === projectId)
-            return projects[i];
+    var found = projects.findById(projectId);
+    if(found) {
+        return found;
     }
     return {
         'name':qsTr('Project was not found'),
@@ -168,9 +167,9 @@ function getProject(projectId, projects) {
 
 function getTaskName(project, taskId) {
     if (project.tasks) {
-        for (var i = 0; i < project.tasks.length; i++) {
-            if (project.tasks[i].id === taskId)
-                return project.tasks[i].name;
+        var found = project.tasks.findById(taskId);
+        if(found) {
+            return found.name;
         }
     }
     return '';

@@ -40,3 +40,11 @@ String.prototype.toHHMM = function () {
     if (minutes < 10) {minutes = "0"+minutes;}
     return hours+':'+minutes;
 }
+
+Array.prototype.findById = function(id) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i].id === id)
+            return this[i];
+    }
+    return false;
+}
