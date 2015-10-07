@@ -46,6 +46,10 @@ Page {
     property string section: ""
     property string projectId: ""
     property variant allHours: []
+    property double categoryDuration: 0
+    property double categoryPrice: 0
+    property int categoryWorkdays: 0
+    property int categoryEntries: 0
 
     function getAllHours(sortby){
         if (dataContainer != null && section != ""){
@@ -80,7 +84,6 @@ Page {
         else
             allHours =  getAllHours();
         if (listView.count != 0){
-            console.log("I need refresh");
             hoursModel.clear();
         }
 
@@ -127,6 +130,14 @@ Page {
         return r;
     }
 
+    function getProject(projectId) {
+        var found = projects.findById(projectId)
+        if(found) {
+            return found;
+        }
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+    }
+
     onStatusChanged: {
         if (all.status === PageStatus.Active && listView.count == 0) {
             updateView();
@@ -143,10 +154,10 @@ Page {
             }
             else if (messageObject.status === 'done') {
                 var data = messageObject.data
-                var categoryDuration = data.categoryDuration;
-                var categoryPrice = data.categoryPrice;
-                var categoryWorkdays = data.categoryWorkdays;
-                var categoryEntries = data.categoryEntries;
+                categoryDuration = data.categoryDuration;
+                categoryPrice = data.categoryPrice;
+                categoryWorkdays = data.categoryWorkdays;
+                categoryEntries = data.categoryEntries;
                 if (all.status === PageStatus.Active && listView.count > 1) {
                     if (pageStack._currentContainer.attachedContainer === null) {
                         pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
