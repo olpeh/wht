@@ -18,6 +18,10 @@ Configure: none
 # control over qmake/make execution
 Builder: qtc5
 
+QMakeOptions:
+- VERSION=%{version}
+- RELEASE=%{release}
+
 # This section specifies build dependencies that are resolved using pkgconfig.
 # This is the preferred way of specifying build dependencies for your package.
 PkgConfigBR:
@@ -29,10 +33,11 @@ PkgConfigBR:
 # Build dependencies without a pkgconfig setup can be listed here
 # PkgBR:
 #   - package-needed-to-build
+PkgBR: []
 
 # Runtime dependencies which are not automatically detected
 Requires:
-  - sailfishsilica-qt5 >= 0.10.9 
+  - sailfishsilica-qt5 >= 0.10.9
 
 # All installed files
 Files:
@@ -44,3 +49,19 @@ Files:
 # For more information about yaml and what's supported in Sailfish OS
 # build system, please see https://wiki.merproject.org/wiki/Spectacle
 
+SubPackages:
+    - Name: test
+      Summary: Tests harbour-workinghourstracker
+      Group: Qt/Qt
+      Description: |-
+        Tests package for harbour-workinghourstracker
+      AutoDepend: true
+      PkgConfigBR:
+        - Qt5QuickTest
+      Requires:
+        - qt5-qtdeclarative-import-qttest
+      Files:
+        - '%{_bindir}/tst-harbour-workinghourstracker'
+        - '%{_datadir}/tst-harbour-workinghourstracker/*.qml'
+        # Script for starting tests on emulator and device
+        - '%{_datadir}/tst-harbour-workinghourstracker/*.sh'

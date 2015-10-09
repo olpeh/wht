@@ -64,6 +64,10 @@ int main(int argc, char *argv[])
 
     QQuickWindow::setDefaultAlphaBuffer(true);
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    view->rootContext()->setContextProperty("appVersion", APP_VERSION);
+    view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
+
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);

@@ -39,6 +39,12 @@ import "../config.js" as DB
 
 Page {
     id: root
+    property string version: ""
+    property string buildNum: ""
+
+    //For tests
+    property alias _timerControl: timerControl
+
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     //ThemeEffect {
@@ -273,6 +279,7 @@ Page {
     }
 
     Component.onCompleted: {
+        console.log(version, buildNum);
         // Update tables for previous versions
         DB.updateIfNeededToV2();
         DB.updateIfNeededToV3();

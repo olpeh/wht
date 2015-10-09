@@ -31,6 +31,16 @@ BuildRequires:  desktop-file-utils
 Working Hours Tracker for SailfishOS
 
 
+%package test
+Summary:    Tests harbour-workinghourstracker
+Group:      Qt/Qt
+Requires:   %{name} = %{version}-%{release}
+Requires:   qt5-qtdeclarative-import-qttest
+BuildRequires:  pkgconfig(Qt5QuickTest)
+
+%description test
+Tests package for harbour-workinghourstracker
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -41,7 +51,9 @@ Working Hours Tracker for SailfishOS
 # >> build pre
 # << build pre
 
-%qtc_qmake5 
+%qtc_qmake5  \
+    VERSION=%{version} \
+    RELEASE=%{release}
 
 %qtc_make %{?_smp_mflags}
 
@@ -69,3 +81,11 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
 # >> files
 # << files
+
+%files test
+%defattr(-,root,root,-)
+%{_bindir}/tst-harbour-workinghourstracker
+%{_datadir}/tst-harbour-workinghourstracker/*.qml
+%{_datadir}/tst-harbour-workinghourstracker/*.sh
+# >> files test
+# << files test

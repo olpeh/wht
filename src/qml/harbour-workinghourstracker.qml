@@ -53,11 +53,15 @@ ApplicationWindow
     property string defaultProjectId: ""
     property variant projects: []
     property string currencyString: "€"
+    readonly property string _APP_VERSION: appVersion
+    readonly property string _APP_BUILD_NUMBER: appBuildNum
 
     id: appWindow
     initialPage: Component {
         FirstPage {
             id: firstPage
+            version: _APP_VERSION
+            buildNum: _APP_BUILD_NUMBER
             Component.onCompleted: appWindow.firstPage = firstPage
         }
     }
