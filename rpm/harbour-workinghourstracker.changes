@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Sat Oct 10 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.1-2
+- Bugfix #36 unable to send email report
+
 * Tue Aug 18 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.1-1
 - Added command line option for stopping and starting the timer
 
