@@ -4,7 +4,7 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.1.0-1 available in Jolla store (14.08.2015)<br />
 
-v. 1.1.0-1 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.1.1-2 Available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
@@ -148,7 +148,11 @@ Don't worry for duplicates when importing because the entries have unique id's a
 
 <strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
 
-
+### Startup commands
+Still WIP
+Commands atm: 
+	- harbour-workinghourstracker --start 
+	- harbour-workinghourstracker --stop
 
 
 
