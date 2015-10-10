@@ -37,6 +37,7 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: timePickerDialog
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     // Items from the Harmattan component interface
     property int hour
