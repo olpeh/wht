@@ -7,6 +7,9 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Sat Oct 10 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.1-3
+- Simple scaling for tablet release
+
 * Sat Oct 10 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.1-2
 - Bugfix #36 unable to send email report
 
