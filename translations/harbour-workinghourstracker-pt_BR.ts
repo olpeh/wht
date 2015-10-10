@@ -16,6 +16,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Usage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25,6 +29,14 @@
     </message>
     <message>
         <source>Author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external email app</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -60,19 +72,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Launching external email app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -84,17 +88,9 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Read the license</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Add</name>
-    <message>
-        <source>Project</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>No description</source>
         <translation type="unfinished"></translation>
@@ -168,11 +164,11 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add or edit projects in settings</source>
+        <source>Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter an optional description</source>
+        <source>Add or edit projects in settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -185,6 +181,10 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter an optional description</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -203,11 +203,31 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Project name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Make this the default project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hourly rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coloring</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -216,26 +236,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Reset coloring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Project name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Coloring</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task Name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -274,23 +274,11 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sort by date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sort by project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Removing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Report of working hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>for project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -307,18 +295,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>for project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Created</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Send report by email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -330,12 +306,44 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Send report by email</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort by project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>No items in this category yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project was not found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CategorySummary</name>
+    <message>
+        <source>Total</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Duration</source>
         <translation type="unfinished"></translation>
@@ -346,10 +354,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -452,6 +456,14 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adjust</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer stopped by command line argument</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -602,10 +614,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Issues in GitHub</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Launching email app</source>
         <translation type="unfinished"></translation>
     </message>
@@ -613,11 +621,23 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Launching external browser</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Issues in GitHub</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send to the developer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching email app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -634,14 +654,6 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Log saved to</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Send to the developer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Launching email app</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MyTimePicker</name>
@@ -653,15 +665,7 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>ProjectPage</name>
     <message>
-        <source>Selected project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Project was not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -669,7 +673,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This week</source>
+        <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -677,7 +681,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This month</source>
+        <source>This week</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -685,7 +689,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This year</source>
+        <source>This month</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -693,7 +697,15 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>This year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hours for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected project</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -727,6 +739,10 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>Settings</name>
     <message>
+        <source>View logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -736,6 +752,14 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Edit projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -775,6 +799,10 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Timer options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Autostart timer on app startup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -787,7 +815,27 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Add break when using timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default break is not added automatically when using timer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Set currency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Currency string too long!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -796,6 +844,158 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Currency string</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No emails will be sent automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can also decide to fill them in manually when sending a report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is just for making it faster.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default to address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid to email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default cc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid cc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default bcc address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid bcc email address!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can export your Working Hours data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It will export everything needed to rebuild the database e.g on another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about exporting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching external browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the whole database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export hours as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CSV saved to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export projects as CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Importing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Here you can import data into Working Hours Tracker.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There should become no duplicates due to unique constraints.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rows are replaced from the imported file in case of entries already in the database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This makes it possible to update edited rows.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read more about importing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import from a .sql dump exported by Working Hours Tracker.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Give the full path to the file and then hit the button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full path to .sql file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import now!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file path given</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -847,6 +1047,10 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>DANGER ZONE!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please be aware!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -862,205 +1066,44 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>main</name>
     <message>
-        <source>Email reports</source>
+        <source>Start the timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
+        <source>Stop the timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No emails will be sent automatically.</source>
+        <source>Select project by id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You can also decide to fill them in manually when sending a report.</source>
+        <source>project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This is just for making it faster.</source>
+        <source>Select task by id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set default to address</source>
+        <source>task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default to address</source>
+        <source>Set description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set default cc address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default cc address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set default bcc address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default bcc address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exporting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export hours as CSV</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export projects as CSV</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export the whole database</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Importing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full path to .sql file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Currency string too long!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid to email address!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid cc email address!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid bcc email address!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Read more about exporting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Launching external browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CSV saved to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Database saved to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Read more about importing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No file path given</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DANGER ZONE!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import now!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View logs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rows are replaced from the imported file in case of entries already in the database.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This makes it possible to update edited rows.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trying to import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timer options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add break when using timer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default break is added automatically when using timer.</source>
+        <source>description</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>worker</name>
-    <message>
-        <source>Project was not found</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Duration</source>
         <translation type="unfinished"></translation>
@@ -1071,6 +1114,10 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project was not found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
