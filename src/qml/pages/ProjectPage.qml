@@ -168,24 +168,28 @@ Page {
             BackgroundItem {
                 anchors {
                     fill: parent
-                    margins: Theme.paddingMedium
+                    margins: Theme.paddingMedium * scaleFactor()
                 }
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: Theme.rgba(project.labelColor, Theme.highlightBackgroundOpacity)
+                    color: Theme.secondaryHighlightColor
                     radius: 10.0
                     width: parent.width
                     height: parent.height
                     Label {
-                        y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
                         text: summaryModel.section(index)
+                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     }
                     Label {
-                        y: 3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
                         text: model.hours
                         font.bold: true
+                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     }
                 }
                 onClicked: {

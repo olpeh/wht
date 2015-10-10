@@ -179,7 +179,28 @@ Page {
             breakDuration = defaultDur
         }
 
-        if(!fromCover) {
+        if (stopFromCommandLine) {
+            var description = "Automatically saved from command line"
+            var project = defaultProjectId
+            var uid = DB.getUniqueId()
+            var taskId = "0"
+
+            var d = new Date()
+            //YYYY-MM-DD
+            var yyyy = d.getFullYear().toString();
+            var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+            var dd  = d.getDate().toString();
+            var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
+            var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
+            var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
+
+            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+            DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
+
+            getHours()
+        }
+
+        else if(!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,
                                   uid: 0,
@@ -187,7 +208,7 @@ Page {
                                   startSelectedHour:startSelectedHour,
                                   endSelectedHour:endSelectedHour,
                                   endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration, fromTimer: true})
+                                  duration:duration, breakDuration:breakDuration, fromTimer: true}, PageStackAction.Immediate)
         }
         else {
             if(pageStack.depth > 1) {
@@ -271,9 +292,14 @@ Page {
     }
 
     onStatusChanged: {
-        if (root.status === PageStatus.Active && projects.length > 1) {
-            if (pageStack._currentContainer.attachedContainer == null) {
-                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root});
+        if (root.status === PageStatus.Active) {
+            if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
+                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate);
+            }
+            if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
+                banner.notify(qsTr("Timer stopped by command line argument"));
+                stop();
+                pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
             }
         }
     }
@@ -301,7 +327,7 @@ Page {
         //console.log("Get hours from database...");
         getHours();
         getStartTime();
-        if(startTime !== "Not started"){
+        if(startTime !== "Not started") {
             timerRunning = true;
             updateStartTime();
             getBreakStartTime();
@@ -318,9 +344,14 @@ Page {
         else {
             duration = 0;
             durationNow = "0h 0min";
+            // Start timer from command line
+            if (startFromCommandLine) {
+                banner.notify(qsTr("Timer started by command line argument"));
+                start();
+            }
 
             // Automatically start timer if allowed in settings
-            if(settings.getTimerAutoStart()){
+            else if(settings.getTimerAutoStart()){
                 banner.notify(qsTr("Timer was autostarted"))
                 start();
             }
@@ -426,7 +457,7 @@ Page {
             BackgroundItem {
                 anchors {
                     fill: parent
-                    margins: Theme.paddingMedium
+                    margins: Theme.paddingMedium * scaleFactor()
                 }
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -435,15 +466,19 @@ Page {
                     width: parent.width
                     height: parent.height
                     Label {
-                        y: Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
                         text: summaryModel.section(index)
+                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     }
                     Label {
-                        y: 3 * Theme.paddingLarge
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
                         text: model.hours
                         font.bold: true
+                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     }
                 }
                 onClicked: {
@@ -465,17 +500,21 @@ Page {
             color: Theme.secondaryHighlightColor
             radius: 10.0
             anchors.fill: parent
-            anchors.margins: Theme.paddingMedium
+            anchors.margins: Theme.paddingMedium * scaleFactor()
 
             Label {
                 id: timerText
-                y: Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
+                font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                 text: qsTr("Timer is not running")
             }
             Label {
-                y:3 * Theme.paddingLarge
                 anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
+                font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                 text: qsTr("Click to start")
                 font.bold: true
             }
@@ -499,26 +538,26 @@ Page {
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium
+                anchors.margins: Theme.paddingMedium * scaleFactor()
                 Label {
                     visible: breakTimerRunning
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    y: Theme.paddingMedium
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: Theme.paddingMedium * scaleFactor()
                     text: breakDurationNow
                 }
                 Image {
                     id: pauseImage
                     source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                     anchors.centerIn: parent
-                    scale: 0.5
+                    scale: 0.5 * scaleFactor()
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: parent.height - this.height - Theme.paddingMedium
+                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: qsTr("Break")
                 }
             }
@@ -541,28 +580,28 @@ Page {
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium
+                anchors.margins: Theme.paddingMedium * scaleFactor()
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: Theme.paddingMedium
+                    y: Theme.paddingMedium * scaleFactor()
                     color: Theme.primaryColor
                     id: durationNowLabel
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: durationNow
                 }
                 Image {
                     id: stopImage
                     source: "image://theme/icon-cover-cancel"
                     anchors.centerIn: parent
-                    scale: 0.5
+                    scale: 0.5 * scaleFactor()
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: parent.height - this.height - Theme.paddingMedium
+                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
                     color: Theme.primaryColor
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: qsTr("Stop")
                 }
             }
@@ -597,12 +636,12 @@ Page {
                 color: Theme.secondaryHighlightColor
                 radius: 10.0
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium
+                anchors.margins: Theme.paddingMedium * scaleFactor()
                 Label {
-                    y: Theme.paddingMedium
+                    y: Theme.paddingMedium * scaleFactor()
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: qsTr("Started")
                 }
                 Label {
@@ -610,13 +649,14 @@ Page {
                     id: startedAt
                     color: Theme.secondaryColor
                     font.bold: true
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: startTime
                 }
                 Label {
-                    y: parent.height - this.height - Theme.paddingMedium
+                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
                     text: qsTr("Adjust")
                 }
             }
