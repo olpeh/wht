@@ -72,19 +72,19 @@ Dialog {
         }
         Item {
             width: parent.width
-            height: 40
+            height: 40 * scaleFactor()
         }
         Text {
             id: warningText
             visible: !canAccept
-            font.pointSize: Theme.fontSizeMedium
+            font.pointSize: Theme.fontSizeMedium * scaleFactor()
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
             width: root.width
             anchors {
                 left: parent.left
                 right: parent.right
-                margins: Theme.paddingLarge
+                margins: Theme.paddingLarge * scaleFactor()
             }
             text: qsTr("Break can not be longer than the duration!")
         }

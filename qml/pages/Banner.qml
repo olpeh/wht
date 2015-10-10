@@ -55,13 +55,13 @@ MouseArea {
     Label {
         id: message
         anchors.verticalCenter: popup.verticalCenter
-        font.pixelSize: 32
+        font.pixelSize: 32 * scaleFactor()
         font.bold: true
         //color: "#000"
         anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingLarge
+        anchors.leftMargin: Theme.paddingLarge * scaleFactor()
         anchors.right: parent.right
-        anchors.rightMargin: Theme.paddingLarge
+        anchors.rightMargin: Theme.paddingLarge * scaleFactor()
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         wrapMode: Text.Wrap
