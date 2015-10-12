@@ -4,6 +4,11 @@ TARGET = harbour-workinghourstracker
 
 CONFIG += sailfishapp
 
+appicons.path = /usr/share/icons/hicolor
+appicons.files = appicons/*
+
+INSTALLS += appicons
+
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
@@ -21,7 +26,11 @@ OTHER_FILES = qml/*.qml \
               harbour-workinghourstracker.desktop \
               ../rpm/harbour-workinghourstracker.changes \
               ../rpm/harbour-workinghourstracker.spec \
-              ../rpm/harbour-workinghourstracker.yaml
+              ../rpm/harbour-workinghourstracker.yaml \
+              appicons/86x86/apps/harbour-workinghourstracker.png \
+              appicons/108x108/apps/harbour-workinghourstracker.png \
+              appicons/128x128/apps/harbour-workinghourstracker.png \
+              appicons/256x256/apps/harbour-workinghourstracker.png
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += ../translations/harbour-workinghourstracker-fi.ts \
