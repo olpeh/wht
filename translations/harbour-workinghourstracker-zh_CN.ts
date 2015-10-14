@@ -1068,41 +1068,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
 </context>
 <context>
-    <name>main</name>
-    <message>
-        <source>Start the timer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop the timer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select project by id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select task by id.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>description</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>worker</name>
     <message>
         <source>Duration</source>
