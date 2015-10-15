@@ -54,10 +54,6 @@ ApplicationWindow
     property variant projects: []
     property string currencyString: "€"
 
-    // Helper function for scaling elements according to screen size
-    function scaleFactor() {
-        return Screen.height / 960
-    }
 
     id: appWindow
     initialPage: Component {

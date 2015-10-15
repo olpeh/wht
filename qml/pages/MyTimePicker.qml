@@ -85,7 +85,7 @@ Dialog {
             anchors {
                 left: parent.left
                 right: parent.right
-                margins: Theme.paddingLarge * scaleFactor()
+                margins: Theme.paddingLarge
             }
             text: qsTr("Break can not be longer than the duration!")
         }

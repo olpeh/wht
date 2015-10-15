@@ -212,7 +212,7 @@ Dialog {
                 acceptText: qsTr("Save")
                 cancelText: qsTr("Cancel")
             }
-            spacing: 15
+            spacing: Theme.paddingLarge
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
@@ -221,7 +221,9 @@ Dialog {
                 id: timeSwitch
                 checked: true
                 text: qsTr("Ends now")
+                width: parent.width * 0.7
                 description: qsTr("Endtime will be set to now.")
+                anchors.horizontalCenter: parent.horizontalCenter
                 onCheckedChanged: {
                     timeSwitch.text = checked ? qsTr("Ends now") : qsTr("Starts now")
                     timeSwitch.description = checked ? qsTr("Endtime will be set to now.") : qsTr("Starttime will be set to now.")
@@ -237,9 +239,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: datePicked.height
                     ValueButton {
                         id: datePicked
                         anchors.centerIn: parent
@@ -264,9 +266,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: startTime.height
                     ValueButton {
                         id: startTime
                         anchors.centerIn: parent
@@ -308,9 +310,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: endTime.height
                     ValueButton {
                         id: endTime
                         anchors.centerIn: parent
@@ -350,8 +352,10 @@ Dialog {
             TextSwitch {
                 id: fixedSwitch
                 checked: true
+                width: parent.width * 0.7
                 text: qsTr("Endtime stays fixed")
                 description: qsTr("Starttime will flex if duration is changed.")
+                anchors.horizontalCenter: parent.horizontalCenter
                 onCheckedChanged: {
                     fixedSwitch.text = checked ? qsTr("Endtime stays fixed") : qsTr("Starttime stays fixed")
                     fixedSwitch.description = checked ? qsTr("Starttime will flex if duration is changed.") : qsTr("Endtime will flex if duration is changed.")
@@ -365,9 +369,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: duration>=0 ? Theme.secondaryHighlightColor : "red"
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: durationButton.height
                     ValueButton {
                         id: durationButton
                         anchors.centerIn: parent
@@ -406,9 +410,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: breakDurationButton.height
                     ValueButton {
                         id: breakDurationButton
                         anchors.centerIn: parent
@@ -445,9 +449,9 @@ Dialog {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
-                    radius: 10.0
-                    width: 380
-                    height: 80
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: netDurationButton.height
                     ValueButton {
                         id: netDurationButton
                         anchors.centerIn: parent
@@ -483,6 +487,8 @@ Dialog {
             }
             ComboBox {
                 id: projectCombo
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Project")
                 menu: ContextMenu {
                     Repeater {
@@ -545,6 +551,8 @@ Dialog {
             // Task ComboBox
             ComboBox {
                 id: taskCombo
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Task")
                 menu: ContextMenu {
                     Repeater {
