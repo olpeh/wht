@@ -261,7 +261,8 @@ Page {
             BackgroundItem {
                 id: contentItem
                 width: parent.width
-                height: model.hourlyRate > 0 ? 210 : 180
+                height: column.height + Theme.paddingLarge
+                //model.hourlyRate > 0 ? 210 : 180
                 Rectangle {
                     anchors.fill: parent
                     color: Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity)

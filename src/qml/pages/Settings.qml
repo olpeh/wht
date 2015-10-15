@@ -79,7 +79,7 @@ Page {
 
         Column {
             id: column
-            spacing: 20
+            spacing: Theme.paddingLarge
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             PageHeader {
@@ -92,8 +92,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: editProjectsButton
@@ -109,8 +109,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: defaultDurationButton
@@ -145,8 +145,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: defaultBreakDurationButton
@@ -178,6 +178,8 @@ Page {
             SectionHeader { text: qsTr("Adding hours") }
             TextSwitch {
                 id: timeSwitch
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 checked: true
                 text: qsTr("Ends now by default")
                 description: qsTr("Endtime will be set to now by default.")
@@ -194,6 +196,8 @@ Page {
             }
             TextSwitch {
                 id: fixedSwitch
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 checked: true
                 text: qsTr("Endtime stays fixed by default.")
                 description: qsTr("Starttime will flex if duration is changed.")
@@ -209,6 +213,8 @@ Page {
             SectionHeader { text: qsTr("Timer options") }
             TextSwitch {
                 id: autoStartSwitch
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 checked: false
                 text: qsTr("Autostart timer on app startup")
                 description: qsTr("Timer will get started automatically if not already running.")
@@ -223,6 +229,8 @@ Page {
             TextSwitch {
                 id: defaultBreakInTimerSwitch
                 checked: true
+                width: parent.width * 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Add break when using timer")
                 description: qsTr("Default break is added automatically when using timer.")
                 onCheckedChanged: {
@@ -357,8 +365,8 @@ Page {
                     id: dump
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: dumpLabel
@@ -383,8 +391,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: exportHoursCSV
@@ -410,8 +418,8 @@ Page {
                     id: projectCSV
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: exportProjectsCSV
@@ -457,8 +465,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: importHoursCSV
@@ -482,8 +490,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: importProjectsCSV
@@ -532,8 +540,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: importButton
@@ -576,8 +584,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: moveHoursButton
@@ -615,8 +623,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: movingHoursButton
@@ -650,8 +658,8 @@ Page {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
-                    width: parent.width - 2*Theme.paddingLarge
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
                     height: 100
                     Label {
                         id: resetButton

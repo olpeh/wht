@@ -168,28 +168,28 @@ Page {
             BackgroundItem {
                 anchors {
                     fill: parent
-                    margins: Theme.paddingMedium * scaleFactor()
+                    margins: Theme.paddingMedium
                 }
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
+                    radius: Theme.paddingMedium
                     width: parent.width
                     height: parent.height
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
+                        anchors.verticalCenterOffset: -Theme.paddingLarge
                         text: summaryModel.section(index)
-                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                        font.pixelSize: Theme.fontSizeSmall
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
+                        anchors.verticalCenterOffset: Theme.paddingLarge
                         text: model.hours
                         font.bold: true
-                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                        font.pixelSize: Theme.fontSizeSmall
                     }
                 }
                 onClicked: {

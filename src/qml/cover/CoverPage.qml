@@ -58,7 +58,7 @@ CoverBackground {
         icon.source: "wht.png"
         anchors.fill: parent
         opacity: 0.8
-        anchors.topMargin: 35
+        anchors.topMargin: 2 * Theme.paddingLarge
     }
     CoverActionList {
         id: coverAction
@@ -110,11 +110,12 @@ CoverBackground {
         spacing: Theme.paddingMedium;
         anchors.horizontalCenter: parent.horizontalCenter
         y: Theme.paddingMedium
+        width: parent.width
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: 210
+            radius: Theme.paddingMedium
+            width: parent.width - Theme.paddingLarge
             height: 80
             Label {
                 anchors.centerIn: parent
@@ -128,8 +129,8 @@ CoverBackground {
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: 210
+            radius: Theme.paddingMedium
+            width: parent.width - Theme.paddingLarge
             height: 80
             Label {
                 anchors.centerIn: parent
@@ -144,8 +145,8 @@ CoverBackground {
             visible: !timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: 210
+            radius: Theme.paddingMedium
+            width: parent.width - Theme.paddingLarge
             height: 80
             Label {
                 anchors.centerIn: parent
@@ -160,8 +161,8 @@ CoverBackground {
             visible: timerRunning && !breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: 210
+            radius: Theme.paddingMedium
+            width: parent.width - Theme.paddingLarge
             height: 80
             IconButton {
                 id: iconButton
@@ -183,8 +184,8 @@ CoverBackground {
             visible: breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: 10.0
-            width: 210
+            radius: Theme.paddingMedium
+            width: parent.width - Theme.paddingLarge
             height: 80
             Item {
             width: childrenRect.width

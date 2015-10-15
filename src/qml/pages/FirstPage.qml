@@ -457,28 +457,28 @@ Page {
             BackgroundItem {
                 anchors {
                     fill: parent
-                    margins: Theme.paddingMedium * scaleFactor()
+                    margins: Theme.paddingMedium
                 }
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
-                    radius: 10.0
+                    radius: Theme.paddingMedium
                     width: parent.width
                     height: parent.height
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
+                        anchors.verticalCenterOffset: -Theme.paddingLarge
                         text: summaryModel.section(index)
-                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                        font.pixelSize: Theme.fontSizeSmall
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
+                        anchors.verticalCenterOffset: Theme.paddingLarge
                         text: model.hours
                         font.bold: true
-                        font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                        font.pixelSize: Theme.fontSizeSmall
                     }
                 }
                 onClicked: {
@@ -498,23 +498,23 @@ Page {
         width: parent.width
         Rectangle {
             color: Theme.secondaryHighlightColor
-            radius: 10.0
+            radius: Theme.paddingMedium
             anchors.fill: parent
-            anchors.margins: Theme.paddingMedium * scaleFactor()
+            anchors.margins: Theme.paddingMedium
 
             Label {
                 id: timerText
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: -Theme.paddingLarge * scaleFactor()
-                font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                anchors.verticalCenterOffset: -Theme.paddingLarge
+                font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Timer is not running")
             }
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: Theme.paddingLarge * scaleFactor()
-                font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                anchors.verticalCenterOffset: Theme.paddingLarge
+                font.pixelSize: Theme.fontSizeSmall
                 text: qsTr("Click to start")
                 font.bold: true
             }
@@ -536,28 +536,28 @@ Page {
             height: parent.height
             Rectangle {
                 color: Theme.secondaryHighlightColor
-                radius: 10.0
+                radius: Theme.paddingMedium
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium * scaleFactor()
+                anchors.margins: Theme.paddingMedium
                 Label {
                     visible: breakTimerRunning
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: Theme.paddingMedium * scaleFactor()
+                    y: Theme.paddingMedium
                     text: breakDurationNow
                 }
                 Image {
                     id: pauseImage
                     source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                     anchors.centerIn: parent
-                    scale: 0.5 * scaleFactor()
+                    scale: 0.5
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
+                    y: parent.height - this.height - Theme.paddingMedium
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: qsTr("Break")
                 }
             }
@@ -578,30 +578,30 @@ Page {
             Rectangle {
                 opacity: breakTimerRunning? 0.5 : 1
                 color: Theme.secondaryHighlightColor
-                radius: 10.0
+                radius: Theme.paddingMedium
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium * scaleFactor()
+                anchors.margins: Theme.paddingMedium
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: Theme.paddingMedium * scaleFactor()
+                    y: Theme.paddingMedium
                     color: Theme.primaryColor
                     id: durationNowLabel
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: durationNow
                 }
                 Image {
                     id: stopImage
                     source: "image://theme/icon-cover-cancel"
                     anchors.centerIn: parent
-                    scale: 0.5 * scaleFactor()
+                    scale: 0.5
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
+                    y: parent.height - this.height - Theme.paddingMedium
                     color: Theme.primaryColor
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: qsTr("Stop")
                 }
             }
@@ -634,14 +634,14 @@ Page {
             Rectangle {
                 opacity: breakTimerRunning? 0.5 : 1
                 color: Theme.secondaryHighlightColor
-                radius: 10.0
+                radius: Theme.paddingMedium
                 anchors.fill: parent
-                anchors.margins: Theme.paddingMedium * scaleFactor()
+                anchors.margins: Theme.paddingMedium
                 Label {
-                    y: Theme.paddingMedium * scaleFactor()
+                    y: Theme.paddingMedium
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: qsTr("Started")
                 }
                 Label {
@@ -649,14 +649,14 @@ Page {
                     id: startedAt
                     color: Theme.secondaryColor
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: startTime
                 }
                 Label {
-                    y: parent.height - this.height - Theme.paddingMedium * scaleFactor()
+                    y: parent.height - this.height - Theme.paddingMedium
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
-                    font.pixelSize: Theme.fontSizeSmall * scaleFactor()
+                    font.pixelSize: Theme.fontSizeSmall
                     text: qsTr("Adjust")
                 }
             }

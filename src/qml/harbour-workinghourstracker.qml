@@ -56,10 +56,6 @@ ApplicationWindow
     readonly property string _APP_VERSION: appVersion
     readonly property string _APP_BUILD_NUMBER: appBuildNum
 
-    // Helper function for scaling elements according to screen size
-    function scaleFactor() {
-        return Screen.height / 960
-    }
 
     id: appWindow
     initialPage: Component {
