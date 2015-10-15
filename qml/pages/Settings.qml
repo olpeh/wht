@@ -85,7 +85,7 @@ Page {
             PageHeader {
                 title: qsTr("Settings")
             }
-            RemorseItem { id: remorse }
+            RemorsePopup { id: remorse }
             SectionHeader { text: qsTr("Projects") }
             BackgroundItem {
                 height: 100
@@ -551,7 +551,7 @@ Page {
                 }
                 onClicked:{
                     if (dumpImport.text) {
-                        remorse.execute(settingsPage, qsTr("Importing") + " " + dumpImport.text, function() {
+                        remorse.execute(qsTr("Importing") + " " + dumpImport.text, function() {
                             Log.info(qsTr("Trying to import")+": " +dumpImport.text);
                             var resp = exporter.importDump(dumpImport.text);
                             banner.notify(resp);
@@ -595,7 +595,7 @@ Page {
                 }
                 onClicked:{
                     if (defaultProjectId !== "")
-                        remorse.execute(settingsPage, qsTr("Move all hours to default project"), function() {
+                        remorse.execute(qsTr("Move all hours to default project"), function() {
                             banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId));
                         })
                     else
@@ -604,7 +604,7 @@ Page {
             }
             SectionHeader { text: qsTr("Move by project name in description") }
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -633,7 +633,7 @@ Page {
                     }
                 }
                 onClicked: {
-                    remorse.execute(settingsPage,qsTr("Moving hours to projects in description"), function() {
+                    remorse.execute(qsTr("Moving hours to projects in description"), function() {
                          banner.notify(settingsPage.dataContainer.moveAllHoursToProjectByDesc());
                      })
                  }
@@ -667,7 +667,7 @@ Page {
                         text: qsTr("Reset database")
                     }
                 }
-                onClicked: remorse.execute(settingsPage,qsTr("Resetting database"), function() {
+                onClicked: remorse.execute(qsTr("Resetting database"), function() {
                     if (dataContainer != null){
                        settingsPage.dataContainer.resetDatabase();
                        projects = settingsPage.dataContainer.getProjects();

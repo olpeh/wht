@@ -345,11 +345,11 @@ Page {
                 width: parent.width
                 height: 10
             }
-            RemorseItem { id: remorse }
+            RemorsePopup { id: remorse }
             function remove() {
                 //console.log(index)
                 //console.log(model.uid)
-                remorse.execute(myListItem, qsTr("Removing"), function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
+                remorse.execute(qsTr("Removing"), function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
 
             }
         }
