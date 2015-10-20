@@ -1,0 +1,136 @@
+header {
+    text-align: center;
+    background-color: #159957;
+    background-image: -webkit-linear-gradient(30deg, #009CCA, #007814);
+    background-image: -o-linear-gradient(30deg, #009CCA, #007814);
+    background-image: linear-gradient(120deg, #009CCA, #007814);
+    padding: 20px 0 40px 0;
+    color: white;
+}
+
+.app-icon {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+}
+
+.nav-home {
+    margin-left: 15%;
+}
+.project-name {
+    font-size: 5.5rem;
+    font-weight: bold;
+}
+
+.project-tagline {
+    margin-bottom: 2rem;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+body {
+    margin-top: 50px;
+}
+
+.image-bg-fluid-height,
+.image-bg-fixed-height {
+    text-align: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.img-center {
+	margin: 0 auto;
+}
+
+.image-bg-fluid-height {
+    background-color: #159957;
+    background-image: -webkit-linear-gradient(30deg, #009CCA, #007814);
+    background-image: -o-linear-gradient(30deg, #009CCA, #007814);
+    background-image: linear-gradient(120deg, #009CCA, #007814);
+    padding: 35px 0;
+}
+
+section {
+    padding: 75px 0;
+}
+
+.section-heading {
+    margin: 30px 0;
+    font-size: 1.75em;
+}
+
+.section-lead {
+    margin: 30px 0;
+    font-size: 0.8em;
+}
+
+.section-paragraph {
+    margin: 30px 0;
+    font-size: 0.6em;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+footer {
+    padding: 50px 0;
+    color: white;
+    text-align: center;
+    background-color: #159957;
+    background-image: -webkit-linear-gradient(30deg, #009CCA, #007814);
+    background-image: -o-linear-gradient(30deg, #009CCA, #007814);
+    background-image: linear-gradient(120deg, #009CCA, #007814);
+}
+
+footer a {
+    color: white;
+}
+@media(max-width:768px) {
+    section {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .section-heading {
+        font-size: 1.5em;
+    }
+}
+
+@media(max-width: 42em) {
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 1.25rem;
+        font-size: 1.45rem;
+        text-align: center;
+    }
+
+    .project-name {
+        font-size: 3.75rem;
+        margin-top: 0;
+        margin-bottom: 0.1rem;
+    }
+
+    .project-tagline {
+        font-size: 1.9rem;
+    }
+}
+
+@media(min-width: 42em) {
+    .btn + .btn {
+        margin-left: 1.35rem;
+    }
+}

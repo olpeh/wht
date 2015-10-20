@@ -1,525 +1,285 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Working Hours Tracker by olpeh</title>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <meta name="description" content="Work time manager for Sailfish OS">
+    <meta name="author" content="Olavi Haapala">
+    <title>Working Hours Tracker by olpeh</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Working Hours Tracker</h1>
-      <h2 class="project-tagline">Work time manager for Sailfish OS</h2>
-      <a href="https://github.com/olpeh/wht" class="btn">View on GitHub</a>
-      <a href="https://github.com/olpeh/wht/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/olpeh/wht/tarball/master" class="btn">Download .tar.gz</a>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="nav-home" href="">
+                  <img class="app-icon" src="img/86.png" alt="WHT appicon">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#how-to-use">How to use</a>
+                    </li>
+                    <li>
+                        <a href="#stats">Download stats</a>
+                    </li>
+                    <li>
+                        <a href="#changelog">Changelog</a>
+                    </li>
+                    <li>
+                        <a href="#license">License</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h2>
+    <header>
+        <h1 class="project-name">Working Hours Tracker</h1>
+        <h2 class="project-tagline">Work time manager for Sailfish OS</h2>
+        <img class="img-responsive img-center" src="img/wht.png" alt="WHT Logo">
+        <a href="https://github.com/olpeh/wht" class="btn">View on GitHub</a>
+        <a href="https://openrepos.net/content/olpe/working-hours-tracker" class="btn">Get it from OpenRepos</a>
+        <a href="https://flattr.com/submit/auto?user_id=olpe&url=http%3A%2F%2Folpeh.github.io/wht" class="btn">Flattr this project</a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP-DonationsBF%3abtn_donateCC_LG.gif%3aNonHosted" class="btn">Donate using Paypal</a>
+    </header>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">About</h1>
+                    <p class="lead section-lead">An easy to use and simple Working Hours Tracker for SailfishOS.</p>
+                    <div class="section-paragraph">
+                      Keep track on your working hours easily with a native Working Hours Tracker application.<br><br>
+                      <b>Current features:</b>
+                      <ul>
+                        <li>Adding hours</li>
+                        <li>Timer</li>
+                        <li>Viewing hours in different categories</li>
+                        <li>Deleting</li>
+                        <li>Editing</li>
+                        <li>Resetting database in settings</li>
+                        <li>Cover actions for timer and adding new hours</li>
+                        <li>Cover info for today, week and month</li>
+                        <li>Changing effort times by adjusting duration</li>
+                        <li>Adding break possibility</li>
+                        <li>Settings for default duration and default break</li>
+                        <li>Setting for timer autostart on app startup</li>
+                        <li>Break functionality in timer</li>
+                        <li>Possibility to adjust timer start time</li>
+                        <li>Support for different projects</li>
+                        <li>Project coloring</li>
+                        <li>Shows price for efforts if project hourlyrate is set</li>
+                        <li>Project view</li>
+                        <li>Category summary</li>
+                        <li>Email reports</li>
+                        <li>Exporting as csv and .sql</li>
+                        <li>Importing .sql dump</li>
+                        <li>Error logging</li>
+                        <li>Tasks within projects</li>
+                      </ul><br>
+                    Donations are welcome <br>
+                    <a href="https://flattr.com/submit/auto?user_id=olpe&amp;url=https%3A%2F%2Fgithub.com%2Folpeh%2Fwht&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this git repo"></a><br>
+                    Paypal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=9HY294XX4EJFW&amp;lc=FI&amp;item_name=Olpe&amp;item_number=Working%20Hours%20Tracker&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">EUR</a><br>
+                    Paypal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=9HY294XX4EJFW&amp;lc=FI&amp;item_name=Olpe&amp;item_number=Working%20Hours%20Tracker&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">USD</a><br><br>
+                    Working Hours Tracker project is in transifex. Please contribute to translations there:<br>
+                    <a href="https://www.transifex.com/projects/p/working-hours-tracker/">Project in transifex</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside class="image-bg-fluid-height">
+      <img class="img-responsive img-center" src="img/whtcover.png" alt="WHT cover">
+    </aside>
+
+    <section id="how-to-use">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">How to use</h1>
+                    <p class="lead section-lead">Working Hours Tracker is quite easy to use. Here are some detailed explanations on how to use it.</p>
+                    <div class="section-paragraph">
+                      <h2>Adding hours</h2>
+                      <ol>
+                      <li>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</li>
+                      <li>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running. At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</li>
+                      </ol>
+
+                      <h2>Adding projects</h2>
+
+                      <p>Projects can be added and edited in the settings. You can select the labelcolor and hourlyrate for a project. You can edit projects by clicking them. When editing a project you can select if you want to make that project the
+                      default project which will be automatically selected when adding hours. If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</p>
+
+                      <h2>Using the timer</h2>
+
+                      <p>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</p>
+
+                      <p>On the left you have a break button which is meant to be used if you have a break 
+                      during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.</p>
+
+                      <p>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.</p>
+
+                      <p>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</p>
+
+                      <h2>Using the cover</h2>
+
+                      <p>Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</p>
+
+                      <p>When stopping the timer from the cover, it should open up the appwindow in the add view and after closing the dialog it should get minimized back to cover.</p>
+
+                      <h2>Summaries</h2>
+
+                      <p>On the first page you will see total hours for different categories. If you have more than one projects you should see a attached page that can be accessed by swiping left from the first page. There you can see hours for one project at a time</p>
+
+                      <p>Clicking a category will take you to the detailed listing view where you can see all entries in that category. You can edit those entries by clicking them.</p>
+
+                      <p>By swiping left in the detailed view you can see a detailed summary for that category.</p>
+
+                      <h2>Settings</h2>
+
+                      <p>There are a few settings in the settings page that makes adding hours faster and easier. Default duration and default break duration will be used when manually adding hours. Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</p>
+
+                      <p>Other settings are explained in the settings page and more will come in the future versions.</p>
+
+                      <h2>Exporting</h2>
+
+                      <p>In the settings you find different methods for exporting data from Working Hours Tracker.</p>
+
+                      <p>When selecting to export Hours as CSV the syntax will look like this: <br>
+                      <strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br></p>
+
+                      <p>Where entries surrounded by ' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:</p>
+
+                      <p>'2015231425401087574','2015-04-20','12:38','18:44',6.1,'20153191429477190454','Code review',0</p>
+
+                      <p>This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <br>
+                      <strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br></p>
+
+                      <p>Project in hours means a project id. <br><br>
+                      When exporting projects as CSV the syntax will look like this:<br>
+                      <strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br></p>
+
+                      <p>An example project line would look like this:<br>
+                      '20153191429477190454','Project name',0,0,0,0,'#ccb865'</p>
+
+                      <p>Exporting the whole database creates a sqlite dump of the database.<br></p>
+
+                      <h2>Importing</h2>
+
+                      <p>At the moment importing is only possible from a .sql file. The .csv file support will come later.<br>
+                      Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br></p>
+
+                      <p><strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside class="image-bg-fluid-height">
+      <img class="img-responsive img-center" src="img/screenshot1.png" alt="Screenshot1">
+    </aside>
+    <section id="stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">Download stats</h1>
+                    <p class="lead section-lead">Since 14.10.2015</p>
+                    <div class="section-paragraph">
+                      <div id="stats-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                      <h2>Latest stats</h2>
+                      <div class="stats-summary">...</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside class="image-bg-fluid-height">
+      <img class="img-responsive img-center" src="img/screenshot2.png" alt="Screenshot2">
+    </aside>
+
+    <section id="changelog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">Changelog</h1>
+                    <p class="lead section-lead">See changelog in GitHub</p>
+                    <div class="section-paragraph">
+                      <a href="https://github.com/olpeh/wht/blob/master/CHANGELOG.md">CHANGELOG.md</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside class="image-bg-fluid-height">
+      <img class="img-responsive img-center" src="img/screenshot3.png" alt="Screenshot3">
+    </aside>
+
+    <section id="license">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">License</h1>
+                    <p class="lead section-lead">BSD 3-clause</p>
+                    <div class="section-paragraph">
+                      <p>Copyright (C) 2015 Olavi Haapala.
+                      <a href="mailto:harbourwht@gmail.com">harbourwht@gmail.com</a>
+                      Twitter: @0lpeh
+                      IRC: olpe
+                      All rights reserved.</p>
+
+                      <p>Redistribution and use in source and binary forms, with or without
+                      modification, are permitted provided that the following conditions are met:</p>
+
+                      <ul>
+                      <li><p>Redistributions of source code must retain the above copyright notice, this
+                      list of conditions and the following disclaimer.</p></li>
+                      <li><p>Redistributions in binary form must reproduce the above copyright notice,
+                      this list of conditions and the following disclaimer in the documentation
+                      and/or other materials provided with the distribution.</p></li>
+                      <li><p>Neither the name of wht nor the names of its
+                      contributors may be used to endorse or promote products derived from
+                      this software without specific prior written permission.</p></li>
+                      </ul>
+
+                      <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+                      AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+                      IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+                      DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+                      FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+                      DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+                      SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+                      CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+                      OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+                      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+                  </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="main-content">
-      <h1>
-<a id="working-hours-tracker" class="anchor" href="#working-hours-tracker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working Hours Tracker</h1>
-
-<p>An easy to use and simple Working Hours Tracker for SailfishOS</p>
-
-<p>v. 1.1.1-3 (for phone and tablet) available in Jolla store (12.10.2015)<br></p>
-
-<p>v. 1.1.1-3 Available in <a href="https://openrepos.net/content/olpe/working-hours-tracker">openrepos</a></p>
-
-<h2>
-<a id="quick-links" class="anchor" href="#quick-links" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick links</h2>
-
-<p><a href="#changelog">Changelog</a><br>
-<a href="#current-features">Current features</a><br>
-<a href="#license">License</a><br>
-<a href="#roadmap">Roadmap</a><br>
-<a href="#how-to-use">How to use</a><br>
-<a href="#exporting">Exporting</a><br>
-<a href="#importing">Importing</a></p>
-
-<h2>
-<a id="donate" class="anchor" href="#donate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Donate</h2>
-
-<p>Donations are welcome :)<br></p>
-
-<p><a href="https://flattr.com/submit/auto?user_id=olpe&amp;url=https%3A%2F%2Fgithub.com%2Folpeh%2Fwht&amp;tags=github&amp;category=software"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this git repo"></a></p>
-
-<p>Paypal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=9HY294XX4EJFW&amp;lc=FI&amp;item_name=Olpe&amp;item_number=Working%20Hours%20Tracker&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">EUR</a><br>
-Paypal <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=9HY294XX4EJFW&amp;lc=FI&amp;item_name=Olpe&amp;item_number=Working%20Hours%20Tracker&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">USD</a></p>
-
-<h2>
-<a id="translate" class="anchor" href="#translate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translate</h2>
-
-<p>Working Hours Tracker project is in transifex. Please contribute to translations there:</p>
-
-<p><a href="https://www.transifex.com/projects/p/working-hours-tracker/">https://www.transifex.com/projects/p/working-hours-tracker/</a></p>
-
-<h2>
-<a id="current-features" class="anchor" href="#current-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current features:</h2>
-
-<ul>
-<li>Adding hours</li>
-<li>Timer - saves starting time to database</li>
-<li>Viewing hours in different categories</li>
-<li>Deleting</li>
-<li>Editing</li>
-<li>Resetting database in settings</li>
-<li>Cover actions for timer and adding new hours</li>
-<li>Cover info for today, week and month</li>
-<li>Changing effort times by adjusting duration</li>
-<li>Adding break possibility</li>
-<li>Settings for default duration and default break</li>
-<li>Setting for timer autostart on app startup</li>
-<li>Break functionality in timer</li>
-<li>Possibility to adjust timer start time</li>
-<li>Support for different projects</li>
-<li>Project coloring</li>
-<li>Shows price for efforts if project hourlyrate is set</li>
-<li>Project view</li>
-<li>Category summary</li>
-<li>Email reports</li>
-<li>Exporting as csv</li>
-<li>Exporting as .sql dump</li>
-<li>Importing database dump</li>
-<li>Translations</li>
-<li>Logging</li>
-<li>Setting for default break in timer</li>
-<li>Tasks within projects</li>
-<li>Autofill last used input</li>
-</ul>
-
-<h2>
-<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap:</h2>
-
-<ul>
-<li>Importing .csv</li>
-<li>Requested features</li>
-<li>Graphs?</li>
-</ul>
-
-<h2>
-<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h2>
-
-<h3>
-<a id="adding-hours" class="anchor" href="#adding-hours" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding hours</h3>
-
-<p>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</p>
-
-<ol>
-<li>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</li>
-<li>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running. At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</li>
-</ol>
-
-<h3>
-<a id="adding-projects" class="anchor" href="#adding-projects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding projects</h3>
-
-<p>Projects can be added and edited in the settings. You can select the labelcolor and hourlyrate for a project. You can edit projects by clicking them. When editing a project you can select if you want to make that project the
-default project which will be automatically selected when adding hours. If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</p>
-
-<h3>
-<a id="using-the-timer" class="anchor" href="#using-the-timer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the timer</h3>
-
-<p>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</p>
-
-<p>On the left you have a break button which is meant to be used if you have a break 
-during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.</p>
-
-<p>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.</p>
-
-<p>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</p>
-
-<h3>
-<a id="using-the-cover" class="anchor" href="#using-the-cover" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the cover</h3>
-
-<p>Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</p>
-
-<p>When stopping the timer from the cover, it should open up the appwindow in the add view and after closing the dialog it should get minimized back to cover.</p>
-
-<h3>
-<a id="summaries" class="anchor" href="#summaries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summaries</h3>
-
-<p>On the first page you will see total hours for different categories. If you have more than one projects you should see a attached page that can be accessed by swiping left from the first page. There you can see hours for one project at a time</p>
-
-<p>Clicking a category will take you to the detailed listing view where you can see all entries in that category. You can edit those entries by clicking them.</p>
-
-<p>By swiping left in the detailed view you can see a detailed summary for that category.</p>
-
-<h3>
-<a id="settings" class="anchor" href="#settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings</h3>
-
-<p>There are a few settings in the settings page that makes adding hours faster and easier. Default duration and default break duration will be used when manually adding hours. Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</p>
-
-<p>Other settings are explained in the settings page and more will come in the future versions.</p>
-
-<h3>
-<a id="exporting" class="anchor" href="#exporting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exporting</h3>
-
-<p>In the settings you find different methods for exporting data from Working Hours Tracker.</p>
-
-<p>When selecting to export Hours as CSV the syntax will look like this: <br>
-<strong>'uid','date','startTime','endTime',duration,'project','description',breakDuration</strong><br></p>
-
-<p>Where entries surrounded by ' are strings (LONGVARCHAR or TEXT in the sqlite database) And durations are of type REAL with . as decimal separator. An example line would look like this:</p>
-
-<p>'2015231425401087574','2015-04-20','12:38','18:44',6.1,'20153191429477190454','Code review',0</p>
-
-<p>This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <br>
-<strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br></p>
-
-<p>Project in hours means a project id. <br><br>
-When exporting projects as CSV the syntax will look like this:<br>
-<strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br></p>
-
-<p>An example project line would look like this:<br>
-'20153191429477190454','Project name',0,0,0,0,'#ccb865'</p>
-
-<p>Exporting the whole database creates a sqlite dump of the database.<br></p>
-
-<h3>
-<a id="importing" class="anchor" href="#importing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Importing</h3>
-
-<p>At the moment importing is only possible from a .sql file. The .csv file support will come later.<br>
-Don't worry for duplicates when importing because the entries have unique id's and duplicates cannot exist in the database due to unique constraints.<br></p>
-
-<p><strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong></p>
-
-<h1>
-<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h1>
-
-<h2>
-<a id="110-1---2015-08-12" class="anchor" href="#110-1---2015-08-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.1.0-1] - 2015-08-12</h2>
-
-<h3>
-<a id="changed" class="anchor" href="#changed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changed</h3>
-
-<ul>
-<li>Improved performance by using workerscript</li>
-</ul>
-
-<h3>
-<a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixed</h3>
-
-<ul>
-<li>Bugfix: unable to save hours</li>
-</ul>
-
-<h2>
-<a id="109-2---2015-07-20" class="anchor" href="#109-2---2015-07-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.9-2] - 2015-07-20</h2>
-
-<h3>
-<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixed</h3>
-
-<ul>
-<li>Fixed norwegian translation was not working</li>
-</ul>
-
-<h2>
-<a id="109-1---2015-07-18" class="anchor" href="#109-1---2015-07-18" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.9-1] - 2015-07-18</h2>
-
-<h3>
-<a id="changed-1" class="anchor" href="#changed-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changed</h3>
-
-<ul>
-<li>Some code refactoring</li>
-</ul>
-
-<h3>
-<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fixed</h3>
-
-<ul>
-<li>Fixed a bug when adding hours from cover</li>
-</ul>
-
-<h3>
-<a id="added" class="anchor" href="#added" aria-hidden="true"><span class="octicon octicon-link"></span></a>Added</h3>
-
-<ul>
-<li>Automatically select last used input when adding hours</li>
-<li>BusyIndicator when loading hours from DB</li>
-</ul>
-
-<h2>
-<a id="108-1---2015-07-15" class="anchor" href="#108-1---2015-07-15" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.8-1] - 2015-07-15</h2>
-
-<ul>
-<li>Updated translations</li>
-<li>Updated contactinfo</li>
-<li>Added flattr link to about</li>
-</ul>
-
-<h2>
-<a id="107-1" class="anchor" href="#107-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.7-1]</h2>
-
-<ul>
-<li>Fixed task selection bug</li>
-<li>More flexible layout</li>
-<li>Enabled landscape mode</li>
-<li>Added new languages and updated translations</li>
-</ul>
-
-<h2>
-<a id="106-2" class="anchor" href="#106-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.6-2]</h2>
-
-<ul>
-<li>Added tasks selection</li>
-<li>Tasks can be added and edited in settings</li>
-</ul>
-
-<h2>
-<a id="105-1" class="anchor" href="#105-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.5-1]</h2>
-
-<ul>
-<li>Setting to use default break also in timer</li>
-<li>Fixed error with empty emails</li>
-<li>Use of haptics</li>
-<li>Fixed rounding bug in email reports</li>
-</ul>
-
-<h2>
-<a id="104-3" class="anchor" href="#104-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.4-3]</h2>
-
-<ul>
-<li>Updated translations</li>
-<li>Prepare for harbour update</li>
-</ul>
-
-<h2>
-<a id="103-1" class="anchor" href="#103-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.3-1]</h2>
-
-<ul>
-<li>Fixed issue with banner</li>
-<li>Added logging</li>
-<li>Added saving log file</li>
-<li>Added sending log file</li>
-<li>Small improvements</li>
-</ul>
-
-<h2>
-<a id="102-1" class="anchor" href="#102-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.2-1]</h2>
-
-<ul>
-<li>Fix the bug #23 (thx ttln)</li>
-<li>Added notification banner</li>
-<li>Added email reports sending</li>
-<li>Added exporting as CSV</li>
-<li>Added exporting as .sql</li>
-<li>Added importing .sql</li>
-<li>More input validation</li>
-</ul>
-
-<h2>
-<a id="101-1" class="anchor" href="#101-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.1-1]</h2>
-
-<ul>
-<li>Bugfixes: #10, #13 and #6</li>
-<li>Added translations for ca, zh_CN, nl_NL, fi, de, es</li>
-</ul>
-
-<h2>
-<a id="100-1" class="anchor" href="#100-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[1.0.0-1]</h2>
-
-<ul>
-<li>Initial harbour release</li>
-<li>Updated about page</li>
-<li>Added howto page</li>
-<li>Fixed two bugs</li>
-</ul>
-
-<h2>
-<a id="092-2" class="anchor" href="#092-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.9.2-2]</h2>
-
-<ul>
-<li>Added category summary view</li>
-<li>Added project view</li>
-<li>Changed to hh:mm format</li>
-<li>Added option to select currency string</li>
-<li>2 bugfixes</li>
-</ul>
-
-<h2>
-<a id="089-2" class="anchor" href="#089-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.9-2]</h2>
-
-<ul>
-<li>Removed unused project properties</li>
-<li>Moved settings to first page pulley</li>
-<li>Added remorse timers to 2 settings</li>
-<li>Bugfix for #8 project was resetted to default</li>
-</ul>
-
-<h2>
-<a id="088-4" class="anchor" href="#088-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.8-4]</h2>
-
-<ul>
-<li>Support for different projects</li>
-<li>Project coloring</li>
-<li>Category view renewed layout</li>
-</ul>
-
-<h2>
-<a id="087-2" class="anchor" href="#087-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.7-2]</h2>
-
-<ul>
-<li>Added setting to autostart timer on app startup</li>
-<li>Added break functionality to the timer</li>
-<li>Fixed an issue when timer used from cover</li>
-<li>Simplified parts of the code</li>
-<li>Small bugfixes</li>
-</ul>
-
-<h2>
-<a id="086-1" class="anchor" href="#086-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.6-1]</h2>
-
-<ul>
-<li>redesigned the firstpage</li>
-<li>moved timer to firstpage</li>
-<li>fixed a few issues</li>
-</ul>
-
-<h2>
-<a id="084-1" class="anchor" href="#084-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.4-1]</h2>
-
-<ul>
-<li>Fix for settings (now gets saved)</li>
-<li>Small bugfix for values shown in firstpage</li>
-</ul>
-
-<h2>
-<a id="083-3" class="anchor" href="#083-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.3-3]</h2>
-
-<ul>
-<li>Modified cover text color</li>
-<li>Changed desktop name</li>
-<li>Added toggles to adding hours</li>
-<li>Added settings for default duration and break</li>
-<li>Fixed bug in deleting items</li>
-<li>Added donation links</li>
-</ul>
-
-<h2>
-<a id="082-1" class="anchor" href="#082-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.2-1]</h2>
-
-<ul>
-<li>Added validator for adding hours</li>
-<li>Added today to cover</li>
-<li>Added stop timer button to timer page</li>
-<li>Appwindow gets now deactivated when adding hours from the cover</li>
-<li>Two bugfixes</li>
-</ul>
-
-<h2>
-<a id="081-1" class="anchor" href="#081-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.1-1]</h2>
-
-<ul>
-<li>Fixed a bug in database creation</li>
-</ul>
-
-<h2>
-<a id="080-1" class="anchor" href="#080-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.8.0-1]</h2>
-
-<ul>
-<li>Added break possibility</li>
-<li>Minor bugfixes</li>
-</ul>
-
-<h2>
-<a id="070-2" class="anchor" href="#070-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.7.0-2]</h2>
-
-<ul>
-<li>Added new cover action</li>
-<li>Added cover info</li>
-<li>Adjusted colors</li>
-<li>Added possibility to change duration when adding</li>
-</ul>
-
-<h2>
-<a id="065-1" class="anchor" href="#065-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.6.5-1]</h2>
-
-<ul>
-<li>Added placeholder text</li>
-<li>Added category to pageheader</li>
-<li>Small bugfixes</li>
-</ul>
-
-<h2>
-<a id="064-1" class="anchor" href="#064-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.6.4-1]</h2>
-
-<ul>
-<li>Bugfix for adding</li>
-</ul>
-
-<h2>
-<a id="063-1" class="anchor" href="#063-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.6.3-1]</h2>
-
-<ul>
-<li>Added about info</li>
-<li>Created icons</li>
-<li>added settings page</li>
-<li>Fixed database resetting bug</li>
-</ul>
-
-<h2>
-<a id="062-1" class="anchor" href="#062-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.6.2-1]</h2>
-
-<ul>
-<li>Fixed sorting order</li>
-<li>Updating detailed view after edit</li>
-<li>added license</li>
-</ul>
-
-<h2>
-<a id="061-1" class="anchor" href="#061-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>[0.6.1-1]</h2>
-
-<ul>
-<li>Added edition possibility</li>
-<li>Deletion possible</li>
-<li>Some bugfixes </li>
-</ul>
-
-<h1>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
-
-<p>Copyright (C) 2015 Olavi Haapala.
-<a href="mailto:harbourwht@gmail.com">harbourwht@gmail.com</a>
-Twitter: @0lpeh
-IRC: olpe
-All rights reserved.</p>
-
-<p>Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:</p>
-
-<ul>
-<li><p>Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.</p></li>
-<li><p>Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation
-and/or other materials provided with the distribution.</p></li>
-<li><p>Neither the name of wht nor the names of its
-contributors may be used to endorse or promote products derived from
-this software without specific prior written permission.</p></li>
-</ul>
-
-<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/olpeh/wht">Working Hours Tracker</a> is maintained by <a href="https://github.com/olpeh">olpeh</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/olpeh/wht">Working Hours Tracker</a> is maintained by <a href="https://github.com/olpeh">olpeh</a>.</span>
+    </footer>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/data.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
 </html>
