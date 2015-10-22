@@ -18,30 +18,30 @@ $(function () {
             labels: {
                 format: '{value}',
                 style: {
-                    color: Highcharts.getOptions().colors[2]
+                    color: Highcharts.getOptions().colors[0]
                 }
             },
             title: {
                 text: 'Amount',
                 style: {
-                    color: Highcharts.getOptions().colors[2]
+                    color: Highcharts.getOptions().colors[0]
                 }
-            }
+            },
+            opposite: true
         }, { // Secondary yAxis
             gridLineWidth: 0,
             title: {
                 text: 'Likes',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[2]
                 }
             },
             labels: {
                 format: '{value} likes',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[2]
                 }
-            },
-            opposite: true
+            }
         }],
         series: [
             {
@@ -64,9 +64,9 @@ $(function () {
     };
     $.getJSON('http://vps161572.ovh.net/wht/wht.php', function(data) {
         $.each(data, function(key, value) {
-            options.series[0].data.push([value.inserted, parseInt(value.downloads)]);
-            options.series[1].data.push([value.inserted, parseInt(value.actives)]);
-            options.series[2].data.push([value.inserted, parseInt(value.likes)]);
+            options.series[0].data.push([value.inserted.split(" ")[0], parseInt(value.downloads)]);
+            options.series[1].data.push([value.inserted.split(" ")[0], parseInt(value.actives)]);
+            options.series[2].data.push([value.inserted.split(" ")[0], parseInt(value.likes)]);
             options.xAxis[0].categories.push(value.inserted.split(" ")[0]);
         });
         var latest = data.pop()
