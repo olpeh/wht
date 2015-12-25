@@ -14,6 +14,12 @@ TARGET = harbour-workinghourstracker
 
 CONFIG += sailfishapp
 
+appicons.path = /usr/share/icons/hicolor
+
+appicons.files = appicons/*
+
+INSTALLS += appicons
+
 SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
@@ -25,6 +31,10 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/FirstPage.qml \
     rpm/harbour-workinghourstracker.spec \
     rpm/harbour-workinghourstracker.yaml \
+    appicons/86x86/apps/harbour-workinghourstracker.png \
+    appicons/108x108/apps/harbour-workinghourstracker.png \
+    appicons/128x128/apps/harbour-workinghourstracker.png \
+    appicons/256x256/apps/harbour-workinghourstracker.png \
     translations/*.ts \
     harbour-workinghourstracker.desktop \
     qml/pages/About.qml \
