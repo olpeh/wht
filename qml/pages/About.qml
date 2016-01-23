@@ -69,6 +69,23 @@ Page {
                 }
                 text: qsTr("Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.")
             }
+            Item {
+                width: parent.width
+                height: Theme.paddingMedium
+            }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("Your current version and build number %1-%2").arg(appVersion).arg(appBuildNum);
+            }
+
             SectionHeader { text: qsTr("Usage") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall

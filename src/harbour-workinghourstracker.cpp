@@ -61,6 +61,16 @@ int main(int argc, char *argv[])
     Exporter exporter;
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+    app->setApplicationName("harbour-workinghourstracker");
+    QCoreApplication::setApplicationName("harbour-workinghourstracker");
+
+    QQuickWindow::setDefaultAlphaBuffer(true);
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    view->rootContext()->setContextProperty("appVersion", APP_VERSION);
+    view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
+    qDebug() << "Version:" << APP_VERSION << "-" << APP_BUILDNUM << QDateTime::currentDateTime().toString();
+
     QCommandLineParser parser;
 
     // Starting the timer (--start)
@@ -104,12 +114,6 @@ int main(int argc, char *argv[])
     qDebug() << selectedProject;
     qDebug() << selectedTask;
     qDebug() << setDescription;
-
-    app->setApplicationName("harbour-workinghourstracker");
-    QCoreApplication::setApplicationName("harbour-workinghourstracker");
-
-    QQuickWindow::setDefaultAlphaBuffer(true);
-    QScopedPointer<QQuickView> view(SailfishApp::createView());
 
     view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
     view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);

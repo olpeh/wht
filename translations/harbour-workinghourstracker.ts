@@ -88,6 +88,10 @@ The source code is licensed under BSD 3-clause.</source>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Your current version and build number %1-%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Add</name>

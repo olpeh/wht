@@ -54,7 +54,6 @@ ApplicationWindow
     property variant projects: []
     property string currencyString: "€"
 
-
     id: appWindow
     initialPage: Component {
         FirstPage {

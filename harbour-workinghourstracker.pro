@@ -20,6 +20,9 @@ appicons.files = appicons/*
 
 INSTALLS += appicons
 
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
+
 SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
