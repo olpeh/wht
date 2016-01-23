@@ -1,10 +1,15 @@
 # Changelog
 
+## [1.1.2-1] - 2016-01-22
+### Fixed
+- Scaling fixes for tablet version
+- Fix annoying bug with the description text
+
 ## [1.1.1-2] - 2015-10-10
 ### Fixed
 - Bugfix: #36 unable to send email report
 
-## [1.1.1-1] - 2015-08-18 
+## [1.1.1-1] - 2015-08-18
 - Added command line option for stopping and starting the timer
 
 ## [1.1.0-1] - 2015-08-12

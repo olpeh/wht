@@ -7,6 +7,10 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Fri Jan 22 2016 Olavi Haapala <harbourwht@gmail.com> 1.1.2-1
+- Scaling fixes for tablet version
+- Fix annoying bug with the description text
+
 * Sat Oct 10 2015 Olavi Haapala <harbourwht@gmail.com> 1.1.1-3
 - Simple scaling for tablet release
 
