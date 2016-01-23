@@ -66,6 +66,6 @@ desktop-file-install --delete-original       \
 %{_bindir}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/
 # >> files
 # << files
