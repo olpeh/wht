@@ -503,11 +503,15 @@ Dialog {
                 }
                 onCurrentItemChanged: {
                     if (projectComboInitialized) {
-                        var selectedValue = modelSource.get(currentIndex).value
+                        var selectedValue = modelSource.get(currentIndex).value;
                         project = modelSource.get(currentIndex).id;
-                        var lastUsed = DB.getLastUsed(project)
-                        taskId = lastUsed['taskId']
-                        descriptionTextArea.text = lastUsed['description']
+                        var lastUsed = DB.getLastUsed(project);
+                        if (lastUsed['taskId']!=='') {
+                            taskId = lastUsed['taskId']
+                        }
+                        if (lastUsed['description']!=='') {
+                            descriptionTextArea.text = lastUsed['description']
+                        }
                     }
                     projectComboInitialized = true;
                     taskCombo.init();
@@ -569,8 +573,15 @@ Dialog {
                     if (currentIndex !==-1) {
                         var selectedValue = taskModelSource.get(currentIndex).value
                         taskId = taskModelSource.get(currentIndex).id
-                        var lastUsed = DB.getLastUsed(project, taskId)
-                        descriptionTextArea.text = lastUsed['description']
+                        if(taskId > 0) {
+                            var lastUsed = DB.getLastUsed(project, taskId)
+                            if (lastUsed['taskId']!=='') {
+                                taskId = lastUsed['taskId']
+                            }
+                            if (lastUsed['description']!=='') {
+                                descriptionTextArea.text = lastUsed['description']
+                            }
+                        }
                     }
                 }
                 function deleteAll() {
@@ -614,7 +625,7 @@ Dialog {
                 id: taskModelSource
             }
 
-            TextField{
+            TextField {
                 id: descriptionTextArea
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
@@ -651,8 +662,9 @@ Dialog {
                 else if(nowByDefault === "no")
                     timeSwitch.checked = false
 
-                if (description != qsTr("No description"))
+                if (description != qsTr("No description")) {
                     descriptionTextArea.text = description;
+                }
                 if(dateText != qsTr("Today"))
                     updateDateText()
                 if (breakDuration > 0) {
