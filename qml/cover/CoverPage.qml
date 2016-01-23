@@ -36,6 +36,7 @@ import Sailfish.Silica 1.0
 import "../config.js" as DB
 
 CoverBackground {
+    id: cover
     property bool active: status == Cover.Active
     onActiveChanged: {
         if(active) {
@@ -117,7 +118,7 @@ CoverBackground {
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
-            height: 80
+            height: cover.height / 5
             Label {
                 anchors.centerIn: parent
                 id: todayLabel
@@ -132,7 +133,7 @@ CoverBackground {
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
-            height: 80
+            height: cover.height / 5
             Label {
                 anchors.centerIn: parent
                 id: week
@@ -148,7 +149,7 @@ CoverBackground {
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
-            height: 80
+            height: cover.height / 5
             Label {
                 anchors.centerIn: parent
                 id: month
@@ -164,7 +165,7 @@ CoverBackground {
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
-            height: 80
+            height: cover.height / 5
             IconButton {
                 id: iconButton
                 icon.source: "image://theme/icon-cover-timer"
@@ -187,7 +188,7 @@ CoverBackground {
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
-            height: 80
+            height: cover.height / 5
             Item {
             width: childrenRect.width
                 anchors.horizontalCenter: parent.horizontalCenter

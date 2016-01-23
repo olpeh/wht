@@ -544,7 +544,6 @@ Page {
                     id: pauseImage
                     source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                     anchors.centerIn: parent
-                    scale: 0.5
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -587,7 +586,6 @@ Page {
                     id: stopImage
                     source: "image://theme/icon-cover-cancel"
                     anchors.centerIn: parent
-                    scale: 0.5
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
