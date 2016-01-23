@@ -1,9 +1,17 @@
 # Changelog
 
-## [1.1.2-1] - 2016-01-22
+## [1.1.3-1] - 2016-01-23
 ### Fixed
 - Scaling fixes for tablet version
 - Fix annoying bug with the description text
+
+## [1.1.2-1] - 2015-10-18
+### Fixed
+- More device agnostig item sizing and scaling
+- Fix for remorse popup in landscape orientiation
+
+### Added
+- Appicons in different sizes
 
 ## [1.1.1-2] - 2015-10-10
 ### Fixed
