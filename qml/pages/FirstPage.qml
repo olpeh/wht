@@ -289,11 +289,9 @@ Page {
     onStatusChanged: {
         if (root.status === PageStatus.Active && !versionCheckDone) {
             var lastVersionUsed = settings.getLastVersionUsed();
-            console.log(lastVersionUsed);
             var current = appVersion + "-" + appBuildNum;
-            console.log(current)
             if (lastVersionUsed !== current) {
-                console.log("App updated");
+                Log.info("App updated");
                 pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
             }
             settings.setLastVersionUsed(current);

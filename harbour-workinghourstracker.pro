@@ -25,7 +25,7 @@ DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
 message($${DEFINES})
 
-system("touch harbour-workinghourstracker.cpp")
+system("touch src/harbour-workinghourstracker.cpp")
 
 SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
