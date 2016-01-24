@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.4-1] - 2016-01-24
+### Added
+- Added version numbering to about page
+- Added what's new dialog after updating
+
 ## [1.1.3-1] - 2016-01-23
 ### Fixed
 - Scaling fixes for tablet version
@@ -178,4 +183,4 @@
 ## [0.6.1-1]
 - Added edition possibility
 - Deletion possible
-- Some bugfixes 
+- Some bugfixes
