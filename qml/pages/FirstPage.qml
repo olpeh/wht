@@ -296,7 +296,7 @@ Page {
                 console.log("App updated");
                 pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
             }
-            settings.setLastVersionUsed(appVersion);
+            settings.setLastVersionUsed(current);
             versionCheckDone = true;
         }
 
