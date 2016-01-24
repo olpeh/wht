@@ -41,7 +41,7 @@ Dialog {
 
     Component.onCompleted: {
         var xhr = new XMLHttpRequest;
-        xhr.open("GET", "../CHANGELOG.md");
+        xhr.open("GET", "../harbour-workinghourstracker.changes");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 changeLogText = xhr.responseText;
@@ -61,26 +61,12 @@ Dialog {
                 cancelText: qsTr("Ok")
             }
             PageHeader {
-                title: qsTr("App updated!")
+                title: qsTr("App updated to %1-%2").arg(appVersion).arg(appBuildNum);
             }
             spacing: Theme.paddingLarge
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
-
-            SectionHeader { text: qsTr("Your version") }
-            Text {
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.primaryColor
-                wrapMode: Text.WordWrap
-                width: root.width
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-                }
-                text: qsTr("Your current version and build number: %1-%2").arg(appVersion).arg(appBuildNum);
-            }
 
             SectionHeader { text: qsTr("What's new?") }
             Text {

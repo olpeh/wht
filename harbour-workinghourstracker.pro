@@ -23,6 +23,10 @@ INSTALLS += appicons
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
 
+message($${DEFINES})
+
+system("touch harbour-workinghourstracker.cpp")
+
 SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
@@ -82,3 +86,5 @@ HEADERS += \
 
 QT += dbus \
    core sql
+
+DISTFILES +=

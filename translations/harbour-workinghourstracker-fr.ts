@@ -1078,19 +1078,11 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>What&apos;s new?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>App updated!</source>
+        <source>App updated to %1-%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
