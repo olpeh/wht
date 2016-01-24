@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.4-1] - 2016-01-24
+## [1.1.4-4] - 2016-01-24
 ### Added
 - Added version numbering to about page
 - Added what's new dialog after updating

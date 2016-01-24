@@ -1,0 +1,1 @@
+/home/olpe/jolla/harbour-workinghourstracker/CHANGELOG.md

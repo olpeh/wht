@@ -89,4 +89,4 @@ QT += dbus \
 
 DISTFILES += \
     qml/md.js\
-    CHANGELOG.md
+    qml/CHANGELOG.md
