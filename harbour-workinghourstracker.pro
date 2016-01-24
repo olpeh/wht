@@ -87,4 +87,6 @@ HEADERS += \
 QT += dbus \
    core sql
 
-DISTFILES +=
+DISTFILES += \
+    qml/md.js\
+    CHANGELOG.md

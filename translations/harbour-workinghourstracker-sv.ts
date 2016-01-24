@@ -387,7 +387,19 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Timer stopped by command line argument</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -396,10 +408,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -460,14 +468,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adjust</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timer stopped by command line argument</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timer started by command line argument</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

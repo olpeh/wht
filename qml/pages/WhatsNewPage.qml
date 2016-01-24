@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../md.js" as MD
 
 Dialog {
     id: page
@@ -41,10 +42,10 @@ Dialog {
 
     Component.onCompleted: {
         var xhr = new XMLHttpRequest;
-        xhr.open("GET", "../harbour-workinghourstracker.changes");
+        xhr.open("GET", "../CHANGELOG.md");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                changeLogText = xhr.responseText;
+                changeLogText = MD.md2html(xhr.responseText);
             }
         }
         xhr.send();
@@ -70,7 +71,7 @@ Dialog {
 
             SectionHeader { text: qsTr("What's new?") }
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: Theme.fontSizeMedium
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -79,6 +80,7 @@ Dialog {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
+                textFormat: Text.RichText
                 text: changeLogText;
             }
         }
