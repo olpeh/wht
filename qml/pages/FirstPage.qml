@@ -39,6 +39,7 @@ import "../config.js" as DB
 
 Page {
     id: root
+    property bool versionCheckDone: false
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     //ThemeEffect {
@@ -286,7 +287,19 @@ Page {
     }
 
     onStatusChanged: {
-        if (root.status === PageStatus.Active) {
+        if (root.status === PageStatus.Active && !versionCheckDone) {
+            var lastVersionUsed = settings.getLastVersionUsed();
+            console.log(lastVersionUsed);
+            console.log(appVersion)
+            if (lastVersionUsed !== appVersion) {
+                console.log("Got updated");
+                pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
+            }
+            settings.setLastVersionUsed(appVersion);
+            versionCheckDone = true;
+        }
+
+        if (root.status === PageStatus.Active && versionCheckDone) {
             if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
                 pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate);
             }

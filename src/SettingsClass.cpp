@@ -224,3 +224,18 @@ void Settings::setBccAddress(QString value) {
     s.setValue("bccAddress", value);
     s.endGroup();
 }
+
+QString Settings::getLastVersionUsed() {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    lastVersionUsed = s.value("lastVersionUsed", "").toString();
+    s.endGroup();
+    return lastVersionUsed;
+}
+
+void Settings::setLastVersionUsed(QString value) {
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("lastVersionUsed", value);
+    s.endGroup();
+}

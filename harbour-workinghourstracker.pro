@@ -55,7 +55,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/HowTo.qml \
     qml/pages/Banner.qml \
     qml/pages/LogViewer.qml \
-    qml/worker.js
+    qml/worker.js\
+    qml/pages/WhatsNewPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

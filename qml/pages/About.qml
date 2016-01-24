@@ -83,7 +83,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: qsTr("Your current version and build number %1-%2").arg(appVersion).arg(appBuildNum);
+                text: qsTr("Your current version and build number: %1-%2").arg(appVersion).arg(appBuildNum);
             }
 
             SectionHeader { text: qsTr("Usage") }

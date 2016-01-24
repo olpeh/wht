@@ -76,6 +76,9 @@ public:
     Q_INVOKABLE QString getBccAddress();
     Q_INVOKABLE void setBccAddress(QString value);
 
+    Q_INVOKABLE QString getLastVersionUsed();
+    Q_INVOKABLE void setLastVersionUsed(QString value);
+
 
 private:
     QString defaultProject;
@@ -90,5 +93,6 @@ private:
     QString toAddress;
     QString ccAddress;
     QString bccAddress;
+    QString lastVersionUsed;
 };
 #endif // SETTINGSCLASS_H

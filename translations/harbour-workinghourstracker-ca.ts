@@ -89,7 +89,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your current version and build number %1-%2</source>
+        <source>Your current version and build number: %1-%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1068,6 +1068,29 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WhatsNewPage</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What&apos;s new?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your current version and build number: %1-%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>App updated!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
