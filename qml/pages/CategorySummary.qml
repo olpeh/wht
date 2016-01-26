@@ -102,11 +102,12 @@ Page {
         delegate: Item {
             id: myListItem
             width: ListView.view.width
-
-            height: model.price > 0 ? 210 : 180
+            height: contentItem.childrenRect.height + Theme.paddingLarge
 
             Rectangle {
-                anchors.fill: parent
+                id: contentItem
+                width: parent.width
+                height: column.height + Theme.paddingLarge
                 color: model.labelColor ? Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity) : Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
                 Column {
                     id: column
