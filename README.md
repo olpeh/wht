@@ -10,7 +10,7 @@ v. 1.1.5-1 available in [openrepos] (https://openrepos.net/content/olpe/working-
 
 ## Quick links
 
-[Changelog] (https://github.com/olpeh/wht/blob/master/CHANGELOG.md)<br />
+[Changelog] (https://github.com/olpeh/wht/blob/master/qml/CHANGELOG.md)<br />
 [Current features] (#current-features)<br />
 [License] (https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
 [Roadmap] (#roadmap)<br />
