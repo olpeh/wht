@@ -1,4 +1,9 @@
 # Changelog
+## [1.1.5-1] - 2016-01-26
+### Fixed
+- Fixed summary page layout
+- Fixed first page layout when using the pulldown menu
+- Decreased banner text size
 
 ## [1.1.4-5] - 2016-01-24
 ### Added
