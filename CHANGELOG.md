@@ -1,1 +1,1 @@
-/home/olpe/jolla/harbour-workinghourstracker/qml/CHANGELOG.md
+qml/CHANGELOG.md
