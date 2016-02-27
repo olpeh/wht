@@ -2,7 +2,7 @@
 
 An easy to use and simple Working Hours Tracker for SailfishOS
 
-v. 1.1.1-3 (for phone and tablet) available in Jolla store (12.10.2015)<br />
+v. 1.1.5-1 (for phone and tablet) available in Jolla store (27.01.2016)<br />
 
 v. 1.1.5-1 available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
 
@@ -10,7 +10,7 @@ v. 1.1.5-1 available in [openrepos] (https://openrepos.net/content/olpe/working-
 
 ## Quick links
 
-[Changelog] (https://github.com/olpeh/wht/blob/master/CHANGELOG.md)<br />
+[Changelog] (https://github.com/olpeh/wht/blob/master/qml/CHANGELOG.md)<br />
 [Current features] (#current-features)<br />
 [License] (https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
 [Roadmap] (#roadmap)<br />
