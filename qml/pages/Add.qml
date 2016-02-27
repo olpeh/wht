@@ -624,15 +624,16 @@ Dialog {
             ListModel {
                 id: taskModelSource
             }
-
             TextField {
                 id: descriptionTextArea
+                width: parent.width
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: focus = false
-                width: parent.width
                 placeholderText: qsTr("Enter an optional description")
+                onClicked: {
+                    selectAll();
+                }
                 //onFocusChanged: descriptionTextArea.text = removeInvalidCharacters(descriptionTextArea.text)
-
             }
             Item {
                 width: parent.width
