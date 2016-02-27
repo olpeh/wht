@@ -190,7 +190,6 @@ Dialog {
                     id: addImage
                     source: "image://theme/icon-cover-new"
                     anchors.centerIn: parent
-                    scale: 0.4
                 }
                 onClicked: {
                     addTaskItem.visible = false
