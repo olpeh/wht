@@ -35,7 +35,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 //import QtFeedback 5.0
 import "../config.js" as DB
-
+import "../helpers.js" as HH
 
 Page {
     id: root
@@ -186,6 +186,18 @@ Page {
             var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
             var dd  = d.getDate().toString();
             var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
+
+            if (roundToNearest) {
+                var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute);
+                startSelectedHour = startValues.hour;
+                startSelectedMinute = startValues.minute;
+                var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute);
+                endSelectedHour = endValues.hour;
+                endSelectedMinute = endValues.minute;
+                duration = HH.calcRoundToNearest(duration);
+                breakDuration = HH.calcRoundToNearest(breakDuration);
+            }
+
             var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
             var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
 
@@ -316,6 +328,7 @@ Page {
         DB.updateIfNeededToV3();
         // Initialize the database
         DB.initialize();
+        roundToNearest = settings.getRoundToNearest()
         projects = DB.getProjects();
         if (projects.length === 0) {
             Log.info("No projects found so let's create one.");

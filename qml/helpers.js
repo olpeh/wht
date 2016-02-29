@@ -48,3 +48,19 @@ Array.prototype.findById = function(id) {
     }
     return false;
 }
+
+function calcRoundToNearest(value) {
+    var inMinutes = value * 60;
+    inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
+    return inMinutes / 60;
+}
+
+function hourMinuteRoundToNearest(hour, minute) {
+    var inHours = hour + (minute / 60);
+    inHours = calcRoundToNearest(inHours);
+    var inMinutes = inHours * 60;
+    return {
+        'hour': Math.floor(inMinutes / 60),
+        'minute': inMinutes % 60
+    }
+}

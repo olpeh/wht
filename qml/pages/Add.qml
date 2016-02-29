@@ -34,6 +34,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "../config.js" as DB
+import "../helpers.js" as HH
+
 Dialog {
     id: page
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
@@ -60,7 +62,6 @@ Dialog {
     property bool endTimeStaysFixed: true
     property variant tasks: []
     property bool projectComboInitialized: false
-    property int roundToNearest: 0
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
@@ -193,32 +194,16 @@ Dialog {
         updateEndTime()
     }
 
-    function calcRoundToNearest(value) {
-        var inMinutes = value * 60;
-        inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
-        return inMinutes / 60;
-    }
-
-    function hourMinuteRoundToNearest(hour, minute) {
-        var inHours = hour + (minute / 60);
-        inHours = calcRoundToNearest(inHours);
-        var inMinutes = inHours * 60;
-        return {
-            'hour': Math.floor(inMinutes / 60),
-            'minute': inMinutes % 60
-        }
-    }
-
     function doRoundToNearest() {
         if (roundToNearest) {
-            var startValues = hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute);
+            var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute);
             startSelectedHour = startValues.hour;
             startSelectedMinute = startValues.minute;
-            var endValues = hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute);
+            var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute);
             endSelectedHour = endValues.hour;
             endSelectedMinute = endValues.minute;
-            duration = calcRoundToNearest(duration);
-            breakDuration = calcRoundToNearest(breakDuration);
+            duration = HH.calcRoundToNearest(duration);
+            breakDuration = HH.calcRoundToNearest(breakDuration);
         }
     }
 

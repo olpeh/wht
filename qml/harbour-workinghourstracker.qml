@@ -53,6 +53,7 @@ ApplicationWindow
     property string defaultProjectId: ""
     property variant projects: []
     property string currencyString: "€"
+    property int roundToNearest: 0
 
     id: appWindow
     initialPage: Component {
