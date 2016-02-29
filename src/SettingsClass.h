@@ -79,6 +79,9 @@ public:
     Q_INVOKABLE QString getLastVersionUsed();
     Q_INVOKABLE void setLastVersionUsed(QString value);
 
+    Q_INVOKABLE int getRoundToNearest();
+    Q_INVOKABLE void setRoundToNearest(int value);
+
 
 private:
     QString defaultProject;
@@ -94,5 +97,6 @@ private:
     QString ccAddress;
     QString bccAddress;
     QString lastVersionUsed;
+    int roundToNearest;
 };
 #endif // SETTINGSCLASS_H

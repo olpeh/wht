@@ -1070,6 +1070,14 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Default break is added automatically when using timer.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Round to nearest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rounding happens when saving hours</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WhatsNewPage</name>

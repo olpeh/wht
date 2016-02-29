@@ -60,6 +60,7 @@ Dialog {
     property bool endTimeStaysFixed: true
     property variant tasks: []
     property bool projectComboInitialized: false
+    property int roundToNearest: 0
 
     //Simple validator to avoid adding negative or erroneous hours
     function validateHours() {
@@ -160,18 +161,18 @@ Dialog {
 
     //udpating breakDuration
     function updateBreakDuration() {
-        breakDurationButton.value = countHours(breakDuration) + ":" + countMinutes(breakDuration)
+        breakDurationButton.value = breakDuration.toString().toHHMM()
     }
 
     //udpating netDuration
     function updateNetDuration() {
         netDuration = duration - breakDuration
-        netDurationButton.value = countHours(netDuration) + ":" + countMinutes(netDuration)
+        netDurationButton.value = netDuration.toString().toHHMM()
     }
 
     //udpating duration
     function updateDuration() {
-        durationButton.value = countHours(duration) + ":" + countMinutes(duration)
+        durationButton.value = duration.toString().toHHMM()
     }
 
     //end now
@@ -190,6 +191,35 @@ Dialog {
         startSelectedMinute= now.getMinutes()
         startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
         updateEndTime()
+    }
+
+    function calcRoundToNearest(value) {
+        var inMinutes = value * 60;
+        inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
+        return inMinutes / 60;
+    }
+
+    function hourMinuteRoundToNearest(hour, minute) {
+        var inHours = hour + (minute / 60);
+        inHours = calcRoundToNearest(inHours);
+        var inMinutes = inHours * 60;
+        return {
+            'hour': Math.floor(inMinutes / 60),
+            'minute': inMinutes % 60
+        }
+    }
+
+    function doRoundToNearest() {
+        if (roundToNearest) {
+            var startValues = hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute);
+            startSelectedHour = startValues.hour;
+            startSelectedMinute = startValues.minute;
+            var endValues = hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute);
+            endSelectedHour = endValues.hour;
+            endSelectedMinute = endValues.minute;
+            duration = calcRoundToNearest(duration);
+            breakDuration = calcRoundToNearest(breakDuration);
+        }
     }
 
     // Not needed
@@ -273,11 +303,12 @@ Dialog {
                         id: startTime
                         anchors.centerIn: parent
                         function openTimeDialog() {
-                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
-                                            hour: startSelectedHour,
-                                            minute: startSelectedMinute,
-                                         })
+                            var dialog = pageStack.push("MyTimePicker.qml", {
+                                                        hourMode: (DateTime.TwentyFourHours),
+                                                        hour: startSelectedHour,
+                                                        minute: startSelectedMinute,
+                                                        roundToNearest: roundToNearest
+                                                     })
 
                             dialog.accepted.connect(function() {
                                 value = dialog.timeText
@@ -317,11 +348,12 @@ Dialog {
                         id: endTime
                         anchors.centerIn: parent
                         function openTimeDialog() {
-                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
-                                            hour: endSelectedHour,
-                                            minute: endSelectedMinute,
-                                         })
+                            var dialog = pageStack.push("MyTimePicker.qml", {
+                                                        hourMode: (DateTime.TwentyFourHours),
+                                                        hour: endSelectedHour,
+                                                        minute: endSelectedMinute,
+                                                        roundToNearest: roundToNearest
+                                                     })
 
                             dialog.accepted.connect(function() {
                                 value = dialog.timeText
@@ -378,11 +410,12 @@ Dialog {
                         function openTimeDialog() {
                             var durationHour = parseInt(countHours(duration))
                             var durationMinute = parseInt(countMinutes(duration))
-                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
-                                            hour: durationHour,
-                                            minute: durationMinute,
-                                         })
+                            var dialog = pageStack.push("MyTimePicker.qml", {
+                                                        hourMode: (DateTime.TwentyFourHours),
+                                                        hour: durationHour,
+                                                        minute: durationMinute,
+                                                        roundToNearest: roundToNearest
+                                                     })
 
                             dialog.accepted.connect(function() {
                                 value = dialog.timeText
@@ -399,7 +432,7 @@ Dialog {
                         }
 
                         label: qsTr("Duration")+": "
-                        value: countHours(duration) + ":" + countMinutes(duration);
+                        value: duration.toString().toHHMM()
                         width: parent.width
                         onClicked: openTimeDialog()
                     }
@@ -424,7 +457,8 @@ Dialog {
                                                         hourMode: (DateTime.TwentyFourHours),
                                                         hour: durationHour,
                                                         minute: durationMinute,
-                                                        duration: duration
+                                                        duration: duration,
+                                                        roundToNearest: roundToNearest
                                                      })
                             dialog.accepted.connect(function() {
                                 durationHour = dialog.hour
@@ -458,11 +492,12 @@ Dialog {
                         function openTimeDialog() {
                             var durationHour = parseInt(countHours(netDuration))
                             var durationMinute = parseInt(countMinutes(netDuration))
-                            var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
-                                            hour: durationHour,
-                                            minute: durationMinute,
-                                         })
+                            var dialog = pageStack.push("MyTimePicker.qml", {
+                                                        hourMode: (DateTime.TwentyFourHours),
+                                                        hour: durationHour,
+                                                        minute: durationMinute,
+                                                        roundToNearest: roundToNearest
+                                                     })
 
                             dialog.accepted.connect(function() {
                                 durationHour = dialog.hour
@@ -478,7 +513,7 @@ Dialog {
                             })
                         }
                         label: qsTr("Net duration")+": "
-                        value: countHours(netDuration) +":"+countMinutes(netDuration)
+                        value: netDuration.toString().toHHMM()
                         width: parent.width
                         onClicked: openTimeDialog()
                     }
@@ -668,6 +703,13 @@ Dialog {
                 }
                 if(dateText != qsTr("Today"))
                     updateDateText()
+
+                // Rounding should happen before updating the values visible
+                roundToNearest = settings.getRoundToNearest()
+                if (!editMode) {
+                    doRoundToNearest()
+                }
+
                 if (breakDuration > 0) {
                     updateBreakDuration();
                     updateNetDuration();

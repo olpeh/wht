@@ -42,7 +42,7 @@ Dialog {
     // Items from the Harmattan component interface
     property int hour
     property int minute
-    property double duration
+    property double duration: -1
     //property int second                   // not supported
     property int hourMode
     //property string acceptButtonText      // not supported
@@ -54,8 +54,25 @@ Dialog {
     property string timeText: timePicker._formatTime()
     canAccept: true
 
+    property int roundToNearest: 0
+    property int oldHour: hour
+
     function calculateCanAccept () {
-       canAccept = (((timePicker.hour)*60 + timePicker.minute) / 60) <= duration
+        if (duration !== -1) {
+            canAccept = (((timePicker.hour)*60 + timePicker.minute) / 60) <= duration
+        }
+    }
+
+    function doRoundToNearest() {
+        if (roundToNearest) {
+            var inMinutes = timePicker.hour * 60 + timePicker.minute;
+            inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
+            var tmpHour = Math.floor(inMinutes / 60);
+            if(Math.abs(tmpHour - oldHour) === 1) {
+                timePicker.hour = tmpHour;
+            }
+            timePicker.minute = inMinutes % 60
+        }
     }
 
     Column {
@@ -69,16 +86,16 @@ Dialog {
             id: timePicker
             anchors.horizontalCenter: parent.horizontalCenter
             onHourChanged: calculateCanAccept()
-            onMinuteChanged: calculateCanAccept()
+            onMinuteChanged: { doRoundToNearest(); calculateCanAccept() }
         }
         Item {
             width: parent.width
-            height: 40 * scaleFactor()
+            height: 40 * Theme.pixelRatio
         }
         Text {
             id: warningText
             visible: !canAccept
-            font.pointSize: Theme.fontSizeMedium * scaleFactor()
+            font.pointSize: Theme.fontSizeMedium
             color: Theme.highlightColor
             wrapMode: Text.WordWrap
             width: root.width
@@ -96,7 +113,6 @@ Dialog {
         timePicker.minute = minute
         timePicker.hourMode = hourMode
     }
-
 
     onDone: {
         if (result == DialogResult.Accepted) {
