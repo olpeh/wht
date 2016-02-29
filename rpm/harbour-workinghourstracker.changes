@@ -1,3 +1,7 @@
+* Mon Feb 29 2016 Olavi Haapala <harbourwht@gmail.com> 1.2.0-1
+- Workaround for issue #39
+- Possibility to use rounding
+
 * Tue Jan 26 2016 Olavi Haapala <harbourwht@gmail.com> 1.1.5-1
 - Fixed summary page layout
 - Fixed first page layout when using the pulldown menu

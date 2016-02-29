@@ -1,4 +1,12 @@
 # Changelog
+## [1.2.0-1] - 2016-02-29
+### Fixed
+- Workaround for issue #39
+
+### Added
+- Possibility to use rounding (still experimental, untested)
+- See settings -> Round to nearest
+
 ## [1.1.5-1] - 2016-01-26
 ### Fixed
 - Fixed summary page layout
