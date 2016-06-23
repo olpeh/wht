@@ -2,6 +2,7 @@
 ## [1.2.1-1] - 2016-06-23
 ### Fixed
 - Bugfix for issue #51
+
 ### Updated
 - Updated translations
 
