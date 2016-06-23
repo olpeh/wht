@@ -160,7 +160,7 @@ function getProject(projectId, projects) {
     }
     return {
         'name':qsTr('Project was not found'),
-        'labelColor': Theme.secondaryHighlightColor,
+        'labelColor': '#ed3a3d',
         'error': true
     };
 }
