@@ -1,4 +1,10 @@
 # Changelog
+## [1.2.1-1] - 2016-06-23
+### Fixed
+- Bugfix for issue #51
+### Updated
+- Updated translations
+
 ## [1.2.0-1] - 2016-02-29
 ### Fixed
 - Workaround for issue #39
