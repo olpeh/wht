@@ -41,14 +41,14 @@ Dialog {
     property string changeLogText: "Error fetching changelog"
 
     Component.onCompleted: {
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", "../CHANGELOG.md");
+        var xhr = new XMLHttpRequest
+        xhr.open("GET", "../CHANGELOG.md")
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                changeLogText = MD.md2html(xhr.responseText);
+                changeLogText = MD.md2html(xhr.responseText)
             }
         }
-        xhr.send();
+        xhr.send()
     }
 
     SilicaFlickable {
@@ -62,7 +62,7 @@ Dialog {
                 cancelText: qsTr("Ok")
             }
             PageHeader {
-                title: qsTr("App updated to %1-%2").arg(appVersion).arg(appBuildNum);
+                title: qsTr("App updated to %1-%2").arg(appVersion).arg(appBuildNum)
             }
             spacing: Theme.paddingLarge
             width: parent.width
@@ -81,7 +81,7 @@ Dialog {
                     margins: Theme.paddingLarge
                 }
                 textFormat: Text.RichText
-                text: changeLogText;
+                text: changeLogText
             }
         }
     }

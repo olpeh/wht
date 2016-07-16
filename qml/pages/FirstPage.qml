@@ -45,9 +45,8 @@ Page {
     property int startSelectedMinute : -1
 
     function resetDatabase(){
-        //console.log(hours);
-        DB.resetDatabase();
-        summaryModel.clear();
+        DB.resetDatabase()
+        summaryModel.clear()
     }
 
     function getHours() {
@@ -56,14 +55,14 @@ Page {
         today = DB.getHoursDay(0).toString().toHHMM()
         thisWeek = DB.getHoursWeek(0).toString().toHHMM()
         thisMonth = DB.getHoursMonth(0).toString().toHHMM()
-        summaryModel.set(0,{"hours": DB.getHoursDay(1).toString().toHHMM() });
-        summaryModel.set(1,{"hours": today });
-        summaryModel.set(2,{"hours": DB.getHoursWeek(1).toString().toHHMM() });
-        summaryModel.set(3,{"hours": thisWeek });
-        summaryModel.set(4,{"hours": DB.getHoursMonth(1).toString().toHHMM() });
-        summaryModel.set(5,{"hours": thisMonth });
-        summaryModel.set(6,{"hours": DB.getHoursAll().toString().toHHMM() });
-        summaryModel.set(7,{"hours": DB.getHoursYear(0).toString().toHHMM() });
+        summaryModel.set(0,{"hours": DB.getHoursDay(1).toString().toHHMM() })
+        summaryModel.set(1,{"hours": today })
+        summaryModel.set(2,{"hours": DB.getHoursWeek(1).toString().toHHMM() })
+        summaryModel.set(3,{"hours": thisWeek })
+        summaryModel.set(4,{"hours": DB.getHoursMonth(1).toString().toHHMM() })
+        summaryModel.set(5,{"hours": thisMonth })
+        summaryModel.set(6,{"hours": DB.getHoursAll().toString().toHHMM() })
+        summaryModel.set(7,{"hours": DB.getHoursYear(0).toString().toHHMM() })
     }
 
     function setHours(uid,date,duration,description, breakDuration) {
@@ -71,90 +70,86 @@ Page {
     }
 
     function getAllDay(offset, sortby, projectId){
-        return DB.getAllDay(offset, sortby, projectId);
+        return DB.getAllDay(offset, sortby, projectId)
     }
 
     function getAllWeek(offset, sortby, projectId){
-        return DB.getAllWeek(offset, sortby, projectId);
+        return DB.getAllWeek(offset, sortby, projectId)
     }
 
     function getAllMonth(offset, sortby, projectId){
-        return DB.getAllMonth(offset, sortby, projectId);
+        return DB.getAllMonth(offset, sortby, projectId)
     }
 
     function getAllThisYear(sortby, projectId){
-        return DB.getAllThisYear(sortby, projectId);
+        return DB.getAllThisYear(sortby, projectId)
     }
 
     function getAll(sortby, projectId){
-        return DB.getAll(sortby, projectId);
-        //console.log(projectId);
+        return DB.getAll(sortby, projectId)
     }
 
     function remove(uid){
-        DB.remove(uid);
+        DB.remove(uid)
     }
 
     function getProjects(){
-        return DB.getProjects();
+        return DB.getProjects()
     }
 
     function moveAllHoursTo(id){
-        return DB.moveAllHoursToProject(id);
+        return DB.moveAllHoursToProject(id)
     }
 
     function moveAllHoursToProjectByDesc(){
         if (defaultProjectId !== "")
-            return DB.moveAllHoursToProjectByDesc(defaultProjectId);
+            return DB.moveAllHoursToProjectByDesc(defaultProjectId)
         return qsTr("No default project found")
     }
 
     function getStartTime(){
-        startTime = DB.getStartTime();
+        startTime = DB.getStartTime()
     }
     function start(newValue){
-        startTime = DB.startTimer(newValue);
-        updateStartTime();
+        startTime = DB.startTimer(newValue)
+        updateStartTime()
         timerRunning = true
     }
     function updateStartTime(){
-        var splitted = startTime.split(":");
-        startSelectedHour = parseInt(splitted[0]);
-        startSelectedMinute = parseInt(splitted[1]);
-        startedAt.text = HH.pad(startSelectedHour) +":" + HH.pad(startSelectedMinute);
+        var splitted = startTime.split(":")
+        startSelectedHour = parseInt(splitted[0])
+        startSelectedMinute = parseInt(splitted[1])
+        startedAt.text = HH.pad(startSelectedHour) +":" + HH.pad(startSelectedMinute)
     }
     function updateDuration(breakDur){
-        //console.log("Update duration triggered");
-        breakDuration = getBreakTimerDuration();
+        breakDuration = getBreakTimerDuration()
         if(breakDur)
             breakDuration += breakDur
-        //console.log(breakDuration);
-        var dateNow = new Date();
-        var hoursNow = dateNow.getHours();
-        var minutesNow = dateNow.getMinutes();
-        var nowInMinutes = hoursNow * 60 + minutesNow;
-        var splitted = startTime.split(":");
-        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        var dateNow = new Date()
+        var hoursNow = dateNow.getHours()
+        var minutesNow = dateNow.getMinutes()
+        var nowInMinutes = hoursNow * 60 + minutesNow
+        var splitted = startTime.split(":")
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1])
         if (nowInMinutes < startInMinutes)
             nowInMinutes += 24*60
-        var breakInMinutes = Math.round(breakDuration *60);
-        //console.log(breakInMinutes);
-        var difference = nowInMinutes - startInMinutes - breakInMinutes;
+        var breakInMinutes = Math.round(breakDuration *60)
+        var difference = nowInMinutes - startInMinutes - breakInMinutes
         var diffHours = Math.floor(difference / 60)
-        var diffMinutes = difference % 60;
-        durationNow = diffHours + "h " + diffMinutes + "min";
+        var diffMinutes = difference % 60
+        durationNow = diffHours + "h " + diffMinutes + "min"
     }
 
     function stop(fromCover){
         if(breakTimerRunning) {
-            stopBreakTimer();
-            breakTimerRunning = false;
+            stopBreakTimer()
+            breakTimerRunning = false
         }
-        breakDuration = getBreakTimerDuration();
+        breakDuration = getBreakTimerDuration()
 
-        var dateNow = new Date();
-        var endSelectedHour = dateNow.getHours();
-        var endSelectedMinute = dateNow.getMinutes();
+        var dateNow = new Date()
+        var endSelectedHour = dateNow.getHours()
+        var endSelectedMinute = dateNow.getMinutes()
         var endHour = endSelectedHour
         if (endSelectedHour < startSelectedHour)
             endHour +=24
@@ -175,24 +170,24 @@ Page {
 
             var d = new Date()
             //YYYY-MM-DD
-            var yyyy = d.getFullYear().toString();
-            var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
-            var dd  = d.getDate().toString();
-            var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
+            var yyyy = d.getFullYear().toString()
+            var mm = (d.getMonth()+1).toString() // getMonth() is zero-based
+            var dd  = d.getDate().toString()
+            var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]) // padding
 
             if (roundToNearest) {
-                var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute);
-                startSelectedHour = startValues.hour;
-                startSelectedMinute = startValues.minute;
-                var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute);
-                endSelectedHour = endValues.hour;
-                endSelectedMinute = endValues.minute;
-                duration = HH.calcRoundToNearest(duration);
-                breakDuration = HH.calcRoundToNearest(breakDuration);
+                var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
+                startSelectedHour = startValues.hour
+                startSelectedMinute = startValues.minute
+                var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
+                endSelectedHour = endValues.hour
+                endSelectedMinute = endValues.minute
+                duration = HH.calcRoundToNearest(duration)
+                breakDuration = HH.calcRoundToNearest(breakDuration)
             }
 
-            var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute);
-            var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute);
+            var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
+            var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
 
             Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
             DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
@@ -228,88 +223,86 @@ Page {
                                duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
         }
-        breakDurationNow = "0h 0min";
-        breakDuration = 0;
-        durationNow = "0h 0min";
-        duration = 0;
-        DB.stopTimer();
-        timerRunning = false;
-        clearBreakTimer();
+        breakDurationNow = "0h 0min"
+        breakDuration = 0
+        durationNow = "0h 0min"
+        duration = 0
+        DB.stopTimer()
+        timerRunning = false
+        clearBreakTimer()
 
     }
 
     // Break timer functions
     function getBreakStartTime() {
-        breakStartTime = DB.getBreakStartTime();
+        breakStartTime = DB.getBreakStartTime()
     }
     function startBreakTimer() {
-        breakDuration = 0;
-        breakDurationNow = "0h 0min";
-        breakStartTime = DB.startBreakTimer();
-        breakTimerRunning = true;
+        breakDuration = 0
+        breakDurationNow = "0h 0min"
+        breakStartTime = DB.startBreakTimer()
+        breakTimerRunning = true
     }
     function updateBreakTimerDuration() {
-        //console.log("Updating breakTimerDuration Triggered");
-        var dateNow = new Date();
-        var hoursNow = dateNow.getHours();
-        var minutesNow = dateNow.getMinutes();
-        var nowInMinutes = hoursNow * 60 + minutesNow;
-        var splitted = breakStartTime.split(":");
-        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        var dateNow = new Date()
+        var hoursNow = dateNow.getHours()
+        var minutesNow = dateNow.getMinutes()
+        var nowInMinutes = hoursNow * 60 + minutesNow
+        var splitted = breakStartTime.split(":")
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1])
         if (nowInMinutes < startInMinutes)
-            nowInMinutes += 24*60;
-        var difference = nowInMinutes - startInMinutes;
-        var diffHours = Math.floor(difference / 60);
-        var diffMinutes = difference % 60;
-        breakDurationNow = diffHours + "h " + diffMinutes + "min";
+            nowInMinutes += 24*60
+        var difference = nowInMinutes - startInMinutes
+        var diffHours = Math.floor(difference / 60)
+        var diffMinutes = difference % 60
+        breakDurationNow = diffHours + "h " + diffMinutes + "min"
         // return the duration in hours
         return (difference/60)
     }
 
     function stopBreakTimer() {
-        //console.log("stopBreakTimer clicked!");
-        var splitted = breakStartTime.split(":");
-        var timerStartHour = parseInt(splitted[0]);
-        var timerStartMinute = parseInt(splitted[1]);
-        var dateNow = new Date();
-        var endSelectedHour = dateNow.getHours();
-        var endSelectedMinute = dateNow.getMinutes();
+        var splitted = breakStartTime.split(":")
+        var timerStartHour = parseInt(splitted[0])
+        var timerStartMinute = parseInt(splitted[1])
+        var dateNow = new Date()
+        var endSelectedHour = dateNow.getHours()
+        var endSelectedMinute = dateNow.getMinutes()
         var endHour = endSelectedHour
         if (endSelectedHour < timerStartHour)
             endHour +=24
         breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
-        DB.stopBreakTimer(breakDuration);
-        breakTimerRunning = false;
+        DB.stopBreakTimer(breakDuration)
+        breakTimerRunning = false
     }
 
     function getBreakTimerDuration(){
-        return DB.getBreakTimerDuration();
+        return DB.getBreakTimerDuration()
 
     }
     function clearBreakTimer(){
-        DB.clearBreakTimer();
-        breakDuration=0;
+        DB.clearBreakTimer()
+        breakDuration=0
     }
 
     onStatusChanged: {
         if (root.status === PageStatus.Active && !versionCheckDone) {
-            var lastVersionUsed = settings.getLastVersionUsed();
-            var current = appVersion + "-" + appBuildNum;
+            var lastVersionUsed = settings.getLastVersionUsed()
+            var current = appVersion + "-" + appBuildNum
             if (lastVersionUsed !== current) {
-                Log.info("App updated");
+                Log.info("App updated")
                 pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
             }
-            settings.setLastVersionUsed(current);
-            versionCheckDone = true;
+            settings.setLastVersionUsed(current)
+            versionCheckDone = true
         }
 
         if (root.status === PageStatus.Active && versionCheckDone) {
             if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
-                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate);
+                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate)
             }
             if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
-                banner.notify(qsTr("Timer stopped by command line argument"));
-                stop();
+                banner.notify(qsTr("Timer stopped by command line argument"))
+                stop()
                 pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
             }
         }
@@ -317,60 +310,59 @@ Page {
 
     Component.onCompleted: {
         // Update tables for previous versions
-        DB.updateIfNeededToV2();
-        DB.updateIfNeededToV3();
+        DB.updateIfNeededToV2()
+        DB.updateIfNeededToV3()
         // Initialize the database
-        DB.initialize();
+        DB.initialize()
         roundToNearest = settings.getRoundToNearest()
-        projects = DB.getProjects();
+        projects = DB.getProjects()
         if (projects.length === 0) {
-            Log.info("No projects found so let's create one.");
-            var id = DB.getUniqueId();
-            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor);
-            defaultProjectId = id;
-            settings.setDefaultProjectId(id);
-            moveAllHoursTo(id);
+            Log.info("No projects found so let's create one.")
+            var id = DB.getUniqueId()
+            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor)
+            defaultProjectId = id
+            settings.setDefaultProjectId(id)
+            moveAllHoursTo(id)
         }
         else {
-            defaultProjectId = settings.getDefaultProjectId();
+            defaultProjectId = settings.getDefaultProjectId()
         }
 
-        //console.log("Get hours from database...");
-        getHours();
-        getStartTime();
+        getHours()
+        getStartTime()
         if(startTime !== "Not started") {
-            timerRunning = true;
-            updateStartTime();
-            getBreakStartTime();
+            timerRunning = true
+            updateStartTime()
+            getBreakStartTime()
             if(breakStartTime !== "Not started"){
-                breakTimerRunning = true;
-                updateDuration(updateBreakTimerDuration());
+                breakTimerRunning = true
+                updateDuration(updateBreakTimerDuration())
             }
             else {
-                breakDuration = 0;
-                breakDurationNow = "0h 0min";
-                updateDuration();
+                breakDuration = 0
+                breakDurationNow = "0h 0min"
+                updateDuration()
             }
         }
         else {
-            duration = 0;
-            durationNow = "0h 0min";
+            duration = 0
+            durationNow = "0h 0min"
             // Start timer from command line
             if (startFromCommandLine) {
-                banner.notify(qsTr("Timer started by command line argument"));
-                start();
+                banner.notify(qsTr("Timer started by command line argument"))
+                start()
             }
 
             // Automatically start timer if allowed in settings
             else if(settings.getTimerAutoStart()){
                 banner.notify(qsTr("Timer was autostarted"))
-                start();
+                start()
             }
         }
-        currencyString = settings.getCurrencyString();
+        currencyString = settings.getCurrencyString()
         if(!currencyString){
-            currencyString = "€";
-            settings.setCurrencyString(currencyString);
+            currencyString = "€"
+            settings.setCurrencyString(currencyString)
         }
     }
     SilicaFlickable {
@@ -656,11 +648,15 @@ Page {
         }
 
         Timer {
-            interval: 60000; running: timerRunning && !breakTimerRunning; repeat: true
+            interval: 60000
+            running: timerRunning && !breakTimerRunning
+            repeat: true
             onTriggered: updateDuration()
         }
         Timer {
-            interval: 60000; running: breakTimerRunning; repeat: true
+            interval: 60000
+            running: breakTimerRunning
+            repeat: true
             onTriggered: updateBreakTimerDuration()
         }
         Banner {

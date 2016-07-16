@@ -36,9 +36,7 @@ String.prototype.toHHMM = function () {
     var dur = parseFloat(this) * 60;
     var hours = (Math.floor(dur / 60)).toFixed(0);
     var minutes = (dur % 60).toFixed(0);
-    //if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    return hours+':'+minutes;
+    return hours + ':' + pad(minutes);
 }
 
 Array.prototype.findById = function(id) {
@@ -66,4 +64,24 @@ function hourMinuteRoundToNearest(hour, minute) {
 }
 
 function pad(n) { return ("0" + n).slice(-2); }
+
+function dateToDbDateString(date) {
+    if (date) {
+        //YYYY-MM-DD
+        var yyyy = date.getFullYear().toString()
+        var mm = (date.getMonth()+1).toString() // getMonth() is zero-based
+        var dd  = date.getDate().toString()
+        return yyyy + "-" + pad(mm) + "-" + pad(dd)
+    }
+}
+
+function countMinutes(duration) {
+    var minutes = duration * 60
+    return Math.round(minutes % 60)
+}
+
+function countHours(duration) {
+    var minutes = duration * 60
+    return Math.floor(minutes / 60)
+}
 

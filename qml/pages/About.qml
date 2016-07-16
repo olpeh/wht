@@ -38,10 +38,12 @@ Page {
     id: aboutPage
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
-    SilicaFlickable{
+
+    SilicaFlickable {
         anchors.fill: parent
         anchors.bottomMargin: Theme.paddingLarge
         contentHeight: column.y + column.height
+
         PullDownMenu {
             MenuItem {
                 text: qsTr("How to use")
@@ -52,11 +54,14 @@ Page {
         }
         Column {
             id: column
+            width: parent.width
+
             PageHeader {
                 title: qsTr("About")
             }
-            width: parent.width
+
             SectionHeader { text: qsTr("General") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -69,10 +74,12 @@ Page {
                 }
                 text: qsTr("Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.")
             }
+
             Item {
                 width: parent.width
                 height: Theme.paddingMedium
             }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -83,10 +90,11 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: qsTr("Your current version and build number: %1-%2").arg(appVersion).arg(appBuildNum);
+                text: qsTr("Your current version and build number: %1-%2").arg(appVersion).arg(appBuildNum)
             }
 
             SectionHeader { text: qsTr("Usage") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -99,12 +107,15 @@ Page {
                 }
                 text: qsTr("Read more about how to use this app by accessing the pulley menu or clicking the button below.")
             }
+
             Button {
               text: qsTr("How to use")
               anchors.horizontalCenter: parent.horizontalCenter
               onClicked: pageStack.push(Qt.resolvedUrl("HowTo.qml"))
             }
+
             SectionHeader { text: qsTr("Author") }
+
             Text {
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
@@ -117,6 +128,7 @@ Page {
                 }
                 text: "Olavi Haapala"
             }
+
             Button {
                 text: "harbourwht@gmail.com"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -125,6 +137,7 @@ Page {
                   Qt.openUrlExternally("mailto:harbourwht@gmail.com")
                 }
             }
+
             Button {
                 text: "Twitter: @0lpeh"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -133,14 +146,16 @@ Page {
                     Qt.openUrlExternally("https://twitter.com/0lpeh")
                 }
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
 
             SectionHeader { text: qsTr("Donate") }
+
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -161,6 +176,7 @@ Page {
                     Qt.openUrlExternally("https://flattr.com/submit/auto?user_id=olpe&url=http%3A%2F%2Fgithub.com/ojhaapala/wht")
                 }
             }
+
             Button {
                 text: "Paypal EUR"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -169,6 +185,7 @@ Page {
                     Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
                 }
             }
+
             Button {
                 text: "Paypal USD"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -177,11 +194,14 @@ Page {
                     Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")
                 }
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
+
             SectionHeader { text: "Bitcoin" }
+
             TextField {
                 font.pixelSize: Theme.fontSizeSmall
                 id: bitcoinText
@@ -195,7 +215,9 @@ Page {
                 label: qsTr("Donate to my bitcoin account")
                 text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
             }
+
             SectionHeader { text: qsTr("Source") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -208,10 +230,12 @@ Page {
                 }
                 text: qsTr("Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.")
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
+
             Button {
                 text: qsTr("Issues in GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -220,6 +244,7 @@ Page {
                     Qt.openUrlExternally("https://github.com/olpeh/wht/issues")
                 }
             }
+
             Button {
                 text: qsTr("Project in GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -228,6 +253,7 @@ Page {
                     Qt.openUrlExternally("https://github.com/olpeh/wht")
                 }
             }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -240,11 +266,14 @@ Page {
                 }
                 text: qsTr("In case of issues or bugs please check the logs in settings->View logs and consider sending it to the developer.")
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
+
             SectionHeader { text: qsTr("License") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -257,6 +286,7 @@ Page {
                 }
                 text: qsTr("Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD 3-clause.")
             }
+
             Button {
                 text: qsTr("Read the license")
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -265,12 +295,14 @@ Page {
                     Qt.openUrlExternally("https://github.com/olpeh/wht/blob/master/LICENSE.md")
                 }
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
         }
     }
+
     Banner {
         id: banner
     }

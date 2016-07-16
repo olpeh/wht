@@ -39,39 +39,39 @@ Page {
     id: projectPage
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
-    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
 
     onStatusChanged: {
 
         // Data is refreshed each time the page is activated.
         // Otherwise, they may not be up to date if changes have occurred for the displayed project.
         if (projectPage.status === PageStatus.Activating) {
-            getHours();
+            getHours()
         }
     }
 
     Component.onCompleted: {
-        project = getProject(defaultProjectId);
-        getHours();
+        project = getProject(defaultProjectId)
+        getHours()
     }
     function getHours() {
         //Update hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(1, project.id).toString().toHHMM() });
-        summaryModel.set(1,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM() });
-        summaryModel.set(2,{"hours": DB.getHoursWeek(1, project.id).toString().toHHMM() });
-        summaryModel.set(3,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM() });
-        summaryModel.set(4,{"hours": DB.getHoursMonth(1, project.id).toString().toHHMM() });
-        summaryModel.set(5,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM() });
-        summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() });
-        summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() });
+        summaryModel.set(0,{"hours": DB.getHoursDay(1, project.id).toString().toHHMM() })
+        summaryModel.set(1,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM() })
+        summaryModel.set(2,{"hours": DB.getHoursWeek(1, project.id).toString().toHHMM() })
+        summaryModel.set(3,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM() })
+        summaryModel.set(4,{"hours": DB.getHoursMonth(1, project.id).toString().toHHMM() })
+        summaryModel.set(5,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM() })
+        summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() })
+        summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() })
     }
 
     function getProject(projectId) {
         var found = projects.findById(projectId)
         if(found) {
-            return found;
+            return found
         }
-        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
     }
 
     property int projectAmount: projects.length
@@ -221,7 +221,7 @@ Page {
             getHours()
         }
         Component.onCompleted: {
-            projectPage.setProjects();
+            projectPage.setProjects()
         }
     }
     ListModel {

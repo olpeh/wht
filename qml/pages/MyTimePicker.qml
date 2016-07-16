@@ -65,11 +65,11 @@ Dialog {
 
     function doRoundToNearest() {
         if (roundToNearest) {
-            var inMinutes = timePicker.hour * 60 + timePicker.minute;
-            inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
-            var tmpHour = Math.floor(inMinutes / 60);
+            var inMinutes = timePicker.hour * 60 + timePicker.minute
+            inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest
+            var tmpHour = Math.floor(inMinutes / 60)
             if(Math.abs(tmpHour - oldHour) === 1) {
-                timePicker.hour = tmpHour;
+                timePicker.hour = tmpHour
             }
             timePicker.minute = inMinutes % 60
         }
@@ -86,7 +86,10 @@ Dialog {
             id: timePicker
             anchors.horizontalCenter: parent.horizontalCenter
             onHourChanged: calculateCanAccept()
-            onMinuteChanged: { doRoundToNearest(); calculateCanAccept() }
+            onMinuteChanged: {
+                doRoundToNearest()
+                calculateCanAccept()
+            }
         }
         Item {
             width: parent.width

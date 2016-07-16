@@ -58,9 +58,9 @@ Page {
     // Email validator
     function validEmail(email) {
         if (email === "")
-            return true;
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
+            return true
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+        return re.test(email)
     }
 
     SilicaFlickable {
@@ -135,7 +135,7 @@ Page {
                                 settings.setDefaultDuration(defaultDuration)
                             })
                         }
-                        text: countHours(defaultDuration) + ":" + countMinutes(defaultDuration);
+                        text: countHours(defaultDuration) + ":" + countMinutes(defaultDuration)
                     }
                 }
                 onClicked: defaultDurationButton.openTimeDialog()
@@ -169,7 +169,7 @@ Page {
                                 settings.setDefaultBreakDuration(defaultBreakDuration)
                             })
                         }
-                        text: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration);
+                        text: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration)
                     }
                 }
                 onClicked: defaultBreakDurationButton.openTimeDialog()
@@ -254,15 +254,15 @@ Page {
 
                 onCurrentItemChanged: {
                     if (roundToNearestComboInitialized) {
-                        var selectedValue = modelSource.get(currentIndex).value;
+                        var selectedValue = modelSource.get(currentIndex).value
                         settings.setRoundToNearest(selectedValue)
                     }
-                    roundToNearestComboInitialized = true;
+                    roundToNearestComboInitialized = true
                 }
                 function init() {
                     _updating = false
-                    roundToNearest =  settings.getRoundToNearest();
-                    console.log(roundToNearest);
+                    roundToNearest =  settings.getRoundToNearest()
+                    console.log(roundToNearest)
                     for (var i = 0; i < modelSource.count; i++) {
                         if (modelSource.get(i).value == roundToNearest) {
                             currentIndex = i
@@ -321,8 +321,8 @@ Page {
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
                 onFocusChanged: {
-                    settings.setCurrencyString(currencyTextArea.text);
-                    currencyString = currencyTextArea.text;
+                    settings.setCurrencyString(currencyTextArea.text)
+                    currencyString = currencyTextArea.text
                 }
             }
             SectionHeader { text: qsTr("Email reports") }
@@ -356,7 +356,7 @@ Page {
                         banner.notify(qsTr("Invalid to email address!"))
                         toTextArea.text = settings.getToAddress()
                     }
-                    settings.setToAddress(toTextArea.text);
+                    settings.setToAddress(toTextArea.text)
                 }
             }
             TextField{
@@ -375,7 +375,7 @@ Page {
                         ccTextArea.text = settings.getCcAddress()
                     }
                     else
-                        settings.setCcAddress(ccTextArea.text);
+                        settings.setCcAddress(ccTextArea.text)
                 }
             }
             TextField{
@@ -394,7 +394,7 @@ Page {
                         bccTextArea.text = settings.getBccAddress()
                     }
                     else
-                        settings.setBccAddress(bccTextArea.text);
+                        settings.setBccAddress(bccTextArea.text)
                 }
             }
 
@@ -439,10 +439,10 @@ Page {
                     }
                 }
                 onClicked:{
-                    var file = exporter.dump();
-                    banner.notify(qsTr("Database saved to")+ ": " + file);
-                    dumpLabel.text = file;
-                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall;
+                    var file = exporter.dump()
+                    banner.notify(qsTr("Database saved to")+ ": " + file)
+                    dumpLabel.text = file
+                    dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
             Rectangle {
@@ -465,9 +465,9 @@ Page {
                     }
                 }
                 onClicked:{
-                    var file = exporter.exportHoursToCSV();
+                    var file = exporter.exportHoursToCSV()
                     exportHoursCSV.text = file
-                    banner.notify(qsTr("CSV saved to") +": " + file);
+                    banner.notify(qsTr("CSV saved to") +": " + file)
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
@@ -492,10 +492,10 @@ Page {
                     }
                 }
                 onClicked:{
-                    var file = exporter.exportProjectsToCSV();
-                    exportProjectsCSV.text = file;
-                    banner.notify(qsTr("CSV saved to") +": " + file);
-                    exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall;
+                    var file = exporter.exportProjectsToCSV()
+                    exportProjectsCSV.text = file
+                    banner.notify(qsTr("CSV saved to") +": " + file)
+                    exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
 
@@ -539,9 +539,9 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Importing hours from CSV");
-                    var resp = exporter.importHoursFromCSV(filename);
-                    banner.notify(resp);
+                    console.log("Importing hours from CSV")
+                    var resp = exporter.importHoursFromCSV(filename)
+                    banner.notify(resp)
                 }
             }
             Rectangle {
@@ -564,9 +564,9 @@ Page {
                     }
                 }
                 onClicked:{
-                    console.log("Importing projects from CSV");
-                    var resp = exporter.importProjectsFromCSV(filename);
-                    banner.notify(resp);
+                    console.log("Importing projects from CSV")
+                    var resp = exporter.importProjectsFromCSV(filename)
+                    banner.notify(resp)
                 }
             }
             Rectangle {
@@ -593,7 +593,7 @@ Page {
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: {
-                    focus = false;
+                    focus = false
                 }
                 width: parent.width
                 placeholderText: qsTr("Full path to .sql file")
@@ -616,11 +616,11 @@ Page {
                 onClicked:{
                     if (dumpImport.text) {
                         remorse.execute(qsTr("Importing") + " " + dumpImport.text, function() {
-                            Log.info(qsTr("Trying to import")+": " +dumpImport.text);
-                            var resp = exporter.importDump(dumpImport.text);
-                            banner.notify(resp);
-                            settingsPage.dataContainer.getHours();
-                            projects = settingsPage.dataContainer.getProjects();
+                            Log.info(qsTr("Trying to import")+": " +dumpImport.text)
+                            var resp = exporter.importDump(dumpImport.text)
+                            banner.notify(resp)
+                            settingsPage.dataContainer.getHours()
+                            projects = settingsPage.dataContainer.getProjects()
                         })
                     }
                     else {
@@ -660,7 +660,7 @@ Page {
                 onClicked:{
                     if (defaultProjectId !== "")
                         remorse.execute(qsTr("Move all hours to default project"), function() {
-                            banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId));
+                            banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId))
                         })
                     else
                        banner.notify(qsTr("No default project set"))
@@ -698,7 +698,7 @@ Page {
                 }
                 onClicked: {
                     remorse.execute(qsTr("Moving hours to projects in description"), function() {
-                         banner.notify(settingsPage.dataContainer.moveAllHoursToProjectByDesc());
+                         banner.notify(settingsPage.dataContainer.moveAllHoursToProjectByDesc())
                      })
                  }
             }
@@ -733,9 +733,9 @@ Page {
                 }
                 onClicked: remorse.execute(qsTr("Resetting database"), function() {
                     if (dataContainer != null){
-                       settingsPage.dataContainer.resetDatabase();
-                       projects = settingsPage.dataContainer.getProjects();
-                       pageStack.replace(Qt.resolvedUrl("FirstPage.qml"));
+                       settingsPage.dataContainer.resetDatabase()
+                       projects = settingsPage.dataContainer.getProjects()
+                       pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
                     }
                 })
             }
@@ -792,12 +792,12 @@ Page {
 
         defaultBreakInTimerSwitch.checked = settings.getDefaultBreakInTimer()
 
-        currencyTextArea.text = settings.getCurrencyString();
-        toTextArea.text = settings.getToAddress();
-        ccTextArea.text = settings.getCcAddress();
-        bccTextArea.text = settings.getBccAddress();
-        dumpImport.text = documentsLocation + "/wht.sql";
-        roundingCombo.init();
+        currencyTextArea.text = settings.getCurrencyString()
+        toTextArea.text = settings.getToAddress()
+        ccTextArea.text = settings.getCcAddress()
+        bccTextArea.text = settings.getBccAddress()
+        dumpImport.text = documentsLocation + "/wht.sql"
+        roundingCombo.init()
     }
     Banner {
         id: banner

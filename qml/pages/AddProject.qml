@@ -57,22 +57,22 @@ Dialog {
         if (taskNameArea.text.length) {
             saveTask(taskNameArea.text)
         }
-        name = nameTextArea.text;
+        name = nameTextArea.text
         if (projectId == "0" && !editMode)
-            projectId = DB.getUniqueId();
-        hourlyRate = parseFloat(hourlyRateTextArea.text) || 0;
-        contractRate = 0; //parseFloat(contractRateTextArea.text || 0);
-        budget = 0; //parseFloat(budgetTextArea.text || 0);
-        hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
-        labelColor = colorIndicator.color;
-        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
-        DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
+            projectId = DB.getUniqueId()
+        hourlyRate = parseFloat(hourlyRateTextArea.text) || 0
+        contractRate = 0 //parseFloat(contractRateTextArea.text || 0)
+        budget = 0 //parseFloat(budgetTextArea.text || 0)
+        hourBudget = 0 //parseFloat(hourBudgetTextArea.text) || 0
+        labelColor = colorIndicator.color
+        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
+        DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor)
         if(defaultSwitch.checked) {
-            defaultProjectId = projectId;
-            settings.setDefaultProjectId(projectId);
+            defaultProjectId = projectId
+            settings.setDefaultProjectId(projectId)
         }
         if(prev)
-            page.prev.getProjects();
+            page.prev.getProjects()
     }
 
     function getTasks() {
@@ -86,14 +86,6 @@ Dialog {
             taskId = DB.getUniqueId()
         return DB.setTask(taskId, projectId, name)
     }
-
-    //Not needed
-    /*function removeInvalidCharacters(text) {
-        var tmp = text
-        text = text.split(",").join("")
-        text =  text.split(";").join("")
-        return text;
-    }*/
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -299,23 +291,26 @@ Dialog {
                         font.bold: true
                     }
                 }
-                onClicked: { colorIndicator.color = Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity); labelColor = Theme.secondaryHighlightColor}
+                onClicked: {
+                    colorIndicator.color = Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
+                    labelColor = Theme.secondaryHighlightColor
+                }
             }
             Item {
                 width: parent.width
                 height: 10
             }
             Component.onCompleted: {
-                getTasks();
+                getTasks()
                 if (editMode){
-                    nameTextArea.text = name;
-                    hourlyRateTextArea.text = hourlyRate;
-                    //contractRateTextArea.text = contractRate;
-                    //budgetTextArea.text = budget;
-                    //hourBudgetTextArea.text = hourBudget;
+                    nameTextArea.text = name
+                    hourlyRateTextArea.text = hourlyRate
+                    //contractRateTextArea.text = contractRate
+                    //budgetTextArea.text = budget
+                    //hourBudgetTextArea.text = hourBudget
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
                     if(defaultProjectId === projectId) {
-                        defaultSwitch.visible = false;
+                        defaultSwitch.visible = false
                     }
                 }
             }

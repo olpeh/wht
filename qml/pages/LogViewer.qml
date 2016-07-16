@@ -56,7 +56,7 @@ Page {
                 text: qsTr("Send to the developer")
                 onClicked: {
                     banner.notify(qsTr("Launching email app"))
-                    Log.send();
+                    Log.send()
                 }
             }
             MenuItem {
@@ -65,7 +65,7 @@ Page {
                 onClicked: {
                     //: Remorse popup message telling the user log file will be saved
                     remorse.execute(qsTr("Saving the log"), function() {
-                        Log.save();
+                        Log.save()
                     })
                 }
             }

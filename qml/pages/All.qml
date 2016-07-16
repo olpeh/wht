@@ -56,91 +56,91 @@ Page {
             //console.log(section)
             //console.log(projectId)
             if (section === qsTr("Today"))
-                return all.dataContainer.getAllDay(0, sortby, projectId);
+                return all.dataContainer.getAllDay(0, sortby, projectId)
             else if (section === qsTr("Yesterday"))
-                return all.dataContainer.getAllDay(1, sortby, projectId);
+                return all.dataContainer.getAllDay(1, sortby, projectId)
             else if(section === qsTr("This week"))
-                return all.dataContainer.getAllWeek(0, sortby, projectId);
+                return all.dataContainer.getAllWeek(0, sortby, projectId)
             else if(section === qsTr("Last week"))
-                return all.dataContainer.getAllWeek(1, sortby, projectId);
+                return all.dataContainer.getAllWeek(1, sortby, projectId)
             else if (section === qsTr("This month"))
-                return all.dataContainer.getAllMonth(0, sortby, projectId);
+                return all.dataContainer.getAllMonth(0, sortby, projectId)
             else if (section === qsTr("Last month"))
-                return all.dataContainer.getAllMonth(1, sortby, projectId);
+                return all.dataContainer.getAllMonth(1, sortby, projectId)
             else if (section === qsTr("This year"))
-                return all.dataContainer.getAllThisYear(sortby, projectId);
+                return all.dataContainer.getAllThisYear(sortby, projectId)
             else if (section === qsTr("All"))
-                return all.dataContainer.getAll(sortby, projectId);
+                return all.dataContainer.getAll(sortby, projectId)
             else{
-                Log.error("Unknown section: " + section);
-                return [];
+                Log.error("Unknown section: " + section)
+                return []
             }
         }
     }
 
     function updateView(hours) {
         if(hours)
-            allHours = hours;
+            allHours = hours
         else
-            allHours =  getAllHours();
+            allHours =  getAllHours()
         if (listView.count != 0){
-            hoursModel.clear();
+            hoursModel.clear()
         }
 
-        myWorker.sendMessage({ 'type': 'all', 'allHours': allHours, 'projects': projects });
+        myWorker.sendMessage({ 'type': 'all', 'allHours': allHours, 'projects': projects })
     }
 
     function formateDate(datestring) {
-        var d = new Date(datestring);
-        return d.toLocaleDateString();
+        var d = new Date(datestring)
+        return d.toLocaleDateString()
     }
 
     function createEmailBody(){
-        var r = qsTr("Report of working hours") + " " + section + " ";
+        var r = qsTr("Report of working hours") + " " + section + " "
         if (projectId !== ""){
-            var pr = getProject(projectId);
-            var prname = pr.name;
-            r += qsTr("for project") +": " + prname;
+            var pr = getProject(projectId)
+            var prname = pr.name
+            r += qsTr("for project") +": " + prname
         }
-        r += "\n\n";
+        r += "\n\n"
         for (var i = 0; i < allHours.length; i++) {
-            var project = getProject(allHours[i].project);
-            var netDuration = allHours[i].duration - allHours[i].breakDuration;
-            r += "[" + (netDuration).toString().toHHMM() + "] ";
+            var project = getProject(allHours[i].project)
+            var netDuration = allHours[i].duration - allHours[i].breakDuration
+            r += "[" + (netDuration).toString().toHHMM() + "] "
             if (projectId === "")
-                r += project.name + " ";
+                r += project.name + " "
             var d = formateDate(allHours[i].date)
-            r += d + "\n";
-            r += allHours[i].description + "\n";
-            r += allHours[i].startTime + " - " + allHours[i].endTime;
+            r += d + "\n"
+            r += allHours[i].description + "\n"
+            r += allHours[i].startTime + " - " + allHours[i].endTime
             if(allHours[i].breakDuration)
-                r += " (" + allHours[i].breakDuration + ") ";
+                r += " (" + allHours[i].breakDuration + ") "
             if(project.hourlyRate) {
-                r += " " + (netDuration * project.hourlyRate).toFixed(2) + " " + currencyString;
+                r += " " + (netDuration * project.hourlyRate).toFixed(2) + " " + currencyString
             }
-            r += "\n\n";
+            r += "\n\n"
         }
-        r += qsTr("Total") + ": " + section + "\n";
-        r += qsTr("Duration") + ": " + (categoryDuration).toString().toHHMM() + "\n";
-        r += qsTr("Workdays") + ": " + categoryWorkdays + "\n";
-        r += qsTr("Entries") + ": " + categoryEntries + "\n";
+        r += qsTr("Total") + ": " + section + "\n"
+        r += qsTr("Duration") + ": " + (categoryDuration).toString().toHHMM() + "\n"
+        r += qsTr("Workdays") + ": " + categoryWorkdays + "\n"
+        r += qsTr("Entries") + ": " + categoryEntries + "\n"
         if (categoryPrice)
-            r += categoryPrice.toFixed(2) + " " + currencyString + "\n";
+            r += categoryPrice.toFixed(2) + " " + currencyString + "\n"
 
-        return r;
+        return r
     }
 
     function getProject(projectId) {
         var found = projects.findById(projectId)
         if(found) {
-            return found;
+            return found
         }
-        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
     }
 
     onStatusChanged: {
         if (all.status === PageStatus.Active && listView.count == 0) {
-            updateView();
+            updateView()
         }
     }
 
@@ -148,16 +148,16 @@ Page {
         id: myWorker
         source: "../worker.js"
         onMessage: {
-            busyIndicator.running = false;
+            busyIndicator.running = false
             if (messageObject.status === 'running') {
-                hoursModel.append(messageObject.data);
+                hoursModel.append(messageObject.data)
             }
             else if (messageObject.status === 'done') {
                 var data = messageObject.data
-                categoryDuration = data.categoryDuration;
-                categoryPrice = data.categoryPrice;
-                categoryWorkdays = data.categoryWorkdays;
-                categoryEntries = data.categoryEntries;
+                categoryDuration = data.categoryDuration
+                categoryPrice = data.categoryPrice
+                categoryWorkdays = data.categoryWorkdays
+                categoryEntries = data.categoryEntries
                 if (all.status === PageStatus.Active && listView.count > 1) {
                     if (pageStack._currentContainer.attachedContainer === null) {
                         pageStack.pushAttached(Qt.resolvedUrl("CategorySummary.qml"), {
@@ -167,12 +167,12 @@ Page {
                                                    categoryPrice: categoryPrice,
                                                    categoryWorkdays: categoryWorkdays,
                                                    categoryEntries: categoryEntries
-                                               });
+                                               })
                     }
                 }
             }
             else {
-                console.log('WTF');
+                console.log('WTF')
             }
         }
     }
@@ -189,44 +189,44 @@ Page {
                 onClicked: {
                     var filename = section.replace(" ", "")
                     if(projectId !== "") {
-                        var project = getProject(projectId);
-                        filename+=project.name.replace(" ", "");
+                        var project = getProject(projectId)
+                        filename+=project.name.replace(" ", "")
                     }
-                    banner.notify(qsTr("Saved to") +": " + exporter.exportCategoryToCSV(filename, allHours));
+                    banner.notify(qsTr("Saved to") +": " + exporter.exportCategoryToCSV(filename, allHours))
                 }
             }
 
             MenuItem {
                 text: qsTr("Send report by email")
                 onClicked: {
-                    var toAddress = settings.getToAddress();
-                    var ccAddress = settings.getCcAddress();
-                    var bccAddress = settings.getBccAddress();
-                    var d = new Date();
-                    var da = d.toLocaleDateString();
-                    var subject = qsTr("Report of working hours") + " " + section + " ";
+                    var toAddress = settings.getToAddress()
+                    var ccAddress = settings.getCcAddress()
+                    var bccAddress = settings.getBccAddress()
+                    var d = new Date()
+                    var da = d.toLocaleDateString()
+                    var subject = qsTr("Report of working hours") + " " + section + " "
                     if (projectId !== ""){
-                        var pr = getProject(projectId);
-                        var prname = pr.name;
-                        subject += qsTr("for project") +": " + prname;
+                        var pr = getProject(projectId)
+                        var prname = pr.name
+                        subject += qsTr("for project") +": " + prname
                     }
-                    subject += qsTr("Created") + " " + da;
-                    var body = createEmailBody();
-                    banner.notify("Trying to launch email app");
-                    launcher.sendEmail(toAddress, ccAddress, bccAddress, subject, body);
+                    subject += qsTr("Created") + " " + da
+                    var body = createEmailBody()
+                    banner.notify("Trying to launch email app")
+                    launcher.sendEmail(toAddress, ccAddress, bccAddress, subject, body)
                 }
             }
             MenuItem {
                 visible: projectId === "" && projects.length > 1
                 text: sortedByProject ? qsTr("Sort by date") : qsTr("Sort by project")
                 onClicked: {
-                    sortedByProject = !sortedByProject;
+                    sortedByProject = !sortedByProject
                     if(sortedByProject){
-                        var hours = getAllHours("project");
-                        updateView(hours);
+                        var hours = getAllHours("project")
+                        updateView(hours)
                     }
                     else
-                        updateView();
+                        updateView()
                 }
             }
         }
@@ -310,12 +310,12 @@ Page {
                 }
 
                 onClicked: {
-                    var splitted = model.startTime.split(":");
-                    var startSelectedHour = splitted[0];
-                    var startSelectedMinute = splitted[1];
-                    var endSplitted = model.endTime.split(":");
-                    var endSelectedHour = endSplitted[0];
-                    var endSelectedMinute = endSplitted[1];
+                    var splitted = model.startTime.split(":")
+                    var startSelectedHour = splitted[0]
+                    var startSelectedMinute = splitted[1]
+                    var endSplitted = model.endTime.split(":")
+                    var endSelectedHour = endSplitted[0]
+                    var endSelectedMinute = endSplitted[1]
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                        dataContainer: dataContainer,
                                        uid: model.uid,
@@ -349,7 +349,11 @@ Page {
             function remove() {
                 //console.log(index)
                 //console.log(model.uid)
-                remorse.execute(qsTr("Removing"), function() { all.dataContainer.remove(model.uid); hoursModel.remove(index); all.dataContainer.getHours();} )
+                remorse.execute(qsTr("Removing"), function() {
+                    all.dataContainer.remove(model.uid)
+                    hoursModel.remove(index)
+                    all.dataContainer.getHours()
+                })
 
             }
         }
@@ -360,7 +364,7 @@ Page {
                MenuItem {
                    text: qsTr("Remove")
                    onClicked: {
-                       menu.parent.remove();
+                       menu.parent.remove()
                    }
                }
            }

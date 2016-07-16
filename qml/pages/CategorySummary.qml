@@ -61,20 +61,20 @@ Page {
         if(dataContainer){
             // get hours sorted by projects
             var allHours = dataContainer.getAllHours("project")
-            myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects });
+            myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects })
         }
     }
 
     Component.onCompleted: {
-        initializeContent();
+        initializeContent()
     }
     WorkerScript {
         id: myWorker
         source: "../worker.js"
         onMessage: {
-            busyIndicator.running = false;
+            busyIndicator.running = false
             if (messageObject.status === 'ok') {
-                hoursModel.append(messageObject.data);
+                hoursModel.append(messageObject.data)
             }
         }
     }

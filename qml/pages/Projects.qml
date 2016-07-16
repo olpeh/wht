@@ -39,7 +39,7 @@ Page {
     id: projectss
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     function getProjects() {
-        projects = DB.getProjects();
+        projects = DB.getProjects()
         for (var i = 0; i < projects.length; i++) {
             projectsModel.set(i, {
                 'id': projects[i].id,
@@ -50,7 +50,6 @@ Page {
                 'hourBudget': projects[i].hourBudget,
                 'labelColor': projects[i].labelColor
             })
-            //console.log(projects[i].id, projects[i].name, projects[i].hourlyRate, projects[i].contractRate, projects[i].budget, projects[i].hourBudget, projects[i].labelColor);
         }
     }
     SilicaFlickable{
@@ -60,9 +59,8 @@ Page {
         }
 
         Component.onCompleted: {
-            defaultProjectId = settings.getDefaultProjectId();
-            //console.log("default project id: ", defaultProjectId);
-            getProjects();
+            defaultProjectId = settings.getDefaultProjectId()
+            getProjects()
         }
         SilicaListView {
             id: listView
@@ -127,7 +125,6 @@ Page {
                         }
                     }
                     onClicked: {
-                        //console.log(model.id, model.name, model.hourlyRate, model.contractRate, model.budget, model.hourBudget, model.labelColor);
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{
                                            prev: projectss,
                                            editMode: true,
@@ -151,9 +148,9 @@ Page {
                     //console.log(index)
                     //console.log(model.id)
                     remorse.execute(qsTr("Removing"), function() {
-                        DB.removeProject(model.id);
-                        projectsModel.remove(index);
-                        getProjects();
+                        DB.removeProject(model.id)
+                        projectsModel.remove(index)
+                        getProjects()
                     })
                 }
             }
@@ -164,7 +161,7 @@ Page {
                    MenuItem {
                        text: qsTr("Remove")
                        onClicked: {
-                           menu.parent.remove();
+                           menu.parent.remove()
                            //console.log("Remove clicked!")
                        }
                    }
