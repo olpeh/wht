@@ -8,34 +8,32 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #ifndef EXPORTER_H
 #define EXPORTER_H
+
 #include <QObject>
 #include <QtSql>
 
-
-class Exporter : public QObject
-{
+class Exporter : public QObject {
     Q_OBJECT
 
-public:
-    explicit Exporter(QObject *parent = 0);
-    ~Exporter();
+    public:
+        explicit Exporter(QObject *parent = 0);
+        ~Exporter();
 
-    Q_INVOKABLE QString exportHoursToCSV();
-    Q_INVOKABLE QString exportProjectsToCSV();
-    Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
-    Q_INVOKABLE QString dump();
-    Q_INVOKABLE QVariantList readHours();
-    Q_INVOKABLE QVariantList readProjects();
-    Q_INVOKABLE QString importHoursFromCSV(QString filename);
-    Q_INVOKABLE QString importProjectsFromCSV(QString filename);
-    Q_INVOKABLE QString importDump(QString filename);
+        Q_INVOKABLE QString exportHoursToCSV();
+        Q_INVOKABLE QString exportProjectsToCSV();
+        Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
+        Q_INVOKABLE QString dump();
+        Q_INVOKABLE QVariantList readHours();
+        Q_INVOKABLE QVariantList readProjects();
+        Q_INVOKABLE QString importHoursFromCSV(QString filename);
+        Q_INVOKABLE QString importProjectsFromCSV(QString filename);
+        Q_INVOKABLE QString importDump(QString filename);
 
 
-    static const QString DB_NAME;
+        static const QString DB_NAME;
 
-private:
-    QSqlDatabase* db;
+    private:
+        QSqlDatabase* db;
 };
-
 
 #endif // EXPORTER_H

@@ -31,72 +31,69 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-//config.js
 .import QtQuick.LocalStorage 2.0 as LS
 var db = LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 
-//reset database
 function resetDatabase() {
-    db.transaction(
-        function(tx) {
-            tx.executeSql('DROP TABLE hours')
-            tx.executeSql('DROP TABLE timer')
-            tx.executeSql('DROP TABLE breaks')
-            tx.executeSql('DROP TABLE projects')
-            tx.executeSql('DROP TABLE tasks')
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0, taskId TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
-            tx.executeSql('PRAGMA user_version=3;');
-            Log.info("Database was resetted");
-        });
+    db.transaction(function(tx) {
+        tx.executeSql('DROP TABLE hours')
+        tx.executeSql('DROP TABLE timer')
+        tx.executeSql('DROP TABLE breaks')
+        tx.executeSql('DROP TABLE projects')
+        tx.executeSql('DROP TABLE tasks')
+        tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0, taskId TEXT);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
+        tx.executeSql('PRAGMA user_version=3;');
+        Log.info("Database was resetted");
+    });
 }
 
-// We want a unique id for hours
-function getUniqueId()
-{
-     var dateObject = new Date();
-     var uniqueId =
-          dateObject.getFullYear() + '' +
-          dateObject.getMonth() + '' +
-          dateObject.getDate() + '' +
-          dateObject.getTime();
-     return uniqueId;
+function getUniqueId() {
+     var d = new Date();
+     var uid = d.getFullYear() +
+               d.getMonth() +
+               d.getDate() +
+               d.getTime();
+     return uid;
 };
 
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
 function initialize() {
-    db.transaction(
-        function(tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0, taskId TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
-            tx.executeSql('PRAGMA user_version=3;');
+    db.transaction(function(tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT,startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT, breakDuration REAL DEFAULT 0, taskId TEXT);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE, starttime TEXT, started INTEGER);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY, starttime TEXT, started INTEGER, duration REAL DEFAULT -1);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);');
+        tx.executeSql('PRAGMA user_version=3;');
     });
+
     Log.info("Database ready.")
 }
+
 function updateIfNeededToV2() {
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
-        if(rs.rows.length > 0) {
+        if (rs.rows.length > 0) {
             if (rs.rows.item(0).user_version < 2) {
                 var ex = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
                 //check if rows exist
-                if(ex.rows.length > 0) {
+                if (ex.rows.length > 0) {
                     if (ex.rows.item(0).name ==="hours") {
                         tx.executeSql('ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;');
                         tx.executeSql('PRAGMA user_version = 2;');
                         Log.info("Updating table hours to user_version 2. Adding breakDuration column.");
                     }
-                    else
+                    else {
                         Log.error("No table named hours...");
+                    }
                 }
-                else
+                else {
                     Log.error("No table named hours...");
+                }
             }
         }
     });
@@ -105,28 +102,31 @@ function updateIfNeededToV2() {
 function updateIfNeededToV3() {
     db.transaction(function(tx) {
         var rs = tx.executeSql('PRAGMA user_version');
-        if(rs.rows.length > 0) {
+        if (rs.rows.length > 0) {
             if (rs.rows.item(0).user_version < 3) {
                 //console.log(rs.rows.item(0).user_version)
                 var res = tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
                 //check if rows exist
-                if(res.rows.length > 0) {
+                if (res.rows.length > 0) {
                     if (res.rows.item(0).name ==="hours") {
                         tx.executeSql('ALTER TABLE hours ADD taskId TEXT;');
                         tx.executeSql('PRAGMA user_version = 3;');
                         Log.info("Updating table hours to user_version 3. Adding taskId column.");
                     }
-                    else
+                    else {
                         Log.error("No table named hours...");
+                    }
                 }
-                else
+                else {
                     Log.error("No table named hours...");
+                }
             }
         }
     });
 }
 
 // This function is used to write hours into the database
+// The function returns “OK” if it was successful, or “Error” if it wasn't
 function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration, taskId) {
     var res = "";
     db.transaction(function(tx) {
@@ -134,18 +134,19 @@ function setHours(uid,date,startTime, endTime, duration, project, description, b
         if (rs.rowsAffected > 0) {
             res = "OK";
             Log.info("Hours saved to database");
-        } else {
+        }
+        else {
             res = "Error";
             Log.error("Error saving hours to database");
         }
     });
-    // The function returns “OK” if it was successful, or “Error” if it wasn't
+
     return res;
 }
 
 // This function is used to retrieve hours for a day from the database
 function getHoursDay(offset, projectId) {
-    var dur =0;
+    var dur = 0;
     var rs;
 
     db.transaction(function(tx) {
@@ -155,12 +156,13 @@ function getHoursDay(offset, projectId) {
         else {
             rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date = strftime("%Y-%m-%d", "now", "-' + offset + ' days", "localtime");');
         }
+
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
     });
-    //console.log(dur);
+
     return dur;
 }
 
@@ -171,22 +173,27 @@ function getHoursWeek(offset, projectId) {
 
     db.transaction(function(tx) {
         if (offset === 0) {
-            if(projectId)
+            if (projectId) {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") AND  project=?;', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0");');
-        }
-        else if (projectId)
-            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") AND  project=?;', [projectId]);
 
-        else
+            }
+        }
+        else if (projectId) {
+            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") AND  project=?;', [projectId]);
+        }
+        else {
             rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days");');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
     });
-    //console.log(dur);
+
     return dur;
 }
 
@@ -194,279 +201,334 @@ function getHoursWeek(offset, projectId) {
 function getHoursMonth(offset, projectId) {
     var dur = 0;
     var rs;
-     db.transaction(function(tx) {
-         if (offset === 0) {
-             if(projectId)
+    db.transaction(function(tx) {
+        if (offset === 0) {
+             if (projectId) {
                  rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime") AND  project=?;', [projectId]);
-             else
+             }
+             else {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d","now","localtime");');
-         }
-         else {
-             if(projectId)
-                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") AND  project=?;', [projectId]);
-             else
-                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day");');
+
+             }
         }
+        else {
+             if (projectId) {
+                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") AND  project=?;', [projectId]);
+             }
+             else {
+                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day");');
+             }
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
     });
-    //console.log(dur);
+
     return dur;
 }
 
 // This function is used to retrieve hours for a year from the database
 function getHoursYear(offset, projectId) {
-    var dur=0;
+    var dur = 0;
     var rs;
     db.transaction(function(tx) {
-        if (offset===0) {
-            if(projectId)
+        if (offset === 0) {
+            if (projectId) {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") AND  project=?;', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime");');
+            }
         }
         else {
-            if(projectId)
+            if (projectId) {
                 rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day") AND  project=?;', [projectId]);
-            rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");');
+            }
+            else {
+                rs = tx.executeSql('SELECT DISTINCT uid, duration, breakDuration FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year" , "-1 years") AND strftime("%Y-%m-%d", "now","localtime" , "start of year" ,"-1 day");');
+            }
         }
+
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
     });
-    //console.log(dur);
+
     return dur;
 }
 
 // This function is used to retrieve all hours from the database
 function getHoursAll(projectId) {
-    var dur=0;
+    var dur = 0;
     var rs;
     db.transaction(function(tx) {
-        if(projectId)
+        if (projectId) {
             rs = tx.executeSql('SELECT * FROM hours WHERE  project=?;', [projectId]);
-        else
+        }
+        else {
             rs = tx.executeSql('SELECT * FROM hours;');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
     });
-    //console.log(dur);
+
     return dur;
 }
 
 
 // This function is used to get all data from the database
 function getAll(sortby, projectId) {
-    var allHours=[];
+    var allHours = [];
     var rs;
-    //console.log(projectId)
+
     db.transaction(function(tx) {
-        if(projectId) {
-            if(sortby === "project")
+        if (projectId) {
+            if (sortby === "project") {
                 rs = tx.executeSql('SELECT * FROM hours WHERE project=? ORDER BY project DESC, date DESC, startTime DESC;', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE project=? ORDER BY date DESC, startTime DESC;', [projectId]);
+            }
         }
+
         else {
-            if(sortby === "project")
+            if (sortby === "project") {
                 rs = tx.executeSql('SELECT * FROM hours ORDER BY project DESC, date DESC, startTime DESC;');
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours ORDER BY date DESC, startTime DESC;');
+            }
         }
 
         for (var i = 0; i < rs.rows.length; i++) {
-             var item ={};
-             //uid,date,duration,project,description
-             item["uid"]=rs.rows.item(i).uid;
-             item["date"]= rs.rows.item(i).date;
-             //console.log(item["date"]);
-             item["startTime"]=rs.rows.item(i).startTime;
-             item["endTime"]=rs.rows.item(i).endTime;
-             item["duration"]=rs.rows.item(i).duration;
-             item["project"]=rs.rows.item(i).project;
-             item["description"]=rs.rows.item(i).description;
-             item["breakDuration"]= rs.rows.item(i).breakDuration;
-             if (rs.rows.item(i).taskId)
+            var item = {};
+            item["uid"]=rs.rows.item(i).uid;
+            item["date"]= rs.rows.item(i).date;
+            item["startTime"]=rs.rows.item(i).startTime;
+            item["endTime"]=rs.rows.item(i).endTime;
+            item["duration"]=rs.rows.item(i).duration;
+            item["project"]=rs.rows.item(i).project;
+            item["description"]=rs.rows.item(i).description;
+            item["breakDuration"]= rs.rows.item(i).breakDuration;
+
+            if (rs.rows.item(i).taskId) {
                 item["taskId"] = rs.rows.item(i).taskId;
-             else
+            }
+            else {
                 item["taskId"] = "0";
-             allHours.push(item);
-            //console.log(item);
+            }
+
+            allHours.push(item);
         }
     });
+
     return allHours;
 }
 
 // This function is used to retrieve data for a day from the database
 function getAllDay(offset, sortby, projectId) {
-    var allHours =[];
+    var allHours = [];
     var rs;
 
     db.transaction(function(tx) {
         var orderby = "ORDER BY date DESC, startTime DESC";
-        if(sortby === "project")
+
+        if (sortby === "project") {
             orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-        if(projectId) {
-            if (offset ===0)
+        }
+
+        if (projectId) {
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime", "-1 day") AND project=? ' + orderby + ';', [projectId]);
+            }
         }
         else {
-            if (offset ===0)
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date = strftime("%Y-%m-%d", "now", "localtime", "-1 day") ' + orderby + ';');
+            }
         }
 
         for (var i = 0; i < rs.rows.length; i++) {
-            var item ={};
-            //uid,date,duration,project,description
-            item["uid"]=rs.rows.item(i).uid;
+            var item = {};
             item["date"]= rs.rows.item(i).date;
-            //console.log(item["date"]);
+            item["uid"]=rs.rows.item(i).uid;
             item["startTime"]=rs.rows.item(i).startTime;
             item["endTime"]=rs.rows.item(i).endTime;
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            if (rs.rows.item(i).taskId)
+
+            if (rs.rows.item(i).taskId) {
                item["taskId"] = rs.rows.item(i).taskId;
-            else
+            }
+            else {
                item["taskId"] = "0";
+            }
+
             allHours.push(item);
-           //console.log(item);
         }
-        //console.log(dur);
     });
+
     return allHours;
 }
 
 // This function is used to retrieve data this week from the database
 function getAllWeek(offset, sortby, projectId) {
-    var allHours=[];
+    var allHours = [];
     var rs;
     db.transaction(function(tx) {
         var orderby = "ORDER BY date DESC, startTime DESC";
-        if(sortby === "project")
+
+        if (sortby === "project") {
             orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-        if(projectId) {
-            if (offset ===0)
+        }
+
+        if (projectId) {
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") AND project=? ' + orderby + ';', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") AND project=? ' + orderby + ';', [projectId]);
+            }
         }
         else {
-            if (offset ===0)
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "weekday 0", "-6 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0") ' + orderby + ';');
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime", "weekday 0", "-13 days") AND strftime("%Y-%m-%d", "now", "localtime", "weekday 0", "-7 days") ' + orderby + ';');
+            }
         }
 
         for (var i = 0; i < rs.rows.length; i++) {
-            var item ={};
-            //uid,date,duration,project,description
+            var item = {};
             item["uid"]=rs.rows.item(i).uid;
             item["date"]= rs.rows.item(i).date;
-            //console.log(item["date"]);
             item["startTime"]=rs.rows.item(i).startTime;
             item["endTime"]=rs.rows.item(i).endTime;
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            if (rs.rows.item(i).taskId)
+
+            if (rs.rows.item(i).taskId) {
                item["taskId"] = rs.rows.item(i).taskId;
-            else
+            }
+            else {
                item["taskId"] = "0";
+            }
+
             allHours.push(item);
-           //console.log(item);
         }
     });
+
     return allHours;
 }
 
 // This function is used to retrieve data this month from the database
 function getAllMonth(offset, sortby, projectId) {
-    var allHours=[];
+    var allHours = [];
     var orderby = "ORDER BY date DESC, startTime DESC";
-    if(sortby === "project")
+
+    if (sortby === "project") {
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
+    }
+
     var rs;
     db.transaction(function(tx) {
-        if(projectId) {
-            if (offset ===0)
+        if (projectId) {
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") AND project=? ' + orderby + ';', [projectId]);
+            }
         }
         else {
-            if (offset ===0)
+            if (offset === 0) {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
-            else
+            }
+            else {
                 rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 month") AND strftime("%Y-%m-%d", "now", "localtime", "start of month", "-1 day") ' + orderby + ';');
+            }
         }
 
         for (var i = 0; i < rs.rows.length; i++) {
-            var item ={};
-            //uid,date,duration,project,description
+            var item = {};
             item["uid"]=rs.rows.item(i).uid;
             item["date"]= rs.rows.item(i).date;
-            //console.log(item["date"]);
             item["startTime"]=rs.rows.item(i).startTime;
             item["endTime"]=rs.rows.item(i).endTime;
             item["duration"]=rs.rows.item(i).duration;
             item["project"]=rs.rows.item(i).project;
             item["description"]=rs.rows.item(i).description;
             item["breakDuration"]= rs.rows.item(i).breakDuration;
-            if (rs.rows.item(i).taskId)
+
+            if (rs.rows.item(i).taskId) {
                item["taskId"] = rs.rows.item(i).taskId;
-            else
+            }
+            else {
                item["taskId"] = "0";
+            }
+
             allHours.push(item);
-           //console.log(item);
         }
     });
+
     return allHours;
 }
 
 // This function is used to retrieve data this year from the database
 function getAllThisYear(sortby, projectId) {
     var orderby = "ORDER BY date DESC, startTime DESC";
-    if(sortby === "project")
+
+    if (sortby === "project") {
         orderby = "ORDER BY project DESC, date DESC, startTime DESC";
-    var allHours =[];
+    }
+
+    var allHours = [];
     var rs;
     db.transaction(function(tx) {
-        if(projectId)
+        if (projectId) {
             rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") AND project=? ' + orderby + ';', [projectId]);
-        else
+        }
+        else {
             rs = tx.executeSql('SELECT * FROM hours WHERE date BETWEEN strftime("%Y-%m-%d", "now","localtime" , "start of year") AND strftime("%Y-%m-%d", "now", "localtime") ' + orderby + ';');
+        }
+
         for (var i = 0; i < rs.rows.length; i++) {
-             var item ={};
-             //uid,date,duration,project,description
-             item["uid"]=rs.rows.item(i).uid;
-             item["date"]= rs.rows.item(i).date;
-             item["startTime"]=rs.rows.item(i).startTime;
-             item["endTime"]=rs.rows.item(i).endTime;
-             item["duration"]=rs.rows.item(i).duration;
-             item["project"]=rs.rows.item(i).project;
-             item["description"]=rs.rows.item(i).description;
-             item["breakDuration"]= rs.rows.item(i).breakDuration;
-             if (rs.rows.item(i).taskId)
+            var item = {};
+            item["uid"]=rs.rows.item(i).uid;
+            item["date"]= rs.rows.item(i).date;
+            item["startTime"]=rs.rows.item(i).startTime;
+            item["endTime"]=rs.rows.item(i).endTime;
+            item["duration"]=rs.rows.item(i).duration;
+            item["project"]=rs.rows.item(i).project;
+            item["description"]=rs.rows.item(i).description;
+            item["breakDuration"]= rs.rows.item(i).breakDuration;
+            if (rs.rows.item(i).taskId) {
                 item["taskId"] = rs.rows.item(i).taskId;
-             else
+            }
+            else {
                 item["taskId"] = "0";
-             allHours.push(item);
-            //console.log(item);
+            }
+            allHours.push(item);
         }
     });
+
     return allHours;
 }
 
@@ -476,9 +538,11 @@ function remove(uid) {
     Log.info("Removing: " + uid);
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM hours WHERE uid=?;' , [uid]);
+
         if (rs.rowsAffected > 0) {
             Log.info("Deleted!");
-        } else {
+        }
+        else {
             Log.error("Error deleting. No deletion occured.");
         }
     });
@@ -488,20 +552,25 @@ function remove(uid) {
 returns the starttime or "Not started" */
 function getStartTime() {
     var started = 0;
-    var resp="";
+    var resp = "";
+
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM timer');
-        if(rs.rows.length > 0) {
+        if (rs.rows.length > 0) {
             started = rs.rows.item(0).started;
-            if(started)
-                resp = rs.rows.item(0).starttime;
-            else
+
+            if (started) {
+                resp = rs.ows.item(0).starttime;
+            }
+            else {
                 resp = "Not started";
+            }
         }
-        else{
+        else {
             resp = "Not started";
         }
     });
+
     return resp;
 }
 
@@ -509,19 +578,23 @@ function getStartTime() {
 Simply sets the starttime and started to 1
 Returns the starttime if inserting is successful */
 function startTimer(newValue) {
-    var resp="";
+    var resp = "";
     var datenow = new Date();
-    var startTime = newValue || datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    var startTime = newValue || datenow.getHours().toString() + ":" + datenow.getMinutes().toString();
+
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO timer VALUES (?,?,?)', [1, startTime, 1]);
+
         if (rs.rowsAffected > 0) {
             resp = startTime;
             Log.info("Timer was saved to database at: " + startTime);
-        } else {
+        }
+        else {
             resp = "Error";
             Log.error("Error saving the timer");
         }
     });
+
     return resp;
 }
 
@@ -531,13 +604,15 @@ function startTimer(newValue) {
  NOTE: the endtime is not used anywhere atm. */
 function stopTimer() {
     var datenow = new Date();
-    var endTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
+    var endTime = datenow.getHours().toString() + ":" + datenow.getMinutes().toString();
+
     db.transaction(function(tx) {
         var rs = tx.executeSql('REPLACE INTO timer VALUES (?,?,?);', [1, endTime, 0]);
+
         if (rs.rowsAffected > 0) {
             Log.info("Timer was stopped at: "+ endTime);
-        } else {
-            resp = "Error";
+        }
+        else {
             Log.error("Error stopping the timer");
         }
     });
@@ -553,20 +628,23 @@ is running and the user pauses it */
 returns the starttime or "Not started" */
 function getBreakStartTime() {
     var started = 0;
-    var resp="";
+    var resp = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
-        if(rs.rows.length > 0) {
+        if (rs.rows.length > 0) {
             started = rs.rows.item(0).started;
-            if(started)
+            if (started) {
                 resp = rs.rows.item(0).starttime;
-            else
+            }
+            else {
                 resp = "Not started";
+            }
         }
-        else{
+        else {
             resp = "Not started";
         }
     });
+
     return resp;
 }
 
@@ -575,20 +653,22 @@ Simply sets the break starttime and started to 1
 Returns the starttime if inserting is successful.
 Also used for adjusting the starttime */
 function startBreakTimer() {
-    var resp="";
+    var resp = "";
     var datenow = new Date();
     var startTime = datenow.getHours().toString() +":" + datenow.getMinutes().toString();
-    db.transaction(function(tx) {
 
+    db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT INTO breaks VALUES (NULL,?,?,?)', [startTime, 1, -1]);
         if (rs.rowsAffected > 0) {
             resp = startTime;
             Log.info("Break Timer was started at: " + startTime);
-        } else {
+        }
+        else {
             resp = "Error";
             Log.error("Error starting the break timer");
         }
     });
+
     return resp;
 }
 
@@ -600,41 +680,43 @@ function stopBreakTimer(duration) {
     var id = 0;
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks ORDER BY id DESC LIMIT 1;');
-        if(rs.rows.length > 0) {
+        if (rs.rows.length > 0) {
             id = rs.rows.item(0).id;
         }
     });
-    if(id) {
+    if (id) {
         db.transaction(function(tx) {
             var rs = tx.executeSql('REPLACE INTO breaks VALUES (?,?,?,?);', [id, startTime, 0, duration]);
+
             if (rs.rowsAffected > 0) {
                 Log.info("BreakTimer was stopped, duration was: " + duration);
-            } else {
+            }
+            else {
                 resp = "Error";
                 Log.error("Error stopping the breaktimer");
             }
         });
     }
-    else
+    else {
         Log.error("Error getting last row id");
+    }
 }
 
 /* Get the break durations from the database
 Gets all break rows. Users may use the breaktimer
 several times during a work day. */
 function getBreakTimerDuration() {
-    var dur=0.0;
+    var dur = 0.0;
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM breaks');
-        if(rs.rows.length > 0) {
-            for(var i =0; i<rs.rows.length; i++) {
+        if (rs.rows.length > 0) {
+            for(var i = 0; i<rs.rows.length; i++) {
                 if (rs.rows.item(i).duration !==-1)
                     dur += rs.rows.item(i).duration;
             }
         }
-        //else
-            //console.log("No breaktimer rows found");
     });
+
     return dur;
 }
 
@@ -651,9 +733,7 @@ function clearBreakTimer() {
 /* PROJECT FUNCTIONS
 These functions are for projects */
 
-/* */
 function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor) {
-    //console.log(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
     var resp = "";
     db.transaction(function(tx) {
         var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, labelColor]);
@@ -665,19 +745,19 @@ function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labe
             Log.error("Error saving project to database");
         }
     });
+
     return resp;
 }
 
-/* Get projects */
 function getProjects() {
     var resp = [];
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects ORDER BY id DESC');
-        if(rs.rows.length > 0) {
-            for (var i=0; i<rs.rows.length; i++) {
+        if (rs.rows.length > 0) {
+            for (var i = 0; i<rs.rows.length; i++) {
                 var projectId = rs.rows.item(i).id
                 var projectTasks = getProjectTasks(projectId)
-                var item ={};
+                var item = {};
                 item["id"]=projectId;
                 item["name"]= rs.rows.item(i).name;
                 item["hourlyRate"]=rs.rows.item(i).hourlyRate;
@@ -691,16 +771,16 @@ function getProjects() {
             }
         }
     });
+
     return resp;
 }
 
-/* Get project by id */
 function getProjectById(id) {
-    var item ={};
+    var item = {};
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
-        if(rs.rows.length > 0) {
-            for (var i=0; i<rs.rows.length; i++) {
+        if (rs.rows.length > 0) {
+            for (var i = 0; i<rs.rows.length; i++) {
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
                 item["hourlyRate"]=rs.rows.item(i).hourlyRate;
@@ -713,6 +793,7 @@ function getProjectById(id) {
             }
         }
     });
+
     return item;
 }
 
@@ -721,7 +802,8 @@ function removeProject(id) {
         var rs = tx.executeSql('DELETE FROM projects WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
             Log.info("Project deleted from database!");
-        } else {
+        }
+        else {
             Log.info("Error deleting project. No deletion occured.");
         }
     });
@@ -734,7 +816,6 @@ function removeProjects() {
 }
 
 function moveAllHoursToProject(id) {
-
     var resp = "Error updating existing hours!";
     var sqlstr = "UPDATE hours SET project='"+id+"';";
     db.transaction(function(tx) {
@@ -743,6 +824,7 @@ function moveAllHoursToProject(id) {
             resp = "Updated hours to project id: " + id;
         }
     });
+
     return resp;
 }
 
@@ -750,21 +832,21 @@ function moveAllHoursToProjectByDesc(defaultProjectId) {
     var resp = "OK";
     var projects = getProjects();
     var allhours = getAll();
-    var i=0
-    for (; i < allhours.length; i++) {
+    for (var i = 0; i < allhours.length; i++) {
         var sqlstr = "UPDATE hours SET project='"+ defaultProjectId +"' WHERE uid='"+ allhours[i].uid +"';";
         if (allhours[i].description !== "No description") {
-            for (var k=0; k< projects.length; k++) {
-                if((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1) {
+            for (var k = 0; k < projects.length; k++) {
+                if ((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1) {
                     sqlstr = "UPDATE hours SET project='"+ projects[k].id +"' WHERE uid='"+ allhours[i].uid +"';";
                 }
             }
         }
+
         db.transaction(function(tx) {
             var rs = tx.executeSql(sqlstr);
-        }
-        );
+        });
     }
+
     return "Updated: " + i + " rows";
 }
 
@@ -780,38 +862,40 @@ function setTask(taskId, projectId, name) {
         if (rs.rowsAffected > 0) {
             resp = "OK";
             Log.info("Task saved to database");
-        } else {
+        }
+        else {
             resp = "Error";
             Log.error("Error saving task to database");
         }
     });
+
     return resp;
 }
-/* Get tasks for project */
+
 function getProjectTasks(projectId) {
     var resp = [];
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectId]);
-        if(rs.rows.length > 0) {
-            for (var i=0; i<rs.rows.length; i++) {
-                var item ={};
+
+        if (rs.rows.length > 0) {
+            for (var i = 0; i<rs.rows.length; i++) {
+                var item = {};
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
-                //console.log(item['name']);
                 resp.push(item);
             }
         }
     });
+
     return resp;
 }
 
-/* Get task by id */
 function getTaskById(id) {
-    var item ={};
+    var item = {};
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM tasks WHERE id=?;', [id]);
-        if(rs.rows.length > 0) {
-            for (var i=0; i<rs.rows.length; i++) {
+        if (rs.rows.length > 0) {
+            for (var i = 0; i<rs.rows.length; i++) {
                 item["id"]=rs.rows.item(i).id;
                 item["name"]= rs.rows.item(i).name;
                 break;
@@ -826,7 +910,8 @@ function removeTask(id) {
         var rs = tx.executeSql('DELETE FROM tasks WHERE id=?;' , [id]);
         if (rs.rowsAffected > 0) {
             Log.info("Task was deleted from database!");
-        } else {
+        }
+        else {
             Log.info("Error deleting task. No deletion occured.");
         }
     });
@@ -834,7 +919,7 @@ function removeTask(id) {
 
 /* Fetch last used input */
 function getLastUsed(projectId, taskId) {
-    var sql;
+    var rs;
     var result = {
         projectId: "",
         taskId: "",
@@ -843,22 +928,29 @@ function getLastUsed(projectId, taskId) {
 
     db.transaction(function(tx) {
         if (projectId && taskId) {
-            var rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId]);
+            rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId]);
         }
         else if (projectId && !taskId) {
-            var rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId]);
+            rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId]);
         }
         else {
-            var rs = tx.executeSql('SELECT project, taskId, description FROM hours ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;');
+            rs = tx.executeSql('SELECT project, taskId, description FROM hours ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;');
         }
-        if(rs.rows.length > 0) {
-            if (rs.rows.item(0).project)
+
+        if (rs.rows.length > 0) {
+            if (rs.rows.item(0).project) {
                 result['projectId'] = rs.rows.item(0).project;
-            if (rs.rows.item(0).taskId)
+            }
+
+            if (rs.rows.item(0).taskId) {
                 result['taskId'] = rs.rows.item(0).taskId;
-            if (rs.rows.item(0).description && rs.rows.item(0).description != 'No description')
+            }
+
+            if (rs.rows.item(0).description && rs.rows.item(0).description != 'No description') {
                 result['description'] = rs.rows.item(0).description;
+            }
         }
     });
+
     return result;
 }

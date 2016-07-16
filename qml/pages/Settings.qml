@@ -108,11 +108,11 @@ Page {
                     Label {
                         id: defaultDurationButton
                         anchors.centerIn: parent
-                        text: HH.countHours(defaultDuration) + ":" + HH.countMinutes(defaultDuration)
+                        text: defaultDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = parseInt(HH.countHours(defaultDuration))
-                            var durationMinute = parseInt(HH.countMinutes(defaultDuration))
+                            var durationHour = HH.countHours(defaultDuration)
+                            var durationMinute = HH.countMinutes(defaultDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -147,11 +147,11 @@ Page {
                     Label {
                         id: defaultBreakDurationButton
                         anchors.centerIn: parent
-                        text: HH.countHours(defaultBreakDuration) + ":" + HH.countMinutes(defaultBreakDuration)
+                        text: defaultBreakDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = parseInt(HH.countHours(defaultBreakDuration))
-                            var durationMinute = parseInt(HH.countMinutes(defaultBreakDuration))
+                            var durationHour = HH.countHours(defaultBreakDuration)
+                            var durationMinute = HH.countMinutes(defaultBreakDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -317,16 +317,13 @@ Page {
                 width: parent.width
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
-
-                EnterKey: {
-                    iconSource: "image://theme/icon-m-enter-close"
-                    onClicked: {
-                        if(currencyTextArea.text.length > 3) {
-                            banner.notify(qsTr("Currency string too long!"))
-                            currencyTextArea.text = settings.getCurrencyString()
-                        }
-                        focus = false
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: {
+                    if(currencyTextArea.text.length > 3) {
+                        banner.notify(qsTr("Currency string too long!"))
+                        currencyTextArea.text = settings.getCurrencyString()
                     }
+                    focus = false
                 }
 
                 onFocusChanged: {
@@ -359,11 +356,8 @@ Page {
                 width: parent.width
                 placeholderText: qsTr("Set default to address")
                 label: qsTr("Default to address")
-
-                EnterKey: {
-                    iconSource: "image://theme/icon-m-enter-close"
-                    onClicked: focus = false
-                }
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
                     if(!HH.validEmail(toTextArea.text)) {
@@ -382,14 +376,11 @@ Page {
                 width: parent.width
                 placeholderText: qsTr("Set default cc address")
                 label: qsTr("Default cc address")
-
-                EnterKey: {
-                    iconSource: "image://theme/icon-m-enter-close"
-                    onClicked: focus = false
-                }
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!validEmail(ccTextArea.text)) {
+                    if(!HH.validEmail(ccTextArea.text)) {
                         banner.notify(qsTr("Invalid cc email address!"))
                         ccTextArea.text = settings.getCcAddress()
                     }
@@ -405,14 +396,11 @@ Page {
                 width: parent.width
                 placeholderText: qsTr("Set default bcc address")
                 label: qsTr("Default bcc address")
-
-                EnterKey: {
-                    iconSource: "image://theme/icon-m-enter-close"
-                    onClicked: focus = false
-                }
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!validEmail(bccTextArea.text)) {
+                    if(!HH.validEmail(bccTextArea.text)) {
                         banner.notify(qsTr("Invalid bcc email address!"))
                         bccTextArea.text = settings.getBccAddress()
                     }
@@ -646,10 +634,8 @@ Page {
                 width: parent.width
                 placeholderText: qsTr("Full path to .sql file")
                 label: qsTr("Full path to .sql file")
-                EnterKey: {
-                    iconSource: "image://theme/icon-m-enter-close"
-                    onClicked: focus = false
-                }
+                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.onClicked: focus = false
             }
 
             BackgroundItem {

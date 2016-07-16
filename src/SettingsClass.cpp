@@ -38,46 +38,37 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QCoreApplication>
 
 
-Settings::Settings(QObject *parent)
-    : QObject(parent)
-{
-}
+Settings::Settings(QObject *parent): QObject(parent){}
 
-Settings::Settings(const Settings &settings)
-    : QObject(0)
-{
+Settings::Settings(const Settings &settings): QObject(0) {
     Q_UNUSED(settings)
 }
-Settings::~Settings()
-{
-}
 
-void Settings::setDefaultDuration(double value)
-{
+Settings::~Settings(){}
+
+void Settings::setDefaultDuration(double value) {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    s.setValue("defaultDuration", value);
    s.endGroup();
 }
 
-double Settings::getDefaultDuration()
-{
+double Settings::getDefaultDuration() {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    defaultDuration = s.value("defaultDuration", -1).toDouble();
    s.endGroup();
    return defaultDuration;
 }
-void Settings::setDefaultBreakDuration(double value)
-{
+
+void Settings::setDefaultBreakDuration(double value) {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    s.setValue("defaultBreakDuration", value);
    s.endGroup();
 }
 
-double Settings::getDefaultBreakDuration()
-{
+double Settings::getDefaultBreakDuration() {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    defaultBreakDuration = s.value("defaultBreakDuration", -1).toDouble();
@@ -85,16 +76,14 @@ double Settings::getDefaultBreakDuration()
    return defaultBreakDuration;
 }
 
-void Settings::setEndsNowByDefault(QString value)
-{
+void Settings::setEndsNowByDefault(QString value) {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    s.setValue("endsNowByDefault", value);
    s.endGroup();
 }
 
-QString Settings::getEndsNowByDefault()
-{
+QString Settings::getEndsNowByDefault() {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    endsNowByDefault= s.value("endsNowByDefault", "error").toString();
@@ -102,16 +91,14 @@ QString Settings::getEndsNowByDefault()
    return endsNowByDefault;
 }
 
-void Settings::setEndTimeStaysFixed(QString value)
-{
+void Settings::setEndTimeStaysFixed(QString value) {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    s.setValue("endTimeStaysFixed", value);
    s.endGroup();
 }
 
-QString Settings::getEndTimeStaysFixed()
-{
+QString Settings::getEndTimeStaysFixed() {
    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
    s.beginGroup("Settings");
    endTimeStaysFixed = s.value("endTimeStaysFixed", "error").toString();
@@ -119,8 +106,7 @@ QString Settings::getEndTimeStaysFixed()
    return endTimeStaysFixed;
 }
 
-bool Settings::getTimerAutoStart()
-{
+bool Settings::getTimerAutoStart() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     timerAutoStart= s.value("timerAutoStart").toBool();
@@ -135,8 +121,7 @@ void Settings::setTimerAutoStart(bool value) {
     s.endGroup();
 }
 
-bool Settings::getDefaultBreakInTimer()
-{
+bool Settings::getDefaultBreakInTimer() {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     defaultBreakInTimer = s.value("defaultBreakInTimer", true).toBool();

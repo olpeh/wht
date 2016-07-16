@@ -41,8 +41,9 @@ String.prototype.toHHMM = function () {
 
 Array.prototype.findById = function(id) {
     for (var i = 0; i < this.length; i++) {
-        if (this[i].id === id)
+        if (this[i].id === id) {
             return this[i];
+        }
     }
     return false;
 }
@@ -57,6 +58,7 @@ function hourMinuteRoundToNearest(hour, minute) {
     var inHours = hour + (minute / 60);
     inHours = calcRoundToNearest(inHours);
     var inMinutes = inHours * 60;
+
     return {
         'hour': Math.floor(inMinutes / 60),
         'minute': inMinutes % 60
@@ -92,8 +94,9 @@ function countHours(duration) {
 
 // Email validator
 function validEmail(email) {
-    if (email === "")
+    if (email === "") {
         return true
+    }
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
     return re.test(email)
 }

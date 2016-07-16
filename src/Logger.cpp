@@ -44,9 +44,9 @@
 //#include <qtconcurrentrun.h>
 
 namespace {
-int kLogCacheSize = 200;
-const char kLogFileName[] = "Documents/workinghourstracker.log";
-const char logEmailAddress[] = "harbourwht@gmail.com";
+    int kLogCacheSize = 200;
+    const char kLogFileName[] = "Documents/workinghourstracker.log";
+    const char logEmailAddress[] = "harbourwht@gmail.com";
 }
 
 static QString _log_str_arr[] = {
@@ -61,66 +61,57 @@ QContiguousCache<QVariantMap> Logger::_log_cache =
     QContiguousCache<QVariantMap>(kLogCacheSize);
 
 Logger::Logger(QObject *parent)
-    : QAbstractListModel(parent)
-{
+    : QAbstractListModel(parent) {
 }
 
-Logger&
-Logger::instance()
-{
+Logger& Logger::instance() {
     static Logger instance;
     if (!_original_handler)
         _original_handler = qInstallMessageHandler(Logger::_messageHandler);
     return instance;
 }
 
-void
-Logger::save()
-{
+void Logger::save() {
     //QtConcurrent::run(
     Logger::saveLogToFile();
             //);
 }
 
-int
-Logger::rowCount(const QModelIndex&) const
-{
+int Logger::rowCount(const QModelIndex&) const {
     return _log_cache.size();
 }
 
-QVariant
-Logger::data(const QModelIndex &index, int role) const
-{
-    if (index.row() < 0 || index.row() >= _log_cache.size())
+QVariant Logger::data(const QModelIndex &index, int role) const {
+    if (index.row() < 0 || index.row() >= _log_cache.size()) {
         return QVariant();
+    }
 
-    if (!_log_cache.areIndexesValid())
+    if (!_log_cache.areIndexesValid()) {
         _log_cache.normalizeIndexes();
+    }
 
     QVariantMap map = _log_cache.at(_log_cache.firstIndex() + index.row());
 
     if (role == Qt::UserRole + 1) {
         return map.value("type").toInt();
-    } else if (role == Qt::UserRole + 2) {
+    }
+    else if (role == Qt::UserRole + 2) {
         return map.value("message").toString();
-    } else {
+    }
+    else {
         qWarning() << "Unknown role type: " << role;
         return QVariant();
     }
 }
 
-QHash<int, QByteArray>
-Logger::roleNames() const
-{
+QHash<int, QByteArray> Logger::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[Qt::UserRole + 1] = "type";
     roles[Qt::UserRole + 2] = "message";
     return roles;
 }
 
-void
-Logger::_log(LogType type, QString message)
-{
+void Logger::_log(LogType type, QString message) {
     const QString& prefix = _log_str_arr[type];
     QString fullMessage = prefix + message;
 
@@ -130,22 +121,20 @@ Logger::_log(LogType type, QString message)
     _log_cache.append(entry);
 
     switch (type) {
-    case LOG_DEBUG:
-    case LOG_INFO:
-        _original_handler(QtDebugMsg, QMessageLogContext(), fullMessage);
-        return;
-    case LOG_ERROR:
-        _original_handler(QtCriticalMsg, QMessageLogContext(), fullMessage);
-        return;
-    case LOG_WARN:
-        _original_handler(QtWarningMsg, QMessageLogContext(), fullMessage);
-        return;
+        case LOG_DEBUG:
+        case LOG_INFO:
+            _original_handler(QtDebugMsg, QMessageLogContext(), fullMessage);
+            return;
+        case LOG_ERROR:
+            _original_handler(QtCriticalMsg, QMessageLogContext(), fullMessage);
+            return;
+        case LOG_WARN:
+            _original_handler(QtWarningMsg, QMessageLogContext(), fullMessage);
+            return;
     }
 }
 
-void
-Logger::saveLogToFile()
-{
+void Logger::saveLogToFile() {
     QString path = QDir::home().filePath(kLogFileName);
     QFile log_file(path);
 
@@ -159,16 +148,16 @@ Logger::saveLogToFile()
     QTextStream stream(&log_file);
 
     int i = _log_cache.firstIndex();
-    for (;i != _log_cache.lastIndex(); i++)
+    for (;i != _log_cache.lastIndex(); i++) {
         stream <<  _log_cache.at(i).value("message").toString() << "\n";
+    }
 
     log_file.close();
 
     instance().logSaved(path);
 }
 
-void Logger::send()
-{
+void Logger::send() {
     QString toAddress = logEmailAddress;
     QString subject = QString("WHT Logfile");
     QString body ("Logfile start\n\n");
@@ -186,27 +175,26 @@ void Logger::send()
     l.sendEmail(toAddress, "", "", subject, body);
 }
 
-void
-Logger::_messageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg)
-{
+void Logger::_messageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
     QVariantMap entry;
     LogType type_;
 
     switch (type) {
-    case QtDebugMsg:
-        type_ = LOG_DEBUG;
-        break;
-    case QtWarningMsg:
-        type_ = LOG_WARN;
-        break;
-    case QtSystemMsg:
-        type_ = LOG_INFO;
-        break;
-    case QtFatalMsg:
-    default:
-        type_ = LOG_ERROR;
-        break;
+        case QtDebugMsg:
+            type_ = LOG_DEBUG;
+            break;
+        case QtWarningMsg:
+            type_ = LOG_WARN;
+            break;
+        case QtSystemMsg:
+            type_ = LOG_INFO;
+            break;
+        case QtFatalMsg:
+        default:
+            type_ = LOG_ERROR;
+            break;
     }
+
     entry.insert("type", type_);
     entry.insert("message", msg);
     _log_cache.append(entry);
