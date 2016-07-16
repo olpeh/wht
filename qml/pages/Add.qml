@@ -73,8 +73,6 @@ Dialog {
         return (duration >=0 && netDuration >=0 && breakDuration >=0 && startSelectedHour < 24 && startSelectedMinute < 60 && endSelectedHour < 24 && endSelectedMinute < 60)
     }
 
-    function pad(n) { return ("0" + n).slice(-2); }
-
     function updateDateText(){
         var date = new Date(dateText);
         var now = new Date();
@@ -99,8 +97,8 @@ Dialog {
         var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
         var dd  = d.getDate().toString();
         var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]); // padding
-        var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
-        var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
+        var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute);
+        var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute);
         //console.log(modelSource.get(projectCombo.currentIndex).id);
         project = modelSource.get(projectCombo.currentIndex).id;
         Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
@@ -115,11 +113,11 @@ Dialog {
     // helper functions for giving duration in hh:mm format
     function countMinutes(duration) {
         var minutes = duration * 60
-        return pad(Math.round(minutes % 60))
+        return HH.pad(Math.round(minutes % 60))
     }
     function countHours(duration) {
         var minutes = duration * 60
-        return pad(Math.floor(minutes / 60))
+        return HH.pad(Math.floor(minutes / 60))
     }
 
     //move start time
@@ -137,7 +135,7 @@ Dialog {
             startSelectedHour+=24
         }
 
-        startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
     }
 
     // move end time
@@ -156,8 +154,7 @@ Dialog {
         if (endSelectedHour >= 24) {
             endSelectedHour-=24
         }
-        endTime.value = pad(endSelectedHour) + ":" + pad(endSelectedMinute)
-        //console.log(pad(endSelectedHour) + ":" + pad(endSelectedMinute))
+        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
     }
 
     //udpating breakDuration
@@ -181,7 +178,7 @@ Dialog {
         var now = new Date()
         endSelectedHour = now.getHours()
         endSelectedMinute= now.getMinutes()
-        endTime.value = pad(endSelectedHour) + ":" + pad(endSelectedMinute)
+        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
         updateStartTime()
     }
 
@@ -190,7 +187,7 @@ Dialog {
         var now = new Date()
         startSelectedHour = now.getHours()
         startSelectedMinute= now.getMinutes()
-        startTime.value = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
         updateEndTime()
     }
 
@@ -315,7 +312,7 @@ Dialog {
                         }
 
                         label: qsTr("Start time:")
-                        value: pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                        value: HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
                         width: parent.width
                         onClicked: openTimeDialog()
                     }
@@ -359,7 +356,7 @@ Dialog {
                         }
 
                         label: qsTr("End time:")
-                        value: pad(endSelectedHour) + ":" + pad(endSelectedMinute)
+                        value: HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
                         width: parent.width
                         onClicked: openTimeDialog()
                     }
@@ -408,7 +405,7 @@ Dialog {
                                 durationMinute = dialog.minute
                                 duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                                 //console.log(duration)
-                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
                                 if(endTimeStaysFixed)
                                     updateStartTime()
                                 else
@@ -451,7 +448,7 @@ Dialog {
                                 //console.log(durationMinute)
                                 breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                                 //console.log(duration)
-                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
                                 updateNetDuration();
                             })
                         }
@@ -488,7 +485,7 @@ Dialog {
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
                                 netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                value = pad(durationHour) + ":" + pad(durationMinute)
+                                value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
                                 duration = netDuration + breakDuration
                                 updateDuration();
                                 if(endTimeStaysFixed)

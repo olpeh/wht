@@ -138,8 +138,7 @@ function setHours(uid,date,startTime, endTime, duration, project, description, b
             res = "Error";
             Log.error("Error saving hours to database");
         }
-    }
-    );
+    });
     // The function returns “OK” if it was successful, or “Error” if it wasn't
     return res;
 }
@@ -160,7 +159,7 @@ function getHoursDay(offset, projectId) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
-    })
+    });
     //console.log(dur);
     return dur;
 }
@@ -186,7 +185,7 @@ function getHoursWeek(offset, projectId) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
-    })
+    });
     //console.log(dur);
     return dur;
 }
@@ -212,7 +211,7 @@ function getHoursMonth(offset, projectId) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
-    })
+    });
     //console.log(dur);
     return dur;
 }
@@ -237,7 +236,7 @@ function getHoursYear(offset, projectId) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
-    })
+    });
     //console.log(dur);
     return dur;
 }
@@ -255,7 +254,7 @@ function getHoursAll(projectId) {
             dur+= rs.rows.item(i).duration;
             dur-= rs.rows.item(i).breakDuration;
         }
-    })
+    });
     //console.log(dur);
     return dur;
 }
@@ -299,7 +298,7 @@ function getAll(sortby, projectId) {
              allHours.push(item);
             //console.log(item);
         }
-    })
+    });
     return allHours;
 }
 
@@ -345,7 +344,7 @@ function getAllDay(offset, sortby, projectId) {
            //console.log(item);
         }
         //console.log(dur);
-    })
+    });
     return allHours;
 }
 
@@ -389,7 +388,7 @@ function getAllWeek(offset, sortby, projectId) {
             allHours.push(item);
            //console.log(item);
         }
-    })
+    });
     return allHours;
 }
 
@@ -433,7 +432,7 @@ function getAllMonth(offset, sortby, projectId) {
             allHours.push(item);
            //console.log(item);
         }
-    })
+    });
     return allHours;
 }
 
@@ -467,7 +466,7 @@ function getAllThisYear(sortby, projectId) {
              allHours.push(item);
             //console.log(item);
         }
-    })
+    });
     return allHours;
 }
 
@@ -482,7 +481,7 @@ function remove(uid) {
         } else {
             Log.error("Error deleting. No deletion occured.");
         }
-    })
+    });
 }
 
 /* Get timer starttime
@@ -502,7 +501,7 @@ function getStartTime() {
         else{
             resp = "Not started";
         }
-    })
+    });
     return resp;
 }
 
@@ -522,7 +521,7 @@ function startTimer(newValue) {
             resp = "Error";
             Log.error("Error saving the timer");
         }
-    })
+    });
     return resp;
 }
 
@@ -541,7 +540,7 @@ function stopTimer() {
             resp = "Error";
             Log.error("Error stopping the timer");
         }
-    })
+    });
 }
 
 
@@ -567,7 +566,7 @@ function getBreakStartTime() {
         else{
             resp = "Not started";
         }
-    })
+    });
     return resp;
 }
 
@@ -589,7 +588,7 @@ function startBreakTimer() {
             resp = "Error";
             Log.error("Error starting the break timer");
         }
-    })
+    });
     return resp;
 }
 
@@ -604,7 +603,7 @@ function stopBreakTimer(duration) {
         if(rs.rows.length > 0) {
             id = rs.rows.item(0).id;
         }
-    })
+    });
     if(id) {
         db.transaction(function(tx) {
             var rs = tx.executeSql('REPLACE INTO breaks VALUES (?,?,?,?);', [id, startTime, 0, duration]);
@@ -614,7 +613,7 @@ function stopBreakTimer(duration) {
                 resp = "Error";
                 Log.error("Error stopping the breaktimer");
             }
-        })
+        });
     }
     else
         Log.error("Error getting last row id");
@@ -635,7 +634,7 @@ function getBreakTimerDuration() {
         }
         //else
             //console.log("No breaktimer rows found");
-    })
+    });
     return dur;
 }
 
@@ -646,7 +645,7 @@ Breaks table can be cleared everytime */
 function clearBreakTimer() {
     db.transaction(function(tx) {
         tx.executeSql('DELETE FROM breaks');
-    })
+    });
 }
 
 /* PROJECT FUNCTIONS
@@ -665,7 +664,7 @@ function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labe
             resp = "Error";
             Log.error("Error saving project to database");
         }
-    })
+    });
     return resp;
 }
 
@@ -691,7 +690,7 @@ function getProjects() {
                 resp.push(item);
             }
         }
-    })
+    });
     return resp;
 }
 
@@ -713,7 +712,7 @@ function getProjectById(id) {
                 break;
             }
         }
-    })
+    });
     return item;
 }
 
@@ -725,13 +724,13 @@ function removeProject(id) {
         } else {
             Log.info("Error deleting project. No deletion occured.");
         }
-    })
+    });
 }
 
 function removeProjects() {
     db.transaction(function(tx) {
         tx.executeSql('DELETE FROM projects');
-    })
+    });
 }
 
 function moveAllHoursToProject(id) {
@@ -743,8 +742,7 @@ function moveAllHoursToProject(id) {
         if (rs.rowsAffected > 0) {
             resp = "Updated hours to project id: " + id;
         }
-    }
-    );
+    });
     return resp;
 }
 
@@ -786,7 +784,7 @@ function setTask(taskId, projectId, name) {
             resp = "Error";
             Log.error("Error saving task to database");
         }
-    })
+    });
     return resp;
 }
 /* Get tasks for project */
@@ -803,7 +801,7 @@ function getProjectTasks(projectId) {
                 resp.push(item);
             }
         }
-    })
+    });
     return resp;
 }
 
@@ -819,7 +817,7 @@ function getTaskById(id) {
                 break;
             }
         }
-    })
+    });
     return item;
 }
 
@@ -831,7 +829,7 @@ function removeTask(id) {
         } else {
             Log.info("Error deleting task. No deletion occured.");
         }
-    })
+    });
 }
 
 /* Fetch last used input */
@@ -842,7 +840,7 @@ function getLastUsed(projectId, taskId) {
         taskId: "",
         description: "",
     }
-    
+
     db.transaction(function(tx) {
         if (projectId && taskId) {
             var rs = tx.executeSql('SELECT project, taskId, description FROM hours WHERE project=? AND taskId=? ORDER BY strftime("%Y-%m-%d", date) DESC LIMIT 1;', [projectId, taskId]);
@@ -861,6 +859,6 @@ function getLastUsed(projectId, taskId) {
             if (rs.rows.item(0).description && rs.rows.item(0).description != 'No description')
                 result['description'] = rs.rows.item(0).description;
         }
-    })
+    });
     return result;
 }

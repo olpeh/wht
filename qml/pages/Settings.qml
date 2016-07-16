@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import "../helpers.js" as HH
 
 Page {
     property double defaultDuration: 8
@@ -48,13 +48,12 @@ Page {
     // helper functions for giving duration in hh:mm format
     function countMinutes(duration) {
         var minutes = duration * 60
-        return pad(Math.round(minutes % 60))
+        return HH.pad(Math.round(minutes % 60))
     }
     function countHours(duration) {
         var minutes = duration * 60
-        return pad(Math.floor(minutes / 60))
+        return HH.pad(Math.floor(minutes / 60))
     }
-    function pad(n) { return ("0" + n).slice(-2); }
 
     // Email validator
     function validEmail(email) {
@@ -132,7 +131,7 @@ Page {
                                 durationMinute = dialog.minute
                                 defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
                                 //console.log(defaultDuration)
-                                //value = pad(durationHour) + ":" + pad(durationMinute)
+                                //value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
                                 settings.setDefaultDuration(defaultDuration)
                             })
                         }
@@ -167,7 +166,6 @@ Page {
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
                                 defaultBreakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                //value = pad(durationHour) + ":" + pad(durationMinute)
                                 settings.setDefaultBreakDuration(defaultBreakDuration)
                             })
                         }

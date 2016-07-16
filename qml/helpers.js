@@ -64,3 +64,6 @@ function hourMinuteRoundToNearest(hour, minute) {
         'minute': inMinutes % 60
     }
 }
+
+function pad(n) { return ("0" + n).slice(-2); }
+

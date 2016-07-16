@@ -39,26 +39,17 @@ import "../helpers.js" as HH
 
 Page {
     id: root
-    property bool versionCheckDone: false
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-
-    //ThemeEffect {
-        //id: buttonBuzz
-        //effect: ThemeEffect.Press
-    //}
+    property bool versionCheckDone: false
+    property int startSelectedHour : -1
+    property int startSelectedMinute : -1
 
     function resetDatabase(){
         //console.log(hours);
         DB.resetDatabase();
-        summaryModel.set(0,{"hours": "0"});
-        summaryModel.set(1,{"hours": "0"});
-        summaryModel.set(2,{"hours": "0"});
-        summaryModel.set(3,{"hours": "0"});
-        summaryModel.set(4,{"hours": "0"});
-        summaryModel.set(5,{"hours": "0"});
-        summaryModel.set(6,{"hours": "0"});
-        summaryModel.set(7,{"hours": "0"});
+        summaryModel.clear();
     }
+
     function getHours() {
         //Update hours view and cover
         //Log.info("Updating hours")
@@ -74,34 +65,40 @@ Page {
         summaryModel.set(6,{"hours": DB.getHoursAll().toString().toHHMM() });
         summaryModel.set(7,{"hours": DB.getHoursYear(0).toString().toHHMM() });
     }
+
     function setHours(uid,date,duration,description, breakDuration) {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
+
     function getAllDay(offset, sortby, projectId){
         return DB.getAllDay(offset, sortby, projectId);
     }
+
     function getAllWeek(offset, sortby, projectId){
         return DB.getAllWeek(offset, sortby, projectId);
     }
+
     function getAllMonth(offset, sortby, projectId){
         return DB.getAllMonth(offset, sortby, projectId);
     }
+
     function getAllThisYear(sortby, projectId){
         return DB.getAllThisYear(sortby, projectId);
     }
+
     function getAll(sortby, projectId){
         return DB.getAll(sortby, projectId);
         //console.log(projectId);
     }
+
     function remove(uid){
         DB.remove(uid);
     }
+
     function getProjects(){
         return DB.getProjects();
     }
 
-    /* if no project is given as a parameter
-      try to udpate according to the descriptions in hours */
     function moveAllHoursTo(id){
         return DB.moveAllHoursToProject(id);
     }
@@ -111,10 +108,6 @@ Page {
             return DB.moveAllHoursToProjectByDesc(defaultProjectId);
         return qsTr("No default project found")
     }
-    property int startSelectedHour : -1
-    property int startSelectedMinute : -1
-
-    function pad(n) { return ("0" + n).slice(-2); }
 
     function getStartTime(){
         startTime = DB.getStartTime();
@@ -128,7 +121,7 @@ Page {
         var splitted = startTime.split(":");
         startSelectedHour = parseInt(splitted[0]);
         startSelectedMinute = parseInt(splitted[1]);
-        startedAt.text = pad(startSelectedHour) +":"+pad(startSelectedMinute);
+        startedAt.text = HH.pad(startSelectedHour) +":" + HH.pad(startSelectedMinute);
     }
     function updateDuration(breakDur){
         //console.log("Update duration triggered");
@@ -198,8 +191,8 @@ Page {
                 breakDuration = HH.calcRoundToNearest(breakDuration);
             }
 
-            var startTime = pad(startSelectedHour) + ":" + pad(startSelectedMinute);
-            var endTime = pad(endSelectedHour) + ":" + pad(endSelectedMinute);
+            var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute);
+            var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute);
 
             Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
             DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
@@ -408,30 +401,6 @@ Page {
 
         ListModel {
             id: summaryModel
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
-            ListElement {
-                hours: "0"
-            }
             function section(index) {
                 if (section["text"] === undefined) {
                     section.text = [
@@ -509,7 +478,7 @@ Page {
                     }
                 }
             }
-        } // SilicaGridView
+        }
 
         BackgroundItem {
             id: timerControl
@@ -541,7 +510,6 @@ Page {
                 }
             }
             onClicked: {
-                //buttonBuzz.play()
                 start()
             }
         }
@@ -645,7 +613,7 @@ Page {
                     dialog.accepted.connect(function() {
                         startSelectedHour = dialog.hour
                         startSelectedMinute = dialog.minute
-                        var newValue = pad(startSelectedHour) + ":" + pad(startSelectedMinute)
+                        var newValue = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
                         start(newValue)
                         updateDuration()
                     })
@@ -682,7 +650,6 @@ Page {
                 onClicked: {
                     if(!breakTimerRunning) {
                         openTimeDialog()
-                        //buttonBuzz.play()
                     }
                 }
             }
