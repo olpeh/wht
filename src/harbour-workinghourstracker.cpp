@@ -46,6 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QStandardPaths>
 #include <QCommandLineParser>
 
+#include "Database.h"
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
@@ -56,6 +57,7 @@ int main(int argc, char *argv[])
     // Make sure the logger is initialized
     Logger::instance();
 
+    Database database;
     Settings settings;
     Launcher launcher;
     Exporter exporter;
@@ -118,6 +120,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
     view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
 
+    view->rootContext()->setContextProperty("db", &database);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);

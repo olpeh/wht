@@ -560,7 +560,7 @@ function getStartTime() {
             started = rs.rows.item(0).started;
 
             if (started) {
-                resp = rs.ows.item(0).starttime;
+                resp = rs.rows.item(0).starttime;
             }
             else {
                 resp = "Not started";

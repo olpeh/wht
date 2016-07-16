@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2016 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -31,34 +31,32 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
-import "pages"
+#ifndef DATABASE_H
+#define DATABASE_H
 
-ApplicationWindow {
-    property bool timerRunning : false
-    property bool breakTimerRunning: false
-    property string startTime: ""
-    property string durationNow: "0h 0min"
-    property double duration: 0
-    property string breakStartTime: ""
-    property string breakDurationNow: "0h 0min"
-    property double breakDuration: 0
-    property string thisWeek: "0"
-    property string thisMonth: "0"
-    property string today: "0"
-    property Item firstPage
-    property string defaultProjectId: ""
-    property variant projects: []
-    property string currencyString: "€"
-    property int roundToNearest: 0
+#include <QObject>
+#include <QtSql>
 
-    id: appWindow
-    initialPage: Component {
-        FirstPage {
-            id: firstPage
-            Component.onCompleted: appWindow.firstPage = firstPage
-        }
-    }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
-}
+class Database : public QObject {
+    Q_OBJECT
+
+    public:
+        explicit Database(QObject *parent = 0);
+        ~Database();
+
+        static const QString DB_NAME;
+
+        QSqlQuery queryBuilder(QString select, QString from, QString where);
+
+        bool queryExecuter(QSqlQuery query);
+
+        Q_INVOKABLE QVariant getDurationForPeriod(QString period, int offset = 0);
+
+    private:
+
+        QSqlDatabase* db;
+
+        Q_DISABLE_COPY(Database)
+};
+
+#endif // DATABASE_H

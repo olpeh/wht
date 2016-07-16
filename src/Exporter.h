@@ -11,6 +11,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include <QObject>
 #include <QtSql>
+#include "Database.h"
 
 class Exporter : public QObject {
     Q_OBJECT
@@ -19,21 +20,16 @@ class Exporter : public QObject {
         explicit Exporter(QObject *parent = 0);
         ~Exporter();
 
-        Q_INVOKABLE QString exportHoursToCSV();
-        Q_INVOKABLE QString exportProjectsToCSV();
-        Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
+        Q_INVOKABLE QString exportHoursToCSV(Database* db);
+        Q_INVOKABLE QString exportProjectsToCSV(Database* db);
+        Q_INVOKABLE QString exportCategoryToCSV(Database* db, QString section, QVariantList allHours);
         Q_INVOKABLE QString dump();
-        Q_INVOKABLE QVariantList readHours();
-        Q_INVOKABLE QVariantList readProjects();
+        Q_INVOKABLE QVariantList readHours(Database* db);
+        Q_INVOKABLE QVariantList readProjects(Database* db);
         Q_INVOKABLE QString importHoursFromCSV(QString filename);
         Q_INVOKABLE QString importProjectsFromCSV(QString filename);
         Q_INVOKABLE QString importDump(QString filename);
 
-
-        static const QString DB_NAME;
-
-    private:
-        QSqlDatabase* db;
 };
 
 #endif // EXPORTER_H

@@ -31,7 +31,8 @@ SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
     src/Exporter.cpp \
-    src/Logger.cpp
+    src/Logger.cpp \
+    src/Database.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -82,7 +83,8 @@ HEADERS += \
     src/SettingsClass.h \
     src/Launcher.h \
     src/Exporter.h \
-    src/Logger.h
+    src/Logger.h \
+    src/Database.h
 
 QT += dbus \
    core sql

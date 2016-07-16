@@ -8,50 +8,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include "Exporter.h"
 #include "Launcher.h"
+#include "Database.h"
 #include <QCoreApplication>
 #include <QtSql>
 #include <QFile>
 #include <QLocale>
 
-const QString Exporter::DB_NAME = "";
+Exporter::Exporter(QObject *parent) : QObject(parent) {}
 
-Exporter::Exporter(QObject *parent) :
-    QObject(parent)
-{
-    /* Open the SQLite database */
-    db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-    QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-    qDebug() << data;
-
-    if (data.length() && !data.endsWith("share")) {
-        data = data.split("/mdeclarativecache_pre_initialized_qapplication").at(0);
-        qDebug() << data;
-    }
-    else if (data.length() && data.endsWith("/harbour-workinghourstracker/harbour-workinghourstracker")) {
-        data = data.split("/harbour-workinghourstracker/harbour-workinghourstracker").at(0);
-        qDebug() << data;
-    }
-
-    db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
-
-    if (db->open()) {
-        qDebug() << "Database OK";
-    }
-    else {
-        qCritical() << "Open error" << " " << db->lastError().text();
-    }
-}
-
-
-QVariantList Exporter::readHours() {
-    QSqlQuery query = QSqlQuery("SELECT * FROM hours;", *db);
+QVariantList Exporter::readHours(Database* db) {
     QVariantList tmp;
     QVariantMap map;
 
-    if (query.exec()) {
+    QString select = QString("uid, date, startTime, endTime, duration, project, description, breakDuration, taskId");
+    QString from = QString("hours");
+    QString where = "";
+    QSqlQuery query = db->queryBuilder(select, from, where);
+
+    if(db->queryExecuter(query)) {
         map.clear();
         while (query.next()) {
-            //uid|date|startTime|endTime|duration|project|description|breakDuration
             map.insert("uid", query.record().value("uid").toString());
             map.insert("date", query.record().value("date").toString());
             map.insert("startTime", query.record().value("startTime").toString());
@@ -60,26 +36,25 @@ QVariantList Exporter::readHours() {
             map.insert("project", query.record().value("project").toString());
             map.insert("description", query.record().value("description").toString());
             map.insert("breakDuration", query.record().value("breakDuration").toString());
+            map.insert("taskId", query.record().value("taskId").toString());
             tmp.append(map);
         }
     }
-    else {
-        qDebug() << "readHours failed " << query.lastError();
-    }
-
     return tmp;
 }
 
-QVariantList Exporter::readProjects() {
-    QSqlQuery query = QSqlQuery("SELECT * FROM projects;", *db);
+QVariantList Exporter::readProjects(Database* db) {
     QVariantList tmp;
     QVariantMap map;
+
+    QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
+    QString from = QString("projects");
+    QString where = "";
+    QSqlQuery query = db->queryBuilder(select, from, where);
 
     if (query.exec()) {
         map.clear();
         while (query.next()) {
-            //id|name|hourlyRate|contractRate|budget|hourBudget|labelColor
-
             map.insert("id", query.record().value("id").toString());
             map.insert("name", query.record().value("name").toString());
             map.insert("hourlyRate", query.record().value("hourlyRate").toString());
@@ -90,9 +65,6 @@ QVariantList Exporter::readProjects() {
             tmp.append(map);
         }
     }
-    else {
-        qDebug() << "readProjects failed " << query.lastError();
-    }
 
     return tmp;
 }
@@ -101,7 +73,7 @@ QVariantList Exporter::readProjects() {
 /*
  * Export Hours to CSV file
  */
-QString Exporter::exportHoursToCSV() {
+QString Exporter::exportHoursToCSV(Database* db) {
     qDebug() << "Exporting hours to CSV";
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
@@ -116,13 +88,13 @@ QString Exporter::exportHoursToCSV() {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
 
-    QVariantList hours = readHours();
+    QVariantList hours = readHours(db);
     QListIterator<QVariant> i(hours);
 
     while (i.hasNext()) {
         QVariantMap data = i.next().value<QVariantMap>();
-        //uid|date|startTime|endTime|duration|project|description|breakDuration
-        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',', '.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ','  << data["breakDuration"].toString().replace(',', '.') << "\n";
+        //uid|date|startTime|endTime|duration|project|description|breakDuration|taskId
+        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',', '.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ','  << data["breakDuration"].toString().replace(',', '.') << ',' << "'" << data["taskId"].toString() << "'" << "\n";
     }
 
     out.flush();
@@ -135,7 +107,7 @@ QString Exporter::exportHoursToCSV() {
 /*
  * Export Projects to CSV file
  */
-QString Exporter::exportProjectsToCSV() {
+QString Exporter::exportProjectsToCSV(Database* db) {
     qDebug() << "Exporting projects to CSV";
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
@@ -150,7 +122,7 @@ QString Exporter::exportProjectsToCSV() {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
 
-    QVariantList projects = readProjects();
+    QVariantList projects = readProjects(db);
     QListIterator<QVariant> n(projects);
 
     while (n.hasNext()) {
@@ -165,7 +137,7 @@ QString Exporter::exportProjectsToCSV() {
     return filename;
 }
 
-QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
+QString Exporter::exportCategoryToCSV(Database* db, QString section, QVariantList allHours) {
     qDebug() << "Exporting hours for " << section;
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
@@ -184,8 +156,8 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
 
     while (n.hasNext()) {
         QVariantMap data = n.next().value<QVariantMap>();
-        //uid|date|startTime|endTime|duration|project|description|breakDuration
-        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',','.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ',' << "'" << data["breakDuration"].toString() << "\n";
+        //uid|date|startTime|endTime|duration|project|description|breakDuration|taskId
+        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',','.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ',' << "'" << data["breakDuration"].toString() << ',' << "'" << data["taskId"].toString() << "'" << "\n";
     }
 
     out.flush();

@@ -51,18 +51,18 @@ Page {
 
     function getHours() {
         //Update hours view and cover
-        //Log.info("Updating hours")
-        today = DB.getHoursDay(0).toString().toHHMM()
-        thisWeek = DB.getHoursWeek(0).toString().toHHMM()
-        thisMonth = DB.getHoursMonth(0).toString().toHHMM()
-        summaryModel.set(0,{"hours": DB.getHoursDay(1).toString().toHHMM() })
+        //today = DB.getHoursDay(0).toString().toHHMM()
+        today = db.getDurationForPeriod("day").toString().toHHMM()
+        thisWeek = db.getDurationForPeriod("week").toString().toHHMM()
+        thisMonth = db.getDurationForPeriod("month").toString().toHHMM()
+        summaryModel.set(0,{"hours": db.getDurationForPeriod("day", 1).toString().toHHMM() })
         summaryModel.set(1,{"hours": today })
-        summaryModel.set(2,{"hours": DB.getHoursWeek(1).toString().toHHMM() })
+        summaryModel.set(2,{"hours": db.getDurationForPeriod("week", 1).toString().toHHMM() })
         summaryModel.set(3,{"hours": thisWeek })
-        summaryModel.set(4,{"hours": DB.getHoursMonth(1).toString().toHHMM() })
+        summaryModel.set(4,{"hours": db.getDurationForPeriod("month", 1).toString().toHHMM() })
         summaryModel.set(5,{"hours": thisMonth })
-        summaryModel.set(6,{"hours": DB.getHoursAll().toString().toHHMM() })
-        summaryModel.set(7,{"hours": DB.getHoursYear(0).toString().toHHMM() })
+        summaryModel.set(6,{"hours": db.getDurationForPeriod("all").toString().toHHMM() })
+        summaryModel.set(7,{"hours": db.getDurationForPeriod("year").toString().toHHMM() })
     }
 
     function setHours(uid,date,duration,description, breakDuration) {

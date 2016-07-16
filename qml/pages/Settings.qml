@@ -488,7 +488,7 @@ Page {
                 }
 
                 onClicked:{
-                    var file = exporter.exportHoursToCSV()
+                    var file = exporter.exportHoursToCSV(db)
                     exportHoursCSV.text = file
                     banner.notify(qsTr("CSV saved to") +": " + file)
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
@@ -520,7 +520,7 @@ Page {
                 }
 
                 onClicked: {
-                    var file = exporter.exportProjectsToCSV()
+                    var file = exporter.exportProjectsToCSV(db)
                     exportProjectsCSV.text = file
                     banner.notify(qsTr("CSV saved to") +": " + file)
                     exportProjectsCSV.font.pixelSize = Theme.fontSizeExtraSmall
