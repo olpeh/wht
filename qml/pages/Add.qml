@@ -704,33 +704,28 @@ Dialog {
             Component.onCompleted: {
                 if(!editMode && !fromTimer) {
                     var dur = settings.getDefaultDuration()
-
                     if (dur >=0) {
                         duration = dur
                     }
 
                     var brk = settings.getDefaultBreakDuration()
-
                     if (brk >= 0) {
                         breakDuration = brk
                     }
                 }
-                var endFixed = settings.getEndTimeStaysFixed()
 
+                var endFixed = settings.getEndTimeStaysFixed()
                 if (endFixed === "yes") {
                     fixedSwitch.checked = true
                 }
-
                 else if (endFixed === "no") {
                     fixedSwitch.checked = false
                 }
 
                 var nowByDefault = settings.getEndsNowByDefault()
-
                 if (nowByDefault === "yes") {
                     timeSwitch.checked = true
                 }
-
                 else if(nowByDefault === "no") {
                     timeSwitch.checked = false
                 }

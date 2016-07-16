@@ -75,6 +75,11 @@ function dateToDbDateString(date) {
     }
 }
 
+function formatDate(datestring) {
+    var d = new Date(datestring)
+    return d.toLocaleDateString()
+}
+
 function countMinutes(duration) {
     var minutes = duration * 60
     return Math.round(minutes % 60)
@@ -83,5 +88,13 @@ function countMinutes(duration) {
 function countHours(duration) {
     var minutes = duration * 60
     return Math.floor(minutes / 60)
+}
+
+// Email validator
+function validEmail(email) {
+    if (email === "")
+        return true
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    return re.test(email)
 }
 

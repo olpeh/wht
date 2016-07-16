@@ -45,8 +45,8 @@ Page {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     SilicaListView {
+        model: Log
         anchors.fill: parent
-
         header: PageHeader {
             title: qsTr("Log viewer")
         }
@@ -59,6 +59,7 @@ Page {
                     Log.send()
                 }
             }
+
             MenuItem {
                 //: Menu action allowing the user to save application log
                 text: qsTr("Save log")
@@ -74,8 +75,6 @@ Page {
         RemorsePopup {
             id: remorse
         }
-
-        model: Log
 
         Connections {
             target: Log
@@ -123,6 +122,7 @@ Page {
 
         VerticalScrollDecorator {}
     }
+
     Banner {
         id: banner
     }

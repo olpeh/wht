@@ -36,32 +36,14 @@ import Sailfish.Silica 1.0
 import "../helpers.js" as HH
 
 Page {
+    id: settingsPage
+    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
     property bool timerAutoStart : false
     property int roundToNearest: 0
     property bool roundToNearestComboInitialized: false
-    id: settingsPage
-    allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
-
-    // helper functions for giving duration in hh:mm format
-    function countMinutes(duration) {
-        var minutes = duration * 60
-        return HH.pad(Math.round(minutes % 60))
-    }
-    function countHours(duration) {
-        var minutes = duration * 60
-        return HH.pad(Math.floor(minutes / 60))
-    }
-
-    // Email validator
-    function validEmail(email) {
-        if (email === "")
-            return true
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-        return re.test(email)
-    }
 
     SilicaFlickable {
         contentHeight: column.y + column.height
@@ -83,13 +65,18 @@ Page {
             spacing: Theme.paddingLarge
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
+
             PageHeader {
                 title: qsTr("Settings")
             }
+
             RemorsePopup { id: remorse }
+
             SectionHeader { text: qsTr("Projects") }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
@@ -102,23 +89,30 @@ Page {
                         text: qsTr("Edit projects")
                     }
                 }
+
                 onClicked: pageStack.push(Qt.resolvedUrl("Projects.qml"))
             }
+
             SectionHeader { text: qsTr("Default duration") }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: defaultDurationButton
                         anchors.centerIn: parent
+                        text: HH.countHours(defaultDuration) + ":" + HH.countMinutes(defaultDuration)
+
                         function openTimeDialog() {
-                            var durationHour = parseInt(countHours(defaultDuration))
-                            var durationMinute = parseInt(countMinutes(defaultDuration))
+                            var durationHour = parseInt(HH.countHours(defaultDuration))
+                            var durationMinute = parseInt(HH.countMinutes(defaultDuration))
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -130,31 +124,34 @@ Page {
                                 durationHour = dialog.hour
                                 durationMinute = dialog.minute
                                 defaultDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-                                //console.log(defaultDuration)
-                                //value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
                                 settings.setDefaultDuration(defaultDuration)
                             })
                         }
-                        text: countHours(defaultDuration) + ":" + countMinutes(defaultDuration)
                     }
                 }
                 onClicked: defaultDurationButton.openTimeDialog()
             }
+
             SectionHeader { text: qsTr("Default break duration") }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: defaultBreakDurationButton
                         anchors.centerIn: parent
+                        text: HH.countHours(defaultBreakDuration) + ":" + HH.countMinutes(defaultBreakDuration)
+
                         function openTimeDialog() {
-                            var durationHour = parseInt(countHours(defaultBreakDuration))
-                            var durationMinute = parseInt(countMinutes(defaultBreakDuration))
+                            var durationHour = parseInt(HH.countHours(defaultBreakDuration))
+                            var durationMinute = parseInt(HH.countMinutes(defaultBreakDuration))
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -169,13 +166,13 @@ Page {
                                 settings.setDefaultBreakDuration(defaultBreakDuration)
                             })
                         }
-                        text: countHours(defaultBreakDuration) + ":" + countMinutes(defaultBreakDuration)
                     }
                 }
                 onClicked: defaultBreakDurationButton.openTimeDialog()
             }
 
             SectionHeader { text: qsTr("Adding hours") }
+
             TextSwitch {
                 id: timeSwitch
                 width: parent.width * 0.7
@@ -183,6 +180,7 @@ Page {
                 checked: true
                 text: qsTr("Ends now by default")
                 description: qsTr("Endtime will be set to now by default.")
+
                 onCheckedChanged: {
                     timeSwitch.text = checked ? qsTr("Ends now by default") : qsTr("Starts now by default")
                     timeSwitch.description = checked ? qsTr("Endtime will be set to now by default.") : qsTr("Starttime will be set to now by default.")
@@ -194,6 +192,7 @@ Page {
                     }
                 }
             }
+
             TextSwitch {
                 id: fixedSwitch
                 width: parent.width * 0.7
@@ -201,13 +200,16 @@ Page {
                 checked: true
                 text: qsTr("Endtime stays fixed by default.")
                 description: qsTr("Starttime will flex if duration is changed.")
+
                 onCheckedChanged: {
                     fixedSwitch.text = checked ? qsTr("Endtime stays fixed by default.") : qsTr("Starttime stays fixed by default.")
                     fixedSwitch.description = checked ? qsTr("Starttime will flex if duration is changed.") : qsTr("Endtime will flex if duration is changed.")
-                    if(checked)
-                        settings.setEndTimeStaysFixed("yes")
-                    else
-                        settings.setEndTimeStaysFixed("no")
+                    if(checked) {
+                        settings.setEndTimeStaysFixed("yes") // LOL
+                    }
+                    else {
+                        settings.setEndTimeStaysFixed("no") // XD
+                    }
                 }
             }
 
@@ -241,6 +243,7 @@ Page {
                 width: parent.width * 0.7
                 anchors.horizontalCenter: parent.horizontalCenter
                 label: qsTr("Round to nearest")
+                description: qsTr("Rounding happens when saving hours")
                 menu: ContextMenu {
                     Repeater {
                         width: parent.width
@@ -259,10 +262,11 @@ Page {
                     }
                     roundToNearestComboInitialized = true
                 }
+
                 function init() {
                     _updating = false
                     roundToNearest =  settings.getRoundToNearest()
-                    console.log(roundToNearest)
+
                     for (var i = 0; i < modelSource.count; i++) {
                         if (modelSource.get(i).value == roundToNearest) {
                             currentIndex = i
@@ -270,11 +274,10 @@ Page {
                         }
                     }
                 }
-                description: qsTr("Rounding happens when saving hours")
             }
 
-
             SectionHeader { text: qsTr("Timer options") }
+
             TextSwitch {
                 id: autoStartSwitch
                 width: parent.width * 0.7
@@ -282,6 +285,7 @@ Page {
                 checked: false
                 text: qsTr("Autostart timer on app startup")
                 description: qsTr("Timer will get started automatically if not already running.")
+
                 onCheckedChanged: {
                     autoStartSwitch.description = checked ? qsTr("Timer will get started automatically if not already running.") : qsTr("Timer will not get started automatically.")
                     if(checked)
@@ -290,6 +294,7 @@ Page {
                         settings.setTimerAutoStart(false)
                 }
             }
+
             TextSwitch {
                 id: defaultBreakInTimerSwitch
                 checked: true
@@ -297,37 +302,43 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Add break when using timer")
                 description: qsTr("Default break is added automatically when using timer.")
+
                 onCheckedChanged: {
                     defaultBreakInTimerSwitch.description = checked ? qsTr("Default break is added automatically when using timer. Only added when break is not recorded with the break timer.") : qsTr("Default break is not added automatically when using timer.")
-                    if(checked)
-                        settings.setDefaultBreakInTimer(true)
-                    else
-                        settings.setDefaultBreakInTimer(false)
+                    settings.setDefaultBreakInTimer(checked)
                 }
             }
+
             SectionHeader { text: qsTr("Set currency") }
+
             TextField{
                 id: currencyTextArea
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    if(currencyTextArea.text.length > 3) {
-                        banner.notify(qsTr("Currency string too long!"))
-                        currencyTextArea.text = settings.getCurrencyString()
-                    }
-                    focus = false
-                }
                 width: parent.width
                 placeholderText: qsTr("Set currency string")
                 label: qsTr("Currency string")
+
+                EnterKey: {
+                    iconSource: "image://theme/icon-m-enter-close"
+                    onClicked: {
+                        if(currencyTextArea.text.length > 3) {
+                            banner.notify(qsTr("Currency string too long!"))
+                            currencyTextArea.text = settings.getCurrencyString()
+                        }
+                        focus = false
+                    }
+                }
+
                 onFocusChanged: {
                     settings.setCurrencyString(currencyTextArea.text)
                     currencyString = currencyTextArea.text
                 }
             }
+
             SectionHeader { text: qsTr("Email reports") }
+
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -341,64 +352,78 @@ Page {
                 + qsTr("You can also decide to fill them in manually when sending a report.") +" "
                 + qsTr("This is just for making it faster.")
             }
+
             TextField{
                 id: toTextArea
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                }
                 width: parent.width
                 placeholderText: qsTr("Set default to address")
                 label: qsTr("Default to address")
+
+                EnterKey: {
+                    iconSource: "image://theme/icon-m-enter-close"
+                    onClicked: focus = false
+                }
+
                 onFocusChanged: {
-                    if(!validEmail(toTextArea.text)) {
+                    if(!HH.validEmail(toTextArea.text)) {
                         banner.notify(qsTr("Invalid to email address!"))
                         toTextArea.text = settings.getToAddress()
                     }
-                    settings.setToAddress(toTextArea.text)
+                    else {
+                        settings.setToAddress(toTextArea.text)
+                    }
                 }
             }
+
             TextField{
                 id: ccTextArea
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                }
                 width: parent.width
                 placeholderText: qsTr("Set default cc address")
                 label: qsTr("Default cc address")
+
+                EnterKey: {
+                    iconSource: "image://theme/icon-m-enter-close"
+                    onClicked: focus = false
+                }
+
                 onFocusChanged: {
                     if(!validEmail(ccTextArea.text)) {
                         banner.notify(qsTr("Invalid cc email address!"))
                         ccTextArea.text = settings.getCcAddress()
                     }
-                    else
+                    else {
                         settings.setCcAddress(ccTextArea.text)
+                    }
                 }
             }
+
             TextField{
                 id: bccTextArea
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                }
                 width: parent.width
                 placeholderText: qsTr("Set default bcc address")
                 label: qsTr("Default bcc address")
+
+                EnterKey: {
+                    iconSource: "image://theme/icon-m-enter-close"
+                    onClicked: focus = false
+                }
+
                 onFocusChanged: {
                     if(!validEmail(bccTextArea.text)) {
                         banner.notify(qsTr("Invalid bcc email address!"))
                         bccTextArea.text = settings.getBccAddress()
                     }
-                    else
+                    else {
                         settings.setBccAddress(bccTextArea.text)
+                    }
                 }
             }
 
             SectionHeader { text: qsTr("Exporting") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -414,9 +439,11 @@ Page {
                 + qsTr("It will export everything needed to rebuild the database e.g on another device.") +" "
                 + qsTr("At the moment you will not be able to import csv files yet. Coming soon.")
             }
+
             Button {
                 text: qsTr("Read more about exporting")
                 anchors.horizontalCenter: parent.horizontalCenter
+
                 onClicked: {
                   banner.notify(qsTr("Launching external browser"))
                   Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
@@ -425,6 +452,7 @@ Page {
 
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     id: dump
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -432,12 +460,14 @@ Page {
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: dumpLabel
                         anchors.centerIn: parent
                         text: qsTr("Export the whole database")
                     }
                 }
+
                 onClicked:{
                     var file = exporter.dump()
                     banner.notify(qsTr("Database saved to")+ ": " + file)
@@ -445,25 +475,30 @@ Page {
                     dumpLabel.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
                 height: 10
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: exportHoursCSV
                         anchors.centerIn: parent
                         text: qsTr("Export hours as CSV")
                     }
                 }
+
                 onClicked:{
                     var file = exporter.exportHoursToCSV()
                     exportHoursCSV.text = file
@@ -471,13 +506,16 @@ Page {
                     exportHoursCSV.font.pixelSize = Theme.fontSizeExtraSmall
                 }
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
                 height: 10
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     id: projectCSV
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -485,13 +523,15 @@ Page {
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: exportProjectsCSV
                         anchors.centerIn: parent
                         text: qsTr("Export projects as CSV")
                     }
                 }
-                onClicked:{
+
+                onClicked: {
                     var file = exporter.exportProjectsToCSV()
                     exportProjectsCSV.text = file
                     banner.notify(qsTr("CSV saved to") +": " + file)
@@ -500,8 +540,9 @@ Page {
             }
 
             SectionHeader { text: qsTr("Importing") }
+
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -515,6 +556,7 @@ Page {
                 + qsTr("Rows are replaced from the imported file in case of entries already in the database.")+ " "
                 + qsTr("This makes it possible to update edited rows.")
             }
+
             Button {
                 text: qsTr("Read more about importing")
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -523,9 +565,11 @@ Page {
                   Qt.openUrlExternally("https://github.com/ojhaapala/wht/blob/master/README.md#exporting")
                 }
             }
+
             /*
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
@@ -544,37 +588,44 @@ Page {
                     banner.notify(resp)
                 }
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
                 height: 10
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: importProjectsCSV
                         anchors.centerIn: parent
                         text: qsTr("Import projects from CSV")
                     }
                 }
+
                 onClicked:{
                     console.log("Importing projects from CSV")
                     var resp = exporter.importProjectsFromCSV(filename)
                     banner.notify(resp)
                 }
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
                 height: 10
             }
             */
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -588,31 +639,36 @@ Page {
                 text:  qsTr("Import from a .sql dump exported by Working Hours Tracker.") + " "
                 + qsTr("Give the full path to the file and then hit the button")
             }
+
             TextField{
                 id: dumpImport
                 focus: false
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                }
                 width: parent.width
                 placeholderText: qsTr("Full path to .sql file")
                 label: qsTr("Full path to .sql file")
+                EnterKey: {
+                    iconSource: "image://theme/icon-m-enter-close"
+                    onClicked: focus = false
+                }
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: importButton
                         anchors.centerIn: parent
                         text: qsTr("Import now!")
                     }
                 }
+
                 onClicked:{
                     if (dumpImport.text) {
                         remorse.execute(qsTr("Importing") + " " + dumpImport.text, function() {
@@ -623,6 +679,7 @@ Page {
                             projects = settingsPage.dataContainer.getProjects()
                         })
                     }
+
                     else {
                         banner.notify(qsTr("No file path given"))
                     }
@@ -630,6 +687,7 @@ Page {
             }
 
             SectionHeader { text: qsTr("Move all hours to default") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -645,28 +703,34 @@ Page {
 
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: moveHoursButton
                         anchors.centerIn: parent
                         text: qsTr("Move all to default")
                     }
                 }
+
                 onClicked:{
                     if (defaultProjectId !== "")
                         remorse.execute(qsTr("Move all hours to default project"), function() {
                             banner.notify(settingsPage.dataContainer.moveAllHoursTo(defaultProjectId))
                         })
-                    else
+                    else {
                        banner.notify(qsTr("No default project set"))
+                    }
                 }
             }
+
             SectionHeader { text: qsTr("Move by project name in description") }
+
             Text {
                 font.pixelSize: 0
                 color: Theme.primaryColor
@@ -682,20 +746,24 @@ Page {
                 + qsTr("This is only meant to be used if you have used earlier versions of this app and written your project name in the description.") +" "
                 + qsTr("This might take a while.")
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: movingHoursButton
                         anchors.centerIn: parent
                         text: qsTr("Move existing hours")
                     }
                 }
+
                 onClicked: {
                     remorse.execute(qsTr("Moving hours to projects in description"), function() {
                          banner.notify(settingsPage.dataContainer.moveAllHoursToProjectByDesc())
@@ -704,6 +772,7 @@ Page {
             }
 
             SectionHeader { text: qsTr("DANGER ZONE!") }
+
             Text {
                 id: warningText2
                 font.pointSize: Theme.fontSizeMedium
@@ -717,20 +786,24 @@ Page {
                 }
                 text: qsTr("Please be aware!")
             }
+
             BackgroundItem {
                 height: 100
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: 100
+
                     Label {
                         id: resetButton
                         anchors.centerIn: parent
                         text: qsTr("Reset database")
                     }
                 }
+
                 onClicked: remorse.execute(qsTr("Resetting database"), function() {
                     if (dataContainer != null){
                        settingsPage.dataContainer.resetDatabase()
@@ -753,6 +826,7 @@ Page {
                 }
                 text: qsTr("Warning: You will loose all your Working Hours data if you reset the database!")
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
@@ -761,35 +835,35 @@ Page {
 
         }
     }
+
     Component.onCompleted: {
         var dur = settings.getDefaultDuration()
-        if(dur >=0){
+        if (dur >= 0) {
             defaultDuration = dur
         }
 
         var brk = settings.getDefaultBreakDuration()
-        if(brk >= 0){
+        if (brk >= 0) {
             defaultBreakDuration = brk
         }
 
         var endFixed = settings.getEndTimeStaysFixed()
-        if(endFixed === "yes")
+        if (endFixed === "yes") {
             fixedSwitch.checked = true
-        else if(endFixed === "no")
+        }
+        else if (endFixed === "no") {
             fixedSwitch.checked = false
+        }
 
         var nowByDefault = settings.getEndsNowByDefault()
-        if(nowByDefault === "yes")
+        if (nowByDefault === "yes") {
             timeSwitch.checked = true
-        else if(nowByDefault === "no")
+        }
+        else if (nowByDefault === "no") {
             timeSwitch.checked = false
+        }
 
-        var timerAutoStart = settings.getTimerAutoStart()
-        if(timerAutoStart === true)
-            autoStartSwitch.checked = true
-        else if(timerAutoStart === false)
-            autoStartSwitch.checked = false
-
+        autoStartSwitch.checked = settings.getTimerAutoStart()
         defaultBreakInTimerSwitch.checked = settings.getDefaultBreakInTimer()
 
         currencyTextArea.text = settings.getCurrencyString()
@@ -799,6 +873,7 @@ Page {
         dumpImport.text = documentsLocation + "/wht.sql"
         roundingCombo.init()
     }
+
     Banner {
         id: banner
     }

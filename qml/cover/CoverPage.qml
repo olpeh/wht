@@ -37,13 +37,18 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: cover
     property bool active: status == Cover.Active
+
     onActiveChanged: {
         if(active) {
             if(timerRunning && !breakTimerRunning){
                 firstPage.updateDuration()
-            } else if (breakTimerRunning) {
+            }
+
+            else if (breakTimerRunning) {
                 firstPage.updateBreakTimerDuration()
-            } else {
+            }
+
+            else {
                firstPage.getHours()
             }
         }
@@ -63,11 +68,15 @@ CoverBackground {
         CoverAction {
             id: pauseAddAction
             iconSource:  {
-                if(timerRunning && breakTimerRunning) {
+                if (timerRunning && breakTimerRunning) {
                     "image://theme/icon-cover-play"
-                } else if(timerRunning) {
+                }
+
+                else if (timerRunning) {
                     "image://theme/icon-cover-pause"
-                } else {
+                }
+
+                else {
                     "image://theme/icon-cover-new"
                 }
             }
@@ -76,12 +85,14 @@ CoverBackground {
                     Log.info("Break starts...")
                     firstPage.startBreakTimer()
                 }
+
                 else if (breakTimerRunning) {
                     Log.info("Break ends...")
                     firstPage.stopBreakTimer()
                 }
+
                 else {
-                    if(pageStack.depth > 1) {
+                    if (pageStack.depth > 1) {
                         var pageOptions = {
                             dataContainer: appWindow.firstPage,
                             uid: 0,
@@ -104,6 +115,7 @@ CoverBackground {
                     firstPage.stop(true)
                     appWindow.activate()
                 }
+
                 else {
                     firstPage.start()
                 }

@@ -37,17 +37,22 @@ import Sailfish.Silica 1.0
 Page {
     id: page
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
+
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
+
         Column {
             id: column
+            width: parent.width
+
             PageHeader {
                 title: qsTr("How to")
             }
-            width: parent.width
+
             SectionHeader { text: qsTr("Adding hours") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -63,7 +68,9 @@ Page {
                 + qsTr("Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.") +" "
                 + qsTr("At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.")
             }
+
             SectionHeader { text: qsTr("Adding projects") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -79,7 +86,9 @@ Page {
                 + qsTr("You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.") + " "
                 + qsTr("If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.")
             }
+
             SectionHeader { text: qsTr("Using the timer") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -97,7 +106,9 @@ Page {
                 + qsTr(" The hours will be saved only when accepting the dialog.") + "\n\n"
                 + qsTr("On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.")
             }
+
             SectionHeader { text: qsTr("Using the cover") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -112,7 +123,9 @@ Page {
                 + qsTr("Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.") + "\n\n"
                 + qsTr("When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.")
             }
+
             SectionHeader { text: qsTr("Summaries") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -130,7 +143,9 @@ Page {
                 + qsTr("You can edit those entries by clicking them.") + "\n\n"
                 + qsTr("By swiping left in the detailed view you can see a detailed summary for that category.")
             }
+
             SectionHeader { text: qsTr("Settings") }
+
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -149,8 +164,9 @@ Page {
             }
 
             SectionHeader { text: qsTr("More questions?") }
+
             Text {
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
@@ -161,6 +177,7 @@ Page {
                 }
                 text: qsTr("Please don't hesitate to contact the developer if you have any questions.") + "\n"
             }
+
             Text {
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
@@ -173,6 +190,7 @@ Page {
                 }
                 text: "Olavi Haapala"
             }
+
             Button {
                 text: "harbourwht@gmail.com"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -181,6 +199,7 @@ Page {
                     Qt.openUrlExternally("mailto:harbourwht@gmail.com")
                 }
             }
+
             Button {
                 text: "Twitter: @0lpeh"
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -189,6 +208,7 @@ Page {
                     Qt.openUrlExternally("https://twitter.com/0lpeh")
                 }
             }
+
             Button {
                 text: qsTr("Issues in GitHub")
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -197,6 +217,7 @@ Page {
                     Qt.openUrlExternally("https://github.com/olpeh/wht/issues")
                 }
             }
+
             Rectangle {
                 opacity: 0
                 width: parent.width
@@ -204,6 +225,7 @@ Page {
             }
         }
     }
+
     Banner {
         id: banner
     }

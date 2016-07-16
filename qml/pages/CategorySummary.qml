@@ -38,15 +38,17 @@ import Sailfish.Silica 1.0
 Page {
     id: summary
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-    ListModel {
-        id: hoursModel
-    }
+
     property QtObject dataContainer: null
     property string section: ""
     property double categoryDuration: 0
     property double categoryPrice: 0
     property int categoryWorkdays: 0
     property int categoryEntries: 0
+
+    Component.onCompleted: {
+        initializeContent()
+    }
 
     function initializeContent() {
         var defColor = String(Theme.secondaryHighlightColor)
@@ -58,16 +60,14 @@ Page {
                        'price': categoryPrice,
                        'labelColor': defColor,
         })
-        if(dataContainer){
+
+        if (dataContainer) {
             // get hours sorted by projects
             var allHours = dataContainer.getAllHours("project")
             myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects })
         }
     }
 
-    Component.onCompleted: {
-        initializeContent()
-    }
     WorkerScript {
         id: myWorker
         source: "../worker.js"
@@ -78,20 +78,27 @@ Page {
             }
         }
     }
+
+    ListModel {
+        id: hoursModel
+    }
+
     SilicaListView {
         id: listView
-        header: PageHeader {
-            title: qsTr("Summary for") + ": " +section
-        }
-
+        model: hoursModel
         spacing: Theme.paddingLarge
         anchors.fill: parent
         anchors.bottomMargin: Theme.paddingLarge
         quickScroll: true
-        model: hoursModel
+        header: PageHeader {
+            title: qsTr("Summary for") + ": " + section
+        }
+
         VerticalScrollDecorator {}
+
         ViewPlaceholder {
             enabled: busyIndicator.running
+
             BusyIndicator {
                 id: busyIndicator
                 anchors.centerIn: parent
@@ -99,6 +106,7 @@ Page {
                 running: true
             }
         }
+
         delegate: Item {
             id: myListItem
             width: ListView.view.width
@@ -108,32 +116,46 @@ Page {
                 id: contentItem
                 width: parent.width
                 height: column.height + Theme.paddingLarge
-                color: model.labelColor ? Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity) : Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
+                color:  {
+                    if (model.labelColor) {
+                        Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity)
+                    }
+                    else {
+                        Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
+
+                    }
+                }
+
                 Column {
                     id: column
                     width: parent.width
                     x: Theme.paddingMedium
                     y: Theme.paddingMedium
+
                     Label {
                         text: model.header
                         font.pixelSize: Theme.fontSizeMedium
                         font.bold : true
                     }
+
                     Label {
                         text: model.duration
                         font.pixelSize: Theme.fontSizeSmall
                         truncationMode: TruncationMode.Fade
                     }
+
                     Label {
                         text: model.days
                         font.pixelSize: Theme.fontSizeSmall
                         truncationMode: TruncationMode.Fade
                     }
+
                     Label {
                         text: model.entries
                         font.pixelSize: Theme.fontSizeSmall
                         truncationMode: TruncationMode.Fade
                     }
+
                     Label {
                         visible: model.price > 0
                         font{

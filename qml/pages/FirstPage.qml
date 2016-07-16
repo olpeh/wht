@@ -102,37 +102,49 @@ Page {
     }
 
     function moveAllHoursToProjectByDesc(){
-        if (defaultProjectId !== "")
+        if (defaultProjectId !== "") {
             return DB.moveAllHoursToProjectByDesc(defaultProjectId)
-        return qsTr("No default project found")
+        }
+        else {
+            return qsTr("No default project found")
+        }
+
     }
 
     function getStartTime(){
         startTime = DB.getStartTime()
     }
+
     function start(newValue){
         startTime = DB.startTimer(newValue)
         updateStartTime()
         timerRunning = true
     }
+
     function updateStartTime(){
         var splitted = startTime.split(":")
         startSelectedHour = parseInt(splitted[0])
         startSelectedMinute = parseInt(splitted[1])
         startedAt.text = HH.pad(startSelectedHour) +":" + HH.pad(startSelectedMinute)
     }
+
     function updateDuration(breakDur){
         breakDuration = getBreakTimerDuration()
-        if(breakDur)
+        if(breakDur) {
             breakDuration += breakDur
+        }
+
         var dateNow = new Date()
         var hoursNow = dateNow.getHours()
         var minutesNow = dateNow.getMinutes()
         var nowInMinutes = hoursNow * 60 + minutesNow
         var splitted = startTime.split(":")
         var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1])
-        if (nowInMinutes < startInMinutes)
+
+        if (nowInMinutes < startInMinutes) {
             nowInMinutes += 24*60
+        }
+
         var breakInMinutes = Math.round(breakDuration *60)
         var difference = nowInMinutes - startInMinutes - breakInMinutes
         var diffHours = Math.floor(difference / 60)
@@ -145,14 +157,18 @@ Page {
             stopBreakTimer()
             breakTimerRunning = false
         }
+
         breakDuration = getBreakTimerDuration()
 
         var dateNow = new Date()
         var endSelectedHour = dateNow.getHours()
         var endSelectedMinute = dateNow.getMinutes()
         var endHour = endSelectedHour
-        if (endSelectedHour < startSelectedHour)
+
+        if (endSelectedHour < startSelectedHour) {
             endHour +=24
+        }
+
         duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
 
         // Add default break duration if settings allow and no break recorded
@@ -167,13 +183,7 @@ Page {
             var project = defaultProjectId
             var uid = DB.getUniqueId()
             var taskId = "0"
-
-            var d = new Date()
-            //YYYY-MM-DD
-            var yyyy = d.getFullYear().toString()
-            var mm = (d.getMonth()+1).toString() // getMonth() is zero-based
-            var dd  = d.getDate().toString()
-            var dateString = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]) // padding
+            var dateString = HH.dateToDbDateString(new Date())
 
             if (roundToNearest) {
                 var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
@@ -195,7 +205,7 @@ Page {
             getHours()
         }
 
-        else if(!fromCover) {
+        else if (!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                   dataContainer: root,
                                   uid: 0,
@@ -205,8 +215,9 @@ Page {
                                   endSelectedMinute:endSelectedMinute,
                                   duration:duration, breakDuration:breakDuration, fromTimer: true}, PageStackAction.Immediate)
         }
+
         else {
-            if(pageStack.depth > 1) {
+            if (pageStack.depth > 1) {
                 pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
                                dataContainer: root,
                                uid: 0,
@@ -223,6 +234,7 @@ Page {
                                duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
             }
         }
+
         breakDurationNow = "0h 0min"
         breakDuration = 0
         durationNow = "0h 0min"
@@ -230,19 +242,20 @@ Page {
         DB.stopTimer()
         timerRunning = false
         clearBreakTimer()
-
     }
 
     // Break timer functions
     function getBreakStartTime() {
         breakStartTime = DB.getBreakStartTime()
     }
+
     function startBreakTimer() {
         breakDuration = 0
         breakDurationNow = "0h 0min"
         breakStartTime = DB.startBreakTimer()
         breakTimerRunning = true
     }
+
     function updateBreakTimerDuration() {
         var dateNow = new Date()
         var hoursNow = dateNow.getHours()
@@ -268,8 +281,10 @@ Page {
         var endSelectedHour = dateNow.getHours()
         var endSelectedMinute = dateNow.getMinutes()
         var endHour = endSelectedHour
-        if (endSelectedHour < timerStartHour)
+        if (endSelectedHour < timerStartHour) {
             endHour +=24
+        }
+
         breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
         DB.stopBreakTimer(breakDuration)
         breakTimerRunning = false
@@ -277,94 +292,13 @@ Page {
 
     function getBreakTimerDuration(){
         return DB.getBreakTimerDuration()
-
     }
+
     function clearBreakTimer(){
         DB.clearBreakTimer()
-        breakDuration=0
+        breakDuration = 0
     }
 
-    onStatusChanged: {
-        if (root.status === PageStatus.Active && !versionCheckDone) {
-            var lastVersionUsed = settings.getLastVersionUsed()
-            var current = appVersion + "-" + appBuildNum
-            if (lastVersionUsed !== current) {
-                Log.info("App updated")
-                pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
-            }
-            settings.setLastVersionUsed(current)
-            versionCheckDone = true
-        }
-
-        if (root.status === PageStatus.Active && versionCheckDone) {
-            if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
-                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate)
-            }
-            if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
-                banner.notify(qsTr("Timer stopped by command line argument"))
-                stop()
-                pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
-            }
-        }
-    }
-
-    Component.onCompleted: {
-        // Update tables for previous versions
-        DB.updateIfNeededToV2()
-        DB.updateIfNeededToV3()
-        // Initialize the database
-        DB.initialize()
-        roundToNearest = settings.getRoundToNearest()
-        projects = DB.getProjects()
-        if (projects.length === 0) {
-            Log.info("No projects found so let's create one.")
-            var id = DB.getUniqueId()
-            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor)
-            defaultProjectId = id
-            settings.setDefaultProjectId(id)
-            moveAllHoursTo(id)
-        }
-        else {
-            defaultProjectId = settings.getDefaultProjectId()
-        }
-
-        getHours()
-        getStartTime()
-        if(startTime !== "Not started") {
-            timerRunning = true
-            updateStartTime()
-            getBreakStartTime()
-            if(breakStartTime !== "Not started"){
-                breakTimerRunning = true
-                updateDuration(updateBreakTimerDuration())
-            }
-            else {
-                breakDuration = 0
-                breakDurationNow = "0h 0min"
-                updateDuration()
-            }
-        }
-        else {
-            duration = 0
-            durationNow = "0h 0min"
-            // Start timer from command line
-            if (startFromCommandLine) {
-                banner.notify(qsTr("Timer started by command line argument"))
-                start()
-            }
-
-            // Automatically start timer if allowed in settings
-            else if(settings.getTimerAutoStart()){
-                banner.notify(qsTr("Timer was autostarted"))
-                start()
-            }
-        }
-        currencyString = settings.getCurrencyString()
-        if(!currencyString){
-            currencyString = "€"
-            settings.setCurrencyString(currencyString)
-        }
-    }
     SilicaFlickable {
         id: flickable
         width: parent.width
@@ -377,12 +311,14 @@ Page {
                     pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
             }
+
             MenuItem {
                 text: qsTr("Settings")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Settings.qml"), {dataContainer: root})
                 }
             }
+
             MenuItem {
                 text: qsTr("Add Hours")
                 onClicked: {
@@ -393,6 +329,7 @@ Page {
 
         ListModel {
             id: summaryModel
+
             function section(index) {
                 if (section["text"] === undefined) {
                     section.text = [
@@ -411,16 +348,16 @@ Page {
         }
 
         SilicaGridView {
-            anchors.fill: parent
             id: grid
-
             property PageHeader pageHeader
+            anchors.fill: parent
+            model: summaryModel
+            snapMode: GridView.SnapToRow
             header: PageHeader {
                 id: pageHeader
                 title: "Working Hours Tracker"
                 Component.onCompleted: grid.pageHeader = pageHeader
             }
-
             cellWidth: {
                 if (root.orientation == Orientation.PortraitInverted || root.orientation == Orientation.Portrait)
                     root.width / 2
@@ -433,22 +370,24 @@ Page {
                 else
                     (root.height / 3) - pageHeader.height / 3
             }
-            model: summaryModel
-            snapMode: GridView.SnapToRow
+
             delegate: Item {
                 width: grid.cellWidth
                 height: grid.cellHeight
+
                 BackgroundItem {
                     anchors {
                         fill: parent
                         margins: Theme.paddingMedium
                     }
+
                     Rectangle {
                         anchors.horizontalCenter: parent.horizontalCenter
                         color: Theme.secondaryHighlightColor
                         radius: Theme.paddingMedium
                         width: parent.width
                         height: parent.height
+
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
@@ -456,6 +395,7 @@ Page {
                             text: summaryModel.section(index)
                             font.pixelSize: Theme.fontSizeSmall
                         }
+
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
@@ -465,6 +405,7 @@ Page {
                             font.pixelSize: Theme.fontSizeSmall
                         }
                     }
+
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: summaryModel.section(index)})
                     }
@@ -478,6 +419,7 @@ Page {
             height: grid.cellHeight
             width: parent.width
             anchors.bottom: grid.bottom
+
             Rectangle {
                 color: Theme.secondaryHighlightColor
                 radius: Theme.paddingMedium
@@ -492,6 +434,7 @@ Page {
                     font.pixelSize: Theme.fontSizeSmall
                     text: qsTr("Timer is not running")
                 }
+
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -501,6 +444,7 @@ Page {
                     font.bold: true
                 }
             }
+
             onClicked: {
                 start()
             }
@@ -512,14 +456,17 @@ Page {
             height: timerControl.height
             width: parent.width
             anchors.bottom: grid.bottom
+
             BackgroundItem {
                 width: timerItem.width / 3
                 height: parent.height
+
                 Rectangle {
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     anchors.fill: parent
                     anchors.margins: Theme.paddingMedium
+
                     Label {
                         visible: breakTimerRunning
                         font.bold: true
@@ -528,11 +475,13 @@ Page {
                         y: Theme.paddingMedium
                         text: breakDurationNow
                     }
+
                     Image {
                         id: pauseImage
                         source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                         anchors.centerIn: parent
                     }
+
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: parent.height - this.height - Theme.paddingMedium
@@ -541,8 +490,8 @@ Page {
                         text: qsTr("Break")
                     }
                 }
+
                 onClicked: {
-                    //buttonBuzz.play()
                     if(!breakTimerRunning) {
                         startBreakTimer()
                     }
@@ -551,16 +500,19 @@ Page {
                     }
                 }
             }
+
             BackgroundItem {
                 width: timerItem.width / 3
                 height: timerControl.height
                 x: timerItem.width / 3
+
                 Rectangle {
                     opacity: breakTimerRunning? 0.5 : 1
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     anchors.fill: parent
                     anchors.margins: Theme.paddingMedium
+
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: Theme.paddingMedium
@@ -570,11 +522,13 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                         text: durationNow
                     }
+
                     Image {
                         id: stopImage
                         source: "image://theme/icon-cover-cancel"
                         anchors.centerIn: parent
                     }
+
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: parent.height - this.height - Theme.paddingMedium
@@ -584,6 +538,7 @@ Page {
                         text: qsTr("Stop")
                     }
                 }
+
                 onClicked: {
                     if(!breakTimerRunning) {
                         //buttonBuzz.play()
@@ -591,10 +546,12 @@ Page {
                     }
                 }
             }
+
             BackgroundItem {
                 width: timerItem.width / 3
                 height: timerControl.height
                 x: 2 * timerItem.width / 3
+
                 function openTimeDialog() {
                     var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                     hourMode: (DateTime.TwentyFourHours),
@@ -610,12 +567,14 @@ Page {
                         updateDuration()
                     })
                 }
+
                 Rectangle {
                     opacity: breakTimerRunning? 0.5 : 1
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     anchors.fill: parent
                     anchors.margins: Theme.paddingMedium
+
                     Label {
                         y: Theme.paddingMedium
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -623,6 +582,7 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                         text: qsTr("Started")
                     }
+
                     Label {
                         anchors.centerIn: parent
                         id: startedAt
@@ -631,6 +591,7 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                         text: startTime
                     }
+
                     Label {
                         y: parent.height - this.height - Theme.paddingMedium
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -639,8 +600,9 @@ Page {
                         text: qsTr("Adjust")
                     }
                 }
+
                 onClicked: {
-                    if(!breakTimerRunning) {
+                    if (!breakTimerRunning) {
                         openTimeDialog()
                     }
                 }
@@ -653,14 +615,107 @@ Page {
             repeat: true
             onTriggered: updateDuration()
         }
+
         Timer {
             interval: 60000
             running: breakTimerRunning
             repeat: true
             onTriggered: updateBreakTimerDuration()
         }
+
         Banner {
             id: banner
+        }
+    }
+
+    onStatusChanged: {
+        if (root.status === PageStatus.Active && !versionCheckDone) {
+            var lastVersionUsed = settings.getLastVersionUsed()
+            var current = appVersion + "-" + appBuildNum
+
+            if (lastVersionUsed !== current) {
+                Log.info("App updated")
+                pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
+            }
+
+            settings.setLastVersionUsed(current)
+            versionCheckDone = true
+        }
+
+        if (root.status === PageStatus.Active && versionCheckDone) {
+            if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
+                pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate)
+            }
+
+            if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
+                banner.notify(qsTr("Timer stopped by command line argument"))
+                stop()
+                pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        // Update tables for previous versions
+        DB.updateIfNeededToV2()
+        DB.updateIfNeededToV3()
+        // Initialize the database
+        DB.initialize()
+
+        roundToNearest = settings.getRoundToNearest()
+        projects = DB.getProjects()
+
+        if (projects.length === 0) {
+            Log.info("No projects found so let's create one.")
+            var id = DB.getUniqueId()
+            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor)
+            defaultProjectId = id
+            settings.setDefaultProjectId(id)
+            moveAllHoursTo(id)
+        }
+        else {
+            defaultProjectId = settings.getDefaultProjectId()
+        }
+
+        getHours()
+        getStartTime()
+
+        if (startTime !== "Not started") {
+            timerRunning = true
+            updateStartTime()
+            getBreakStartTime()
+
+            if (breakStartTime !== "Not started") {
+                breakTimerRunning = true
+                updateDuration(updateBreakTimerDuration())
+            }
+            else {
+                breakDuration = 0
+                breakDurationNow = "0h 0min"
+                updateDuration()
+            }
+        }
+        else {
+            duration = 0
+            durationNow = "0h 0min"
+
+            // Start timer from command line
+            if (startFromCommandLine) {
+                banner.notify(qsTr("Timer started by command line argument"))
+                start()
+            }
+
+            // Automatically start timer if allowed in settings
+            else if (settings.getTimerAutoStart()) {
+                banner.notify(qsTr("Timer was autostarted"))
+                start()
+            }
+        }
+
+        currencyString = settings.getCurrencyString()
+        if(!currencyString){
+            currencyString = "€"
+            settings.setCurrencyString(currencyString)
         }
     }
 }

@@ -38,6 +38,7 @@ import "../config.js" as DB
 Page {
     id: projectss
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
+
     function getProjects() {
         projects = DB.getProjects()
         for (var i = 0; i < projects.length; i++) {
@@ -52,40 +53,40 @@ Page {
             })
         }
     }
+
     SilicaFlickable{
         anchors.fill: parent
+
         ListModel {
             id: projectsModel
         }
 
-        Component.onCompleted: {
-            defaultProjectId = settings.getDefaultProjectId()
-            getProjects()
-        }
         SilicaListView {
             id: listView
-            header: PageHeader {
-                title: qsTr("All projects")
-            }
-            PullDownMenu {
-                MenuItem {
-                    text: qsTr("Add project")
-                    onClicked: {
-                        //console.log (dataContainer)
-                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{prev: projectss})
-                    }
-                }
-            }
             spacing: Theme.paddingLarge
             anchors.fill: parent
             quickScroll: true
             model: projectsModel
+            header: PageHeader {
+                title: qsTr("All projects")
+            }
+
+            PullDownMenu {
+                MenuItem {
+                    text: qsTr("Add project")
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{prev: projectss})
+                    }
+                }
+            }
+
             VerticalScrollDecorator {}
 
             ViewPlaceholder {
                         enabled: listView.count == 0
                         text: qsTr("No projects found")
             }
+
             delegate: Item {
                 id: myListItem
                 property Item contextMenu
@@ -96,14 +97,17 @@ Page {
                 BackgroundItem {
                     id: contentItem
                     width: parent.width
+
                     Rectangle{
                         height: 15
                         color: Theme.rgba(model.labelColor, Theme.highlightBackgroundOpacity)
                         anchors.fill: parent
+
                         Item {
                             width: childrenRect.width
                             y: Theme.paddingLarge
                             x: Theme.paddingLarge
+
                             Label {
                                 id: projectName
                                 text: model.name
@@ -112,18 +116,20 @@ Page {
                                     pixelSize: Theme.fontSizeMedium
                                 }
                             }
+
                             Label {
                                 visible: model.id === defaultProjectId
                                 id: defaultProjectLabel
                                 text: "  (" + qsTr("Default project") + ")"
+                                anchors.left: projectName.right
                                 font{
                                     bold: true
                                     pixelSize: Theme.fontSizeMedium
                                 }
-                                anchors.left: projectName.right
                             }
                         }
                     }
+
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("AddProject.qml"),{
                                            prev: projectss,
@@ -137,16 +143,19 @@ Page {
                                            labelColor: model.labelColor
                                        })
                     }
+
                     onPressAndHold: {
-                        if (!contextMenu)
+                        if (!contextMenu) {
                             contextMenu = contextMenuComponent.createObject(listView)
+                        }
+
                         contextMenu.show(myListItem)
                     }
                 }
+
                 RemorsePopup { id: remorse }
+
                 function remove() {
-                    //console.log(index)
-                    //console.log(model.id)
                     remorse.execute(qsTr("Removing"), function() {
                         DB.removeProject(model.id)
                         projectsModel.remove(index)
@@ -154,20 +163,27 @@ Page {
                     })
                 }
             }
+
             Component {
                id: contextMenuComponent
+
                ContextMenu {
                    id: menu
+
                    MenuItem {
                        text: qsTr("Remove")
                        onClicked: {
                            menu.parent.remove()
-                           //console.log("Remove clicked!")
                        }
                    }
                }
             }
         }
+    }
+
+    Component.onCompleted: {
+        defaultProjectId = settings.getDefaultProjectId()
+        getProjects()
     }
 }
 
