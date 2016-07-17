@@ -66,13 +66,31 @@ Database::Database(QObject *parent) : QObject(parent) {
     }
 }
 
-void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QString where = "") {
-    if(where != "") {
-        where = " AND " + where;
+void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting) {
+    QListIterator<QString> i(where);
+    QString w = "1=1";
+    while (i.hasNext()) {
+        w += " AND " + i.next();
     }
+
+    QListIterator<QString> s(sorting);
+    QString sort;
+    while (s.hasNext()) {
+        if(!s.hasPrevious()) {
+             sort = "ORDER BY";
+        }
+
+        sort += " " + s.next();
+
+        if (s.hasNext()) {
+            sort += ",";
+        }
+    }
+
     *query = QSqlQuery("SELECT " + select + " "
                        "FROM " + from + " "
-                       "WHERE 1=1" + where + ";",*db);
+                       "WHERE " + w + " "
+                       + sort + ";",*db);
 }
 
 bool Database::hasDuration(QSqlQuery* query) {
@@ -85,48 +103,101 @@ bool Database::hasDuration(QSqlQuery* query) {
     }
 }
 
-QVariant Database::getDurationForPeriod(QString period, int offset) {
-    QString select = QString("sum(duration - breakDuration)");
+bool Database::periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset, QList<QString> sorting, QString projectId) {
     QString from = QString("hours");
-    QString where = "";
+    QList<QString> where;
     QString off;
-    off.setNum(offset);
+    off.setNum(timeOffset);
 
     if (period == "day") {
-        where = QStringLiteral("date = strftime('%Y-%m-%d', 'now', '-%1 days', 'localtime')").arg(off);
+        where.append(QStringLiteral("date = strftime('%Y-%m-%d', 'now', '-%1 days', 'localtime')").arg(off));
     }
     else if (period == "week") {
         QString startOffset, endOffset;
-        startOffset.setNum((offset + 1) * 7 - 1);
-        endOffset.setNum(offset * 7);
-        qDebug() << startOffset << "  " <<endOffset;
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'weekday 0', '-%1 days', 'localtime') "
-                               "AND strftime('%Y-%m-%d', 'now', 'weekday 0', '-%2 days', 'localtime')").arg(startOffset, endOffset);
+        startOffset.setNum((timeOffset + 1) * 7 - 1);
+        endOffset.setNum(timeOffset * 7);
+        where.append(QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'weekday 0', '-%1 days', 'localtime')").arg(startOffset));
+        where.append(QStringLiteral("strftime('%Y-%m-%d', 'now', 'weekday 0', '-%2 days', 'localtime')").arg(endOffset));
     }
     else if (period == "month") {
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', 'localtime') "
-                               "AND strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', '+1 month', '-1 day', 'localtime')").arg(off);
+        where.append(QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', 'localtime')").arg(off));
+        where.append(QStringLiteral("strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', '+1 month', '-1 day', 'localtime')").arg(off));
     }
     else if (period == "year") {
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', 'localtime') "
-                               "AND strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', '+1 years', '-1 day', 'localtime')").arg(off);
+        where.append(QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', 'localtime')").arg(off));
+        where.append(QStringLiteral("strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', '+1 years', '-1 day', 'localtime')").arg(off));
     }
     else if (period != "all") {
         qDebug() << "Invalid period given as a parameter for getDurationForPeriod!";
-        return 0;
+        return false;
     }
 
+    // Default sorting for hours
+    if(sorting.empty()) {
+        sorting.append("date DESC");
+        sorting.append("startTime DESC");
+    }
+
+    // Filter by projectId
+    if(projectId != NULL) {
+        where.append(QStringLiteral("project = '%1'").arg(projectId));
+    }
+
+    // Make the actual query string
+    queryBuilder(query, select, from, where, sorting);
+    return true;
+}
+
+QVariant Database::getDurationForPeriod(QString period, int timeOffset, QString projectId) {
+    QString select = QString("sum(duration - breakDuration)");
+    QList<QString> sorting;
     QSqlQuery query;
-    queryBuilder(&query, select, from, where);
-    if(query.exec()) {
-        if(hasDuration(&query)) {
-            return query.value(0);
+    if(periodQueryBuilder(&query, select, period, timeOffset, sorting, projectId)) {
+        if(query.exec()) {
+            if(hasDuration(&query)) {
+                return query.value(0);
+            }
+        }
+        else {
+           qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
         }
     }
     else {
-       qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
+        qDebug() << "periodQueryBuilder failed!";
     }
     return 0;
 }
+
+QVariantList Database::getHoursForPeriod(QString period, int timeOffset, QList<QString> sorting, QString projectId) {
+    QString select = QString("uid, date, startTime, endTime, duration, project, description, breakDuration, taskId");
+    QSqlQuery query;
+    QVariantList tmp;
+    QVariantMap map;
+    if(periodQueryBuilder(&query, select, period, timeOffset, sorting, projectId)) {
+        if(query.exec()) {
+            map.clear();
+            while (query.next()) {
+                map.insert("uid", query.record().value("uid").toString());
+                map.insert("date", query.record().value("date").toString());
+                map.insert("startTime", query.record().value("startTime").toString());
+                map.insert("endTime", query.record().value("endTime").toString());
+                map.insert("duration", query.record().value("duration").toString());
+                map.insert("project", query.record().value("project").toString());
+                map.insert("description", query.record().value("description").toString());
+                map.insert("breakDuration", query.record().value("breakDuration").toString());
+                map.insert("taskId", query.record().value("taskId").toString());
+                tmp.append(map);
+            }
+        }
+        else {
+            qDebug() << "readHours failed " << query.lastError();
+        }
+    }
+    else {
+        qDebug() << "periodQueryBuilder failed!";
+    }
+    return tmp;
+}
+
 
 Database::~Database(){}

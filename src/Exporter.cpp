@@ -21,7 +21,7 @@ QVariantList Exporter::readHours(Database* db) {
 
     QString select = QString("uid, date, startTime, endTime, duration, project, description, breakDuration, taskId");
     QString from = QString("hours");
-    QString where = "";
+    QList<QString> where;
     QSqlQuery query;
     db->queryBuilder(&query, select, from, where);
 
@@ -52,7 +52,7 @@ QVariantList Exporter::readProjects(Database* db) {
 
     QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
     QString from = QString("projects");
-    QString where = "";
+    QList<QString> where;
     QSqlQuery query;
     db->queryBuilder(&query, select, from, where);
 

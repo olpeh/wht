@@ -68,26 +68,6 @@ Page {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
 
-    function getAllDay(offset, sortby, projectId){
-        return DB.getAllDay(offset, sortby, projectId)
-    }
-
-    function getAllWeek(offset, sortby, projectId){
-        return DB.getAllWeek(offset, sortby, projectId)
-    }
-
-    function getAllMonth(offset, sortby, projectId){
-        return DB.getAllMonth(offset, sortby, projectId)
-    }
-
-    function getAllThisYear(sortby, projectId){
-        return DB.getAllThisYear(sortby, projectId)
-    }
-
-    function getAll(sortby, projectId){
-        return DB.getAll(sortby, projectId)
-    }
-
     function remove(uid){
         DB.remove(uid)
     }

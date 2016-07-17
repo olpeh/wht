@@ -44,14 +44,14 @@ Page {
 
     function getHours() {
         //Update hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(1, project.id).toString().toHHMM() })
-        summaryModel.set(1,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM() })
-        summaryModel.set(2,{"hours": DB.getHoursWeek(1, project.id).toString().toHHMM() })
-        summaryModel.set(3,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM() })
-        summaryModel.set(4,{"hours": DB.getHoursMonth(1, project.id).toString().toHHMM() })
-        summaryModel.set(5,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM() })
-        summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() })
-        summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() })
+        summaryModel.set(0,{"hours": db.getDurationForPeriod("day", 1, project.id).toString().toHHMM() })
+        summaryModel.set(1,{"hours": db.getDurationForPeriod("day", 0, project.id).toString().toHHMM() })
+        summaryModel.set(2,{"hours": db.getDurationForPeriod("week", 1, project.id).toString().toHHMM() })
+        summaryModel.set(3,{"hours": db.getDurationForPeriod("week", 0, project.id).toString().toHHMM() })
+        summaryModel.set(4,{"hours": db.getDurationForPeriod("month", 1, project.id).toString().toHHMM() })
+        summaryModel.set(5,{"hours": db.getDurationForPeriod("month", 0, project.id).toString().toHHMM() })
+        summaryModel.set(6,{"hours": db.getDurationForPeriod("all", 0, project.id).toString().toHHMM() })
+        summaryModel.set(7,{"hours": db.getDurationForPeriod("year", 0, project.id).toString().toHHMM() })
     }
 
     function getProject(projectId) {

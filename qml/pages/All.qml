@@ -48,28 +48,31 @@ Page {
     property int categoryWorkdays: 0
     property int categoryEntries: 0
 
-    function getAllHours(sortby){
-        if (dataContainer != null && section != ""){
-            if (section === qsTr("Today"))
-                return all.dataContainer.getAllDay(0, sortby, projectId)
-            else if (section === qsTr("Yesterday"))
-                return all.dataContainer.getAllDay(1, sortby, projectId)
-            else if(section === qsTr("This week"))
-                return all.dataContainer.getAllWeek(0, sortby, projectId)
-            else if(section === qsTr("Last week"))
-                return all.dataContainer.getAllWeek(1, sortby, projectId)
-            else if (section === qsTr("This month"))
-                return all.dataContainer.getAllMonth(0, sortby, projectId)
-            else if (section === qsTr("Last month"))
-                return all.dataContainer.getAllMonth(1, sortby, projectId)
-            else if (section === qsTr("This year"))
-                return all.dataContainer.getAllThisYear(sortby, projectId)
-            else if (section === qsTr("All"))
-                return all.dataContainer.getAll(sortby, projectId)
-            else{
+    function getHoursForSection(sortby){
+        var sorting = []
+        if (sortby) {
+            sorting.push(sortby + " DESC")
+        }
+        switch (section) {
+            case qsTr("Today"):
+                return db.getHoursForPeriod("day", 0, sorting, projectId)
+            case qsTr("Yesterday"):
+                return db.getHoursForPeriod("day", 1, sorting, projectId)
+            case qsTr("This week"):
+                return db.getHoursForPeriod("week", 0, sorting, projectId)
+            case qsTr("Last week"):
+                return db.getHoursForPeriod("week", 1, sorting, projectId)
+            case qsTr("This month"):
+                return db.getHoursForPeriod("month", 0, sorting, projectId)
+            case qsTr("Last month"):
+                return db.getHoursForPeriod("month", 1, sorting, projectId)
+            case qsTr("This year"):
+                return db.getHoursForPeriod("year", 0, sorting, projectId)
+            case qsTr("All"):
+                return db.getHoursForPeriod("all", 1, sorting, projectId)
+            default:
                 Log.error("Unknown section: " + section)
                 return []
-            }
         }
     }
 
@@ -78,7 +81,7 @@ Page {
             allHours = hours
         }
         else {
-            allHours =  getAllHours()
+            allHours =  getHoursForSection()
         }
         if (listView.count != 0) {
             hoursModel.clear()
@@ -245,7 +248,7 @@ Page {
                     sortedByProject = !sortedByProject
 
                     if (sortedByProject) {
-                        var hours = getAllHours("project")
+                        var hours = getHoursForSection("project")
                         updateView(hours)
                     }
                     else {

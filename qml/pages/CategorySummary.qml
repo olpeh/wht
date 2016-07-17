@@ -63,7 +63,7 @@ Page {
 
         if (dataContainer) {
             // get hours sorted by projects
-            var allHours = dataContainer.getAllHours("project")
+            var allHours = dataContainer.getHoursForSection("project")
             myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects })
         }
     }
