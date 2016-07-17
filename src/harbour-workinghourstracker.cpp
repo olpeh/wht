@@ -46,11 +46,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QStandardPaths>
 #include <QCommandLineParser>
 
+#include "Logger.h"
 #include "Database.h"
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
-#include "Logger.h"
 
 int main(int argc, char *argv[])
 {

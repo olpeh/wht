@@ -211,7 +211,7 @@ Page {
                         filename += project.name.replace(" ", "")
                     }
 
-                    banner.notify(qsTr("Saved to") + ": " + exporter.exportCategoryToCSV(db, filename, allHours))
+                    banner.notify(qsTr("Saved to") + ": " + exporter.exportCategoryToCSV(filename, allHours))
                 }
             }
 

@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 const QString Database::DB_NAME = "";
 
-Database::Database(QObject *parent): QObject(parent) {
+Database::Database(QObject *parent) : QObject(parent) {
     /* Open the SQLite database */
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
     QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
@@ -66,26 +66,22 @@ Database::Database(QObject *parent): QObject(parent) {
     }
 }
 
-QSqlQuery Database::queryBuilder(QString select, QString from, QString where = "") {
+void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QString where = "") {
     if(where != "") {
-        where = "AND " + where;
+        where = " AND " + where;
     }
-    return QSqlQuery("SELECT " + select + " FROM " + from + " WHERE 1=1 " + where + ";", *db);
+    *query = QSqlQuery("SELECT " + select + " "
+                       "FROM " + from + " "
+                       "WHERE 1=1" + where + ";",*db);
 }
 
-bool Database::queryExecuter(QSqlQuery query) {
-    if (query.exec()) {
-        if (query.numRowsAffected()) {
-            return true;
-        }
-        else {
-            qDebug() << "No results for query: " << query.lastQuery();
-            return false;
-        }
+bool Database::hasDuration(QSqlQuery* query) {
+    if(query->first() && !query->value(0).isNull()) {
+        return true;
     }
     else {
-        qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
-        return false;
+       qDebug() << "No results for query: " << query->lastQuery();
+       return false;
     }
 }
 
@@ -100,25 +96,37 @@ QVariant Database::getDurationForPeriod(QString period, int offset) {
         where = QStringLiteral("date = strftime('%Y-%m-%d', 'now', '-%1 days', 'localtime')").arg(off);
     }
     else if (period == "week") {
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'weekday 0', '-%1 weeks', 'localtime') AND strftime('%Y-%m-%d', 'now', 'weekday 6', '-%1 weeks', 'localtime')").arg(off);
+        QString startOffset, endOffset;
+        startOffset.setNum((offset + 1) * 7 - 1);
+        endOffset.setNum(offset * 7);
+        qDebug() << startOffset << "  " <<endOffset;
+        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'weekday 0', '-%1 days', 'localtime') "
+                               "AND strftime('%Y-%m-%d', 'now', 'weekday 0', '-%2 days', 'localtime')").arg(startOffset, endOffset);
     }
     else if (period == "month") {
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', 'localtime') AND strftime('%Y-%m-%d', 'now', 'end of month', '-%1 month', 'localtime')").arg(off);
+        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', 'localtime') "
+                               "AND strftime('%Y-%m-%d', 'now', 'start of month', '-%1 month', '+1 month', '-1 day', 'localtime')").arg(off);
     }
     else if (period == "year") {
-        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', 'localtime') AND strftime('%Y-%m-%d', 'now', 'end of year', '-%1 years', 'localtime')").arg(off);
+        where = QStringLiteral("date BETWEEN strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', 'localtime') "
+                               "AND strftime('%Y-%m-%d', 'now', 'start of year', '-%1 years', '+1 years', '-1 day', 'localtime')").arg(off);
     }
     else if (period != "all") {
+        qDebug() << "Invalid period given as a parameter for getDurationForPeriod!";
         return 0;
     }
 
-    QSqlQuery query = queryBuilder(select, from, where);
-    if(queryExecuter(query) && query.first()) {
-        return query.value(0);
+    QSqlQuery query;
+    queryBuilder(&query, select, from, where);
+    if(query.exec()) {
+        if(hasDuration(&query)) {
+            return query.value(0);
+        }
     }
     else {
-        return 0;
+       qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
     }
+    return 0;
 }
 
 Database::~Database(){}

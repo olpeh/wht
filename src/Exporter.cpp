@@ -8,7 +8,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include "Exporter.h"
 #include "Launcher.h"
-#include "Database.h"
 #include <QCoreApplication>
 #include <QtSql>
 #include <QFile>
@@ -23,9 +22,10 @@ QVariantList Exporter::readHours(Database* db) {
     QString select = QString("uid, date, startTime, endTime, duration, project, description, breakDuration, taskId");
     QString from = QString("hours");
     QString where = "";
-    QSqlQuery query = db->queryBuilder(select, from, where);
+    QSqlQuery query;
+    db->queryBuilder(&query, select, from, where);
 
-    if(db->queryExecuter(query)) {
+    if(query.exec()) {
         map.clear();
         while (query.next()) {
             map.insert("uid", query.record().value("uid").toString());
@@ -40,6 +40,9 @@ QVariantList Exporter::readHours(Database* db) {
             tmp.append(map);
         }
     }
+    else {
+        qDebug() << "readHours failed " << query.lastError();
+    }
     return tmp;
 }
 
@@ -50,7 +53,8 @@ QVariantList Exporter::readProjects(Database* db) {
     QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
     QString from = QString("projects");
     QString where = "";
-    QSqlQuery query = db->queryBuilder(select, from, where);
+    QSqlQuery query;
+    db->queryBuilder(&query, select, from, where);
 
     if (query.exec()) {
         map.clear();
@@ -65,7 +69,9 @@ QVariantList Exporter::readProjects(Database* db) {
             tmp.append(map);
         }
     }
-
+    else {
+        qDebug() << "readProjects failed " << query.lastError();
+    }
     return tmp;
 }
 
@@ -137,7 +143,7 @@ QString Exporter::exportProjectsToCSV(Database* db) {
     return filename;
 }
 
-QString Exporter::exportCategoryToCSV(Database* db, QString section, QVariantList allHours) {
+QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     qDebug() << "Exporting hours for " << section;
 
     //QLocale loc = QLocale::system(); /* Should return current locale */

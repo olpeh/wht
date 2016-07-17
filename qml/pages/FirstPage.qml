@@ -51,7 +51,6 @@ Page {
 
     function getHours() {
         //Update hours view and cover
-        //today = DB.getHoursDay(0).toString().toHHMM()
         today = db.getDurationForPeriod("day").toString().toHHMM()
         thisWeek = db.getDurationForPeriod("week").toString().toHHMM()
         thisMonth = db.getDurationForPeriod("month").toString().toHHMM()

@@ -22,7 +22,7 @@ class Exporter : public QObject {
 
         Q_INVOKABLE QString exportHoursToCSV(Database* db);
         Q_INVOKABLE QString exportProjectsToCSV(Database* db);
-        Q_INVOKABLE QString exportCategoryToCSV(Database* db, QString section, QVariantList allHours);
+        Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
         Q_INVOKABLE QString dump();
         Q_INVOKABLE QVariantList readHours(Database* db);
         Q_INVOKABLE QVariantList readProjects(Database* db);

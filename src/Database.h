@@ -41,14 +41,14 @@ class Database : public QObject {
     Q_OBJECT
 
     public:
-        explicit Database(QObject *parent = 0);
+        explicit Database(QObject* parent = 0);
         ~Database();
 
         static const QString DB_NAME;
 
-        QSqlQuery queryBuilder(QString select, QString from, QString where);
+        void queryBuilder(QSqlQuery* query, QString select, QString from, QString where);
 
-        bool queryExecuter(QSqlQuery query);
+        bool hasDuration(QSqlQuery* query);
 
         Q_INVOKABLE QVariant getDurationForPeriod(QString period, int offset = 0);
 
