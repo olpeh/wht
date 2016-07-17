@@ -40,7 +40,7 @@ Page {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     function getProjects() {
-        projects = DB.getProjects()
+        projects = db.getProjects()
         for (var i = 0; i < projects.length; i++) {
             projectsModel.set(i, {
                 'id': projects[i].id,
@@ -157,9 +157,13 @@ Page {
 
                 function remove() {
                     remorse.execute(qsTr("Removing"), function() {
-                        DB.removeProject(model.id)
-                        projectsModel.remove(index)
-                        getProjects()
+                        if(db.remove("project", model.id)) {
+                            projectsModel.remove(index)
+                            getProjects()
+                        }
+                        else {
+                            banner.notify("Removing failed!")
+                        }
                     })
                 }
             }
@@ -179,6 +183,10 @@ Page {
                }
             }
         }
+    }
+
+    Banner {
+        id: banner
     }
 
     Component.onCompleted: {

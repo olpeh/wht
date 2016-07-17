@@ -44,8 +44,8 @@ Page {
     property int startSelectedHour : -1
     property int startSelectedMinute : -1
 
-    function resetDatabase(){
-        DB.resetDatabase()
+    function resetDatabase() {
+        db.resetDatabase()
         summaryModel.clear()
     }
 
@@ -68,12 +68,8 @@ Page {
         DB.setHours(uid,date,duration,description, breakDuration)
     }
 
-    function remove(uid){
-        DB.remove(uid)
-    }
-
     function getProjects(){
-        return DB.getProjects()
+        return db.getProjects()
     }
 
     function moveAllHoursTo(id){
@@ -635,14 +631,8 @@ Page {
     }
 
     Component.onCompleted: {
-        // Update tables for previous versions
-        DB.updateIfNeededToV2()
-        DB.updateIfNeededToV3()
-        // Initialize the database
-        DB.initialize()
-
         roundToNearest = settings.getRoundToNearest()
-        projects = DB.getProjects()
+        projects = db.getProjects()
 
         if (projects.length === 0) {
             Log.info("No projects found so let's create one.")

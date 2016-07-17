@@ -386,9 +386,13 @@ Page {
 
             function remove() {
                 remorse.execute(qsTr("Removing"), function() {
-                    all.dataContainer.remove(model.uid)
-                    hoursModel.remove(index)
-                    all.dataContainer.getHours()
+                    if(db.remove("hours", model.uid)) {
+                        hoursModel.remove(index)
+                        all.dataContainer.getHours()
+                    }
+                    else {
+                        banner.notify("Removing failed!")
+                    }
                 })
 
             }

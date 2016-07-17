@@ -58,12 +58,70 @@ Database::Database(QObject *parent) : QObject(parent) {
 
     db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
 
-    if (db->open()) {
+    // If open - initilialize the tables
+    if (db->open() && init()) {
         qDebug() << "Database OK";
     }
     else {
         qCritical() << "Open error" << " " << db->lastError().text();
     }
+}
+
+bool Database::init() {
+    // Let's try to support older versions too
+    upgradeIfNeeded();
+    return createTables();
+}
+
+void Database::upgradeIfNeeded() {
+    bool success = QSqlDatabase::database().transaction();
+    QSqlQuery query;
+    query.exec("PRAGMA user_version");
+    // 1 -> 2 Add breakDuration if missing
+    if (query.first() && !query.value(0).isNull()) {
+        QVariant version = query.value(0);
+        if (version < 3) {
+            query.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
+            if (query.first() && query.value(0) == "hours") {
+                if(version < 2) {
+                    query.exec("ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;");
+                    qDebug() << "Updating table hours to user_version 2. Adding breakDuration column.";
+                }
+                query.exec("ALTER TABLE hours ADD taskId TEXT;");
+                qDebug() << "Updating table hours to user_version 3. Adding tadkId column.";
+
+                query.exec("PRAGMA user_version = 3;");
+            }
+            else {
+                qDebug() << "No table named hours - " << query.lastError();
+            }
+        }
+    }
+    QSqlDatabase::database().commit();
+    if(success) {
+        qDebug() << "Database schema version is currently 3";
+    }
+    else {
+        qDebug() << "Error upgrading tables!" << query.lastError();
+    }
+}
+
+
+bool Database::createTables() {
+    bool success = QSqlDatabase::database().transaction();
+    QSqlQuery query;
+    query.exec("CREATE TABLE IF NOT EXISTS hours(uid LONGVARCHAR UNIQUE, date TEXT, startTime TEXT, endTime TEXT, duration REAL,project TEXT, description TEXT,breakDuration REAL DEFAULT 0, taskId TEXT);");
+    query.exec("CREATE TABLE IF NOT EXISTS timer(uid INTEGER UNIQUE,starttime TEXT, started INTEGER);");
+    query.exec("CREATE TABLE IF NOT EXISTS breaks(id INTEGER PRIMARY KEY,starttime TEXT, started INTEGER, duration REAL DEFAULT -1);");
+    query.exec("CREATE TABLE IF NOT EXISTS projects(id LONGVARCHAR UNIQUE, name TEXT, hourlyRate REAL DEFAULT 0, contractRate REAL DEFAULT 0, budget REAL DEFAULT 0, hourBudget REAL DEFAULT 0, labelColor TEXT);");
+    query.exec("CREATE TABLE IF NOT EXISTS tasks(id LONGVARCHAR UNIQUE, projectId REFERENCES projects(id), name TEXT);");
+    query.exec("PRAGMA user_version=3;");
+    QSqlDatabase::database().commit();
+
+    if(!success) {
+        qDebug() << "Error creating tables!";
+    }
+    return success;
 }
 
 void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting) {
@@ -77,7 +135,7 @@ void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QLis
     QString sort;
     while (s.hasNext()) {
         if(!s.hasPrevious()) {
-             sort = "ORDER BY";
+             sort = " ORDER BY";
         }
 
         sort += " " + s.next();
@@ -86,21 +144,7 @@ void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QLis
             sort += ",";
         }
     }
-
-    *query = QSqlQuery("SELECT " + select + " "
-                       "FROM " + from + " "
-                       "WHERE " + w + " "
-                       + sort + ";",*db);
-}
-
-bool Database::hasDuration(QSqlQuery* query) {
-    if(query->first() && !query->value(0).isNull()) {
-        return true;
-    }
-    else {
-       qDebug() << "No results for query: " << query->lastQuery();
-       return false;
-    }
+    *query = QSqlQuery("SELECT " + select + " FROM " + from + " WHERE " + w + sort + ";", *db);
 }
 
 bool Database::periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset, QList<QString> sorting, QString projectId) {
@@ -154,7 +198,7 @@ QVariant Database::getDurationForPeriod(QString period, int timeOffset, QString 
     QSqlQuery query;
     if(periodQueryBuilder(&query, select, period, timeOffset, sorting, projectId)) {
         if(query.exec()) {
-            if(hasDuration(&query)) {
+            if(query.first() && !query.value(0).isNull()) {
                 return query.value(0);
             }
         }
@@ -190,7 +234,7 @@ QVariantList Database::getHoursForPeriod(QString period, int timeOffset, QList<Q
             }
         }
         else {
-            qDebug() << "readHours failed " << query.lastError();
+            qDebug() << "getHoursForPeriod failed " << query.lastError();
         }
     }
     else {
@@ -199,5 +243,80 @@ QVariantList Database::getHoursForPeriod(QString period, int timeOffset, QList<Q
     return tmp;
 }
 
+QVariantList Database::getProjects() {
+    QVariantList tmp;
+    QVariantMap map;
+    QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
+    QString from = QString("projects");
+    QSqlQuery query;
+
+    queryBuilder(&query, select, from);
+    if (query.exec()) {
+        map.clear();
+        while (query.next()) {
+            map.insert("id", query.record().value("id").toString());
+            map.insert("name", query.record().value("name").toString());
+            map.insert("hourlyRate", query.record().value("hourlyRate").toString());
+            map.insert("contractRate", query.record().value("contractRate").toString());
+            map.insert("budget", query.record().value("budget").toString());
+            map.insert("hourBudget", query.record().value("hourBudget").toString());
+            map.insert("labelColor", query.record().value("labelColor").toString());
+            tmp.append(map);
+        }
+    }
+    else {
+        qDebug() << "getProjects failed " << query.lastError();
+    }
+    return tmp;
+}
+
+bool Database::remove(QString table, QString id) {
+    if (id.isEmpty() || table.isEmpty()) {
+        qDebug() << "No id or table was given for remove! You crazy?";
+        return false;
+    }
+
+    QSqlQuery query;
+    if (table == "hours" || table == "timer") {
+        query = QSqlQuery("DELETE FROM " + table + " WHERE uid = '" + id + "';", *db);
+    }
+    else if (table == "breaks" || table == "projects" || table == "tasks") {
+        query = QSqlQuery("DELETE FROM " + table + " WHERE id = '" + id + "';", *db);
+    }
+    else {
+        qDebug() << "Erroneous table: " << table << ". Nothing was removed.";
+        return false;
+    }
+
+    if (query.exec()) {
+        if (query.size()) {
+            qDebug() << "Deleted row " << id << " from " << table;
+            return true;
+        }
+        else {
+            qDebug() << "FAILED to delete row " << id << " from " << table;
+            return false;
+        }
+    }
+    qDebug() << "Error deleting. " << query.lastQuery() << query.lastError();
+    return false;
+}
+
+void Database::resetDatabase() {
+    bool success = QSqlDatabase::database().transaction();
+    QSqlQuery query;
+    query.exec("DROP TABLE hours");
+    query.exec("DROP TABLE timer");
+    query.exec("DROP TABLE breaks");
+    query.exec("DROP TABLE projects");
+    query.exec("DROP TABLE tasks");
+    QSqlDatabase::database().commit();
+    if(success && createTables()) {
+        qDebug() <<"Database was reset";
+    }
+    else {
+        qDebug() << "Error resetting database!";
+    }
+}
 
 Database::~Database(){}

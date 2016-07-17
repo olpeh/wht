@@ -46,11 +46,17 @@ class Database : public QObject {
 
         static const QString DB_NAME;
 
-        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting = QList<QString>());
+        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>());
 
         Q_INVOKABLE QVariant getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 
-        Q_INVOKABLE QVariantList getHoursForPeriod(QString period, int timeOffset, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+        Q_INVOKABLE QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+
+        Q_INVOKABLE QVariantList getProjects();
+
+        Q_INVOKABLE bool remove(QString table, QString id);
+
+        Q_INVOKABLE void resetDatabase();
 
     private:
 
@@ -58,9 +64,14 @@ class Database : public QObject {
 
         Q_DISABLE_COPY(Database)
 
+        bool init();
+
+        void upgradeIfNeeded();
+
+        bool createTables();
+
         bool periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset,  QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
-        bool hasDuration(QSqlQuery* query);
 };
 
 #endif // DATABASE_H

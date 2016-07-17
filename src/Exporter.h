@@ -24,8 +24,6 @@ class Exporter : public QObject {
         Q_INVOKABLE QString exportProjectsToCSV(Database* db);
         Q_INVOKABLE QString exportCategoryToCSV(QString section, QVariantList allHours);
         Q_INVOKABLE QString dump();
-        Q_INVOKABLE QVariantList readHours(Database* db);
-        Q_INVOKABLE QVariantList readProjects(Database* db);
         Q_INVOKABLE QString importHoursFromCSV(QString filename);
         Q_INVOKABLE QString importProjectsFromCSV(QString filename);
         Q_INVOKABLE QString importDump(QString filename);

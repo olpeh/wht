@@ -15,67 +15,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Exporter::Exporter(QObject *parent) : QObject(parent) {}
 
-QVariantList Exporter::readHours(Database* db) {
-    QVariantList tmp;
-    QVariantMap map;
-
-    QString select = QString("uid, date, startTime, endTime, duration, project, description, breakDuration, taskId");
-    QString from = QString("hours");
-    QList<QString> where;
-    QSqlQuery query;
-    db->queryBuilder(&query, select, from, where);
-
-    if(query.exec()) {
-        map.clear();
-        while (query.next()) {
-            map.insert("uid", query.record().value("uid").toString());
-            map.insert("date", query.record().value("date").toString());
-            map.insert("startTime", query.record().value("startTime").toString());
-            map.insert("endTime", query.record().value("endTime").toString());
-            map.insert("duration", query.record().value("duration").toString());
-            map.insert("project", query.record().value("project").toString());
-            map.insert("description", query.record().value("description").toString());
-            map.insert("breakDuration", query.record().value("breakDuration").toString());
-            map.insert("taskId", query.record().value("taskId").toString());
-            tmp.append(map);
-        }
-    }
-    else {
-        qDebug() << "readHours failed " << query.lastError();
-    }
-    return tmp;
-}
-
-QVariantList Exporter::readProjects(Database* db) {
-    QVariantList tmp;
-    QVariantMap map;
-
-    QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
-    QString from = QString("projects");
-    QList<QString> where;
-    QSqlQuery query;
-    db->queryBuilder(&query, select, from, where);
-
-    if (query.exec()) {
-        map.clear();
-        while (query.next()) {
-            map.insert("id", query.record().value("id").toString());
-            map.insert("name", query.record().value("name").toString());
-            map.insert("hourlyRate", query.record().value("hourlyRate").toString());
-            map.insert("contractRate", query.record().value("contractRate").toString());
-            map.insert("budget", query.record().value("budget").toString());
-            map.insert("hourBudget", query.record().value("hourBudget").toString());
-            map.insert("labelColor", query.record().value("labelColor").toString());
-            tmp.append(map);
-        }
-    }
-    else {
-        qDebug() << "readProjects failed " << query.lastError();
-    }
-    return tmp;
-}
-
-
 /*
  * Export Hours to CSV file
  */
@@ -94,7 +33,7 @@ QString Exporter::exportHoursToCSV(Database* db) {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
 
-    QVariantList hours = readHours(db);
+    QVariantList hours = db->getHoursForPeriod("all");
     QListIterator<QVariant> i(hours);
 
     while (i.hasNext()) {
@@ -128,7 +67,7 @@ QString Exporter::exportProjectsToCSV(Database* db) {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
 
-    QVariantList projects = readProjects(db);
+    QVariantList projects = db->getProjects();
     QListIterator<QVariant> n(projects);
 
     while (n.hasNext()) {

@@ -568,7 +568,7 @@ Dialog {
                 }
 
                 function init() {
-                    projects = DB.getProjects()
+                    projects = db.getProjects()
                     if (projects.length === 0) {
                         var id = DB.getUniqueId()
                         DB.setProject(id, "default", 0, 0, 0, 0, Theme.secondaryHighlightColor)
@@ -576,7 +576,7 @@ Dialog {
                         settings.setDefaultProjectId(id)
                         if (dataContainer != null)
                             page.dataContainer.moveAllHoursTo(id)
-                        projects = DB.getProjects()
+                        projects = db.getProjects()
                     }
 
                     for (var i = 0; i < projects.length; i++) {
