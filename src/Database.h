@@ -46,20 +46,23 @@ class Database : public QObject {
 
         static const QString DB_NAME;
 
-        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>());
+    public slots:
+        bool saveHourRow(QVariantMap values);
 
-        Q_INVOKABLE QVariant getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
+        QVariant getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 
-        Q_INVOKABLE QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+        QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
-        Q_INVOKABLE QVariantList getProjects();
+        QVariantList getProjects();
 
-        Q_INVOKABLE bool remove(QString table, QString id);
+        bool remove(QString table, QString id);
 
-        Q_INVOKABLE void resetDatabase();
+        void resetDatabase();
+
+        // @TODO: make this private
+        QString getUniqueId();
 
     private:
-
         QSqlDatabase* db;
 
         Q_DISABLE_COPY(Database)
@@ -69,6 +72,8 @@ class Database : public QObject {
         void upgradeIfNeeded();
 
         bool createTables();
+
+        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>());
 
         bool periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset,  QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 

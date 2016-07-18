@@ -60,7 +60,7 @@ Dialog {
         }
 
         if (projectId == "0" && !editMode) {
-            projectId = DB.getUniqueId()
+            projectId = db.getUniqueId()
         }
 
         name = nameTextArea.text
@@ -84,13 +84,13 @@ Dialog {
 
     function getTasks() {
         if (projectId == "0" && !editMode)
-            projectId = DB.getUniqueId()
+            projectId = db.getUniqueId()
         return DB.getProjectTasks(projectId)
     }
 
     function saveTask(name, taskId) {
         if (!taskId || taskId === "" || taskId === " ") {
-            taskId = DB.getUniqueId()
+            taskId = db.getUniqueId()
         }
 
         return DB.setTask(taskId, projectId, name)

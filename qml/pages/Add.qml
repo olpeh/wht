@@ -100,7 +100,7 @@ Dialog {
         }
 
         if (uid == "0") {
-            uid = DB.getUniqueId()
+            uid = db.getUniqueId()
         }
 
         if (!taskId) {
@@ -113,14 +113,29 @@ Dialog {
         project = modelSource.get(projectCombo.currentIndex).id
 
         Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
-        DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
 
-        if (dataContainer != null) {
-            page.dataContainer.getHours()
+        var values = {
+            "uid": uid,
+            "date": dateString,
+            "startTime": startTime,
+            "endTime": endTime,
+            "duration": duration,
+            "project": project,
+            "description": description,
+            "breakDuration": breakDuration,
+            "taskId": taskId
+        };
+        if(db.saveHourRow(values)) {
+            if (dataContainer != null) {
+                page.dataContainer.getHours()
+            }
+
+            if (previousPage != null) {
+                page.previousPage.updateView()
+            }
         }
-
-        if (previousPage != null) {
-            page.previousPage.updateView()
+        else {
+            banner.notify("Error when saving!")
         }
     }
 
@@ -570,7 +585,7 @@ Dialog {
                 function init() {
                     projects = db.getProjects()
                     if (projects.length === 0) {
-                        var id = DB.getUniqueId()
+                        var id = db.getUniqueId()
                         DB.setProject(id, "default", 0, 0, 0, 0, Theme.secondaryHighlightColor)
                         defaultProjectId = id
                         settings.setDefaultProjectId(id)

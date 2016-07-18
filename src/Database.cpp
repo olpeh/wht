@@ -124,6 +124,47 @@ bool Database::createTables() {
     return success;
 }
 
+QString Database::getUniqueId() {
+    return QUuid::createUuid().toString();
+}
+
+bool Database::saveHourRow(QVariantMap values) {
+    if(!values.empty()) {
+        if (values["id"].isNull()) {
+            // Creating a new row
+            values["id"] = getUniqueId();
+        }
+
+        QSqlQuery query;
+        query.prepare("INSERT OR REPLACE INTO hours "
+                      "VALUES (:uid, :date, :startTime, :endTime, :duration, :project, "
+                      ":description, :breakDuration, :taskId);");
+
+        query.bindValue(":uid", values["uid"].toString());
+        query.bindValue(":date", values["date"].toString());
+        query.bindValue(":startTime", values["startTime"].toString());
+        query.bindValue(":endTime", values["endTime"].toString());
+        query.bindValue(":duration", values["duration"].toString());
+        query.bindValue(":project", values["project"].toString());
+        query.bindValue(":description", values["description"].toString());
+        query.bindValue(":breakDuration", values["breakDuration"].toString());
+        query.bindValue(":taskId", values["taskId"].toString());
+
+        if (query.exec()) {
+            qDebug() << "Row saved! ID: " << values["id"].toString();
+            return true;
+        }
+        else {
+            qDebug() << "Insert failed! " << query.lastError() << " in " << query.lastQuery();
+            return false;
+        }
+    }
+    else {
+        qDebug() << "Values empty in saveHourRow";
+        return false;
+    }
+}
+
 void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting) {
     QListIterator<QString> i(where);
     QString w = "1=1";

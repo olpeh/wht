@@ -46,7 +46,9 @@ Page {
 
     function resetDatabase() {
         db.resetDatabase()
-        summaryModel.clear()
+        for (var i = 0; i< summaryModel.length();i++) {
+            summaryModel[i].hours = "0";
+        }
     }
 
     function getHours() {
@@ -62,10 +64,6 @@ Page {
         summaryModel.set(5,{"hours": thisMonth })
         summaryModel.set(6,{"hours": db.getDurationForPeriod("all").toString().toHHMM() })
         summaryModel.set(7,{"hours": db.getDurationForPeriod("year").toString().toHHMM() })
-    }
-
-    function setHours(uid,date,duration,description, breakDuration) {
-        DB.setHours(uid,date,duration,description, breakDuration)
     }
 
     function getProjects(){
@@ -156,7 +154,7 @@ Page {
         if (stopFromCommandLine) {
             var description = "Automatically saved from command line"
             var project = defaultProjectId
-            var uid = DB.getUniqueId()
+            var uid = db.getUniqueId()
             var taskId = "0"
             var dateString = HH.dateToDbDateString(new Date())
 
@@ -175,9 +173,25 @@ Page {
             var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
 
             Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
-            DB.setHours(uid,dateString,startTime, endTime, duration,project,description, breakDuration, taskId)
 
-            getHours()
+            var values = {
+                "uid": uid,
+                "dateString": dateString,
+                "startTime": startTime,
+                "endTime": endTime,
+                "duration": duration,
+                "project": project,
+                "description": description,
+                "breakDuration": breakDuration,
+                "taskId": taskId
+            };
+
+            if(db.saveHourRow(values)) {
+                getHours()
+            }
+            else {
+                banner.notify("Error when saving!")
+            }
         }
 
         else if (!fromCover) {
@@ -636,7 +650,7 @@ Page {
 
         if (projects.length === 0) {
             Log.info("No projects found so let's create one.")
-            var id = DB.getUniqueId()
+            var id = db.getUniqueId()
             DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor)
             defaultProjectId = id
             settings.setDefaultProjectId(id)

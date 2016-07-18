@@ -34,34 +34,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 .import QtQuick.LocalStorage 2.0 as LS
 var db = LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 
-function getUniqueId() {
-     var d = new Date();
-     var uid = d.getFullYear() +
-               d.getMonth() +
-               d.getDate() +
-               d.getTime();
-     return uid;
-};
-
-// This function is used to write hours into the database
-// The function returns “OK” if it was successful, or “Error” if it wasn't
-function setHours(uid,date,startTime, endTime, duration, project, description, breakDuration, taskId) {
-    var res = "";
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO hours VALUES (?,?,?,?,?,?,?,?,?);', [uid,date,startTime,endTime,duration,project,description, breakDuration, taskId]);
-        if (rs.rowsAffected > 0) {
-            res = "OK";
-            Log.info("Hours saved to database");
-        }
-        else {
-            res = "Error";
-            Log.error("Error saving hours to database");
-        }
-    });
-
-    return res;
-}
-
 /* Get timer starttime
 returns the starttime or "Not started" */
 function getStartTime() {
