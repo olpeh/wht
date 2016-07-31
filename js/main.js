@@ -2,7 +2,10 @@
 $(function () {
     var options = {
         navigator:  {
-            enabled: true
+            enabled: true,
+        },
+        rangeSelector: {
+            selected: 2
         },
         chart: {
            renderTo: 'stats-container',
@@ -22,13 +25,15 @@ $(function () {
                 labels: {
                     format: '{value}',
                     style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
+                        color: 'rgba(0, 156, 202, 1)'
+                    },
+                    align:'right',
+                    x: 10
                 },
                 title: {
                     text: 'Amount',
                     style: {
-                        color: Highcharts.getOptions().colors[0]
+                        color: 'rgba(0, 156, 202, 1)'
                     }
                 },
                 allowDecimals: false
@@ -53,10 +58,10 @@ $(function () {
         ],
         series: [
             {
-                type: 'line',
+                type: 'column',
                 yAxis: 1,
                 name: 'Likes',
-                color: 'rgba(63, 191, 63, 0.4)',
+                color: 'rgba(63, 191, 63, 0.2)',
                 data: [],
                 allowDecimals: false,
                 step: true,
@@ -65,19 +70,21 @@ $(function () {
                 type: 'spline',
                 name: 'Downloads',
                 data: [],
+                color: 'rgba(0, 156, 202, 1)',
                 allowDecimals: false
             },
             {
                 type: 'spline',
                 name: 'Active installations',
                 data: [],
+                color: '#007814',
                 allowDecimals: false
             }
         ]
     };
     $.getJSON('http://vps161572.ovh.net/wht/wht.php', function(data) {
         $.each(data, function(key, value) {
-            var date =  new Date(value.inserted).getTime(); //split(" ")[0];
+            var date =  new Date(value.inserted.split(" ")[0]).getTime();
             options.series[0].data.push([date, parseInt(value.likes)]);
             options.series[1].data.push([date, parseInt(value.downloads)]);
             options.series[2].data.push([date, parseInt(value.actives)]);
