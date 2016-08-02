@@ -22,16 +22,15 @@ $(function () {
         }],
         yAxis: [
             {
+                opposite: false,
                 labels: {
                     format: '{value}',
                     style: {
                         color: 'rgba(0, 156, 202, 1)'
                     },
-                    align:'right',
-                    x: 10
                 },
                 title: {
-                    text: 'Amount',
+                    text: 'Downloads',
                     style: {
                         color: 'rgba(0, 156, 202, 1)'
                     }
@@ -39,7 +38,7 @@ $(function () {
                 allowDecimals: false
             },
             {
-                opposite: false,
+                opposite: true,
                 gridLineWidth: 0,
                 title: {
                     text: 'Likes',
