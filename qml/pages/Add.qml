@@ -103,14 +103,17 @@ Dialog {
             uid = db.getUniqueId()
         }
 
-        if (!taskId) {
-            taskId = "0"
-        }
+
 
         var dateString = HH.dateToDbDateString(selectedDate)
         var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
         var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
         project = modelSource.get(projectCombo.currentIndex).id
+        taskId = taskModelSource.get(taskCombo.currentIndex).id
+
+        if (!taskId) {
+            taskId = "0"
+        }
 
         Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
 
@@ -568,13 +571,13 @@ Dialog {
                     if (projectComboInitialized) {
                         var selectedValue = modelSource.get(currentIndex).value
                         project = modelSource.get(currentIndex).id
-                        var lastUsed = DB.getLastUsed(project)
+                        var lastUsed = db.getLastUsedInput(project)
 
-                        if (lastUsed['taskId']!=='') {
+                        if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
                             taskId = lastUsed['taskId']
                         }
 
-                        if (lastUsed['description']!=='') {
+                        if (lastUsed['description'] && lastUsed['description'] !== '') {
                             descriptionTextArea.text = lastUsed['description']
                         }
                     }
@@ -640,18 +643,18 @@ Dialog {
                 }
 
                 onCurrentItemChanged: {
-                    if (currentIndex !==-1) {
+                    if (currentIndex !== -1) {
                         var selectedValue = taskModelSource.get(currentIndex).value
                         taskId = taskModelSource.get(currentIndex).id
 
                         if (taskId > 0) {
-                            var lastUsed = DB.getLastUsed(project, taskId)
+                            var lastUsed = db.getLastUsedInput(project)
 
-                            if (lastUsed['taskId']!=='') {
+                            if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
                                 taskId = lastUsed['taskId']
                             }
 
-                            if (lastUsed['description']!=='') {
+                            if (lastUsed['description'] && lastUsed['description'] !== '') {
                                 descriptionTextArea.text = lastUsed['description']
                             }
                         }

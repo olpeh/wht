@@ -165,9 +165,11 @@ bool Database::saveHourRow(QVariantMap values) {
     }
 }
 
-void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting) {
+void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where, QList<QString> sorting, int limit) {
     QListIterator<QString> i(where);
     QString w = "1=1";
+    QString limitString = "";
+
     while (i.hasNext()) {
         w += " AND " + i.next();
     }
@@ -185,7 +187,17 @@ void Database::queryBuilder(QSqlQuery* query, QString select, QString from, QLis
             sort += ",";
         }
     }
-    *query = QSqlQuery("SELECT " + select + " FROM " + from + " WHERE " + w + sort + ";", *db);
+
+    if (limit) {
+        limitString = QStringLiteral(" LIMIT %1").arg(limit);
+    }
+
+    *query = QSqlQuery("SELECT " + select
+                       + " FROM " + from
+                       + " WHERE " + w
+                       + sort
+                       + limitString
+                       + ";", *db);
 }
 
 bool Database::periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset, QList<QString> sorting, QString projectId) {
@@ -283,6 +295,48 @@ QVariantList Database::getHoursForPeriod(QString period, int timeOffset, QList<Q
     }
     return tmp;
 }
+
+QVariantMap Database::getLastUsedInput(QString projectID, QString taskID) {
+    QString select = QString("project, taskId, description");
+    QString from = QString("hours");
+    QList<QString> where;
+    QList<QString> sorting;
+    int limit = 1;
+    QSqlQuery query;
+    QVariantMap result;
+
+    sorting.append("strftime('%Y-%m-%d', date) DESC");
+
+    if (!projectID.isEmpty()) {
+        where.append(QStringLiteral("project='%1'").arg(projectID));
+    }
+
+    if (!taskID.isEmpty()) {
+        where.append(QStringLiteral("taskID='%1'").arg(taskID));
+    }
+
+    queryBuilder(&query, select, from, where, sorting, limit);
+
+    if(query.exec()) {
+        if(query.first()) {
+            result.insert("projectId", query.record().value("project").toString());
+            result.insert("taskId", query.record().value("taskId").toString());
+
+            QString descr = query.record().value("description").toString();
+            if (descr != "No description") {
+                result.insert("description", descr);
+            }
+        }
+    }
+    else {
+       qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
+    }
+
+    qDebug() << "Query: " << query.lastQuery();
+    qDebug() << result["projectId"] << " " << result["taskId"] << " " << result["description"];
+    return result;
+}
+
 
 QVariantList Database::getProjects() {
     QVariantList tmp;

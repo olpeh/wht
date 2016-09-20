@@ -53,6 +53,8 @@ class Database : public QObject {
 
         QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
+        QVariantMap getLastUsedInput(QString projectID, QString taskID = "");
+
         QVariantList getProjects();
 
         bool remove(QString table, QString id);
@@ -73,7 +75,7 @@ class Database : public QObject {
 
         bool createTables();
 
-        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>());
+        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>(), int limit = 0);
 
         bool periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset,  QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
