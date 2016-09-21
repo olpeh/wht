@@ -588,12 +588,19 @@ Dialog {
                 function init() {
                     projects = db.getProjects()
                     if (projects.length === 0) {
-                        var id = db.getUniqueId()
-                        DB.setProject(id, "default", 0, 0, 0, 0, Theme.secondaryHighlightColor)
+                        var id = db.getUniqueId(),
+                            values = {
+                                "uid": id,
+                                "name": "default",
+                                "labelColor": Theme.secondaryHighlightColor,
+                            };
+
+                        db.saveProject(values);
                         defaultProjectId = id
                         settings.setDefaultProjectId(id)
-                        if (dataContainer != null)
+                        if (dataContainer != null) {
                             page.dataContainer.moveAllHoursTo(id)
+                        }
                         projects = db.getProjects()
                     }
 

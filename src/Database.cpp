@@ -130,9 +130,9 @@ QString Database::getUniqueId() {
 
 bool Database::saveHourRow(QVariantMap values) {
     if(!values.empty()) {
-        if (values["id"].isNull()) {
+        if (values["uid"].isNull()) {
             // Creating a new row
-            values["id"] = getUniqueId();
+            values["uid"] = getUniqueId();
         }
 
         QSqlQuery query;
@@ -363,6 +363,41 @@ QVariantList Database::getProjects() {
         qDebug() << "getProjects failed " << query.lastError();
     }
     return tmp;
+}
+
+bool Database::saveProject(QVariantMap values) {
+    if(!values.empty()) {
+        if (values["id"].isNull()) {
+            // Creating a new row
+            values["id"] = getUniqueId();
+        }
+
+        QSqlQuery query;
+        query.prepare("INSERT OR REPLACE INTO projects "
+                      "VALUES (:uid, :name, :hourlyRate, :contractRate, :budget,"
+                      " :hourBudget, :labelColor);");
+
+        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
+        query.bindValue(":name", values["name"].isNull() ? "default" : values["name"].toString());
+        query.bindValue(":hourlyRate", values["hourlyRate"].isNull() ? 0 : values["hourlyRate"]);
+        query.bindValue(":contractRate", values["contractRate"].isNull() ? 0 : values["contractRate"]);
+        query.bindValue(":budget", values["budget"].isNull() ? 0 : values["budget"]);
+        query.bindValue(":hourBudget", values["hourBudget"].isNull() ? 0 : values["hourBudget"]);
+        query.bindValue(":labelColor", values["labelColor"].toString());
+
+        if (query.exec()) {
+            qDebug() << "Project saved! ID: " << values["id"].toString();
+            return true;
+        }
+        else {
+            qDebug() << "Insert failed! " << query.lastError() << " in " << query.lastQuery();
+            return false;
+        }
+    }
+    else {
+        qDebug() << "Values empty in saveProject";
+        return false;
+    }
 }
 
 bool Database::remove(QString table, QString id) {

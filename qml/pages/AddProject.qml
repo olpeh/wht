@@ -69,8 +69,19 @@ Dialog {
         budget = 0 //parseFloat(budgetTextArea.text || 0)
         hourBudget = 0 //parseFloat(hourBudgetTextArea.text) || 0
         labelColor = colorIndicator.color
+
+        var values = {
+            "uid": projectId,
+            "name": name,
+            "hourlyRate": hourlyRate,
+            "contractRate": contractRate,
+            "budget": budget,
+            "hourBudget": hourBudget,
+            "labelColor": colorIndicator.color,
+        };
+
         Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
-        DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor)
+        db.saveProject(values);
 
         if(defaultSwitch.checked) {
             defaultProjectId = projectId

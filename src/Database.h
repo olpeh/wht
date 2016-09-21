@@ -57,6 +57,8 @@ class Database : public QObject {
 
         QVariantList getProjects();
 
+        bool saveProject(QVariantMap values);
+
         bool remove(QString table, QString id);
 
         void resetDatabase();

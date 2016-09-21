@@ -219,23 +219,6 @@ function clearBreakTimer() {
 /* PROJECT FUNCTIONS
 These functions are for projects */
 
-function setProject(id, name, hourlyRate, contractRate, budget, hourBudget, labelColor) {
-    var resp = "";
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO projects VALUES (?,?,?,?,?,?,?);', [id, name, hourlyRate, contractRate, budget, hourBudget, labelColor]);
-        if (rs.rowsAffected > 0) {
-            resp = "OK";
-            Log.info("Project saved to database");
-        } else {
-            resp = "Error";
-            Log.error("Error saving project to database");
-        }
-    });
-
-    return resp;
-}
-
-
 function getProjectById(id) {
     var item = {};
     db.transaction(function(tx) {

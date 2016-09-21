@@ -650,8 +650,14 @@ Page {
 
         if (projects.length === 0) {
             Log.info("No projects found so let's create one.")
-            var id = db.getUniqueId()
-            DB.setProject(id, qsTr("default"), 0, 0, 0, 0, Theme.secondaryHighlightColor)
+            var id = db.getUniqueId(),
+                values = {
+                    "uid": id,
+                    "name": "default",
+                    "labelColor": Theme.secondaryHighlightColor,
+                };
+
+            db.saveProject(values);
             defaultProjectId = id
             settings.setDefaultProjectId(id)
             moveAllHoursTo(id)
