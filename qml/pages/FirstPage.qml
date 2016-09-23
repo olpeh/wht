@@ -71,11 +71,11 @@ Page {
     }
 
     function getStartTime(){
-        startTime = DB.getStartTime()
+        startTime = timer.getStartTime()
     }
 
     function start(newValue){
-        startTime = DB.startTimer(newValue)
+        startTime = timer.start(newValue)
         updateStartTime()
         timerRunning = true
     }
@@ -214,7 +214,7 @@ Page {
         breakDuration = 0
         durationNow = "0h 0min"
         duration = 0
-        DB.stopTimer()
+        timer.stop()
         timerRunning = false
         clearBreakTimer()
     }

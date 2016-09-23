@@ -48,6 +48,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Logger.h"
 #include "Database.h"
+#include "WorkTimer.h"
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
@@ -58,6 +59,7 @@ int main(int argc, char *argv[])
     Logger::instance();
 
     Database database;
+    WorkTimer* timer = new WorkTimer(&database);
     Settings settings;
     Launcher launcher;
     Exporter exporter;
@@ -121,6 +123,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
 
     view->rootContext()->setContextProperty("db", &database);
+    view->rootContext()->setContextProperty("timer", timer);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);
