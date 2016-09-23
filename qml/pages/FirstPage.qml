@@ -70,20 +70,6 @@ Page {
         return db.getProjects()
     }
 
-    function moveAllHoursTo(id){
-        return DB.moveAllHoursToProject(id)
-    }
-
-    function moveAllHoursToProjectByDesc(){
-        if (defaultProjectId !== "") {
-            return DB.moveAllHoursToProjectByDesc(defaultProjectId)
-        }
-        else {
-            return qsTr("No default project found")
-        }
-
-    }
-
     function getStartTime(){
         startTime = DB.getStartTime()
     }
@@ -660,7 +646,6 @@ Page {
             db.saveProject(values);
             defaultProjectId = id
             settings.setDefaultProjectId(id)
-            moveAllHoursTo(id)
         }
         else {
             defaultProjectId = settings.getDefaultProjectId()

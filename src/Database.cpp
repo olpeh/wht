@@ -245,14 +245,14 @@ bool Database::periodQueryBuilder(QSqlQuery* query, QString select, QString peri
     return true;
 }
 
-QVariant Database::getDurationForPeriod(QString period, int timeOffset, QString projectId) {
+double Database::getDurationForPeriod(QString period, int timeOffset, QString projectId) {
     QString select = QString("sum(duration - breakDuration)");
     QList<QString> sorting;
     QSqlQuery query;
     if(periodQueryBuilder(&query, select, period, timeOffset, sorting, projectId)) {
         if(query.exec()) {
             if(query.first() && !query.value(0).isNull()) {
-                return query.value(0);
+                return query.value(0).toDouble();
             }
         }
         else {

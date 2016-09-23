@@ -383,19 +383,11 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>No default project found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Timer stopped by command line argument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1000,54 +992,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move all hours to default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move all to default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move all hours to default project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No default project set</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move by project name in description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try to move hours to existing projects.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sets correct project if the project name is found in the description.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This might take a while.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move existing hours</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Moving hours to projects in description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -49,7 +49,7 @@ class Database : public QObject {
     public slots:
         bool saveHourRow(QVariantMap values);
 
-        QVariant getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
+        double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 
         QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 

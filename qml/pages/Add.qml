@@ -598,9 +598,6 @@ Dialog {
                         db.saveProject(values);
                         defaultProjectId = id
                         settings.setDefaultProjectId(id)
-                        if (dataContainer != null) {
-                            page.dataContainer.moveAllHoursTo(id)
-                        }
                         projects = db.getProjects()
                     }
 

@@ -216,69 +216,6 @@ function clearBreakTimer() {
     });
 }
 
-/* PROJECT FUNCTIONS
-These functions are for projects */
-
-function getProjectById(id) {
-    var item = {};
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM projects WHERE id=?;', [id]);
-        if (rs.rows.length > 0) {
-            for (var i = 0; i<rs.rows.length; i++) {
-                item["id"]=rs.rows.item(i).id;
-                item["name"]= rs.rows.item(i).name;
-                item["hourlyRate"]=rs.rows.item(i).hourlyRate;
-                item["contractRate"]=rs.rows.item(i).contractRate;
-                item["budget"]=rs.rows.item(i).budget;
-                item["hourBudget"]=rs.rows.item(i).hourBudget;
-                item["labelColor"]=rs.rows.item(i).labelColor;
-                item["breakDuration"]= rs.rows.item(i).breakDuration;
-                break;
-            }
-        }
-    });
-
-    return item;
-}
-
-
-function moveAllHoursToProject(id) {
-    var resp = "Error updating existing hours!";
-    var sqlstr = "UPDATE hours SET project='"+id+"';";
-    db.transaction(function(tx) {
-        var rs = tx.executeSql(sqlstr);
-        if (rs.rowsAffected > 0) {
-            resp = "Updated hours to project id: " + id;
-        }
-    });
-
-    return resp;
-}
-
-function moveAllHoursToProjectByDesc(defaultProjectId) {
-    var resp = "OK";
-    var projects = getProjects();
-    var allhours = getAll();
-    for (var i = 0; i < allhours.length; i++) {
-        var sqlstr = "UPDATE hours SET project='"+ defaultProjectId +"' WHERE uid='"+ allhours[i].uid +"';";
-        if (allhours[i].description !== "No description") {
-            for (var k = 0; k < projects.length; k++) {
-                if ((allhours[i].description.toLowerCase()).indexOf(projects[k].name.toLowerCase()) > -1) {
-                    sqlstr = "UPDATE hours SET project='"+ projects[k].id +"' WHERE uid='"+ allhours[i].uid +"';";
-                }
-            }
-        }
-
-        db.transaction(function(tx) {
-            var rs = tx.executeSql(sqlstr);
-        });
-    }
-
-    return "Updated: " + i + " rows";
-}
-
-
-
 // Tasks
 
 // Save task
