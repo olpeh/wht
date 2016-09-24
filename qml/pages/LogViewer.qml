@@ -45,8 +45,8 @@ Page {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     SilicaListView {
+        model: Log
         anchors.fill: parent
-
         header: PageHeader {
             title: qsTr("Log viewer")
         }
@@ -56,16 +56,17 @@ Page {
                 text: qsTr("Send to the developer")
                 onClicked: {
                     banner.notify(qsTr("Launching email app"))
-                    Log.send();
+                    Log.send()
                 }
             }
+
             MenuItem {
                 //: Menu action allowing the user to save application log
                 text: qsTr("Save log")
                 onClicked: {
                     //: Remorse popup message telling the user log file will be saved
                     remorse.execute(qsTr("Saving the log"), function() {
-                        Log.save();
+                        Log.save()
                     })
                 }
             }
@@ -74,8 +75,6 @@ Page {
         RemorsePopup {
             id: remorse
         }
-
-        model: Log
 
         Connections {
             target: Log
@@ -123,6 +122,7 @@ Page {
 
         VerticalScrollDecorator {}
     }
+
     Banner {
         id: banner
     }

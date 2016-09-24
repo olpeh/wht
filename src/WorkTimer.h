@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2016 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -31,24 +31,29 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LAUNCHER_H
-#define LAUNCHER_H
+#ifndef WORKTIMER_H
+#define WORKTIMER_H
+
 
 #include <QObject>
-#include <QProcess>
-#include <QDBusInterface>
+#include <QtSql>
+#include "Database.h"
 
-class Launcher : public QObject {
+class WorkTimer : public QObject {
     Q_OBJECT
 
     public:
-        explicit Launcher(QObject *parent = 0);
-        ~Launcher();
-        Q_INVOKABLE QString launch(const QString &program);
-        Q_INVOKABLE void sendEmail(const QString &toAddress, const QString &ccAddress, const QString &bccAddress, const QString &subject, const QString &body);
+        explicit WorkTimer(Database* db, QObject* parent = 0);
+        ~WorkTimer();
 
-    protected:
-        QProcess *m_process;
+    public slots:
+        QString start(QString startTime = NULL);
+        QString getStartTime();
+        void stop();
+
+    private:
+        bool setTimer(QString timeString, bool running);
+        Database* db;
 };
 
-#endif // LAUNCHER_H
+#endif // WORKTIMER_H

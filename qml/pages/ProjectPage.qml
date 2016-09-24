@@ -39,43 +39,29 @@ Page {
     id: projectPage
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
-    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+    property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
+    property int projectAmount: projects.length
 
-    onStatusChanged: {
-
-        // Data is refreshed each time the page is activated.
-        // Otherwise, they may not be up to date if changes have occurred for the displayed project.
-        if (projectPage.status === PageStatus.Activating) {
-            getHours();
-        }
-    }
-
-    Component.onCompleted: {
-        project = getProject(defaultProjectId);
-        getHours();
-    }
     function getHours() {
         //Update hours
-        summaryModel.set(0,{"hours": DB.getHoursDay(1, project.id).toString().toHHMM() });
-        summaryModel.set(1,{"hours": DB.getHoursDay(0, project.id).toString().toHHMM() });
-        summaryModel.set(2,{"hours": DB.getHoursWeek(1, project.id).toString().toHHMM() });
-        summaryModel.set(3,{"hours": DB.getHoursWeek(0, project.id).toString().toHHMM() });
-        summaryModel.set(4,{"hours": DB.getHoursMonth(1, project.id).toString().toHHMM() });
-        summaryModel.set(5,{"hours": DB.getHoursMonth(0, project.id).toString().toHHMM() });
-        summaryModel.set(6,{"hours": DB.getHoursAll(project.id).toString().toHHMM() });
-        summaryModel.set(7,{"hours": DB.getHoursYear(0, project.id).toString().toHHMM() });
+        summaryModel.set(0,{"hours": db.getDurationForPeriod("day", 1, project.id).toString().toHHMM() })
+        summaryModel.set(1,{"hours": db.getDurationForPeriod("day", 0, project.id).toString().toHHMM() })
+        summaryModel.set(2,{"hours": db.getDurationForPeriod("week", 1, project.id).toString().toHHMM() })
+        summaryModel.set(3,{"hours": db.getDurationForPeriod("week", 0, project.id).toString().toHHMM() })
+        summaryModel.set(4,{"hours": db.getDurationForPeriod("month", 1, project.id).toString().toHHMM() })
+        summaryModel.set(5,{"hours": db.getDurationForPeriod("month", 0, project.id).toString().toHHMM() })
+        summaryModel.set(6,{"hours": db.getDurationForPeriod("all", 0, project.id).toString().toHHMM() })
+        summaryModel.set(7,{"hours": db.getDurationForPeriod("year", 0, project.id).toString().toHHMM() })
     }
 
     function getProject(projectId) {
         var found = projects.findById(projectId)
         if(found) {
-            return found;
+            return found
         }
-        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor};
+        return {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
     }
 
-    property int projectAmount: projects.length
-    onProjectAmountChanged: { setProjects() }
     function setProjects() {
         for (var i = 0; i < projects.length; i++) {
             modelSource.set(i, {
@@ -85,6 +71,7 @@ Page {
                             })
         }
         projectCombo._updating = false
+
         for (var i = 0; i < modelSource.count; i++) {
             if (modelSource.get(i).id === defaultProjectId) {
                 projectCombo.currentIndex = i
@@ -95,30 +82,6 @@ Page {
 
     ListModel {
         id: summaryModel
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
-        ListElement {
-            hours: "0"
-        }
         function section(index) {
             if (section["text"] === undefined) {
                 section.text = [
@@ -132,22 +95,22 @@ Page {
                     qsTr("This year"),
                 ]
             }
+
             return section.text[index]
         }
     }
 
     SilicaGridView {
+        id: grid
+        property PageHeader pageHeader
+
         height: projectPage.height - projectCombo.height
         width: parent.width
-        id: grid
-
-        property PageHeader pageHeader
         header: PageHeader {
             id: pageHeader
             title: qsTr("Hours for") + " " +project.name
             Component.onCompleted: grid.pageHeader = pageHeader
         }
-
         cellWidth: {
             if (projectPage.orientation == Orientation.PortraitInverted || projectPage.orientation == Orientation.Portrait)
                 projectPage.width / 2
@@ -160,22 +123,26 @@ Page {
             else
                 (projectPage.height / 3) - pageHeader.height / 3
         }
+
         model: summaryModel
         snapMode: GridView.SnapToRow
         delegate: Item {
             width: grid.cellWidth
             height: grid.cellHeight
+
             BackgroundItem {
                 anchors {
                     fill: parent
                     margins: Theme.paddingMedium
                 }
+
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width
                     height: parent.height
+
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -183,6 +150,7 @@ Page {
                         text: summaryModel.section(index)
                         font.pixelSize: Theme.fontSizeSmall
                     }
+
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -192,12 +160,17 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                     }
                 }
+
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: dataContainer, section: summaryModel.section(index), projectId: project.id})
                 }
             }
         }
-    } // SilicaGridView
+    }
+
+    ListModel {
+        id: modelSource
+    }
 
     ComboBox {
         id: projectCombo
@@ -221,10 +194,22 @@ Page {
             getHours()
         }
         Component.onCompleted: {
-            projectPage.setProjects();
+            projectPage.setProjects()
         }
     }
-    ListModel {
-        id: modelSource
+
+    onStatusChanged: {
+        // Data is refreshed each time the page is activated.
+        // Otherwise, they may not be up to date if changes have occurred for the displayed project.
+        if (projectPage.status === PageStatus.Activating) {
+            getHours()
+        }
+    }
+
+    onProjectAmountChanged: { setProjects() }
+
+    Component.onCompleted: {
+        project = getProject(defaultProjectId)
+        getHours()
     }
 }

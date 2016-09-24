@@ -47,8 +47,8 @@ function categorySummary(message){
     var allHours = message.allHours;
     var projects = message.projects;
     var lastDate = "";
-    var results=[];
-    var item ={
+    var results = [];
+    var item = {
         'project': {},
         'projectDuration': 0,
         'projectPrice': 0,
@@ -72,18 +72,23 @@ function categorySummary(message){
             lastDate = "";
         }
         var netDuration = allHours[i].duration - allHours[i].breakDuration;
-        item.projectDuration+= netDuration;
-        if (project.hourlyRate)
+        item.projectDuration += netDuration;
+
+        if (project.hourlyRate) {
             item.projectPrice += project.hourlyRate * netDuration;
-        if(allHours[i].date!==lastDate){
-            item.projectWorkdays+=1;
+        }
+
+        if (allHours[i].date!==lastDate) {
+            item.projectWorkdays += 1;
             lastDate = allHours[i].date;
         }
-        item.projectEntries+=1;
+
+        item.projectEntries += 1;
     }
     results.push(item);
+
     if(results.length) {
-        for(var j=0; j<results.length; j++) {
+        for(var j = 0; j < results.length; j++) {
             var data = {
                'header': results[j].project.name,
                'duration': qsTr("Duration") + ": " + results[j].projectDuration.toString().toHHMM(),
@@ -112,12 +117,15 @@ function all(message){
     for (var i = 0; i < allHours.length; i++) {
         var project = getProject(allHours[i].project, projects);
         var taskId = "0"
-        if (allHours[i].taskId !== "0")
+        if (allHours[i].taskId !== "0") {
             taskId = allHours[i].taskId
+        }
         var taskName = ""
+
         if (taskId !=="" && taskId !=="0" && !project.error) {
             taskName = getTaskName(project, allHours[i].taskId)
         }
+
         var data  = {
             'uid': allHours[i].uid,
             'date': allHours[i].date,
@@ -133,36 +141,46 @@ function all(message){
             'taskId': taskId,
             'taskName': taskName
         }
+
         WorkerScript.sendMessage({ 'status': 'running', 'data': data });
+
         var netDuration = allHours[i].duration - allHours[i].breakDuration;
-        categoryDuration+= netDuration;
-        if (project.hourlyRate)
+        categoryDuration += netDuration;
+
+        if (project.hourlyRate) {
             categoryPrice += project.hourlyRate * netDuration;
-        if(allHours[i].date!==lastDate){
+        }
+
+        if (allHours[i].date!==lastDate) {
             categoryWorkdays+=1;
             lastDate = allHours[i].date;
         }
+
         categoryEntries+=1;
     }
+
     var summary  = {
         'categoryDuration': categoryDuration,
         'categoryPrice': categoryPrice,
         'categoryWorkdays': categoryWorkdays,
         'categoryEntries': categoryEntries,
     }
+
     WorkerScript.sendMessage({ 'status': 'done', 'data': summary });
 }
 
 function getProject(projectId, projects) {
     var found = projects.findById(projectId);
-    if(found) {
+    if (found) {
         return found;
     }
-    return {
-        'name':qsTr('Project was not found'),
-        'labelColor': '#ed3a3d',
-        'error': true
-    };
+    else {
+        return {
+            'name':qsTr('Project was not found'),
+            'labelColor': '#ed3a3d',
+            'error': true
+        };
+    }
 }
 
 function getTaskName(project, taskId) {

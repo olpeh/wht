@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2016 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -31,24 +31,30 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LAUNCHER_H
-#define LAUNCHER_H
+#ifndef BREAKTIMER_H
+#define BREAKTIMER_H
 
 #include <QObject>
-#include <QProcess>
-#include <QDBusInterface>
+#include <QtSql>
+#include "Database.h"
 
-class Launcher : public QObject {
+class BreakTimer : public QObject {
     Q_OBJECT
 
     public:
-        explicit Launcher(QObject *parent = 0);
-        ~Launcher();
-        Q_INVOKABLE QString launch(const QString &program);
-        Q_INVOKABLE void sendEmail(const QString &toAddress, const QString &ccAddress, const QString &bccAddress, const QString &subject, const QString &body);
+        explicit BreakTimer(Database* db, QObject* parent = 0);
+        ~BreakTimer();
 
-    protected:
-        QProcess *m_process;
+    public slots:
+        QString start();
+        QString getStartTime();
+        double getDuration();
+        void stop(double duration);
+        void clear();
+
+    private:
+        bool setTimer(QString timeString, bool running);
+        Database* db;
 };
 
-#endif // LAUNCHER_H
+#endif // BREAKTIMER_H

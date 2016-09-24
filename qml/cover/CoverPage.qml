@@ -33,24 +33,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../config.js" as DB
 
 CoverBackground {
     id: cover
     property bool active: status == Cover.Active
+
     onActiveChanged: {
         if(active) {
             if(timerRunning && !breakTimerRunning){
-                //console.log("Timer refresh triggered");
-                firstPage.updateDuration();
+                firstPage.updateDuration()
             }
+
             else if (breakTimerRunning) {
-                //console.log("Break refresh triggered");
-                firstPage.updateBreakTimerDuration();
+                firstPage.updateBreakTimerDuration()
             }
+
             else {
-               //console.log("refresh triggered");
-               firstPage.getHours();
+               firstPage.getHours()
             }
         }
     }
@@ -62,38 +61,53 @@ CoverBackground {
         opacity: 0.8
         anchors.topMargin: 2 * Theme.paddingLarge
     }
+
     CoverActionList {
         id: coverAction
+
         CoverAction {
             id: pauseAddAction
             iconSource:  {
-                if(timerRunning && breakTimerRunning)
+                if (timerRunning && breakTimerRunning) {
                     "image://theme/icon-cover-play"
-                else if(timerRunning)
+                }
+
+                else if (timerRunning) {
                     "image://theme/icon-cover-pause"
-                else
+                }
+
+                else {
                     "image://theme/icon-cover-new"
+                }
             }
             onTriggered: {
                 if (timerRunning && !breakTimerRunning) {
-                    Log.info("Break starts...");
+                    Log.info("Break starts...")
                     firstPage.startBreakTimer()
-                    //pauseAddAction.iconSource = "image://theme/icon-cover-play"
                 }
+
                 else if (breakTimerRunning) {
-                    Log.info("Break ends...");
+                    Log.info("Break ends...")
                     firstPage.stopBreakTimer()
-                    //pauseAddAction.iconSource = "image://theme/icon-cover-pause"
                 }
+
                 else {
-                    if(pageStack.depth > 1)
-                        pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
-                    else
-                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {dataContainer: appWindow.firstPage, uid: 0, fromCover: true})
+                    if (pageStack.depth > 1) {
+                        var pageOptions = {
+                            dataContainer: appWindow.firstPage,
+                            uid: 0,
+                            fromCover: true
+                        }
+
+                        pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
+                    } else {
+                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
+                    }
                     appWindow.activate()
                 }
             }
         }
+
         CoverAction {
             iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
@@ -101,6 +115,7 @@ CoverBackground {
                     firstPage.stop(true)
                     appWindow.activate()
                 }
+
                 else {
                     firstPage.start()
                 }
@@ -109,16 +124,18 @@ CoverBackground {
     }
 
     Column {
-        spacing: Theme.paddingMedium;
+        spacing: Theme.paddingMedium
         anchors.horizontalCenter: parent.horizontalCenter
         y: Theme.paddingMedium
         width: parent.width
+
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
+
             Label {
                 anchors.centerIn: parent
                 id: todayLabel
@@ -128,12 +145,14 @@ CoverBackground {
                 text: qsTr("Today")+ ": " + today
             }
         }
+
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
+
             Label {
                 anchors.centerIn: parent
                 id: week
@@ -143,6 +162,7 @@ CoverBackground {
                 text: qsTr("Week")+ ": " + thisWeek
             }
         }
+
         Rectangle {
             visible: !timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
@@ -150,6 +170,7 @@ CoverBackground {
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
+
             Label {
                 anchors.centerIn: parent
                 id: month
@@ -159,6 +180,7 @@ CoverBackground {
                 text: qsTr("Month")+ ": " + thisMonth
             }
         }
+
         Rectangle {
             visible: timerRunning && !breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
@@ -166,6 +188,7 @@ CoverBackground {
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
+
             IconButton {
                 id: iconButton
                 icon.source: "image://theme/icon-cover-timer"
@@ -182,6 +205,7 @@ CoverBackground {
                 text: durationNow
             }
         }
+
         Rectangle {
             visible: breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
@@ -189,10 +213,12 @@ CoverBackground {
             radius: Theme.paddingMedium
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
+
             Item {
-            width: childrenRect.width
+                width: childrenRect.width
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: Theme.paddingMedium
+
                 Image {
                     id: timerIconButton
                     source: "image://theme/icon-cover-timer"
@@ -200,11 +226,13 @@ CoverBackground {
                     height: 20
                     anchors.rightMargin: Theme.paddingLarge
                 }
+
                 Item {
                     id: spacer
                     width: Theme.paddingMedium
                     anchors.left: timerIconButton.right
                 }
+
                 Label {
                     anchors.left: spacer.right
                     anchors.verticalCenter: timerIconButton.verticalCenter
@@ -213,10 +241,12 @@ CoverBackground {
                     text: durationNow
                 }
             }
+
             Item {
                 width: childrenRect.width
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 3 * Theme.paddingMedium
+
                 Image {
                     id: pauseIconButton
                     source: "image://theme/icon-cover-pause"
@@ -224,11 +254,13 @@ CoverBackground {
                     height: 30
                     anchors.rightMargin: Theme.paddingLarge
                 }
+
                 Item {
                     id: spacer2
                     width: Theme.paddingMedium
                     anchors.left: pauseIconButton.right
                 }
+
                 Label {
                     anchors.left: spacer2.right
                     anchors.verticalCenter: pauseIconButton.verticalCenter

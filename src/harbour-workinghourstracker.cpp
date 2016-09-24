@@ -46,16 +46,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QStandardPaths>
 #include <QCommandLineParser>
 
+#include "Logger.h"
+#include "Database.h"
+#include "WorkTimer.h"
+#include "BreakTimer.h"
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
-#include "Logger.h"
 
 int main(int argc, char *argv[])
 {
     // Make sure the logger is initialized
     Logger::instance();
 
+    Database database;
+    WorkTimer* timer = new WorkTimer(&database);
+    BreakTimer* breakTimer = new BreakTimer(&database);
     Settings settings;
     Launcher launcher;
     Exporter exporter;
@@ -118,6 +124,9 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
     view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
 
+    view->rootContext()->setContextProperty("db", &database);
+    view->rootContext()->setContextProperty("timer", timer);
+    view->rootContext()->setContextProperty("breakTimer", breakTimer);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);

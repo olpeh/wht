@@ -34,13 +34,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Launcher::Launcher(QObject *parent) :
     QObject(parent),
-    m_process(new QProcess(this))
-{
-
+    m_process(new QProcess(this)) {
 }
 
-QString Launcher::launch(const QString &program)
-{
+QString Launcher::launch(const QString &program) {
     m_process->start(program);
     m_process->waitForFinished(-1);
     QByteArray bytes = m_process->readAllStandardOutput();
@@ -52,6 +49,5 @@ void Launcher::sendEmail(const QString &toAddress, const QString &ccAddress, con
     QDBusInterface email("com.jolla.email.ui", "/com/jolla/email/ui", "com.jolla.email.ui");
     email.call("compose", subject, toAddress, ccAddress, bccAddress, body);
 }
-
 
 Launcher::~Launcher() {}

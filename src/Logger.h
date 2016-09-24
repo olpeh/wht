@@ -48,47 +48,46 @@
 #include <QContiguousCache>
 #include <QAbstractListModel>
 
-class Logger : public QAbstractListModel
-{
+class Logger : public QAbstractListModel {
     Q_OBJECT
     Q_ENUMS(LogType)
 
-public:
-    enum LogType {
-        LOG_DEBUG = 0,
-        LOG_ERROR = 1,
-        LOG_WARN = 2,
-        LOG_INFO = 3
-    };
+    public:
+        enum LogType {
+            LOG_DEBUG = 0,
+            LOG_ERROR = 1,
+            LOG_WARN = 2,
+            LOG_INFO = 3
+        };
 
-    static Logger& instance();
+        static Logger& instance();
 
-    Q_INVOKABLE void save();
-    Q_INVOKABLE void send();
+        Q_INVOKABLE void save();
+        Q_INVOKABLE void send();
 
-    Q_INVOKABLE void debug(QString msg) { _log(LOG_DEBUG, msg); }
-    Q_INVOKABLE void error(QString msg) { _log(LOG_ERROR, msg); }
-    Q_INVOKABLE void warn(QString msg)  { _log(LOG_WARN, msg); }
-    Q_INVOKABLE void info(QString msg)  { _log(LOG_INFO, msg); }
+        Q_INVOKABLE void debug(QString msg) { _log(LOG_DEBUG, msg); }
+        Q_INVOKABLE void error(QString msg) { _log(LOG_ERROR, msg); }
+        Q_INVOKABLE void warn(QString msg)  { _log(LOG_WARN, msg); }
+        Q_INVOKABLE void info(QString msg)  { _log(LOG_INFO, msg); }
 
-    // QAbstractListModel
-    int rowCount(const QModelIndex& parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const;
+        // QAbstractListModel
+        int rowCount(const QModelIndex& parent = QModelIndex()) const;
+        QVariant data(const QModelIndex &index, int role) const;
+        QHash<int, QByteArray> roleNames() const;
 
-signals:
-    void logSaved(QString path);
+    signals:
+        void logSaved(QString path);
 
-private:
-    explicit Logger(QObject *parent = 0);
-    void _log(LogType, QString);
-    static void saveLogToFile();
-    static void _messageHandler(QtMsgType, const QMessageLogContext&, const QString&);
+    private:
+        explicit Logger(QObject *parent = 0);
+        void _log(LogType, QString);
+        static void saveLogToFile();
+        static void _messageHandler(QtMsgType, const QMessageLogContext&, const QString&);
 
-    static QtMessageHandler _original_handler;
-    static QContiguousCache<QVariantMap> _log_cache;
+        static QtMessageHandler _original_handler;
+        static QContiguousCache<QVariantMap> _log_cache;
 
-    Q_DISABLE_COPY(Logger)
+        Q_DISABLE_COPY(Logger)
 };
 
 #endif // LOGGER_H

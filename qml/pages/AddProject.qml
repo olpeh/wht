@@ -53,77 +53,93 @@ Dialog {
         // TODO validate other project properties if used
         return nameTextArea.text !== "" && (hourlyRateTextArea.text === "" || !isNaN(parseFloat(hourlyRateTextArea.text)) || parseFloat(hourlyRateTextArea.text) >=0)
     }
+
     function saveProject() {
         if (taskNameArea.text.length) {
             saveTask(taskNameArea.text)
         }
-        name = nameTextArea.text;
-        if (projectId == "0" && !editMode)
-            projectId = DB.getUniqueId();
-        hourlyRate = parseFloat(hourlyRateTextArea.text) || 0;
-        contractRate = 0; //parseFloat(contractRateTextArea.text || 0);
-        budget = 0; //parseFloat(budgetTextArea.text || 0);
-        hourBudget = 0; //parseFloat(hourBudgetTextArea.text) || 0;
-        labelColor = colorIndicator.color;
-        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor);
-        DB.setProject(projectId, name, hourlyRate, contractRate, budget, hourBudget, labelColor);
-        if(defaultSwitch.checked) {
-            defaultProjectId = projectId;
-            settings.setDefaultProjectId(projectId);
+
+        if (projectId == "0" && !editMode) {
+            projectId = db.getUniqueId()
         }
-        if(prev)
-            page.prev.getProjects();
+
+        name = nameTextArea.text
+        hourlyRate = parseFloat(hourlyRateTextArea.text) || 0
+        contractRate = 0 //parseFloat(contractRateTextArea.text || 0)
+        budget = 0 //parseFloat(budgetTextArea.text || 0)
+        hourBudget = 0 //parseFloat(hourBudgetTextArea.text) || 0
+        labelColor = colorIndicator.color
+
+        var values = {
+            "uid": projectId,
+            "name": name,
+            "hourlyRate": hourlyRate,
+            "contractRate": contractRate,
+            "budget": budget,
+            "hourBudget": hourBudget,
+            "labelColor": colorIndicator.color,
+        };
+
+        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
+        db.saveProject(values);
+
+        if(defaultSwitch.checked) {
+            defaultProjectId = projectId
+            settings.setDefaultProjectId(projectId)
+        }
+
+        if(prev) {
+            page.prev.getProjects()
+        }
     }
 
     function getTasks() {
         if (projectId == "0" && !editMode)
-            projectId = DB.getUniqueId()
-        return DB.getProjectTasks(projectId)
+            projectId = db.getUniqueId()
+        return db.getTasks(projectId)
     }
 
     function saveTask(name, taskId) {
-        if (!taskId || taskId === "" || taskId === " ")
-            taskId = DB.getUniqueId()
-        return DB.setTask(taskId, projectId, name)
-    }
+        if (!taskId || taskId === "" || taskId === " ") {
+            taskId = db.getUniqueId()
+        }
 
-    //Not needed
-    /*function removeInvalidCharacters(text) {
-        var tmp = text
-        text = text.split(",").join("")
-        text =  text.split(";").join("")
-        return text;
-    }*/
+        var values = {
+            "uid": taskId,
+            "projectID": projectId,
+            "name": name,
+        };
+
+        return db.saveTask(values)
+    }
 
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
+
         Column {
             id: column
-            DialogHeader {
-                acceptText: qsTr("Save")
-                cancelText: qsTr("Cancel")
-            }
             spacing: 15
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
-            TextField{
+            DialogHeader {
+                acceptText: qsTr("Save")
+                cancelText: qsTr("Cancel")
+            }
+
+            TextField {
                 id: nameTextArea
                 focus: !editMode
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                }
+                EnterKey.onClicked: focus = false
                 width: parent.width
                 placeholderText: qsTr("Please enter a name for the project")
                 label: qsTr("Project name")
-                /*onFocusChanged: {
-                    nameTextArea.text = removeInvalidCharacters(nameTextArea.text)
-                }*/
             }
+
             TextSwitch {
                 id: defaultSwitch
                 checked: false
@@ -131,14 +147,23 @@ Dialog {
             }
 
             SectionHeader { text: qsTr("Tasks") }
+
             Repeater {
                 id: repeater
                 model: getTasks()
+
                 BackgroundItem {
                     id: contentItem
-                    Rectangle{
+                    onClicked: {
+                        taskLabel.visible = false
+                        taskNameEditArea.focus = true
+                        taskNameEditArea.text = taskLabel.text
+                    }
+
+                    Rectangle {
                         color: colorIndicator.color
                         anchors.fill: parent
+
                         Label {
                             id: taskLabel
                             y: Theme.paddingLarge
@@ -149,12 +174,14 @@ Dialog {
                                 pixelSize: Theme.fontSizeMedium
                             }
                         }
-                        TextField{
+
+                        TextField {
                             visible: !taskLabel.visible
                             id: taskNameEditArea
                             focus: false
                             y: Theme.paddingMedium
                             EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                            width: parent.width
                             EnterKey.onClicked: {
                                 focus = false
                                 taskLabel.visible = true
@@ -173,50 +200,49 @@ Dialog {
                                     }
                                 }
                             }
-                            width: parent.width
                         }
 
                     }
-                    onClicked: {
-                        taskLabel.visible = false
-                        taskNameEditArea.focus = true
-                        taskNameEditArea.text = taskLabel.text
-                    }
                 }
             }
+
             BackgroundItem {
                 id: addTaskItem
+                onClicked: {
+                    addTaskItem.visible = false
+                    taskNameArea.focus = true
+                }
+
                 Image {
                     id: addImage
                     source: "image://theme/icon-cover-new"
                     anchors.centerIn: parent
                 }
-                onClicked: {
-                    addTaskItem.visible = false
-                    taskNameArea.focus = true
-                }
             }
-            TextField{
+
+            TextField {
                 visible: !addTaskItem.visible
                 id: taskNameArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                width: parent.width
+                placeholderText: qsTr("Task Name")
+                label: qsTr("Task Name")
                 EnterKey.onClicked: {
                     focus = false
                     addTaskItem.visible = true
+
                     if (taskNameArea.text.length) {
                         saveTask(taskNameArea.text)
                         repeater.model = getTasks()
                         text = ''
                     }
                 }
-                width: parent.width
-                placeholderText: qsTr("Task Name")
-                label: qsTr("Task Name")
             }
 
             SectionHeader { text: qsTr("Rates") }
-            TextField{
+
+            TextField {
                 id: hourlyRateTextArea
                 focus: false
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -229,6 +255,7 @@ Dialog {
                 label: qsTr("Hourly rate")
                 onFocusChanged: hourlyRateTextArea.text = hourlyRateTextArea.text.replace(",",".")
             }
+
             /* Lets hide these for now...
             TextField{
                 id: contractRateTextArea
@@ -240,6 +267,7 @@ Dialog {
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: qsTr("Contract rate")
             }
+
             TextField{
                 id: budgetTextArea
                 focus: false
@@ -250,6 +278,7 @@ Dialog {
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: qsTr("Budget")
             }
+
             TextField{
                 id: hourBudgetTextArea
                 focus: false
@@ -260,8 +289,18 @@ Dialog {
                 inputMethodHints: Qt.ImhFormattedNumbersOnly | Qt.ImhNoPredictiveText
                 label: qsTr("Hour budget")
             }*/
+
             SectionHeader { text: qsTr("Coloring") }
+
             BackgroundItem {
+                onClicked: {
+                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
+                    dialog.accepted.connect(function() {
+                        colorIndicator.color = Theme.rgba(dialog.color, Theme.highlightBackgroundOpacity)
+                        labelColor = dialog.color
+                    })
+                }
+
                 Rectangle {
                     id: colorIndicator
                     opacity: 0.6
@@ -276,15 +315,14 @@ Dialog {
                         font.bold: true
                     }
                 }
-                onClicked: {
-                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
-                    dialog.accepted.connect(function() {
-                        colorIndicator.color = Theme.rgba(dialog.color, Theme.highlightBackgroundOpacity)
-                        labelColor = dialog.color
-                    })
-                }
             }
+
             BackgroundItem {
+                onClicked: {
+                    colorIndicator.color = Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity)
+                    labelColor = Theme.secondaryHighlightColor
+                }
+
                 Rectangle {
                     id: colorReset
                     opacity: 0.6
@@ -299,23 +337,25 @@ Dialog {
                         font.bold: true
                     }
                 }
-                onClicked: { colorIndicator.color = Theme.rgba(Theme.secondaryHighlightColor, Theme.highlightBackgroundOpacity); labelColor = Theme.secondaryHighlightColor}
             }
+
             Item {
                 width: parent.width
                 height: 10
             }
+
             Component.onCompleted: {
-                getTasks();
-                if (editMode){
-                    nameTextArea.text = name;
-                    hourlyRateTextArea.text = hourlyRate;
-                    //contractRateTextArea.text = contractRate;
-                    //budgetTextArea.text = budget;
-                    //hourBudgetTextArea.text = hourBudget;
+                getTasks()
+                if (editMode) {
+                    nameTextArea.text = name
+                    hourlyRateTextArea.text = hourlyRate
+                    //contractRateTextArea.text = contractRate
+                    //budgetTextArea.text = budget
+                    //hourBudgetTextArea.text = hourBudget
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
-                    if(defaultProjectId === projectId) {
-                        defaultSwitch.visible = false;
+
+                    if (defaultProjectId === projectId) {
+                        defaultSwitch.visible = false
                     }
                 }
             }

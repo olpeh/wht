@@ -31,7 +31,10 @@ SOURCES += src/harbour-workinghourstracker.cpp \
     src/SettingsClass.cpp \
     src/Launcher.cpp \
     src/Exporter.cpp \
-    src/Logger.cpp
+    src/Logger.cpp \
+    src/Database.cpp \
+    src/WorkTimer.cpp \
+    src/BreakTimer.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -46,7 +49,6 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     harbour-workinghourstracker.desktop \
     qml/pages/About.qml \
     qml/pages/Add.qml \
-    qml/config.js \
     qml/pages/All.qml \
     rpm/harbour-workinghourstracker.changes \
     qml/pages/Settings.qml \
@@ -82,7 +84,10 @@ HEADERS += \
     src/SettingsClass.h \
     src/Launcher.h \
     src/Exporter.h \
-    src/Logger.h
+    src/Logger.h \
+    src/Database.h \
+    src/WorkTimer.h \
+    src/BreakTimer.h
 
 QT += dbus \
    core sql

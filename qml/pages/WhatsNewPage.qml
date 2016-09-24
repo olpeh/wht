@@ -40,49 +40,53 @@ Dialog {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property string changeLogText: "Error fetching changelog"
 
-    Component.onCompleted: {
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", "../CHANGELOG.md");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                changeLogText = MD.md2html(xhr.responseText);
-            }
-        }
-        xhr.send();
-    }
-
     SilicaFlickable {
         contentHeight: column.y + column.height
         width: parent.width
         height: parent.height
+
         Column {
             id: column
-            DialogHeader {
-                acceptText: qsTr("Ok")
-                cancelText: qsTr("Ok")
-            }
-            PageHeader {
-                title: qsTr("App updated to %1-%2").arg(appVersion).arg(appBuildNum);
-            }
             spacing: Theme.paddingLarge
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Theme.PaddingLarge
 
+            DialogHeader {
+                acceptText: qsTr("Ok")
+                cancelText: qsTr("Ok")
+            }
+
+            PageHeader {
+                title: qsTr("App updated to %1-%2").arg(appVersion).arg(appBuildNum)
+            }
+
             SectionHeader { text: qsTr("What's new?") }
+
             Text {
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: 0
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: root.width
+                textFormat: Text.RichText
+                text: changeLogText
                 anchors {
                     left: parent.left
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                textFormat: Text.RichText
-                text: changeLogText;
             }
         }
+    }
+
+    Component.onCompleted: {
+        var xhr = new XMLHttpRequest
+        xhr.open("GET", "../CHANGELOG.md")
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                changeLogText = MD.md2html(xhr.responseText)
+            }
+        }
+        xhr.send()
     }
 }

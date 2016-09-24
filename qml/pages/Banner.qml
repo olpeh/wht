@@ -3,12 +3,13 @@ import Sailfish.Silica 1.0
 
 MouseArea {
     id: popup
-    anchors.top: parent.top
-    width: parent.width
-    height: message.paintedHeight + (Theme.paddingLarge * 2)
     property alias title: message.text
     property alias timeout: hideTimer.interval
     property alias background: bg.color
+
+    anchors.top: parent.top
+    width: parent.width
+    height: message.paintedHeight + (Theme.paddingLarge * 2)
     visible: opacity > 0
     opacity: 0.0
 
@@ -44,8 +45,10 @@ MouseArea {
         popup.title = text
         // Save also to log
         Log.info(text)
-        if (color && (typeof(color) != "undefined"))
+
+        if (color && (typeof(color) != "undefined")) {
             bg.color = color
+        }
         else {
             bg.color = Theme.secondaryHighlightColor
         }

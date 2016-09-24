@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2016 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -31,24 +31,60 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LAUNCHER_H
-#define LAUNCHER_H
+#ifndef DATABASE_H
+#define DATABASE_H
 
 #include <QObject>
-#include <QProcess>
-#include <QDBusInterface>
+#include <QtSql>
 
-class Launcher : public QObject {
+class Database : public QObject {
     Q_OBJECT
 
     public:
-        explicit Launcher(QObject *parent = 0);
-        ~Launcher();
-        Q_INVOKABLE QString launch(const QString &program);
-        Q_INVOKABLE void sendEmail(const QString &toAddress, const QString &ccAddress, const QString &bccAddress, const QString &subject, const QString &body);
+        explicit Database(QObject* parent = 0);
+        ~Database();
 
-    protected:
-        QProcess *m_process;
+        static const QString DB_NAME;
+
+    public slots:
+        bool saveHourRow(QVariantMap values);
+
+        double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
+
+        QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+
+        QVariantMap getLastUsedInput(QString projectID, QString taskID = "");
+
+        QVariantList getProjects();
+
+        bool saveProject(QVariantMap values);
+
+        QVariantList getTasks(QString projectID = NULL);
+
+        bool saveTask(QVariantMap values);
+
+        bool remove(QString table, QString id);
+
+        void resetDatabase();
+
+        // @TODO: make this private
+        QString getUniqueId();
+
+    private:
+        QSqlDatabase* db;
+
+        Q_DISABLE_COPY(Database)
+
+        bool init();
+
+        void upgradeIfNeeded();
+
+        bool createTables();
+
+        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>(), int limit = 0);
+
+        bool periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset,  QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+
 };
 
-#endif // LAUNCHER_H
+#endif // DATABASE_H

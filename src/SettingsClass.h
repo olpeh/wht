@@ -38,65 +38,65 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QVariant>
 #include <QSettings>
 
-class Settings : public QObject
-{
+class Settings : public QObject {
     Q_OBJECT
 
-public:
-    explicit Settings(QObject *parent = 0);
-    ~Settings();
-    explicit Settings(const Settings &settings);
-    Q_INVOKABLE double getDefaultDuration();
-    Q_INVOKABLE void setDefaultDuration(double value);
-    Q_INVOKABLE double getDefaultBreakDuration();
-    Q_INVOKABLE void setDefaultBreakDuration(double value);
+    public:
+        explicit Settings(QObject *parent = 0);
+        ~Settings();
+        explicit Settings(const Settings &settings);
+        Q_INVOKABLE double getDefaultDuration();
+        Q_INVOKABLE void setDefaultDuration(double value);
+        Q_INVOKABLE double getDefaultBreakDuration();
+        Q_INVOKABLE void setDefaultBreakDuration(double value);
 
-    Q_INVOKABLE QString getEndsNowByDefault();
-    Q_INVOKABLE void setEndsNowByDefault(QString value);
+        Q_INVOKABLE QString getEndsNowByDefault();
+        Q_INVOKABLE void setEndsNowByDefault(QString value);
 
-    Q_INVOKABLE QString getEndTimeStaysFixed();
-    Q_INVOKABLE void setEndTimeStaysFixed(QString value);
+        Q_INVOKABLE QString getEndTimeStaysFixed();
+        Q_INVOKABLE void setEndTimeStaysFixed(QString value);
 
-    Q_INVOKABLE bool getTimerAutoStart();
-    Q_INVOKABLE void setTimerAutoStart(bool value);
+        Q_INVOKABLE bool getTimerAutoStart();
+        Q_INVOKABLE void setTimerAutoStart(bool value);
 
-    Q_INVOKABLE bool getDefaultBreakInTimer();
-    Q_INVOKABLE void setDefaultBreakInTimer(bool value);
+        Q_INVOKABLE bool getDefaultBreakInTimer();
+        Q_INVOKABLE void setDefaultBreakInTimer(bool value);
 
-    Q_INVOKABLE QString getDefaultProjectId();
-    Q_INVOKABLE void setDefaultProjectId(QString value);
+        Q_INVOKABLE QString getDefaultProjectId();
+        Q_INVOKABLE void setDefaultProjectId(QString value);
 
-    Q_INVOKABLE QString getCurrencyString();
-    Q_INVOKABLE void setCurrencyString(QString value);
+        Q_INVOKABLE QString getCurrencyString();
+        Q_INVOKABLE void setCurrencyString(QString value);
 
-    Q_INVOKABLE QString getToAddress();
-    Q_INVOKABLE void setToAddress(QString value);
-    Q_INVOKABLE QString getCcAddress();
-    Q_INVOKABLE void setCcAddress(QString value);
-    Q_INVOKABLE QString getBccAddress();
-    Q_INVOKABLE void setBccAddress(QString value);
+        Q_INVOKABLE QString getToAddress();
+        Q_INVOKABLE void setToAddress(QString value);
+        Q_INVOKABLE QString getCcAddress();
+        Q_INVOKABLE void setCcAddress(QString value);
+        Q_INVOKABLE QString getBccAddress();
+        Q_INVOKABLE void setBccAddress(QString value);
 
-    Q_INVOKABLE QString getLastVersionUsed();
-    Q_INVOKABLE void setLastVersionUsed(QString value);
+        Q_INVOKABLE QString getLastVersionUsed();
+        Q_INVOKABLE void setLastVersionUsed(QString value);
 
-    Q_INVOKABLE int getRoundToNearest();
-    Q_INVOKABLE void setRoundToNearest(int value);
+        Q_INVOKABLE int getRoundToNearest();
+        Q_INVOKABLE void setRoundToNearest(int value);
 
 
-private:
-    QString defaultProject;
-    double defaultDuration;
-    double defaultBreakDuration;
-    QString endsNowByDefault;
-    QString endTimeStaysFixed;
-    bool timerAutoStart;
-    bool defaultBreakInTimer;
-    QString defaultProjectId;
-    QString currencyString;
-    QString toAddress;
-    QString ccAddress;
-    QString bccAddress;
-    QString lastVersionUsed;
-    int roundToNearest;
+    private:
+        QString defaultProject;
+        double defaultDuration;
+        double defaultBreakDuration;
+        QString endsNowByDefault;
+        QString endTimeStaysFixed;
+        bool timerAutoStart;
+        bool defaultBreakInTimer;
+        QString defaultProjectId;
+        QString currencyString;
+        QString toAddress;
+        QString ccAddress;
+        QString bccAddress;
+        QString lastVersionUsed;
+        int roundToNearest;
 };
+
 #endif // SETTINGSCLASS_H

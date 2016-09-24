@@ -36,15 +36,14 @@ String.prototype.toHHMM = function () {
     var dur = parseFloat(this) * 60;
     var hours = (Math.floor(dur / 60)).toFixed(0);
     var minutes = (dur % 60).toFixed(0);
-    //if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    return hours+':'+minutes;
+    return hours + ':' + pad(minutes);
 }
 
 Array.prototype.findById = function(id) {
     for (var i = 0; i < this.length; i++) {
-        if (this[i].id === id)
+        if (this[i].id === id) {
             return this[i];
+        }
     }
     return false;
 }
@@ -59,8 +58,46 @@ function hourMinuteRoundToNearest(hour, minute) {
     var inHours = hour + (minute / 60);
     inHours = calcRoundToNearest(inHours);
     var inMinutes = inHours * 60;
+
     return {
         'hour': Math.floor(inMinutes / 60),
         'minute': inMinutes % 60
     }
 }
+
+function pad(n) { return ("0" + n).slice(-2); }
+
+function dateToDbDateString(date) {
+    if (date) {
+        //YYYY-MM-DD
+        var yyyy = date.getFullYear().toString()
+        var mm = (date.getMonth()+1).toString() // getMonth() is zero-based
+        var dd  = date.getDate().toString()
+        return yyyy + "-" + pad(mm) + "-" + pad(dd)
+    }
+}
+
+function formatDate(datestring) {
+    var d = new Date(datestring)
+    return d.toLocaleDateString()
+}
+
+function countMinutes(duration) {
+    var minutes = duration * 60
+    return Math.round(minutes % 60)
+}
+
+function countHours(duration) {
+    var minutes = duration * 60
+    return Math.floor(minutes / 60)
+}
+
+// Email validator
+function validEmail(email) {
+    if (email === "") {
+        return true
+    }
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+    return re.test(email)
+}
+
