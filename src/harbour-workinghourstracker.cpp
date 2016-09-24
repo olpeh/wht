@@ -49,6 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "Logger.h"
 #include "Database.h"
 #include "WorkTimer.h"
+#include "BreakTimer.h"
 #include "SettingsClass.h"
 #include "Launcher.h"
 #include "Exporter.h"
@@ -60,6 +61,7 @@ int main(int argc, char *argv[])
 
     Database database;
     WorkTimer* timer = new WorkTimer(&database);
+    BreakTimer* breakTimer = new BreakTimer(&database);
     Settings settings;
     Launcher launcher;
     Exporter exporter;
@@ -124,6 +126,7 @@ int main(int argc, char *argv[])
 
     view->rootContext()->setContextProperty("db", &database);
     view->rootContext()->setContextProperty("timer", timer);
+    view->rootContext()->setContextProperty("breakTimer", breakTimer);
     view->rootContext()->setContextProperty("settings", &settings);
     view->rootContext()->setContextProperty("launcher", &launcher);
     view->rootContext()->setContextProperty("exporter", &exporter);

@@ -33,7 +33,8 @@ SOURCES += src/harbour-workinghourstracker.cpp \
     src/Exporter.cpp \
     src/Logger.cpp \
     src/Database.cpp \
-    src/WorkTimer.cpp
+    src/WorkTimer.cpp \
+    src/BreakTimer.cpp
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -86,7 +87,8 @@ HEADERS += \
     src/Exporter.h \
     src/Logger.h \
     src/Database.h \
-    src/WorkTimer.h
+    src/WorkTimer.h \
+    src/BreakTimer.h
 
 QT += dbus \
    core sql

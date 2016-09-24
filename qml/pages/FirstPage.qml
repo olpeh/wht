@@ -221,13 +221,13 @@ Page {
 
     // Break timer functions
     function getBreakStartTime() {
-        breakStartTime = DB.getBreakStartTime()
+        breakStartTime = breakTimer.getStartTime()
     }
 
     function startBreakTimer() {
         breakDuration = 0
         breakDurationNow = "0h 0min"
-        breakStartTime = DB.startBreakTimer()
+        breakStartTime = breakTimer.start()
         breakTimerRunning = true
     }
 
@@ -261,16 +261,16 @@ Page {
         }
 
         breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
-        DB.stopBreakTimer(breakDuration)
+        breakTimer.stop(breakDuration)
         breakTimerRunning = false
     }
 
     function getBreakTimerDuration(){
-        return DB.getBreakTimerDuration()
+        return breakTimer.getDuration()
     }
 
     function clearBreakTimer(){
-        DB.clearBreakTimer()
+        breakTimer.clear()
         breakDuration = 0
     }
 
