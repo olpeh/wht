@@ -96,7 +96,7 @@ Dialog {
     function getTasks() {
         if (projectId == "0" && !editMode)
             projectId = db.getUniqueId()
-        return DB.getProjectTasks(projectId)
+        return db.getTasks(projectId)
     }
 
     function saveTask(name, taskId) {
@@ -104,7 +104,13 @@ Dialog {
             taskId = db.getUniqueId()
         }
 
-        return DB.setTask(taskId, projectId, name)
+        var values = {
+            "uid": taskId,
+            "projectID": projectId,
+            "name": name,
+        };
+
+        return db.saveTask(values)
     }
 
     SilicaFlickable {

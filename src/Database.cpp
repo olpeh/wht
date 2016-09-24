@@ -130,17 +130,12 @@ QString Database::getUniqueId() {
 
 bool Database::saveHourRow(QVariantMap values) {
     if(!values.empty()) {
-        if (values["uid"].isNull()) {
-            // Creating a new row
-            values["uid"] = getUniqueId();
-        }
-
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO hours "
                       "VALUES (:uid, :date, :startTime, :endTime, :duration, :project, "
                       ":description, :breakDuration, :taskId);");
 
-        query.bindValue(":uid", values["uid"].toString());
+        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
         query.bindValue(":date", values["date"].toString());
         query.bindValue(":startTime", values["startTime"].toString());
         query.bindValue(":endTime", values["endTime"].toString());
@@ -151,7 +146,7 @@ bool Database::saveHourRow(QVariantMap values) {
         query.bindValue(":taskId", values["taskId"].toString());
 
         if (query.exec()) {
-            qDebug() << "Row saved! ID: " << values["id"].toString();
+            qDebug() << "Row saved! ID: " << values["uid"].toString();
             return true;
         }
         else {
@@ -367,11 +362,6 @@ QVariantList Database::getProjects() {
 
 bool Database::saveProject(QVariantMap values) {
     if(!values.empty()) {
-        if (values["id"].isNull()) {
-            // Creating a new row
-            values["id"] = getUniqueId();
-        }
-
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO projects "
                       "VALUES (:uid, :name, :hourlyRate, :contractRate, :budget,"
@@ -386,7 +376,7 @@ bool Database::saveProject(QVariantMap values) {
         query.bindValue(":labelColor", values["labelColor"].toString());
 
         if (query.exec()) {
-            qDebug() << "Project saved! ID: " << values["id"].toString();
+            qDebug() << "Project saved! ID: " << values["uid"].toString();
             return true;
         }
         else {
@@ -396,6 +386,64 @@ bool Database::saveProject(QVariantMap values) {
     }
     else {
         qDebug() << "Values empty in saveProject";
+        return false;
+    }
+}
+
+QVariantList Database::getTasks(QString projectID) {
+    QVariantList tmp;
+    QVariantMap map;
+    QString select = QString("id, name");
+    QString from = QString("tasks");
+    QList<QString> where;
+    QSqlQuery query;
+
+    if (!projectID.isEmpty()) {
+        where.append(QStringLiteral("projectId='%1'").arg(projectID));
+    }
+
+    queryBuilder(&query, select, from, where);
+    if (query.exec()) {
+        map.clear();
+        while (query.next()) {
+            map.insert("id", query.record().value("id").toString());
+            map.insert("name", query.record().value("name").toString());
+            tmp.append(map);
+        }
+    }
+    else {
+        qDebug() << "getTasks failed " << query.lastError()  << " in " << query.lastQuery();
+    }
+
+    return tmp;
+}
+
+bool Database::saveTask(QVariantMap values) {
+    if(!values.empty()) {
+        if (values["uid"].isNull()) {
+            // Creating a new row
+            values["uid"] = getUniqueId();
+        }
+
+        QSqlQuery query;
+        query.prepare("INSERT OR REPLACE INTO tasks "
+                      "VALUES (:uid, :projectId, :name);");
+
+        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
+        query.bindValue(":projectId", values["projectID"]);
+        query.bindValue(":name", values["name"].isNull() ? "Default task" : values["name"].toString());
+
+        if (query.exec()) {
+            qDebug() << "Task saved! ID: " << values["uid"].toString();
+            return true;
+        }
+        else {
+            qDebug() << "Insert failed! " << query.lastError() << " in " << query.lastQuery();
+            return false;
+        }
+    }
+    else {
+        qDebug() << "Values empty in saveTask";
         return false;
     }
 }

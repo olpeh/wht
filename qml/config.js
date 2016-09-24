@@ -34,8 +34,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 .import QtQuick.LocalStorage 2.0 as LS
 var db = LS.LocalStorage.openDatabaseSync("WHT", "1.0", "StorageDatabase", 100000);
 
-// Tasks
-
 // Save task
 function setTask(taskId, projectId, name) {
     var resp = "";
@@ -52,37 +50,4 @@ function setTask(taskId, projectId, name) {
     });
 
     return resp;
-}
-
-function getProjectTasks(projectId) {
-    var resp = [];
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM tasks WHERE projectId=? ORDER BY id ASC;', [projectId]);
-
-        if (rs.rows.length > 0) {
-            for (var i = 0; i<rs.rows.length; i++) {
-                var item = {};
-                item["id"]=rs.rows.item(i).id;
-                item["name"]= rs.rows.item(i).name;
-                resp.push(item);
-            }
-        }
-    });
-
-    return resp;
-}
-
-function getTaskById(id) {
-    var item = {};
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM tasks WHERE id=?;', [id]);
-        if (rs.rows.length > 0) {
-            for (var i = 0; i<rs.rows.length; i++) {
-                item["id"]=rs.rows.item(i).id;
-                item["name"]= rs.rows.item(i).name;
-                break;
-            }
-        }
-    });
-    return item;
 }

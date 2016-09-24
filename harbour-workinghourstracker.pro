@@ -49,7 +49,6 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     harbour-workinghourstracker.desktop \
     qml/pages/About.qml \
     qml/pages/Add.qml \
-    qml/config.js \
     qml/pages/All.qml \
     rpm/harbour-workinghourstracker.changes \
     qml/pages/Settings.qml \

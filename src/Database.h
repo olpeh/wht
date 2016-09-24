@@ -59,6 +59,10 @@ class Database : public QObject {
 
         bool saveProject(QVariantMap values);
 
+        QVariantList getTasks(QString projectID = NULL);
+
+        bool saveTask(QVariantMap values);
+
         bool remove(QString table, QString id);
 
         void resetDatabase();

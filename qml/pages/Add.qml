@@ -673,7 +673,7 @@ Dialog {
                 }
 
                 function init(deselect) {
-                    tasks = DB.getProjectTasks(project)
+                    tasks = db.getTasks(project)
                     for (var i = 0; i < tasks.length; i++) {
                         taskModelSource.set(i, {
                             'id': tasks[i].id,
