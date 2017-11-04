@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../config.js" as DB
 Dialog {
     id: page
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
