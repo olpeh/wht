@@ -339,8 +339,11 @@ QVariantList Database::getProjects() {
     QString select = QString("id, name, hourlyRate, contractRate, budget, hourBudget, labelColor");
     QString from = QString("projects");
     QSqlQuery query;
+    QList<QString> where;
+    QList<QString> sorting;
+    sorting.append("name ASC");
 
-    queryBuilder(&query, select, from);
+    queryBuilder(&query, select, from, where, sorting);
     if (query.exec()) {
         map.clear();
         while (query.next()) {
