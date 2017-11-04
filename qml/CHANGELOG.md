@@ -1,4 +1,8 @@
 # Changelog
+## [1.2.2-1] - 2017-11-04
+### Added
+- Sort projects alphabetically
+
 ## [1.2.1-1] - 2016-06-23
 ### Fixed
 - Bugfix for issue #51
