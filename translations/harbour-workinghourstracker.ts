@@ -76,7 +76,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
+        <source>Copyright (C) 2017 Olavi Haapala
 The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>

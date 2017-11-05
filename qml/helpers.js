@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2017 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -31,73 +31,73 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
-String.prototype.toHHMM = function () {
-    var dur = parseFloat(this) * 60;
-    var hours = (Math.floor(dur / 60)).toFixed(0);
-    var minutes = (dur % 60).toFixed(0);
-    return hours + ':' + pad(minutes);
-}
+String.prototype.toHHMM = function() {
+  var dur = parseFloat(this) * 60;
+  var hours = Math.floor(dur / 60).toFixed(0);
+  var minutes = (dur % 60).toFixed(0);
+  return hours + ':' + pad(minutes);
+};
 
 Array.prototype.findById = function(id) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i].id === id) {
-            return this[i];
-        }
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].id === id) {
+      return this[i];
     }
-    return false;
-}
+  }
+  return false;
+};
 
 function calcRoundToNearest(value) {
-    var inMinutes = value * 60;
-    inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
-    return inMinutes / 60;
+  var inMinutes = value * 60;
+  inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest;
+  return inMinutes / 60;
 }
 
 function hourMinuteRoundToNearest(hour, minute) {
-    var inHours = hour + (minute / 60);
-    inHours = calcRoundToNearest(inHours);
-    var inMinutes = inHours * 60;
+  var inHours = hour + minute / 60;
+  inHours = calcRoundToNearest(inHours);
+  var inMinutes = inHours * 60;
 
-    return {
-        'hour': Math.floor(inMinutes / 60),
-        'minute': inMinutes % 60
-    }
+  return {
+    hour: Math.floor(inMinutes / 60),
+    minute: inMinutes % 60
+  };
 }
 
-function pad(n) { return ("0" + n).slice(-2); }
+function pad(n) {
+  return ('0' + n).slice(-2);
+}
 
 function dateToDbDateString(date) {
-    if (date) {
-        //YYYY-MM-DD
-        var yyyy = date.getFullYear().toString()
-        var mm = (date.getMonth()+1).toString() // getMonth() is zero-based
-        var dd  = date.getDate().toString()
-        return yyyy + "-" + pad(mm) + "-" + pad(dd)
-    }
+  if (date) {
+    //YYYY-MM-DD
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth() + 1).toString(); // getMonth() is zero-based
+    var dd = date.getDate().toString();
+    return yyyy + '-' + pad(mm) + '-' + pad(dd);
+  }
 }
 
 function formatDate(datestring) {
-    var d = new Date(datestring)
-    return d.toLocaleDateString()
+  var d = new Date(datestring);
+  return d.toLocaleDateString();
 }
 
 function countMinutes(duration) {
-    var minutes = duration * 60
-    return Math.round(minutes % 60)
+  var minutes = duration * 60;
+  return Math.round(minutes % 60);
 }
 
 function countHours(duration) {
-    var minutes = duration * 60
-    return Math.floor(minutes / 60)
+  var minutes = duration * 60;
+  return Math.floor(minutes / 60);
 }
 
 // Email validator
 function validEmail(email) {
-    if (email === "") {
-        return true
-    }
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-    return re.test(email)
+  if (email === '') {
+    return true;
+  }
+  var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return re.test(email);
 }
-

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2017 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe

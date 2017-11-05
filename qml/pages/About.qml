@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Olavi Haapala.
+Copyright (C) 2017 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
 IRC: olpe
@@ -284,7 +284,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: qsTr("Copyright (C) 2015 Olavi Haapala \nThe source code is licensed under BSD 3-clause.")
+                text: qsTr("Copyright (C) 2017 Olavi Haapala \nThe source code is licensed under BSD 3-clause.")
             }
 
             Button {

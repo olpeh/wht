@@ -74,9 +74,9 @@
         <translation>Starte externe E-Mail-App</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
+        <source>Copyright (C) 2017 Olavi Haapala
 The source code is licensed under BSD 3-clause.</source>
-        <translation>Copyright (c) 2015 Olavi Haapala
+        <translation>Copyright (C) 2017 Olavi Haapala
 Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
     </message>
     <message>

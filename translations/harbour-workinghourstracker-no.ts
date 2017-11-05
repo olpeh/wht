@@ -74,9 +74,9 @@
         <translation>Starter epostprogram</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015 Olavi Haapala 
+        <source>Copyright (C) 2017 Olavi Haapala
 The source code is licensed under BSD 3-clause.</source>
-        <translation>Opphavsrett (C) 2015 Olavi Haapala 
+        <translation>Opphavsrett (C) 2015 Olavi Haapala
 Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
