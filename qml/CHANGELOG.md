@@ -1,4 +1,8 @@
 # Changelog
+## [1.2.3-1] - 2017-11-05
+### Added
+- Better cover layout
+
 ## [1.2.2-1] - 2017-11-04
 ### Added
 - Sort projects alphabetically
