@@ -55,11 +55,13 @@ CoverBackground {
     }
 
     Image {
-        source: 'cover.png'
+        source: 'cover.svg'
         anchors.horizontalCenter: parent.horizontalCenter
+        y: Theme.paddingLarge
         width: parent.width
         height: sourceSize.height * width / sourceSize.width
         opacity: 0.1
+        scale: 1.05
     }
 
     CoverActionList {
