@@ -4,29 +4,29 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 v. 1.1.5-1 (for phone and tablet) available in Jolla store (27.01.2016)<br />
 
-v. 1.2.1-1 available in [openrepos] (https://openrepos.net/content/olpe/working-hours-tracker)
+v. 1.2.1-1 available in [openrepos](https://openrepos.net/content/olpe/working-hours-tracker)
 
 
 
 ## Quick links
 
-[Changelog] (https://github.com/olpeh/wht/blob/master/qml/CHANGELOG.md)<br />
-[Current features] (#current-features)<br />
-[License] (https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
-[Roadmap] (#roadmap)<br />
-[How to use] (#how-to-use)<br />
-[Exporting] (#exporting)<br />
-[Importing] (#importing)
+[Changelog](https://github.com/olpeh/wht/blob/master/qml/CHANGELOG.md)<br />
+[Current features](#current-features)<br />
+[License](https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
+[Roadmap](#roadmap)<br />
+[How to use](#how-to-use)<br />
+[Exporting](#exporting)<br />
+[Importing](#importing)
 
 ## Donate
 Donations are welcome :)<br />
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=olpe&url=https%3A%2F%2Fgithub.com%2Folpeh%2Fwht&tags=github&category=software)
 
-Paypal [EUR] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
-Paypal [USD] (https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+Paypal [EUR](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
+Paypal [USD](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
-## Translate 
+## Translate
 
 Working Hours Tracker project is in transifex. Please contribute to translations there:
 
@@ -70,7 +70,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## License
 
-[See license here] (https://github.com/olpeh/wht/blob/master/LICENSE.md)
+[See license here](https://github.com/olpeh/wht/blob/master/LICENSE.md)
 
 
 ## How to use
@@ -91,13 +91,13 @@ default project which will be automatically selected when adding hours. If you s
 
 Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.
 
-On the left you have a break button which is meant to be used if you have a break 
+On the left you have a break button which is meant to be used if you have a break
 during your workday that you don't want to include in the duration. Break works just like the timer: you start it by clicking it and stop it when the break is over.
 
 The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort. The hours will be saved only when accepting the dialog.
 
 On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.
- 
+
 ### Using the cover
 
 Cover actions can be used to quickly add hours or to control the timer. Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.
@@ -132,7 +132,7 @@ Where entries surrounded by ' are strings (LONGVARCHAR or TEXT in the sqlite dat
 
 This is also the syntax which is expected for the .csv importing (Coming later...) Exporting as .csv from Working Hours Tracker will create the data in the right format but if you e.g want to import your existing data into Working Hours Tracker you can create .csv files in the above syntax. <br />
 <strong>Please note that uid must be an unique id of type LONGVARCHAR and project should be an id of an existing project in your database.</strong><br />
-           
+
 Project in hours means a project id. <br /><br />
 When exporting projects as CSV the syntax will look like this:<br />
 <strong>'id','name',hourlyRate,contractRate,budget,hourBudget,'labelColor'</strong><br />
@@ -150,10 +150,11 @@ Don't worry for duplicates when importing because the entries have unique id's a
 <strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
 
 ### Startup commands
-Still WIP
-Commands atm: 
-	- harbour-workinghourstracker --start 
-	- harbour-workinghourstracker --stop
+Still WIP (but it works)
+
+#### Commands atm:
+	- `harbour-workinghourstracker --start`
+	- `harbour-workinghourstracker --stop`
 
 
 
