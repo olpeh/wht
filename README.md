@@ -153,8 +153,8 @@ Don't worry for duplicates when importing because the entries have unique id's a
 Still WIP (but it works)
 
 #### Commands atm:
-	- `harbour-workinghourstracker --start`
-	- `harbour-workinghourstracker --stop`
+- `harbour-workinghourstracker --start`
+- `harbour-workinghourstracker --stop`
 
 
 
