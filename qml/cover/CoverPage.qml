@@ -200,8 +200,7 @@ CoverBackground {
         Rectangle {
             visible: breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
-            radius: Theme.paddingMedium
+            color: "transparent"
             width: parent.width - Theme.paddingLarge
             height: cover.height / 5
 
@@ -213,8 +212,8 @@ CoverBackground {
                 Image {
                     id: timerIconButton
                     source: "image://theme/icon-cover-timer"
-                    width: 20
-                    height: 20
+                    width: Theme.paddingLarge
+                    height: Theme.paddingLarge
                     anchors.rightMargin: Theme.paddingLarge
                 }
 
@@ -241,8 +240,8 @@ CoverBackground {
                 Image {
                     id: pauseIconButton
                     source: "image://theme/icon-cover-pause"
-                    width: 30
-                    height: 30
+                    width: 2 * Theme.paddingLarge
+                    height: 2 * Theme.paddingLarge
                     anchors.rightMargin: Theme.paddingLarge
                 }
 
