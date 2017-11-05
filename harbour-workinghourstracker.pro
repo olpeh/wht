@@ -94,4 +94,5 @@ QT += dbus \
 
 DISTFILES += \
     qml/md.js\
-    qml/CHANGELOG.md
+    qml/CHANGELOG.md \
+    qml/cover/cover.png
