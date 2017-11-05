@@ -53,13 +53,29 @@ CoverBackground {
             }
         }
     }
-
-    CoverPlaceholder {
-        id: icon
-        icon.source: "wht.png"
-        anchors.fill: parent
-        opacity: 0.8
-        anchors.topMargin: 2 * Theme.paddingLarge
+    function updateDuration(){
+        var dateNow = new Date();
+        var hoursNow = dateNow.getHours();
+        var minutesNow = dateNow.getMinutes();
+        var nowInMinutes = hoursNow * 60 + minutesNow;
+        var splitted = startTime.split(":");
+        //console.log(splitted);
+        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1]);
+        //console.log(nowInMinutes);
+        //console.log(startInMinutes);
+        if (nowInMinutes < startInMinutes)
+            nowInMinutes += 24*60
+        var difference = nowInMinutes - startInMinutes;
+        var diffHours = Math.floor(difference / 60)
+        var diffMinutes = difference % 60;
+        durationNow = diffHours + "h " + diffMinutes + "min";
+    }
+    Image {
+	source: 'cover.png'
+	anchors.horizontalCenter: parent.horizontalCenter
+	width: parent.width
+	height: sourceSize.height * width / sourceSize.width
+	opacity: 0.1
     }
 
     CoverActionList {
@@ -132,10 +148,10 @@ CoverBackground {
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             color: Theme.secondaryHighlightColor
-            radius: Theme.paddingMedium
-            width: parent.width - Theme.paddingLarge
-            height: cover.height / 5
-
+            color: "transparent"
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
                 anchors.centerIn: parent
                 id: todayLabel
@@ -148,11 +164,10 @@ CoverBackground {
 
         Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
-            radius: Theme.paddingMedium
-            width: parent.width - Theme.paddingLarge
-            height: cover.height / 5
-
+            color: "transparent"
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
                 anchors.centerIn: parent
                 id: week
@@ -166,11 +181,10 @@ CoverBackground {
         Rectangle {
             visible: !timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
-            radius: Theme.paddingMedium
-            width: parent.width - Theme.paddingLarge
-            height: cover.height / 5
-
+            color: "transparent"
+            radius: 10.0
+            width: 210
+            height: 80
             Label {
                 anchors.centerIn: parent
                 id: month
@@ -184,11 +198,10 @@ CoverBackground {
         Rectangle {
             visible: timerRunning && !breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
-            color: Theme.secondaryHighlightColor
-            radius: Theme.paddingMedium
-            width: parent.width - Theme.paddingLarge
-            height: cover.height / 5
-
+            color: "transparent"
+            radius: 10.0
+            width: 210
+            height: 80
             IconButton {
                 id: iconButton
                 icon.source: "image://theme/icon-cover-timer"
