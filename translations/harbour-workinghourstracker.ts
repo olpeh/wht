@@ -76,11 +76,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copyright (C) 2017 Olavi Haapala
-The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Read the license</source>
         <translation type="unfinished"></translation>
     </message>
@@ -90,6 +85,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2017 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
