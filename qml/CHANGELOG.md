@@ -1,4 +1,8 @@
 # Changelog
+## [1.2.3-2] - 2017-11-06
+### Fixed
+- DB creation fails for new users #58
+
 ## [1.2.3-1] - 2017-11-05
 ### Added
 - Better cover layout
