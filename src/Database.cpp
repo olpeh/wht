@@ -49,22 +49,21 @@ Database::Database(QObject *parent) : QObject(parent) {
     QString dbName = "e1e57aa3b56d20de7b090320d566397e.sqlite";
 
     // Support legacy versions where the db might be in a weird folder
-    QString legacyDbPath = "/home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/";
-
+    QString appName = "harbour-workinghourstracker";
+    QString legacyDbPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + appName + "/" + appName + "/QML/OfflineStorage/Databases/";
+    qDebug() << "Checking if legacyDB exists in path: " << legacyDbPath;
     if(fileExists(legacyDbPath + dbName)) {
         qDebug() << "Legacy db exists -> let's try to use it";
         DB_NAME = legacyDbPath + dbName;
     } else {
-        qDebug() << "Using standard db location";
+        qDebug() << "Legacy does not exist. Using standard db location";
         QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-        QString appNamePath = "/harbour-workinghourstracker/";
 
-        if(!QDir(data + appNamePath).exists()) {
-            qDebug() << data + appNamePath << " was not existing yet. Trying to create it.";
-            QDir().mkdir(data + appNamePath);
+        if(!QDir(data + "/" + appName).exists()) {
+            qDebug() << data + "/" + appName << " was not existing yet. Trying to create it.";
+            QDir().mkdir(data + "/" + appName);
         }
-        DB_NAME = data + appNamePath + dbName;
-
+        DB_NAME = data + "/" + appName + "/" + dbName;
     }
 
     qDebug() << "DB name is now: " << DB_NAME;
