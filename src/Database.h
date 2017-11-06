@@ -44,7 +44,7 @@ class Database : public QObject {
         explicit Database(QObject* parent = 0);
         ~Database();
 
-        static const QString DB_NAME;
+        static QString DB_NAME;
 
     public slots:
         bool saveHourRow(QVariantMap values);
@@ -74,6 +74,8 @@ class Database : public QObject {
         QSqlDatabase* db;
 
         Q_DISABLE_COPY(Database)
+
+        bool fileExists(QString path);
 
         bool init();
 

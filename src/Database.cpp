@@ -38,25 +38,37 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QObject>
 #include <QtSql>
 #include <QFile>
+#include <QFileInfo>
 
-const QString Database::DB_NAME = "";
+QString Database::DB_NAME = "";
 
 Database::Database(QObject *parent) : QObject(parent) {
     /* Open the SQLite database */
+    qDebug() << "Trying to open the SQLite database";
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
-    QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-    qDebug() << data;
+    QString dbName = "e1e57aa3b56d20de7b090320d566397e.sqlite";
 
-    if (data.length() && !data.endsWith("share")) {
-        data = data.split("/mdeclarativecache_pre_initialized_qapplication").at(0);
-        qDebug() << data;
-    }
-    else if (data.length() && data.endsWith("/harbour-workinghourstracker/harbour-workinghourstracker")) {
-        data = data.split("/harbour-workinghourstracker/harbour-workinghourstracker").at(0);
-        qDebug() << data;
+    // Support legacy versions where the db might be in a weird folder
+    QString legacyDbPath = "/home/nemo/.local/share/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/";
+
+    if(fileExists(legacyDbPath + dbName)) {
+        qDebug() << "Legacy db exists -> let's try to use it";
+        DB_NAME = legacyDbPath + dbName;
+    } else {
+        qDebug() << "Using standard db location";
+        QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+        QString appNamePath = "/harbour-workinghourstracker/";
+
+        if(!QDir(data + appNamePath).exists()) {
+            qDebug() << data + appNamePath << " was not existing yet. Trying to create it.";
+            QDir().mkdir(data + appNamePath);
+        }
+        DB_NAME = data + appNamePath + dbName;
+
     }
 
-    db->setDatabaseName(data + "/harbour-workinghourstracker/harbour-workinghourstracker/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite");
+    qDebug() << "DB name is now: " << DB_NAME;
+    db->setDatabaseName(DB_NAME);
 
     // If open - initilialize the tables
     if (db->open() && init()) {
@@ -65,6 +77,12 @@ Database::Database(QObject *parent) : QObject(parent) {
     else {
         qCritical() << "Open error" << " " << db->lastError().text();
     }
+}
+
+bool Database::fileExists(QString path) {
+    QFileInfo check_file(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    return check_file.exists() && check_file.isFile();
 }
 
 bool Database::init() {

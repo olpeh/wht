@@ -8,6 +8,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #include "Exporter.h"
 #include "Launcher.h"
+#include "Database.h"
 #include <QCoreApplication>
 #include <QtSql>
 #include <QFile>
@@ -122,7 +123,10 @@ QString Exporter::dump() {
     QTextStream out(&file);
     out.setCodec("ISO-8859-1");
     Launcher l;
-    QString retval = l.launch("sqlite3 "+ QStandardPaths::writableLocation(QStandardPaths::DataLocation) +"/QML/OfflineStorage/Databases/e1e57aa3b56d20de7b090320d566397e.sqlite .dump");
+    QString command = "sqlite3 " + Database::DB_NAME + " .dump";
+    qDebug() << "Going to run command: " << command;
+    QString retval = l.launch(command);
+    qDebug() << "Done. Return value was: " << retval;
     out << retval;
     file.close();
 

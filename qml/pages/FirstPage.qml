@@ -45,7 +45,7 @@ Page {
 
     function resetDatabase() {
         db.resetDatabase()
-        for (var i = 0; i< summaryModel.length();i++) {
+        for (var i = 0; i < summaryModel.length; i++) {
             summaryModel[i].hours = "0";
         }
     }
