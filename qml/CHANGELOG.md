@@ -1,5 +1,5 @@
 # Changelog
-## [1.2.3-2] - 2017-11-06
+## [1.2.3-3] - 2017-11-06
 ### Fixed
 - DB creation fails for new users #58
 
