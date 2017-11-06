@@ -50,15 +50,24 @@ Database::Database(QObject *parent) : QObject(parent) {
 
     // Support legacy versions where the db might be in a weird folder
     QString appName = "harbour-workinghourstracker";
-    QString legacyDbPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/" + appName + "/" + appName + "/QML/OfflineStorage/Databases/";
+    QString data = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+
+    //  Legacy hack
+    if (data.length() && !data.endsWith("share")) {
+        data = data.split("/mdeclarativecache_pre_initialized_qapplication").at(0);
+        qDebug() << data;
+    } else if (data.length() && data.endsWith("/harbour-workinghourstracker/harbour-workinghourstracker")) {
+        data = data.split("/harbour-workinghourstracker/harbour-workinghourstracker").at(0);
+        qDebug() << data;
+    }
+
+    QString legacyDbPath = data + "/" + appName + "/" + appName + "/QML/OfflineStorage/Databases/";
     qDebug() << "Checking if legacyDB exists in path: " << legacyDbPath;
     if(fileExists(legacyDbPath + dbName)) {
         qDebug() << "Legacy db exists -> let's try to use it";
         DB_NAME = legacyDbPath + dbName;
     } else {
         qDebug() << "Legacy does not exist. Using standard db location";
-        QString data (QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-
         if(!QDir(data + "/" + appName).exists()) {
             qDebug() << data + "/" + appName << " was not existing yet. Trying to create it.";
             QDir().mkdir(data + "/" + appName);
