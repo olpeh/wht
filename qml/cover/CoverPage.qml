@@ -40,17 +40,7 @@ CoverBackground {
 
     onActiveChanged: {
         if(active) {
-            if(timerRunning && !breakTimerRunning){
-                firstPage.updateDuration()
-            }
-
-            else if (breakTimerRunning) {
-                firstPage.updateBreakTimerDuration()
-            }
-
-            else {
-               firstPage.getHours()
-            }
+           firstPage.refreshState()
         }
     }
 
@@ -70,11 +60,11 @@ CoverBackground {
         CoverAction {
             id: pauseAddAction
             iconSource:  {
-                if (timerRunning && breakTimerRunning) {
+                if (appState.timerRunning && appState.breakTimerRunning) {
                     "image://theme/icon-cover-play"
                 }
 
-                else if (timerRunning) {
+                else if (appState.timerRunning) {
                     "image://theme/icon-cover-pause"
                 }
 
@@ -83,12 +73,12 @@ CoverBackground {
                 }
             }
             onTriggered: {
-                if (timerRunning && !breakTimerRunning) {
+                if (appState.timerRunning && !appState.breakTimerRunning) {
                     Log.info("Break starts...")
                     firstPage.startBreakTimer()
                 }
 
-                else if (breakTimerRunning) {
+                else if (appState.breakTimerRunning) {
                     Log.info("Break ends...")
                     firstPage.stopBreakTimer()
                 }
@@ -111,9 +101,9 @@ CoverBackground {
         }
 
         CoverAction {
-            iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
+            iconSource: appState.timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
-                if (timerRunning) {
+                if (timer.isRunning()) {
                     firstPage.stop(true)
                     appWindow.activate()
                 }
@@ -142,7 +132,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Today")+ ": " + today
+                text: qsTr("Today")+ ": " + appState.data.today
             }
         }
 
@@ -157,12 +147,12 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Week")+ ": " + thisWeek
+                text: qsTr("Week")+ ": " + appState.data.thisWeek
             }
         }
 
         Rectangle {
-            visible: !timerRunning
+            visible: !timer.isRunning()
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -173,12 +163,12 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Month")+ ": " + thisMonth
+                text: qsTr("Month")+ ": " + appState.data.thisMonth
             }
         }
 
         Rectangle {
-            visible: timerRunning && !breakTimerRunning
+            visible: appState.timerRunning && !appState.breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -191,16 +181,16 @@ CoverBackground {
             Label {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: iconButton.right
-                id: timer
+                id: durationNow
                 font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
                 color: Theme.primaryColor
-                text: durationNow
+                text: helpers.formatTimerDuration(appState.timerDuration)
             }
         }
 
         Rectangle {
-            visible: breakTimerRunning
+            visible: appState.breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -230,7 +220,7 @@ CoverBackground {
                     anchors.verticalCenter: timerIconButton.verticalCenter
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: durationNow
+                    text: helpers.formatTimerDuration(appState.timerDuration)
                 }
             }
 
@@ -259,7 +249,7 @@ CoverBackground {
                     font.pixelSize: Theme.fontSizeSmall
                     font.bold: true
                     color: Theme.primaryColor
-                    text: breakDurationNow
+                    text: helpers.formatTimerDuration(appState.breakTimerDuration)
                 }
             }
         }

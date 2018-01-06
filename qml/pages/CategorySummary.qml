@@ -64,7 +64,7 @@ Page {
         if (dataContainer) {
             // get hours sorted by projects
             var allHours = dataContainer.getHoursForSection("project")
-            myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': projects })
+            myWorker.sendMessage({ 'type': 'categorySummary', 'allHours': allHours, 'projects': appState.data.projects })
         }
     }
 
@@ -161,7 +161,7 @@ Page {
                         font{
                             pixelSize: Theme.fontSizeSmall
                         }
-                        text: model.price.toFixed(2) + " " + currencyString
+                        text: model.price.toFixed(2) + " " + settings.getCurrencyString()
                     }
                 }
             }

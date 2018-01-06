@@ -39,7 +39,7 @@ Page {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     property QtObject dataContainer: null
     property variant project: {'name':qsTr('Project was not found'), 'labelColor': Theme.secondaryHighlightColor}
-    property int projectAmount: projects.length
+    property int projectAmount: appState.data.projects.length
 
     function getHours() {
         //Update hours
@@ -54,7 +54,7 @@ Page {
     }
 
     function getProject(projectId) {
-        var found = projects.findById(projectId)
+        var found = appState.data.projects.findById(projectId)
         if(found) {
             return found
         }
@@ -62,6 +62,7 @@ Page {
     }
 
     function setProjects() {
+        var projects = appState.data.projects
         for (var i = 0; i < projects.length; i++) {
             modelSource.set(i, {
                            'id': projects[i].id,
@@ -71,6 +72,7 @@ Page {
         }
         projectCombo._updating = false
 
+        var defaultProjectId =  settings.getDefaultProjectId()
         for (var i = 0; i < modelSource.count; i++) {
             if (modelSource.get(i).id === defaultProjectId) {
                 projectCombo.currentIndex = i
@@ -208,7 +210,7 @@ Page {
     onProjectAmountChanged: { setProjects() }
 
     Component.onCompleted: {
-        project = getProject(defaultProjectId)
+        project = getProject(settings.getDefaultProjectId())
         getHours()
     }
 }

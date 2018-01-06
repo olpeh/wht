@@ -37,91 +37,102 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QGuiApplication>
 #include <QCoreApplication>
 
+Settings::Settings(QObject *parent) : QObject(parent) {}
 
-Settings::Settings(QObject *parent): QObject(parent){}
+Settings::Settings(const Settings &settings) : QObject(0){
+                                                   Q_UNUSED(settings)}
 
-Settings::Settings(const Settings &settings): QObject(0) {
-    Q_UNUSED(settings)
+                                               Settings::~Settings()
+{
 }
 
-Settings::~Settings(){}
-
-void Settings::setDefaultDuration(double value) {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   s.setValue("defaultDuration", value);
-   s.endGroup();
-}
-
-double Settings::getDefaultDuration() {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   defaultDuration = s.value("defaultDuration", -1).toDouble();
-   s.endGroup();
-   return defaultDuration;
-}
-
-void Settings::setDefaultBreakDuration(double value) {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   s.setValue("defaultBreakDuration", value);
-   s.endGroup();
-}
-
-double Settings::getDefaultBreakDuration() {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   defaultBreakDuration = s.value("defaultBreakDuration", -1).toDouble();
-   s.endGroup();
-   return defaultBreakDuration;
-}
-
-void Settings::setEndsNowByDefault(QString value) {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   s.setValue("endsNowByDefault", value);
-   s.endGroup();
-}
-
-QString Settings::getEndsNowByDefault() {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   endsNowByDefault= s.value("endsNowByDefault", "error").toString();
-   s.endGroup();
-   return endsNowByDefault;
-}
-
-void Settings::setEndTimeStaysFixed(QString value) {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   s.setValue("endTimeStaysFixed", value);
-   s.endGroup();
-}
-
-QString Settings::getEndTimeStaysFixed() {
-   QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-   s.beginGroup("Settings");
-   endTimeStaysFixed = s.value("endTimeStaysFixed", "error").toString();
-   s.endGroup();
-   return endTimeStaysFixed;
-}
-
-bool Settings::getTimerAutoStart() {
+void Settings::setDefaultDuration(double value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    timerAutoStart= s.value("timerAutoStart").toBool();
+    s.setValue("defaultDuration", value);
+    s.endGroup();
+}
+
+double Settings::getDefaultDuration()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    defaultDuration = s.value("defaultDuration", -1).toDouble();
+    s.endGroup();
+    return defaultDuration;
+}
+
+void Settings::setDefaultBreakDuration(double value)
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("defaultBreakDuration", value);
+    s.endGroup();
+}
+
+double Settings::getDefaultBreakDuration()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    defaultBreakDuration = s.value("defaultBreakDuration", -1).toDouble();
+    s.endGroup();
+    return defaultBreakDuration;
+}
+
+void Settings::setEndsNowByDefault(QString value)
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("endsNowByDefault", value);
+    s.endGroup();
+}
+
+QString Settings::getEndsNowByDefault()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    endsNowByDefault = s.value("endsNowByDefault", "error").toString();
+    s.endGroup();
+    return endsNowByDefault;
+}
+
+void Settings::setEndTimeStaysFixed(QString value)
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    s.setValue("endTimeStaysFixed", value);
+    s.endGroup();
+}
+
+QString Settings::getEndTimeStaysFixed()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    endTimeStaysFixed = s.value("endTimeStaysFixed", "error").toString();
+    s.endGroup();
+    return endTimeStaysFixed;
+}
+
+bool Settings::getTimerAutoStart()
+{
+    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
+    s.beginGroup("Settings");
+    timerAutoStart = s.value("timerAutoStart").toBool();
     s.endGroup();
     return timerAutoStart;
 }
 
-void Settings::setTimerAutoStart(bool value) {
+void Settings::setTimerAutoStart(bool value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("timerAutoStart", value);
     s.endGroup();
 }
 
-bool Settings::getDefaultBreakInTimer() {
+bool Settings::getDefaultBreakInTimer()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     defaultBreakInTimer = s.value("defaultBreakInTimer", true).toBool();
@@ -129,88 +140,103 @@ bool Settings::getDefaultBreakInTimer() {
     return defaultBreakInTimer;
 }
 
-void Settings::setDefaultBreakInTimer(bool value) {
+void Settings::setDefaultBreakInTimer(bool value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("defaultBreakInTimer", value);
     s.endGroup();
 }
 
-QString Settings::getDefaultProjectId() {
+QString Settings::getDefaultProjectId()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    defaultProjectId= s.value("defaultProjectId").toString();
+    defaultProjectId = s.value("defaultProjectId").toString();
     s.endGroup();
     return defaultProjectId;
 }
 
-void Settings::setDefaultProjectId(QString value) {
+void Settings::setDefaultProjectId(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("defaultProjectId", value);
     s.endGroup();
 }
 
-QString Settings::getCurrencyString() {
+QString Settings::getCurrencyString()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    currencyString= s.value("currencyString").toString();
+    currencyString = s.value("currencyString").toString();
     s.endGroup();
-    return currencyString;
+    if (!currencyString.isEmpty()) {
+        return currencyString;
+    }
+    return "€";
 }
 
-void Settings::setCurrencyString(QString value) {
+void Settings::setCurrencyString(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("currencyString", value);
     s.endGroup();
 }
 
-QString Settings::getToAddress() {
+QString Settings::getToAddress()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    toAddress = s.value("toAddress","").toString();
+    toAddress = s.value("toAddress", "").toString();
     s.endGroup();
     return toAddress;
 }
 
-void Settings::setToAddress(QString value) {
+void Settings::setToAddress(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("toAddress", value);
     s.endGroup();
 }
 
-QString Settings::getCcAddress() {
+QString Settings::getCcAddress()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    ccAddress = s.value("ccAddress","").toString();
+    ccAddress = s.value("ccAddress", "").toString();
     s.endGroup();
     return ccAddress;
 }
 
-void Settings::setCcAddress(QString value) {
+void Settings::setCcAddress(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("ccAddress", value);
     s.endGroup();
 }
-QString Settings::getBccAddress() {
+QString Settings::getBccAddress()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    bccAddress = s.value("bccAddress","").toString();
+    bccAddress = s.value("bccAddress", "").toString();
     s.endGroup();
     return bccAddress;
 }
 
-void Settings::setBccAddress(QString value) {
+void Settings::setBccAddress(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("bccAddress", value);
     s.endGroup();
 }
 
-QString Settings::getLastVersionUsed() {
+QString Settings::getLastVersionUsed()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     lastVersionUsed = s.value("lastVersionUsed", "").toString();
@@ -218,14 +244,16 @@ QString Settings::getLastVersionUsed() {
     return lastVersionUsed;
 }
 
-void Settings::setLastVersionUsed(QString value) {
+void Settings::setLastVersionUsed(QString value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("lastVersionUsed", value);
     s.endGroup();
 }
 
-int Settings::getRoundToNearest() {
+int Settings::getRoundToNearest()
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     roundToNearest = s.value("roundToNearest", 0).toInt();
@@ -233,7 +261,8 @@ int Settings::getRoundToNearest() {
     return roundToNearest;
 }
 
-void Settings::setRoundToNearest(int value) {
+void Settings::setRoundToNearest(int value)
+{
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
     s.setValue("roundToNearest", value);

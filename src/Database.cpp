@@ -164,9 +164,9 @@ bool Database::createTables()
     return success;
 }
 
-QString Database::getUniqueId()
+QUuid Database::getUniqueId()
 {
-    return QUuid::createUuid().toString();
+    return QUuid::createUuid();
 }
 
 bool Database::saveHourRow(QVariantMap values)
@@ -440,16 +440,26 @@ QVariantList Database::getProjects()
     return tmp;
 }
 
-bool Database::saveProject(QVariantMap values)
+QUuid Database::insertInitialProject(QString labelColor)
+{
+    QVariantMap values;
+    values.insert("uid", getUniqueId());
+    values.insert("name", "default");
+    values.insert("labelColor", labelColor);
+    return saveProject(values);
+}
+
+QUuid Database::saveProject(QVariantMap values)
 {
     if (!values.empty())
     {
+        QString uid = values["uid"].isNull() ? getUniqueId().toString() : values["uid"].toString();
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO projects "
                       "VALUES (:uid, :name, :hourlyRate, :contractRate, :budget,"
                       " :hourBudget, :labelColor);");
 
-        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
+        query.bindValue(":uid", uid);
         query.bindValue(":name", values["name"].isNull() ? "default" : values["name"].toString());
         query.bindValue(":hourlyRate", values["hourlyRate"].isNull() ? 0 : values["hourlyRate"]);
         query.bindValue(":contractRate", values["contractRate"].isNull() ? 0 : values["contractRate"]);
@@ -460,18 +470,18 @@ bool Database::saveProject(QVariantMap values)
         if (query.exec())
         {
             Logger::instance().debug("Project saved! ID: " + values["uid"].toString());
-            return true;
+            return uid;
         }
         else
         {
             Logger::instance().error("Insert failed!: " + query.lastError().text() + " in " + query.lastQuery());
-            return false;
+            return NULL;
         }
     }
     else
     {
         Logger::instance().warn("Values empty in saveProject");
-        return false;
+        return NULL;
     }
 }
 

@@ -39,7 +39,7 @@ Dialog {
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
-    property string projectId: "0"
+    property string projectId: null
     property string name: ""
     property double hourlyRate: 0
     property double contractRate: 0
@@ -58,10 +58,6 @@ Dialog {
             saveTask(taskNameArea.text)
         }
 
-        if (projectId == "0" && !editMode) {
-            projectId = db.getUniqueId()
-        }
-
         name = nameTextArea.text
         hourlyRate = parseFloat(hourlyRateTextArea.text) || 0
         contractRate = 0 //parseFloat(contractRateTextArea.text || 0)
@@ -70,7 +66,6 @@ Dialog {
         labelColor = colorIndicator.color
 
         var values = {
-            "uid": projectId,
             "name": name,
             "hourlyRate": hourlyRate,
             "contractRate": contractRate,
@@ -79,11 +74,15 @@ Dialog {
             "labelColor": colorIndicator.color,
         };
 
-        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
-        db.saveProject(values);
+        projectId = db.saveProject(values);
+        if (projectId) {
+            Log.info("Project saved succesfully: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
+        } else {
+            Log.error("Saving project failed!")
+        }
+
 
         if(defaultSwitch.checked) {
-            defaultProjectId = projectId
             settings.setDefaultProjectId(projectId)
         }
 
@@ -93,8 +92,6 @@ Dialog {
     }
 
     function getTasks() {
-        if (projectId == "0" && !editMode)
-            projectId = db.getUniqueId()
         return db.getTasks(projectId)
     }
 
@@ -353,6 +350,7 @@ Dialog {
                     //hourBudgetTextArea.text = hourBudget
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
 
+                    var defaultProjectId =  settings.getDefaultProjectId()
                     if (defaultProjectId === projectId) {
                         defaultSwitch.visible = false
                     }

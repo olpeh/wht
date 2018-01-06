@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../helpers.js" as HH
 
 Dialog {
     id: page
@@ -104,9 +103,9 @@ Dialog {
 
 
 
-        var dateString = HH.dateToDbDateString(selectedDate)
-        var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-        var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
+        var dateString = helpers.dateToDbDateString(selectedDate)
+        var startTime = helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
+        var endTime = helpers.pad(endSelectedHour) + ":" + helpers.pad(endSelectedMinute)
         project = modelSource.get(projectCombo.currentIndex).id
         taskId = taskModelSource.get(taskCombo.currentIndex).id
 
@@ -157,10 +156,10 @@ Dialog {
     }
 
     function updateStartTime() {
-        startSelectedHour = endSelectedHour - HH.countHours(duration)
-        startSelectedMinute = endSelectedMinute - HH.countMinutes(duration)
+        startSelectedHour = endSelectedHour - helpers.countHours(duration)
+        startSelectedMinute = endSelectedMinute - helpers.countMinutes(duration)
         ensureValidStartTimeValues(startSelectedHour, startSelectedMinute)
-        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
+        startTime.value = helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
     }
 
     function ensureValidEndTimeValues(hour, minute) {
@@ -179,10 +178,10 @@ Dialog {
     }
 
     function updateEndTime() {
-        endSelectedHour = startSelectedHour + HH.countHours(duration)
-        endSelectedMinute = startSelectedMinute + HH.countMinutes(duration)
+        endSelectedHour = startSelectedHour + helpers.countHours(duration)
+        endSelectedMinute = startSelectedMinute + helpers.countMinutes(duration)
         ensureValidEndTimeValues(endSelectedHour, endSelectedMinute)
-        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
+        endTime.value = helpers.pad(endSelectedHour) + ":" + helpers.pad(endSelectedMinute)
     }
 
     function updateBreakDuration() {
@@ -202,7 +201,7 @@ Dialog {
         var now = new Date()
         endSelectedHour = now.getHours()
         endSelectedMinute= now.getMinutes()
-        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
+        endTime.value = helpers.pad(endSelectedHour) + ":" + helpers.pad(endSelectedMinute)
         updateStartTime()
     }
 
@@ -210,38 +209,38 @@ Dialog {
         var now = new Date()
         startSelectedHour = now.getHours()
         startSelectedMinute= now.getMinutes()
-        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
+        startTime.value = helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
         updateEndTime()
     }
 
     function doRoundToNearest() {
-        if (roundToNearest) {
-            var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
+        if (settings.getRoundToNearest()) {
+            var startValues = helpers.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
             startSelectedHour = startValues.hour
             startSelectedMinute = startValues.minute
-            var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
+            var endValues = helpers.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
             endSelectedHour = endValues.hour
             endSelectedMinute = endValues.minute
-            duration = HH.calcRoundToNearest(duration)
-            breakDuration = HH.calcRoundToNearest(breakDuration)
+            duration = helpers.calcRoundToNearest(duration)
+            breakDuration = helpers.calcRoundToNearest(breakDuration)
         }
     }
 
     function showNetDurationTimepicker () {
-        var netHour = HH.countHours(netDuration)
-        var netMinute = HH.countMinutes(netDuration)
+        var netHour = helpers.countHours(netDuration)
+        var netMinute = helpers.countMinutes(netDuration)
         openTimeDialog(netHour, netMinute, durationSelected, "netDuration")
     }
 
     function showBreakDurationTimepicker () {
-        var breakHour = HH.countHours(breakDuration)
-        var breakMinute = HH.countMinutes(breakDuration)
+        var breakHour = helpers.countHours(breakDuration)
+        var breakMinute = helpers.countMinutes(breakDuration)
         openTimeDialog(breakHour, breakMinute, durationSelected, "breakDuration")
     }
 
     function showDurationTimepicker () {
-        var durationHour = HH.countHours(duration)
-        var durationMinute = HH.countMinutes(duration)
+        var durationHour = helpers.countHours(duration)
+        var durationMinute = helpers.countMinutes(duration)
         openTimeDialog(durationHour, durationMinute, durationSelected, "duration")
     }
 
@@ -251,7 +250,7 @@ Dialog {
 
         if (durationType === "duration") {
             duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            durationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
+            durationButton.value = helpers.pad(durationHour) + ":" + helpers.pad(durationMinute)
 
             if (endTimeStaysFixed) {
                 updateStartTime()
@@ -266,13 +265,13 @@ Dialog {
 
         else if (durationType === "breakDuration") {
             breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            breakDurationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
+            breakDurationButton.value = helpers.pad(durationHour) + ":" + helpers.pad(durationMinute)
             updateNetDuration()
         }
 
         else if (durationType === "netDuration") {
             netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            netDurationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
+            netDurationButton.value = helpers.pad(durationHour) + ":" + helpers.pad(durationMinute)
             duration = netDuration + breakDuration
             updateDuration()
 
@@ -339,7 +338,7 @@ Dialog {
                                     hour: h,
                                     minute: m,
                                     duration: dur,
-                                    roundToNearest: roundToNearest
+                                    roundToNearest: settings.getRoundToNearest()
                                  })
 
         dialog.accepted.connect(function() {
@@ -428,7 +427,7 @@ Dialog {
                         id: startTime
                         anchors.centerIn: parent
                         label: qsTr("Start time:")
-                        value: HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
+                        value: helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
                         width: parent.width
                         onClicked: doOnClicked()
 
@@ -453,7 +452,7 @@ Dialog {
                         id: endTime
                         anchors.centerIn: parent
                         label: qsTr("End time:")
-                        value: HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
+                        value: helpers.pad(endSelectedHour) + ":" + helpers.pad(endSelectedMinute)
                         width: parent.width
                         onClicked: doOnClicked()
 
@@ -585,19 +584,16 @@ Dialog {
                 }
 
                 function init() {
-                    projects = db.getProjects()
+                    appState.data.projects = db.getProjects()
+                    var projects = appState.data.projects
                     if (projects.length === 0) {
-                        var id = db.getUniqueId(),
-                            values = {
-                                "uid": id,
-                                "name": "default",
-                                "labelColor": Theme.secondaryHighlightColor,
-                            };
-
-                        db.saveProject(values);
-                        defaultProjectId = id
-                        settings.setDefaultProjectId(id)
-                        projects = db.getProjects()
+                        var id = db.insertInitialProject(Theme.secondaryHighlightColor);
+                        if (id) {
+                            //TODO: Try to get rid of this kind of code
+                            settings.setDefaultProjectId(id)
+                            appState.data.projects = db.getProjects()
+                            projects = appState.data.projects
+                        }
                     }
 
                     for (var i = 0; i < projects.length; i++) {
@@ -760,7 +756,6 @@ Dialog {
                 }
 
                 // Rounding should happen before updating the values visible
-                roundToNearest = settings.getRoundToNearest()
                 if (!editMode) {
                     doRoundToNearest()
                 }

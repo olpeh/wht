@@ -39,7 +39,8 @@ Page {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
 
     function getProjects() {
-        projects = db.getProjects()
+        appState.data.projects = db.getProjects()
+        var projects = appState.data.projects
         for (var i = 0; i < projects.length; i++) {
             projectsModel.set(i, {
                 'id': projects[i].id,
@@ -189,7 +190,6 @@ Page {
     }
 
     Component.onCompleted: {
-        defaultProjectId = settings.getDefaultProjectId()
         getProjects()
     }
 }

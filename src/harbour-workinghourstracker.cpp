@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
   // Make sure the logger is initialized
   Logger::instance();
 
+
   Database database;
   WorkTimer *timer = new WorkTimer(&database);
   BreakTimer *breakTimer = new BreakTimer(&database);

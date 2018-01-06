@@ -63,7 +63,9 @@ public slots:
 
   QVariantList getProjects();
 
-  bool saveProject(QVariantMap values);
+  QUuid insertInitialProject(QString labelColor);
+
+  QUuid saveProject(QVariantMap values);
 
   QVariantList getTasks(QString projectID = NULL);
 
@@ -73,13 +75,13 @@ public slots:
 
   void resetDatabase();
 
-  // @TODO: make this private
-  QString getUniqueId();
 
 private:
   QSqlDatabase *db;
 
   Q_DISABLE_COPY(Database)
+
+  QUuid getUniqueId();
 
   bool fileExists(QString path);
 

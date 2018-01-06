@@ -95,4 +95,5 @@ QT += dbus \
 DISTFILES += \
     qml/md.js\
     qml/CHANGELOG.md \
-    qml/cover/cover.svg
+    qml/cover/cover.svg \
+    qml/date_fns.min.js

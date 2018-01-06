@@ -31,8 +31,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QObject>
-#include <QtSql>
 #include "BreakTimer.h"
 #include "Database.h"
 
@@ -42,28 +40,32 @@ BreakTimer::BreakTimer(Database* db, QObject *parent) : QObject(parent) {
 
 BreakTimer::~BreakTimer() {}
 
-QString BreakTimer::start() {
-    QString startTime = QTime::currentTime().toString("hh:mm");
+QDateTime BreakTimer::start() {
+    QDateTime startTime  = QDateTime::currentDateTime();
 
     if (setTimer(startTime, true)) {
-        Logger::instance().debug("Breaktimer was saved to database at: " + startTime);
+        Logger::instance().debug("Breaktimer was saved to database at: " + startTime.toString());
         return startTime;
     }
-    return "Error";
+    return QDateTime();
 }
 
-QString BreakTimer::getStartTime() {
+QDateTime BreakTimer::getStartTime() {
     QSqlQuery query;
     query.prepare("SELECT starttime from breaks WHERE STARTED = 1 ORDER BY id DESC LIMIT 1");
     if (query.exec() && query.first()) {
-        return query.record().value("starttime").toString();
+        return QDateTime::fromString(query.record().value("starttime").toString());
     }
-    else {
-        return "Not started";
-    }
+    return QDateTime();
 }
 
-double BreakTimer::getDuration() {
+qint64 BreakTimer::getDurationInMilliseconds() {
+    QDateTime dateTimeNow = QDateTime::currentDateTime();
+    QDateTime startTime = getStartTime();
+    return startTime.msecsTo(dateTimeNow);
+}
+
+qint64 BreakTimer::getTotalDurationInMilliseconds() {
     QSqlQuery query;
     query.prepare("SELECT sum(duration) FROM breaks;");
     if(query.exec()) {
@@ -80,7 +82,12 @@ double BreakTimer::getDuration() {
     }
 }
 
-void BreakTimer::stop(double duration) {
+bool BreakTimer::isRunning() {
+    return !getStartTime().isNull();
+}
+
+void BreakTimer::stop() {
+    qint64 duration = getDurationInMilliseconds();
     QSqlQuery query;
     query.prepare(QStringLiteral("UPDATE breaks "
                   "SET started = 0, duration = %1 "
@@ -100,14 +107,13 @@ void BreakTimer::clear() {
     query.exec();
 }
 
-// Should use some better format for timestamps
-// Now uses time in hh:mm format
-bool BreakTimer::setTimer(QString timeString, bool running) {
+
+bool BreakTimer::setTimer(QDateTime startTime, bool running) {
     QSqlQuery query;
     query.prepare("INSERT INTO breaks "
                   "VALUES (NULL, :starttime, :started, :duration);");
 
-    query.bindValue(":starttime", timeString);
+    query.bindValue(":starttime", startTime.toString());
     query.bindValue(":started", running);
     query.bindValue(":duration", 0);
 

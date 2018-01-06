@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../helpers.js" as HH
 
 Page {
     id: settingsPage
@@ -111,8 +110,8 @@ Page {
                         text: defaultDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = HH.countHours(defaultDuration)
-                            var durationMinute = HH.countMinutes(defaultDuration)
+                            var durationHour = helpers.countHours(defaultDuration)
+                            var durationMinute = helpers.countMinutes(defaultDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -150,8 +149,8 @@ Page {
                         text: defaultBreakDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = HH.countHours(defaultBreakDuration)
-                            var durationMinute = HH.countMinutes(defaultBreakDuration)
+                            var durationHour = helpers.countHours(defaultBreakDuration)
+                            var durationMinute = helpers.countMinutes(defaultBreakDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -360,7 +359,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(toTextArea.text)) {
+                    if(!helpers.validEmail(toTextArea.text)) {
                         banner.notify(qsTr("Invalid to email address!"))
                         toTextArea.text = settings.getToAddress()
                     }
@@ -380,7 +379,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(ccTextArea.text)) {
+                    if(!helpers.validEmail(ccTextArea.text)) {
                         banner.notify(qsTr("Invalid cc email address!"))
                         ccTextArea.text = settings.getCcAddress()
                     }
@@ -400,7 +399,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(bccTextArea.text)) {
+                    if(!helpers.validEmail(bccTextArea.text)) {
                         banner.notify(qsTr("Invalid bcc email address!"))
                         bccTextArea.text = settings.getBccAddress()
                     }
@@ -662,7 +661,7 @@ Page {
                             var resp = exporter.importDump(dumpImport.text)
                             banner.notify(resp)
                             settingsPage.dataContainer.getHours()
-                            projects = settingsPage.dataContainer.getProjects()
+                            settingsPage.dataContainer.refreshState()
                         })
                     }
 
