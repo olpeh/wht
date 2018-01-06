@@ -113,7 +113,7 @@ QHash<int, QByteArray> Logger::roleNames() const {
 
 void Logger::_log(LogType type, QString message) {
     const QString timeStamp = QDateTime::currentDateTime().toString();
-    const QString& prefix = timeStamp + ": " + _log_str_arr[type];
+    const QString& prefix = _log_str_arr[type] + timeStamp + ": ";
     QString fullMessage = prefix + message;
 
     QVariantMap entry;
