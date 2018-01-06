@@ -119,6 +119,7 @@ void Logger::_log(LogType type, QString message) {
     QVariantMap entry;
     entry.insert("type", type);
     entry.insert("message", message);
+    entry.insert("fullMessage", fullMessage);
     _log_cache.append(entry);
 
     switch (type) {
@@ -150,7 +151,7 @@ void Logger::saveLogToFile() {
 
     int i = _log_cache.firstIndex();
     for (;i != _log_cache.lastIndex(); i++) {
-        stream <<  _log_cache.at(i).value("message").toString() << "\n";
+        stream <<  _log_cache.at(i).value("fullMessage").toString() << "\n";
     }
 
     log_file.close();
@@ -166,7 +167,7 @@ void Logger::send() {
 
     int i = _log_cache.firstIndex();
     for (;i != _log_cache.lastIndex(); i++) {
-        body +=  _log_cache.at(i).value("message").toString();
+        body +=  _log_cache.at(i).value("fullMessage").toString();
         body += "\n";
     }
     body += "\nLogfile end";
