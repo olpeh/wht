@@ -47,6 +47,7 @@
 #include <QVariantMap>
 #include <QContiguousCache>
 #include <QAbstractListModel>
+#include <QDateTime>
 
 class Logger : public QAbstractListModel {
     Q_OBJECT
