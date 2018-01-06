@@ -34,59 +34,64 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <QCoreApplication>
+#include <QLocale>
 #include <QObject>
 #include <QtSql>
+#include <QFile>
+#include <QFileInfo>
+#include "Logger.h"
 
-class Database : public QObject {
-    Q_OBJECT
+class Database : public QObject
+{
+  Q_OBJECT
 
-    public:
-        explicit Database(QObject* parent = 0);
-        ~Database();
+public:
+  explicit Database(QObject *parent = 0);
+  ~Database();
 
-        static QString DB_NAME;
+  static QString DB_NAME;
 
-    public slots:
-        bool saveHourRow(QVariantMap values);
+public slots:
+  bool saveHourRow(QVariantMap values);
 
-        double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
+  double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 
-        QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
+  QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
-        QVariantMap getLastUsedInput(QString projectID, QString taskID = "");
+  QVariantMap getLastUsedInput(QString projectID, QString taskID = "");
 
-        QVariantList getProjects();
+  QVariantList getProjects();
 
-        bool saveProject(QVariantMap values);
+  bool saveProject(QVariantMap values);
 
-        QVariantList getTasks(QString projectID = NULL);
+  QVariantList getTasks(QString projectID = NULL);
 
-        bool saveTask(QVariantMap values);
+  bool saveTask(QVariantMap values);
 
-        bool remove(QString table, QString id);
+  bool remove(QString table, QString id);
 
-        void resetDatabase();
+  void resetDatabase();
 
-        // @TODO: make this private
-        QString getUniqueId();
+  // @TODO: make this private
+  QString getUniqueId();
 
-    private:
-        QSqlDatabase* db;
+private:
+  QSqlDatabase *db;
 
-        Q_DISABLE_COPY(Database)
+  Q_DISABLE_COPY(Database)
 
-        bool fileExists(QString path);
+  bool fileExists(QString path);
 
-        bool init();
+  bool init();
 
-        void upgradeIfNeeded();
+  void upgradeIfNeeded();
 
-        bool createTables();
+  bool createTables();
 
-        void queryBuilder(QSqlQuery* query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>(), int limit = 0);
+  void queryBuilder(QSqlQuery *query, QString select, QString from, QList<QString> where = QList<QString>(), QList<QString> sorting = QList<QString>(), int limit = 0);
 
-        bool periodQueryBuilder(QSqlQuery* query, QString select, QString period, int timeOffset,  QList<QString> sorting = QList<QString>(), QString projectId = NULL);
-
+  bool periodQueryBuilder(QSqlQuery *query, QString select, QString period, int timeOffset, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 };
 
 #endif // DATABASE_H

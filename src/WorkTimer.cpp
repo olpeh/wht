@@ -48,7 +48,7 @@ QString WorkTimer::start(QString startTime) {
     }
 
     if (setTimer(startTime, true)) {
-        qDebug() << "Timer was saved to database at: " << startTime;
+        Logger::instance().debug("Timer was saved to database at: " + startTime);
         return startTime;
     }
     return "Error";
@@ -68,7 +68,7 @@ QString WorkTimer::getStartTime() {
 void WorkTimer::stop() {
     QString stopTime = QTime::currentTime().toString("hh:mm");
     if (setTimer(stopTime, false)) {
-        qDebug() << "Timer was stopped at: " << stopTime;
+        Logger::instance().debug("Timer was stopped at: " + stopTime);
     }
 }
 
@@ -89,7 +89,7 @@ bool WorkTimer::setTimer(QString timeString, bool running) {
         return true;
     }
     else {
-        qDebug() << "Insert failed! " << query.lastError() << " in " << query.lastQuery();
+        Logger::instance().error("Insert failed!: " + query.lastError().text() + " in " + query.lastQuery());
         return false;
     }
 }

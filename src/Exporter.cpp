@@ -20,14 +20,13 @@ Exporter::Exporter(QObject *parent) : QObject(parent) {}
  * Export Hours to CSV file
  */
 QString Exporter::exportHoursToCSV(Database* db) {
-    qDebug() << "Exporting hours to CSV";
+    Logger::instance().debug("Trying to export hours to CSV");
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/workinghours.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is " << filename;
+    Logger::instance().debug("Output filename is " + filename);
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -54,14 +53,13 @@ QString Exporter::exportHoursToCSV(Database* db) {
  * Export Projects to CSV file
  */
 QString Exporter::exportProjectsToCSV(Database* db) {
-    qDebug() << "Exporting projects to CSV";
+    Logger::instance().debug("Trying to export projects to CSV");
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/whtProjects.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is " << filename;
+    Logger::instance().debug("Output filename is " + filename);
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -84,14 +82,13 @@ QString Exporter::exportProjectsToCSV(Database* db) {
 }
 
 QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
-    qDebug() << "Exporting hours for " << section;
+    Logger::instance().debug("Trying to export hours for " + section);
 
     //QLocale loc = QLocale::system(); /* Should return current locale */
     //QChar separator = (loc.decimalPoint() == '.') ? ',' : ';';
-    //qDebug() << "Using" << separator << "as separator";
 
     QString filename = QString("%1/%2.csv").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)).arg(section);
-    qDebug() << "Output filename is " << filename;
+    Logger::instance().debug("Output filename is " + filename);
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -113,10 +110,10 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
 }
 
 QString Exporter::dump() {
-    qDebug() << "Dumping the database";
+    Logger::instance().debug("Trying to dumb the database to a file");
 
     QString filename = QString("%1/wht.sql").arg(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    qDebug() << "Output filename is " << filename;
+    Logger::instance().debug("Output filename is " + filename);
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -124,9 +121,9 @@ QString Exporter::dump() {
     out.setCodec("ISO-8859-1");
     Launcher l;
     QString command = "sqlite3 " + Database::DB_NAME + " .dump";
-    qDebug() << "Going to run command: " << command;
+    Logger::instance().debug("Going to run command: " + command);
     QString retval = l.launch(command);
-    qDebug() << "Done. Return value was: " << retval;
+    Logger::instance().debug("Done. Return value was: " + retval);
     out << retval;
     file.close();
 
@@ -147,7 +144,7 @@ QString Exporter::importProjectsFromCSV(QString filename) {
 }
 
 QString Exporter::importDump(QString filename) {
-    qDebug() << "Trying to import from a dump file: " << filename;
+    Logger::instance().debug("Trying to import from a dump file: " + filename);
 
     /**
     * Read each line from a .sql QFile and when ; is reached, execute
@@ -206,15 +203,14 @@ QString Exporter::importDump(QString filename) {
                 }
 
                 if (query.exec(line)) {
-                    qDebug() << "Successful line: "<< line;
+                    Logger::instance().debug("Successful line: " + line);
                     success++;
                 }
                 else {
                     if (!line.startsWith("COMMIT") && !line.startsWith("PRAGMA") && !line.startsWith("BEGIN") && !line.startsWith("CREATE TABLE")) {
                         errors++;
                     }
-                    qCritical() <<  query.lastError();
-                    qCritical() << "Error in query: " << query.lastQuery();
+                    Logger::instance().error("Error in importDump: " + query.lastError().text() + " in " + query.lastQuery());
                 }
             }
         }

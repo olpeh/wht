@@ -41,7 +41,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlContext>
-#include <QDebug>
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QCommandLineParser>
@@ -56,87 +55,90 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 int main(int argc, char *argv[])
 {
-    // Make sure the logger is initialized
-    Logger::instance();
+  // Make sure the logger is initialized
+  Logger::instance();
 
-    Database database;
-    WorkTimer* timer = new WorkTimer(&database);
-    BreakTimer* breakTimer = new BreakTimer(&database);
-    Settings settings;
-    Launcher launcher;
-    Exporter exporter;
+  Database database;
+  WorkTimer *timer = new WorkTimer(&database);
+  BreakTimer *breakTimer = new BreakTimer(&database);
+  Settings settings;
+  Launcher launcher;
+  Exporter exporter;
 
-    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-    app->setApplicationName("harbour-workinghourstracker");
-    QCoreApplication::setApplicationName("harbour-workinghourstracker");
+  QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+  app->setApplicationName("harbour-workinghourstracker");
+  QCoreApplication::setApplicationName("harbour-workinghourstracker");
 
-    QQuickWindow::setDefaultAlphaBuffer(true);
-    QScopedPointer<QQuickView> view(SailfishApp::createView());
+  QQuickWindow::setDefaultAlphaBuffer(true);
+  QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    view->rootContext()->setContextProperty("appVersion", APP_VERSION);
-    view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
-    qDebug() << "Version:" << APP_VERSION << "-" << APP_BUILDNUM << QDateTime::currentDateTime().toString();
+  view->rootContext()->setContextProperty("appVersion", APP_VERSION);
+  view->rootContext()->setContextProperty("appBuildNum", APP_BUILDNUM);
+  Logger::instance().debug("Version: " + QString(APP_VERSION) + "-" + QString(APP_BUILDNUM));
 
-    QCommandLineParser parser;
+  QCommandLineParser parser;
 
-    // Starting the timer (--start)
-    QCommandLineOption startTimerOption("start", QCoreApplication::translate("main", "Start the timer"));
-    parser.addOption(startTimerOption);
+  // Starting the timer (--start)
+  QCommandLineOption startTimerOption("start", QCoreApplication::translate("main", "Start the timer"));
+  parser.addOption(startTimerOption);
 
-    // Stopping the timer (--stop)
-    QCommandLineOption stopTimerOption("stop", QCoreApplication::translate("main", "Stop the timer"));
-    parser.addOption(stopTimerOption);
+  // Stopping the timer (--stop)
+  QCommandLineOption stopTimerOption("stop", QCoreApplication::translate("main", "Stop the timer"));
+  parser.addOption(stopTimerOption);
 
-    // An option select the project with (-p [projectId])
-    // Only useful when stopping the timer
-    QCommandLineOption selectProjectOption(QStringList() << "p" << "project",
-            QCoreApplication::translate("main", "Select project by id."),
-            QCoreApplication::translate("main", "project"));
-    parser.addOption(selectProjectOption);
+  // An option select the project with (-p [projectId])
+  // Only useful when stopping the timer
+  QCommandLineOption selectProjectOption(QStringList() << "p"
+                                                       << "project",
+                                         QCoreApplication::translate("main", "Select project by id."),
+                                         QCoreApplication::translate("main", "project"));
+  parser.addOption(selectProjectOption);
 
-    // An option select the task with (-t [taskId])
-    // Only useful when stopping the timer
-    QCommandLineOption selectTaskOption(QStringList() << "t" << "task",
-            QCoreApplication::translate("main", "Select task by id."),
-            QCoreApplication::translate("main", "task"));
-    parser.addOption(selectTaskOption);
+  // An option select the task with (-t [taskId])
+  // Only useful when stopping the timer
+  QCommandLineOption selectTaskOption(QStringList() << "t"
+                                                    << "task",
+                                      QCoreApplication::translate("main", "Select task by id."),
+                                      QCoreApplication::translate("main", "task"));
+  parser.addOption(selectTaskOption);
 
-    // An option to set the description (-d [description])
-    // Only useful when stopping the timer
-    QCommandLineOption setDescriptionOption(QStringList() << "d" << "description",
-            QCoreApplication::translate("main", "Set description"),
-            QCoreApplication::translate("main", "description"));
-    parser.addOption(setDescriptionOption);
+  // An option to set the description (-d [description])
+  // Only useful when stopping the timer
+  QCommandLineOption setDescriptionOption(QStringList() << "d"
+                                                        << "description",
+                                          QCoreApplication::translate("main", "Set description"),
+                                          QCoreApplication::translate("main", "description"));
+  parser.addOption(setDescriptionOption);
 
-    // Process the actual command line arguments given by the user
-    parser.process(*app);
-    bool isStartCommand = parser.isSet(startTimerOption);
-    bool isStopCommand = parser.isSet(stopTimerOption);
-    QString selectedProject = parser.value(selectProjectOption);
-    QString selectedTask = parser.value(selectTaskOption);
-    QString setDescription = parser.value(setDescriptionOption);
-    qDebug() << isStartCommand;
-    qDebug() << isStopCommand;
-    qDebug() << selectedProject;
-    qDebug() << selectedTask;
-    qDebug() << setDescription;
+  // Process the actual command line arguments given by the user
+  parser.process(*app);
+  bool isStartCommand = parser.isSet(startTimerOption);
+  bool isStopCommand = parser.isSet(stopTimerOption);
+  QString selectedProject = parser.value(selectProjectOption);
+  QString selectedTask = parser.value(selectTaskOption);
+  QString setDescription = parser.value(setDescriptionOption);
+  Logger::instance().debug("Start timer command line argument was: \"" + QString(isStartCommand ? "true" : "false") + "\"");
+  Logger::instance().debug("Stop timer command line argument was: \"" + QString(isStopCommand ? "true" : "false") + "\"");
+  Logger::instance().debug("Selected project command line argument was: \"" + selectedProject + "\"");
+  Logger::instance().debug("Selected task command line argument was: \"" + selectedTask + "\"");
+  Logger::instance().debug("Selected description command line argument was: \"" + setDescription + "\"");
 
-    view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
-    view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
+  view->rootContext()->setContextProperty("startFromCommandLine", isStartCommand);
+  view->rootContext()->setContextProperty("stopFromCommandLine", isStopCommand);
 
-    view->rootContext()->setContextProperty("db", &database);
-    view->rootContext()->setContextProperty("timer", timer);
-    view->rootContext()->setContextProperty("breakTimer", breakTimer);
-    view->rootContext()->setContextProperty("settings", &settings);
-    view->rootContext()->setContextProperty("launcher", &launcher);
-    view->rootContext()->setContextProperty("exporter", &exporter);
+  view->rootContext()->setContextProperty("db", &database);
+  view->rootContext()->setContextProperty("timer", timer);
+  view->rootContext()->setContextProperty("breakTimer", breakTimer);
+  view->rootContext()->setContextProperty("settings", &settings);
+  view->rootContext()->setContextProperty("launcher", &launcher);
+  view->rootContext()->setContextProperty("exporter", &exporter);
 
-    view->rootContext()->setContextProperty("Log", &Logger::instance());
-    view->rootContext()->setContextProperty("documentsLocation",QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+  view->rootContext()->setContextProperty("Log", &Logger::instance());
+  view->rootContext()->setContextProperty("documentsLocation", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 
-    view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));
-    view->setResizeMode(QQuickView::SizeRootObjectToView);
+  view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));
+  view->setResizeMode(QQuickView::SizeRootObjectToView);
 
-    view->show();
-    return app->exec();
+  view->show();
+  return app->exec();
 }

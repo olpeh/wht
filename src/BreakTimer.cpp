@@ -46,7 +46,7 @@ QString BreakTimer::start() {
     QString startTime = QTime::currentTime().toString("hh:mm");
 
     if (setTimer(startTime, true)) {
-        qDebug() << "Breaktimer was saved to database at: " << startTime;
+        Logger::instance().debug("Breaktimer was saved to database at: " + startTime);
         return startTime;
     }
     return "Error";
@@ -75,7 +75,7 @@ double BreakTimer::getDuration() {
         }
     }
     else {
-        qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
+        Logger::instance().error("Query: " + query.lastQuery() + " failed " + query.lastError().text());
         return 0;
     }
 }
@@ -87,11 +87,10 @@ void BreakTimer::stop(double duration) {
                   "WHERE started = 1;").arg(duration));
 
     if (query.exec()) {
-        qDebug() << "BreakTimer was stopped, duration was: " << duration;
+        Logger::instance().debug("BreakTimer was stopped, break duration was: " + QString::number(duration));
     }
     else {
-        qDebug() << "Error stopping the breaktimer";
-        qDebug() << "Query: " << query.lastQuery() << " failed " << query.lastError();
+        Logger::instance().error("Error stopping the breaktimer: Query: " + query.lastQuery() + " failed " + query.lastError().text());
     }
 }
 
@@ -116,7 +115,7 @@ bool BreakTimer::setTimer(QString timeString, bool running) {
         return true;
     }
     else {
-        qDebug() << "Insert failed! " << query.lastError() << " in " << query.lastQuery();
+        Logger::instance().error("Insert failed!: " + query.lastError().text() + " in " + query.lastQuery());
         return false;
     }
 }
