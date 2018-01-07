@@ -660,7 +660,6 @@ Page {
                             Log.info(qsTr("Trying to import")+": " +dumpImport.text)
                             var resp = exporter.importDump(dumpImport.text)
                             banner.notify(resp)
-                            settingsPage.dataContainer.getHours()
                             settingsPage.dataContainer.refreshState()
                         })
                     }

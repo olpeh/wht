@@ -128,7 +128,7 @@ Dialog {
         };
         if(db.saveHourRow(values)) {
             if (dataContainer != null) {
-                page.dataContainer.getHours()
+                page.dataContainer.refreshState()
             }
 
             if (previousPage != null) {

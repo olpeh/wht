@@ -41,29 +41,16 @@ ApplicationWindow {
     property Item firstPage
     property variant dateFns: DD.dateFns
     property variant helpers: HH.helpers
-    property variant appState: {
-        'versionCheckDone': false,
-        'arguments': {
-            'startFromCommandLine': startFromCommandLine,
-            'stopFromCommandLine': stopFromCommandLine
-        },
-        'timerRunning': timer.isRunning(),
-        'breakTimerRunning': breakTimer.isRunning(),
-        'timerDuration': timer.getDurationInMilliseconds(),
-        'breakTimerDuration': breakTimer.getDurationInMilliseconds(),
-        'data':{
-            'projects': db.getProjects(),
-            'today': db.getDurationForPeriod("day"),
-            'thisWeek': db.getDurationForPeriod("week"),
-            'thisMonth': db.getDurationForPeriod("month"),
-        }
-    }
+    property variant appState: ({})
 
     id: appWindow
     initialPage: Component {
         FirstPage {
             id: firstPage
-            Component.onCompleted: appWindow.firstPage = firstPage
+            Component.onCompleted: {
+                appWindow.firstPage = firstPage
+                firstPage.refreshState()
+            }
         }
     }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")

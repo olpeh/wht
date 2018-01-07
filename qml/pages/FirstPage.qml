@@ -42,21 +42,34 @@ Page {
     // TODO: Try to get rid of this
     // Temporary hack before using more reactive ways of doing things
     function refreshState() {
-        appState.timerRunning = timer.isRunning()
-        appState.breakTimerRunning = breakTimer.isRunning()
-        appState.timerDuration = timer.getDurationInMilliseconds()
-        appState.breakTimerDuration = breakTimer.getDurationInMilliseconds()
-
-        // TODO: how about performance?
-        appState.data = {
-            today: db.getDurationForPeriod("day").toString(),
-            thisWeek: db.getDurationForPeriod("week").toString(),
-            thisMonth: db.getDurationForPeriod("month").toString(),
-            projects: db.getProjects()
-        }
+        Log.debug('refreshState called')
+        appState = {
+            'versionCheckDone': false,
+            'arguments': {
+                'startFromCommandLine': startFromCommandLine,
+                'stopFromCommandLine': stopFromCommandLine
+            },
+            'timerRunning': timer.isRunning(),
+            'timerDuration': timer.getDurationInMilliseconds(),
+            'timerStartTime': timer.getStartTime(),
+            'breakTimerRunning': breakTimer.isRunning(),
+            'breakTimerDuration': breakTimer.getDurationInMilliseconds(),
+            'breakStartTime': breakTimer.getStartTime(),
+            'data':{
+                'projects': db.getProjects(),
+                'yesterday': db.getDurationForPeriod("day", 1),
+                'today': db.getDurationForPeriod("day"),
+                'lastWeek': db.getDurationForPeriod("week", 1),
+                'thisWeek': db.getDurationForPeriod("week"),
+                'lastMonth': db.getDurationForPeriod("month", 1),
+                'thisMonth': db.getDurationForPeriod("month"),
+                'all': db.getDurationForPeriod("all"),
+                'thisYear': db.getDurationForPeriod("year")
+            }
+        };
 
         // TODO: Is this ok?
-        getHours()
+        setHours()
     }
 
     //TODO: Why is this here?
@@ -67,16 +80,16 @@ Page {
         }
     }
 
-    function getHours() {
+    function setHours() {
         //Update hours view and cover
-        summaryModel.set(0,{"hours": db.getDurationForPeriod("day", 1).toString().toHHMM() })
-        summaryModel.set(1,{"hours": appState.data.today.toString().toHHMM() })
-        summaryModel.set(2,{"hours": db.getDurationForPeriod("week", 1).toString().toHHMM() })
-        summaryModel.set(3,{"hours": appState.data.thisWeek.toString().toHHMM() })
-        summaryModel.set(4,{"hours": db.getDurationForPeriod("month", 1).toString().toHHMM() })
-        summaryModel.set(5,{"hours": appState.data.thisMonth.toString().toHHMM() })
-        summaryModel.set(6,{"hours": db.getDurationForPeriod("all").toString().toHHMM() })
-        summaryModel.set(7,{"hours": db.getDurationForPeriod("year").toString().toHHMM() })
+        summaryModel.set(0,{ "hours": appState.data.yesterday.toString().toHHMM() })
+        summaryModel.set(1,{ "hours": appState.data.today.toString().toHHMM() })
+        summaryModel.set(2,{ "hours": appState.data.lastWeek.toString().toHHMM() })
+        summaryModel.set(3,{ "hours": appState.data.thisWeek.toString().toHHMM() })
+        summaryModel.set(4,{ "hours": appState.data.lastMonth.toString().toHHMM() })
+        summaryModel.set(5,{ "hours": appState.data.thisMonth.toString().toHHMM() })
+        summaryModel.set(6,{ "hours": appState.data.all.toString().toHHMM() })
+        summaryModel.set(7,{ "hours": appState.data.thisYear.toString().toHHMM() })
     }
 
     function startBreakTimer() {
@@ -104,30 +117,33 @@ Page {
 
         // Add default break duration if settings allow and no break recorded
         // Also only add it if it is less than the duration
-        var defaultDur = settings.getDefaultBreakDuration()
-        if (!breakDuration && settings.getDefaultBreakInTimer() && defaultDur < duration) {
-            breakDuration = defaultDur
+        var defaultBreakDur = settings.getDefaultBreakDuration()
+        if (!breakDuration && settings.getDefaultBreakInTimer() && defaultBreakDur < duration) {
+            breakDuration = defaultBreakDur
         }
 
         if (appState.arguments.stopFromCommandLine) {
             var description = "Automatically saved from command line"
             var project =  settings.getDefaultProjectId()
             var taskId = "0"
+
+            // if (settings.getRoundToNearest()) {
+            //     var startValues = helpers.hourMinuteRoundToNearest(appState.timeDialogSelections.start.hour, appState.timeDialogSelections.start.minute)
+            //     appState.timeDialogSelections.start.hour = startValues.hour
+            //     appState.timeDialogSelections.start.minute = startValues.minute
+            //     var endValues = helpers.hourMinuteRoundToNearest(appState.timeDialogSelections.end.hour, appState.timeDialogSelections.start.minute)
+            //     appState.timeDialogSelections.end.hour = endValues.hour
+            //     appState.timeDialogSelections.end.minute = endValues.minute
+
+            //     // TODO: Fix these, why is rounding happening here?
+            //     duration = helpers.calcRoundToNearest(duration)
+            //     breakDuration = helpers.calcRoundToNearest(breakDuration)
+            // }
+
+            var startTime = dateFns.format(appState.timerStartTime, 'H:mm')
+            var endTime = dateFns.format(new Date(), 'H:mm')
+            // TODO: Change the format
             var dateString = helpers.dateToDbDateString(new Date())
-
-            if (settings.getRoundToNearest()) {
-                var startValues = helpers.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
-                startSelectedHour = startValues.hour
-                startSelectedMinute = startValues.minute
-                var endValues = helpers.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
-                endSelectedHour = endValues.hour
-                endSelectedMinute = endValues.minute
-                duration = helpers.calcRoundToNearest(duration)
-                breakDuration = helpers.calcRoundToNearest(breakDuration)
-            }
-
-            var startTime = helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
-            var endTime = helpers.pad(endSelectedHour) + ":" + helpers.pad(endSelectedMinute)
 
             Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
 
@@ -144,21 +160,20 @@ Page {
 
             if(db.saveHourRow(values)) {
                 refreshState()
-            }
-            else {
+            } else {
                 banner.notify("Error when saving!")
             }
-        }
-
-        else if (!fromCover) {
+        } else if (!fromCover) {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                                  dataContainer: root,
-                                  uid: 0,
-                                  startSelectedMinute:startSelectedMinute,
-                                  startSelectedHour:startSelectedHour,
-                                  endSelectedHour:endSelectedHour,
-                                  endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration, fromTimer: true}, PageStackAction.Immediate)
+                               dataContainer: root,
+                               uid: 0,
+                               startSelectedHour: dateFns.format(appState.timerStartTime, 'H'),
+                               startSelectedMinute: dateFns.format(appState.timerStartTime, 'mm'),
+                               endSelectedHour: dateFns.format(new Date(), 'H'),
+                               endSelectedMinute: dateFns.format(new Date(), 'mm'),
+                               duration: appState.timerDuration,
+                               breakDuration: appState.breakTimerDuration,
+                               fromTimer: true }, PageStackAction.Immediate)
         }
 
         else {
@@ -442,14 +457,14 @@ Page {
                 function openTimeDialog() {
                     var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                     hourMode: (DateTime.TwentyFourHours),
-                                    hour: startSelectedHour,
-                                    minute: startSelectedMinute,
+                                    hour: appState.timeDialogSelections.start.hour,
+                                    minute: appState.timeDialogSelections.start.minute,
                                  })
 
                     dialog.accepted.connect(function() {
-                        startSelectedHour = dialog.hour
-                        startSelectedMinute = dialog.minute
-                        var newValue = helpers.pad(startSelectedHour) + ":" + helpers.pad(startSelectedMinute)
+                        appState.timeDialogSelections.start.hour = dialog.hour
+                        appState.timeDialogSelections.start.minute = dialog.minute
+                        var newValue = helpers.pad(appState.timeDialogSelections.start.hour) + ":" + helpers.pad(appState.timeDialogSelections.start.minute)
                         // TODO: Does not work now
                         startTimer(newValue)
                     })
@@ -476,7 +491,7 @@ Page {
                         color: Theme.secondaryColor
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
-                        text: dateFns.format(timer.getStartTime(), 'HH:mm')
+                        text: dateFns.format(appState.timerStartTime, 'HH:mm')
                     }
 
                     Label {
@@ -544,7 +559,7 @@ Page {
             if (id) {
                 //TODO: Try to get rid of this kind of code
                 settings.setDefaultProjectId(id)
-                appState.data.projects = db.getProjects()
+                refreshState()
             }
         }
 
