@@ -2,9 +2,9 @@
 
 An easy to use and simple Working Hours Tracker for SailfishOS
 
-- v. 1.2.3-1 (for phone and tablet) available in Jolla store (06.11.2017)<br />
-- v. 1.2.4-1 available in [openrepos](https://openrepos.net/content/olpe/working-hours-tracker)
-- Newest version also available with direct download [here](https://github.com/olpeh/wht/tree/master/RPMS)
+* v. 1.2.3-1 (for phone and tablet) available in Jolla store (06.11.2017)<br />
+* v. 1.2.5-1 available in [openrepos](https://openrepos.net/content/olpe/working-hours-tracker)
+* Newest version also available with direct download [here](https://github.com/olpeh/wht/releases)
 
 ## Quick links
 
@@ -17,12 +17,13 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 [Importing](#importing)
 
 ## Donate
+
 Donations are welcome :)<br />
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=olpe&url=https%3A%2F%2Fgithub.com%2Folpeh%2Fwht&tags=github&category=software)
 
-Paypal [EUR](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
-Paypal [USD](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+Paypal [EUR](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker¤cy_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)<br />
+Paypal [USD](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9HY294XX4EJFW&lc=FI&item_name=Olpe&item_number=Working%20Hours%20Tracker¤cy_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
 ## Translate
 
@@ -31,6 +32,7 @@ Working Hours Tracker project is in transifex. Please contribute to translations
 https://www.transifex.com/projects/p/working-hours-tracker/
 
 ## Current features:
+
 * Adding hours
 * Timer - saves starting time to database
 * Viewing hours in different categories
@@ -62,6 +64,7 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Rounding to nearest
 
 ## Roadmap:
+
 * Importing .csv
 * Requested features
 * Graphs?
@@ -69,7 +72,6 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 ## License
 
 [See license here](https://github.com/olpeh/wht/blob/master/LICENSE.md)
-
 
 ## How to use
 
@@ -116,7 +118,6 @@ There are a few settings in the settings page that makes adding hours faster and
 
 Other settings are explained in the settings page and more will come in the future versions.
 
-
 ### Exporting
 
 In the settings you find different methods for exporting data from Working Hours Tracker.
@@ -148,14 +149,10 @@ Don't worry for duplicates when importing because the entries have unique id's a
 <strong>Please note that importing uses INSERT OR REPLACE so you can update edited entries.</strong>
 
 ### Startup commands
+
 Still WIP (but it works)
 
 #### Commands atm:
-- `harbour-workinghourstracker --start`
-- `harbour-workinghourstracker --stop`
 
-
-
-
-
-
+* `harbour-workinghourstracker --start`
+* `harbour-workinghourstracker --stop`

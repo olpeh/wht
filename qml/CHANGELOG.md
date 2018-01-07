@@ -1,4 +1,8 @@
 # Changelog
+## [1.2.5-1] - 2018-01-07
+### Added
+- Add timestamps to log entries for better debuggability (visible if logs are exported)
+
 ## [1.2.4-1] - 2017-11-07
 ### Fixed
 - DB creation fails for new users #58
