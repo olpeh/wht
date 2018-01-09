@@ -185,7 +185,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
                 color: Theme.primaryColor
-                text: helpers.formatTimerDuration(appState.timerDuration)
+                text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration): ""
             }
         }
 
@@ -220,7 +220,7 @@ CoverBackground {
                     anchors.verticalCenter: timerIconButton.verticalCenter
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: helpers.formatTimerDuration(appState.timerDuration)
+                    text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration) : ""
                 }
             }
 
@@ -249,7 +249,7 @@ CoverBackground {
                     font.pixelSize: Theme.fontSizeSmall
                     font.bold: true
                     color: Theme.primaryColor
-                    text: helpers.formatTimerDuration(appState.breakTimerDuration)
+                    text: appState.breakTimerRunning ? helpers.formatTimerDuration(appState.breakTimerDuration) : ""
                 }
             }
         }

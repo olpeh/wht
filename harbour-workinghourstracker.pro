@@ -96,4 +96,4 @@ DISTFILES += \
     qml/md.js\
     qml/CHANGELOG.md \
     qml/cover/cover.svg \
-    qml/date_fns.min.js
+    qml/moment.min.js

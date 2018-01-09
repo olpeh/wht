@@ -42,31 +42,31 @@ Page {
     // TODO: Try to get rid of this
     // Temporary hack before using more reactive ways of doing things
     function refreshState() {
-        Log.debug('refreshState called')
+        Log.debug("refreshState called")
         appState = {
-            'versionCheckDone': false,
-            'arguments': {
-                'startFromCommandLine': startFromCommandLine,
-                'stopFromCommandLine': stopFromCommandLine
+            "versionCheckDone": false,
+            "arguments": {
+                "startFromCommandLine": startFromCommandLine,
+                "stopFromCommandLine": stopFromCommandLine
             },
-            'timerRunning': timer.isRunning(),
-            'timerDuration': timer.getDurationInMilliseconds(),
-            'timerStartTime': timer.getStartTime(),
-            'breakTimerRunning': breakTimer.isRunning(),
-            'breakTimerDuration': breakTimer.getDurationInMilliseconds(),
-            'breakStartTime': breakTimer.getStartTime(),
-            'data':{
-                'projects': db.getProjects(),
-                'yesterday': db.getDurationForPeriod("day", 1),
-                'today': db.getDurationForPeriod("day"),
-                'lastWeek': db.getDurationForPeriod("week", 1),
-                'thisWeek': db.getDurationForPeriod("week"),
-                'lastMonth': db.getDurationForPeriod("month", 1),
-                'thisMonth': db.getDurationForPeriod("month"),
-                'all': db.getDurationForPeriod("all"),
-                'thisYear': db.getDurationForPeriod("year")
+            "timerRunning": timer.isRunning(),
+            "timerDuration": timer.getDurationInMilliseconds(),
+            "timerStartTime": timer.getStartTime(),
+            "breakTimerRunning": breakTimer.isRunning(),
+            "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
+            "breakStartTime": breakTimer.getStartTime(),
+            "data":{
+                "projects": db.getProjects(),
+                "yesterday": db.getDurationForPeriod("day", 1),
+                "today": db.getDurationForPeriod("day"),
+                "lastWeek": db.getDurationForPeriod("week", 1),
+                "thisWeek": db.getDurationForPeriod("week"),
+                "lastMonth": db.getDurationForPeriod("month", 1),
+                "thisMonth": db.getDurationForPeriod("month"),
+                "all": db.getDurationForPeriod("all"),
+                "thisYear": db.getDurationForPeriod("year")
             }
-        };
+        }
 
         // TODO: Is this ok?
         setHours()
@@ -76,7 +76,7 @@ Page {
     function resetDatabase() {
         db.resetDatabase()
         for (var i = 0; i < summaryModel.length; i++) {
-            summaryModel[i].hours = "0";
+            summaryModel[i].hours = "0"
         }
     }
 
@@ -102,8 +102,13 @@ Page {
         refreshState()
     }
 
-    function startTimer() {
-        timer.start()
+    function startTimer(date) {
+        Log.debug(date)
+        if (date !== undefined) {
+            timer.start(date)
+        } else {
+            timer.start()
+        }
         refreshState()
     }
 
@@ -140,8 +145,8 @@ Page {
             //     breakDuration = helpers.calcRoundToNearest(breakDuration)
             // }
 
-            var startTime = dateFns.format(appState.timerStartTime, 'H:mm')
-            var endTime = dateFns.format(new Date(), 'H:mm')
+            var startTime = dateFns.format(appState.timerStartTime, "H:mm")
+            var endTime = moment().format("H:mm")
             // TODO: Change the format
             var dateString = helpers.dateToDbDateString(new Date())
 
@@ -156,7 +161,7 @@ Page {
                 "description": description,
                 "breakDuration": breakDuration,
                 "taskId": taskId
-            };
+            }
 
             if(db.saveHourRow(values)) {
                 refreshState()
@@ -167,10 +172,10 @@ Page {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                dataContainer: root,
                                uid: 0,
-                               startSelectedHour: dateFns.format(appState.timerStartTime, 'H'),
-                               startSelectedMinute: dateFns.format(appState.timerStartTime, 'mm'),
-                               endSelectedHour: dateFns.format(new Date(), 'H'),
-                               endSelectedMinute: dateFns.format(new Date(), 'mm'),
+                               startSelectedHour: moment(appState.timerStartTime).format("H"),
+                               startSelectedMinute: moment(appState.timerStartTime).format("mm"),
+                               endSelectedHour: moment().format("H"),
+                               endSelectedMinute: moment().format("mm"),
                                duration: appState.timerDuration,
                                breakDuration: appState.breakTimerDuration,
                                fromTimer: true }, PageStackAction.Immediate)
@@ -375,7 +380,7 @@ Page {
                         font.pixelSize: Theme.fontSizeSmall
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: Theme.paddingMedium
-                        text: helpers.formatTimerDuration(appState.breakTimerDuration)
+                        text: appState.breakTimerRunning ? helpers.formatTimerDuration(appState.breakTimerDuration) : ""
                     }
 
                     Image {
@@ -422,7 +427,7 @@ Page {
                         id: durationNow
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
-                        text: helpers.formatTimerDuration(appState.timerDuration)
+                        text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration) : ""
                     }
 
                     Image {
@@ -457,16 +462,17 @@ Page {
                 function openTimeDialog() {
                     var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                     hourMode: (DateTime.TwentyFourHours),
-                                    hour: appState.timeDialogSelections.start.hour,
-                                    minute: appState.timeDialogSelections.start.minute,
+                                    hour: moment(appState.timerStartTime).format("H"),
+                                    minute: moment(appState.timerStartTime).format("mm"),
                                  })
 
                     dialog.accepted.connect(function() {
-                        appState.timeDialogSelections.start.hour = dialog.hour
-                        appState.timeDialogSelections.start.minute = dialog.minute
-                        var newValue = helpers.pad(appState.timeDialogSelections.start.hour) + ":" + helpers.pad(appState.timeDialogSelections.start.minute)
-                        // TODO: Does not work now
-                        startTimer(newValue)
+                        // Assume current day (for now)
+                        var date = new Date()
+                        date.setHours(dialog.hour)
+                        date.setMinutes(dialog.minute)
+                        // dialog.time cannot be used since it has the day and year wrong
+                        startTimer(date)
                     })
                 }
 
@@ -491,7 +497,7 @@ Page {
                         color: Theme.secondaryColor
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
-                        text: dateFns.format(appState.timerStartTime, 'HH:mm')
+                        text: moment(appState.timerStartTime).format("H:mm")
                     }
 
                     Label {
@@ -554,8 +560,11 @@ Page {
     }
 
     Component.onCompleted: {
+        // Set the initial state
+        refreshState()
+
         if (appState.data.projects.length === 0) {
-            var id = db.insertInitialProject(Theme.secondaryHighlightColor);
+            var id = db.insertInitialProject(Theme.secondaryHighlightColor)
             if (id) {
                 //TODO: Try to get rid of this kind of code
                 settings.setDefaultProjectId(id)
@@ -572,9 +581,6 @@ Page {
             // Automatically start timer if allowed in settings
             banner.notify(qsTr("Timer was autostarted"))
             startTimer()
-        } else {
-            // No need to refreshState() yet. Just fetch the hours and display data
-            getHours()
         }
     }
 }

@@ -48,15 +48,17 @@ String.prototype.toHHMM = function() {
 };
 
 var helpers = {
-  formatTimerDuration: function(duration) {
-    var date = new Date(duration);
+  formatTimerDuration: function(durationInMs) {
     return (
-      dateFns.format(date, 'H') + 'h ' + dateFns.format(date, 'mm') + 'min'
+      moment.utc(durationInMs).format('H') +
+      'h ' +
+      moment.utc(durationInMs).format('mm') +
+      'min'
     );
   },
 
-  formatDuration: function(duration) {
-    return dateFns.format(new Date(duration), 'H:mm');
+  formatDuration: function(durationInMs) {
+    return moment.utc(durationInMs).format('H:mm');
   },
 
   calcRoundToNearest: function(value) {

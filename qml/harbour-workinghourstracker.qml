@@ -35,11 +35,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 import "helpers.js" as HH
-import "date_fns.min.js" as DD
+import "moment.min.js" as M
 
 ApplicationWindow {
     property Item firstPage
-    property variant dateFns: DD.dateFns
+    property variant moment: M
     property variant helpers: HH.helpers
     property variant appState: ({})
 
@@ -49,7 +49,6 @@ ApplicationWindow {
             id: firstPage
             Component.onCompleted: {
                 appWindow.firstPage = firstPage
-                firstPage.refreshState()
             }
         }
     }
