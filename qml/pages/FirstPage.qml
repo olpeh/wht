@@ -117,8 +117,10 @@ Page {
             stopBreakTimer()
         }
 
-        var breakDuration = breakTimer.getDurationInMilliseconds()
+        var breakDuration = breakTimer.getTotalDurationInMilliseconds()
         var duration = timer.getDurationInMilliseconds()
+        var startTime = moment(appState.timerStartTime)
+        var endTime = moment()
 
         // Add default break duration if settings allow and no break recorded
         // Also only add it if it is less than the duration
@@ -144,18 +146,15 @@ Page {
             //     duration = helpers.calcRoundToNearest(duration)
             //     breakDuration = helpers.calcRoundToNearest(breakDuration)
             // }
-
-            var startTime = dateFns.format(appState.timerStartTime, "H:mm")
-            var endTime = moment().format("H:mm")
             // TODO: Change the format
             var dateString = helpers.dateToDbDateString(new Date())
 
-            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime.format("H:mm") + "," + endTime.format("H:mm") + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
 
             var values = {
                 "dateString": dateString,
-                "startTime": startTime,
-                "endTime": endTime,
+                "startTime": startTime.format("H:mm"),
+                "endTime": endTime.format("H:mm"),
                 "duration": duration,
                 "project": project,
                 "description": description,
@@ -168,36 +167,17 @@ Page {
             } else {
                 banner.notify("Error when saving!")
             }
-        } else if (!fromCover) {
+        } else {
             pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                dataContainer: root,
                                uid: 0,
-                               startSelectedHour: moment(appState.timerStartTime).format("H"),
-                               startSelectedMinute: moment(appState.timerStartTime).format("mm"),
-                               endSelectedHour: moment().format("H"),
-                               endSelectedMinute: moment().format("mm"),
+                               startSelectedHour: startTime.format("H"),
+                               startSelectedMinute: startTime.format("mm"),
+                               endSelectedHour: endTime.format("H"),
+                               endSelectedMinute: endTime.format("mm"),
                                duration: appState.timerDuration,
                                breakDuration: appState.breakTimerDuration,
-                               fromTimer: true }, PageStackAction.Immediate)
-        }
-
-        else {
-            if (pageStack.depth > 1) {
-                pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
-                               dataContainer: root,
-                               uid: 0,
-                               startSelectedMinute:startSelectedMinute,
-                               startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
-            }
-            else {
-                pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
-                               dataContainer: root,
-                               uid: 0,
-                               startSelectedMinute:startSelectedMinute,
-                               startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
-            }
+                               fromTimer: true, fromCover: fromCover })
         }
 
         timer.stop()
@@ -449,7 +429,7 @@ Page {
                 onClicked: {
                     if(!appState.breakTimerRunning) {
                         //buttonBuzz.play()
-                        stopTimer(false)
+                        stopTimer()
                     }
                 }
             }

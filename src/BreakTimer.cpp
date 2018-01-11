@@ -94,7 +94,7 @@ void BreakTimer::stop() {
                   "WHERE started = 1;").arg(duration));
 
     if (query.exec()) {
-        Logger::instance().debug("BreakTimer was stopped, break duration was: " + QString::number(duration));
+        Logger::instance().debug("BreakTimer was stopped, break duration was: " + QString::number(duration) + " ms");
     }
     else {
         Logger::instance().error("Error stopping the breaktimer: Query: " + query.lastQuery() + " failed " + query.lastError().text());

@@ -103,13 +103,11 @@ CoverBackground {
         CoverAction {
             iconSource: appState.timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
-                if (timer.isRunning()) {
-                    firstPage.stop(true)
+                if (appState.timerRunning) {
+                    firstPage.stopTimer(true)
                     appWindow.activate()
-                }
-
-                else {
-                    firstPage.start()
+                } else {
+                    firstPage.startTimer()
                 }
             }
         }
