@@ -251,20 +251,3 @@ void Settings::setLastVersionUsed(QString value)
     s.setValue("lastVersionUsed", value);
     s.endGroup();
 }
-
-int Settings::getRoundToNearest()
-{
-    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-    s.beginGroup("Settings");
-    roundToNearest = s.value("roundToNearest", 0).toInt();
-    s.endGroup();
-    return roundToNearest;
-}
-
-void Settings::setRoundToNearest(int value)
-{
-    QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
-    s.beginGroup("Settings");
-    s.setValue("roundToNearest", value);
-    s.endGroup();
-}

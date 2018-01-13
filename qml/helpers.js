@@ -72,24 +72,6 @@ var helpers = {
       return Math.floor(hours * 1000 * 60 * 60)
   },
 
-  calcRoundToNearest: function(value) {
-    var inMinutes = value * 60;
-    inMinutes =
-      Math.round(inMinutes / appState.roundToNearest) * appState.roundToNearest;
-    return inMinutes / 60;
-  },
-
-  hourMinuteRoundToNearest: function(hour, minute) {
-    var inHours = hour + minute / 60;
-    inHours = calcRoundToNearest(inHours);
-    var inMinutes = inHours * 60;
-
-    return {
-      hour: Math.floor(inMinutes / 60),
-      minute: inMinutes % 60
-    };
-  },
-
   pad: function(n) {
     return ('0' + n).slice(-2);
   },

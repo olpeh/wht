@@ -1010,14 +1010,6 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Round to nearest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rounding happens when saving hours</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>WhatsNewPage</name>

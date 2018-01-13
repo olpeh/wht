@@ -40,8 +40,6 @@ Page {
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
     property bool timerAutoStart : false
-    property int roundToNearest: 0
-    property bool roundToNearestComboInitialized: false
     property QtObject dataContainer: null
 
     SilicaFlickable {
@@ -113,7 +111,7 @@ Page {
                             var durationHour = helpers.countHours(defaultDuration)
                             var durationMinute = helpers.countMinutes(defaultDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
+                                            hourMode: DateTime.TwentyFourHours,
                                             hour: durationHour,
                                             minute: durationMinute,
                                          })
@@ -208,69 +206,6 @@ Page {
                     }
                     else {
                         settings.setEndTimeStaysFixed("no") // XD
-                    }
-                }
-            }
-
-            ListModel {
-                id: modelSource
-                ListElement {
-                    key: "Off"
-                    value: 0
-                }
-                ListElement {
-                    key: "5 min"
-                    value: 5
-                }
-                ListElement {
-                    key: "10 min"
-                    value: 10
-                }
-                ListElement {
-                    key: "15 min"
-                    value: 15
-                }
-                ListElement {
-                    key: "30 min"
-                    value: 30
-                }
-            }
-
-            ComboBox {
-                id: roundingCombo
-                anchors.margins: Theme.paddingLarge
-                width: parent.width * 0.7
-                anchors.horizontalCenter: parent.horizontalCenter
-                label: qsTr("Round to nearest")
-                description: qsTr("Rounding happens when saving hours")
-                menu: ContextMenu {
-                    Repeater {
-                        width: parent.width
-                        model: modelSource
-                        delegate: MenuItem {
-                            text: model.key
-                            font.bold: true
-                        }
-                    }
-                }
-
-                onCurrentItemChanged: {
-                    if (roundToNearestComboInitialized) {
-                        var selectedValue = modelSource.get(currentIndex).value
-                        settings.setRoundToNearest(selectedValue)
-                    }
-                    roundToNearestComboInitialized = true
-                }
-
-                function init() {
-                    _updating = false
-                    roundToNearest =  settings.getRoundToNearest()
-
-                    for (var i = 0; i < modelSource.count; i++) {
-                        if (modelSource.get(i).value == roundToNearest) {
-                            currentIndex = i
-                            break
-                        }
                     }
                 }
             }
@@ -770,7 +705,6 @@ Page {
         ccTextArea.text = settings.getCcAddress()
         bccTextArea.text = settings.getBccAddress()
         dumpImport.text = documentsLocation + "/wht.sql"
-        roundingCombo.init()
     }
 
     Banner {

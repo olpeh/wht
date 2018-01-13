@@ -143,18 +143,6 @@ Page {
             // var project =  settings.getDefaultProjectId()
             // var taskId = "0"
 
-            // if (settings.getRoundToNearest()) {
-            //     var startValues = helpers.hourMinuteRoundToNearest(appState.timeDialogSelections.start.hour, appState.timeDialogSelections.start.minute)
-            //     appState.timeDialogSelections.start.hour = startValues.hour
-            //     appState.timeDialogSelections.start.minute = startValues.minute
-            //     var endValues = helpers.hourMinuteRoundToNearest(appState.timeDialogSelections.end.hour, appState.timeDialogSelections.start.minute)
-            //     appState.timeDialogSelections.end.hour = endValues.hour
-            //     appState.timeDialogSelections.end.minute = endValues.minute
-
-            //     // TODO: Fix these, why is rounding happening here?
-            //     duration = helpers.calcRoundToNearest(duration)
-            //     breakDuration = helpers.calcRoundToNearest(breakDuration)
-            // }
             // TODO: Change the format
             // var dateString = helpers.dateToDbDateString(new Date())
 

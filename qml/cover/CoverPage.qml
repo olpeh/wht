@@ -138,7 +138,7 @@ CoverBackground {
         }
 
         Rectangle {
-            visible: !timer.isRunning()
+            visible: !appState.timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge

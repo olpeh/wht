@@ -154,7 +154,7 @@ Dialog {
         }
 
         var dialog = pageStack.push("MyTimePicker.qml", {
-                                        hourMode: (DateTime.TwentyFourHours),
+                                        hourMode: DateTime.TwentyFourHours,
                                         momentObj: momentObj,
                                         durationInMilliseconds: durationInMilliseconds
                                     })
@@ -220,11 +220,17 @@ Dialog {
                             var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: startMoment.toDate() })
 
                             dialog.accepted.connect(function() {
-                                var lastSelectedHours = startMoment.format("H")
-                                var lastSelectedMinutes = startMoment.format("mm")
+                                //  @TODO: Why so complicated?
+                                var lastSelectedHours = startMoment.hours()
+                                var lastSelectedMinutes = startMoment.minutes()
+                                var lastSelectedEndHours = endMoment.hours()
+                                var lastSelectedEndMinutes = endMoment.minutes()
                                 startMoment = moment(dialog.date)
-                                startMoment.setHours(lastSelectedHours)
-                                startMoment.setMinutes(lastSelectedMinutes)
+                                startMoment.hours(lastSelectedHours)
+                                startMoment.minutes(lastSelectedMinutes)
+                                endMoment = moment(dialog.date)
+                                endMoment.hours(lastSelectedEndHours)
+                                endMoment.minutes(lastSelectedEndMinutes)
                             })
                         }
                     }
@@ -340,7 +346,8 @@ Dialog {
                 }
             }
             BackgroundItem {
-                visible: breakDurationInMilliseconds > 0
+                // At least one minute
+                visible: breakDurationInMilliseconds > 60 * 1000
                 onClicked: showNetDurationTimepicker()
 
                 Rectangle {
