@@ -296,21 +296,8 @@ Page {
                     var endSelectedMinute = endSplitted[1]
 
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                                       dataContainer: dataContainer,
-                                       uid: model.uid,
-                                       selectedDate: model.date,
-                                       startSelectedMinute:startSelectedMinute,
-                                       startSelectedHour:startSelectedHour,
-                                       endSelectedHour:endSelectedHour,
-                                       endSelectedMinute:endSelectedMinute,
-                                       duration:model.duration,
-                                       description: model.description,
-                                       project: model.project,
-                                       dateText: model.date,
-                                       breakDuration: model.breakDuration,
-                                       editMode: true,
-                                       previousPage: all,
-                                       taskId: model.taskId
+                                       hourRow: model,
+                                       editMode: true
                                    })
 
                 }
@@ -387,7 +374,7 @@ Page {
                 remorse.execute(qsTr("Removing"), function() {
                     if(db.remove("hours", model.uid)) {
                         hoursModel.remove(index)
-                        all.dataContainer.getHours()
+                        firstPage.refreshState()
                     }
                     else {
                         banner.notify("Removing failed!")

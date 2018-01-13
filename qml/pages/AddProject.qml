@@ -75,9 +75,12 @@ Dialog {
             "labelColor": colorIndicator.color,
         };
 
-        projectId = db.saveProject(values);
         if (projectId) {
             values.uid = projectId
+        }
+
+        projectId = db.saveProject(values);
+        if (projectId) {
             Log.info("Project saved succesfully: " + JSON.stringify(values))
         } else {
             Log.error("Saving project failed!")
@@ -99,10 +102,13 @@ Dialog {
 
     function saveTask(name, taskId) {
         var values = {
-            "uid": taskId,
             "projectID": projectId,
             "name": name,
         };
+
+        if (taskId) {
+            values.uid = taskId
+        }
 
         return db.saveTask(values)
     }

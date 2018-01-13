@@ -64,6 +64,14 @@ var helpers = {
     return ms
   },
 
+  millisecondsToHours: function(milliseconds) {
+      return milliseconds / 1000 / 60 / 60;
+  },
+
+  hoursToMilliseconds: function(hours) {
+      return Math.floor(hours * 1000 * 60 * 60)
+  },
+
   calcRoundToNearest: function(value) {
     var inMinutes = value * 60;
     inMinutes =
@@ -84,16 +92,6 @@ var helpers = {
 
   pad: function(n) {
     return ('0' + n).slice(-2);
-  },
-
-  dateToDbDateString: function(date) {
-    if (date) {
-      //YYYY-MM-DD
-      var yyyy = date.getFullYear().toString();
-      var mm = (date.getMonth() + 1).toString(); // getMonth() is zero-based
-      var dd = date.getDate().toString();
-      return yyyy + '-' + pad(mm) + '-' + pad(dd);
-    }
   },
 
   formatDate: function(datestring) {

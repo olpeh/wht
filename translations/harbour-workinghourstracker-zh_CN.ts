@@ -183,6 +183,10 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddProject</name>

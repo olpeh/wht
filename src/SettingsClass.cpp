@@ -58,7 +58,7 @@ double Settings::getDefaultDuration()
 {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    defaultDuration = s.value("defaultDuration", -1).toDouble();
+    defaultDuration = s.value("defaultDuration", 0).toDouble();
     s.endGroup();
     return defaultDuration;
 }
@@ -75,7 +75,7 @@ double Settings::getDefaultBreakDuration()
 {
     QSettings s("harbour-workinghourstracker", "harbour-workinghourstracker");
     s.beginGroup("Settings");
-    defaultBreakDuration = s.value("defaultBreakDuration", -1).toDouble();
+    defaultBreakDuration = s.value("defaultBreakDuration", 0).toDouble();
     s.endGroup();
     return defaultBreakDuration;
 }

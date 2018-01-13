@@ -39,14 +39,16 @@ Dialog {
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
     canAccept: getDurationInMilliseconds() > 0
 
-    property bool editMode: false
     property bool fromCover: false
     property bool fromTimer: false
+
+    property bool editMode: false
+    property QtObject hourRow: null
 
     // By default we assume we are adding hours manually
     // These values can be overwritten when opening in editMode or fromTimer
     property variant startMoment : moment()
-    property variant endMoment: moment().add(settings.getDefaultDuration(), 'hours')
+    property variant endMoment: moment().add(settings.getDefaultDuration() > 0 ? settings.getDefaultDuration() : 8, 'hours')
     property int breakDurationInMilliseconds: 0
 
     property bool endTimeStaysFixed: true
@@ -66,12 +68,18 @@ Dialog {
             "date": startMoment.format("YYYY-MM-DD"),
             "startTime": startMoment.format("HH:mm"),
             "endTime": endMoment.format("HH:mm"),
-            "duration": getDurationInMilliseconds(),
+            // For legacy reasons
+            "duration": helpers.millisecondsToHours(getDurationInMilliseconds()),
             "project": appState.currentProjectId ,
             "description": descriptionTextArea.text,
-            "breakDuration": breakDurationInMilliseconds,
+            // For legacy reasons
+            "breakDuration": helpers.millisecondsToHours(breakDurationInMilliseconds),
             "taskId": appState.currentTaskId
         };
+
+        if (hourRow && hourRow.uid) {
+            values.uid = hourRow.uid
+        }
 
         Log.info("Trying to save: " + JSON.stringify(values));
 
@@ -169,7 +177,7 @@ Dialog {
 
             DialogHeader {
                 acceptText: qsTr("Save")
-                cancelText: qsTr("Discard")
+                cancelText: editMode ? qsTr("Cancel") : qsTr("Discard")
             }
 
             TextSwitch {
@@ -520,18 +528,32 @@ Dialog {
 
             Component.onCompleted: {
                 if(!editMode && !fromTimer) {
-                    var dur = settings.getDefaultDuration()
-                    // DefaultDuration got saved as hours for some stupid reason
-                    if (dur >=0) {
-                        // @TODO: Validate that this works
-                        endMoment = startMoment.add(dur, 'hours')
-                    }
-
                     var brk = settings.getDefaultBreakDuration()
-                    if (brk >= 0) {
+                    if (brk > 0) {
                         // DefaultBreakDuration got saved as hours for some stupid reason
-                        breakDurationInMilliseconds = brk * 60 * 60 * 1000
+                        breakDurationInMilliseconds = helpers.hoursToMilliseconds(brk)
                     }
+                } else if (fromTimer) {
+                    breakDurationInMilliseconds = breakTimer.getTotalDurationInMilliseconds()
+                    startMoment = moment(appState.timerStartTime)
+                    endMoment = moment()
+
+                    // Add default break duration if settings allows and no break recorded
+                    // Also only add it if it is less than the duration
+                    // DefaultBreakDuration got saved as hours for some stupid reason
+                    var defaultBreakDurInMs = helpers.hoursToMilliseconds(settings.getDefaultBreakDuration())
+                    if (!breakDurationInMilliseconds && settings.getDefaultBreakInTimer() && defaultBreakDurInMs < getDurationInMilliseconds()) {
+                        breakDurationInMilliseconds = defaultBreakDurInMs
+                    }
+                } else if (editMode && hourRow) {
+                    // breakDuration was saved as hours
+                    breakDurationInMilliseconds = helpers.hoursToMilliseconds(hourRow.breakDuration)
+                    // For legacy reasons date and times are saved separately
+                    startMoment = moment(hourRow.date + " " + hourRow.startTime)
+                    endMoment = moment(hourRow.date + " " + hourRow.endTime)
+                    descriptionTextArea.text = hourRow.description
+                    appState.currentProjectId = hourRow.project
+                    appState.currentTaskId = hourRow.taskId
                 }
 
                 var endFixed = settings.getEndTimeStaysFixed()
@@ -546,20 +568,6 @@ Dialog {
                     timeSwitch.checked = true
                 } else if(nowByDefault === "no") {
                     timeSwitch.checked = false
-                }
-
-                if (fromTimer) {
-                    breakDurationInMilliseconds = breakTimer.getTotalDurationInMilliseconds()
-                    startMoment = moment(appState.timerStartTime)
-                    endMoment = moment()
-
-                    // Add default break duration if settings allows and no break recorded
-                    // Also only add it if it is less than the duration
-                    // DefaultBreakDuration got saved as hours for some stupid reason
-                    var defaultBreakDurInMs = settings.getDefaultBreakDuration() * 60 * 60 * 1000
-                    if (!breakDurationInMilliseconds && settings.getDefaultBreakInTimer() && defaultBreakDurInMs < getDurationInMilliseconds()) {
-                        breakDurationInMilliseconds = defaultBreakDurInMs
-                    }
                 }
 
                 projectCombo.init()

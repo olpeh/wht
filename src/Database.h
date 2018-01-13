@@ -53,7 +53,7 @@ public:
   static QString DB_NAME;
 
 public slots:
-  bool saveHourRow(QVariantMap values);
+  QString saveHourRow(QVariantMap values);
 
   double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 

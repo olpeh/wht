@@ -737,12 +737,12 @@ Page {
 
     Component.onCompleted: {
         var dur = settings.getDefaultDuration()
-        if (dur >= 0) {
+        if (dur > 0) {
             defaultDuration = dur
         }
 
         var brk = settings.getDefaultBreakDuration()
-        if (brk >= 0) {
+        if (brk > 0) {
             defaultBreakDuration = brk
         }
 

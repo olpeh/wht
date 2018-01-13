@@ -169,16 +169,17 @@ QUuid Database::getUniqueId()
     return QUuid::createUuid();
 }
 
-bool Database::saveHourRow(QVariantMap values)
+QString Database::saveHourRow(QVariantMap values)
 {
     if (!values.empty())
     {
+        QString uid = values["uid"].isNull() ? getUniqueId().toString() : values["uid"].toString();
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO hours "
                       "VALUES (:uid, :date, :startTime, :endTime, :duration, :project, "
                       ":description, :breakDuration, :taskId);");
 
-        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
+        query.bindValue(":uid", uid);
         query.bindValue(":date", values["date"].toString());
         query.bindValue(":startTime", values["startTime"].toString());
         query.bindValue(":endTime", values["endTime"].toString());
@@ -190,19 +191,19 @@ bool Database::saveHourRow(QVariantMap values)
 
         if (query.exec())
         {
-            Logger::instance().debug("Row saved! ID: " + values["uid"].toString());
-            return true;
+            Logger::instance().debug("Row saved! ID: " + uid);
+            return uid;
         }
         else
         {
             Logger::instance().error("Insert failed!: " + query.lastError().text() + " in " + query.lastQuery());
-            return false;
+            return NULL;
         }
     }
     else
     {
         Logger::instance().warn("Values empty in saveHourRow");
-        return false;
+        return NULL;
     }
 }
 
@@ -469,8 +470,8 @@ QString Database::saveProject(QVariantMap values)
 
         if (query.exec())
         {
-            Logger::instance().debug("Project saved! ID: " + values["uid"].toString());
-            return values["uid"].toString();
+            Logger::instance().debug("Project saved! ID: " + uid);
+            return uid;
         }
         else
         {
@@ -534,8 +535,8 @@ QString Database::saveTask(QVariantMap values)
 
         if (query.exec())
         {
-            Logger::instance().debug("Task saved! ID: " + values["uid"].toString());
-            return values["uid"].toString();
+            Logger::instance().debug("Task saved! ID: " + uid);
+            return uid;
         }
         else
         {
