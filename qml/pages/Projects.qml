@@ -41,6 +41,7 @@ Page {
     function getProjects() {
         appState.data.projects = db.getProjects()
         var projects = appState.data.projects
+        projectsModel.clear()
         for (var i = 0; i < projects.length; i++) {
             projectsModel.set(i, {
                 'id': projects[i].id,
@@ -75,7 +76,7 @@ Page {
                 MenuItem {
                     text: qsTr("Add project")
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("AddProject.qml"),{prev: projectss})
+                        pageStack.push(Qt.resolvedUrl("AddProject.qml"), {prev: projectss})
                     }
                 }
             }
@@ -118,7 +119,7 @@ Page {
                             }
 
                             Label {
-                                visible: model.id === defaultProjectId
+                                visible: model.id === settings.getDefaultProjectId()
                                 id: defaultProjectLabel
                                 text: "  (" + qsTr("Default project") + ")"
                                 anchors.left: projectName.right
@@ -157,7 +158,7 @@ Page {
 
                 function remove() {
                     remorse.execute(qsTr("Removing"), function() {
-                        if(db.remove("project", model.id)) {
+                        if(db.remove("projects", model.id)) {
                             projectsModel.remove(index)
                             getProjects()
                         }

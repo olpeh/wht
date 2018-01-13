@@ -66,6 +66,7 @@ Dialog {
         labelColor = colorIndicator.color
 
         var values = {
+            "uid": projectId ? projectId : null,
             "name": name,
             "hourlyRate": hourlyRate,
             "contractRate": contractRate,
@@ -76,7 +77,8 @@ Dialog {
 
         projectId = db.saveProject(values);
         if (projectId) {
-            Log.info("Project saved succesfully: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
+            values.uid = projectId
+            Log.info("Project saved succesfully: " + JSON.stringify(values))
         } else {
             Log.error("Saving project failed!")
         }
@@ -87,7 +89,7 @@ Dialog {
         }
 
         if(prev) {
-            page.prev.getProjects()
+            prev.getProjects()
         }
     }
 
@@ -96,10 +98,6 @@ Dialog {
     }
 
     function saveTask(name, taskId) {
-        if (!taskId || taskId === "" || taskId === " ") {
-            taskId = db.getUniqueId()
-        }
-
         var values = {
             "uid": taskId,
             "projectID": projectId,
@@ -183,7 +181,6 @@ Dialog {
                                 taskLabel.visible = true
                                 if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
                                     saveTask(taskNameEditArea.text, modelData.id)
-                                    console.log(modelData.id)
                                     repeater.model = getTasks()
                                 }
                             }

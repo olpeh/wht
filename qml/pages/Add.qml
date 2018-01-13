@@ -550,7 +550,6 @@ Dialog {
 
                 if (fromTimer) {
                     breakDurationInMilliseconds = breakTimer.getTotalDurationInMilliseconds()
-                    Log.debug(breakDurationInMilliseconds)
                     startMoment = moment(appState.timerStartTime)
                     endMoment = moment()
 

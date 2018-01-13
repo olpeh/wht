@@ -440,7 +440,7 @@ QVariantList Database::getProjects()
     return tmp;
 }
 
-QUuid Database::insertInitialProject(QString labelColor)
+QString Database::insertInitialProject(QString labelColor)
 {
     QVariantMap values;
     values.insert("uid", getUniqueId());
@@ -449,7 +449,7 @@ QUuid Database::insertInitialProject(QString labelColor)
     return saveProject(values);
 }
 
-QUuid Database::saveProject(QVariantMap values)
+QString Database::saveProject(QVariantMap values)
 {
     if (!values.empty())
     {
@@ -470,7 +470,7 @@ QUuid Database::saveProject(QVariantMap values)
         if (query.exec())
         {
             Logger::instance().debug("Project saved! ID: " + values["uid"].toString());
-            return uid;
+            return values["uid"].toString();
         }
         else
         {
@@ -518,39 +518,35 @@ QVariantList Database::getTasks(QString projectID)
     return tmp;
 }
 
-bool Database::saveTask(QVariantMap values)
+QString Database::saveTask(QVariantMap values)
 {
     if (!values.empty())
     {
-        if (values["uid"].isNull())
-        {
-            // Creating a new row
-            values["uid"] = getUniqueId();
-        }
+        QString uid = values["uid"].isNull() ? getUniqueId().toString() : values["uid"].toString();
 
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO tasks "
                       "VALUES (:uid, :projectId, :name);");
 
-        query.bindValue(":uid", values["uid"].isNull() ? getUniqueId() : values["uid"].toString());
+        query.bindValue(":uid", uid);
         query.bindValue(":projectId", values["projectID"]);
         query.bindValue(":name", values["name"].isNull() ? "Default task" : values["name"].toString());
 
         if (query.exec())
         {
             Logger::instance().debug("Task saved! ID: " + values["uid"].toString());
-            return true;
+            return values["uid"].toString();
         }
         else
         {
             Logger::instance().error("Insert failed!: " + query.lastError().text() + " in " + query.lastQuery());
-            return false;
+            return NULL;
         }
     }
     else
     {
         Logger::instance().warn("Values empty in saveTask");
-        return false;
+        return NULL;
     }
 }
 

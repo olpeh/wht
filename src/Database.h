@@ -63,13 +63,13 @@ public slots:
 
   QVariantList getProjects();
 
-  QUuid insertInitialProject(QString labelColor);
+  QString insertInitialProject(QString labelColor);
 
-  QUuid saveProject(QVariantMap values);
+  QString saveProject(QVariantMap values);
 
   QVariantList getTasks(QString projectID = NULL);
 
-  bool saveTask(QVariantMap values);
+  QString saveTask(QVariantMap values);
 
   bool remove(QString table, QString id);
 

@@ -49,7 +49,7 @@ Page {
                                                  "startFromCommandLine": startFromCommandLine,
                                                  "stopFromCommandLine": stopFromCommandLine
                                              }
-        var currentProjectId = appState.currentProjectId ? appState.currentProjectId : settings.getDefaultProjectId()
+        var currentProjectId = appState.currentProjectId !== undefined ? appState.currentProjectId : settings.getDefaultProjectId()
         var currentTaskId = appState.currentTaskId
         var versionCheckDone = appState.versionCheckDone
 
@@ -62,8 +62,8 @@ Page {
             "breakTimerRunning": breakTimer.isRunning(),
             "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
             "breakStartTime": breakTimer.getStartTime(),
-            "currentProjectId:": currentProjectId,
-            "currentTaskId:": currentTaskId,
+            "currentProjectId": currentProjectId,
+            "currentTaskId": currentTaskId,
             "data":{
                 "projects": db.getProjects(),
                 "yesterday": db.getDurationForPeriod("day", 1),
