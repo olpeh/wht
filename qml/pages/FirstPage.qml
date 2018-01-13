@@ -43,18 +43,27 @@ Page {
     // Temporary hack before using more reactive ways of doing things
     function refreshState() {
         Log.debug("refreshState called")
+
+        // these should not be Refreshed - rest of the state is dynamic
+        var arguments = appState.arguments ? appState.arguments : {
+                                                 "startFromCommandLine": startFromCommandLine,
+                                                 "stopFromCommandLine": stopFromCommandLine
+                                             }
+        var currentProjectId = appState.currentProjectId ? appState.currentProjectId : settings.getDefaultProjectId()
+        var currentTaskId = appState.currentTaskId
+        var versionCheckDone = appState.versionCheckDone
+
         appState = {
-            "versionCheckDone": false,
-            "arguments": {
-                "startFromCommandLine": startFromCommandLine,
-                "stopFromCommandLine": stopFromCommandLine
-            },
+            "versionCheckDone": versionCheckDone,
+            "arguments": arguments,
             "timerRunning": timer.isRunning(),
             "timerDuration": timer.getDurationInMilliseconds(),
             "timerStartTime": timer.getStartTime(),
             "breakTimerRunning": breakTimer.isRunning(),
             "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
             "breakStartTime": breakTimer.getStartTime(),
+            "currentProjectId:": currentProjectId,
+            "currentTaskId:": currentTaskId,
             "data":{
                 "projects": db.getProjects(),
                 "yesterday": db.getDurationForPeriod("day", 1),
@@ -92,6 +101,14 @@ Page {
         summaryModel.set(7,{ "hours": appState.data.thisYear.toString().toHHMM() })
     }
 
+    function addHoursManually(fromCover) {
+        if (fromCover === undefined) {
+            fromCover = false
+        }
+
+        pageStack.push(Qt.resolvedUrl("Add.qml"), { fromCover: fromCover })
+    }
+
     function startBreakTimer() {
         breakTimer.start()
         refreshState()
@@ -113,26 +130,18 @@ Page {
     }
 
     function stopTimer(fromCover){
+        if (fromCover === undefined) {
+            fromCover = false
+        }
+
         if(appState.breakTimerRunning) {
             stopBreakTimer()
         }
 
-        var breakDuration = breakTimer.getTotalDurationInMilliseconds()
-        var duration = timer.getDurationInMilliseconds()
-        var startTime = moment(appState.timerStartTime)
-        var endTime = moment()
-
-        // Add default break duration if settings allow and no break recorded
-        // Also only add it if it is less than the duration
-        var defaultBreakDur = settings.getDefaultBreakDuration()
-        if (!breakDuration && settings.getDefaultBreakInTimer() && defaultBreakDur < duration) {
-            breakDuration = defaultBreakDur
-        }
-
         if (appState.arguments.stopFromCommandLine) {
-            var description = "Automatically saved from command line"
-            var project =  settings.getDefaultProjectId()
-            var taskId = "0"
+            // var description = "Automatically saved from command line"
+            // var project =  settings.getDefaultProjectId()
+            // var taskId = "0"
 
             // if (settings.getRoundToNearest()) {
             //     var startValues = helpers.hourMinuteRoundToNearest(appState.timeDialogSelections.start.hour, appState.timeDialogSelections.start.minute)
@@ -147,37 +156,32 @@ Page {
             //     breakDuration = helpers.calcRoundToNearest(breakDuration)
             // }
             // TODO: Change the format
-            var dateString = helpers.dateToDbDateString(new Date())
+            // var dateString = helpers.dateToDbDateString(new Date())
 
-            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime.format("H:mm") + "," + endTime.format("H:mm") + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+            // Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime.format("H:mm") + "," + endTime.format("H:mm") + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
 
-            var values = {
-                "dateString": dateString,
-                "startTime": startTime.format("H:mm"),
-                "endTime": endTime.format("H:mm"),
-                "duration": duration,
-                "project": project,
-                "description": description,
-                "breakDuration": breakDuration,
-                "taskId": taskId
-            }
+            // var values = {
+            //     "dateString": dateString,
+            //     "startTime": startTime.format("H:mm"),
+            //     "endTime": endTime.format("H:mm"),
+            //     "duration": duration,
+            //     "project": project,
+            //     "description": description,
+            //     "breakDuration": breakDuration,
+            //     "taskId": taskId
+            // }
 
-            if(db.saveHourRow(values)) {
-                refreshState()
-            } else {
-                banner.notify("Error when saving!")
-            }
+            // if(db.saveHourRow(values)) {
+            //     refreshState()
+            // } else {
+            //     banner.notify("Error when saving!")
+            // }
         } else {
-            pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                               dataContainer: root,
-                               uid: 0,
-                               startSelectedHour: startTime.format("H"),
-                               startSelectedMinute: startTime.format("mm"),
-                               endSelectedHour: endTime.format("H"),
-                               endSelectedMinute: endTime.format("mm"),
-                               duration: appState.timerDuration,
-                               breakDuration: appState.breakTimerDuration,
-                               fromTimer: true, fromCover: fromCover })
+            if (fromCover && pageStack.depth > 1) {
+                pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), { fromTimer: true, fromCover: fromCover })
+            } else {
+                pageStack.push(Qt.resolvedUrl("Add.qml"), { fromTimer: true, fromCover: fromCover })
+            }
         }
 
         timer.stop()
@@ -208,7 +212,7 @@ Page {
             MenuItem {
                 text: qsTr("Add Hours")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
+                    addHoursManually()
                 }
             }
         }

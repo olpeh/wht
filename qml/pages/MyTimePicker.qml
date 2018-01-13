@@ -38,43 +38,18 @@ import Sailfish.Silica 1.0
 Dialog {
     id: timePickerDialog
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-
-    // Items from the Harmattan component interface
-    property int hour
-    property int minute
-    property double duration: -1
-    //property int second                   // not supported
+    canAccept: validateCanAccept()
     property int hourMode
-    //property string acceptButtonText      // not supported
-    //property string rejectButtonText      // not supported
-    //property string titleText             // not supported
-    //property int fields                   // not supported
-
-    property date time: new Date(0,0,0, hour, minute)
     property string timeText: timePicker._formatTime()
-    canAccept: true
 
-    property int roundToNearest: 0
-    property int oldHour: hour
+    property variant momentObj: moment()
+    property int durationInMilliseconds: -1
 
-    function calculateCanAccept () {
-        if (duration !== -1) {
-            canAccept = (((timePicker.hour)*60 + timePicker.minute) / 60) <= duration
+    function validateCanAccept () {
+        if (durationInMilliseconds !== -1) {
+            return helpers.momentAsMillisecons(momentObj) < durationInMilliseconds
         }
-    }
-
-    function doRoundToNearest() {
-        if (roundToNearest) {
-            var inMinutes = timePicker.hour * 60 + timePicker.minute
-            inMinutes = Math.round(inMinutes / roundToNearest) * roundToNearest
-            var tmpHour = Math.floor(inMinutes / 60)
-
-            if(Math.abs(tmpHour - oldHour) === 1) {
-                timePicker.hour = tmpHour
-            }
-
-            timePicker.minute = inMinutes % 60
-        }
+        return true
     }
 
     Column {
@@ -87,11 +62,6 @@ Dialog {
         TimePicker {
             id: timePicker
             anchors.horizontalCenter: parent.horizontalCenter
-            onHourChanged: calculateCanAccept()
-            onMinuteChanged: {
-                doRoundToNearest()
-                calculateCanAccept()
-            }
         }
         Item {
             width: parent.width
@@ -114,15 +84,14 @@ Dialog {
     }
 
     onOpened: {
-        timePicker.hour = hour
-        timePicker.minute = minute
+        timePicker.hour = momentObj.hours()
+        timePicker.minute = momentObj.minutes()
         timePicker.hourMode = hourMode
     }
 
     onDone: {
         if (result == DialogResult.Accepted) {
-            hour = timePicker.hour
-            minute = timePicker.minute
+            momentObj = moment(timePicker.time)
         }
     }
 }

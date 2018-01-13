@@ -76,25 +76,13 @@ CoverBackground {
                 if (appState.timerRunning && !appState.breakTimerRunning) {
                     Log.info("Break starts...")
                     firstPage.startBreakTimer()
-                }
-
-                else if (appState.breakTimerRunning) {
+                } else if (appState.breakTimerRunning) {
                     Log.info("Break ends...")
                     firstPage.stopBreakTimer()
-                }
-
-                else {
-                    if (pageStack.depth > 1) {
-                        var pageOptions = {
-                            dataContainer: appWindow.firstPage,
-                            uid: 0,
-                            fromCover: true
-                        }
-
-                        pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
-                    } else {
-                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
-                    }
+                } else {
+                    // BreakTimer was not running -> this is now a manual add button
+                    var fromCover = true
+                    firsPage.addHoursManually(fromCover)
                     appWindow.activate()
                 }
             }
