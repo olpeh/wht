@@ -96,19 +96,7 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>Add</name>
     <message>
-        <source>No description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -189,6 +177,10 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Enter an optional description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

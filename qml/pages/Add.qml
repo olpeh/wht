@@ -53,7 +53,7 @@ Dialog {
     property bool projectComboInitialized: false
 
     function getDurationInMilliseconds() {
-        return endMoment.diff(startMoment)
+        return moment(endMoment).diff(moment(startMoment))
     }
 
     function getNetDurationInMilliseconds() {
@@ -89,7 +89,7 @@ Dialog {
 
     function setStartNow() {
         startMoment = moment()
-        endMoment = moment().add(-getDurationInMilliseconds(), 'milliseconds')
+        endMoment = moment().subtract(getDurationInMilliseconds(), 'milliseconds')
     }
 
     function showBreakDurationTimepicker () {
@@ -105,41 +105,43 @@ Dialog {
         openTimeDialog(netDurationMoment, durationSelected, "netDuration")
     }
 
-    function durationSelected (dialog, durationType) {
-        var durationMoment = dialog.momentObj
-
+    function durationSelected (momentObj, durationType) {
         if (durationType === "duration") {
             // Duration changed -> move either start time or end timeSwitch
             if (endTimeStaysFixed) {
-                startMoment = endMoment.add(-helpers.momentAsMilliseconds(durationMoment))
+                startMoment = moment(endMoment).subtract(helpers.momentAsMilliseconds(momentObj), 'milliseconds')
             } else {
-                endMoment = startMoment.add(helpers.momentAsMilliseconds(durationMoment))
+                endMoment = moment(startMoment).add(helpers.momentAsMilliseconds(momentObj), 'milliseconds')
             }
         } else if (durationType === "breakDuration") {
-            breakDurationInMilliseconds = helpers.momentAsMilliseconds(durationMoment)
+            breakDurationInMilliseconds = helpers.momentAsMilliseconds(momentObj)
         } else if (durationType === "netDuration") {
-            // Net duration changed -> move either startTime or endTime
+            // Net duration changed > move either startTime or endTime
             // Break time stays of course untouched
             if (endTimeStaysFixed) {
-                startMoment = endMoment.add(-helpers.momentAsMilliseconds(durationMoment) - breakDurationInMilliseconds)
+                startMoment = moment(endMoment).subtract(helpers.momentAsMilliseconds(momentObj) + breakDurationInMilliseconds, 'milliseconds')
             } else {
-                endMoment = startMoment.add(helpers.momentAsMilliseconds(durationMoment) + breakDurationInMilliseconds)
+                endMoment = moment(startMoment).add(helpers.momentAsMilliseconds(momentObj) + breakDurationInMilliseconds, 'milliseconds')
             }
         }
 
     }
 
-    function startTimeSelected(dialog) {
-        startMoment = dialog.momentObj
+    function startTimeSelected(momentObj) {
+        startMoment = moment(momentObj)
     }
 
-    function endTimeSelected(dialog) {
-        endMoment = dialog.momentObj
+    function endTimeSelected(momentObj) {
+        endMoment = moment(momentObj)
     }
 
     function openTimeDialog(momentObj, callBack, durationType) {
+        if (durationType !== undefined) {
+            momentObj = momentObj.utc()
+        }
+
         var durationInMilliseconds = -1
-        if (durationType === 'breakDuration') {
+        if (durationType === "breakDuration") {
             durationInMilliseconds = getDurationInMilliseconds()
         }
 
@@ -149,7 +151,7 @@ Dialog {
                                         durationInMilliseconds: durationInMilliseconds
                                     })
         dialog.accepted.connect(function() {
-            callBack(dialog, durationType)
+            callBack(dialog.momentObj, durationType)
         })
     }
 
@@ -240,7 +242,7 @@ Dialog {
                         onClicked: doOnClicked()
 
                         function doOnClicked() {
-                            openTimeDialog(startMoment, startTimeSelected)
+                            openTimeDialog(moment(startMoment), startTimeSelected)
                         }
                     }
                 }
@@ -265,7 +267,7 @@ Dialog {
                         onClicked: doOnClicked()
 
                         function doOnClicked() {
-                            openTimeDialog(endMoment, endTimeSelected)
+                            openTimeDialog(moment(endMoment), endTimeSelected)
                         }
                     }
                 }
@@ -299,7 +301,7 @@ Dialog {
                     ValueButton {
                         id: durationButton
                         anchors.centerIn: parent
-                        label: qsTr("Duration")+": "
+                        label: qsTr("Duration") + ": "
                         value: helpers.formatTimerDuration(getDurationInMilliseconds())
                         width: parent.width
                         onClicked: showDurationTimepicker()
@@ -308,6 +310,8 @@ Dialog {
             }
 
             BackgroundItem {
+                // At least one minute
+                visible: getDurationInMilliseconds() > 60 * 1000
                 onClicked: showBreakDurationTimepicker()
 
                 Rectangle {
@@ -320,7 +324,7 @@ Dialog {
                     ValueButton {
                         id: breakDurationButton
                         anchors.centerIn: parent
-                        label: qsTr("Break")+": "
+                        label: qsTr("Break") + ": "
                         value: helpers.formatTimerDuration(breakDurationInMilliseconds)
                         width: parent.width
                         onClicked: showBreakDurationTimepicker()
@@ -443,7 +447,7 @@ Dialog {
                         appState.currentTaskId = taskModelSource.get(currentIndex).id
 
                         if (appState.currentTaskId > 0) {
-                            var lastUsed = db.getLastUsedInput(project)
+                            var lastUsed = db.getLastUsedInput(appState.currentProjectId)
 
                             if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
                                 appState.currentTaskId = lastUsed['taskId']
@@ -480,7 +484,7 @@ Dialog {
 
                     _updating = false
 
-                    currentIndex = -1
+                    currentIndex = 1
                     currentItem = null
 
                     if (appState.currentTaskId) {
@@ -501,7 +505,7 @@ Dialog {
             TextField {
                 id: descriptionTextArea
                 width: parent.width
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.iconSource: "image://theme/icon-enter-close"
                 EnterKey.onClicked: focus = false
                 placeholderText: qsTr("Enter an optional description")
                 onClicked: {

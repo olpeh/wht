@@ -45,10 +45,12 @@ Dialog {
     property variant momentObj: moment()
     property int durationInMilliseconds: -1
 
-    function validateCanAccept () {
+    function validateCanAccept() {
         if (durationInMilliseconds !== -1) {
-            return helpers.momentAsMillisecons(momentObj) < durationInMilliseconds
+            canAccept = helpers.momentAsMilliseconds(momentObj) < durationInMilliseconds
+            return helpers.momentAsMilliseconds(momentObj) < durationInMilliseconds
         }
+        canAccept = true
         return true
     }
 
@@ -62,6 +64,14 @@ Dialog {
         TimePicker {
             id: timePicker
             anchors.horizontalCenter: parent.horizontalCenter
+            onHourChanged:  {
+                momentObj.hours(timePicker.hour)
+                validateCanAccept()
+            }
+            onMinuteChanged: {
+                momentObj.minutes(timePicker.minute)
+                validateCanAccept()
+            }
         }
         Item {
             width: parent.width
@@ -87,11 +97,5 @@ Dialog {
         timePicker.hour = momentObj.hours()
         timePicker.minute = momentObj.minutes()
         timePicker.hourMode = hourMode
-    }
-
-    onDone: {
-        if (result == DialogResult.Accepted) {
-            momentObj = moment(timePicker.time)
-        }
     }
 }
