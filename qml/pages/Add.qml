@@ -37,7 +37,7 @@ import Sailfish.Silica 1.0
 Dialog {
     id: page
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-    canAccept: getDurationInMilliseconds() > 0
+    canAccept: getNetDurationInMilliseconds() > 0
 
     property bool fromCover: false
     property bool fromTimer: false
@@ -55,6 +55,14 @@ Dialog {
     property bool projectComboInitialized: false
 
     function getDurationInMilliseconds() {
+        // Workaround for the fact that there is no end date selector
+        // @TODO: rethink this issue
+        // Id end is before start -> start must be on the previous date
+        // Is this smart or even going to work as a workaround?
+        if(endMoment < startMoment) {
+            startMoment.subtract(1, 'day')
+        }
+
         return moment(endMoment).diff(moment(startMoment))
     }
 
@@ -307,7 +315,7 @@ Dialog {
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: getDurationInMilliseconds() >= 0 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: durationButton.height
@@ -330,7 +338,7 @@ Dialog {
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: breakDurationInMilliseconds >= 0 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: breakDurationButton.height
