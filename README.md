@@ -38,6 +38,20 @@ Working Hours Tracker project is in transifex. Please contribute to translations
 
 https://www.transifex.com/projects/p/working-hours-tracker/
 
+### Updating resources in transifex
+
+The file `.tx/config` contains the basic config for what needs to be pushed to tx.
+
+`~/.transifexrc`, which stores your Transifex credentials in your home directory. You shouldn’t share this file since it contains your own credentials.
+
+To push a source file, use the -s or --source flag with the push command:
+
+`$ tx push -s`
+
+To pull translations from Transifex, run the following command:
+
+`$ tx pull -a`
+
 ## Current features:
 
 * Adding hours
