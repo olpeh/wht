@@ -12,10 +12,11 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 
 ## Quick links
 
+[Project page](https://wht.olpe.fi/)<br />
 [Changelog](https://github.com/olpeh/wht/blob/master/qml/CHANGELOG.md)<br />
 [Current features](#current-features)<br />
 [License](https://github.com/olpeh/wht/blob/master/LICENSE.md)<br />
-[Roadmap](#roadmap)<br />
+[Roadmap](https://github.com/olpeh/wht/projects/1)<br />
 [How to use](#how-to-use)<br />
 [Exporting](#exporting)<br />
 [Importing](#importing)
@@ -68,12 +69,6 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 * Tasks within projects
 * Autofill last used input
 * Rounding to nearest
-
-## Roadmap:
-
-* Importing .csv
-* Requested features
-* Graphs?
 
 ## License
 
