@@ -39,7 +39,7 @@ Dialog {
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
-    property string projectId: null
+    property string projectId
     property string name: ""
     property double hourlyRate: 0
     property double contractRate: 0
@@ -66,7 +66,7 @@ Dialog {
         labelColor = colorIndicator.color
 
         var values = {
-            "uid": projectId ? projectId : null,
+            "id": projectId ? projectId : null,
             "name": name,
             "hourlyRate": hourlyRate,
             "contractRate": contractRate,
@@ -76,18 +76,19 @@ Dialog {
         };
 
         if (projectId) {
-            values.uid = projectId
+            values.id = projectId
         }
 
         projectId = db.saveProject(values);
         if (projectId) {
+            values.id = projectId
             Log.info("Project saved succesfully: " + JSON.stringify(values))
         } else {
             Log.error("Saving project failed!")
         }
 
 
-        if(defaultSwitch.checked) {
+        if(defaultSwitch.checked && projectId) {
             settings.setDefaultProjectId(projectId)
         }
 
@@ -107,7 +108,7 @@ Dialog {
         };
 
         if (taskId) {
-            values.uid = taskId
+            values.id = taskId
         }
 
         return db.saveTask(values)

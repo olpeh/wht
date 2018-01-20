@@ -444,7 +444,7 @@ QVariantList Database::getProjects()
 QString Database::insertInitialProject(QString labelColor)
 {
     QVariantMap values;
-    values.insert("uid", getUniqueId());
+    values.insert("id", getUniqueId());
     values.insert("name", "default");
     values.insert("labelColor", labelColor);
     return saveProject(values);
@@ -454,13 +454,13 @@ QString Database::saveProject(QVariantMap values)
 {
     if (!values.empty())
     {
-        QString uid = values["uid"].isNull() ? getUniqueId().toString() : values["uid"].toString();
+        QString id = values["id"].isNull() ? getUniqueId().toString() : values["id"].toString();
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO projects "
-                      "VALUES (:uid, :name, :hourlyRate, :contractRate, :budget,"
+                      "VALUES (:id, :name, :hourlyRate, :contractRate, :budget,"
                       " :hourBudget, :labelColor);");
 
-        query.bindValue(":uid", uid);
+        query.bindValue(":id", id);
         query.bindValue(":name", values["name"].isNull() ? "default" : values["name"].toString());
         query.bindValue(":hourlyRate", values["hourlyRate"].isNull() ? 0 : values["hourlyRate"]);
         query.bindValue(":contractRate", values["contractRate"].isNull() ? 0 : values["contractRate"]);
@@ -470,8 +470,8 @@ QString Database::saveProject(QVariantMap values)
 
         if (query.exec())
         {
-            Logger::instance().debug("Project saved! ID: " + uid);
-            return uid;
+            Logger::instance().debug("Project saved! ID: " + id);
+            return id;
         }
         else
         {
@@ -523,20 +523,20 @@ QString Database::saveTask(QVariantMap values)
 {
     if (!values.empty())
     {
-        QString uid = values["uid"].isNull() ? getUniqueId().toString() : values["uid"].toString();
+        QString id = values["id"].isNull() ? getUniqueId().toString() : values["id"].toString();
 
         QSqlQuery query;
         query.prepare("INSERT OR REPLACE INTO tasks "
-                      "VALUES (:uid, :projectId, :name);");
+                      "VALUES (:id, :projectId, :name);");
 
-        query.bindValue(":uid", uid);
+        query.bindValue(":id", id);
         query.bindValue(":projectId", values["projectID"]);
         query.bindValue(":name", values["name"].isNull() ? "Default task" : values["name"].toString());
 
         if (query.exec())
         {
-            Logger::instance().debug("Task saved! ID: " + uid);
-            return uid;
+            Logger::instance().debug("Task saved! ID: " + id);
+            return id;
         }
         else
         {

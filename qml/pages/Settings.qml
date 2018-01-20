@@ -641,7 +641,7 @@ Page {
                 onClicked: remorse.execute(qsTr("Resetting database"), function() {
                     if (dataContainer != null){
                        settingsPage.dataContainer.resetDatabase()
-                       projects = settingsPage.dataContainer.getProjects()
+                       settingsPage.dataContainer.refreshState()
                        pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
                     }
                 })
