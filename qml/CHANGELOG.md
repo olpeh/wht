@@ -1,3 +1,10 @@
+## [1.3.0-1] - 2018-01-20
+### Fixed
+- Refactor date handlings to fix most of the date related issues
+
+### Added
+- Add end date picker in order to be able to add longer hours or hours for night shifts etc.
+
 # Changelog
 ## [1.2.5-1] - 2018-01-07
 ### Added
