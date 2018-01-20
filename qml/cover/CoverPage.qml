@@ -118,7 +118,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Today")+ ": " + appState.data.today
+                text: qsTr("Today")+ ": " + appState.data.today.toString().toHHMM()
             }
         }
 
@@ -133,7 +133,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Week")+ ": " + appState.data.thisWeek
+                text: qsTr("Week")+ ": " + appState.data.thisWeek.toString().toHHMM()
             }
         }
 
@@ -149,7 +149,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Month")+ ": " + appState.data.thisMonth
+                text: qsTr("Month")+ ": " + appState.data.thisMonth.toString().toHHMM()
             }
         }
 
