@@ -1,3 +1,6 @@
+* Sun Jan 07 2018 Olavi Haapala <harbourwht@gmail.com> 1.2.5-1
+- Add timestamps to log entries for better debuggability (visible if logs are exported)
+
 * Tue Nov 07 2017 Olavi Haapala <harbourwht@gmail.com> 1.2.4-1
 - Fix: DB creation fails for new users #58
 
