@@ -49,27 +49,32 @@ String.prototype.toHHMM = function() {
 
 var helpers = {
   formatTimerDuration: function(durationInMs) {
-    return moment.utc(durationInMs).format('H[h] mm[min]')
-  },
-
-  formatDuration: function(durationInMs) {
-    return moment.utc(durationInMs).format('H:mm');
+    // Is duration more than one day ?
+    var oneDayInMs = 1000 * 60 * 60 * 24;
+    if (durationInMs >= oneDayInMs) {
+      return moment.duration(durationInMs, 'milliseconds').humanize();
+    } else {
+      var dur = moment.duration(durationInMs, 'milliseconds');
+      return dur.hours() + 'h' + ' ' + dur.minutes() + 'min';
+    }
   },
 
   momentAsMilliseconds: function(momentObj) {
     // Returns the a moment object as milliseconds
     // Note this is not the same as moment().milliseconds()
-    var m = momentObj
-    var ms = m.milliseconds() + 1000 * (m.seconds() + 60 * (m.minutes() + 60 * m.hours()));
-    return ms
+    var m = momentObj;
+    var ms =
+      m.milliseconds() +
+      1000 * (m.seconds() + 60 * (m.minutes() + 60 * m.hours()));
+    return ms;
   },
 
   millisecondsToHours: function(milliseconds) {
-      return milliseconds / 1000 / 60 / 60;
+    return milliseconds / 1000 / 60 / 60;
   },
 
   hoursToMilliseconds: function(hours) {
-      return Math.floor(hours * 1000 * 60 * 60)
+    return Math.floor(hours * 1000 * 60 * 60);
   },
 
   pad: function(n) {

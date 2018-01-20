@@ -42,8 +42,6 @@ Page {
     // TODO: Try to get rid of this
     // Temporary hack before using more reactive ways of doing things
     function refreshState() {
-        Log.debug("refreshState called")
-
         // these should not be Refreshed - rest of the state is dynamic
         var arguments = appState.arguments ? appState.arguments : {
                                                  "startFromCommandLine": startFromCommandLine,

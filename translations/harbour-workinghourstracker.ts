@@ -120,10 +120,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -185,6 +181,14 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End date:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

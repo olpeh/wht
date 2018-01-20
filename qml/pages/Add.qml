@@ -55,15 +55,7 @@ Dialog {
     property bool projectComboInitialized: false
 
     function getDurationInMilliseconds() {
-        // Workaround for the fact that there is no end date selector
-        // @TODO: rethink this issue
-        // Id end is before start -> start must be on the previous date
-        // Is this smart or even going to work as a workaround?
-        if(endMoment < startMoment) {
-            startMoment.subtract(1, 'day')
-        }
-
-        return moment(endMoment).diff(moment(startMoment))
+       return moment(endMoment).diff(moment(startMoment))
     }
 
     function getNetDurationInMilliseconds() {
@@ -100,12 +92,12 @@ Dialog {
 
     function setEndNow() {
         endMoment = moment()
-        startMoment = moment().add(getDurationInMilliseconds(), 'milliseconds')
+        startMoment = moment().subtract(getDurationInMilliseconds(), 'milliseconds')
     }
 
     function setStartNow() {
         startMoment = moment()
-        endMoment = moment().subtract(getDurationInMilliseconds(), 'milliseconds')
+        endMoment = moment().add(getDurationInMilliseconds(), 'milliseconds')
     }
 
     function showBreakDurationTimepicker () {
@@ -220,7 +212,7 @@ Dialog {
                     ValueButton {
                         id: datePicked
                         anchors.centerIn: parent
-                        label: qsTr("Date:")
+                        label: qsTr("Start date:")
                         value: startMoment.format("DD.MM.YYYY")
                         onClicked: openDateDialog()
 
@@ -231,14 +223,9 @@ Dialog {
                                 //  @TODO: Why so complicated?
                                 var lastSelectedHours = startMoment.hours()
                                 var lastSelectedMinutes = startMoment.minutes()
-                                var lastSelectedEndHours = endMoment.hours()
-                                var lastSelectedEndMinutes = endMoment.minutes()
                                 startMoment = moment(dialog.date)
                                 startMoment.hours(lastSelectedHours)
                                 startMoment.minutes(lastSelectedMinutes)
-                                endMoment = moment(dialog.date)
-                                endMoment.hours(lastSelectedEndHours)
-                                endMoment.minutes(lastSelectedEndMinutes)
                             })
                         }
                     }
@@ -265,6 +252,39 @@ Dialog {
 
                         function doOnClicked() {
                             openTimeDialog(moment(startMoment), startTimeSelected)
+                        }
+                    }
+                }
+            }
+
+            BackgroundItem {
+                onClicked: endDatePicker.openDateDialog()
+
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: endDatePicker.height
+
+                    ValueButton {
+                        id: endDatePicker
+                        anchors.centerIn: parent
+                        label: qsTr("End date:")
+                        value: endMoment.format("DD.MM.YYYY")
+                        onClicked: openDateDialog()
+
+                        function openDateDialog() {
+                            var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: endMoment.toDate() })
+
+                            dialog.accepted.connect(function() {
+                                //  @TODO: Why so complicated?
+                                var lastSelectedEndHours = endMoment.hours()
+                                var lastSelectedEndMinutes = endMoment.minutes()
+                                endMoment = moment(dialog.date)
+                                endMoment.hours(lastSelectedEndHours)
+                                endMoment.minutes(lastSelectedEndMinutes)
+                            })
                         }
                     }
                 }
@@ -565,7 +585,9 @@ Dialog {
                     breakDurationInMilliseconds = helpers.hoursToMilliseconds(hourRow.breakDuration)
                     // For legacy reasons date and times are saved separately
                     startMoment = moment(hourRow.date + " " + hourRow.startTime)
-                    endMoment = moment(hourRow.date + " " + hourRow.endTime)
+                    // @TODO: This might not be very smart
+                    // For legacy reasons durations were saved as hours
+                    endMoment = moment(startMoment).add(hourRow.duration, "hours")
                     descriptionTextArea.text = hourRow.description
                     appState.currentProjectId = hourRow.project
                     appState.currentTaskId = hourRow.taskId
