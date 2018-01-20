@@ -66,7 +66,6 @@ Dialog {
         labelColor = colorIndicator.color
 
         var values = {
-            "id": projectId ? projectId : null,
             "name": name,
             "hourlyRate": hourlyRate,
             "contractRate": contractRate,

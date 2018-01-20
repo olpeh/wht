@@ -1,4 +1,4 @@
-## [1.3.2-1] - 2018-01-20
+## [1.3.3-1] - 2018-01-20
 ### Fixed
 - Refactor date handlings to fix most of the date related issues
 
