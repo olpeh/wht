@@ -96,19 +96,7 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>Add</name>
     <message>
-        <source>No description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -125,10 +113,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -189,6 +173,22 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Enter an optional description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End date:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -383,23 +383,23 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Timer stopped by command line argument</source>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Today</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timer started by command line argument</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
+        <source>Add Hours</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yesterday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -427,18 +427,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Hours</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Timer is not running</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,6 +448,18 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adjust</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer stopped by command line argument</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1012,14 +1012,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Round to nearest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rounding happens when saving hours</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

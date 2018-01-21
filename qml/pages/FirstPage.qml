@@ -34,243 +34,145 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 //import QtFeedback 5.0
-import "../helpers.js" as HH
 
 Page {
     id: root
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-    property bool versionCheckDone: false
-    property int startSelectedHour : -1
-    property int startSelectedMinute : -1
 
+    // TODO: Try to get rid of this
+    // Temporary hack before using more reactive ways of doing things
+    function refreshState() {
+        // these should not be Refreshed - rest of the state is dynamic
+        var arguments = appState.arguments ? appState.arguments : {
+                                                 "startFromCommandLine": startFromCommandLine,
+                                                 "stopFromCommandLine": stopFromCommandLine
+                                             }
+        var currentProjectId = appState.currentProjectId !== undefined ? appState.currentProjectId : settings.getDefaultProjectId()
+        var currentTaskId = appState.currentTaskId
+        var versionCheckDone = appState.versionCheckDone
+
+        appState = {
+            "versionCheckDone": versionCheckDone,
+            "arguments": arguments,
+            "timerRunning": timer.isRunning(),
+            "timerDuration": timer.getDurationInMilliseconds(),
+            "timerStartTime": timer.getStartTime(),
+            "breakTimerRunning": breakTimer.isRunning(),
+            "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
+            "breakStartTime": breakTimer.getStartTime(),
+            "currentProjectId": currentProjectId,
+            "currentTaskId": currentTaskId,
+            "data":{
+                "projects": db.getProjects(),
+                "yesterday": db.getDurationForPeriod("day", 1),
+                "today": db.getDurationForPeriod("day"),
+                "lastWeek": db.getDurationForPeriod("week", 1),
+                "thisWeek": db.getDurationForPeriod("week"),
+                "lastMonth": db.getDurationForPeriod("month", 1),
+                "thisMonth": db.getDurationForPeriod("month"),
+                "all": db.getDurationForPeriod("all"),
+                "thisYear": db.getDurationForPeriod("year")
+            }
+        }
+
+        // TODO: Is this ok?
+        setHours()
+    }
+
+    //TODO: Why is this here?
     function resetDatabase() {
         db.resetDatabase()
         for (var i = 0; i < summaryModel.length; i++) {
-            summaryModel[i].hours = "0";
+            summaryModel[i].hours = "0"
         }
     }
 
-    function getHours() {
+    function setHours() {
         //Update hours view and cover
-        today = db.getDurationForPeriod("day").toString().toHHMM()
-        thisWeek = db.getDurationForPeriod("week").toString().toHHMM()
-        thisMonth = db.getDurationForPeriod("month").toString().toHHMM()
-        summaryModel.set(0,{"hours": db.getDurationForPeriod("day", 1).toString().toHHMM() })
-        summaryModel.set(1,{"hours": today })
-        summaryModel.set(2,{"hours": db.getDurationForPeriod("week", 1).toString().toHHMM() })
-        summaryModel.set(3,{"hours": thisWeek })
-        summaryModel.set(4,{"hours": db.getDurationForPeriod("month", 1).toString().toHHMM() })
-        summaryModel.set(5,{"hours": thisMonth })
-        summaryModel.set(6,{"hours": db.getDurationForPeriod("all").toString().toHHMM() })
-        summaryModel.set(7,{"hours": db.getDurationForPeriod("year").toString().toHHMM() })
+        summaryModel.set(0,{ "hours": appState.data.yesterday.toString().toHHMM() })
+        summaryModel.set(1,{ "hours": appState.data.today.toString().toHHMM() })
+        summaryModel.set(2,{ "hours": appState.data.lastWeek.toString().toHHMM() })
+        summaryModel.set(3,{ "hours": appState.data.thisWeek.toString().toHHMM() })
+        summaryModel.set(4,{ "hours": appState.data.lastMonth.toString().toHHMM() })
+        summaryModel.set(5,{ "hours": appState.data.thisMonth.toString().toHHMM() })
+        summaryModel.set(6,{ "hours": appState.data.all.toString().toHHMM() })
+        summaryModel.set(7,{ "hours": appState.data.thisYear.toString().toHHMM() })
     }
 
-    function getProjects(){
-        return db.getProjects()
-    }
-
-    function getStartTime(){
-        startTime = timer.getStartTime()
-    }
-
-    function start(newValue){
-        startTime = timer.start(newValue)
-        updateStartTime()
-        timerRunning = true
-    }
-
-    function updateStartTime(){
-        var splitted = startTime.split(":")
-        startSelectedHour = parseInt(splitted[0])
-        startSelectedMinute = parseInt(splitted[1])
-        startedAt.text = HH.pad(startSelectedHour) +":" + HH.pad(startSelectedMinute)
-    }
-
-    function updateDuration(breakDur){
-        breakDuration = getBreakTimerDuration()
-        if(breakDur) {
-            breakDuration += breakDur
+    function addHoursManually(fromCover) {
+        if (fromCover === undefined) {
+            fromCover = false
         }
 
-        var dateNow = new Date()
-        var hoursNow = dateNow.getHours()
-        var minutesNow = dateNow.getMinutes()
-        var nowInMinutes = hoursNow * 60 + minutesNow
-        var splitted = startTime.split(":")
-        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1])
-
-        if (nowInMinutes < startInMinutes) {
-            nowInMinutes += 24*60
-        }
-
-        var breakInMinutes = Math.round(breakDuration *60)
-        var difference = nowInMinutes - startInMinutes - breakInMinutes
-        var diffHours = Math.floor(difference / 60)
-        var diffMinutes = difference % 60
-        durationNow = diffHours + "h " + diffMinutes + "min"
-    }
-
-    function stop(fromCover){
-        if(breakTimerRunning) {
-            stopBreakTimer()
-            breakTimerRunning = false
-        }
-
-        breakDuration = getBreakTimerDuration()
-
-        var dateNow = new Date()
-        var endSelectedHour = dateNow.getHours()
-        var endSelectedMinute = dateNow.getMinutes()
-        var endHour = endSelectedHour
-
-        if (endSelectedHour < startSelectedHour) {
-            endHour +=24
-        }
-
-        duration = ((((endHour - startSelectedHour)*60) + (endSelectedMinute - startSelectedMinute)) / 60).toFixed(2)
-
-        // Add default break duration if settings allow and no break recorded
-        // Also only add it if it is less than the duration
-        var defaultDur = settings.getDefaultBreakDuration()
-        if (!breakDuration && settings.getDefaultBreakInTimer() && defaultDur < duration) {
-            breakDuration = defaultDur
-        }
-
-        if (stopFromCommandLine) {
-            var description = "Automatically saved from command line"
-            var project = defaultProjectId
-            var uid = db.getUniqueId()
-            var taskId = "0"
-            var dateString = HH.dateToDbDateString(new Date())
-
-            if (roundToNearest) {
-                var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
-                startSelectedHour = startValues.hour
-                startSelectedMinute = startValues.minute
-                var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
-                endSelectedHour = endValues.hour
-                endSelectedMinute = endValues.minute
-                duration = HH.calcRoundToNearest(duration)
-                breakDuration = HH.calcRoundToNearest(breakDuration)
-            }
-
-            var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-            var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
-
-            Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
-
-            var values = {
-                "uid": uid,
-                "dateString": dateString,
-                "startTime": startTime,
-                "endTime": endTime,
-                "duration": duration,
-                "project": project,
-                "description": description,
-                "breakDuration": breakDuration,
-                "taskId": taskId
-            };
-
-            if(db.saveHourRow(values)) {
-                getHours()
-            }
-            else {
-                banner.notify("Error when saving!")
-            }
-        }
-
-        else if (!fromCover) {
-            pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                                  dataContainer: root,
-                                  uid: 0,
-                                  startSelectedMinute:startSelectedMinute,
-                                  startSelectedHour:startSelectedHour,
-                                  endSelectedHour:endSelectedHour,
-                                  endSelectedMinute:endSelectedMinute,
-                                  duration:duration, breakDuration:breakDuration, fromTimer: true}, PageStackAction.Immediate)
-        }
-
-        else {
-            if (pageStack.depth > 1) {
-                pageStack.replaceAbove(appWindow.firstPage, Qt.resolvedUrl("../pages/Add.qml"), {
-                               dataContainer: root,
-                               uid: 0,
-                               startSelectedMinute:startSelectedMinute,
-                               startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
-            }
-            else {
-                pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), {
-                               dataContainer: root,
-                               uid: 0,
-                               startSelectedMinute:startSelectedMinute,
-                               startSelectedHour:startSelectedHour,
-                               duration:duration, breakDuration:breakDuration, fromCover: true, fromTimer: true })
-            }
-        }
-
-        breakDurationNow = "0h 0min"
-        breakDuration = 0
-        durationNow = "0h 0min"
-        duration = 0
-        timer.stop()
-        timerRunning = false
-        clearBreakTimer()
-    }
-
-    // Break timer functions
-    function getBreakStartTime() {
-        breakStartTime = breakTimer.getStartTime()
+        pageStack.push(Qt.resolvedUrl("Add.qml"), { fromCover: fromCover })
     }
 
     function startBreakTimer() {
-        breakDuration = 0
-        breakDurationNow = "0h 0min"
-        breakStartTime = breakTimer.start()
-        breakTimerRunning = true
-    }
-
-    function updateBreakTimerDuration() {
-        var dateNow = new Date()
-        var hoursNow = dateNow.getHours()
-        var minutesNow = dateNow.getMinutes()
-        var nowInMinutes = hoursNow * 60 + minutesNow
-        var splitted = breakStartTime.split(":")
-        var startInMinutes = parseInt(splitted[0]) * 60 + parseInt(splitted[1])
-        if (nowInMinutes < startInMinutes)
-            nowInMinutes += 24*60
-        var difference = nowInMinutes - startInMinutes
-        var diffHours = Math.floor(difference / 60)
-        var diffMinutes = difference % 60
-        breakDurationNow = diffHours + "h " + diffMinutes + "min"
-        // return the duration in hours
-        return (difference/60)
+        breakTimer.start()
+        refreshState()
     }
 
     function stopBreakTimer() {
-        var splitted = breakStartTime.split(":")
-        var timerStartHour = parseInt(splitted[0])
-        var timerStartMinute = parseInt(splitted[1])
-        var dateNow = new Date()
-        var endSelectedHour = dateNow.getHours()
-        var endSelectedMinute = dateNow.getMinutes()
-        var endHour = endSelectedHour
-        if (endSelectedHour < timerStartHour) {
-            endHour +=24
+        breakTimer.stop()
+        refreshState()
+    }
+
+    function startTimer(date) {
+        Log.debug(date)
+        if (date !== undefined) {
+            timer.start(date)
+        } else {
+            timer.start()
+        }
+        refreshState()
+    }
+
+    function stopTimer(fromCover){
+        if (fromCover === undefined) {
+            fromCover = false
         }
 
-        breakDuration = ((((endHour - timerStartHour)*60) + (endSelectedMinute - timerStartMinute)) / 60).toFixed(2)
-        breakTimer.stop(breakDuration)
-        breakTimerRunning = false
-    }
+        if(appState.breakTimerRunning) {
+            stopBreakTimer()
+        }
 
-    function getBreakTimerDuration(){
-        return breakTimer.getDuration()
-    }
+        if (appState.arguments.stopFromCommandLine) {
+            // var description = "Automatically saved from command line"
+            // var project =  settings.getDefaultProjectId()
+            // var taskId = "0"
 
-    function clearBreakTimer(){
+            // TODO: Change the format
+            // var dateString = helpers.dateToDbDateString(new Date())
+
+            // Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime.format("H:mm") + "," + endTime.format("H:mm") + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+
+            // var values = {
+            //     "dateString": dateString,
+            //     "startTime": startTime.format("H:mm"),
+            //     "endTime": endTime.format("H:mm"),
+            //     "duration": duration,
+            //     "project": project,
+            //     "description": description,
+            //     "breakDuration": breakDuration,
+            //     "taskId": taskId
+            // }
+
+            // if(db.saveHourRow(values)) {
+            //     refreshState()
+            // } else {
+            //     banner.notify("Error when saving!")
+            // }
+        } else {
+            if (fromCover && pageStack.depth > 1) {
+                pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), { fromTimer: true, fromCover: fromCover })
+            } else {
+                pageStack.push(Qt.resolvedUrl("Add.qml"), { fromTimer: true, fromCover: fromCover })
+            }
+        }
+
+        timer.stop()
         breakTimer.clear()
-        breakDuration = 0
+        refreshState()
     }
 
     SilicaFlickable {
@@ -296,7 +198,7 @@ Page {
             MenuItem {
                 text: qsTr("Add Hours")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Add.qml"), {dataContainer: root, uid: 0})
+                    addHoursManually()
                 }
             }
         }
@@ -389,7 +291,7 @@ Page {
 
         BackgroundItem {
             id: timerControl
-            visible: !timerRunning
+            visible: !appState.timerRunning
             height: grid.cellHeight
             width: parent.width
             anchors.bottom: grid.bottom
@@ -419,14 +321,12 @@ Page {
                 }
             }
 
-            onClicked: {
-                start()
-            }
+            onClicked: startTimer()
         }
 
         Item {
             id: timerItem
-            visible: timerRunning
+            visible: appState.timerRunning
             height: timerControl.height
             width: parent.width
             anchors.bottom: grid.bottom
@@ -441,18 +341,21 @@ Page {
                     anchors.fill: parent
                     anchors.margins: Theme.paddingMedium
 
+
+
                     Label {
-                        visible: breakTimerRunning
+                        id: breakDurationNow
+                        visible: appState.breakTimerRunning
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: Theme.paddingMedium
-                        text: breakDurationNow
+                        text: appState.breakTimerRunning ? helpers.formatTimerDuration(appState.breakTimerDuration) : ""
                     }
 
                     Image {
                         id: pauseImage
-                        source: breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
+                        source: appState.breakTimerRunning ? "image://theme/icon-cover-play" : "image://theme/icon-cover-pause"
                         anchors.centerIn: parent
                     }
 
@@ -466,7 +369,7 @@ Page {
                 }
 
                 onClicked: {
-                    if(!breakTimerRunning) {
+                    if(!appState.breakTimerRunning) {
                         startBreakTimer()
                     }
                     else {
@@ -481,7 +384,7 @@ Page {
                 x: timerItem.width / 3
 
                 Rectangle {
-                    opacity: breakTimerRunning? 0.5 : 1
+                    opacity: appState.breakTimerRunning ? 0.5 : 1
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     anchors.fill: parent
@@ -491,10 +394,10 @@ Page {
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: Theme.paddingMedium
                         color: Theme.primaryColor
-                        id: durationNowLabel
+                        id: durationNow
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
-                        text: durationNow
+                        text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration) : ""
                     }
 
                     Image {
@@ -514,9 +417,9 @@ Page {
                 }
 
                 onClicked: {
-                    if(!breakTimerRunning) {
+                    if(!appState.breakTimerRunning) {
                         //buttonBuzz.play()
-                        stop(false)
+                        stopTimer()
                     }
                 }
             }
@@ -529,21 +432,22 @@ Page {
                 function openTimeDialog() {
                     var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                     hourMode: (DateTime.TwentyFourHours),
-                                    hour: startSelectedHour,
-                                    minute: startSelectedMinute,
+                                    hour: moment(appState.timerStartTime).format("H"),
+                                    minute: moment(appState.timerStartTime).format("mm"),
                                  })
 
                     dialog.accepted.connect(function() {
-                        startSelectedHour = dialog.hour
-                        startSelectedMinute = dialog.minute
-                        var newValue = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-                        start(newValue)
-                        updateDuration()
+                        // Assume current day (for now)
+                        var date = new Date()
+                        date.setHours(dialog.hour)
+                        date.setMinutes(dialog.minute)
+                        // dialog.time cannot be used since it has the day and year wrong
+                        startTimer(date)
                     })
                 }
 
                 Rectangle {
-                    opacity: breakTimerRunning? 0.5 : 1
+                    opacity: appState.breakTimerRunning ? 0.5 : 1
                     color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     anchors.fill: parent
@@ -563,7 +467,7 @@ Page {
                         color: Theme.secondaryColor
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
-                        text: startTime
+                        text: moment(appState.timerStartTime).format("H:mm")
                     }
 
                     Label {
@@ -576,7 +480,7 @@ Page {
                 }
 
                 onClicked: {
-                    if (!breakTimerRunning) {
+                    if (!appState.breakTimerRunning) {
                         openTimeDialog()
                     }
                 }
@@ -585,16 +489,9 @@ Page {
 
         Timer {
             interval: 60000
-            running: timerRunning && !breakTimerRunning
+            running: appState.timerRunning || appState.breakTimerRunning
             repeat: true
-            onTriggered: updateDuration()
-        }
-
-        Timer {
-            interval: 60000
-            running: breakTimerRunning
-            repeat: true
-            onTriggered: updateBreakTimerDuration()
+            onTriggered: refreshState()
         }
 
         Banner {
@@ -603,7 +500,9 @@ Page {
     }
 
     onStatusChanged: {
-        if (root.status === PageStatus.Active && !versionCheckDone) {
+        refreshState()
+
+        if (root.status === PageStatus.Active && !appState.versionCheckDone) {
             var lastVersionUsed = settings.getLastVersionUsed()
             var current = appVersion + "-" + appBuildNum
 
@@ -613,15 +512,16 @@ Page {
             }
 
             settings.setLastVersionUsed(current)
-            versionCheckDone = true
+            appState.versionCheckDone = true
         }
 
-        if (root.status === PageStatus.Active && versionCheckDone) {
-            if (projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
+        if (root.status === PageStatus.Active && appState.versionCheckDone) {
+            if (appState.data.projects.length > 1 && pageStack._currentContainer.attachedContainer == null) {
                 pageStack.pushAttached(Qt.resolvedUrl("ProjectPage.qml"), {dataContainer: root}, PageStackAction.Immediate)
             }
 
-            if(timerRunning && startTime !== "Not started" && stopFromCommandLine) {
+            // TODO: Why is this here?
+            if(appState.timerRunning && appState.arguments.stopFromCommandLine) {
                 banner.notify(qsTr("Timer stopped by command line argument"))
                 stop()
                 pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
@@ -630,65 +530,27 @@ Page {
     }
 
     Component.onCompleted: {
-        roundToNearest = settings.getRoundToNearest()
-        projects = db.getProjects()
+        // Set the initial state
+        refreshState()
 
-        if (projects.length === 0) {
-            Log.info("No projects found so let's create one.")
-            var id = db.getUniqueId(),
-                values = {
-                    "uid": id,
-                    "name": "default",
-                    "labelColor": Theme.secondaryHighlightColor,
-                };
-
-            db.saveProject(values);
-            defaultProjectId = id
-            settings.setDefaultProjectId(id)
-        }
-        else {
-            defaultProjectId = settings.getDefaultProjectId()
-        }
-
-        getHours()
-        getStartTime()
-
-        if (startTime !== "Not started") {
-            timerRunning = true
-            updateStartTime()
-            getBreakStartTime()
-
-            if (breakStartTime !== "Not started") {
-                breakTimerRunning = true
-                updateDuration(updateBreakTimerDuration())
-            }
-            else {
-                breakDuration = 0
-                breakDurationNow = "0h 0min"
-                updateDuration()
+        if (appState.data.projects.length === 0) {
+            var id = db.insertInitialProject(Theme.secondaryHighlightColor)
+            if (id) {
+                //TODO: Try to get rid of this kind of code
+                settings.setDefaultProjectId(id)
+                refreshState()
             }
         }
-        else {
-            duration = 0
-            durationNow = "0h 0min"
 
+
+        if (appState.arguments.startFromCommandLine && !appState.timerRunning) {
             // Start timer from command line
-            if (startFromCommandLine) {
-                banner.notify(qsTr("Timer started by command line argument"))
-                start()
-            }
-
+            banner.notify(qsTr("Timer started by command line argument"))
+            startTimer()
+        } else if (settings.getTimerAutoStart() && !appState.timerRunning) {
             // Automatically start timer if allowed in settings
-            else if (settings.getTimerAutoStart()) {
-                banner.notify(qsTr("Timer was autostarted"))
-                start()
-            }
-        }
-
-        currencyString = settings.getCurrencyString()
-        if(!currencyString){
-            currencyString = "€"
-            settings.setCurrencyString(currencyString)
+            banner.notify(qsTr("Timer was autostarted"))
+            startTimer()
         }
     }
 }

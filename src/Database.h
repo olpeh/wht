@@ -53,7 +53,7 @@ public:
   static QString DB_NAME;
 
 public slots:
-  bool saveHourRow(QVariantMap values);
+  QString saveHourRow(QVariantMap values);
 
   double getDurationForPeriod(QString period, int timeOffset = 0, QString projectId = NULL);
 
@@ -63,23 +63,25 @@ public slots:
 
   QVariantList getProjects();
 
-  bool saveProject(QVariantMap values);
+  QString insertInitialProject(QString labelColor);
+
+  QString saveProject(QVariantMap values);
 
   QVariantList getTasks(QString projectID = NULL);
 
-  bool saveTask(QVariantMap values);
+  QString saveTask(QVariantMap values);
 
   bool remove(QString table, QString id);
 
   void resetDatabase();
 
-  // @TODO: make this private
-  QString getUniqueId();
 
 private:
   QSqlDatabase *db;
 
   Q_DISABLE_COPY(Database)
+
+  QUuid getUniqueId();
 
   bool fileExists(QString path);
 

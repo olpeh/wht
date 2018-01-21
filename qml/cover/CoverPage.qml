@@ -40,17 +40,7 @@ CoverBackground {
 
     onActiveChanged: {
         if(active) {
-            if(timerRunning && !breakTimerRunning){
-                firstPage.updateDuration()
-            }
-
-            else if (breakTimerRunning) {
-                firstPage.updateBreakTimerDuration()
-            }
-
-            else {
-               firstPage.getHours()
-            }
+           firstPage.refreshState()
         }
     }
 
@@ -70,11 +60,11 @@ CoverBackground {
         CoverAction {
             id: pauseAddAction
             iconSource:  {
-                if (timerRunning && breakTimerRunning) {
+                if (appState.timerRunning && appState.breakTimerRunning) {
                     "image://theme/icon-cover-play"
                 }
 
-                else if (timerRunning) {
+                else if (appState.timerRunning) {
                     "image://theme/icon-cover-pause"
                 }
 
@@ -83,43 +73,29 @@ CoverBackground {
                 }
             }
             onTriggered: {
-                if (timerRunning && !breakTimerRunning) {
+                if (appState.timerRunning && !appState.breakTimerRunning) {
                     Log.info("Break starts...")
                     firstPage.startBreakTimer()
-                }
-
-                else if (breakTimerRunning) {
+                } else if (appState.breakTimerRunning) {
                     Log.info("Break ends...")
                     firstPage.stopBreakTimer()
-                }
-
-                else {
-                    if (pageStack.depth > 1) {
-                        var pageOptions = {
-                            dataContainer: appWindow.firstPage,
-                            uid: 0,
-                            fromCover: true
-                        }
-
-                        pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
-                    } else {
-                        pageStack.push(Qt.resolvedUrl("../pages/Add.qml"), pageOptions)
-                    }
+                } else {
+                    // BreakTimer was not running -> this is now a manual add button
+                    var fromCover = true
+                    firsPage.addHoursManually(fromCover)
                     appWindow.activate()
                 }
             }
         }
 
         CoverAction {
-            iconSource: timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
+            iconSource: appState.timerRunning ? "image://theme/icon-cover-cancel" : "image://theme/icon-cover-timer"
             onTriggered: {
-                if (timerRunning) {
-                    firstPage.stop(true)
+                if (appState.timerRunning) {
+                    firstPage.stopTimer(true)
                     appWindow.activate()
-                }
-
-                else {
-                    firstPage.start()
+                } else {
+                    firstPage.startTimer()
                 }
             }
         }
@@ -142,7 +118,7 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Today")+ ": " + today
+                text: qsTr("Today")+ ": " + appState.data.today.toString().toHHMM()
             }
         }
 
@@ -157,12 +133,12 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Week")+ ": " + thisWeek
+                text: qsTr("Week")+ ": " + appState.data.thisWeek.toString().toHHMM()
             }
         }
 
         Rectangle {
-            visible: !timerRunning
+            visible: !appState.timerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -173,12 +149,12 @@ CoverBackground {
                 font.pixelSize: Theme.fontSizeMedium
                 font.bold: true
                 color: Theme.primaryColor
-                text: qsTr("Month")+ ": " + thisMonth
+                text: qsTr("Month")+ ": " + appState.data.thisMonth.toString().toHHMM()
             }
         }
 
         Rectangle {
-            visible: timerRunning && !breakTimerRunning
+            visible: appState.timerRunning && !appState.breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -191,16 +167,16 @@ CoverBackground {
             Label {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: iconButton.right
-                id: timer
+                id: durationNow
                 font.pixelSize: Theme.fontSizeSmall
                 font.bold: true
                 color: Theme.primaryColor
-                text: durationNow
+                text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration): ""
             }
         }
 
         Rectangle {
-            visible: breakTimerRunning
+            visible: appState.breakTimerRunning
             anchors.horizontalCenter: parent.horizontalCenter
             color: "transparent"
             width: parent.width - Theme.paddingLarge
@@ -230,7 +206,7 @@ CoverBackground {
                     anchors.verticalCenter: timerIconButton.verticalCenter
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: durationNow
+                    text: appState.timerRunning ? helpers.formatTimerDuration(appState.timerDuration) : ""
                 }
             }
 
@@ -259,7 +235,7 @@ CoverBackground {
                     font.pixelSize: Theme.fontSizeSmall
                     font.bold: true
                     color: Theme.primaryColor
-                    text: breakDurationNow
+                    text: appState.breakTimerRunning ? helpers.formatTimerDuration(appState.breakTimerDuration) : ""
                 }
             }
         }

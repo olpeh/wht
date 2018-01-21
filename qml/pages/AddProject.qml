@@ -39,7 +39,7 @@ Dialog {
     canAccept: validateInput()
     property QtObject prev: null
     property bool editMode: false
-    property string projectId: "0"
+    property string projectId
     property string name: ""
     property double hourlyRate: 0
     property double contractRate: 0
@@ -58,10 +58,6 @@ Dialog {
             saveTask(taskNameArea.text)
         }
 
-        if (projectId == "0" && !editMode) {
-            projectId = db.getUniqueId()
-        }
-
         name = nameTextArea.text
         hourlyRate = parseFloat(hourlyRateTextArea.text) || 0
         contractRate = 0 //parseFloat(contractRateTextArea.text || 0)
@@ -70,7 +66,6 @@ Dialog {
         labelColor = colorIndicator.color
 
         var values = {
-            "uid": projectId,
             "name": name,
             "hourlyRate": hourlyRate,
             "contractRate": contractRate,
@@ -79,35 +74,41 @@ Dialog {
             "labelColor": colorIndicator.color,
         };
 
-        Log.info("Saving project: " + projectId + "," + name + "," + hourlyRate + "," + contractRate + "," + budget + "," + hourBudget + "," + labelColor)
-        db.saveProject(values);
+        if (projectId) {
+            values.id = projectId
+        }
 
-        if(defaultSwitch.checked) {
-            defaultProjectId = projectId
+        projectId = db.saveProject(values);
+        if (projectId) {
+            values.id = projectId
+            Log.info("Project saved succesfully: " + JSON.stringify(values))
+        } else {
+            Log.error("Saving project failed!")
+        }
+
+
+        if(defaultSwitch.checked && projectId) {
             settings.setDefaultProjectId(projectId)
         }
 
         if(prev) {
-            page.prev.getProjects()
+            prev.getProjects()
         }
     }
 
     function getTasks() {
-        if (projectId == "0" && !editMode)
-            projectId = db.getUniqueId()
         return db.getTasks(projectId)
     }
 
     function saveTask(name, taskId) {
-        if (!taskId || taskId === "" || taskId === " ") {
-            taskId = db.getUniqueId()
-        }
-
         var values = {
-            "uid": taskId,
             "projectID": projectId,
             "name": name,
         };
+
+        if (taskId) {
+            values.id = taskId
+        }
 
         return db.saveTask(values)
     }
@@ -186,7 +187,6 @@ Dialog {
                                 taskLabel.visible = true
                                 if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
                                     saveTask(taskNameEditArea.text, modelData.id)
-                                    console.log(modelData.id)
                                     repeater.model = getTasks()
                                 }
                             }
@@ -353,6 +353,7 @@ Dialog {
                     //hourBudgetTextArea.text = hourBudget
                     colorIndicator.color = Theme.rgba(labelColor, Theme.highlightBackgroundOpacity)
 
+                    var defaultProjectId =  settings.getDefaultProjectId()
                     if (defaultProjectId === projectId) {
                         defaultSwitch.visible = false
                     }

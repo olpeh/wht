@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../helpers.js" as HH
 
 Page {
     id: settingsPage
@@ -41,8 +40,6 @@ Page {
     property double defaultDuration: 8
     property double defaultBreakDuration: 0
     property bool timerAutoStart : false
-    property int roundToNearest: 0
-    property bool roundToNearestComboInitialized: false
     property QtObject dataContainer: null
 
     SilicaFlickable {
@@ -111,10 +108,10 @@ Page {
                         text: defaultDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = HH.countHours(defaultDuration)
-                            var durationMinute = HH.countMinutes(defaultDuration)
+                            var durationHour = helpers.countHours(defaultDuration)
+                            var durationMinute = helpers.countMinutes(defaultDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
-                                            hourMode: (DateTime.TwentyFourHours),
+                                            hourMode: DateTime.TwentyFourHours,
                                             hour: durationHour,
                                             minute: durationMinute,
                                          })
@@ -150,8 +147,8 @@ Page {
                         text: defaultBreakDuration.toString().toHHMM()
 
                         function openTimeDialog() {
-                            var durationHour = HH.countHours(defaultBreakDuration)
-                            var durationMinute = HH.countMinutes(defaultBreakDuration)
+                            var durationHour = helpers.countHours(defaultBreakDuration)
+                            var durationMinute = helpers.countMinutes(defaultBreakDuration)
                             var dialog = pageStack.push("Sailfish.Silica.TimePickerDialog", {
                                             hourMode: (DateTime.TwentyFourHours),
                                             hour: durationHour,
@@ -209,69 +206,6 @@ Page {
                     }
                     else {
                         settings.setEndTimeStaysFixed("no") // XD
-                    }
-                }
-            }
-
-            ListModel {
-                id: modelSource
-                ListElement {
-                    key: "Off"
-                    value: 0
-                }
-                ListElement {
-                    key: "5 min"
-                    value: 5
-                }
-                ListElement {
-                    key: "10 min"
-                    value: 10
-                }
-                ListElement {
-                    key: "15 min"
-                    value: 15
-                }
-                ListElement {
-                    key: "30 min"
-                    value: 30
-                }
-            }
-
-            ComboBox {
-                id: roundingCombo
-                anchors.margins: Theme.paddingLarge
-                width: parent.width * 0.7
-                anchors.horizontalCenter: parent.horizontalCenter
-                label: qsTr("Round to nearest")
-                description: qsTr("Rounding happens when saving hours")
-                menu: ContextMenu {
-                    Repeater {
-                        width: parent.width
-                        model: modelSource
-                        delegate: MenuItem {
-                            text: model.key
-                            font.bold: true
-                        }
-                    }
-                }
-
-                onCurrentItemChanged: {
-                    if (roundToNearestComboInitialized) {
-                        var selectedValue = modelSource.get(currentIndex).value
-                        settings.setRoundToNearest(selectedValue)
-                    }
-                    roundToNearestComboInitialized = true
-                }
-
-                function init() {
-                    _updating = false
-                    roundToNearest =  settings.getRoundToNearest()
-
-                    for (var i = 0; i < modelSource.count; i++) {
-                        if (modelSource.get(i).value == roundToNearest) {
-                            currentIndex = i
-                            break
-                        }
                     }
                 }
             }
@@ -360,7 +294,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(toTextArea.text)) {
+                    if(!helpers.validEmail(toTextArea.text)) {
                         banner.notify(qsTr("Invalid to email address!"))
                         toTextArea.text = settings.getToAddress()
                     }
@@ -380,7 +314,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(ccTextArea.text)) {
+                    if(!helpers.validEmail(ccTextArea.text)) {
                         banner.notify(qsTr("Invalid cc email address!"))
                         ccTextArea.text = settings.getCcAddress()
                     }
@@ -400,7 +334,7 @@ Page {
                 EnterKey.onClicked: focus = false
 
                 onFocusChanged: {
-                    if(!HH.validEmail(bccTextArea.text)) {
+                    if(!helpers.validEmail(bccTextArea.text)) {
                         banner.notify(qsTr("Invalid bcc email address!"))
                         bccTextArea.text = settings.getBccAddress()
                     }
@@ -661,8 +595,7 @@ Page {
                             Log.info(qsTr("Trying to import")+": " +dumpImport.text)
                             var resp = exporter.importDump(dumpImport.text)
                             banner.notify(resp)
-                            settingsPage.dataContainer.getHours()
-                            projects = settingsPage.dataContainer.getProjects()
+                            settingsPage.dataContainer.refreshState()
                         })
                     }
 
@@ -708,7 +641,7 @@ Page {
                 onClicked: remorse.execute(qsTr("Resetting database"), function() {
                     if (dataContainer != null){
                        settingsPage.dataContainer.resetDatabase()
-                       projects = settingsPage.dataContainer.getProjects()
+                       settingsPage.dataContainer.refreshState()
                        pageStack.replace(Qt.resolvedUrl("FirstPage.qml"))
                     }
                 })
@@ -739,12 +672,12 @@ Page {
 
     Component.onCompleted: {
         var dur = settings.getDefaultDuration()
-        if (dur >= 0) {
+        if (dur > 0) {
             defaultDuration = dur
         }
 
         var brk = settings.getDefaultBreakDuration()
-        if (brk >= 0) {
+        if (brk > 0) {
             defaultBreakDuration = brk
         }
 
@@ -772,7 +705,6 @@ Page {
         ccTextArea.text = settings.getCcAddress()
         bccTextArea.text = settings.getBccAddress()
         dumpImport.text = documentsLocation + "/wht.sql"
-        roundingCombo.init()
     }
 
     Banner {

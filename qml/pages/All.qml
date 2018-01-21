@@ -33,7 +33,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../helpers.js" as HH
 
 Page {
     id: all
@@ -87,7 +86,7 @@ Page {
             hoursModel.clear()
         }
 
-        myWorker.sendMessage({ 'type': 'all', 'allHours': allHours, 'projects': projects })
+        myWorker.sendMessage({ 'type': 'all', 'allHours': allHours, 'projects': appState.data.projects })
     }
 
     function createEmailBody(){
@@ -108,7 +107,7 @@ Page {
                 r += project.name + " "
             }
 
-            var d = HH.formatDate(allHours[i].date)
+            var d = helpers.formatDate(allHours[i].date)
             r += d + "\n"
             r += allHours[i].description + "\n"
             r += allHours[i].startTime + " - " + allHours[i].endTime
@@ -118,7 +117,7 @@ Page {
             }
 
             if(project.hourlyRate) {
-                r += " " + (netDuration * project.hourlyRate).toFixed(2) + " " + currencyString
+                r += " " + (netDuration * project.hourlyRate).toFixed(2) + " " + settings.getCurrencyString()
             }
 
             r += "\n\n"
@@ -129,14 +128,14 @@ Page {
         r += qsTr("Entries") + ": " + categoryEntries + "\n"
 
         if (categoryPrice) {
-            r += categoryPrice.toFixed(2) + " " + currencyString + "\n"
+            r += categoryPrice.toFixed(2) + " " + settings.getCurrencyString() + "\n"
         }
 
         return r
     }
 
     function getProject(projectId) {
-        var found = projects.findById(projectId)
+        var found = appState.data.projects.findById(projectId)
         if(found) {
             return found
         }
@@ -242,7 +241,7 @@ Page {
             }
 
             MenuItem {
-                visible: projectId === "" && projects.length > 1
+                visible: projectId === "" && appState.data.projects.length > 1
                 text: sortedByProject ? qsTr("Sort by date") : qsTr("Sort by project")
                 onClicked: {
                     sortedByProject = !sortedByProject
@@ -297,21 +296,8 @@ Page {
                     var endSelectedMinute = endSplitted[1]
 
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {
-                                       dataContainer: dataContainer,
-                                       uid: model.uid,
-                                       selectedDate: model.date,
-                                       startSelectedMinute:startSelectedMinute,
-                                       startSelectedHour:startSelectedHour,
-                                       endSelectedHour:endSelectedHour,
-                                       endSelectedMinute:endSelectedMinute,
-                                       duration:model.duration,
-                                       description: model.description,
-                                       project: model.project,
-                                       dateText: model.date,
-                                       breakDuration: model.breakDuration,
-                                       editMode: true,
-                                       previousPage: all,
-                                       taskId: model.taskId
+                                       hourRow: model,
+                                       editMode: true
                                    })
 
                 }
@@ -343,7 +329,7 @@ Page {
                         Label {
                             id: duration
                             font.pixelSize: Theme.fontSizeMedium
-                            text: HH.formatDate(model.date)
+                            text: helpers.formatDate(model.date)
                         }
 
                         Label {
@@ -370,7 +356,7 @@ Page {
                             id: price
                             visible: model.hourlyRate > 0
                             font.pixelSize: Theme.fontSizeSmall
-                            text: (netDur * model.hourlyRate).toFixed(2) + " " + currencyString
+                            text: (netDur * model.hourlyRate).toFixed(2) + " " + settings.getCurrencyString()
                         }
                     }
 
@@ -388,7 +374,7 @@ Page {
                 remorse.execute(qsTr("Removing"), function() {
                     if(db.remove("hours", model.uid)) {
                         hoursModel.remove(index)
-                        all.dataContainer.getHours()
+                        firstPage.refreshState()
                     }
                     else {
                         banner.notify("Removing failed!")

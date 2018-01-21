@@ -33,317 +33,133 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../helpers.js" as HH
 
 Dialog {
     id: page
     allowedOrientations: Orientation.Portrait | Orientation.Landscape | Orientation.LandscapeInverted
-    canAccept: validateHours()
-    property QtObject dataContainer: null
-    property QtObject previousPage: null
-    property bool editMode: false
-    property string description: qsTr("No description")
-    property string project: "" //default
-    property string taskId: "0"
-    property double duration: 8
-    property double breakDuration: 0
-    property double netDuration: 8
-    property string uid: "0"
-    property string dateText: qsTr("Today")
-    property date selectedDate : new Date()
-    property date timeNow : new Date()
-    property int startSelectedHour : timeNow.getHours() - 8
-    property int startSelectedMinute : timeNow.getMinutes()
-    property int endSelectedHour : timeNow.getHours()
-    property int endSelectedMinute : timeNow.getMinutes()
+    canAccept: getNetDurationInMilliseconds() > 0
+
     property bool fromCover: false
     property bool fromTimer: false
+
+    property bool editMode: false
+    property QtObject hourRow: null
+
+    // By default we assume we are adding hours manually
+    // These values can be overwritten when opening in editMode or fromTimer
+    property variant startMoment : moment()
+    property variant endMoment: moment().add(settings.getDefaultDuration() > 0 ? settings.getDefaultDuration() : 8, 'hours')
+    property int breakDurationInMilliseconds: 0
+
     property bool endTimeStaysFixed: true
-    property variant tasks: []
     property bool projectComboInitialized: false
 
-    //Simple validator to avoid adding negative or erroneous hours
-    function validateHours() {
-        // Lazyfix... sry
-        if (breakDuration < 0) {
-            breakDuration = 0
-            breakDurationButton.value = "00:00"
-        }
-
-        return (duration >=0
-                && netDuration >=0
-                && breakDuration >=0
-                && startSelectedHour < 24
-                && startSelectedMinute < 60
-                && endSelectedHour < 24
-                && endSelectedMinute < 60)
+    function getDurationInMilliseconds() {
+       return moment(endMoment).diff(moment(startMoment))
     }
 
-    function updateDateText(){
-        var date = new Date(dateText)
-        var now = new Date()
-
-        if(now.toDateString() === date.toDateString()) {
-            datePicked.value = qsTr("Today")
-        }
-
-        else {
-            var splitted = date.toDateString().split(" ")
-            datePicked.value = splitted[1] + " " +splitted[2] + " "+ splitted[3]
-        }
+    function getNetDurationInMilliseconds() {
+        return getDurationInMilliseconds() - breakDurationInMilliseconds
     }
 
     function saveHours() {
-        if (descriptionTextArea.text) {
-            description = descriptionTextArea.text
-        }
-
-        if (uid == "0") {
-            uid = db.getUniqueId()
-        }
-
-
-
-        var dateString = HH.dateToDbDateString(selectedDate)
-        var startTime = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-        var endTime = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
-        project = modelSource.get(projectCombo.currentIndex).id
-        taskId = taskModelSource.get(taskCombo.currentIndex).id
-
-        if (!taskId) {
-            taskId = "0"
-        }
-
-        Log.info("Saving: " + uid + "," + dateString + "," + startTime + "," + endTime + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
-
         var values = {
-            "uid": uid,
-            "date": dateString,
-            "startTime": startTime,
-            "endTime": endTime,
-            "duration": duration,
-            "project": project,
-            "description": description,
-            "breakDuration": breakDuration,
-            "taskId": taskId
+            // TODO: CHANGE THE FORMAT (?)
+            "date": startMoment.format("YYYY-MM-DD"),
+            "startTime": startMoment.format("HH:mm"),
+            "endTime": endMoment.format("HH:mm"),
+            // For legacy reasons
+            "duration": helpers.millisecondsToHours(getDurationInMilliseconds()),
+            "project": appState.currentProjectId ,
+            "description": descriptionTextArea.text,
+            // For legacy reasons
+            "breakDuration": helpers.millisecondsToHours(breakDurationInMilliseconds),
+            "taskId": appState.currentTaskId
         };
-        if(db.saveHourRow(values)) {
-            if (dataContainer != null) {
-                page.dataContainer.getHours()
-            }
 
-            if (previousPage != null) {
-                page.previousPage.updateView()
-            }
+        if (hourRow && hourRow.uid) {
+            values.uid = hourRow.uid
         }
-        else {
+
+        Log.info("Trying to save: " + JSON.stringify(values));
+
+        if(db.saveHourRow(values)) {
+            firstPage.refreshState()
+        } else {
             banner.notify("Error when saving!")
         }
     }
 
-    function ensureValidStartTimeValues(hour, minute) {
-        if (hour < 0) {
-            hour += 24
-        }
-
-        if (minute < 0) {
-            minute += 60
-            hour -=1
-        }
-
-        if (hour < 0) {
-            hour += 24
-        }
-    }
-
-    function updateStartTime() {
-        startSelectedHour = endSelectedHour - HH.countHours(duration)
-        startSelectedMinute = endSelectedMinute - HH.countMinutes(duration)
-        ensureValidStartTimeValues(startSelectedHour, startSelectedMinute)
-        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-    }
-
-    function ensureValidEndTimeValues(hour, minute) {
-        if (hour >= 24) {
-            hour -= 24
-        }
-
-        if (minute >= 60) {
-            minute -= 60
-            hour += 1
-        }
-
-        if (hour >= 24) {
-            hour -= 24
-        }
-    }
-
-    function updateEndTime() {
-        endSelectedHour = startSelectedHour + HH.countHours(duration)
-        endSelectedMinute = startSelectedMinute + HH.countMinutes(duration)
-        ensureValidEndTimeValues(endSelectedHour, endSelectedMinute)
-        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
-    }
-
-    function updateBreakDuration() {
-        breakDurationButton.value = breakDuration.toString().toHHMM()
-    }
-
-    function updateNetDuration() {
-        netDuration = duration - breakDuration
-        netDurationButton.value = netDuration.toString().toHHMM()
-    }
-
-    function updateDuration() {
-        durationButton.value = duration.toString().toHHMM()
-    }
-
     function setEndNow() {
-        var now = new Date()
-        endSelectedHour = now.getHours()
-        endSelectedMinute= now.getMinutes()
-        endTime.value = HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
-        updateStartTime()
+        endMoment = moment()
+        startMoment = moment().subtract(getDurationInMilliseconds(), 'milliseconds')
     }
 
     function setStartNow() {
-        var now = new Date()
-        startSelectedHour = now.getHours()
-        startSelectedMinute= now.getMinutes()
-        startTime.value = HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
-        updateEndTime()
-    }
-
-    function doRoundToNearest() {
-        if (roundToNearest) {
-            var startValues = HH.hourMinuteRoundToNearest(startSelectedHour, startSelectedMinute)
-            startSelectedHour = startValues.hour
-            startSelectedMinute = startValues.minute
-            var endValues = HH.hourMinuteRoundToNearest(endSelectedHour, endSelectedMinute)
-            endSelectedHour = endValues.hour
-            endSelectedMinute = endValues.minute
-            duration = HH.calcRoundToNearest(duration)
-            breakDuration = HH.calcRoundToNearest(breakDuration)
-        }
-    }
-
-    function showNetDurationTimepicker () {
-        var netHour = HH.countHours(netDuration)
-        var netMinute = HH.countMinutes(netDuration)
-        openTimeDialog(netHour, netMinute, durationSelected, "netDuration")
+        startMoment = moment()
+        endMoment = moment().add(getDurationInMilliseconds(), 'milliseconds')
     }
 
     function showBreakDurationTimepicker () {
-        var breakHour = HH.countHours(breakDuration)
-        var breakMinute = HH.countMinutes(breakDuration)
-        openTimeDialog(breakHour, breakMinute, durationSelected, "breakDuration")
+        openTimeDialog(moment(breakDurationInMilliseconds), durationSelected, "breakDuration")
     }
 
     function showDurationTimepicker () {
-        var durationHour = HH.countHours(duration)
-        var durationMinute = HH.countMinutes(duration)
-        openTimeDialog(durationHour, durationMinute, durationSelected, "duration")
+        openTimeDialog(moment(getDurationInMilliseconds()), durationSelected, "duration")
     }
 
-    function durationSelected (dialog, durationType) {
-        var durationHour = dialog.hour
-        var durationMinute = dialog.minute
+    function showNetDurationTimepicker () {
+        var netDurationMoment = moment(getNetDurationInMilliseconds())
+        openTimeDialog(netDurationMoment, durationSelected, "netDuration")
+    }
 
+    function durationSelected (momentObj, durationType) {
         if (durationType === "duration") {
-            duration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            durationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
-
+            // Duration changed -> move either start time or end timeSwitch
             if (endTimeStaysFixed) {
-                updateStartTime()
+                startMoment = moment(endMoment).subtract(helpers.momentAsMilliseconds(momentObj), 'milliseconds')
+            } else {
+                endMoment = moment(startMoment).add(helpers.momentAsMilliseconds(momentObj), 'milliseconds')
             }
-
-            else {
-                updateEndTime()
-            }
-
-            updateNetDuration()
-        }
-
-        else if (durationType === "breakDuration") {
-            breakDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            breakDurationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
-            updateNetDuration()
-        }
-
-        else if (durationType === "netDuration") {
-            netDuration = (((durationHour)*60 + durationMinute) / 60).toFixed(2)
-            netDurationButton.value = HH.pad(durationHour) + ":" + HH.pad(durationMinute)
-            duration = netDuration + breakDuration
-            updateDuration()
-
+        } else if (durationType === "breakDuration") {
+            breakDurationInMilliseconds = helpers.momentAsMilliseconds(momentObj)
+        } else if (durationType === "netDuration") {
+            // Net duration changed > move either startTime or endTime
+            // Break time stays of course untouched
             if (endTimeStaysFixed) {
-                updateStartTime()
-            }
-
-            else {
-                updateEndTime()
+                startMoment = moment(endMoment).subtract(helpers.momentAsMilliseconds(momentObj) + breakDurationInMilliseconds, 'milliseconds')
+            } else {
+                endMoment = moment(startMoment).add(helpers.momentAsMilliseconds(momentObj) + breakDurationInMilliseconds, 'milliseconds')
             }
         }
 
     }
 
-    function startTimeSelected(dialog) {
-        startTime.value = dialog.timeText
-        startSelectedHour = dialog.hour
-        startSelectedMinute = dialog.minute
-        var endHour = endSelectedHour
-        var endMinute = endSelectedMinute
-
-        if (endMinute - startSelectedMinute < 0) {
-            endMinute +=60
-            endHour -=1
-        }
-
-        if (endHour - startSelectedHour < 0)
-            endHour +=24
-
-        duration = ((((endHour - startSelectedHour) * 60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
-        updateDuration()
-        updateNetDuration()
+    function startTimeSelected(momentObj) {
+        startMoment = moment(momentObj)
     }
 
-    function endTimeSelected(dialog) {
-        endTime.value = dialog.timeText
-        endSelectedHour = dialog.hour
-        endSelectedMinute = dialog.minute
-        var endHour = endSelectedHour
-        var endMinute = endSelectedMinute
-
-        if (endMinute - startSelectedMinute < 0) {
-            endMinute += 60
-            endHour -= 1
-        }
-
-        if (endHour - startSelectedHour < 0) {
-            endHour += 24
-        }
-
-        duration = ((((endHour - startSelectedHour)*60) + (endMinute - startSelectedMinute)) / 60).toFixed(2)
-        updateDuration()
-        updateNetDuration()
+    function endTimeSelected(momentObj) {
+        endMoment = moment(momentObj)
     }
 
-    function openTimeDialog(h, m, callBack, durationType) {
-        var dur = -1
-        if (durationType === 'breakDuration') {
-            dur = duration
+    function openTimeDialog(momentObj, callBack, durationType) {
+        if (durationType !== undefined) {
+            momentObj = momentObj.utc()
+        }
+
+        var durationInMilliseconds = -1
+        if (durationType === "breakDuration") {
+            durationInMilliseconds = getDurationInMilliseconds()
         }
 
         var dialog = pageStack.push("MyTimePicker.qml", {
-                                    hourMode: (DateTime.TwentyFourHours),
-                                    hour: h,
-                                    minute: m,
-                                    duration: dur,
-                                    roundToNearest: roundToNearest
-                                 })
-
+                                        hourMode: DateTime.TwentyFourHours,
+                                        momentObj: momentObj,
+                                        durationInMilliseconds: durationInMilliseconds
+                                    })
         dialog.accepted.connect(function() {
-            callBack(dialog, durationType)
+            callBack(dialog.momentObj, durationType)
         })
     }
 
@@ -361,7 +177,7 @@ Dialog {
 
             DialogHeader {
                 acceptText: qsTr("Save")
-                cancelText: qsTr("Cancel")
+                cancelText: editMode ? qsTr("Cancel") : qsTr("Discard")
             }
 
             TextSwitch {
@@ -377,9 +193,7 @@ Dialog {
 
                     if (checked) {
                         setEndNow()
-                    }
-
-                    else {
+                    } else {
                         setStartNow()
                     }
                 }
@@ -398,16 +212,20 @@ Dialog {
                     ValueButton {
                         id: datePicked
                         anchors.centerIn: parent
-                        label: qsTr("Date:")
-                        value: dateText
+                        label: qsTr("Start date:")
+                        value: startMoment.format("DD.MM.YYYY")
                         onClicked: openDateDialog()
 
                         function openDateDialog() {
-                            var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: new Date() })
+                            var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: startMoment.toDate() })
 
                             dialog.accepted.connect(function() {
-                                value = dialog.dateText
-                                selectedDate = dialog.date
+                                //  @TODO: Why so complicated?
+                                var lastSelectedHours = startMoment.hours()
+                                var lastSelectedMinutes = startMoment.minutes()
+                                startMoment = moment(dialog.date)
+                                startMoment.hours(lastSelectedHours)
+                                startMoment.minutes(lastSelectedMinutes)
                             })
                         }
                     }
@@ -419,7 +237,7 @@ Dialog {
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: startSelectedHour <24 && startSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: startTime.height
@@ -428,12 +246,45 @@ Dialog {
                         id: startTime
                         anchors.centerIn: parent
                         label: qsTr("Start time:")
-                        value: HH.pad(startSelectedHour) + ":" + HH.pad(startSelectedMinute)
+                        value: startMoment.format("H:mm")
                         width: parent.width
                         onClicked: doOnClicked()
 
                         function doOnClicked() {
-                            openTimeDialog(startSelectedHour, startSelectedMinute, startTimeSelected)
+                            openTimeDialog(moment(startMoment), startTimeSelected)
+                        }
+                    }
+                }
+            }
+
+            BackgroundItem {
+                onClicked: endDatePicker.openDateDialog()
+
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: Theme.secondaryHighlightColor
+                    radius: Theme.paddingMedium
+                    width: parent.width * 0.7
+                    height: endDatePicker.height
+
+                    ValueButton {
+                        id: endDatePicker
+                        anchors.centerIn: parent
+                        label: qsTr("End date:")
+                        value: endMoment.format("DD.MM.YYYY")
+                        onClicked: openDateDialog()
+
+                        function openDateDialog() {
+                            var dialog = pageStack.push("Sailfish.Silica.DatePickerDialog", { date: endMoment.toDate() })
+
+                            dialog.accepted.connect(function() {
+                                //  @TODO: Why so complicated?
+                                var lastSelectedEndHours = endMoment.hours()
+                                var lastSelectedEndMinutes = endMoment.minutes()
+                                endMoment = moment(dialog.date)
+                                endMoment.hours(lastSelectedEndHours)
+                                endMoment.minutes(lastSelectedEndMinutes)
+                            })
                         }
                     }
                 }
@@ -444,7 +295,7 @@ Dialog {
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: endSelectedHour <24 && endSelectedMinute < 60 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: endTime.height
@@ -453,12 +304,12 @@ Dialog {
                         id: endTime
                         anchors.centerIn: parent
                         label: qsTr("End time:")
-                        value: HH.pad(endSelectedHour) + ":" + HH.pad(endSelectedMinute)
+                        value: endMoment.format("H:mm")
                         width: parent.width
                         onClicked: doOnClicked()
 
                         function doOnClicked() {
-                            openTimeDialog(endSelectedHour, endSelectedMinute, endTimeSelected)
+                            openTimeDialog(moment(endMoment), endTimeSelected)
                         }
                     }
                 }
@@ -475,14 +326,7 @@ Dialog {
                 onCheckedChanged: {
                     fixedSwitch.text = checked ? qsTr("Endtime stays fixed") : qsTr("Starttime stays fixed")
                     fixedSwitch.description = checked ? qsTr("Starttime will flex if duration is changed.") : qsTr("Endtime will flex if duration is changed.")
-
-                    if (checked) {
-                        endTimeStaysFixed = true
-                    }
-
-                    else {
-                        endTimeStaysFixed = false
-                    }
+                    endTimeStaysFixed = checked
                 }
             }
 
@@ -491,7 +335,7 @@ Dialog {
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: duration>=0 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: durationButton.height
@@ -499,8 +343,8 @@ Dialog {
                     ValueButton {
                         id: durationButton
                         anchors.centerIn: parent
-                        label: qsTr("Duration")+": "
-                        value: duration.toString().toHHMM()
+                        label: qsTr("Duration") + ": "
+                        value: helpers.formatTimerDuration(getDurationInMilliseconds())
                         width: parent.width
                         onClicked: showDurationTimepicker()
                     }
@@ -508,11 +352,13 @@ Dialog {
             }
 
             BackgroundItem {
+                // At least one minute
+                visible: getDurationInMilliseconds() > 60 * 1000
                 onClicked: showBreakDurationTimepicker()
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: breakDuration>=0 ? Theme.secondaryHighlightColor : "red"
+                    color: Theme.secondaryHighlightColor
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: breakDurationButton.height
@@ -520,20 +366,21 @@ Dialog {
                     ValueButton {
                         id: breakDurationButton
                         anchors.centerIn: parent
-                        label: qsTr("Break")+": "
-                        value: "00:00"
+                        label: qsTr("Break") + ": "
+                        value: helpers.formatTimerDuration(breakDurationInMilliseconds)
                         width: parent.width
                         onClicked: showBreakDurationTimepicker()
                     }
                 }
             }
             BackgroundItem {
-                visible: breakDuration
+                // At least one minute
+                visible: breakDurationInMilliseconds > 60 * 1000
                 onClicked: showNetDurationTimepicker()
 
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    color: netDuration>=0 ? Theme.secondaryHighlightColor : "red"
+                    color: getNetDurationInMilliseconds() > 0 ? Theme.secondaryHighlightColor : "red"
                     radius: Theme.paddingMedium
                     width: parent.width * 0.7
                     height: netDurationButton.height
@@ -542,7 +389,7 @@ Dialog {
                         id: netDurationButton
                         anchors.centerIn: parent
                         label: qsTr("Net duration")+": "
-                        value: netDuration.toString().toHHMM()
+                        value: helpers.formatTimerDuration(getNetDurationInMilliseconds())
                         width: parent.width
                         onClicked: showNetDurationTimepicker()
                     }
@@ -569,11 +416,11 @@ Dialog {
                 onCurrentItemChanged: {
                     if (projectComboInitialized) {
                         var selectedValue = modelSource.get(currentIndex).value
-                        project = modelSource.get(currentIndex).id
-                        var lastUsed = db.getLastUsedInput(project)
+                        appState.currentProjectId = modelSource.get(currentIndex).id
+                        var lastUsed = db.getLastUsedInput(appState.currentProjectId)
 
                         if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
-                            taskId = lastUsed['taskId']
+                            appState.currentTaskId = lastUsed['taskId']
                         }
 
                         if (lastUsed['description'] && lastUsed['description'] !== '') {
@@ -585,19 +432,15 @@ Dialog {
                 }
 
                 function init() {
-                    projects = db.getProjects()
+                    var projects = appState.data.projects
                     if (projects.length === 0) {
-                        var id = db.getUniqueId(),
-                            values = {
-                                "uid": id,
-                                "name": "default",
-                                "labelColor": Theme.secondaryHighlightColor,
-                            };
-
-                        db.saveProject(values);
-                        defaultProjectId = id
-                        settings.setDefaultProjectId(id)
-                        projects = db.getProjects()
+                        var id = db.insertInitialProject(Theme.secondaryHighlightColor);
+                        if (id) {
+                            //TODO: Try to get rid of this kind of code
+                            settings.setDefaultProjectId(id)
+                            appState.data.projects = db.getProjects()
+                            projects = appState.data.projects
+                        }
                     }
 
                     for (var i = 0; i < projects.length; i++) {
@@ -609,12 +452,8 @@ Dialog {
                     }
                     _updating = false
 
-                    if(project === "") {
-                        project = settings.getDefaultProjectId()
-                    }
-
                     for (var i = 0; i < modelSource.count; i++) {
-                        if (modelSource.get(i).id == project) {
+                        if (modelSource.get(i).id === appState.currentProjectId) {
                             currentIndex = i
                             break
                         }
@@ -648,13 +487,13 @@ Dialog {
                 onCurrentItemChanged: {
                     if (currentIndex !== -1) {
                         var selectedValue = taskModelSource.get(currentIndex).value
-                        taskId = taskModelSource.get(currentIndex).id
+                        appState.currentTaskId = taskModelSource.get(currentIndex).id
 
-                        if (taskId > 0) {
-                            var lastUsed = db.getLastUsedInput(project)
+                        if (appState.currentTaskId > 0) {
+                            var lastUsed = db.getLastUsedInput(appState.currentProjectId)
 
                             if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
-                                taskId = lastUsed['taskId']
+                                appState.currentTaskId = lastUsed['taskId']
                             }
 
                             if (lastUsed['description'] && lastUsed['description'] !== '') {
@@ -672,7 +511,7 @@ Dialog {
                 }
 
                 function init(deselect) {
-                    tasks = db.getTasks(project)
+                    var tasks = db.getTasks(appState.currentProjectId)
                     for (var i = 0; i < tasks.length; i++) {
                         taskModelSource.set(i, {
                             'id': tasks[i].id,
@@ -688,12 +527,12 @@ Dialog {
 
                     _updating = false
 
-                    currentIndex = -1
+                    currentIndex = 1
                     currentItem = null
 
-                    if (taskId !== "0" || taskId !== "") {
+                    if (appState.currentTaskId) {
                         for (var i = 0; i < taskModelSource.count; i++) {
-                            if (taskModelSource.get(i).id === taskId) {
+                            if (taskModelSource.get(i).id === appState.currentTaskId) {
                                 currentIndex = i
                                 break
                             }
@@ -709,7 +548,7 @@ Dialog {
             TextField {
                 id: descriptionTextArea
                 width: parent.width
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                EnterKey.iconSource: "image://theme/icon-enter-close"
                 EnterKey.onClicked: focus = false
                 placeholderText: qsTr("Enter an optional description")
                 onClicked: {
@@ -724,54 +563,50 @@ Dialog {
 
             Component.onCompleted: {
                 if(!editMode && !fromTimer) {
-                    var dur = settings.getDefaultDuration()
-                    if (dur >=0) {
-                        duration = dur
-                    }
-
                     var brk = settings.getDefaultBreakDuration()
-                    if (brk >= 0) {
-                        breakDuration = brk
+                    if (brk > 0) {
+                        // DefaultBreakDuration got saved as hours for some stupid reason
+                        breakDurationInMilliseconds = helpers.hoursToMilliseconds(brk)
                     }
+                } else if (fromTimer) {
+                    breakDurationInMilliseconds = breakTimer.getTotalDurationInMilliseconds()
+                    startMoment = moment(appState.timerStartTime)
+                    endMoment = moment()
+
+                    // Add default break duration if settings allows and no break recorded
+                    // Also only add it if it is less than the duration
+                    // DefaultBreakDuration got saved as hours for some stupid reason
+                    var defaultBreakDurInMs = helpers.hoursToMilliseconds(settings.getDefaultBreakDuration())
+                    if (!breakDurationInMilliseconds && settings.getDefaultBreakInTimer() && defaultBreakDurInMs < getDurationInMilliseconds()) {
+                        breakDurationInMilliseconds = defaultBreakDurInMs
+                    }
+                } else if (editMode && hourRow) {
+                    // breakDuration was saved as hours
+                    breakDurationInMilliseconds = helpers.hoursToMilliseconds(hourRow.breakDuration)
+                    // For legacy reasons date and times are saved separately
+                    startMoment = moment(hourRow.date + " " + hourRow.startTime)
+                    // @TODO: This might not be very smart
+                    // For legacy reasons durations were saved as hours
+                    endMoment = moment(startMoment).add(hourRow.duration, "hours")
+                    descriptionTextArea.text = hourRow.description
+                    appState.currentProjectId = hourRow.project
+                    appState.currentTaskId = hourRow.taskId
                 }
 
                 var endFixed = settings.getEndTimeStaysFixed()
                 if (endFixed === "yes") {
                     fixedSwitch.checked = true
-                }
-                else if (endFixed === "no") {
+                } else if (endFixed === "no") {
                     fixedSwitch.checked = false
                 }
 
                 var nowByDefault = settings.getEndsNowByDefault()
                 if (nowByDefault === "yes") {
                     timeSwitch.checked = true
-                }
-                else if(nowByDefault === "no") {
+                } else if(nowByDefault === "no") {
                     timeSwitch.checked = false
                 }
 
-                if (description !== qsTr("No description")) {
-                    descriptionTextArea.text = description
-                }
-
-                if(dateText !== qsTr("Today")) {
-                    updateDateText()
-                }
-
-                // Rounding should happen before updating the values visible
-                roundToNearest = settings.getRoundToNearest()
-                if (!editMode) {
-                    doRoundToNearest()
-                }
-
-                if (breakDuration > 0) {
-                    updateBreakDuration()
-                    updateNetDuration()
-                }
-
-                updateDuration()
-                updateStartTime()
                 projectCombo.init()
             }
         }
@@ -780,16 +615,11 @@ Dialog {
     onDone: {
         if (result == DialogResult.Accepted) {
             saveHours()
-
-            if (dataContainer != null) {
-                page.dataContainer.getHours()
-
-            }
+            firstPage.refreshState()
         }
 
         if(fromCover) {
             appWindow.deactivate()
-
         }
     }
 

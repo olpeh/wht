@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QObject>
 #include <QtSql>
+#include <QDateTime>
 #include "Database.h"
 
 class BreakTimer : public QObject {
@@ -46,14 +47,16 @@ class BreakTimer : public QObject {
         ~BreakTimer();
 
     public slots:
-        QString start();
-        QString getStartTime();
-        double getDuration();
-        void stop(double duration);
+        QDateTime start();
+        QDateTime getStartTime();
+        qint64 getDurationInMilliseconds();
+        qint64 getTotalDurationInMilliseconds();
+        bool isRunning();
+        void stop();
         void clear();
 
     private:
-        bool setTimer(QString timeString, bool running);
+        bool setTimer(QDateTime startTime, bool running);
         Database* db;
 };
 

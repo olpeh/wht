@@ -31,10 +31,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <QObject>
-#include <QtSql>
 #include "WorkTimer.h"
-#include "Database.h"
 
 WorkTimer::WorkTimer(Database* db, QObject *parent) : QObject(parent) {
     this->db = db;
@@ -42,50 +39,67 @@ WorkTimer::WorkTimer(Database* db, QObject *parent) : QObject(parent) {
 
 WorkTimer::~WorkTimer() {}
 
-QString WorkTimer::start(QString startTime) {
-    if (startTime == NULL) {
-        startTime = QTime::currentTime().toString("hh:mm");
-    }
 
+QDateTime WorkTimer::start(QDateTime startTime) {
     if (setTimer(startTime, true)) {
-        Logger::instance().debug("Timer was saved to database at: " + startTime);
+        Logger::instance().debug("Timer was saved to database at: " + startTime.toString());
         return startTime;
     }
-    return "Error";
+    // NULL DateTime
+    return QDateTime();
 }
 
-QString WorkTimer::getStartTime() {
+QDateTime WorkTimer::getStartTime() {
     QSqlQuery query;
     query.prepare("SELECT starttime from timer WHERE started = 1 LIMIT 1");
     if (query.exec() && query.first()) {
-        return query.record().value("starttime").toString();
+        return QDateTime::fromString(query.record().value("starttime").toString());
     }
     else {
-        return "Not started";
+        // NULL DateTime
+        return QDateTime();
     }
+}
+
+qint64 WorkTimer::getDurationInMilliseconds() {
+    // TODO: Does this work
+    QDateTime dateTimeNow = QDateTime::currentDateTime();
+    QDateTime startTime = getStartTime();
+    return startTime.msecsTo(dateTimeNow);
+}
+
+qint64 WorkTimer::getActualDurationInMilliseconds(BreakTimer* breakTimer) {
+    // TODO: Is this even safe?
+    return getDurationInMilliseconds() - breakTimer->getTotalDurationInMilliseconds();
+}
+
+bool WorkTimer::isRunning() {
+    return !getStartTime().isNull();
 }
 
 void WorkTimer::stop() {
-    QString stopTime = QTime::currentTime().toString("hh:mm");
+    QDateTime stopTime = QDateTime::currentDateTime();
     if (setTimer(stopTime, false)) {
-        Logger::instance().debug("Timer was stopped at: " + stopTime);
+        Logger::instance().debug("Timer was stopped at: " + stopTime.toString());
     }
 }
 
-// Should use some better format for timestamps
-// Now uses time in hh:mm format
-bool WorkTimer::setTimer(QString timeString, bool running) {
+bool WorkTimer::setTimer(QDateTime startTime, bool running) {
     QSqlQuery query;
     query.prepare("INSERT OR REPLACE INTO timer "
                   "VALUES (:uid, :starttime, :started);");
 
-    // Why did I do it like this earlier?
+    // TODO: Why did I do it like this earlier?
     // Plz refactor this
+    // Why did I comment like that?
     query.bindValue(":uid", 1);
-    query.bindValue(":starttime", timeString);
+    query.bindValue(":starttime", startTime.toString());
     query.bindValue(":started", running);
 
     if (query.exec()) {
+        if(running) {
+           emit startTimeChanged(startTime);
+        }
         return true;
     }
     else {
