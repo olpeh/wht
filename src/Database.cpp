@@ -109,24 +109,39 @@ void Database::upgradeIfNeeded()
     bool success = QSqlDatabase::database().transaction();
     QSqlQuery query;
     query.exec("PRAGMA user_version");
-    // 1 -> 2 Add breakDuration if missing
     if (query.first() && !query.value(0).isNull())
     {
         QVariant version = query.value(0);
-        if (version < 3)
+        if (version < 4)
         {
             query.exec("SELECT name FROM sqlite_master WHERE type='table' AND name='hours';");
             if (query.first() && query.value(0) == "hours")
             {
                 if (version < 2)
                 {
+                    // 1 -> 2 Add breakDuration if missing
                     query.exec("ALTER TABLE hours ADD breakDuration REAL DEFAULT 0;");
                     Logger::instance().debug("Updating table hours to user_version 2. Adding breakDuration column.");
                 }
-                query.exec("ALTER TABLE hours ADD taskId TEXT;");
-                Logger::instance().debug("Updating table hours to user_version 3. Adding tadkId column.");
 
-                query.exec("PRAGMA user_version = 3;");
+                if (version < 3)
+                {
+                    // 2 -> 3 Add taskId if missing
+                    query.exec("ALTER TABLE hours ADD taskId TEXT;");
+                    Logger::instance().debug("Updating table hours to user_version 3. Adding taskId column.");
+                }
+
+                if (version < 4)
+                {
+                    // 3 -> 4 Fix some broken starttimes and endtimes
+                    // Because of a bug some of the times where something like this: "08:-2"
+                    // The fix will change those times from "08:-2" to "08:02"
+                    query.exec("UPDATE hours SET starttime=(SELECT substr(starttime, 0, 4) || \"0\" || substr(starttime, 5, 1) FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\")) WHERE uid IN (SELECT uid FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\"));");
+                    query.exec("UPDATE hours SET endtime=(SELECT substr(endtime, 0, 4) || \"0\" || substr(endtime, 5, 1) FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\")) WHERE uid IN (SELECT uid FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\"));");
+                    Logger::instance().debug("Updating table hours to user_version 4. Fixed some broken rows.");
+                }
+
+                query.exec("PRAGMA user_version = 4;");
             }
             else
             {
@@ -137,7 +152,7 @@ void Database::upgradeIfNeeded()
     QSqlDatabase::database().commit();
     if (success)
     {
-        Logger::instance().debug("Database schema version is currently 3");
+        Logger::instance().debug("Database schema version is currently 4");
     }
     else
     {
