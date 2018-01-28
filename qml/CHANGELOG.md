@@ -1,3 +1,8 @@
+## [1.3.4-1] - 2018-01-28
+### Fixed
+- Fix broken rows in the database
+- Fix stopping from command line, issue #57
+
 ## [1.3.3-1] - 2018-01-20
 ### Fixed
 - Refactor date handlings to fix most of the date related issues
