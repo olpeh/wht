@@ -137,31 +137,31 @@ Page {
         }
 
         if (appState.arguments.stopFromCommandLine) {
-            // var description = "Automatically saved from command line"
-            // var project =  settings.getDefaultProjectId()
-            // var taskId = "0"
+            var startMoment = moment(appState.timerStartTime)
+            var endMoment = moment()
 
-            // TODO: Change the format
-            // var dateString = helpers.dateToDbDateString(new Date())
+            var values = {
+                "date": startMoment.format("YYYY-MM-DD"),
+                "startTime": startMoment.format("HH:mm"),
+                "endTime": endMoment.format("HH:mm"),
+                // For legacy reasons
+                "duration": helpers.millisecondsToHours(appState.timerDuration),
+                "project": settings.getDefaultProjectId(),
+                "description": "Automatically saved from command line",
+                // For legacy reasons
+                "breakDuration": helpers.millisecondsToHours(appState.breakTimerDuration),
+                "taskId": "0"
+            };
 
-            // Log.info("AutoSaving: " + uid + "," + dateString + "," + startTime.format("H:mm") + "," + endTime.format("H:mm") + "," + duration + "," + project + "," + description + "," + breakDuration + "," + taskId)
+            Log.info("Trying to save automatically: " + JSON.stringify(values));
 
-            // var values = {
-            //     "dateString": dateString,
-            //     "startTime": startTime.format("H:mm"),
-            //     "endTime": endTime.format("H:mm"),
-            //     "duration": duration,
-            //     "project": project,
-            //     "description": description,
-            //     "breakDuration": breakDuration,
-            //     "taskId": taskId
-            // }
-
-            // if(db.saveHourRow(values)) {
-            //     refreshState()
-            // } else {
-            //     banner.notify("Error when saving!")
-            // }
+            if(db.saveHourRow(values)) {
+                // Try to avoid saving multiple times etc.
+                stopFromCommandLine = false
+                firstPage.refreshState()
+            } else {
+                banner.notify("Error when saving!")
+            }
         } else {
             if (fromCover && pageStack.depth > 1) {
                 pageStack.replaceAbove(appWindow.firstPage,Qt.resolvedUrl("../pages/Add.qml"), { fromTimer: true, fromCover: fromCover })
@@ -523,7 +523,7 @@ Page {
             // TODO: Why is this here?
             if(appState.timerRunning && appState.arguments.stopFromCommandLine) {
                 banner.notify(qsTr("Timer stopped by command line argument"))
-                stop()
+                stopTimer()
                 pageStack.push(Qt.resolvedUrl("All.qml"), {dataContainer: root, section: qsTr("Today")})
             }
         }
