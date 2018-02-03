@@ -1,3 +1,12 @@
+## [1.3.5-1] - 2018-02-03
+### Fixed
+- Fix the fix for broken rows in the database
+- Remove dateless rows
+- Add break when saving from command line if settings allow
+
+### Updated
+- Updated translations
+
 ## [1.3.4-1] - 2018-01-28
 ### Fixed
 - Fix broken rows in the database
