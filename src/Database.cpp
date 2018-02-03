@@ -131,17 +131,18 @@ void Database::upgradeIfNeeded()
                     Logger::instance().debug("Updating table hours to user_version 3. Adding taskId column.");
                 }
 
-                if (version < 4)
+                // 3 -> 4 Fix tried to fix broken starttimes and endtimes
+                // The broken fix changed those times from "08:-2" to "08:02"
+                if (version < 5)
                 {
-                    // 3 -> 4 Fix some broken starttimes and endtimes
                     // Because of a bug some of the times where something like this: "08:-2"
-                    // The fix will change those times from "08:-2" to "08:02"
-                    query.exec("UPDATE hours SET starttime=(SELECT substr(starttime, 0, 4) || \"0\" || substr(starttime, 5, 1) FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\")) WHERE uid IN (SELECT uid FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\"));");
-                    query.exec("UPDATE hours SET endtime=(SELECT substr(endtime, 0, 4) || \"0\" || substr(endtime, 5, 1) FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\")) WHERE uid IN (SELECT uid FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\"));");
-                    Logger::instance().debug("Updating table hours to user_version 4. Fixed some broken rows.");
+                    // The correct fix changes those times from "08:-2" to "07:58" etc.
+                    query.exec("UPDATE hours SET starttime=(SELECT CAST(CAST(substr(starttime, 0, 3) as integer) -1 as string) || \":\" || CAST(60 + CAST(substr(starttime, 4,2) as integer) as string) FROM hours as h WHERE h.uid=hours.uid) WHERE uid IN (SELECT uid FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\"));");
+                    query.exec("UPDATE hours SET endtime=(SELECT CAST(CAST(substr(endtime, 0, 3) as integer) -1 as string) || \":\" || CAST(60 + CAST(substr(endtime, 4,2) as integer) as string) FROM hours as h WHERE h.uid=hours.uid) WHERE uid IN (SELECT uid FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\"));");
+                    Logger::instance().debug("Updating table hours to user_version 5. Fixed some broken rows.");
                 }
 
-                query.exec("PRAGMA user_version = 4;");
+                query.exec("PRAGMA user_version = 5;");
             }
             else
             {
@@ -152,7 +153,7 @@ void Database::upgradeIfNeeded()
     QSqlDatabase::database().commit();
     if (success)
     {
-        Logger::instance().debug("Database schema version is currently 4");
+        Logger::instance().debug("Database schema version is currently 5");
     }
     else
     {
