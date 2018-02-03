@@ -74,12 +74,6 @@
         <translation>Starte externe E-Mail-App</translation>
     </message>
     <message>
-        <source>Copyright (C) 2017 Olavi Haapala
-The source code is licensed under BSD 3-clause.</source>
-        <translation>Copyright (C) 2017 Olavi Haapala
-Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
-    </message>
-    <message>
         <source>Read the license</source>
         <translation>Lizenz anzeigen</translation>
     </message>
@@ -91,6 +85,11 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
         <source>Your current version and build number: %1-%2</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Copyright (C) 2017 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Add</name>
@@ -99,20 +98,8 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
         <translation>Projekt</translation>
     </message>
     <message>
-        <source>No description</source>
-        <translation>Keine Beschreibung</translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation>Heute</translation>
-    </message>
-    <message>
         <source>Save</source>
         <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Ends now</source>
@@ -129,10 +116,6 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
     <message>
         <source>Starttime will be set to now.</source>
         <translation>Startzeit wird auf die momentane Uhrzeit gesetzt.</translation>
-    </message>
-    <message>
-        <source>Date:</source>
-        <translation>Datum:</translation>
     </message>
     <message>
         <source>Start time:</source>
@@ -189,6 +172,22 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
     <message>
         <source>Add or edit tasks in project settings</source>
         <translation>Aufgaben können in den Einstellungen hinzugefügt oder geändert werden.</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Start date:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>End date:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -382,32 +381,24 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>No default project found</source>
-        <translation>Kein Standardprojekt gefunden</translation>
+        <source>About</source>
+        <translation>Über</translation>
     </message>
     <message>
-        <source>Timer stopped by command line argument</source>
-        <translation>Zähler durch Argument auf der Kommandozeile angehalten.</translation>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
     </message>
     <message>
-        <source>Today</source>
-        <translation>Heute</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>Standard</translation>
-    </message>
-    <message>
-        <source>Timer started by command line argument</source>
-        <translation>Zähler durch Argument auf der Kommandozeile gestartet.</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation>Zeiterfassung startete automatisch</translation>
+        <source>Add Hours</source>
+        <translation>Stunden hinzufügen</translation>
     </message>
     <message>
         <source>Yesterday</source>
         <translation>Gestern</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation>Heute</translation>
     </message>
     <message>
         <source>Last week</source>
@@ -434,18 +425,6 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
         <translation>Dieses Jahr</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>Über</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <source>Add Hours</source>
-        <translation>Stunden hinzufügen</translation>
-    </message>
-    <message>
         <source>Timer is not running</source>
         <translation>Zeiterfassung ist nicht aktiv</translation>
     </message>
@@ -468,6 +447,18 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
     <message>
         <source>Adjust</source>
         <translation>Anpassen</translation>
+    </message>
+    <message>
+        <source>Timer stopped by command line argument</source>
+        <translation>Zähler durch Argument auf der Kommandozeile angehalten.</translation>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
+        <translation>Zähler durch Argument auf der Kommandozeile gestartet.</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>Zeiterfassung startete automatisch</translation>
     </message>
 </context>
 <context>
@@ -812,54 +803,6 @@ Der Quellcode ist unter der BSD 3-Klausel lizensiert.</translation>
     <message>
         <source>Currency string</source>
         <translation>Währungskürzel oder -symbol</translation>
-    </message>
-    <message>
-        <source>Move all hours to default</source>
-        <translation>Alle Arbeitszeiten zum Standard verschieben</translation>
-    </message>
-    <message>
-        <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation>Verschiebe alle erfassten Arbeitsstunden zu dem Projekt welches als Standard gesetzt ist.</translation>
-    </message>
-    <message>
-        <source>Move all to default</source>
-        <translation>Alles zum Standard verschieben</translation>
-    </message>
-    <message>
-        <source>Move all hours to default project</source>
-        <translation>Alle Arbeitszeiten zum Standardprojekt verschieben.</translation>
-    </message>
-    <message>
-        <source>No default project set</source>
-        <translation>Kein Standardprojekt gesetzt</translation>
-    </message>
-    <message>
-        <source>Move by project name in description</source>
-        <translation>Verschiebe anhand der Beschreibung</translation>
-    </message>
-    <message>
-        <source>Try to move hours to existing projects.</source>
-        <translation>Versucht Arbeitszeiten zu existierenden Projekten zu verschieben.</translation>
-    </message>
-    <message>
-        <source>Sets correct project if the project name is found in the description.</source>
-        <translation>Setzt das korrektes Projekt wenn der Projektname in der Beschreibung enthalten ist.</translation>
-    </message>
-    <message>
-        <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation>(Nur vorgesehen, wenn du eine frühere Version dieser App benutzt und Projektnamen in die Beschreibungen geschrieben hast.)</translation>
-    </message>
-    <message>
-        <source>This might take a while.</source>
-        <translation>Dies könnte eine Weile dauern.</translation>
-    </message>
-    <message>
-        <source>Move existing hours</source>
-        <translation>Verschiebe erfasste Arbeitsstunden</translation>
-    </message>
-    <message>
-        <source>Moving hours to projects in description</source>
-        <translation>Verschiebe Arbeitsstunden zu Projekten aus der Beschreibung</translation>
     </message>
     <message>
         <source>Please be aware!</source>

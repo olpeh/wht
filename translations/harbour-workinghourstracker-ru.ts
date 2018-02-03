@@ -74,16 +74,20 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Copyright (C) 2017 Olavi Haapala
-The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Read the license</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Your current version and build number: %1-%2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Copyright (C) 2017 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -94,19 +98,7 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>No description</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Save</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Cancel</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -123,10 +115,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Date:</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -185,6 +173,22 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Add or edit tasks in project settings</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start date:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>End date:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>AddProject</name>
@@ -240,10 +244,6 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>All</name>
     <message>
-        <source>Project was not found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Today</source>
         <translation type="unfinished"/>
     </message>
@@ -281,10 +281,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Sort by project</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>No items in this category yet</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -335,6 +331,14 @@ The source code is licensed under BSD 3-clause.</source>
         <source>Saved to</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>No items in this category yet</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>CategorySummary</name>
@@ -348,10 +352,6 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Something went wrong</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -381,18 +381,6 @@ The source code is licensed under BSD 3-clause.</source>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>No default project found</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>default</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>About</source>
         <translation type="unfinished"/>
     </message>
@@ -405,23 +393,11 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Today</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>This week</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>This month</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>This year</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Yesterday</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Today</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -429,11 +405,23 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
     <message>
+        <source>This week</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>Last month</source>
         <translation type="unfinished"/>
     </message>
     <message>
+        <source>This month</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <source>All</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>This year</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -458,6 +446,18 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adjust</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Timer stopped by command line argument</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -805,54 +805,6 @@ The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Move all hours to default</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Move all to default</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Move all hours to default project</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>No default project set</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Move by project name in description</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Try to move hours to existing projects.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Sets correct project if the project name is found in the description.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>This might take a while.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Move existing hours</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Moving hours to projects in description</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Please be aware!</source>
         <translation type="unfinished"/>
     </message>
@@ -1058,6 +1010,75 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>WhatsNewPage</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>What&apos;s new?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>App updated to %1-%2</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Start the timer</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Stop the timer</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Select project by id.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>project</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Select task by id.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>task</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Set description</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>description</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>worker</name>
+    <message>
+        <source>Project was not found</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Workdays</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Entries</source>
         <translation type="unfinished"/>
     </message>
 </context>

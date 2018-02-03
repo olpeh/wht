@@ -1,133 +1,134 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="tr_TR" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="hu" version="2.1">
 <context>
     <name>About</name>
     <message>
         <source>How to use</source>
-        <translation type="unfinished"/>
+        <translation>Használati útmutató</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Névjegy</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>Általános</translation>
     </message>
     <message>
         <source>Usage</source>
-        <translation type="unfinished"/>
+        <translation>Használat</translation>
     </message>
     <message>
         <source>Read more about how to use this app by accessing the pulley menu or clicking the button below.</source>
-        <translation type="unfinished"/>
+        <translation>Tudj meg többet az alkalmazás használatáról a lehúzható menü vagy az alábbi gomb segítségével.</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"/>
+        <translation>Szerző</translation>
     </message>
     <message>
         <source>Donate</source>
-        <translation type="unfinished"/>
+        <translation>Adományozz</translation>
     </message>
     <message>
         <source>Please donate if you like my work. Donations help me to use more time on development.</source>
-        <translation type="unfinished"/>
+        <translation>Ha tetszik a munkám, kérlek adományozz. Az adományok segítenek, hogy több időt tölthessek fejlesztéssel.</translation>
     </message>
     <message>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"/>
+        <translation>A vágólapra másolva</translation>
     </message>
     <message>
         <source>Donate to my bitcoin account</source>
-        <translation type="unfinished"/>
+        <translation>Adományozz a bitcoin számlámra</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation type="unfinished"/>
+        <translation>Forrás</translation>
     </message>
     <message>
         <source>Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.</source>
-        <translation type="unfinished"/>
+        <translation>Közreműködésnek, hibajelentéseknek és ötleteknek örülünk. A problémákat a GitHub-on jelenthetitek. Hivatkozás lentebb.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation type="unfinished"/>
+        <translation>Problémák a GitHub-on</translation>
     </message>
     <message>
         <source>Project in GitHub</source>
-        <translation type="unfinished"/>
+        <translation>A projekt a GitHub-on</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="unfinished"/>
+        <translation>Licenc</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"/>
+        <translation>Külső böngésző megnyitása</translation>
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation type="unfinished"/>
+        <translation>A Working Hours Tracker Sailfish OS-re egy egyszerű munkaidő-nyilvántartó, ami a munkaidő nyilvántartására szolgál.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation type="unfinished"/>
+        <translation>Külső e-mailalkalmazás megnyitása</translation>
     </message>
     <message>
         <source>Read the license</source>
-        <translation type="unfinished"/>
+        <translation>Olvasd el a licencet</translation>
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation type="unfinished"/>
+        <translation>Problémák vagy hibák esetében ellenőrizd a naplókat a beállítások-&gt;Naplók megtekintése fejezetben, és küldd el a fejlesztőnek.</translation>
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"/>
+        <translation>A jelenlegi verzió és build szám: %1-%2</translation>
     </message>
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation>Copyright (C) 2017 Olavi Haapala 
+A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
 </context>
 <context>
     <name>Add</name>
     <message>
         <source>Project</source>
-        <translation type="unfinished"/>
+        <translation>Projekt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>Mentés</translation>
     </message>
     <message>
         <source>Ends now</source>
-        <translation type="unfinished"/>
+        <translation>Befejeződik most</translation>
     </message>
     <message>
         <source>Endtime will be set to now.</source>
-        <translation type="unfinished"/>
+        <translation>A befejezési idő mostanra lesz állítva.</translation>
     </message>
     <message>
         <source>Starts now</source>
-        <translation type="unfinished"/>
+        <translation>Kezdődik most</translation>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
-        <translation type="unfinished"/>
+        <translation>A kezdő idő mostanra lesz állítva.</translation>
     </message>
     <message>
         <source>Start time:</source>
-        <translation type="unfinished"/>
+        <translation>Kezdési idő:</translation>
     </message>
     <message>
         <source>End time:</source>
-        <translation type="unfinished"/>
+        <translation>Befejezési idő:</translation>
     </message>
     <message>
         <source>Endtime stays fixed</source>
-        <translation type="unfinished"/>
+        <translation>A befejezési idő fix marad</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
@@ -143,173 +144,173 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"/>
+        <translation>Időtartam</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation type="unfinished"/>
+        <translation>Szünet</translation>
     </message>
     <message>
         <source>Net duration</source>
-        <translation type="unfinished"/>
+        <translation>Nettó időtartam</translation>
     </message>
     <message>
         <source>Add or edit projects in settings</source>
-        <translation type="unfinished"/>
+        <translation>Projektek hozzáadása vagy szerkesztése a beállításokban</translation>
     </message>
     <message>
         <source>Enter an optional description</source>
-        <translation type="unfinished"/>
+        <translation>Írj be egy opcionális leírást</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"/>
+        <translation>Feladat</translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"/>
+        <translation>Nincs feladat meghatározva</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"/>
+        <translation>Feladatok hozzáadása, vagy szerkesztése a projektbeállításokban</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation>Elvet</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Mégse</translation>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation>Indítás dátuma:</translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation>Befejezés dátuma:</translation>
     </message>
 </context>
 <context>
     <name>AddProject</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>Mentés</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Mégse</translation>
     </message>
     <message>
         <source>Please enter a name for the project</source>
-        <translation type="unfinished"/>
+        <translation>Adj egy nevet a projektnek</translation>
     </message>
     <message>
         <source>Make this the default project</source>
-        <translation type="unfinished"/>
+        <translation>Legyen ez az alapértelmezett projekt</translation>
     </message>
     <message>
         <source>Hourly rate</source>
-        <translation type="unfinished"/>
+        <translation>Órabér</translation>
     </message>
     <message>
         <source>Select label color</source>
-        <translation type="unfinished"/>
+        <translation>Címke színének kiválasztása</translation>
     </message>
     <message>
         <source>Reset coloring</source>
-        <translation type="unfinished"/>
+        <translation>Színezés alapértelmezettre</translation>
     </message>
     <message>
         <source>Project name</source>
-        <translation type="unfinished"/>
+        <translation>Projekt neve</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"/>
+        <translation>Feladatok</translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"/>
+        <translation>Díjszabások</translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"/>
+        <translation>Színezés</translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"/>
+        <translation>Feladat neve</translation>
     </message>
 </context>
 <context>
     <name>All</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"/>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation type="unfinished"/>
+        <translation>Tegnap</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation type="unfinished"/>
+        <translation>Ezen a héten</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation type="unfinished"/>
+        <translation>Múlt héten</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation type="unfinished"/>
+        <translation>Ebben a hónapban</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation type="unfinished"/>
+        <translation>Múlt hónapban</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation type="unfinished"/>
+        <translation>Ebben az évben</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"/>
+        <translation>Mind</translation>
     </message>
     <message>
         <source>Sort by date</source>
-        <translation type="unfinished"/>
+        <translation>Rendezés dátum szerint</translation>
     </message>
     <message>
         <source>Sort by project</source>
-        <translation type="unfinished"/>
+        <translation>Rendezés projekt szerint</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation type="unfinished"/>
+        <translation>Eltávolítás</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>Eltávolítás</translation>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation type="unfinished"/>
+        <translation>Munkaórák jelentése</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished"/>
+        <translation>Összes</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"/>
+        <translation>Időtartam</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished"/>
+        <translation>Munkanapok</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"/>
+        <translation>Bejegyzések</translation>
     </message>
     <message>
         <source>for project</source>
@@ -317,46 +318,46 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Created</source>
-        <translation type="unfinished"/>
+        <translation>Létrehozva</translation>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation type="unfinished"/>
+        <translation>Jelentés küldése e-mailben</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation type="unfinished"/>
+        <translation>Exportálás CSV-be</translation>
     </message>
     <message>
         <source>Saved to</source>
-        <translation type="unfinished"/>
+        <translation>Mentve ide:</translation>
     </message>
     <message>
         <source>No items in this category yet</source>
-        <translation type="unfinished"/>
+        <translation>Ebben a kategóriában még nincsenek tételek</translation>
     </message>
     <message>
         <source>Project was not found</source>
-        <translation type="unfinished"/>
+        <translation>A projektet nem találom</translation>
     </message>
 </context>
 <context>
     <name>CategorySummary</name>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"/>
+        <translation>Időtartam</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished"/>
+        <translation>Munkanapok</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"/>
+        <translation>Bejegyzések</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation type="unfinished"/>
+        <translation>Összes</translation>
     </message>
     <message>
         <source>Summary for</source>
@@ -367,121 +368,121 @@ The source code is licensed under BSD 3-clause.</source>
     <name>CoverPage</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"/>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"/>
+        <translation>Hét</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"/>
+        <translation>Hónap</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Névjegy</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>Add Hours</source>
-        <translation type="unfinished"/>
+        <translation>Órák hozzáadása</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation type="unfinished"/>
+        <translation>Tegnap</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"/>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation type="unfinished"/>
+        <translation>Múlt héten</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation type="unfinished"/>
+        <translation>Ezen a héten</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation type="unfinished"/>
+        <translation>Múlt hónapban</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation type="unfinished"/>
+        <translation>Ebben a hónapban</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"/>
+        <translation>Mind</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation type="unfinished"/>
+        <translation>Ebben az évben</translation>
     </message>
     <message>
         <source>Timer is not running</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő nem fut</translation>
     </message>
     <message>
         <source>Click to start</source>
-        <translation type="unfinished"/>
+        <translation>Kattints a kezdéshez</translation>
     </message>
     <message>
         <source>Break</source>
-        <translation type="unfinished"/>
+        <translation>Szünet</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"/>
+        <translation>Leállítás</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"/>
+        <translation>Elindítva</translation>
     </message>
     <message>
         <source>Adjust</source>
-        <translation type="unfinished"/>
+        <translation>Beállítás</translation>
     </message>
     <message>
         <source>Timer stopped by command line argument</source>
-        <translation type="unfinished"/>
+        <translation>Időzítő leállítva a parancssorból</translation>
     </message>
     <message>
         <source>Timer started by command line argument</source>
-        <translation type="unfinished"/>
+        <translation>Időzítő elindítva a parancssorból</translation>
     </message>
     <message>
         <source>Timer was autostarted</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő automatikusan elindult</translation>
     </message>
 </context>
 <context>
     <name>HowTo</name>
     <message>
         <source>How to</source>
-        <translation type="unfinished"/>
+        <translation>Útmutató</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation type="unfinished"/>
+        <translation>Órák hozzáadása</translation>
     </message>
     <message>
         <source>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</source>
-        <translation type="unfinished"/>
+        <translation>A Working Hours Tracker-t könnyű használni. Órák hozzáadása két különböző módon történhetik.</translation>
     </message>
     <message>
         <source>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</source>
-        <translation type="unfinished"/>
+        <translation>Az órák hozzáadását elérheted az első oldal lehúzható menüjében. Az a hozzáadás oldalra visz.</translation>
     </message>
     <message>
         <source>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.</source>
-        <translation type="unfinished"/>
+        <translation>Indítsd el az időzítőt, mikor dolgozni kezdesz. Utána bezárhatod az alkalmazást, ha akarod és az időzítő tovább fog futni.</translation>
     </message>
     <message>
         <source>At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</source>
@@ -489,15 +490,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adding projects</source>
-        <translation type="unfinished"/>
+        <translation>Projektek hozzáadása</translation>
     </message>
     <message>
         <source>Projects can be added and edited in the settings.</source>
-        <translation type="unfinished"/>
+        <translation>Projekteket a beállításokban adhatsz hozzá és szerkeszthetsz.</translation>
     </message>
     <message>
         <source>You can select the labelcolor and hourlyrate for a project.</source>
-        <translation type="unfinished"/>
+        <translation>Kiválaszthatod a projekt címkeszínét és az óradíjat.</translation>
     </message>
     <message>
         <source>You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.</source>
@@ -509,7 +510,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Using the timer</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő használata</translation>
     </message>
     <message>
         <source>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</source>
@@ -553,7 +554,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Summaries</source>
-        <translation type="unfinished"/>
+        <translation>Összefoglalók</translation>
     </message>
     <message>
         <source>On the first page you will see total hours for different categories.</source>
@@ -581,11 +582,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>There are a few settings in the settings page that makes adding hours faster and easier.</source>
-        <translation type="unfinished"/>
+        <translation>Van néhány beállítás a beállítások oldalon, amely gyorsabbá és könnyebbé teszi az órák hozzáadását.</translation>
     </message>
     <message>
         <source>Default duration and default break duration will be used when manually adding hours.</source>
@@ -601,52 +602,52 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>More questions?</source>
-        <translation type="unfinished"/>
+        <translation>Még több kérdés?</translation>
     </message>
     <message>
         <source>Please don&apos;t hesitate to contact the developer if you have any questions.</source>
-        <translation type="unfinished"/>
+        <translation>Kérlek ne habozz kapcsolatba lépni a fejlesztővel, ha bármilyen kérdésed van.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
-        <translation type="unfinished"/>
+        <translation>Problémák a GitHub-on</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"/>
+        <translation>E-mail alkalmazás indítása</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"/>
+        <translation>Külső böngésző megnyitása</translation>
     </message>
 </context>
 <context>
     <name>LogViewer</name>
     <message>
         <source>Log viewer</source>
-        <translation type="unfinished"/>
+        <translation>Napló megjelenítő</translation>
     </message>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"/>
+        <translation>Napló mentése</translation>
     </message>
     <message>
         <source>Saving the log</source>
         <extracomment>Remorse popup message telling the user log file will be saved</extracomment>
-        <translation type="unfinished"/>
+        <translation>Napló mentése</translation>
     </message>
     <message>
         <source>Log saved to</source>
-        <translation type="unfinished"/>
+        <translation>Napló mentve ide:</translation>
     </message>
     <message>
         <source>Send to the developer</source>
-        <translation type="unfinished"/>
+        <translation>Küldés a fejlesztőnek</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation type="unfinished"/>
+        <translation>E-mail alkalmazás indítása</translation>
     </message>
 </context>
 <context>
@@ -664,39 +665,39 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Project was not found</source>
-        <translation type="unfinished"/>
+        <translation>A projektet nem találom</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"/>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Yesterday</source>
-        <translation type="unfinished"/>
+        <translation>Tegnap</translation>
     </message>
     <message>
         <source>This week</source>
-        <translation type="unfinished"/>
+        <translation>Ezen a héten</translation>
     </message>
     <message>
         <source>Last week</source>
-        <translation type="unfinished"/>
+        <translation>Múlt héten</translation>
     </message>
     <message>
         <source>This month</source>
-        <translation type="unfinished"/>
+        <translation>Ebben a hónapban</translation>
     </message>
     <message>
         <source>Last month</source>
-        <translation type="unfinished"/>
+        <translation>Múlt hónapban</translation>
     </message>
     <message>
         <source>This year</source>
-        <translation type="unfinished"/>
+        <translation>Ebben az évben</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"/>
+        <translation>Mind</translation>
     </message>
     <message>
         <source>Hours for</source>
@@ -707,46 +708,46 @@ The source code is licensed under BSD 3-clause.</source>
     <name>Projects</name>
     <message>
         <source>All projects</source>
-        <translation type="unfinished"/>
+        <translation>Minden projekt</translation>
     </message>
     <message>
         <source>Add project</source>
-        <translation type="unfinished"/>
+        <translation>Projekt hozzáadása</translation>
     </message>
     <message>
         <source>No projects found</source>
-        <translation type="unfinished"/>
+        <translation>Nem találhatók projektek</translation>
     </message>
     <message>
         <source>Default project</source>
-        <translation type="unfinished"/>
+        <translation>Alapértelmezett projekt</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation type="unfinished"/>
+        <translation>Eltávolítás</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>Eltávolítás</translation>
     </message>
 </context>
 <context>
     <name>Settings</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"/>
+        <translation>Beállítások</translation>
     </message>
     <message>
         <source>Projects</source>
-        <translation type="unfinished"/>
+        <translation>Projektek</translation>
     </message>
     <message>
         <source>Edit projects</source>
-        <translation type="unfinished"/>
+        <translation>Projektek szerkesztése</translation>
     </message>
     <message>
         <source>Adding hours</source>
-        <translation type="unfinished"/>
+        <translation>Órák hozzáadása</translation>
     </message>
     <message>
         <source>Ends now by default</source>
@@ -794,7 +795,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Set currency</source>
-        <translation type="unfinished"/>
+        <translation>Pénznem beállítása</translation>
     </message>
     <message>
         <source>Set currency string</source>
@@ -806,15 +807,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Please be aware!</source>
-        <translation type="unfinished"/>
+        <translation>Kérlek vedd figyelembe!</translation>
     </message>
     <message>
         <source>Reset database</source>
-        <translation type="unfinished"/>
+        <translation>Adatbázis alapértelmezettre állítása</translation>
     </message>
     <message>
         <source>Resetting database</source>
-        <translation type="unfinished"/>
+        <translation>Adatbázis alapértelmezettre állítása</translation>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
@@ -822,7 +823,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Email reports</source>
-        <translation type="unfinished"/>
+        <translation>E-mail jelentések</translation>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
@@ -866,47 +867,47 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Exporting</source>
-        <translation type="unfinished"/>
+        <translation>Exportálás</translation>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"/>
+        <translation>Itt exportálhatod a Working Hours adataidat.</translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
-        <translation type="unfinished"/>
+        <translation>Órák exportálása CSV-be</translation>
     </message>
     <message>
         <source>Export projects as CSV</source>
-        <translation type="unfinished"/>
+        <translation>Projektek exportálása CSV-be</translation>
     </message>
     <message>
         <source>Default duration</source>
-        <translation type="unfinished"/>
+        <translation>Alapértelmezett időtartam</translation>
     </message>
     <message>
         <source>Default break duration</source>
-        <translation type="unfinished"/>
+        <translation>Alapértelmezett szünet-időtartam</translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"/>
+        <translation>Ha szeretnéd importálni az adataidat a Working Hours Tracker-be pl. más készüléken, használd Az egész adatbázis exportálása gombot.</translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"/>
+        <translation>Minden, az adatbázis pl. más készüléken történő újraépítéséhez szükséges adatot exportálni fog.</translation>
     </message>
     <message>
         <source>Export the whole database</source>
-        <translation type="unfinished"/>
+        <translation>Az egész adatbázis exportálása</translation>
     </message>
     <message>
         <source>Importing</source>
-        <translation type="unfinished"/>
+        <translation>Importálás</translation>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"/>
+        <translation>Itt adatokat importálhatsz a Working Hours Tracker-be.</translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
@@ -914,7 +915,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"/>
+        <translation>.sql fájl teljes elérési útvonala</translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
@@ -938,47 +939,47 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"/>
+        <translation>Jelenleg még nem lehet csv fájlokat importálni. Hamarosan.</translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"/>
+        <translation>Olvass többet az exportálásról</translation>
     </message>
     <message>
         <source>Launching external browser</source>
-        <translation type="unfinished"/>
+        <translation>Külső böngésző megnyitása</translation>
     </message>
     <message>
         <source>CSV saved to</source>
-        <translation type="unfinished"/>
+        <translation>CSV mentve ide:</translation>
     </message>
     <message>
         <source>Database saved to</source>
-        <translation type="unfinished"/>
+        <translation>Adatbázis mentve ide:</translation>
     </message>
     <message>
         <source>Read more about importing</source>
-        <translation type="unfinished"/>
+        <translation>Olvass többet az importálásról</translation>
     </message>
     <message>
         <source>No file path given</source>
-        <translation type="unfinished"/>
+        <translation>Nincs fájlelérhetőség megadva</translation>
     </message>
     <message>
         <source>DANGER ZONE!</source>
-        <translation type="unfinished"/>
+        <translation>VESZÉLYZÓNA!</translation>
     </message>
     <message>
         <source>Give the full path to the file and then hit the button</source>
-        <translation type="unfinished"/>
+        <translation>Add meg a fájl teljes elérési útját, majd nyomd meg a gombot</translation>
     </message>
     <message>
         <source>Import now!</source>
-        <translation type="unfinished"/>
+        <translation>Importálás most!</translation>
     </message>
     <message>
         <source>View logs</source>
-        <translation type="unfinished"/>
+        <translation>Naplók megtekintése</translation>
     </message>
     <message>
         <source>Rows are replaced from the imported file in case of entries already in the database.</source>
@@ -1017,26 +1018,26 @@ The source code is licensed under BSD 3-clause.</source>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation>Mi újság?</translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation>Alkalmazás frissítve erre: %1-%2</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Start the timer</source>
-        <translation type="unfinished"/>
+        <translation>Időzítő indítása</translation>
     </message>
     <message>
         <source>Stop the timer</source>
-        <translation type="unfinished"/>
+        <translation>Időzítő leállítása</translation>
     </message>
     <message>
         <source>Select project by id.</source>
@@ -1044,7 +1045,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>project</source>
-        <translation type="unfinished"/>
+        <translation>projekt</translation>
     </message>
     <message>
         <source>Select task by id.</source>
@@ -1052,34 +1053,34 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>task</source>
-        <translation type="unfinished"/>
+        <translation>feladat</translation>
     </message>
     <message>
         <source>Set description</source>
-        <translation type="unfinished"/>
+        <translation>Leírás beállítása</translation>
     </message>
     <message>
         <source>description</source>
-        <translation type="unfinished"/>
+        <translation>leírás</translation>
     </message>
 </context>
 <context>
     <name>worker</name>
     <message>
         <source>Project was not found</source>
-        <translation type="unfinished"/>
+        <translation>A projektet nem találom</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="unfinished"/>
+        <translation>Időtartam</translation>
     </message>
     <message>
         <source>Workdays</source>
-        <translation type="unfinished"/>
+        <translation>Munkanapok</translation>
     </message>
     <message>
         <source>Entries</source>
-        <translation type="unfinished"/>
+        <translation>Bejegyzések</translation>
     </message>
 </context>
 </TS>

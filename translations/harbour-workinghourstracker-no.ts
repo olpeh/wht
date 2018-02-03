@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Read more about how to use this app by accessing the pulley menu or clicking the button below.</source>
-        <translation>Les mer om hvordan programmet brukes ved å bruke rullegardinmenyen oppe eller trykke på knappen nedenfor.</translation>
+        <translation>Les mer om hvordan appen brukes ved å bruke rullegardinmenyen oppe eller trykke på knappen nedenfor.</translation>
     </message>
     <message>
         <source>Author</source>
@@ -71,13 +71,7 @@
     </message>
     <message>
         <source>Launching external email app</source>
-        <translation>Starter epostprogram</translation>
-    </message>
-    <message>
-        <source>Copyright (C) 2017 Olavi Haapala
-The source code is licensed under BSD 3-clause.</source>
-        <translation>Opphavsrett (C) 2015 Olavi Haapala
-Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
+        <translation>Starter ekstern epostapp</translation>
     </message>
     <message>
         <source>Read the license</source>
@@ -89,6 +83,11 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
+        <translation>Du bruker versjons- og byggnummer: %1-%2</translation>
+    </message>
+    <message>
+        <source>Copyright (C) 2017 Olavi Haapala 
+The source code is licensed under BSD 3-clause.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -99,20 +98,8 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
         <translation>Prosjekt</translation>
     </message>
     <message>
-        <source>No description</source>
-        <translation>Ingen beskrivelse</translation>
-    </message>
-    <message>
-        <source>Today</source>
-        <translation>I dag</translation>
-    </message>
-    <message>
         <source>Save</source>
         <translation>Lagre</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Ends now</source>
@@ -129,10 +116,6 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <message>
         <source>Starttime will be set to now.</source>
         <translation>Starttid settes til nå.</translation>
-    </message>
-    <message>
-        <source>Date:</source>
-        <translation>Dato:</translation>
     </message>
     <message>
         <source>Start time:</source>
@@ -189,6 +172,22 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <message>
         <source>Add or edit tasks in project settings</source>
         <translation>Legg til eller endre oppgaver i innstillinger</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Start date:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>End date:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -382,32 +381,24 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>No default project found</source>
-        <translation>Standardprosjekt ikke funnet</translation>
+        <source>About</source>
+        <translation>Om</translation>
     </message>
     <message>
-        <source>Timer stopped by command line argument</source>
-        <translation>Tidtaker stoppet av kommando</translation>
+        <source>Settings</source>
+        <translation>Innstillinger</translation>
     </message>
     <message>
-        <source>Today</source>
-        <translation>I dag</translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation>standard</translation>
-    </message>
-    <message>
-        <source>Timer started by command line argument</source>
-        <translation>Tidtaker startet av kommando</translation>
-    </message>
-    <message>
-        <source>Timer was autostarted</source>
-        <translation>Tidtakeren startet automatisk</translation>
+        <source>Add Hours</source>
+        <translation>Legg til timer</translation>
     </message>
     <message>
         <source>Yesterday</source>
         <translation>I går</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation>I dag</translation>
     </message>
     <message>
         <source>Last week</source>
@@ -434,18 +425,6 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
         <translation>Dette året</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>Om</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Innstillinger</translation>
-    </message>
-    <message>
-        <source>Add Hours</source>
-        <translation>Legg til timer</translation>
-    </message>
-    <message>
         <source>Timer is not running</source>
         <translation>Tidtaker er ikke startet</translation>
     </message>
@@ -469,6 +448,18 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
         <source>Adjust</source>
         <translation>Juster</translation>
     </message>
+    <message>
+        <source>Timer stopped by command line argument</source>
+        <translation>Tidtaker stoppet av kommando</translation>
+    </message>
+    <message>
+        <source>Timer started by command line argument</source>
+        <translation>Tidtaker startet av kommando</translation>
+    </message>
+    <message>
+        <source>Timer was autostarted</source>
+        <translation>Tidtakeren startet automatisk</translation>
+    </message>
 </context>
 <context>
     <name>HowTo</name>
@@ -490,7 +481,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.</source>
-        <translation>Start tidtakeren når du begynner å arbeide. Du kan så lukke programmet om du vil, tidtakeren vil likevel fungere.</translation>
+        <translation>Start tidtakeren når du begynner å arbeide. Du kan så lukke appen om du vil, tidtakeren vil likevel fungere.</translation>
     </message>
     <message>
         <source>At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</source>
@@ -558,7 +549,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.</source>
-        <translation>Når du stopper tidtakeren fra omslaget skal programmet åpnes med siden for å legge til en post, og når du lukker denne siden skal programmet gå tilbake til omslagsvisning.</translation>
+        <translation>Når du stopper tidtakeren fra omslaget skal appen åpnes til siden for å legge til en post, og når du lukker denne siden skal appen gå tilbake til å vise omslaget.</translation>
     </message>
     <message>
         <source>Summaries</source>
@@ -622,7 +613,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation>Starter epost</translation>
+        <translation>Starter epostapp</translation>
     </message>
     <message>
         <source>Launching external browser</source>
@@ -655,7 +646,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation>Starter epostprogram</translation>
+        <translation>Starter epostapp</translation>
     </message>
 </context>
 <context>
@@ -791,7 +782,7 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
-        <translation>Start tidtaker når programmet starter.</translation>
+        <translation>Start tidtaker når appen starter.</translation>
     </message>
     <message>
         <source>Timer will get started automatically if not already running.</source>
@@ -812,54 +803,6 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <message>
         <source>Currency string</source>
         <translation>Valutakode</translation>
-    </message>
-    <message>
-        <source>Move all hours to default</source>
-        <translation>Flytt alle timer til standardprosjekt</translation>
-    </message>
-    <message>
-        <source>Move ALL your existing hours to the project which is set as default.</source>
-        <translation>Flytt ALLE eksisterende poster til prosjektet som er satt som standardprosjekt.</translation>
-    </message>
-    <message>
-        <source>Move all to default</source>
-        <translation>Flytt alle til standard</translation>
-    </message>
-    <message>
-        <source>Move all hours to default project</source>
-        <translation>Flytt alle timer til standardprosjekt</translation>
-    </message>
-    <message>
-        <source>No default project set</source>
-        <translation>Standardprosjekt ikke satt</translation>
-    </message>
-    <message>
-        <source>Move by project name in description</source>
-        <translation>Flytt til prosjektnavn i beskrivelse</translation>
-    </message>
-    <message>
-        <source>Try to move hours to existing projects.</source>
-        <translation>Forsøk å flytte timer til eksisterende prosjekter.</translation>
-    </message>
-    <message>
-        <source>Sets correct project if the project name is found in the description.</source>
-        <translation>Setter korrekt prosjekt hvis prosjektnavn finnes i beskrivelsen.</translation>
-    </message>
-    <message>
-        <source>This is only meant to be used if you have used earlier versions of this app and written your project name in the description.</source>
-        <translation>Denne funksjonen brukes hvis du har brukt tidligere versjoner av programmet og skrevet prosjektnavnet i beskrivelsen for postene.</translation>
-    </message>
-    <message>
-        <source>This might take a while.</source>
-        <translation>Dette kan ta en stund.</translation>
-    </message>
-    <message>
-        <source>Move existing hours</source>
-        <translation>Flytt eksisterende poster.</translation>
-    </message>
-    <message>
-        <source>Moving hours to projects in description</source>
-        <translation>Flytter timer til prosjekter i beskrivelsen</translation>
     </message>
     <message>
         <source>Please be aware!</source>
@@ -1074,15 +1017,15 @@ Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation>Hva er nytt?</translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation>App oppdatert til %1-%2</translation>
     </message>
 </context>
 <context>

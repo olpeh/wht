@@ -1,131 +1,131 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nl_NL" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="hu" version="2.1">
 <context>
     <name>Description for store</name>
     <message>
         <source>Keep track on your working hours easily with a native Working Hours Tracker application.</source>
-        <translation>Hou je werkuren eenvoudig bij met deze voor Sailfish OS gemaakte Working Hours Tracker-app.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Current features:</source>
-        <translation>Huidige mogelijkheden:</translation>
+        <translation>Jelenlegi funkciók:</translation>
     </message>
     <message>
         <source>- Adding hours</source>
-        <translation>- Toevoegen van uren</translation>
+        <translation>- Órák hozzáadása</translation>
     </message>
     <message>
         <source>- Timer - saves starting time to database</source>
-        <translation>- Timer - slaat de begintijd op naar de database</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Viewing hours in different categories</source>
-        <translation>- Weergave van uren in verschillende categorieën</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Deleting</source>
-        <translation>- Verwijderen</translation>
+        <translation>- Törlés</translation>
     </message>
     <message>
         <source>- Editing</source>
-        <translation>- Bewerken</translation>
+        <translation>- Szerkesztés</translation>
     </message>
     <message>
         <source>- Resetting database in settings</source>
-        <translation>- Terugzetten van de database in de instellingen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Cover actions for timer and adding new hours</source>
-        <translation>- Omslagacties voor de timer en het toevoegen van nieuwe uren</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Cover info for today, week and month</source>
-        <translation>- Omslaginformatie voor vandaag, deze week en deze maand</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Changing effort times by adjusting duration</source>
-        <translation>- Wijzigen van inspanningsuren door de duur aan te passen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Adding break possibility</source>
-        <translation>- Toevoegen van pauzemomenten</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Settings for default duration and default break</source>
-        <translation>- Instellingen voor de standaardduur en -pauze</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Setting for timer autostart on app startup</source>
-        <translation>- Instelling om de timer automatisch te starten wanneer de app wordt gestart</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Break functionality in timer</source>
-        <translation>- Pauzefunctionaliteit in de timer</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Possibility to adjust timer start time</source>
-        <translation>- Mogelijkheid om de begintijd van de timer aan te passen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Support for different projects</source>
-        <translation>- Ondersteuning voor verschillende projecten</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Project coloring</source>
-        <translation>- Projectkleuren</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Shows price for efforts if project hourlyrate is set</source>
-        <translation>- Prijs weergeven voor inspanningen als er een project-uurloon is ingesteld</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Project view</source>
-        <translation>- Projectweergave</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Category summary</source>
-        <translation>- Categoriesamenvatting</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Email reports</source>
-        <translation>- Rapporten e-mailen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Exporting as csv</source>
-        <translation>- Exporteren naar CSV</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Exporting as .sql</source>
-        <translation>- Exporteren naar .sql</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>- Importing .sql</source>
-        <translation>- Importeren uit .sql</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Please report any issues and send ideas for improvements.</source>
-        <translation>Rapporteer ieder probleem dat je ervaart en stuur me ideeën voor verbeteringen.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Donations are also welcome.</source>
-        <translation>Donaties worden altijd gewaardeerd.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>If you want to contribute to the translations please do so by following the link below.</source>
-        <translation>Als je wil bijdragen aan de vertalingen, kan je op de koppeling hieronder klikken.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Summary for store</name>
     <message>
         <source>An easy to use and simple Working Hours Tracker for SailfishOS.</source>
-        <translation>Een eenvoudig te gebruiken werkurentracker voor SailfishOS.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>Desktop name for the app (must be short)</name>
     <message>
         <source>Work Hours</source>
-        <translation>Werkuren</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
