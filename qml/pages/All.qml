@@ -146,7 +146,7 @@ Page {
     }
 
     onStatusChanged: {
-        if (all.status === PageStatus.Active && listView.count == 0) {
+        if (all.status === PageStatus.Active) {
             updateView()
         }
     }
