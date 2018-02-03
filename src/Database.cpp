@@ -139,6 +139,8 @@ void Database::upgradeIfNeeded()
                     // The correct fix changes those times from "08:-2" to "07:58" etc.
                     query.exec("UPDATE hours SET starttime=(SELECT CAST(CAST(substr(starttime, 0, 3) as integer) -1 as string) || \":\" || CAST(60 + CAST(substr(starttime, 4,2) as integer) as string) FROM hours as h WHERE h.uid=hours.uid) WHERE uid IN (SELECT uid FROM hours WHERE starttime regexp(\"\\d{2}:-\\d{1}\"));");
                     query.exec("UPDATE hours SET endtime=(SELECT CAST(CAST(substr(endtime, 0, 3) as integer) -1 as string) || \":\" || CAST(60 + CAST(substr(endtime, 4,2) as integer) as string) FROM hours as h WHERE h.uid=hours.uid) WHERE uid IN (SELECT uid FROM hours WHERE endtime regexp(\"\\d{2}:-\\d{1}\"));");
+                    // Due to bugs in the command line stopping some rows were saved without date -> useless rows
+                    query.exec("DELETE FROM hours where date IS NULL;");
                     Logger::instance().debug("Updating table hours to user_version 5. Fixed some broken rows.");
                 }
 
