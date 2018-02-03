@@ -1,3 +1,8 @@
+## [1.3.6-1] - 2018-02-03
+### Fixed
+- Do not select all when focusing on description text field #63
+- Update the view after editing a row #64
+
 ## [1.3.5-1] - 2018-02-03
 ### Fixed
 - Fix the fix for broken rows in the database
