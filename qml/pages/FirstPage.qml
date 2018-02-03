@@ -139,17 +139,28 @@ Page {
         if (appState.arguments.stopFromCommandLine) {
             var startMoment = moment(appState.timerStartTime)
             var endMoment = moment()
+            var timerDurationInHours = helpers.millisecondsToHours(appState.timerDuration)
+            var breakDuration = helpers.millisecondsToHours(appState.breakTimerDuration)
+            if (breakDuration === 0 && settings.getDefaultBreakInTimer()) {
+                Log.debug("No break recorded, let's see if we should add a break...")
+                var defaultBreakInHours = settings.getDefaultBreakDuration()
+                Log.debug("Default break was " + defaultBreakInHours + " and current duration is: " + timerDurationInHours)
+                if (defaultBreakInHours < timerDurationInHours) {
+                    Log.debug("Default break is less than current duration, so let's add it as the break")
+                    breakDuration = defaultBreakInHours
+                }
+            }
 
             var values = {
                 "date": startMoment.format("YYYY-MM-DD"),
                 "startTime": startMoment.format("HH:mm"),
                 "endTime": endMoment.format("HH:mm"),
                 // For legacy reasons
-                "duration": helpers.millisecondsToHours(appState.timerDuration),
+                "duration": timerDurationInHours,
                 "project": settings.getDefaultProjectId(),
                 "description": "Automatically saved from command line",
                 // For legacy reasons
-                "breakDuration": helpers.millisecondsToHours(appState.breakTimerDuration),
+                "breakDuration": breakDuration,
                 "taskId": "0"
             };
 
