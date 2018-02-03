@@ -551,9 +551,6 @@ Dialog {
                 EnterKey.iconSource: "image://theme/icon-enter-close"
                 EnterKey.onClicked: focus = false
                 placeholderText: qsTr("Enter an optional description")
-                onClicked: {
-                    selectAll()
-                }
             }
 
             Item {
