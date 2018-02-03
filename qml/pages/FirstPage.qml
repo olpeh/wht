@@ -55,7 +55,7 @@ Page {
             "versionCheckDone": versionCheckDone,
             "arguments": arguments,
             "timerRunning": timer.isRunning(),
-            "timerDuration": timer.getDurationInMilliseconds(),
+            "timerDuration": timer.getActualDurationInMilliseconds(breakTimer),
             "timerStartTime": timer.getStartTime(),
             "breakTimerRunning": breakTimer.isRunning(),
             "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
