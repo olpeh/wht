@@ -333,6 +333,13 @@ Page {
                         }
 
                         Label {
+                            id: task
+                            text: model.taskName
+                            font.pixelSize: Theme.fontSizeSmall
+                            truncationMode: TruncationMode.Fade
+                        }
+
+                        Label {
                             id: description
                             text: model.description
                             font.pixelSize: Theme.fontSizeSmall
