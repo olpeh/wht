@@ -18,7 +18,11 @@ appicons.path = /usr/share/icons/hicolor
 
 appicons.files = appicons/*
 
-INSTALLS += appicons
+tests.files = tests/*
+tests.path = /usr/share/harbour-workinghourstracker/tests
+
+INSTALLS += appicons \
+            tests
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 DEFINES += APP_BUILDNUM=\\\"$$RELEASE\\\"
@@ -35,6 +39,7 @@ SOURCES += src/harbour-workinghourstracker.cpp \
     src/Database.cpp \
     src/WorkTimer.cpp \
     src/BreakTimer.cpp
+
 
 OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/cover/CoverPage.qml \
@@ -62,7 +67,8 @@ OTHER_FILES += qml/harbour-workinghourstracker.qml \
     qml/pages/Banner.qml \
     qml/pages/LogViewer.qml \
     qml/worker.js\
-    qml/pages/WhatsNewPage.qml
+    qml/pages/WhatsNewPage.qml\
+    tests/*
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -96,4 +102,6 @@ DISTFILES += \
     qml/md.js\
     qml/CHANGELOG.md \
     qml/cover/cover.svg \
-    qml/moment.min.js
+    qml/moment.min.js \
+    tests/tst_sample.qml \
+    qml/WorkingHoursTracker.qml
