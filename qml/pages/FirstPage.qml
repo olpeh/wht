@@ -59,6 +59,7 @@ Page {
             "timerStartTime": timer.getStartTime(),
             "breakTimerRunning": breakTimer.isRunning(),
             "breakTimerDuration": breakTimer.getDurationInMilliseconds(),
+            "breakTimerTotalDuration": breakTimer.getTotalDurationInMilliseconds(),
             "breakStartTime": breakTimer.getStartTime(),
             "currentProjectId": currentProjectId,
             "currentTaskId": currentTaskId,
@@ -356,12 +357,13 @@ Page {
 
                     Label {
                         id: breakDurationNow
-                        visible: appState.breakTimerRunning
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
                         anchors.horizontalCenter: parent.horizontalCenter
                         y: Theme.paddingMedium
-                        text: appState.breakTimerRunning ? helpers.formatTimerDuration(appState.breakTimerDuration) : ""
+                        text: appState.breakTimerRunning ?
+                                  helpers.formatTimerDuration(appState.breakTimerDuration) :
+                                  helpers.formatTimerDuration(appState.breakTimerTotalDuration)
                     }
 
                     Image {
