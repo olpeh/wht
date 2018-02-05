@@ -81,7 +81,7 @@ Dialog {
             values.uid = hourRow.uid
         }
 
-        Log.info("Trying to save: " + JSON.stringify(values));
+        logger.info("Trying to save: " + JSON.stringify(values));
 
         if(db.saveHourRow(values)) {
             firstPage.refreshState()

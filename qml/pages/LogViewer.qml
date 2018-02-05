@@ -56,7 +56,7 @@ Page {
                 text: qsTr("Send to the developer")
                 onClicked: {
                     banner.notify(qsTr("Launching email app"))
-                    Log.send()
+                    logger.send()
                 }
             }
 
@@ -66,7 +66,7 @@ Page {
                 onClicked: {
                     //: Remorse popup message telling the user log file will be saved
                     remorse.execute(qsTr("Saving the log"), function() {
-                        Log.save()
+                        logger.save()
                     })
                 }
             }
@@ -79,7 +79,7 @@ Page {
         Connections {
             target: Log
             onLogSaved: {
-                Log.debug("Log saved to: " + path)
+                logger.debug("Log saved to: " + path)
                 banner.notify(qsTr("Log saved to") + ": " + path)
             }
         }

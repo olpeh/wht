@@ -70,7 +70,7 @@ Page {
             case qsTr("All"):
                 return db.getHoursForPeriod("all", 1, sorting, projectId)
             default:
-                Log.error("Unknown section: " + section)
+                logger.error("Unknown section: " + section)
                 return []
         }
     }

@@ -74,10 +74,10 @@ CoverBackground {
             }
             onTriggered: {
                 if (appState.timerRunning && !appState.breakTimerRunning) {
-                    Log.info("Break starts...")
+                    logger.info("Break starts...")
                     firstPage.startBreakTimer()
                 } else if (appState.breakTimerRunning) {
-                    Log.info("Break ends...")
+                    logger.info("Break ends...")
                     firstPage.stopBreakTimer()
                 } else {
                     // BreakTimer was not running -> this is now a manual add button

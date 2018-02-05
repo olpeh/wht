@@ -103,5 +103,13 @@ DISTFILES += \
     qml/CHANGELOG.md \
     qml/cover/cover.svg \
     qml/moment.min.js \
+    qml/WorkingHoursTracker.qml \
     tests/tst_sample.qml \
-    qml/WorkingHoursTracker.qml
+    tests/SailfishTestCase.qml \
+    tests/mocks/MockBreakTimer.qml \
+    tests/mocks/MockWorkTimer.qml \
+    tests/mocks/MockDatabase.qml \
+    tests/mocks/MockSettings.qml \
+    tests/mocks/SailfishTestCase.qml \
+    tests/mocks/MockWorkingHoursTracker.qml \
+    tests/mocks/MockLogger.qml

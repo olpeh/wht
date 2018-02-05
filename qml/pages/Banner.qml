@@ -44,7 +44,7 @@ MouseArea {
     function notify(text, color) {
         popup.title = text
         // Save also to log
-        Log.info(text)
+        logger.info(text)
 
         if (color && (typeof(color) != "undefined")) {
             bg.color = color

@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
   view->rootContext()->setContextProperty("launcher", &launcher);
   view->rootContext()->setContextProperty("exporter", &exporter);
 
-  view->rootContext()->setContextProperty("Log", &Logger::instance());
+  view->rootContext()->setContextProperty("logger", &Logger::instance());
   view->rootContext()->setContextProperty("documentsLocation", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
 
   view->setSource(SailfishApp::pathTo("qml/harbour-workinghourstracker.qml"));

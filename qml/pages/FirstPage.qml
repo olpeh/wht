@@ -118,7 +118,7 @@ Page {
     }
 
     function startTimer(date) {
-        Log.debug(date)
+        logger.debug(date)
         if (date !== undefined) {
             timer.start(date)
         } else {
@@ -142,11 +142,11 @@ Page {
             var timerDurationInHours = helpers.millisecondsToHours(appState.timerDuration)
             var breakDuration = helpers.millisecondsToHours(appState.breakTimerDuration)
             if (breakDuration === 0 && settings.getDefaultBreakInTimer()) {
-                Log.debug("No break recorded, let's see if we should add a break...")
+                logger.debug("No break recorded, let's see if we should add a break...")
                 var defaultBreakInHours = settings.getDefaultBreakDuration()
-                Log.debug("Default break was " + defaultBreakInHours + " and current duration is: " + timerDurationInHours)
+                logger.debug("Default break was " + defaultBreakInHours + " and current duration is: " + timerDurationInHours)
                 if (defaultBreakInHours < timerDurationInHours) {
-                    Log.debug("Default break is less than current duration, so let's add it as the break")
+                    logger.debug("Default break is less than current duration, so let's add it as the break")
                     breakDuration = defaultBreakInHours
                 }
             }
@@ -164,7 +164,7 @@ Page {
                 "taskId": "0"
             };
 
-            Log.info("Trying to save automatically: " + JSON.stringify(values));
+            logger.info("Trying to save automatically: " + JSON.stringify(values));
 
             if(db.saveHourRow(values)) {
                 // Try to avoid saving multiple times etc.
@@ -513,12 +513,12 @@ Page {
     onStatusChanged: {
         refreshState()
 
-        if (root.status === PageStatus.Active && !appState.versionCheckDone) {
+        if (root.status === PageStatus.Active && !appState.versionCheckDone && appVersion !== "MOCK") {
             var lastVersionUsed = settings.getLastVersionUsed()
             var current = appVersion + "-" + appBuildNum
 
             if (lastVersionUsed !== current) {
-                Log.info("App updated")
+                logger.info("App updated")
                 pageStack.push(Qt.resolvedUrl("WhatsNewPage.qml"))
             }
 

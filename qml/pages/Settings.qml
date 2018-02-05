@@ -592,7 +592,7 @@ Page {
                 onClicked:{
                     if (dumpImport.text) {
                         remorse.execute(qsTr("Importing") + " " + dumpImport.text, function() {
-                            Log.info(qsTr("Trying to import")+": " +dumpImport.text)
+                            logger.info(qsTr("Trying to import")+": " +dumpImport.text)
                             var resp = exporter.importDump(dumpImport.text)
                             banner.notify(resp)
                             settingsPage.dataContainer.refreshState()

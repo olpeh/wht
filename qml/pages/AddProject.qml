@@ -81,9 +81,9 @@ Dialog {
         projectId = db.saveProject(values);
         if (projectId) {
             values.id = projectId
-            Log.info("Project saved succesfully: " + JSON.stringify(values))
+            logger.info("Project saved succesfully: " + JSON.stringify(values))
         } else {
-            Log.error("Saving project failed!")
+            logger.error("Saving project failed!")
         }
 
 
