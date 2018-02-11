@@ -19,7 +19,8 @@ An easy to use and simple Working Hours Tracker for SailfishOS
 [Roadmap](https://github.com/olpeh/wht/projects/1)<br />
 [How to use](#how-to-use)<br />
 [Exporting](#exporting)<br />
-[Importing](#importing)
+[Importing](#importing)<br />
+[Development](#development)
 
 ![Working Hours Tracker GIF](wht.gif)
 
@@ -171,3 +172,29 @@ Still WIP (but it works)
 
 * `harbour-workinghourstracker --start`
 * `harbour-workinghourstracker --stop`
+
+## Development
+
+### Testing
+
+WIP
+
+### Releasing
+
+Notes to myself on how to release a new version. This should be automated somehow.
+
+* Verify that changes work correctly on all device types
+* Push related changes to master
+* Build both ARM and x86 versions in QT Creator
+* Update `harbour-workinghourstracker.yml` with correct version and build numbers
+* Update `CHANGELOG.md` with related changes
+* Update `harbour-workinghourstracker.changes` with related changes
+* Pull newest translations from Transifex `$ tx pull -a`
+* Commit these changes with commmit message: `Release v.X.Y.Z-b`
+* Push changes to master
+* Create tag `X.Y.Z-b`
+* Push tag to origin
+* Create a new release in GitHub with new binaries as attachments
+* Release new binaries in openrepos
+* Optionally send new release to Jolla store QA
+* Make sure Github issues and `Roadmap` project are up to date
