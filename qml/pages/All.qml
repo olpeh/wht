@@ -288,13 +288,6 @@ Page {
                 height: column.height + Theme.paddingLarge
 
                 onClicked: {
-                    var splitted = model.startTime.split(":")
-                    var startSelectedHour = splitted[0]
-                    var startSelectedMinute = splitted[1]
-                    var endSplitted = model.endTime.split(":")
-                    var endSelectedHour = endSplitted[0]
-                    var endSelectedMinute = endSplitted[1]
-
                     pageStack.push(Qt.resolvedUrl("Add.qml"), {
                                        hourRow: model,
                                        editMode: true
