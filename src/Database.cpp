@@ -388,13 +388,14 @@ QVariantMap Database::getLastUsedInput(QString projectID, QString taskID)
     QVariantMap result;
 
     sorting.append("strftime('%Y-%m-%d', date) DESC");
+    sorting.append("startTime DESC");
 
-    if (!projectID.isEmpty())
+    if (!projectID.isNull())
     {
         where.append(QStringLiteral("project='%1'").arg(projectID));
     }
 
-    if (!taskID.isEmpty())
+    if (!taskID.isNull())
     {
         where.append(QStringLiteral("taskID='%1'").arg(taskID));
     }

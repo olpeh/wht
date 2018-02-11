@@ -52,7 +52,6 @@ Dialog {
     property int breakDurationInMilliseconds: 0
 
     property bool endTimeStaysFixed: true
-    property bool projectComboInitialized: false
 
     function getDurationInMilliseconds() {
        return moment(endMoment).diff(moment(startMoment))
@@ -414,20 +413,7 @@ Dialog {
                     }
                 }
                 onCurrentItemChanged: {
-                    if (projectComboInitialized) {
-                        var selectedValue = modelSource.get(currentIndex).value
-                        appState.currentProjectId = modelSource.get(currentIndex).id
-                        var lastUsed = db.getLastUsedInput(appState.currentProjectId)
-
-                        if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
-                            appState.currentTaskId = lastUsed['taskId']
-                        }
-
-                        if (lastUsed['description'] && lastUsed['description'] !== '') {
-                            descriptionTextArea.text = lastUsed['description']
-                        }
-                    }
-                    projectComboInitialized = true
+                    appState.currentProjectId = modelSource.get(currentIndex).id
                     taskCombo.init()
                 }
 
@@ -486,31 +472,25 @@ Dialog {
 
                 onCurrentItemChanged: {
                     if (currentIndex !== -1) {
-                        var selectedValue = taskModelSource.get(currentIndex).value
                         appState.currentTaskId = taskModelSource.get(currentIndex).id
 
-                        if (appState.currentTaskId > 0) {
-                            var lastUsed = db.getLastUsedInput(appState.currentProjectId)
+                        var lastUsed = db.getLastUsedInput(appState.currentProjectId, appState.currentTaskId)
 
-                            if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
-                                appState.currentTaskId = lastUsed['taskId']
-                            }
-
-                            if (lastUsed['description'] && lastUsed['description'] !== '') {
-                                descriptionTextArea.text = lastUsed['description']
-                            }
+                        if (lastUsed['description'] && lastUsed['description'] !== '') {
+                            descriptionTextArea.text = lastUsed['description']
                         }
                     }
                 }
 
                 function deleteAll() {
                     // @TODO: Does not work
-                    for (var i = 0; i < taskModelSource.length; i++) {
-                        taskModelSource.delete(i)
+                    for (var i = 0; i < taskModelSource.count; i++) {
+                        taskModelSource.remove(i)
                     }
                 }
 
-                function init(deselect) {
+                function init() {
+                    deleteAll()
                     var tasks = db.getTasks(appState.currentProjectId)
                     for (var i = 0; i < tasks.length; i++) {
                         taskModelSource.set(i, {
@@ -527,7 +507,7 @@ Dialog {
 
                     _updating = false
 
-                    currentIndex = 1
+                    currentIndex = -1
                     currentItem = null
 
                     if (appState.currentTaskId) {
@@ -604,7 +584,25 @@ Dialog {
                     timeSwitch.checked = false
                 }
 
+
+                if (!editMode) {
+                    var lastUsed = db.getLastUsedInput()
+
+                    if (lastUsed['projectId'] && lastUsed['projectId'] !== '') {
+                        appState.currentProjectId = lastUsed['projectId']
+                    }
+
+                    if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
+                        appState.currentTaskId = lastUsed['taskId']
+                    }
+
+                    if (lastUsed['description'] && lastUsed['description'] !== '') {
+                        descriptionTextArea.text = lastUsed['description']
+                    }
+                }
+
                 projectCombo.init()
+                taskCombo.init()
             }
         }
     }
