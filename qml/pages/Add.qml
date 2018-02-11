@@ -476,7 +476,7 @@ Dialog {
 
                         var lastUsed = db.getLastUsedInput(appState.currentProjectId, appState.currentTaskId)
 
-                        if (lastUsed['description'] && lastUsed['description'] !== '') {
+                        if (!editMode && lastUsed['description'] && lastUsed['description'] !== '') {
                             descriptionTextArea.text = lastUsed['description']
                         }
                     }
