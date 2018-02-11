@@ -88,7 +88,8 @@
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation>Opphavsrett (C) 2017 Olavi Haapala 
+Kildekoden er lisensiert under BSD 3-betingelsen.</translation>
     </message>
 </context>
 <context>

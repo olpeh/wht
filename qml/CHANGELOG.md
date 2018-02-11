@@ -1,3 +1,8 @@
+## [1.3.7-1] - 2018-02-11
+### Fixed
+- Display the correct duration in timer, with breaks deducted
+- Fix task related issue caused by refactoring #65
+
 ## [1.3.6-1] - 2018-02-03
 ### Fixed
 - Do not select all when focusing on description text field #63
