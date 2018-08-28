@@ -82,7 +82,7 @@ $(function() {
       }
     ]
   };
-  $.getJSON('https://api.olpe.fi/wht.php', function(data) {
+  $.getJSON('https://api.olpe.fi/wht/wht.php', function(data) {
     $.each(data, function(key, value) {
       var date = new Date(value.inserted.split(' ')[0]).getTime();
       options.series[0].data.push([date, parseInt(value.likes)]);
