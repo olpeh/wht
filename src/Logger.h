@@ -5,7 +5,6 @@
  * Copyright (C) 2017 Olavi Haapala.
  * <harbourwht@gmail.com>
  * Twitter: @0lpeh
- * IRC: olpe
  *
  * -Renamed everything to Logger
  * -Added sending as email

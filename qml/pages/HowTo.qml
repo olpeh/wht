@@ -2,7 +2,6 @@
 Copyright (C) 2017 Olavi Haapala.
 <harbourwht@gmail.com>
 Twitter: @0lpeh
-IRC: olpe
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
