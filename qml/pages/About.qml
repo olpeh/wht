@@ -200,22 +200,6 @@ Page {
                 height: 10
             }
 
-            SectionHeader { text: "Bitcoin" }
-
-            TextField {
-                font.pixelSize: Theme.fontSizeSmall
-                id: bitcoinText
-                readOnly: true
-                focusOnClick: true
-                onClicked: {
-                    selectAll()
-                    copy()
-                    banner.notify(qsTr("Copied to clipboard"))
-                }
-                label: qsTr("Donate to my bitcoin account")
-                text: "185QfMcsF4WL1T1ypCdcg5oYbM7XKZMABa"
-            }
-
             SectionHeader { text: qsTr("Source") }
 
             Text {
