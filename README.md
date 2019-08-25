@@ -79,4 +79,5 @@ Notes to myself on how to release a new version. This should be automated someho
 - Create a new release in GitHub with new binaries as attachments
 - Release new binaries in openrepos
 - Optionally send new release to Jolla store QA
+- Update readme about latest version availability
 - Make sure Github issues and `Roadmap` project are up to date
