@@ -343,6 +343,9 @@ Dialog {
             }
 
             Component.onCompleted: {
+                if (!projectId) {
+                    projectId = db.getUniqueId().toString()
+                }
                 getTasks()
                 if (editMode) {
                     nameTextArea.text = name

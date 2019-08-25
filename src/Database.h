@@ -74,13 +74,12 @@ public slots:
 
   void resetDatabase();
 
+  QUuid getUniqueId();
 
 private:
   QSqlDatabase *db;
 
   Q_DISABLE_COPY(Database)
-
-  QUuid getUniqueId();
 
   bool fileExists(QString path);
 
