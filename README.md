@@ -68,14 +68,14 @@ Notes to myself on how to release a new version. This should be automated someho
 - Verify that changes work correctly on all device types
 - Push related changes to master
 - Pull newest translations from Transifex `$ tx pull -a`
-- Update `harbour-workinghourstracker.yml` with correct version and build numbers
+- Update `harbour-workinghourstracker.yaml` with correct version and build numbers
 - Update `CHANGELOG.md` with related changes
 - Update `harbour-workinghourstracker.changes` with related changes
-- Build both ARM and x86 versions in QT Creator
 - Commit these changes with commmit message: `Release v.X.Y.Z-b`
 - Push changes to master
 - Create tag `X.Y.Z-b`
 - Push tag to origin
+- Build both ARM and x86 versions in QT Creator
 - Create a new release in GitHub with new binaries as attachments
 - Release new binaries in openrepos
 - Optionally send new release to Jolla store QA
