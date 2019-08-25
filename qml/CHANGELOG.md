@@ -1,3 +1,11 @@
+## [1.3.8-1] - 2019-08-25
+### Fixed
+- Generate UUID for new Projects #68
+- Project/task not selected when editing entry #69
+
+### Updated
+- Updated translations
+
 ## [1.3.7-1] - 2018-02-11
 ### Fixed
 - Display the correct duration in timer, with breaks deducted
