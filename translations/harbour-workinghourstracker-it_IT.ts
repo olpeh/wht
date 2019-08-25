@@ -34,14 +34,6 @@
         <translation>Puoi donare se ti piace il mio lavoro. Le donazioni mi aiutano a trovare più tempo per lo sviluppo.</translation>
     </message>
     <message>
-        <source>Copied to clipboard</source>
-        <translation>Copiato negli appunti</translation>
-    </message>
-    <message>
-        <source>Donate to my bitcoin account</source>
-        <translation>Dona sul mio conto bitcoin</translation>
-    </message>
-    <message>
         <source>Source</source>
         <translation>Sorgenti</translation>
     </message>
@@ -88,7 +80,8 @@
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation>Copyright (C) 2017 Olavi Haapala 
+Il codice è rilasciato sotto licenza BSD 3.</translation>
     </message>
 </context>
 <context>
@@ -175,7 +168,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation>Abbandona</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -183,11 +176,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation>Data inizio:</translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation>Data termine:</translation>
     </message>
 </context>
 <context>

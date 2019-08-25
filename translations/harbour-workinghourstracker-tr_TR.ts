@@ -34,14 +34,6 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Copied to clipboard</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Donate to my bitcoin account</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Source</source>
         <translation type="unfinished"/>
     </message>

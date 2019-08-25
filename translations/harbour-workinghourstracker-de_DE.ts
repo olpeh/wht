@@ -31,15 +31,7 @@
     </message>
     <message>
         <source>Please donate if you like my work. Donations help me to use more time on development.</source>
-        <translation>Bitte spende wenn dir meine Arbeit gefällt. Spenden helfen mir mehr Zeit in die Entwicklung zu investieren.</translation>
-    </message>
-    <message>
-        <source>Copied to clipboard</source>
-        <translation>In Zwischenablage kopiert</translation>
-    </message>
-    <message>
-        <source>Donate to my bitcoin account</source>
-        <translation>Spende an mein Bitcoin-Konto</translation>
+        <translation>Bitte spende, wenn dir meine Arbeit gefällt. Spenden helfen mir mehr Zeit in die Entwicklung zu investieren.</translation>
     </message>
     <message>
         <source>Source</source>
@@ -47,7 +39,7 @@
     </message>
     <message>
         <source>Contributions, bug reports and ideas are welcome. Please report issues in github. Link below.</source>
-        <translation>Mitwirken, Fehlermeldungen und Ideen sind willkommen. Probleme oder Vorschläge kannst du unter folgendem Link bei GitHub melden.</translation>
+        <translation>Beiträge, Fehlermeldungen und Ideen sind willkommen. Probleme oder Vorschläge kannst du unter folgendem Link bei GitHub melden.</translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
@@ -55,7 +47,7 @@
     </message>
     <message>
         <source>Project in GitHub</source>
-        <translation>Projekt betrachten</translation>
+        <translation>Projekt auf GitHub</translation>
     </message>
     <message>
         <source>License</source>
@@ -67,7 +59,7 @@
     </message>
     <message>
         <source>Working Hours Tracker for SailfishOS is a simple working hours tracker to keep track on working hours.</source>
-        <translation>&quot;Working Hours Tracker&quot; für SailfishOS ist ein einfacher Arbeitszeitverfolger um Arbeitszeiten im Blick zu behalten.</translation>
+        <translation>&quot;Working Hours Tracker&quot; für SailfishOS ist eine einfache App für die Zeiterfassung von Arbeitsstunden.</translation>
     </message>
     <message>
         <source>Launching external email app</source>
@@ -79,16 +71,17 @@
     </message>
     <message>
         <source>In case of issues or bugs please check the logs in settings-&gt;View logs and consider sending it to the developer.</source>
-        <translation>Wenn Probleme oder Fehler auftreten überprüfe bitte die Logs in &quot;Einstellungen-&gt;Logs anzeigen&quot; und erwäge diese an den Entwickler zu senden.</translation>
+        <translation>Wenn Probleme oder Fehler auftreten überprüfe bitte die Logs in &quot;Einstellungen-&gt;Logs anzeigen&quot; und sende sie womöglich an den Entwickler.</translation>
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"/>
+        <translation>Deine aktuell verwendete Version und Build-Nummer: %1-%2</translation>
     </message>
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation>Copyright (C) 2017 Olavi Haapala 
+Der Quellcode ist lizenziert unter der BSD 3-clause.</translation>
     </message>
 </context>
 <context>
@@ -111,7 +104,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starts now</source>
-        <translation>Startet jetzt</translation>
+        <translation>Beginnt jetzt</translation>
     </message>
     <message>
         <source>Starttime will be set to now.</source>
@@ -167,7 +160,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>No task defined</source>
-        <translation>Keine Aufgabe eingestellt</translation>
+        <translation>Keine Aufgabe angegeben</translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
@@ -175,7 +168,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -183,11 +176,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation>Startdatum:</translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation>Enddatum:</translation>
     </message>
 </context>
 <context>
@@ -293,11 +286,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Report of working hours</source>
-        <translation>Arbeitszeitbericht</translation>
+        <translation>Stundenübersicht</translation>
     </message>
     <message>
         <source>Total</source>
-        <translation>Total</translation>
+        <translation>Gesamt</translation>
     </message>
     <message>
         <source>Duration</source>
@@ -321,11 +314,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Send report by email</source>
-        <translation>Sende Bericht per E-Mail</translation>
+        <translation>Sende Übersicht per E-Mail</translation>
     </message>
     <message>
         <source>Export as CSV</source>
-        <translation>Export al CSV</translation>
+        <translation>Als CSV exportieren</translation>
     </message>
     <message>
         <source>Saved to</source>
@@ -333,7 +326,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>No items in this category yet</source>
-        <translation>Keine Einträge vorhanden</translation>
+        <translation>Keine Einträge in dieser Kategorie vorhanden</translation>
     </message>
     <message>
         <source>Project was not found</source>
@@ -356,7 +349,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Total</source>
-        <translation>Total</translation>
+        <translation>Gesamt</translation>
     </message>
     <message>
         <source>Summary for</source>
@@ -430,7 +423,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Click to start</source>
-        <translation>Start</translation>
+        <translation>Zeiterfassung starten</translation>
     </message>
     <message>
         <source>Break</source>
@@ -442,7 +435,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Started</source>
-        <translation>Gestartet</translation>
+        <translation>Läuft</translation>
     </message>
     <message>
         <source>Adjust</source>
@@ -450,15 +443,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer stopped by command line argument</source>
-        <translation>Zähler durch Argument auf der Kommandozeile angehalten.</translation>
+        <translation>Erfassung durch Kommandozeilenbefehl angehalten.</translation>
     </message>
     <message>
         <source>Timer started by command line argument</source>
-        <translation>Zähler durch Argument auf der Kommandozeile gestartet.</translation>
+        <translation>Erfassung durch Kommandozeilenbefehl gestartet.</translation>
     </message>
     <message>
         <source>Timer was autostarted</source>
-        <translation>Zeiterfassung startete automatisch</translation>
+        <translation>Automatische Zeiterfassung</translation>
     </message>
 </context>
 <context>
@@ -473,19 +466,19 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Working Hours Tracker is quite easy to use. Adding hours can be done in two different ways.</source>
-        <translation>&quot;Working Hours Tracker&quot; ist einfach in der Handhabe. Arbeitsstunden können auf zwei verschiedene Arten hinzugefügt werden.</translation>
+        <translation>&quot;Working Hours Tracker&quot; ist leicht zu bedienen. Arbeitsstunden können auf zwei verschiedene Arten hinzugefügt werden.</translation>
     </message>
     <message>
         <source>You can access the add hours in the pulley menu on the first page. It takes you to the add page.</source>
-        <translation>Über die Option &quot;Stunden hinzufügen&quot; im Pulley-Menü auf der Startseite, diese führt zur &quot;Stunden hinzufügen&quot;-Seite.</translation>
+        <translation>Von Hand über den Eintrag &quot;Stunden hinzufügen&quot; im Pulley-Menü auf der Startseite, diese führt dich auf eine eigene Seite für das Anlegen neuer Arbeitsstunden.</translation>
     </message>
     <message>
         <source>Start the timer when starting to work. You can then close the app if you want to and the timer will stay running.</source>
-        <translation>Oder über die Zeiterfassung beim Beginn der Arbeit. Die App kann auf Wunsch geschlossen werden, die Zeiterfassung wird nicht unterbrochen.</translation>
+        <translation>Zu Beginn der Arbeit über die Zeiterfassung. Du kannst die App während der Erfassung problemlos schließen, sie wird dadurch nicht unterbrochen.</translation>
     </message>
     <message>
         <source>At the end of your work day, stop the timer and it should take you to the add page where you can adjust the details, add description and select the project.</source>
-        <translation>Am Ende des Arbeitstages kann die Zeiterfassung gestoppt werden, was zur &quot;Stunden hinzufügen&quot;-Seite führt auf der die Zeiten angepasst, Beschreibungen hinzugefügt und Projekte ausgewählt werden können.</translation>
+        <translation>Beende am Ende des Arbeitstages die Zeiterfassung. Du gelangst auf die &quot;Stunden hinzufügen&quot;-Seite und kannst hier Uhrzeiten anpassen, Beschreibungen hinzufügen und zugehörige Projekte auswählen.</translation>
     </message>
     <message>
         <source>Adding projects</source>
@@ -493,19 +486,19 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Projects can be added and edited in the settings.</source>
-        <translation>Projekte können unter Einstellungen hinzugefügt und geändert werden.</translation>
+        <translation>Projekte können in den Einstellungen hinzugefügt und geändert werden.</translation>
     </message>
     <message>
         <source>You can select the labelcolor and hourlyrate for a project.</source>
-        <translation>Sie können farblich abgesetzt und mit einem Stundenlohn definiert werden.</translation>
+        <translation>Sie können farblich abgesetzt und mit einem festgesetzten Stundenlohn versehen werden.</translation>
     </message>
     <message>
         <source>You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.</source>
-        <translation>Projekte können per Berührung bearbeitet werden. Bei der Bearbeitung eines Projektes kann es als Standard zur Zeiterfassung gesetzt werden.</translation>
+        <translation>Projekte bearbeitest du durch Antippen. Dabei kannst du es auch als Vorgabe für die Zeiterfassung festlegen.</translation>
     </message>
     <message>
         <source>If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</source>
-        <translation>Ist ein Stundenlohn für ein Projekt eingetragen, wird das Gehalt in den detailierten Auflistungen und Zusammenfassungen angezeigt.</translation>
+        <translation>Ist ein Stundenlohn für ein Projekt eingetragen, siehst du dein Gehalt in der Detailübersicht und den Zusammenfassungen.</translation>
     </message>
     <message>
         <source>Using the timer</source>
@@ -513,19 +506,19 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</source>
-        <translation>Die Zeiterfassung kann durch klicken der große Schaltfläche auf der Startseite aktiviert werden. Bei aktiver Zeiterfassung erscheinen drei Schaltflächen zum Einstellen der Zeiterfassung.</translation>
+        <translation>Die Zeiterfassung kann durch Antippen der großen Schaltfläche auf der Startseite aktiviert werden. Bei laufender Erfassung siehst du drei Schaltflächen zur Steuerung.</translation>
     </message>
     <message>
         <source>On the left you have a break button which is meant to be used if you have a break during your workday that you don&apos;t want to include in the duration.</source>
-        <translation>Links ist ein Pausenknopf der betätigt werden soll, wenn eine Pause eingelegt wird, die nicht in die Arbeitszeiterfassung eingehen soll.</translation>
+        <translation>Links ist ein Pausenknopf, der dafür gedacht ist eine Pause einzulegen, die nicht als Arbeitszeit gelten soll.</translation>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation>Pausen funktionieren wie die Arbeitszeiterfassung, bei Berührung wird eine Pause begonnen, eine Berührung am Ende der Pause stoppt sie.</translation>
+        <translation>Pausen funktionieren wie die Arbeitszeiterfassung: Beim Antippen beginnt die Pause, das erneute Antippen Beendet die Pause.</translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
-        <translation>Der mitlere Knopf stoppt die Arbeitszeiterfassung und führt zur &quot;Stunden hinzufügen&quot;-Seite auf der die Start- und Endzeit sowie weitere Details eingestellt werden können.</translation>
+        <translation>Der mitlere Knopf beendet die Zeiterfassung und führt weiter auf die &quot;Stunden hinzufügen&quot;-Seite. Hier kannst du Start- und Endzeit sowie weitere Details anpassen.</translation>
     </message>
     <message>
         <source> The hours will be saved only when accepting the dialog.</source>
@@ -533,7 +526,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</source>
-        <translation>Der rechte Knopf ändert die Startzeit, etwa wenn vergessen wurde die Zeiterfassung im richtigen Moment zu starten.</translation>
+        <translation>Mit dem rechten Knopf änderst du die Startzeit. Etwa dann, wenn du zu Beginn der Arbeit das Starten vergessen hast.</translation>
     </message>
     <message>
         <source>Using the cover</source>
@@ -541,15 +534,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Cover actions can be used to quickly add hours or to control the timer.</source>
-        <translation>Cover-Aktionen können genutzt werden um schnell Arbeitsstuden hinzuzufügen oder die Zeiterfassung zu kontrollieren.</translation>
+        <translation>Die Cover-Aktionen dienen zum schnellen Hinzufügen von Arbeitsstunden oder Steuern der Zeiterfassung.</translation>
     </message>
     <message>
         <source>Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</source>
-        <translation>Cover-Aktionen beinhalten Stunden hinzufügen, Zeiterfassung starten, Pause starten, Pause beenden und Zeiterfassung beenden.</translation>
+        <translation>Die Cover-Aktionen beinhalten: Stunden hinzufügen, Zeiterfassung beginnen, Pause beginnen, Pause beenden und Zeiterfassung beenden.</translation>
     </message>
     <message>
         <source>When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.</source>
-        <translation>Wenn die Zeiterfassung vom Cover beendet wird sollte die &quot;Stunden hinzufügen&quot;-Seite angezeigt werden, nach dem schließen des Dialogs ist die App wieder minimiert.</translation>
+        <translation>Wird die Zeiterfassung vom Cover aus beendet, sollte die &quot;Stunden hinzufügen&quot;-Seite angezeigt werden. Nach dem Verlassen des Dialogs wird die App wieder minimiert.</translation>
     </message>
     <message>
         <source>Summaries</source>
@@ -557,27 +550,27 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>On the first page you will see total hours for different categories.</source>
-        <translation>Auf der Startseite wird die Gesamanzahl an Arbeitsstunden nach verschiedenen Kategorien angezeigt.</translation>
+        <translation>Auf der Startseite wird die Gesamtanzahl der Arbeitsstunden nach verschiedenen Kategorien unterteilt angezeigt.</translation>
     </message>
     <message>
         <source>If you have more than one project you should see an attached page that can be accessed by swiping left from the first page.</source>
-        <translation>Bei mehreren Projekten erscheint eine angehängte Seite die per Swipe-Geste nach links erreichbar ist.</translation>
+        <translation>Bei mehreren Projekten erscheint eine weitere Seite, die per Wischgeste nach links erreichbar ist.</translation>
     </message>
     <message>
         <source>There you can see hours for one project at a time.</source>
-        <translation>Dort werden die Arbeitszeiten des anderen Projektes angezeigt.</translation>
+        <translation>Dort siehst du jeweils die Arbeitszeiten der anderen Projekte.</translation>
     </message>
     <message>
         <source>Clicking a category will take you to the detailed listing view where you can see all entries in that category.</source>
-        <translation>Durch Berühren eines Kategoriefeldes werden detailierte Auflistungen aller Einträge dieser Kategorie angezeigt.</translation>
+        <translation>Durch Antippen eines Kategoriefeldes erhältst du eine detailierte Auflistung aller Einträge dieser Kategorie angezeigt.</translation>
     </message>
     <message>
         <source>You can edit those entries by clicking them.</source>
-        <translation>Diese Einträge können durch berührung bearbeitet werden.</translation>
+        <translation>Diese Einträge können durch Antippen bearbeitet werden.</translation>
     </message>
     <message>
         <source>By swiping left in the detailed view you can see a detailed summary for that category.</source>
-        <translation>Durch eine Swipe-Geste nach links wird eine detailierte Zusammenfassung dieser Kategorie angezeigt.</translation>
+        <translation>Durch eine Wischgeste nach links erhältst du eine detaillierte Zusammenfassung dieser Kategorie.</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -585,23 +578,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>There are a few settings in the settings page that makes adding hours faster and easier.</source>
-        <translation>Es gibt ein paar Einstellungen auf der &quot;Einstellungen&quot;-Seite durch die Zeiterfassung schneller und einfacher gemacht werden kann.</translation>
+        <translation>Einige Einstellungen ermöglichen dir, die Zeiterfassung zu beschleunigen und vereinfachen.</translation>
     </message>
     <message>
         <source>Default duration and default break duration will be used when manually adding hours.</source>
-        <translation>Standardarbeitsdauer und -pausendauer werden genutzt wenn Stunden manuell hinzugefügt werden.</translation>
+        <translation>Voreinstellungen für Arbeits- sowie Pausendauer werden als Vorgabe genutzt, wenn du Stunden von Hand einträgst.</translation>
     </message>
     <message>
         <source>Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</source>
-        <translation>Standardmäßig jetzt starten, bzw beenden bedeutet bei manuellem hinzufügen von Arbeitsstunden, dass der Start-, bzw der Endzeitpunkt auf die geltende Uhrzeit gesetzt wird.</translation>
+        <translation>Die Einstellung &quot;Startet/Endet immer zum aktuellen Zeitpunkt&quot; besagt, ob  die aktuelle Uhrzeit standardmäßig als Start- oder Endzeit eingetragen wird, wenn du von Hand Stunden hinzufügst.</translation>
     </message>
     <message>
         <source>Other settings are explained in the settings page and more will come in the future versions.</source>
-        <translation>Andere Einstellungen werden auf der &quot;Einstellungen&quot;-Seite separat erklärt. Weitere Einstellungen sind für künftige Versionen geplant.</translation>
+        <translation>Die anderen Einstellungen werden auf der &quot;Einstellungen&quot;-Seite separat erklärt und weitere kommen in künftigen Versionen.</translation>
     </message>
     <message>
         <source>More questions?</source>
-        <translation>Noch Fragen?</translation>
+        <translation>Hast du weitere Fragen?</translation>
     </message>
     <message>
         <source>Please don&apos;t hesitate to contact the developer if you have any questions.</source>
@@ -613,7 +606,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Launching email app</source>
-        <translation>Starte externe E-Mail-App</translation>
+        <translation>Starte E-Mail-App</translation>
     </message>
     <message>
         <source>Launching external browser</source>
@@ -750,7 +743,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Ends now by default</source>
-        <translation>Endet jetzt</translation>
+        <translation>Endet immer zum aktuellen Zeitpunkt</translation>
     </message>
     <message>
         <source>Endtime will be set to now by default.</source>
@@ -758,7 +751,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starts now by default</source>
-        <translation>Startet jetzt</translation>
+        <translation>Startet immer zum aktuellen Zeitpunk</translation>
     </message>
     <message>
         <source>Starttime will be set to now by default.</source>
@@ -1017,15 +1010,15 @@ The source code is licensed under BSD 3-clause.</source>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation>Was ist neu?</translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation>Anwendung aktualisiert auf %1-%2</translation>
     </message>
 </context>
 <context>

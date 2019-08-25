@@ -34,14 +34,6 @@
         <translation>Ha tetszik a munkám, kérlek adományozz. Az adományok segítenek, hogy több időt tölthessek fejlesztéssel.</translation>
     </message>
     <message>
-        <source>Copied to clipboard</source>
-        <translation>A vágólapra másolva</translation>
-    </message>
-    <message>
-        <source>Donate to my bitcoin account</source>
-        <translation>Adományozz a bitcoin számlámra</translation>
-    </message>
-    <message>
         <source>Source</source>
         <translation>Forrás</translation>
     </message>
@@ -132,15 +124,15 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation type="unfinished"/>
+        <translation>A kezdési időpont változni fog, ha az időtartam megváltozik.</translation>
     </message>
     <message>
         <source>Starttime stays fixed</source>
-        <translation type="unfinished"/>
+        <translation>A kezdési időpont fix marad</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation type="unfinished"/>
+        <translation>A befejezés időpontja változni fog, ha az időtartam megváltozik.</translation>
     </message>
     <message>
         <source>Duration</source>
@@ -361,7 +353,7 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>Summary for</source>
-        <translation type="unfinished"/>
+        <translation>Összefoglaló ennek:</translation>
     </message>
 </context>
 <context>
@@ -558,15 +550,15 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>On the first page you will see total hours for different categories.</source>
-        <translation type="unfinished"/>
+        <translation>Az első oldalon a különböző kategóriák összes óráját fogod látni.</translation>
     </message>
     <message>
         <source>If you have more than one project you should see an attached page that can be accessed by swiping left from the first page.</source>
-        <translation type="unfinished"/>
+        <translation>Ha egynél több projekted van, lennie kell egy csatolt oldalnak, melyet az első oldalról balra lapozással érhetsz el.</translation>
     </message>
     <message>
         <source>There you can see hours for one project at a time.</source>
-        <translation type="unfinished"/>
+        <translation>Ott egyszerre egy projekt óráit láthatod.</translation>
     </message>
     <message>
         <source>Clicking a category will take you to the detailed listing view where you can see all entries in that category.</source>
@@ -574,7 +566,7 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>You can edit those entries by clicking them.</source>
-        <translation type="unfinished"/>
+        <translation>Azokat a bejegyzéseket kattintással szerkesztheted.</translation>
     </message>
     <message>
         <source>By swiping left in the detailed view you can see a detailed summary for that category.</source>
@@ -654,7 +646,7 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     <name>MyTimePicker</name>
     <message>
         <source>Break can not be longer than the duration!</source>
-        <translation type="unfinished"/>
+        <translation>A szünet nem lehet hosszabb az időtartamnál!</translation>
     </message>
 </context>
 <context>
@@ -751,47 +743,47 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>Ends now by default</source>
-        <translation type="unfinished"/>
+        <translation>Alapértelmezetten most végződik</translation>
     </message>
     <message>
         <source>Endtime will be set to now by default.</source>
-        <translation type="unfinished"/>
+        <translation>A befejezés időpontja alapértelmezetten mostanra lesz beállítva</translation>
     </message>
     <message>
         <source>Starts now by default</source>
-        <translation type="unfinished"/>
+        <translation>Alapértelmezetten most kezdődik</translation>
     </message>
     <message>
         <source>Starttime will be set to now by default.</source>
-        <translation type="unfinished"/>
+        <translation>A kezdési idő alapértelmezetten mostanra lesz beállítva</translation>
     </message>
     <message>
         <source>Endtime stays fixed by default.</source>
-        <translation type="unfinished"/>
+        <translation>A befejezés időpontja alapértelmezetten állandó marad.</translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
-        <translation type="unfinished"/>
+        <translation>A kezdési időpont változni fog, ha az időtartam megváltozik.</translation>
     </message>
     <message>
         <source>Starttime stays fixed by default.</source>
-        <translation type="unfinished"/>
+        <translation>A kezdési időpont alapértelmezetten állandó marad.</translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
-        <translation type="unfinished"/>
+        <translation>A befejezés időpontja változni fog, ha az időtartam megváltozik.</translation>
     </message>
     <message>
         <source>Autostart timer on app startup</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő automatikusan induljon el az alkalmazás indításakor</translation>
     </message>
     <message>
         <source>Timer will get started automatically if not already running.</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő automatikusan el fog indulni, ha még nem fut.</translation>
     </message>
     <message>
         <source>Timer will not get started automatically.</source>
-        <translation type="unfinished"/>
+        <translation>Az időzítő nem fog automatikusan elindulni.</translation>
     </message>
     <message>
         <source>Set currency</source>
@@ -819,7 +811,7 @@ A forráskód a BSD 3-záradék szerint licencelve.</translation>
     </message>
     <message>
         <source>Warning: You will loose all your Working Hours data if you reset the database!</source>
-        <translation type="unfinished"/>
+        <translation>Figyelem: Az összes Munkaidő adatod elveszted, ha visszaállítod az adatbázist!</translation>
     </message>
     <message>
         <source>Email reports</source>
