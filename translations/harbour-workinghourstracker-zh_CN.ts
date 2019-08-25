@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -75,12 +77,12 @@
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -167,7 +169,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -175,11 +177,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1010,15 +1012,15 @@ The source code is licensed under BSD 3-clause.</source>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>About</name>
     <message>
@@ -75,12 +77,12 @@
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -155,19 +157,19 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No task defined</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add or edit tasks in project settings</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -175,11 +177,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -214,23 +216,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Project name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rates</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Coloring</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Task Name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -442,11 +444,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Timer stopped by command line argument</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Timer started by command line argument</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Timer was autostarted</source>
@@ -481,7 +483,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Adding projects</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Projects can be added and edited in the settings.</source>
@@ -489,11 +491,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>You can select the labelcolor and hourlyrate for a project.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You can edit projects by clicking them. When editing a project you can select if you want to make that project the default project which will be automatically selected when adding hours.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>If you set the hourlyrate for a project, you will see the price for spent hours in the detailed listing and summaries.</source>
@@ -501,11 +503,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Using the timer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Timer can be used by pressing the big button on the first page. When started, you will see three buttons for controlling the timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>On the left you have a break button which is meant to be used if you have a break during your workday that you don&apos;t want to include in the duration.</source>
@@ -513,35 +515,35 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Break works just like the timer: you start it by clicking it and stop it when the break is over.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The button in the middle stops the timer and takes you to the add page where you will be able to adjust the start and endtime and other details for the effort.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source> The hours will be saved only when accepting the dialog.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>On the right side you have a button for adjusting the timer start time. It can be used if you forget to start the timer when you start to work.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Using the cover</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cover actions can be used to quickly add hours or to control the timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cover actions include adding hours, starting the timer, starting a break, ending a break and stopping the timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>When stopping the timer from the cover, it should open up the appwindow in the add page and after closing the dialog it should get minimized back to cover.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Summaries</source>
@@ -553,23 +555,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>If you have more than one project you should see an attached page that can be accessed by swiping left from the first page.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There you can see hours for one project at a time.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clicking a category will take you to the detailed listing view where you can see all entries in that category.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You can edit those entries by clicking them.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>By swiping left in the detailed view you can see a detailed summary for that category.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Settings</source>
@@ -577,19 +579,19 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>There are a few settings in the settings page that makes adding hours faster and easier.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default duration and default break duration will be used when manually adding hours.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Starts now or Ends now by default means the option to select if you want the start time or the endtime be set to the time now when adding hours manually.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Other settings are explained in the settings page and more will come in the future versions.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>More questions?</source>
@@ -597,7 +599,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Please don&apos;t hesitate to contact the developer if you have any questions.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Issues in GitHub</source>
@@ -621,7 +623,7 @@ The source code is licensed under BSD 3-clause.</source>
     <message>
         <source>Save log</source>
         <extracomment>Menu action allowing the user to save application log</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Saving the log</source>
@@ -645,14 +647,14 @@ The source code is licensed under BSD 3-clause.</source>
     <name>MyTimePicker</name>
     <message>
         <source>Break can not be longer than the duration!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ProjectPage</name>
     <message>
         <source>Selected project</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Project was not found</source>
@@ -703,11 +705,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Add project</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No projects found</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default project</source>
@@ -742,23 +744,23 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Ends now by default</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Endtime will be set to now by default.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Starts now by default</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Starttime will be set to now by default.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Endtime stays fixed by default.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Starttime will flex if duration is changed.</source>
@@ -766,7 +768,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Starttime stays fixed by default.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Endtime will flex if duration is changed.</source>
@@ -790,11 +792,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Set currency string</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Currency string</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Please be aware!</source>
@@ -818,43 +820,43 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>These email addresses will be automatically filled in when selecting to send a report by email.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No emails will be sent automatically.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You can also decide to fill them in manually when sending a report.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This is just for making it faster.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set default to address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default to address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set default cc address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default cc address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set default bcc address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default bcc address</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Exporting</source>
@@ -862,7 +864,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Here you can export your Working Hours data.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export hours as CSV</source>
@@ -878,15 +880,15 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Default break duration</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>If you want to import your data to Working Hours Tracker e.g on another device, use the export the whole database button.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>It will export everything needed to rebuild the database e.g on another device.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Export the whole database</source>
@@ -898,43 +900,43 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Here you can import data into Working Hours Tracker.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There should become no duplicates due to unique constraints.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Full path to .sql file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Import from a .sql dump exported by Working Hours Tracker.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Currency string too long!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid to email address!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid cc email address!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid bcc email address!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>At the moment you will not be able to import csv files yet. Coming soon.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Read more about exporting</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Launching external browser</source>
@@ -982,77 +984,77 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Trying to import</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Timer options</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Start the timer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stop the timer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select project by id.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>project</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select task by id.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>task</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set description</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>description</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

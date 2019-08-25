@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="de">
 <context>
     <name>About</name>
     <message>
@@ -75,12 +77,12 @@
     </message>
     <message>
         <source>Your current version and build number: %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Copyright (C) 2017 Olavi Haapala 
 The source code is licensed under BSD 3-clause.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -167,7 +169,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -175,11 +177,11 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Start date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End date:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -990,7 +992,7 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Add break when using timer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is not added automatically when using timer.</source>
@@ -998,26 +1000,26 @@ The source code is licensed under BSD 3-clause.</source>
     </message>
     <message>
         <source>Default break is added automatically when using timer. Only added when break is not recorded with the break timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default break is added automatically when using timer.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WhatsNewPage</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>What&apos;s new?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>App updated to %1-%2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
