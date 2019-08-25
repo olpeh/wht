@@ -435,7 +435,6 @@ Dialog {
                                        'labelColor': projects[i].labelColor
                                         })
                     }
-                    _updating = false
 
                     for (var i = 0; i < modelSource.count; i++) {
                         if (modelSource.get(i).id === appState.currentProjectId) {
@@ -503,8 +502,6 @@ Dialog {
                         'name': qsTr("No task defined"),
                         'enabled': false
                     })
-
-                    _updating = false
 
                     currentIndex = -1
                     currentItem = null

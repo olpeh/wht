@@ -69,7 +69,6 @@ Page {
                            'labelColor': projects[i].labelColor
                             })
         }
-        projectCombo._updating = false
 
         var defaultProjectId =  settings.getDefaultProjectId()
         for (var i = 0; i < modelSource.count; i++) {
