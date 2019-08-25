@@ -37,6 +37,8 @@ https://www.transifex.com/projects/p/working-hours-tracker/
 
 ### Updating resources in transifex
 
+You will need the [Transifex CLI tool](https://docs.transifex.com/client/installing-the-client)
+
 The file `.tx/config` contains the basic config for what needs to be pushed to tx.
 
 `~/.transifexrc`, which stores your Transifex credentials in your home directory. You shouldn’t share this file since it contains your own credentials.
@@ -65,11 +67,11 @@ Notes to myself on how to release a new version. This should be automated someho
 
 - Verify that changes work correctly on all device types
 - Push related changes to master
-- Build both ARM and x86 versions in QT Creator
+- Pull newest translations from Transifex `$ tx pull -a`
 - Update `harbour-workinghourstracker.yml` with correct version and build numbers
 - Update `CHANGELOG.md` with related changes
 - Update `harbour-workinghourstracker.changes` with related changes
-- Pull newest translations from Transifex `$ tx pull -a`
+- Build both ARM and x86 versions in QT Creator
 - Commit these changes with commmit message: `Release v.X.Y.Z-b`
 - Push changes to master
 - Create tag `X.Y.Z-b`
