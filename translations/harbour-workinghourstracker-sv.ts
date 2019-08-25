@@ -48,14 +48,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Donate to my bitcoin account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
