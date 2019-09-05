@@ -108,8 +108,9 @@ Page {
                 r += project.name + " "
             }
 
-            if (task)
-                r += "/ " + task.name + " ";
+            if (task) {
+                r += "/ " + task.name + " "
+            }
 
             var d = helpers.formatDate(allHours[i].date)
             r += d + "\n"
