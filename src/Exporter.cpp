@@ -39,7 +39,15 @@ QString Exporter::exportHoursToCSV(Database* db) {
     while (i.hasNext()) {
         QVariantMap data = i.next().value<QVariantMap>();
         //uid|date|startTime|endTime|duration|project|description|breakDuration|taskId
-        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',', '.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ','  << data["breakDuration"].toString().replace(',', '.') << ',' << "'" << data["taskId"].toString() << "'" << "\n";
+        out << "'" << data["uid"].toString() << "'" << ','
+            << "'" << data["date"].toString() << "'" << ','
+            << "'" << data["startTime"].toString() << "'" << ','
+            << "'" << data["endTime"].toString() << "'" << ','
+            << data["duration"].toString().replace(',', '.') << ','
+            << "'" << data["project"].toString() << "'" << ','
+            << "'" << data["description"].toString().replace("'", "\\'") << "'" << ','
+            << data["breakDuration"].toString().replace(',', '.') << ','
+            << "'" << data["taskId"].toString() << "'" << "\n";
     }
 
     out.flush();
@@ -72,7 +80,13 @@ QString Exporter::exportProjectsToCSV(Database* db) {
     while (n.hasNext()) {
         QVariantMap data = n.next().value<QVariantMap>();
         //id|name|hourlyRate|contractRate|budget|hourBudget|labelColor
-        out << "'" << data["id"].toString() << "'" << ',' << "'" << data["name"].toString().replace(',', ' ') << "'" << ',' << data["hourlyRate"].toString().replace(',', '.') << ',' << data["contractRate"].toString().replace(',',',') << ',' << data["budget"].toString().replace(',', '.') << ',' << data["hourBudget"].toString().replace(',','.') << ',' << "'" << data["labelColor"].toString() << "'" << "\n";
+        out << "'" << data["id"].toString() << "'" << ','
+            << "'" << data["name"].toString().replace("'", "\\'") << "'" << ','
+            << data["hourlyRate"].toString().replace(',', '.') << ','
+            << data["contractRate"].toString().replace(',', '.') << ','
+            << data["budget"].toString().replace(',', '.') << ','
+            << data["hourBudget"].toString().replace(',', '.') << ','
+            << "'" << data["labelColor"].toString() << "'" << "\n";
     }
 
     out.flush();
@@ -100,7 +114,15 @@ QString Exporter::exportCategoryToCSV(QString section, QVariantList allHours) {
     while (n.hasNext()) {
         QVariantMap data = n.next().value<QVariantMap>();
         //uid|date|startTime|endTime|duration|project|description|breakDuration|taskId
-        out << "'" << data["uid"].toString() << "'" << ',' << "'" << data["date"].toString() << "'" << ',' << "'" << data["startTime"].toString() << "'" << ',' << "'" << data["endTime"].toString() << "'" << ',' << data["duration"].toString().replace(',','.') << ',' << "'" << data["project"].toString() << "'" << ',' << "'" << data["description"].toString().replace(',', ' ') << "'" << ',' << "'" << data["breakDuration"].toString() << ',' << "'" << data["taskId"].toString() << "'" << "\n";
+        out << "'" << data["uid"].toString() << "'" << ','
+            << "'" << data["date"].toString() << "'" << ','
+            << "'" << data["startTime"].toString() << "'" << ','
+            << "'" << data["endTime"].toString() << "'" << ','
+            << data["duration"].toString().replace(',', '.') << ','
+            << "'" << data["project"].toString() << "'" << ','
+            << "'" << data["description"].toString().replace("'", "\\'") << "'" << ','
+            << data["breakDuration"].toString().replace(',','.') << ','
+            << "'" << data["taskId"].toString() << "'" << "\n";
     }
 
     out.flush();
