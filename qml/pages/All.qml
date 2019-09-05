@@ -313,7 +313,9 @@ Page {
 
                         Label {
                             id: project
-                            text: "[" + netDur.toString().toHHMM() + "]  " + model.projectName + "  " + model.taskName
+                            text: "[" + netDur.toString().toHHMM() + "]  "
+                                  + model.projectName
+                                  + (model.taskName !== '' ? " / " + model.taskName : "")
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }

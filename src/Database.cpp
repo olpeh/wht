@@ -449,6 +449,7 @@ QVariantList Database::getProjects()
             map.insert("budget", query.record().value("budget").toString());
             map.insert("hourBudget", query.record().value("hourBudget").toString());
             map.insert("labelColor", query.record().value("labelColor").toString());
+            map.insert("tasks", getTasks(query.record().value("id").toString()));
             tmp.append(map);
         }
     }
