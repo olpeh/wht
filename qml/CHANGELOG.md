@@ -1,3 +1,10 @@
+## [1.3.9-1] - 2019-09-09
+
+### Fixed
+
+- Fix CSV exporter #72 (thanks krzyc)
+- Fix tasks on hours list #71 (thanks krzyc)
+
 ## [1.3.8-1] - 2019-08-25
 
 ### Fixed
