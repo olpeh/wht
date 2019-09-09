@@ -99,11 +99,17 @@ Page {
         r += "\n\n"
         for (var i = 0; i < allHours.length; i++) {
             var project = getProject(allHours[i].project)
+            var task = project.tasks.findById(allHours[i].taskId)
+
             var netDuration = allHours[i].duration - allHours[i].breakDuration
             r += "[" + (netDuration).toString().toHHMM() + "] "
 
             if (projectId === "") {
                 r += project.name + " "
+            }
+
+            if (task) {
+                r += "/ " + task.name + " "
             }
 
             var d = helpers.formatDate(allHours[i].date)
@@ -313,7 +319,9 @@ Page {
 
                         Label {
                             id: project
-                            text: "[" + netDur.toString().toHHMM() + "]  " + model.projectName + "  " + model.taskName
+                            text: "[" + netDur.toString().toHHMM() + "]  "
+                                  + model.projectName
+                                  + (model.taskName !== '' ? " / " + model.taskName : "")
                             font.pixelSize: Theme.fontSizeMedium
                             font.bold : true
                         }
