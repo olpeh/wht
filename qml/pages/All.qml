@@ -332,12 +332,6 @@ Page {
                             text: helpers.formatDate(model.date)
                         }
 
-                        Label {
-                            id: task
-                            text: model.taskName
-                            font.pixelSize: Theme.fontSizeSmall
-                            truncationMode: TruncationMode.Fade
-                        }
 
                         Label {
                             id: description
