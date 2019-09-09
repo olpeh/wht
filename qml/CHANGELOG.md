@@ -2,8 +2,8 @@
 
 ### Fixed
 
-- Generate UUID for new Projects #68
-- Project/task not selected when editing entry #69
+- Generate UUID for new Projects #68 (thanks krzyc)
+- Project/task not selected when editing entry #69 (thanks krzyc)
 
 ### Updated
 
