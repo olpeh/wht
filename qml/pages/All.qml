@@ -304,7 +304,7 @@ Page {
                         contextMenu = contextMenuComponent.createObject(listView)
                     }
 
-                    contextMenu.show(myListItem)
+                    contextMenu.open(myListItem)
                 }
 
                 Rectangle {
