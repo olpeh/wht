@@ -1,3 +1,10 @@
+## [1.3.10-1] - 2019-09-10
+
+### Fixed
+
+- Fix removing break from a row – setting break to 0 does not remove it #75
+- Fix a couple of warnings and deprecation errors
+
 ## [1.3.9-1] - 2019-09-09
 
 ### Fixed
