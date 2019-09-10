@@ -185,7 +185,7 @@ Dialog {
                                 focus = false
                                 taskLabel.visible = true
                                 if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
-                                    saveTask(taskNameEditArea.text, modelData.id)
+                                    saveTask(taskNameEditArea.text, model.id)
                                     repeater.model = getTasks()
                                 }
                             }
@@ -193,7 +193,7 @@ Dialog {
                                 if (!taskNameEditArea.focus) {
                                     taskLabel.visible = true
                                     if (taskNameEditArea.text.length && taskNameEditArea.text !== taskLabel.text) {
-                                        saveTask(taskNameEditArea.text, modelData.id)
+                                        saveTask(taskNameEditArea.text, model.id)
                                         repeater.model = getTasks()
                                     }
                                 }
