@@ -71,13 +71,9 @@ Dialog {
             "project": appState.currentProjectId ,
             "description": descriptionTextArea.text,
             // For legacy reasons
+            "breakDuration": helpers.millisecondsToHours(breakDurationInMilliseconds),
             "taskId": appState.currentTaskId
         };
-
-        // Don't mark breaks shorter than one minute
-        if(breakDurationInMilliseconds >= 60000) {
-            values.breakDuration = helpers.millisecondsToHours(breakDurationInMilliseconds);
-        }
 
         if (hourRow && hourRow.uid) {
             values.uid = hourRow.uid
