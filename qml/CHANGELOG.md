@@ -1,3 +1,9 @@
+## [1.3.11-1] - 2019-09-13
+
+### Fixed
+
+- Fix sums not working #76 (thanks krzyc)
+
 ## [1.3.10-1] - 2019-09-10
 
 ### Fixed
