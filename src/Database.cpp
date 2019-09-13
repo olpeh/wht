@@ -315,7 +315,7 @@ bool Database::periodQueryBuilder(QSqlQuery *query, QString select, QString peri
 
 double Database::getDurationForPeriod(QString period, int timeOffset, QString projectId)
 {
-    QString select = QString("sum(duration - breakDuration)");
+    QString select = QString("sum(duration - ifnull(breakDuration, 0))");
     QList<QString> sorting;
     QSqlQuery query;
     if (periodQueryBuilder(&query, select, period, timeOffset, sorting, projectId))
