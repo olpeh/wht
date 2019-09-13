@@ -143,7 +143,17 @@ void Database::upgradeIfNeeded()
                     Logger::instance().debug("Updating table hours to user_version 5. Fixed some broken rows.");
                 }
 
-                query.exec("PRAGMA user_version = 5;");
+                // 5 -> 6 update NULL breakdurations as 0
+                if(version < 6)
+                {
+                    // Because of a bugfix that would stop adding breaks less than 1min, they got saved as NULL values
+                    // The field should have been NOT NULL, but I don't dare to alter the database schema at this point
+                    Logger::instance().debug("Updating table hours to user_version 6. Changing NULL breakDurations to 0s.");
+                    query.exec("UPDATE hours SET breakDuration=0 WHERE breakDuration IS NULL;");
+
+                }
+
+                query.exec("PRAGMA user_version = 6;");
             }
             else
             {
@@ -154,7 +164,7 @@ void Database::upgradeIfNeeded()
     QSqlDatabase::database().commit();
     if (success)
     {
-        Logger::instance().debug("Database schema version is currently 5");
+        Logger::instance().debug("Database schema version is currently 6");
     }
     else
     {
