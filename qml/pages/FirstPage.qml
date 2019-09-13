@@ -160,6 +160,9 @@ Page {
                 "project": settings.getDefaultProjectId(),
                 "description": "Automatically saved from command line",
                 // For legacy reasons
+                // Don't mark breaks shorter than one minute
+                // breakDuration is in hours for some reason
+                "breakDuration": breakDuration >= 1/60 ? breakDuration: 0,
                 "breakDuration": breakDuration,
                 "taskId": "0"
             };
