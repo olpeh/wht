@@ -81,7 +81,7 @@ CoverBackground {
                 } else {
                     // BreakTimer was not running -> this is now a manual add button
                     var fromCover = true
-                    firsPage.addHoursManually(fromCover)
+                    firstPage.addHoursManually(fromCover)
                     appWindow.activate()
                 }
             }
