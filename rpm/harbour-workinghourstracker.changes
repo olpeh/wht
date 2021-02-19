@@ -1,3 +1,7 @@
+* Sat Feb 20 2021 Olavi Haapala <harbourwht@gmail.com> 1.4.0-1
+- Fix color contrast issue in first page #81
+- Fix previously used description selection when switching between projects or tasks #67
+
 * Fri Sep 13 2019 Olavi Haapala <harbourwht@gmail.com> 1.3.11-1
 - Fix sums not working #76 (thanks krzyc)
 

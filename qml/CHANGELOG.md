@@ -1,3 +1,10 @@
+## [1.4.0-1] - 2021-02-20
+
+### Fixed
+
+- Fix color contrast issue in first page #81
+- Fix previously used description selection when switching between projects or tasks #67
+
 ## [1.3.11-1] - 2019-09-13
 
 ### Fixed
