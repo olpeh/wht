@@ -414,6 +414,12 @@ Dialog {
                 }
                 onCurrentItemChanged: {
                     appState.currentProjectId = modelSource.get(currentIndex).id
+
+                    if (!editMode) {
+                        var lastUsed = db.getLastUsedInput(appState.currentProjectId)
+                        appState.currentTaskId = lastUsed['taskId'] || -1
+                        descriptionTextArea.text = lastUsed['description'] || ''
+                    }
                     taskCombo.init()
                 }
 
@@ -473,10 +479,9 @@ Dialog {
                     if (currentIndex !== -1) {
                         appState.currentTaskId = taskModelSource.get(currentIndex).id
 
-                        var lastUsed = db.getLastUsedInput(appState.currentProjectId, appState.currentTaskId)
-
-                        if (!editMode && lastUsed['description'] && lastUsed['description'] !== '') {
-                            descriptionTextArea.text = lastUsed['description']
+                        if (!editMode) {
+                            var lastUsed = db.getLastUsedInput(appState.currentProjectId, appState.currentTaskId)
+                            descriptionTextArea.text = lastUsed['description'] || ''
                         }
                     }
                 }
@@ -584,19 +589,10 @@ Dialog {
 
                 if (!editMode) {
                     var lastUsed = db.getLastUsedInput()
-
-                    if (lastUsed['projectId'] && lastUsed['projectId'] !== '') {
-                        appState.currentProjectId = lastUsed['projectId']
-                    }
-
-                    if (lastUsed['taskId'] && lastUsed['taskId'] !== '') {
-                        appState.currentTaskId = lastUsed['taskId']
-                    }
-
-                    if (lastUsed['description'] && lastUsed['description'] !== '') {
-                        descriptionTextArea.text = lastUsed['description']
-                    }
-                }
+                    appState.currentProjectId = lastUsed['projectId'] || -1
+                    appState.currentTaskId = lastUsed['taskId'] || -1
+                    descriptionTextArea.text = lastUsed['description'] || ''
+            }
 
                 projectCombo.init()
                 taskCombo.init()

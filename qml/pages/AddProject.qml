@@ -101,7 +101,7 @@ Dialog {
 
     function saveTask(name, taskId) {
         var values = {
-            "projectID": projectId,
+            "projectId": projectId,
             "name": name,
         };
 

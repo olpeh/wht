@@ -386,7 +386,7 @@ QVariantList Database::getHoursForPeriod(QString period, int timeOffset, QList<Q
     return tmp;
 }
 
-QVariantMap Database::getLastUsedInput(QString projectID, QString taskID)
+QVariantMap Database::getLastUsedInput(QString projectId, QString taskId)
 {
     QString select = QString("project, taskId, description");
     QString from = QString("hours");
@@ -399,14 +399,14 @@ QVariantMap Database::getLastUsedInput(QString projectID, QString taskID)
     sorting.append("strftime('%Y-%m-%d', date) DESC");
     sorting.append("startTime DESC");
 
-    if (!projectID.isNull())
+    if (!projectId.isNull())
     {
-        where.append(QStringLiteral("project='%1'").arg(projectID));
+        where.append(QStringLiteral("project='%1'").arg(projectId));
     }
 
-    if (!taskID.isNull())
+    if (!taskId.isNull())
     {
-        where.append(QStringLiteral("taskID='%1'").arg(taskID));
+        where.append(QStringLiteral("taskId='%1'").arg(taskId));
     }
 
     queryBuilder(&query, select, from, where, sorting, limit);
@@ -515,7 +515,7 @@ QString Database::saveProject(QVariantMap values)
     }
 }
 
-QVariantList Database::getTasks(QString projectID)
+QVariantList Database::getTasks(QString projectId)
 {
     QVariantList tmp;
     QVariantMap map;
@@ -524,9 +524,9 @@ QVariantList Database::getTasks(QString projectID)
     QList<QString> where;
     QSqlQuery query;
 
-    if (!projectID.isEmpty())
+    if (!projectId.isEmpty())
     {
-        where.append(QStringLiteral("projectId='%1'").arg(projectID));
+        where.append(QStringLiteral("projectId='%1'").arg(projectId));
     }
 
     queryBuilder(&query, select, from, where);
@@ -559,7 +559,7 @@ QString Database::saveTask(QVariantMap values)
                       "VALUES (:id, :projectId, :name);");
 
         query.bindValue(":id", id);
-        query.bindValue(":projectId", values["projectID"]);
+        query.bindValue(":projectId", values["projectId"]);
         query.bindValue(":name", values["name"].isNull() ? "Default task" : values["name"].toString());
 
         if (query.exec())

@@ -58,7 +58,7 @@ public slots:
 
   QVariantList getHoursForPeriod(QString period, int timeOffset = 0, QList<QString> sorting = QList<QString>(), QString projectId = NULL);
 
-  QVariantMap getLastUsedInput(QString projectID = NULL, QString taskID = NULL);
+  QVariantMap getLastUsedInput(QString projectId = NULL, QString taskId = NULL);
 
   QVariantList getProjects();
 
@@ -66,7 +66,7 @@ public slots:
 
   QString saveProject(QVariantMap values);
 
-  QVariantList getTasks(QString projectID = NULL);
+  QVariantList getTasks(QString projectId = NULL);
 
   QString saveTask(QVariantMap values);
 
