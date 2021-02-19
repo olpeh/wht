@@ -479,7 +479,6 @@ Page {
                     Label {
                         anchors.centerIn: parent
                         id: startedAt
-                        color: Theme.secondaryColor
                         font.bold: true
                         font.pixelSize: Theme.fontSizeSmall
                         text: moment(appState.timerStartTime).format("H:mm")
