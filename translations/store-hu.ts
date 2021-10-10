@@ -3,7 +3,7 @@
     <name>Description for store</name>
     <message>
         <source>Keep track on your working hours easily with a native Working Hours Tracker application.</source>
-        <translation type="unfinished"/>
+        <translation>Tartsa szemmel munkaidejét a SailfishOS &quot;Working Hours Tracker&quot; applikácíoval</translation>
     </message>
     <message>
         <source>Current features:</source>
@@ -11,121 +11,121 @@
     </message>
     <message>
         <source>- Adding hours</source>
-        <translation>- Órák hozzáadása</translation>
+        <translation>- Munkaidő hozzáadása</translation>
     </message>
     <message>
         <source>- Timer - saves starting time to database</source>
-        <translation type="unfinished"/>
+        <translation>- Időkövetés - elmenti a kezdési időt az adatbázisban</translation>
     </message>
     <message>
         <source>- Viewing hours in different categories</source>
-        <translation type="unfinished"/>
+        <translation>- Megjeleníti a nap, hét, hónap és év ledolgozott óráit </translation>
     </message>
     <message>
         <source>- Deleting</source>
-        <translation>- Törlés</translation>
+        <translation>- Munkaidő törlése</translation>
     </message>
     <message>
         <source>- Editing</source>
-        <translation>- Szerkesztés</translation>
+        <translation>- Munkaidő Szerkesztése</translation>
     </message>
     <message>
         <source>- Resetting database in settings</source>
-        <translation type="unfinished"/>
+        <translation>- Az adatbázis visszaállítása a beállításokban</translation>
     </message>
     <message>
         <source>- Cover actions for timer and adding new hours</source>
-        <translation type="unfinished"/>
+        <translation>- &quot;Cover&quot; akciók időzítéshez és új órák hozzáadásához</translation>
     </message>
     <message>
         <source>- Cover info for today, week and month</source>
-        <translation type="unfinished"/>
+        <translation>- &quot;Cover&quot; információ a mai napra, hétre és hónapra</translation>
     </message>
     <message>
         <source>- Changing effort times by adjusting duration</source>
-        <translation type="unfinished"/>
+        <translation>- A munkaidő megváltoztatása</translation>
     </message>
     <message>
         <source>- Adding break possibility</source>
-        <translation type="unfinished"/>
+        <translation>- Szünetidők beszúrása</translation>
     </message>
     <message>
         <source>- Settings for default duration and default break</source>
-        <translation type="unfinished"/>
+        <translation>- Beállítások az alapértelmezett időtartamra és az alapértelmezett szünetre</translation>
     </message>
     <message>
         <source>- Setting for timer autostart on app startup</source>
-        <translation type="unfinished"/>
+        <translation>- Automatikus időrögzítés az applikácío indításakor</translation>
     </message>
     <message>
         <source>- Break functionality in timer</source>
-        <translation type="unfinished"/>
+        <translation>- Szünet funkció időrögzítés közben</translation>
     </message>
     <message>
         <source>- Possibility to adjust timer start time</source>
-        <translation type="unfinished"/>
+        <translation>- Állítsa be az időrögzítés kezdő időpontját</translation>
     </message>
     <message>
         <source>- Support for different projects</source>
-        <translation type="unfinished"/>
+        <translation>- Különféle projektek irányítása</translation>
     </message>
     <message>
         <source>- Project coloring</source>
-        <translation type="unfinished"/>
+        <translation>- A projekteket színezéssel különböztesse meg</translation>
     </message>
     <message>
         <source>- Shows price for efforts if project hourlyrate is set</source>
-        <translation type="unfinished"/>
+        <translation>- Számítsa ki a fizetést a projekt óránkénti bérének alapján</translation>
     </message>
     <message>
         <source>- Project view</source>
-        <translation type="unfinished"/>
+        <translation>- A projekt áttekintése</translation>
     </message>
     <message>
         <source>- Category summary</source>
-        <translation type="unfinished"/>
+        <translation>- Időszak áttekintés</translation>
     </message>
     <message>
         <source>- Email reports</source>
-        <translation type="unfinished"/>
+        <translation>- Jelentések e -mailben</translation>
     </message>
     <message>
         <source>- Exporting as csv</source>
-        <translation type="unfinished"/>
+        <translation>- CSV exportálás</translation>
     </message>
     <message>
         <source>- Exporting as .sql</source>
-        <translation type="unfinished"/>
+        <translation>- SQL exportálás</translation>
     </message>
     <message>
         <source>- Importing .sql</source>
-        <translation type="unfinished"/>
+        <translation>- SQL importálása</translation>
     </message>
     <message>
         <source>Please report any issues and send ideas for improvements.</source>
-        <translation type="unfinished"/>
+        <translation>Kérjük, jelentse a problémákat, és küldjön javítási javaslatokat.</translation>
     </message>
     <message>
         <source>Donations are also welcome.</source>
-        <translation type="unfinished"/>
+        <translation>Adományokat is szívesen fogadunk.</translation>
     </message>
     <message>
         <source>If you want to contribute to the translations please do so by following the link below.</source>
-        <translation type="unfinished"/>
+        <translation>Ha segíteni szeretne az applikácío lefordításában, kérjük, tegye ezt meg az alábbi link alatt.</translation>
     </message>
 </context>
 <context>
     <name>Summary for store</name>
     <message>
         <source>An easy to use and simple Working Hours Tracker for SailfishOS.</source>
-        <translation type="unfinished"/>
+        <translation>Egy egyszerű és könnyen használható applikácío az időkövetéshez a SailfishOS operációs rendszerhez</translation>
     </message>
 </context>
 <context>
     <name>Desktop name for the app (must be short)</name>
     <message>
         <source>Work Hours</source>
-        <translation type="unfinished"/>
+        <translation>Munkaidők</translation>
     </message>
 </context>
 </TS>
