@@ -3,7 +3,7 @@
     <name>Description for store</name>
     <message>
         <source>Keep track on your working hours easily with a native Working Hours Tracker application.</source>
-        <translation type="unfinished"/>
+        <translation>Tartsd nyilván a munkaidődet könnyedén egy natív &quot;Working Hours Tracker&quot; alkalmazással.</translation>
     </message>
     <message>
         <source>Current features:</source>
@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>- Timer - saves starting time to database</source>
-        <translation type="unfinished"/>
+        <translation>- Időzítő - a kezdés időpontját adatbázisba menti</translation>
     </message>
     <message>
         <source>- Viewing hours in different categories</source>
-        <translation type="unfinished"/>
+        <translation>- Különböző kategóriák óráinak megtekintése</translation>
     </message>
     <message>
         <source>- Deleting</source>
@@ -31,101 +31,101 @@
     </message>
     <message>
         <source>- Resetting database in settings</source>
-        <translation type="unfinished"/>
+        <translation>- Adatbázis visszaállítása a beállításokban</translation>
     </message>
     <message>
         <source>- Cover actions for timer and adding new hours</source>
-        <translation type="unfinished"/>
+        <translation>- &quot;Cover&quot; akciók időzítéshez és új órák hozzáadásához</translation>
     </message>
     <message>
         <source>- Cover info for today, week and month</source>
-        <translation type="unfinished"/>
+        <translation>- &quot;Cover&quot; információ a mai napra, hétre és hónapra</translation>
     </message>
     <message>
         <source>- Changing effort times by adjusting duration</source>
-        <translation type="unfinished"/>
+        <translation>- A munkaidő megváltoztatása</translation>
     </message>
     <message>
         <source>- Adding break possibility</source>
-        <translation type="unfinished"/>
+        <translation>- Szünet hozzáadásának lehetősége</translation>
     </message>
     <message>
         <source>- Settings for default duration and default break</source>
-        <translation type="unfinished"/>
+        <translation>- Beállítások az alapértelmezett időtartamra és az alapértelmezett szünetre</translation>
     </message>
     <message>
         <source>- Setting for timer autostart on app startup</source>
-        <translation type="unfinished"/>
+        <translation>- Automatikus időrögzítés az applikácío indításakor</translation>
     </message>
     <message>
         <source>- Break functionality in timer</source>
-        <translation type="unfinished"/>
+        <translation>- Szünet funkció időrögzítés közben</translation>
     </message>
     <message>
         <source>- Possibility to adjust timer start time</source>
-        <translation type="unfinished"/>
+        <translation>- Lehetőség az időzítő kezdési időpontjának beállítására</translation>
     </message>
     <message>
         <source>- Support for different projects</source>
-        <translation type="unfinished"/>
+        <translation>- Különböző projektek támogatása</translation>
     </message>
     <message>
         <source>- Project coloring</source>
-        <translation type="unfinished"/>
+        <translation>- Projekt színezés</translation>
     </message>
     <message>
         <source>- Shows price for efforts if project hourlyrate is set</source>
-        <translation type="unfinished"/>
+        <translation>- Megjeleníti az erőfeszítések árát, ha az órabér be van állítva</translation>
     </message>
     <message>
         <source>- Project view</source>
-        <translation type="unfinished"/>
+        <translation>- Projekt nézet</translation>
     </message>
     <message>
         <source>- Category summary</source>
-        <translation type="unfinished"/>
+        <translation>- Kategória összefoglaló</translation>
     </message>
     <message>
         <source>- Email reports</source>
-        <translation type="unfinished"/>
+        <translation>- E-mail jelentések</translation>
     </message>
     <message>
         <source>- Exporting as csv</source>
-        <translation type="unfinished"/>
+        <translation>Exportálás csv-be</translation>
     </message>
     <message>
         <source>- Exporting as .sql</source>
-        <translation type="unfinished"/>
+        <translation>Exportálás .sql-be</translation>
     </message>
     <message>
         <source>- Importing .sql</source>
-        <translation type="unfinished"/>
+        <translation>Importálás .sql-ből</translation>
     </message>
     <message>
         <source>Please report any issues and send ideas for improvements.</source>
-        <translation type="unfinished"/>
+        <translation>Kérlek jelezz, ha bármilyen problémát találsz, és küldj ötleteket a tökéletesítéshez.</translation>
     </message>
     <message>
         <source>Donations are also welcome.</source>
-        <translation type="unfinished"/>
+        <translation>Az adományoknak is örülök.</translation>
     </message>
     <message>
         <source>If you want to contribute to the translations please do so by following the link below.</source>
-        <translation type="unfinished"/>
+        <translation>Ha szeretnél közreműködni a fordításokban, tedd azt az alábbi hivatkozáson.</translation>
     </message>
 </context>
 <context>
     <name>Summary for store</name>
     <message>
         <source>An easy to use and simple Working Hours Tracker for SailfishOS.</source>
-        <translation type="unfinished"/>
+        <translation>Egy könnyen használható és egyszerű munkaidő nyilvántartó SailfishOS-re.</translation>
     </message>
 </context>
 <context>
     <name>Desktop name for the app (must be short)</name>
     <message>
         <source>Work Hours</source>
-        <translation type="unfinished"/>
+        <translation>Munkaidők</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Description for store</name>
     <message>
         <source>Keep track on your working hours easily with a native Working Hours Tracker application.</source>
-        <translation>Behalte deine Arbeitszeiten im Blick mit der &quot;Working Hours Tracker&quot;-Applikation für SailfishOS</translation>
+        <translation>Behalte deine Arbeitszeiten im Blick mit der &quot;Working Hours Tracker&quot;-App für SailfishOS</translation>
     </message>
     <message>
         <source>Current features:</source>
@@ -11,15 +11,15 @@
     </message>
     <message>
         <source>- Adding hours</source>
-        <translation>- Arbeitsstunden hinzufgen</translation>
+        <translation>- Arbeitsstunden hinzufügen</translation>
     </message>
     <message>
         <source>- Timer - saves starting time to database</source>
-        <translation>- Zeiterfassung speichert Startzeit in Datenbank</translation>
+        <translation>- Zeiterfassung - speichert die Startzeit in der Datenbank</translation>
     </message>
     <message>
         <source>- Viewing hours in different categories</source>
-        <translation>- Anzeige für geleistete Arbeitsstunden am Tag, in der Woche, im Monat und Jahr anzeigen</translation>
+        <translation>- Anzeige für geleistete Arbeitsstunden am Tag, in der Woche, im Monat und im Jahr anzeigen</translation>
     </message>
     <message>
         <source>- Deleting</source>
@@ -31,15 +31,15 @@
     </message>
     <message>
         <source>- Resetting database in settings</source>
-        <translation>- Datenbank leeren</translation>
+        <translation>- Zurücksetzen der Datenbank in den Einstellungen</translation>
     </message>
     <message>
         <source>- Cover actions for timer and adding new hours</source>
-        <translation>- &quot;Cover&quot;-aktionen für &quot;Zeiterfassung starten&quot; und &quot;Arbeitsstunden hinzufügen&quot;</translation>
+        <translation>- &quot;Cover&quot;-Aktionen für &quot;Zeiterfassung starten&quot; und &quot;Arbeitsstunden hinzufügen&quot;</translation>
     </message>
     <message>
         <source>- Cover info for today, week and month</source>
-        <translation>- &quot;Cover&quot;-info für geleistete Arbeitsstunden am Tag, in der Woche und im Monat</translation>
+        <translation>- &quot;Cover&quot;-Info für geleistete Arbeitsstunden am Tag, in der Woche und im Monat</translation>
     </message>
     <message>
         <source>- Changing effort times by adjusting duration</source>
@@ -55,19 +55,19 @@
     </message>
     <message>
         <source>- Setting for timer autostart on app startup</source>
-        <translation>- Automatische Zeiterfassung bei starten der App</translation>
+        <translation>- Automatische Zeiterfassung beim Start der App</translation>
     </message>
     <message>
         <source>- Break functionality in timer</source>
-        <translation>- Pausenfunktion bei Zeiterfassung</translation>
+        <translation>- Pausenfunktion während der Zeiterfassung</translation>
     </message>
     <message>
         <source>- Possibility to adjust timer start time</source>
-        <translation>- Start Zeiterfassung einstellen</translation>
+        <translation>- Startzeit der Zeiterfassung einstellen</translation>
     </message>
     <message>
         <source>- Support for different projects</source>
-        <translation>- Verschiedene Projekte verwalten</translation>
+        <translation>- Verwaltung verschiedener Projekte</translation>
     </message>
     <message>
         <source>- Project coloring</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Please report any issues and send ideas for improvements.</source>
-        <translation>Bitte berichtet Probleme und Ideen zur Verbesserung.</translation>
+        <translation>Bitte berichtet Probleme und sendet Verbesserungsvorschläge.</translation>
     </message>
     <message>
         <source>Donations are also welcome.</source>
@@ -111,14 +111,14 @@
     </message>
     <message>
         <source>If you want to contribute to the translations please do so by following the link below.</source>
-        <translation>Wenn du bei der Übersetzung dieser Applikation helfen möchtest, kannst du dies gerne unter folgendem Link tuen.</translation>
+        <translation>Wenn du bei der Übersetzung der App helfen möchtest, kannst du dies gerne unter folgendem Link tun.</translation>
     </message>
 </context>
 <context>
     <name>Summary for store</name>
     <message>
         <source>An easy to use and simple Working Hours Tracker for SailfishOS.</source>
-        <translation>Ein einfacher und leicht zu nutzender Arbeitszeitverfolger für SailfishOS</translation>
+        <translation>Eine einfache und leicht zu bedienende App zur Arbeitszeiterfassung für SailfishOS</translation>
     </message>
 </context>
 <context>
