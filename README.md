@@ -71,7 +71,7 @@ Notes to myself on how to release a new version. This should be automated someho
 - Update `harbour-workinghourstracker.yaml` with correct version and build numbers
 - Update `CHANGELOG.md` with related changes
 - Update `harbour-workinghourstracker.changes` with related changes
-- Build both ARM and x86 versions in QT Creator
+- Build ARM, x86, and AAarch64 versions in QT Creator
 - Commit these changes with commmit message: `Release v.X.Y.Z-b`
 - Push changes to master
 - Create tag `X.Y.Z-b`

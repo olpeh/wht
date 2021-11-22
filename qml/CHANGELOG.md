@@ -1,3 +1,13 @@
+## [1.4.1-1] - 2021-11-22
+
+### Updated
+
+- Update translations
+
+### Added
+
+- Add missing AAarch64 builds #82 
+
 ## [1.4.0-1] - 2021-02-20
 
 ### Fixed

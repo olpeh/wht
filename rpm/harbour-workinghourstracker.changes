@@ -1,3 +1,7 @@
+* Mon Nov 22 2021 Olavi Haapala <harbourwht@gmail.com> 1.4.1-1
+- Update translations from Transifex
+- Add missing AAarch64 builds #82 
+
 * Sat Feb 20 2021 Olavi Haapala <harbourwht@gmail.com> 1.4.0-1
 - Fix color contrast issue in first page #81
 - Fix previously used description selection when switching between projects or tasks #67
